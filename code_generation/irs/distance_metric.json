@@ -1,0 +1,6 @@
+[
+  "euclidean",
+  "manhattan",
+  "geographic",
+  "user_defined"
+]

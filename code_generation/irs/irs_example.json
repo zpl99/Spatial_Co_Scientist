@@ -1,0 +1,172 @@
+{
+  "task_metadata": {
+    "task_id": "unique_task_identifier",
+    "task_type": "spatial_clustering",
+    "user_question": "natural language question from user"
+  },
+
+  "data_description": {
+    "data_type": "polygon" | "polyline" | "point" | "tabular",
+    "data_source": "path or url to dataset",
+    "spatial_reference": "e.g., EPSG:4326",
+    "variables": [
+      {
+        "name": "variable_name",
+        "description": "brief description",
+        "type": "numeric" | "categorical" | "ordinal",
+        "unit": "units or scale, if applicable"
+      }
+    ]
+  },
+
+  "analysis_goal": {
+    "goal_type": "homogeneous_regions" | "density_hotspots" | "multivariate_profiles" | "resilience_profiles" | "economic_profiles",
+    "description": "brief textual description of the goal"
+  },
+
+  "clustering_pipeline": [
+    {
+      "step_id": 1,
+      "dep": [-1],
+      "step_name": "dimensionality_reduction",
+      "method": "PCA" | "t-SNE" | "UMAP" | "none",{
+  "task_metadata": {
+    "task_id": "unique_task_identifier",
+    "task_type": "spatial_clustering",
+    "user_question": "natural language question from user"
+  },
+
+  "data_description": {
+    "data_type": "polygon" | "polyline" | "point" | "tabular",
+    "data_source": "path or url to dataset",
+    "spatial_reference": "e.g., EPSG:4326",
+    "variables": [
+      {
+        "name": "variable_name",
+        "description": "brief description",
+        "type": "numeric" | "categorical" | "ordinal",
+        "unit": "units or scale, if applicable"
+      }
+    ]
+  },
+
+  "analysis_goal": {
+    "goal_type": "homogeneous_regions" | "density_hotspots" | "multivariate_profiles" | "resilience_profiles" | "economic_profiles",
+    "description": "brief textual description of the goal"
+  },
+
+  "clustering_pipeline": [
+    {
+      "step_id": 1,
+      "dep": [-1],
+      "step_name": "dimensionality_reduction",
+      "method": "PCA" | "t-SNE" | "UMAP" | "none",
+      "parameters": {
+        "target_dimensions": int,
+        "additional_parameters": {}
+      }
+    },
+    {
+      "step_id": 2,
+      "dep": [1],
+      "step_name": "initial_clustering",
+      "method": "k-means" | "DBSCAN" | "HDBSCAN" | "hierarchical_clustering",
+      "parameters": {
+        "number_of_clusters": "auto" | int,
+        "distance_metric": "euclidean" | "manhattan" | "geographic",
+        "spatial_constraint": "none" | "contiguity" | "distance_band",
+        "additional_parameters": {}
+      }
+    },
+    {
+      "step_id": 3,
+      "dep": ["2"],
+      "step_name": "cluster_refinement",
+      "method": "spatially_constrained_clustering" | "none",
+      "parameters": {
+        "constraint_type": "contiguity" | "compactness",
+        "additional_parameters": {}
+      }
+    }
+  ],
+
+  "data_preprocessing": {
+    "handle_missing_values": "remove_rows" | "impute_mean" | "impute_median" | "none",
+    "normalize_data": true | false,
+    "remove_multicollinearity": true | false
+  },
+
+  "evaluation_plan": {
+    "number_of_iterations": int,
+    "cluster_validity_metrics": ["pseudo_f", "silhouette_score", "davies_bouldin"],
+    "evaluation_strategy": {
+      "visual_inspection": true,
+      "domain_knowledge_check": true,
+      "statistical_significance_check": true,
+      "variable_importance_analysis": ["boxplot", "canonical_correlation_analysis"]
+    }
+  },
+
+  "constraints_and_notes": {
+    "user_defined_constraints": {
+      "max_number_of_clusters": int,
+      "preferred_spatial_scale": "fine" | "medium" | "coarse"
+    },
+    "additional_notes": "Any additional information, e.g., user or expert suggestions"
+  }
+}
+
+      "parameters": {
+        "target_dimensions": int,
+        "additional_parameters": {}
+      }
+    },
+    {
+      "step_id": 2,
+      "dep": [1],
+      "step_name": "initial_clustering",
+      "method": "k-means" | "DBSCAN" | "HDBSCAN" | "hierarchical_clustering",
+      "parameters": {
+        "number_of_clusters": "auto" | int,
+        "distance_metric": "euclidean" | "manhattan" | "geographic",
+        "spatial_constraint": "none" | "contiguity" | "distance_band",
+        "additional_parameters": {}
+      }
+    },
+    {
+      "step_id": 3,
+      "dep": ["2"],
+      "step_name": "cluster_refinement",
+      "method": "spatially_constrained_clustering" | "none",
+      "parameters": {
+        "constraint_type": "contiguity" | "compactness",
+        "additional_parameters": {}
+      }
+    }
+  ],
+
+  "data_preprocessing": {
+    "handle_missing_values": "remove_rows" | "impute_mean" | "impute_median" | "none",
+    "normalize_data": true | false,
+    "remove_multicollinearity": true | false
+  },
+
+  "evaluation_plan": {
+    "number_of_iterations": int,
+    "cluster_validity_metrics": ["pseudo_f", "silhouette_score", "davies_bouldin"],
+    "evaluation_strategy": {
+      "visual_inspection": true,
+      "domain_knowledge_check": true,
+      "statistical_significance_check": true,
+      "variable_importance_analysis": ["boxplot", "canonical_correlation_analysis"]
+    }
+  },
+
+  "constraints_and_notes": {
+    "user_defined_constraints": {
+      "max_number_of_clusters": int,
+      "preferred_spatial_scale": "fine" | "medium" | "coarse"
+    },
+    "additional_notes": "Any additional information, e.g., user or expert suggestions"
+  }
+}
