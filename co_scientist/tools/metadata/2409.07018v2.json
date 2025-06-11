@@ -1,0 +1,14 @@
+{
+  "id": "http://arxiv.org/abs/2409.07018v2",
+  "title": "Clustered Factor Analysis for Multivariate Spatial Data",
+  "summary": "Factor analysis has been extensively used to reveal the dependence structures among multivariate variables, offering valuable insight in various fields. However, it cannot incorporate the spatial heterogeneity that is typically present in spatial data. To address this issue, we introduce an effective method specifically designed to discover the potential dependence structures in multivariate spatial data. Our approach assumes that spatial locations can be approximately divided into a finite number of clusters, with locations within the same cluster sharing similar dependence structures. By leveraging an iterative algorithm that combines spatial clustering with factor analysis, we simultaneously detect spatial clusters and estimate a unique factor model for each cluster. The proposed method is evaluated through comprehensive simulation studies, demonstrating its flexibility. In addition, we apply the proposed method to a dataset of railway station attributes in the Tokyo metropolitan area, highlighting its practical applicability and effectiveness in uncovering complex spatial dependencies.",
+  "published": "2024-09-11T05:21:12Z",
+  "authors": [
+    "Yanxiu Jin",
+    "Tomoya Wakayama",
+    "Renhe Jiang",
+    "Shonosuke Sugasawa"
+  ],
+  "primary_category": "stat.ME",
+  "pdf_url": "http://arxiv.org/pdf/2409.07018v2"
+}

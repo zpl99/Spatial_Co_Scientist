@@ -1,0 +1,482 @@
+0
+2
+0
+2
+
+v
+o
+N
+2
+2
+
+]
+
+Y
+C
+.
+s
+c
+[
+
+1
+v
+5
+9
+0
+1
+1
+.
+1
+1
+0
+2
+:
+v
+i
+X
+r
+a
+
+How will AI and automation transform society
+and cities?
+
+Gevorg Yeghikyan
+
+Scuola Normale Superiore di Pisa
+ISTI-CNR
+gevorg.yeghikyan@sns.it
+
+Abstract
+
+Against the backdrop of rising anxiety and discussions on the impact
+of AI on society, I explore in this article the structural possibilities of
+AI and automation triggering a new social conﬂict between the current
+capitalist elites and the emerging ”creative class” (R&D scientists, engi-
+neers, business developers, etc.), and how this conﬂict can produce social
+tensions and transform urban space. By drawing insights from a struc-
+turally similar conﬂict in 17-18th century Europe between the aristocracy
+and the emerging bourgeoisie, the impact of this conﬂict on the social,
+spatial, and power landscapes in cities of that time, as well as current
+trends in urban geography, this article outlines the prospects of urban
+transformations under changing production and consumption economies.
+
+Keywords— urbanism, class conﬂict, capitalism, urban space
+
+1 The prospects for a new social conﬂict
+
+In his classic work, the Production of Space, Henri Lefebvre argued that “new social
+relationships call for a new space, and vice versa.” (Lefebvre and Nicholson-Smith
+1991) With all the anxiety and discussions on AI and automation gaining momentum,
+the future of production relations, power structures, and social relationships becomes
+increasingly uncertain. Hand in hand, as urban theory suggests, so does the future
+of cities. To reﬂect on the possible urban futures unleashed by the eﬀects of AI and
+automation on the social organization of space, one should ask, following Lefebvre: is a
+new social conﬂict structurally possible? The answer to this question might contain the
+seeds for ideas about the future of work, social relations, forms of social organization,
+and, ultimately, cities.
+
+1.1 Formal vs. real subsumption
+
+So how should we approach this question? One need not be familiar with Marxist
+thought to know that capitalist production functions by appropriating the surplus
+value created by (social) labour. However, what is interesting regarding the possibility
+of a new social conﬂict due to AI and automation, is how capitalism subsumes labor. In
+Capital, Marx distinguishes between formal and real subsumption of labour by capital
+(Marx 2004). Under formal subsumption, capital exploits labour in socio-economic
+terms: the capitalist monopolises the means of production, forcing the worker to yield
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+to the conditions of wage labour, be hired, and give away their added value. Real
+subsumption, on the other hand, occurs along with the technological evolution of
+capitalist production, under which the worker is dominated by the capitalist not only
+by being hired, but also through exploitation by the material movement of capital in
+the process of production. He is dominated by the system of machines and becomes a
+kind of a living appendix to them, forced to work according to the technological logic
+of the machinery he operates, or rather, is operated by. In other words, the worker
+is subsumed by capital not only in terms of production relations, but also in terms
+of the very production processes he works under. This, according to Marx, is what
+makes the domination of labour by capital in organisational and administrative terms,
+and hence, the eﬃcient obtaining of maximum surplus value from the employment of
+labour, possible. This theoretical framework can be easily extended to post-industrial
+economies dominated by services by replacing the machinery logic with, for instance,
+the bureaucratic-administrative logic of typical oﬃce work.
+
+What is it that changes in capitalist production with the advent of Industry 4.0
+with Machine to Machine, Internet of Things, and AI systems? The worker as an ap-
+pendix to the production process essentially disappears, and with it, disappears also
+the bundle of manager and supervisor positions telling the worker what to do and how,
+since there is no one left to command: algorithms and robots are now at work. Unlike
+the disappearing factory or white collar workers, the remaining employees, required
+to develop, innovate, and sustain production, such as R&D scientists, engineers, and
+business developers, are not working under real subsumption by capital. They are
+mainly concerned with intellectual and creative work in which they are operationally
+free. Although the external socio-economic conditions are still dictated by capital since
+these workers are employed by it (formal subsumption), they are not functionally dom-
+inated by capital in the creative process. Moreover, with the capitalist losing leverage
+over traditional workers due to automation replacing them, the creative workers gain
+further space for operational freedom. Thus, the widespread introduction of Industry
+4.0 and AI systems completely or partially abolishes real subsumption in capitalist
+production.
+
+Interestingly, this is precisely where space for a new social conﬂict opens up.
+While the conﬂict between the traditional industrial worker and the capitalist re-
+volved around wages, working hours and conditions, the creative worker is typically
+well-paid, enjoys retirement beneﬁts, vacations, and is often even lured by employee
+stock options, oﬀering company shares to its employees. Therefore, the conﬂict is to
+be found elsewhere.
+
+2 Social climbing in the 17th century and today
+
+To understand the possibilities of the creative class entering into conﬂict with existing
+capitalist structures, it is worthwhile to recall a structurally similar socio-economic
+conﬂict in history: that between the bourgeoisie and feudal aristocracy in 17th century
+Western Europe. Comedies of that epoch show what the emerging bourgeois was
+striving for: to make his way to the ruling classes through social climbing. His ascent
+from bourgeois to noble might involve marrying a noble woman or buying a noble
+title. For example, Moliere’s classic play, titled Le bourgeois gentilhomme, an evident
+oxymoron, mocks such attempts of social climbing by the pretentious bourgeois and
+ingeniously shows the emerging class conﬂict (Moli`ere 2019).
+
+Likewise, being only formally subsumed by capital and having considerable op-
+erational freedom, resources, and time at their disposal, many creative workers
+today dream about converting their creative abilities into capital and ap-
+plying them with proﬁt - think of the startup ecosystems, - thus liber-
+ating themselves from the exploitation of capital and becoming capitalist
+
+2
+
+entrepreneurs themselves. As we can see, this is structurally analogous to the
+17-18th century bourgeoisie striving to liberate themselves from the domination of the
+monarchic system oﬀering privileges to the aristocracy, by attempting social climb-
+ing to become aristocrats themselves. This state of aﬀairs continued for almost two
+centuries, until the conﬂict between the ever-stronger bourgeoisie and the ever-weaker
+aristocracy ﬁrst manifested itself in the former articulating their diﬀerences from the
+latter, and then burst into the violent bourgeois revolution.
+
+2.1 Limits to the growth of the creative class
+
+Coming back to our days, capital still succeeds in keeping the ever-growing creative
+class (Florida 2019) in check by oﬀering privileged working conditions and employee
+stock options to a still narrow group of creative workers, but it will not be able to
+do so indeﬁnitely. Take the example of the so-called Scandinavian Nordic model.
+The Nordic model, more than any other capitalist model, took the path of collective
+bargaining: a strong compromise between capital and labour, with an unparalleled
+level of social guarantees, education and healthcare in the developed part of the world.
+For example, unlike the United States where one in ten people live oﬃcially below the
+poverty line, poverty in the Scandinavian countries is virtually nonexistent (Semega
+2019). Similarly, a situation where a person is denied medical care because they cannot
+aﬀord it is essentially impossible in those countries (Sainato 2020). Nevertheless,
+the Nordic model has its limits and reached them already in the 1980s when the
+portion of GDP redistributed through government spending, i.e., through a non-market
+mechanism, reached 65% (Ortiz-Ospina 2016). This meant that capital was forced to
+concede the lion’s share of the surplus value it appropriated from labour and allow
+it to be redistributed among workers. The Nordic model was unable to go further
+with its redistributive policies, since doing so would mean to encroach the very heart
+of capitalist production denying it its main motivation: the appropriation of surplus
+value. Similarly, given the current growth of the creative class, capital will not be able
+to attract and sustain all creative workers, and, given the discussed aspirations of the
+latter, the conﬂict will thus be only exacerbated.
+
+Now, whether the discussed conﬂict between the growing creative class and the
+current bourgeoisie will culminate in a revolution or will ﬁnd another resolution is not
+only diﬃcult to predict, but is secondary and irrelevant here. Of interest is how it can
+aﬀect the social, political, and economic organization of urban space.
+
+3 Urban transformations in 19th century France
+
+To understand the prospects of these pending socio-economic transformations shaping
+the urban landscape, let’s have a recourse to the French Revolution, and its short and
+long term aftermath. Before and immediately after the revolution, in the late 18th
+century, the aristocracy, bourgeoisie, artisans, and workers had diﬀerent levels of urban
+mobility and use of urban space. Municipal power, exercised by the monarchy and
+the aristocracy tightly connected with it, built elaborate public spaces for displaying
+power as a performative ritual (Rotenberg 2001): processions of carriages pompously
+moved every day along stylised boulevards connecting the various “hˆotel particulier”
+to municipal or religious buildings situated in focal squares. Place des Vosges and
+Place de la Concorde in Paris are prime examples of such urban spaces. Thus, public
+space didn’t exist in the modern sense and merely served as a stage for
+celebrating monarchic power. While lower class workers and artisans exercised
+minimal mobility staying within the conﬁnes of their neighbourhoods and travelling
+almost exclusively by foot, the emerging bourgeoisie was increasingly mobile, agile, and
+sought to establish its class identity. Class membership was ﬁrst articulated through
+
+3
+
+literacy, and a new consumer culture such as the emergence of restaurants as a cheaper
+way to simulate a private cook that only nobles could enjoy (Spang and Gopnik 2019).
+And yet, segregation in cities was mainly vertical rather than horizontal, meaning
+that the poor lived on the higher ﬂoors of buildings inhabited by the upper classes
+(Chartier, Ladurie, and Quilliet 1998). One could often meet middle class members,
+artisanal masters, and lower class workers in the same neighbourhood. This was due
+to the initial alliance of reformist middle classes with the relatively well-doing artisanal
+classes.
+
+This began to change with the July revolution of 1830, when space started to play
+a central role in the creation of middle-class identity following similar processes in
+London and Vienna. The noble landowners had overestimated the falling demand for
+noble mansion housing, incurring severe losses on investment, and eventually had to
+sell the land to private investors. The increasing migration to cities and the ensuing
+severe housing crisis, coupled with the socio-economic transformations with a grow-
+ing bourgeoisie and its quest for a new identity, compelled private developers to create
+and sell an image of a culturally homogeneous, technologically modern, and consumer-
+quality neighbourhoods in order to make money on new housing. Private capital thus
+subdivided previously aristocratic lands into smaller lots and made possible urban re-
+development in speciﬁc areas of the city, meeting the newly formed bourgeois consumer
+demand. These new quarters instigated the self-reinforcing horizontal stratiﬁcation of
+the city, with rising property values attracting ﬁnancial and banking elites and the
+upper middle class, which further nourished consumer culture, already manifest in the
+design of new housing blocks.
+
+To distinguish themselves both from the aristocracy and the lower classes, new
+kinds of public and private spaces were emerging. This included the appearance of
+boudoirs and, most notably, balconies, which, as argued by Francois Loyer, were aimed
+at displaying public wealth by “showing the world outside the location and size of
+an apartment’s salon” (Loyer 1988). The streets in these new quarters were wider,
+straighter, and more luminous, containing more parks and public spaces. The socio-
+economic conditions thus shaped a diﬀerent kind of urban space, which made it possible
+to experience older areas of the city as well. As Victoria Thompson argued, the
+experience of wider streets made older streets seem even narrower, and this came to
+be associated with the poor, dark neighbourhoods (Thompson 2003).
+
+This only strengthened segregation in the city, and, given the low urban mobility
+of the lower classes and the poor living conditions in such centrally located older parts
+of the city as Cit´e in Paris, planted the seeds for social tensions between the poor
+and the bourgeoisie for the ﬁrst time. For example, as recounted by Eugene Roche, it
+was common belief among the poor in these quarters that the 1832 cholera was a plot
+of the rich (sounds familiar?), leading to disregard for social distancing and hygiene
+rules, and propelling insurrection, resulting in a mortality rate in the poor quarters
+twice as high as the city average (Roch 1832; Jordan 1995).
+
+Bourgeois urban redevelopment, the emergence of what we now call urban master
+planning, the Hausmann reconstruction, and rising rents eventually, towards the end of
+the 19th century, pushed the poor away from the city center to the city outskirts. Here,
+the poor working class lived in badly built, unsanitary housing and environment, from
+where the poor did not intrude the rich bourgeois quarters anymore. This concluded
+the horizontal segregation process that had begun almost a century earlier.
+
+4 Customizing or segregating urban space
+
+This rather lengthy historical excursion served to delineate the framework for a con-
+ceptually similar possible transformation of urban space following the emergence of
+the creative class and its conﬂict with the current bourgeois elites. The economic
+
+4
+
+geography for one such transformation model has been described by the urbanist Dror
+Poleg in a recent article (Poleg 2020). Poleg starts by recounting the following idea of
+Chris Anderson: historically, the entertainment industry was built around producing
+and promoting ”hits” because of economic and physical restrictions. The production,
+shipping, storing, and displaying CDs or books were expensive, there were not many
+cinemas, and there were only 24 hours in a day. This meant that producing a wide
+range of albums, books, or movies was not economically viable and hence the industry
+was dependent on hits following the Pareto rule: 20% of products made 80% of the
+sales (Anderson 2007).
+
+The internet changed this by making the production, distribution and storage of,
+and access to content cheaper. Now, most of the sales are no longer coming from a few
+hits, but from what Anderson calls the ”long tail” of a multitude of highly customized
+products, of interest to a very narrow audience, as shown in Figure 1.
+
+Figure 1: Song popularity vs. sales rank plot diagram. Copyright Dror Poleg.
+
+The sheer quantity of such ”narrow” products creates near-unlimited choice and
+constitutes the bulk of most consumer demand. Poleg calls this phenomenon the eco-
+nomics of abundance and goes on to link this idea to urban geography. While eco-
+nomic scarcity historically produced spatially concentrated population and
+economic activity distributions in cities, the emergence of remote working
+options is causing population and economic activity to be distributed across
+a long tail of many city locations instead of a few spatially concentrated
+centers as before. He then notes that under economics of scarcity, the spatially
+concentrated urban locations were designed to appeal to the largest number of peo-
+ple since they share the same urban infrastructure, centrally located job market, and
+public spaces. However, under economics of abundance, people won’t have to share
+the same space anymore. City locations could become as customized as the
+songs people choose to listen to, making cities even more segregated.
+
+5 So what is at stake?
+
+In the developed world, given the growing ambitions and aspirations of creative work-
+ers, gradual and unequal automation can trigger new forms of social organisation of
+space following the logic discussed in our historical excursion as well as in the shift of
+urban activity to the ”long tail”. In fact, the impact of the growing political relevance
+of the creative class on real estate is already palpable in such business models as that
+of WeWork. As described in a piece in the Atlantic (WeWork 2018):
+
+”The bespoke spaces are appealing to big organizations because they allow for a
+nimble oﬃce experience in which employees aren’t necessarily bound to their desks but
+are free to roam and connect with other businesses and entrepreneurs, creating a looser,
+more innovative environment in which ideas can sprout.”
+
+Going further, urban segregation on the ”long tail”, for example, can
+take the form of a digital divide, but in reverse. With automation bringing
+
+5
+
+low skilled labour wages below the level of subsistence, the unemployed will become
+structurally unemployable, and universal basic income (UBI) will most likely become
+an imperative policy to sustain this segment of population, making it a class of its own.
+This UBI class will be oﬀered basic services in their neighbourhoods and cheap access
+to digital services, but will be denied a range of new kinds of physical services like novel
+infrastructures serving speciﬁc technologies in transport, logistical, and recreational
+activities, as well as quality healthcare and education in customized quarters of the
+creative classes. This might create a feedback loop of further investment
+in those areas, creating new extraterritorial conditions, pushing the UBI
+class away, thus concluding the urban segregation process, just like the
+ascending bourgeois pushed low wage workers away to the city outskirts
+150 years ago.
+
+Moreover, a certain physical-digital consumer culture of minor luxuries will have to
+be facilitated to keep the UBI class entertained within the range of their basic income,
+further encouraging this class to customize their neighbourhoods according to that
+culture. The closest analogy is perhaps the story of the French general Gallieni who
+conquered Madagascar, imposed a head tax in the newly issued local currency in 1901,
+eﬀectively printing money and demanding that everyone give some of that money back
+to him. Described in detail in David Graeber’s seminal work, this forced the creation
+of certain markets and population debt, but was also aimed at nurturing a consumer
+culture of cheap luxuries like lipstick or parasol, and making sure locals have some
+of their money left to spend on these products (Graeber 2012). It was crucial that
+they develop new tastes, habits, and desires; that consumer demand previously alien
+to them became ingrained in local culture to keep Madagascar forever tied to France
+even after the conquerors had left. Despite the speculative nature of these reﬂections,
+they highlight the possibility for social and urban transformations articulated through
+extraterritorial conditions and segregation in our cities, as a result of the emerging
+structural conﬂict between the creative class and the current capitalist bourgeoisie.
+
+5.1 Hot dog urbanism
+
+One key aspect of our discussion about automation and AI missing so far is that
+automation is not taking place uniformly across all levels of production. This con-
+sideration is based on Paul Krugman’s hot dog economy toy model (Krugman 2010).
+In this model, the economy produces just hot dogs, consisting of two goods, sausages
+and bread rolls. Let’s assume that advances in technology allow the bakeries to be
+automated, boosting productivity and dropping the cost per bread roll produced. This
+cost reduction causes a rise in demand for hot-dogs, other things being equal. But
+since automation took place only in bakeries, while sausages continue to be produced
+manually, this means that demand for manual labour in the sausage industry will have
+to rise to meet the growing hot-dog demand.
+
+So far, the solution has been to tap into cheap labour in the third world. For
+example, a technological innovation in Silicon Valley increases productivity in the
+upper levels of production but simultaneously raises demand for additional manual
+labour in the lower levels of production. Consider that despite automation and AI, the
+global workforce has actually doubled in the past decades reaching 3.5 billion people -
+faster than population growth (Group 2020). Incidentally, this might also be the reason
+why despite the technology being available for quite some time now, corporations
+have not been in a hurry to shift to automated production, preferring cheap manual
+labour somewhere in Southeast Asia instead. However, unless automation takes place
+uniformly across diﬀerent levels of production chains, which it won’t, we might actually
+face a workforce shortage, given the limited rural population and the current rates
+of urbanization. This means that the above mentioned changes in social structures
+and urban life will have an unequal distribution on the global scale with inevitable
+
+6
+
+geopolitical consequences, which is, however, out of the scope of this article.
+
+6 Conclusion
+
+In an attempt to sketch the baseline for how AI and automation could aﬀect social
+and urban structures, we looked at concepts from Marx’s political economy, saw what
+kind of social conﬂict could emerge with the advent of automation, and looked at
+17-19th century France to discover how the mounting socio-economic conﬂict between
+the aristocracy and bourgeoisie shaped the urban landscape of Paris and resulted in
+segregation in the city. We discussed Dror Poleg’s idea of living on the tail by noting
+how it structurally ﬁts the predictions of our model of the social conﬂict between the
+creative class and current capitalist elites. We also speculated about the formation
+of a structurally unemployable class sustained by universal basic income, the UBI
+class, and reﬂected on possible urban transformations as an indispensable part of this
+dynamic.
+
+City authorities have traditionally been reactive, but with the advent of the In-
+formation age and the disruptive power of AI and automation, policy makers will be
+compelled to take a proactive approach to addressing the challenges to the social and
+cultural fabric raised by the impact of new technologies on urban space.
+
+This discussed scenario is, no doubt, highly speculative, and the exact form it could
+take is impossible to predict, but the aim was to draw attention to the new structural
+conﬂict emerging in the current post-industrial capitalist regime and to trigger further
+discussions on how it might transform society and urban space.
+
+References
+
+Anderson, Chris (2007). The long tail: How endless choice is creating unlimited
+
+demand. Random House.
+
+Chartier, Roger, Emmanuel Le Roy Ladurie, and Bernard Quilliet (1998). La
+ville des temps modernes: de la Renaissance aux R´evolutions. Vol. 249. Seuil.
+Florida, Richard (2019). Maps Reveal Where the Creative Class Is Growing.
+url: https://www.bloomberg.com/news/articles/2019-07-09/maps-
+reveal-where-the-creative-class-is-growing.
+
+Graeber, David (2012). Debt: The ﬁrst 5000 years. Penguin UK.
+Group, The World Bank (2020). Labor force, total. url: https : / / data .
+
+worldbank.org/indicator/SL.TLF.TOTL.IN.
+
+Jordan, David P (1995). Transforming Paris: The Life and Labors of Baron
+
+Haussman. Simon and Schuster.
+
+Krugman, Paul (2010). The accidental theorist: and other dispatches from the
+
+dismal science. WW Norton & Company.
+
+Lefebvre, Henri and Donald Nicholson-Smith (1991). The production of space.
+
+Vol. 142. Oxford Blackwell.
+
+Loyer, Fran¸cois (1988). Paris Nineteenth Century: Architecture and Urbanism.
+
+Abbeville Press.
+
+Marx, Karl (2004). Capital: volume I. Penguin UK.
+Moli`ere, Jean-Baptiste (2019). Le bourgeois gentilhomme. BoD-Books on De-
+
+mand.
+
+Ortiz-Ospina, Esteban (2016). “Government Spending”. In: Our World in Data.
+
+https://ourworldindata.org/government-spending.
+
+7
+
+Poleg, Dror (2020). Living on the Tail. url: https://rethinking.re/blog/
+
+living-on-the-tail/.
+
+Roch, Eugene (1832). “Paris malade, 2 vols”. In: Paris: Montardier 33.
+Rotenberg, Robert (2001). “Metropolitanism and the Transformation of Urban
+Space in Nineteenth-Century Colonial Metropoles”. In: American Anthro-
+pologist 103.1, pp. 7–15.
+
+Sainato, Michael (2020). The Americans dying because they can’t aﬀord medical
+care. url: https : / / www . theguardian . com / us - news / 2020 / jan / 07 /
+americans-healthcare-medical-costs.
+
+Semega, Jessica (2019). Income and Poverty in the United States: 2018. url:
+https : / / www . census . gov / library / publications / 2019 / demo / p60 -
+266.html#:~:text=The%5C%20official%5C%20poverty%5C%20rate%5C%
+20in,14.8%5C%20percent%5C%20to%5C%2011.8%5C%20percent..
+
+Spang, Rebecca L and Adam Gopnik (2019). The Invention of the Restaurant-
+Paris and Modern Gastronomic Culture, with a New Preface. Vol. 135. Har-
+vard University Press.
+
+Thompson, Victoria E (2003). “Telling “spatial stories”: urban space and bour-
+geois identity in early nineteenth-century Paris”. In: The Journal of Modern
+History 75.3, pp. 523–556.
+
+WeWork (2018). How can cities succeed in the 21st century? url: https://www.
+theatlantic.com/sponsored/wework-2018/focus-on-community/1832/.
+
+8
+
+

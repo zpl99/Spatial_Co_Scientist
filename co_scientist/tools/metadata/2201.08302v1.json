@@ -1,0 +1,12 @@
+{
+  "id": "http://arxiv.org/abs/2201.08302v1",
+  "title": "The R Package HCV for Hierarchical Clustering from Vertex-links",
+  "summary": "The HCV package implements the hierarchical clustering for spatial data. It requires clustering results not only homogeneous in non-geographical features among samples but also geographically close to each other within a cluster. We modified typically used hierarchical agglomerative clustering algorithms to introduce the spatial homogeneity, by considering geographical locations as vertices and converting spatial adjacency into whether a shared edge exists between a pair of vertices. The main function HCV obeying constraints of the vertex links automatically enforces the spatial contiguity property at each step of iterations. In addition, two methods to find an appropriate number of clusters and to report cluster members are also provided.",
+  "published": "2022-01-13T20:14:42Z",
+  "authors": [
+    "ShengLi Tzeng",
+    "Hao-Yun Hsu"
+  ],
+  "primary_category": "stat.CO",
+  "pdf_url": "http://arxiv.org/pdf/2201.08302v1"
+}

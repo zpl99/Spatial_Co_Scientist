@@ -1,0 +1,3894 @@
+Data Accuracy Model for Distributed Clustering Algorithm based on 
+Spatial Data Correlation in Wireless Sensor Networks 
+
+1Jyotirmoy Karjee ,2H.S Jamadagni 
+
+1Centre for Electronics Design and Technology, Indian Institute of Science, Bangalore, India 
+kjyotirmoy@cedt.iisc.ernet.in   
+2Centre for Electronics Design and Technology, Indian Institute of Science, Bangalore, India 
+ hsjam@cedt.iisc.ernet.in 
+
+                 Abstract  
+
+               Objective: The main objective of this paper is to construct a distributed clustering 
+algorithm  based  upon  spatial  data  correlation  among  sensor  nodes  and  perform  data 
+accuracy  for  each  distributed  cluster  at  their  respective  cluster  head  node.  Design 
+Procedure/Approach:  We  investigate  that  due  to  deployment  of  high  density  of  sensor 
+nodes in the sensor field, spatial data are highly correlated among sensor nodes in spatial 
+domain.  Based  on  high  data  correlation  among  sensor  nodes,  we  propose  a  non  -
+overlapping  irregular  distributed  clustering  algorithm  with  different  sizes  to  collect  most 
+accurate or precise data at the cluster head node for each respective distributed cluster. To 
+collect  the  most  accurate  data  at  the  cluster  head  node  for  each  distributed  cluster  in 
+sensor field, we propose a Data accuracy model and compare the results with Information 
+accuracy model. Finding: Simulation results shows that our propose Data accuracy model 
+collects  more  accurate  data  and  gives  better  performance  than  Information  accuracy 
+model  at  the  cluster  head  node  for  each  respective  distributed  cluster  in  our  propose 
+distributed  clustering  algorithm.Morover  there  exist  a  optimal  cluster  of  sensor  nodes 
+which is adequate to perform approximately the same data accuracy achieve by a cluster. 
+Practical  Implementation:  Measuring  humidity  and  moisture  content  in  an  agricultural 
+field, measuring temperature in physical environment. Inventive /Novel Idea: A distributed 
+clustering  algorithm  is  proposed  based  on  spatial  data  correlation  among  sensor  nodes 
+with Data accuracy model. 
+
+ Keywords:  Spatial  correlation,  distributed  clusters,  data  accuracy,  wireless  sensor 
+networks. 
+
+1.  Introduction 
+
+    Recent  development  of  wireless  technology  and  embedded  system  made  a  drastic  improvement 
+over  wireless  sensor  networks.  Due  to  ease  of  deployment  and  reliable  cost,  sensor  networks  are 
+used  in  many  applications  to  sense  or  collect  the  physical  phenomenon  of  raw  data  for  any  event 
+such as temperature, humidity, seismic event, fire, etc from the physical environment  [1]. A small 
+processing unit device called node captures the physical phenomenon of raw data from the physical 
+environment. These nodes can process the raw data, communicate wirelessly among other nodes and 
+finally transmits the collected raw data to the base station or sink node.  
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    Generally the physically sensed data collected by the sensor nodes are spatially correlated [2] in 
+the  sensor  field.  If  the  deployed  density  of  sensor  nodes  increases,  the  spatially  proximal  sensor 
+observations  are  highly  correlated  [3]  in  the  sensor  field.  Since  the  sensor  observations  are  highly 
+correlated among sensor nodes, the sensor nodes form distributed clusters [4] in the sensor field to 
+minimize data collection cost [5]. According to literature survey, LEACH [6] demonstrates a clear 
+concept about distributed dynamic cluster formation according to priori probability. Each distributed 
+cluster has respective Cluster Head (CH) [7] node which aggregates the data collected from all the 
+sensor nodes in the cluster and finally transmits the processed data to the sink node. Moreover SEP 
+[8]  gives  the  cluster  formation  in  the  heterogeneous  sensor  networks.  Literature  [3,  9]  shows  the 
+spatial correlation of  observed data  among sensor nodes to form distributed clusters.  A grid based 
+clustering method proposed in literature [10] shows a spatial correlation model for cluster formation. 
+Basically this type of theoretical clustering model rarely happens in practical scenario in the sensor 
+field. A disk-shaped circular cluster proposed in literature [11] shows grouping of nodes into disjoint 
+set each managed by a designated CH node. However formation of disk shape cluster doesn’t really 
+appears in original scenario. Most of the cases, cluster formation are irregular in shape and size the 
+in spatial domain. In literature [4] authors proposed a distributed clustering algorithm with different 
+shape and size based upon shortest distance among sensor nodes and CH nodes in spatial domain. 
+Here in this paper, we propose a formation of distributed clustering algorithm based upon spatially 
+correlated data among sensor nodes. Our propose model for distributed clustering algorithm which 
+form  irregular  shape  and  size  is  much  more  practical  than  the  previously  proposed  clustering 
+algorithm in spatial domain. As the numbers of sensor nodes are more in the sensor field, the data 
+correlation  among  the  sensor  nodes  increases  [3]  and  form  distributed  clusters  for  high  density  of 
+sensor  nodes  in  our  clustering  algorithm.  Thus  finally  we  form  spatially  correlated  distributed 
+irregular  non  overlapping  clusters  of  different  sizes  with  high  density  of  sensor  nodes  in  spatial 
+domain.  More  over  the  size  of  each  distributed  cluster  in  our  algorithm  is  based  upon  a  threshold 
+value given in data correlation model [4] in spatial domain. 
+      In  literature  [12,  13,  14],  authors  proposed  Information  accuracy  (distortion  function)  model 
+where base station or sink node can estimate the information accuracy for observed data sensed by 
+all  the  sensor  nodes.  These  types  of  model  are  based  on  one  hop  communication  where  observed 
+data are sensed by all the sensor nodes and directly transmit the observed data to the sink node. But 
+in literature [4, 15] authors proposed two hop communication where observed data are transmitted to 
+the sink node via intermediate node (CH node) where the sensor field is large. Again in this paper, 
+we consider two hop communications for our distributed clustering algorithm based on spatial data 
+correlation  among  sensor  nodes  in  which  observed  data  are  transmitted  to  the  sink  node  via  CH 
+node.  From  literature  survey,  it  has  been  noted  that  estimated  data  collected  from  all  the  sensor 
+nodes  in  a  cluster  are  directly  send  to  CH  node  for  aggregation[24,25]  without  verifying  the 
+accuracy. Hence it is important to verify the estimated data before data aggregation at CH node and 
+then send it to the sink node. For each distributed cluster, the data accuracy is verified using MMSE 
+estimator  [23]  before  data  aggregation  and  then  only  transmits  the  most  accurate  data  to  the  sink 
+node. Thus verifying data accuracy at CH node before data aggregation for each distributed cluster 
+may  reduce  communication  overhead.  It  may  possible  that  some  of  the  sensor  nodes  in  the 
+distributed cluster get malicious [16] due to external physical environment .In such tropical situation 
+sensor  nodes  can  sense  and  read  inaccurate  data.  These  inaccurate  data  transmitted  by  malicious 
+nodes  may  cause  incorrect  data  aggregation  at  the  CH  node  for  respective  clusters.  Hence  it  is 
+required to estimate and verify the data accuracy before data aggregation in the CH node for each 
+distributed cluster to reduce data redundancy and power consumption. 
+
+       In  this  paper,  we  propose  Data  accuracy  model  where  we  use  Minimum  Mean  Square  Error 
+(MMSE) estimation to perform data accuracy at the CH node before data aggregation [17] for each 
+distributed cluster. Most of the work done [12, 18] till today is to perform MMSE estimation at each 
+individual sensor nodes for the observed data before transmitting the estimated data at the CH1 node 
+in  a  cluster.  According  to  literature  [18],  once  the  estimated  data  is  received  at  the  CH  node 
+transmitted by all the sensor nodes in a cluster, averaging the estimated data at CH node and finally 
+transmits the most accurate data to the sink node. However to the best understanding of authors, this 
+is the first time to perform MMSE estimation only at the CH node for all the observed data sensed 
+by all the sensor nodes in a cluster .In our Data accuracy model, calculating MMSE estimation only 
+at the CH node for the observed data sensed by all the sensor nodes in a cluster can increase the data 
+accuracy and reduce the communication overhead before data aggregation.  
+       Rest  of  the  paper  is  given  as  follows.  In  section-2,  we  construct  a  data  correlation  model  [4] 
+among  sensor  nodes  in  spatial  domain.  Data  correlation  model  shows  the  degree  of  correlation 
+coefficient for observed data among sensor nodes. The degree of correlation coefficient for observed 
+data are  measured  by an assumed threshold value. If the correlation coefficients for observed data 
+among  sensor  nodes  are  greater  than  the  threshold  value,  observed  data  are  spatially  correlated 
+among sensor nodes in spatial domain otherwise not. Ultimately from this threshold value, we get an 
+approximated  circular  data  correlation  range  among  sensor  nodes.  The  size  of  this  approximated 
+circular data correlation range depends upon the threshold value. The sensor nodes which fall with in 
+this circular data correlation range, the spatial data among them are highly correlated in the spatial 
+domain. Hence the correlation coefficients for observed data among these sensor nodes are greater 
+than  the  threshold  value.  In  section-3,  we  propose  a  distributed  clustering  algorithm  based  upon  
+spatial  correlation  for  observed  data  among  sensor  nodes  in  the  sensor  field  .It  forms  non  over-
+lapping  irregular  shape  and  size  of  different  distributed  clusters  in  the  spatial  domain.  Once  the 
+distributed clusters are formed in the sensor field, each cluster can perform the data accuracy at their 
+respective  CH  node  and  transmit  the  most  accurate  data  to  the  sink  node  which  is  discussed  in 
+section-4.  We  also  construct  a  Data  accuracy  model  and  compare  it  with  Information  accuracy 
+model with respect to data accuracy. In section 5, we perform the simulation and validation for our 
+proposed distributed clustering algorithm and Data accuracy model. Finally we conclude our work in 
+section 6. 
+
+2.  Data Correlation Model in Spatial Domain 
+
+j to  sense  or  measure  a  tracing  point  [4] i
+
+      In this section, we are interested to illustrate the spatial data correlation among sensor nodes  i  
+i  in  a  spatial  domain.  Tracing  point  is  a 
+S   for 
+and 
+reference  value  which  we  are  interested  to  measure  and  sense  in  the  spatial  domain.  For  example 
+tracing  point  has  higher  concentration  of  moisture  content  in  an  agricultural  field.  It  has  higher 
+concentration  of  data  with  higher  variation  with  respect  to  lower  variation  of  data  in  the  spatial 
+among 
+domain. As the sensor node density increases, the spatial correlation of observed data  (
+
+1
+
+)
+
+S S
+,
+i
+
+j
+
+the sensor nodes  i  and  j  also increases in the spatial domain. The sensor nodes sense and measure 
+the tracing point over a window frame of time interval   T to capture the continuous data sample with  
+Si={ si1 ,  si2, si3, ……..sin } and Sj={sj1 ,  sj2, sj3, ……..sjn} respectively. If the tracing point sensed and 
+measured by the sensor nodes  i and j located near to each other, the data correlation is strong. The 
+
+1 According to literature [18] CH node is only a logical entity and can also be called as sink node depending upon applications. 
+
+ 
+ 
+                                                 
+data correlation decreases as the sensor nodes  i and j are far apart from the tracing point. The sensor 
+nodes  i and j can compute the mean of continuous data sample over a window frame of time interval 
+T. Thus the mean of continuous data sample sensed and measured by sensor nodes  i and j are given 
+as follows. 
+
+
+
+S
+
+i
+
+1
+
+kn
+
+n
+
+1
+
+
+S
+
+ik
+
+          and         
+
+S
+
+
+
+j
+
+1
+
+kn
+
+n
+
+1
+
+
+S
+
+jk
+
+                                             (1) 
+
+We compute the variance of continuous sample data captured by the sensor nodes  i and j  in spatial 
+domain.  Variance  is  used  to  measure  how  far  a  set of continuous  data sample of sensor nodes are 
+spread out from each other. Thus the sensor nodes compute the variance of sample data as follows. 
+
+Var S
+
+(
+
+)
+
+
+
+i
+
+1
+
+n
+
+
+
+1
+
+n
+
+1
+k
+
+
+2
+
+(
+
+S
+
+ik
+
+
+
+S
+
+)
+
+i
+
+   and  
+
+Var S
+
+(
+
+)
+
+
+
+j
+
+1
+
+n
+
+
+
+1
+
+n
+
+1
+k
+
+
+2
+
+(
+
+S
+
+
+
+S
+
+)
+
+j
+
+jk
+
+                            (2)                       
+
+We compute the covariance of sample data for nodes  i and j  which is given as  
+
+Cov S S
+(
+
+,
+
+i
+
+)
+
+
+
+j
+
+1
+
+(
+
+n
+
+
+
+1)
+
+n
+
+k
+1
+
+
+(
+
+S
+
+ik
+
+
+
+S
+
+i
+
+)(
+
+S
+
+jk
+
+
+
+S
+
+j
+
+)
+
+                                                          (3) 
+
+Covariance  is  defined  as  a  measure  of  how  much  two  variable  of  continuous  sample  data  change 
+jS S ) for 
+together in a spatial domain for sensor nodes  i and j .We find the correlation coefficient (
+sensed by the sensor nodes  i and j  which is given as  
+
+spatial correlation between sample data  (
+
+i
+
+)
+
+S S
+,
+i
+j
+Cov S Si
+(
+Var S Var S
+)
+(
+i
+
+)
+
+(
+
+j
+
+)
+
+j
+
+
+S Si
+
+j
+
+
+
+
+
+S S
+i
+
+j
+
+
+
+n
+
+(
+n
+
+1
+k
+
+
+
+
+
+
+1
+
+(
+
+n
+
+
+
+1)
+
+1
+
+
+
+1)
+
+n
+
+1
+k
+
+
+(
+
+S
+
+ik
+
+
+
+S
+
+i
+
+)(
+
+S
+
+jk
+
+
+
+S
+
+)
+
+j
+
+(
+
+S
+
+ik
+
+
+
+S
+
+)
+
+i
+
+2
+
+ 
+ 
+ 
+
+1
+
+(
+
+n
+
+
+
+1)
+
+n
+
+1
+k
+
+
+(
+
+S
+
+jk
+
+
+
+S
+
+)
+
+j
+
+2
+
+
+
+
+
+                                          (4) 
+
+Thus  equation  no.  (4)  shows  the  data  correlation  between  the  sample  data  among  sensor  nodes 
+i and j   in  the  spatial  domain.  These  spatially  correlated  data  among  sensor  nodes  i and j   can  be 
+modeled as Joint Gaussian Random Variables (JGRV) [12, 14] as follows: 
+
+]
+
+0
+
+0
+
+E S j                          for i=1,2,…………..n     and j=1,2 ……..n 
+E Si   , 
+[
+]
+[
+2
+
+iS
+
+          for i=1,2……….n    and j=1,2,……..n 
+
+Var Si
+[
+
+2
+
+jS
+
+, 
+
+]
+
+]
+
+Var S j
+[
+2
+
+i
+S
+
+Cov S S
+[
+
+,
+
+i
+
+]
+
+j
+
+Corr S S
+[
+
+,
+
+i
+
+]
+
+j
+
+2
+
+i
+S
+
+Corr S S
+[
+
+i
+
+]
+
+
+
+j
+
+2
+[
+ 
+i
+S
+
+S S
+i
+
+j
+
+]
+
+
+
+E S S
+[
+i
+
+j
+
+]
+
+
+
+Cov S S
+[
+
+i
+
+]
+
+j
+
+ 
+                                      
+ 
+ 
+        
+                           
+ 
+ 
+                                
+ 
+                                                   
+ 
+ 
+                            
+ 
+ 
+ 
+ 
+K d
+(
+V
+
+i j
+,
+
+)
+
+
+
+Corr S S
+[
+
+i
+
+]
+
+
+
+[
+
+
+S S
+i
+
+j
+
+]
+
+
+
+j
+
+]
+
+j
+
+
+
+E S S
+[
+i
+2
+
+i
+S
+
+Cov S S
+[
+
+i
+2
+
+i
+S
+
+]
+
+j
+
+                                        (5) 
+
+(.)
+
+VK
+represented  as 
+
+ is a correlation model [14]and the Euclidian distance between the sensor nodes  i and j can be 
+for  the  sensed  data  .  We  assume  the  covariance  function  to  be  non-
+
+||
+
+
+
+
+||
+
+d
+
+S
+
+S
+
+i
+
+,
+
+j
+
+i
+
+j
+
+negative  and  can  decrease  monotonically  with  distance 
+
+d
+
+||
+
+
+S
+
+i
+
+
+
+S
+
+j
+
+i
+
+,
+
+j
+
+||
+
+,with  limiting  value  of  1  at 
+
+d   and of 0 at d   . We adopt power exponential model [19, 20] which is given as  
+
+0
+
+K
+
+PE
+V
+
+(
+
+d
+
+i
+
+,
+
+j
+
+)
+
+
+
+e
+
+(
+
+
+/
+d
+
+)
+
+2
+
+1
+
+    for   1
+
+0   , 
+
+ 
+2
+
+(0, 2]
+
+                                                 (6 ) 
+
+1  is called range parameter which controls the relation between the distance among sensor 
+where 
+nodes and the correlation coefficient. It also controls how fast the correlation decays with distance 
+2   is  called  a  smoothness  or  roughness  parameter  which  controls 
+among  the  sensor  nodes.
+geometrical  properties  of  the  random  field.  It  contains  exponential  model  for 
+1    and  squared 
+exponential model for 
+2  .From equations no. (5) and (6), we find the correlation coefficient of 
+observed data 
+ among the sensor nodes  i and j  using power exponential 
+ as well as 
+S x
+(
+i
+i
+model as follows 
+
+S x
+(
+j
+
+y
+i
+
+y
+
+)
+
+)
+
+,
+
+,
+
+2
+
+2
+
+j
+
+j
+
+
+
+d
+i j
+,
+
+1
+
+
+
+
+
+
+
+2
+
+
+
+
+
+[
+
+
+S S
+i
+
+j
+
+]
+
+
+
+e
+
+                                                                      (7) 
+
+If 
+
+jS S
+[
+
+We define a threshold  for  0
+1  which determines whether the spatial data are correlated among 
+the  sensor  nodes  in  the  sensor  field.  Using  the  threshold  value    ,  we  show  two  properties  for 
+spatially correlated data among sensor nodes as follows: 
+ 
+domain. 
+ 
+domain. 
+From equations no. (4 ), (6 ) and (7 ), we define the correlation coefficient 
+
+ ,  spatial  data  are  weakly  correlated  among  sensor  nodes  iand j   in  the  spatial 
+
+   ,  spatial  data  are  strongly  correlated  among  sensor  nodes  iand j   in  the  spatial 
+
+ for the observed 
+
+jS S
+[
+
+If
+
+]
+
+]
+
+]
+
+i
+
+i
+
+jS S
+[
+
+i
+
+data  using  power  exponential  model  among  sensor  nodes  i and j   where  the  data  are  strongly 
+correlated in the spatial domain represented as follows 
+
+j
+
+d
+i
+,
+
+1
+
+
+
+
+
+
+
+
+
+
+2
+
+
+
+
+
+
+
+
+e
+
+[
+
+
+S S
+i
+
+j
+
+]
+
+
+
+Cov S S
+[
+
+i
+
+]
+
+j
+
+2
+
+S
+i
+
+                                                        (8) 
+
+
+
+From  equation  no  8,  we  find  the  relation  between  the  threshold  values    and  power  exponential 
+model represented as  
+
+                                 
+ 
+ 
+                                   
+ 
+ 
+                                                         
+ 
+                                                
+ 
+ 
+
+
+ijd
+
+1
+
+
+
+
+
+
+
+2
+
+
+
+
+
+e
+
+  
+
+
+2
+
+ijd
+
+
+
+2
+
+1
+
+2
+
+log
+
+
+
+
+
+2
+
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                 (9) 
+
+We compare the equation no (9) with the Euclidean distance among the coordinates of sensor nodes 
+i and j  as follows. 
+
+d
+
+2
+ij
+
+
+
+(
+
+x
+i
+
+
+
+x
+
+2
+
+)
+
+j
+
+
+
+(
+
+y
+i
+
+
+
+y
+
+2
+
+)
+
+j
+
+                                                              (10) 
+
+From equations no (9) and (10), we get  
+
+(
+
+x
+i
+
+
+
+x
+
+2
+
+)
+
+j
+
+
+
+(
+
+y
+i
+
+
+
+y
+
+2
+
+)
+
+j
+
+
+
+2
+
+1
+
+2
+
+log
+
+
+
+
+
+2
+
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      (11) 
+
+Comparing equation no. (11) with the equation of a circle , we get  
+x
+
+
+
+
+
+
+
+
+
+y
+
+r
+
+(
+
+)
+
+)
+
+(
+
+2
+
+2
+
+2
+
+x
+i
+
+j
+
+y
+i
+
+j
+
+                                                                    (12) 
+
+From  equations  no.  (11)  and  (12  ),  we  find  the  radius  r for  range  of  circular  data  correlation  area 
+denoted as 
+
+cir i around a sensor node  i  as a centre coordinate .  
+
+( )
+
+2
+
+r
+
+
+
+2
+
+1
+
+2
+
+log
+
+
+
+
+
+2
+
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   (13) 
+
+The sensor nodes  j which falls under
+correlated  in  the  spatial  domain.  The  spatial  data  correlation 
+
+cir i , the observed data among sensor nodes  iand j are highly 
+  among  sensor  nodes  i and j  
+
+( )
+
+]
+
+[
+jS S
+
+i
+
+with in 
+
+cir i are greater than the threshold value. 
+
+( )
+
+( )
+
+1  and 
+
+1  and 
+
+For a fixed value of 
+
+Similarly with a fixed value of 
+
+2  , if the threshold  increases, the radius  r of 
+
+cir i  depends upon the 
+2  in the spatial domain. We define two properties from equation no. (13) 
+
+Equation no. (13), shows that the radius  r of circular data correlation area 
+threshold value,
+given as follows: 
+ 
+exponentially. 
+ 
+cir i  
+( )
+also  get  increase  and  the  average  number  of  distributed  clusters  (discuss  in  section-5)  decreases 
+exponentially in the sensor region. 
+    Hence we take an appropriate threshold value  to find the size of 
+cir i  where the observed data 
+among sensor nodes are strongly correlated in the spatial domain. In the next section, we propose a 
+distributed clustering algorithm based upon data correlation among sensor nodes in each 
+cir i in the 
+sensor field. 
+
+1  and 2 , if the radius  r of 
+
+cir i increases, the size of 
+
+cir i decreases 
+
+( )
+
+( )
+
+( )
+
+( )
+
+                                                                    
+ 
+ 
+                                                          
+ 
+                                                   
+ 
+ 
+                                      
+                                             
+ 
+                                                      
+ 
+ 
+      3. Distributed Clustering Algorithm based on Spatial Data Correlation 
+
+      In  this  section,  we  propose  a  distributed  clustering  algorithm  which  forms  non  overlapping 
+clusters of irregular shape and size in the sensor field. If the deployed sensor nodes increases in the 
+sensor  field,  the  spatial  data  correlation  among  the  sensor  nodes  increases.  Based  upon  the  spatial 
+cir i in  the  sensor  field,  we  construct  the 
+data  correlation  among  the  sensor  nodes  for  each 
+distributed clustering algorithm. 
+
+( )
+
+Notations used in the clustering algorithm: 
+
+( )
+
+( )
+
+M  Total number of sensor nodes in deployed sensor field  
+i   Represents each sensor node where  i M  
+id i =Represents identification number of each sensor node  i  
+cir i =Range of data correlation area which is approximated by a circular area around each sensor    
+           node  i  as centre  
+r =Radius of data correlation range area 
+( )G i =A group of neighboring sensor nodes  j which is a subset of 
+max
+
+NodeG i  =Maximum number of sensor nodes  j in 
+DisG i =Maximum Euclidian distance between the farthest node  j  from node  i  as a centre in  
+
+cir i of node  i as centre  
+cir i  
+( )
+
+cir i  
+( )
+
+ of 
+
+( )G i
+
+( )
+
+( )
+
+( )
+
+max
+                      max
+min
+
+( )
+NodeG i
+
+SizeG i =Minimum size of  max
+
+( )
+
+DisG i  
+( )
+
+=Spatial data correlation coefficient between nodes  i and  j  
+
+i
+
+]
+
+[
+jS S
+  Threshold value 
+W  Set of 
+W = Set of 
+
+id i  which doesn’t form cluster 
+id i  which form cluster  
+
+( )
+( )
+
+Distributed Clustering Algorithm 
+Step 1: Start 
+Step 2: Initially 
+Step 3: For each i ,
+Step 4: if 
+
+where 
+{ :
+j d i
+( ,
+
+,then 
+
+W M
+
+( )G i 
+
+cir i
+( )
+
+G i
+( )
+
+( )
+
+}
+
+{
+
+)
+
+]
+
+j
+
+ in each  
+
+Step 5: Compute 
+( )G i
+Step 6: Check for  max
+                        If more than one same  max
+                        { 
+                                Compute  max
+                                Compute  min
+                                 min
+                                each 
+                           } 
+
+( )
+SizeG i
+ in   W   
+
+id i
+( )
+
+( )
+
+( )
+
+id i M
+
+1, 2, ...............
+
+M
+
+ and 
+
+W    
+{ }
+
+i
+
+for 
+j
+}
+
+
+ where 
+
+j is the Euclidian distance between  i  and  j  
+)
+
+
+
+r i
+,
+
+ is strongly correlated  and 
+
+d i
+( ,
+
+i
+
+jS S
+[
+cir i  of each sensor node  i  
+( )
+ for 
+NodeG i
+( )
+
+cir i  in the sensor field 
+
+( )
+NodeG i
+( )
+
+ in the sensor field  
+
+jS S
+[
+
+i
+
+]
+
+  
+
+DisG i  for all  max
+SizeG i among  max
+
+NodeG i
+( )
+DisG i  
+( )
+ form the cluster among   max
+
+NodeG i
+( )
+
+ with CH node as  i and add    
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                           else  
+                            max
+Step 7: Repeat Step 6 until 
+
+( )
+NodeG i
+W    and 
+{ }
+
+ form the cluster with CH node  i and add each 
+for all 
+
+where each 
+
+id i M
+
+W M
+
+{ }
+
+( )
+
+( )
+
+id i in W   
+i
+1, 2..........
+
+
+
+M
+
+ where   
+
+( )G i  ( )G j =    in the sensor field 
+
+Step 8: Stop 
+
+      We  consider  a  rectangular  sensor  field  where  M sensor  nodes  are  randomly  deployed.  We 
+assume  that  every  sensor  nodes  knows  the  position  of  the  coordinates  of  all  sensor  nodes  in  the 
+sensor field like MTE routing [6] to simplify the deployment topology. In the previous section, we 
+cir i for each sensor node  i in the sensor 
+clarify that for a threshold value, we get the radius  r of 
+field. Hence we fix a threshold value for which we get radius  r of an appropriate size of 
+cir i for 
+( )
+each  sensor  node  i   in  the  sensor  region.  This  means  that  each  sensor  node  i   perform  the  data 
+correlation  with  the  neighboring  [26,  27]  sensor  nodes  j   to  form 
+( )G i within  the  data  correlation 
+cir i is  approximated  by  a  circular  area  around  the  node  i   with  radius  of  data 
+( )
+range  area
+cir i  and the neighboring nodes 
+correlation range r . 
+( )G i
+j   which  fall  under  the  data  correlation  range  of  area 
+( )G i for  data 
+correlation among the sensor nodes  i and j  with in 
+
+ includes the node  i  itself as the centre of 
+
+cir i with  radius r .  Thus 
+
+cir i  can be given as  
+
+cir i .   
+( )
+
+( )
+
+( )
+
+( )
+
+( )
+
+G i
+( )
+
+
+
+{ :
+
+j d i
+( ,
+
+j
+
+)
+
+
+
+r i
+,
+
+
+
+j
+
+}
+
+                                            (14) 
+
+( )G j of 
+
+( ,
+d i
+cir i are  partially  or  fully  overlapped  with 
+
+Where 
+j is the Euclidian distance between sensor nodes  i and j . The spatial data correlation for 
+)
+( )
+( )G i of 
+in  the  sensor  field.  Thus 
+overlapping  of  many  data  correlation  range  area  occurs  in  the  sensor  field.  Overlapping  of  spatial 
+data  correlation  for 
+can  share  the  same  correlated  overlapping  of  data  among 
+.  Thus  overlapping  of  same  correlated  data  is  like  utilizing  the  same  resource  [4] 
+( )G i and 
+( )G j
+cir
+among the 
+. Hence it increases the 
+( )G j
+cir
+data  redundancy  among 
+.  Hence  a  distributed  clustering  algorithm  is  proposed  to 
+overcome  the  overlapping  problem  of  spatially  correlated  data  among 
+.  Thus  the 
+distributed clustering formation consists of the following phases: 
+
+ in the data correlation range areas 
+cir i and
+( )
+
+cir i and 
+( )
+
+cir i and
+( )
+
+( )G i and 
+
+( )G i and 
+
+( )G j
+
+( )j
+
+( )j
+
+( )j
+
+( )j
+
+cir
+
+cir
+
+Phase-I: 
+, 
+  Each  sensor  node  i   has  its  node  identification  number 
+W M
+id i M which participate to form cluster in 
+i
+later phase, leaves from the array  W and add to an arrayW .W  is an array which signifies that each 
+sensor node   i of 
+
+W   . For each sensor node  i ,
+
+id i  participate to form cluster. 
+
+where ( )
+
+id i   for 
+
+1, 2, ...............
+
+id i M
+
+ and 
+
+{ }
+
+{ }
+
+( )
+
+( )
+
+( )
+
+M
+
+
+
+Phase-II: 
+Each sensor node  i  computes 
+satisfies the equation no. (14). 
+
+( )G i
+
+ with in the data correlation range area 
+
+cir i  with radius  r  and 
+
+( )
+
+            
+ 
+ 
+                                                      
+ 
+ 
+ 
+ 
+ 
+ 
+Phase-III: 
+Check for each sensor node  i  having  max
+cluster  in  the  sensor  region.  Sensor  node  i form  the  CH  node  of  max
+( )
+
+NodeG i in   
+( )
+cir i  leaves from the array W and added to arrayW . 
+
+cir i in the sensor field which forms the first 
+cir i   .Hence 
+
+NodeG i forms the cluster in 
+
+NodeG i
+( )
+
+ of 
+
+max
+
+( )
+
+( )
+
+( )
+
+NodeG i forms the cluster. This problem can be resolve in two steps: 
+
+NodeG i of 
+
+( )
+
+cir i in the sensor field, then there is a big question 
+
+( )
+
+NodeG i of 
+
+( )
+
+cir i in the sensor field.                         
+
+( )
+
+SizeG i among  max
+( )
+
+DisG i for all  max
+
+cir i in the sensor 
+DisG i because  the  data  correlation  among  closer  nodes 
+
+NodeG i of 
+
+( )
+
+( )
+
+( )
+
+( )
+
+Phase-IV: 
+If there are more than one same  max
+that which  max
+ 
+ 
+field.  We  calculate  min
+for  min
+SizeG i
+( )
+Hence  min
+id i in arrayW . 
+
+Firstly we compute  max
+Secondly we find the  min
+( )
+
+SizeG i among  max
+ are strong to form cluster.  
+SizeG i forms the cluster among  max
+( )
+
+DisG i for all  max
+
+( )
+
+( )
+
+( )
+
+DisG i  with sensor node  i as CH node and add each 
+
+( )
+
+Phase-V: 
+Repeat Phases-III & IV until 
+Finally  all 
+with ( )G i  ( )G j =    in the sensor field. 
+
+W    and 
+{ }
+
+the  sensor  nodes  participate 
+
+W M
+
+{ }
+
+where 
+
+id i M
+
+i
+
+to  form  non  overlapping  distributed  clusters 
+
+1, 2..........
+
+( )
+
+M
+
+for all 
+
+.  
+
+   Therefore  we  construct  a  non  overlapping  distributed  clustering  algorithm  in  this  section  based 
+upon  spatial  data  correlation  among  sensor  nodes  in  the  sensor  field.  In  the  next  section  we  are 
+interested to find the data accuracy estimation for each distributed cluster and send the most accurate 
+data to the sink node. 
+
+     4. Distributed Cluster-based Data Accuracy Model  
+
+     In  the  previous  section,  we  develop  a  non-overlapping  distributed  clustering  algorithm  with 
+irregular  shape  and  size  in  the  sensor  field  based  upon  data  correlation  among  sensor  nodes.  We 
+assume  each  distributed  cluster  can  sense  and  measure  a  single  tracing  point  of  same  event  and 
+perform the data accuracy for the measured data at the CH node for the respective cluster. Finally 
+CH node of each distributed cluster transmits the most accurate data to the sink node in the sensor 
+region. Each distributed cluster has different set of sensor nodes to perform the data accuracy. The 
+data  accuracy  is  perform  to  verify  the  estimated  data  received  at  the  CH  node  from  all  the  sensor 
+nodes for a cluster are most accurate and doesn’t contain any redundant data in it. It may reduce the 
+communication overhead.  
+
+     For  the  simplest  analysis  of  our  propose  Data  accuracy  model,  we  choose  a  single  cluster 
+of M sensor nodes.  Cluster with  M sensor nodes can sense a single tracing point and check the data 
+accuracy at the CH node before data aggregation and then transmit the most accurate data to the sink 
+node. Here we demonstrate the mathematical analysis of data accuracy for a single cluster with M  
+sensor  nodes.  Each  sensor  node  i can  observe  and  measure  the  physically  sensed  data  Si   for  the 
+
+ 
+ 
+ 
+ 
+ 
+ 
+tracing point value  S  with observation noise 
+the sensor node  i in a cluster is illustrated as  
+
+in  for the cluster. Therefore the observation done by 
+
+                                                       x
+
+
+
+s
+
+i
+
+
+
+n
+
+i
+
+i
+
+          where  i M                                               (15) 
+
+ix  and transmits 
+     The sensor node  i sense the observation sample data 
+wireless Additive White Gaussian Noise(AWGN) channel [12 ,21 ] where 
+
+ix  to the CH node sharing 
+in  is independent of each 
+2
+other  and  modeled  as  Gaussian  Random  Variable  of  zero  mean  and  variance 
+n .  Thus  the 
+observation  sample  data 
+ix   passes  through  AWGN  channel  to  the  CH  node  for  the  cluster  which 
+reconstructs estimation  ˆS  of the tracing point S . The CH node receive all  M observation sample for 
+the cluster given by  
+
+                                                               X
+
+
+
+AZ N
+
+
+                                                                        (16) 
+
+) 1M
+
+ random vector for physically sensed data 
+)ZC   ,  A  is  a  known 
+
+1M    data  vector  for  observation  done  by  M sensor  nodes  in  a  cluster  ,  Z is  a 
+where  X is  a 
+iS  for  i M including the point event  S where we 
+(1
+estimate  for  N  (0,
+1M    noise  vector  for  the 
+  matrix  and  N is  a 
+)
+M
+observed  data  of  M sensor  nodes    with    N  (0,
+)ZC .The  random  vector  Z  with  zero  mean  and 
+covariance N  (0,
+
+)ZC  can be shown as follows : 
+
+(1
+ 
+
+M
+
+
+z
+
+
+
+E Z
+[
+
+]
+
+
+
+
+
+
+
+
+.
+
+
+.
+
+
+
+
+E s
+[ ]
+
+E s
+[
+
+1
+
+[
+E s
+
+2
+
+]
+
+]
+
+
+
+
+
+
+
+
+
+]M
+
+
+
+
+
+0
+ 
+ 
+0
+ 
+ 
+0
+ 
+.
+ 
+ 
+.
+ 
+0
+ 
+
+        and     
+
+C E ZZ
+
+
+[
+
+z
+
+T
+
+]
+
+
+
+
+
+ 
+
+
+
+
+
+
+]
+
+]
+
+E s s
+[ , ]
+
+E s s
+[
+]
+
+1
+
+E ss
+[
+1
+E s s
+[
+
+1 1
+
+]
+
+]
+
+]
+
+E ss
+[
+2
+E s s
+[
+
+1 2
+
+E s s E s s
+]
+
+[
+
+[
+
+2 1
+
+2
+
+.
+
+.
+E s s
+[
+]
+
+M
+
+.
+
+.
+.
+
+]
+
+2 2
+
+E s s
+[
+.
+
+.
+.
+
+.
+
+.
+
+.
+.
+
+.
+.
+
+.
+
+.
+
+.
+.
+
+.
+.
+
+E ss
+[
+M
+E s s
+[
+
+1
+
+M
+
+M
+
+2
+
+E s s
+[
+.
+
+.
+E s s
+[
+
+M M
+
+]
+
+]
+
+]
+
+
+
+
+
+
+
+
+
+]
+
+
+
+E s
+[
+
+Thus the covariance matrix is  
+
+C
+z
+
+
+1
+2
+1 1
+ 
+
+
+s
+R
+
+1
+M
+
+
+M
+
+T
+R
+1
+
+B
+M M
+
+
+
+
+
+
+                                                                (17)        
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+        
+ 
+ 
+ 
+   
+ 
+ 
+ 
+                                                          
+ 
+ 
+where  
+
+R
+M
+
+1
+
+
+
+
+s s
+,
+1
+
+,
+
+s
+
+2
+
+
+
+
+s
+
+
+
+
+
+
+
+
+
+
+s
+
+.
+
+.
+
+,
+
+s
+
+M
+
+
+
+
+
+
+
+
+
+
+B
+
+M M
+
+
+
+
+
+
+s s
+,
+i
+
+j
+
+s s
+,
+1
+1
+
+,
+
+s
+1
+
+2
+
+
+
+
+s
+
+
+
+
+ 
+
+
+
+
+s
+
+.
+
+
+
+s s
+,
+1
+
+2
+
+
+s
+
+,
+
+s
+
+2
+
+2
+
+.
+
+.
+
+.
+
+.
+
+.
+
+
+
+s s
+,
+1
+
+M
+
+
+s
+
+,
+
+s
+
+M
+
+2
+
+.
+
+
+s
+
+s
+,
+M M
+
+
+
+
+
+
+
+
+
+,
+
+s
+1
+
+M
+
+
+s
+
+,
+
+s
+2
+
+M
+
+1MR  =
+
+ZC   matrix, 
+S S   gives  the  correlation  coefficient  between 
+
+      In 
+M MB  =
+exponential model [19, 20] can be used for correlation model to show the relation between 
+
+iS   ,  S   respectively  and 
+jS   respectively.  Now  the  power 
+iS  and S  
+
+,iS S   gives  the  correlation  coefficient  between 
+
+iS   , 
+
+,i
+
+j
+
+as well as 
+
+iS  and jS . Thus we get 
+
+,iS S = 
+
+e
+
+
+
+
+
+dS i
+,
+
+
+/
+1
+
+
+
+ 2
+
+and 
+
+
+
+S Si
+
+j
+
+
+e
+
+
+
+dS i
+,
+
+
+/
+1
+
+
+
+ 2
+
+in the covariance matrix ZC . 
+
+       CH node collects all the observations from  M sensor nodes in the cluster to find the estimate of  
+ˆS   from ˆ
+iS .  If  the  observed  data  X can  be  modeled  by  Bayesian  Linear  Model  [22  ]  for  all  sensor 
+nodes in cluster , the MMSE estimator to estimate the tracing point at the CH node in a cluster is 
+given as : 
+
+ˆ
+Z
+
+
+
+
+E Z X
+
+|
+
+
+
+
+
+
+
+
+
+
+
+
+
+ˆ
+s
+ˆ
+s
+1
+ˆ
+s
+2
+.
+ˆM
+s
+
+
+
+
+
+
+
+
+
+ˆ
+Z
+
+
+
+T
+
+C A AC A
+(
+
+Z
+
+Z
+
+T
+
+
+
+2
+
+N M M
+
+I
+
+
+
+
+
+1
+
+)
+
+X
+
+ˆ
+Z
+
+
+
+
+
+
+
+T
+
+R
+
+B
+
+
+
+
+
+ 
+
+B
+
+
+
+2
+
+N
+2
+
+S
+
+I
+
+M M
+
+
+
+
+1
+
+
+
+
+
+X
+
+                                                             (18) 
+
+The measurement of performance for the MMSE estimator at the CH node for the cluster is given as 
+the error 
+
+ with mean zero and covariance matrix illustrated as 
+
+
+
+ˆ
+S
+
+S
+
+)
+
+(
+
+E Z
+[(
+
+
+
+ˆ
+Z
+
+)(
+
+Z
+
+
+
+ˆ
+Z
+
+) T
+
+]
+
+
+
+C
+
+Z
+
+
+
+T
+
+T
+C A AC A
+(
+
+Z
+
+Z
+
+
+
+2
+I
+
+N M M
+
+
+
+)
+
+
+
+1
+
+AC
+
+Z
+
+ 
+ 
+                         
+             
+              
+ 
+ 
+ 
+ 
+ 
+                                                        
+ 
+ 
+ 
+                                             
+ 
+ 
+                                                
+                        
+  
+                                                         
+ 
+ 
+                                       
+ 
+
+
+2
+
+S
+
+T
+
+R
+1
+R B
+
+
+
+
+
+
+
+
+
+
+
+2
+
+S
+
+T
+
+
+
+
+
+R
+
+B
+
+
+
+
+
+
+
+B
+
+
+
+2
+
+N
+2
+
+S
+
+I
+
+M M
+
+
+
+
+1
+
+
+
+
+
+(R  B )                                               (19) 
+
+From equation no.(18), we get the estimation of tracing point 
+
+ˆ( )S at the CH node in a cluster given as  
+
+ˆ
+S
+
+T
+
+
+
+R
+
+
+
+
+
+B
+
+
+
+2
+
+N
+2
+
+S
+
+I
+
+M M
+
+
+
+
+1
+
+
+
+
+
+X
+
+                                                            (20) 
+
+We find the distortion factor between  S  and  ˆS to perform data accuracy at the CH node for a cluster. 
+From equation no (19), we get the distortion factor as  
+
+D
+
+
+
+E S
+[(
+
+
+
+S
+
+)
+
+2
+
+]
+
+D
+
+
+
+2
+ 
+
+S
+
+2
+S
+
+T
+
+R
+
+
+
+
+
+B
+
+
+
+2
+
+N
+2
+
+S
+
+I
+
+M M
+
+
+1
+
+
+
+
+
+
+R
+
+                                                      (21) 
+
+We normalize the distortion factor and calculated the data accuracy for  M sensor nodes for a cluster 
+as  
+
+(
+D M
+A
+
+)
+
+1
+ 
+
+D
+2
+
+S
+
+D M
+(
+A
+
+)
+
+
+
+R
+
+T
+
+
+
+
+
+B
+
+
+
+2
+
+N
+2
+
+S
+
+I
+
+M M
+
+
+1
+
+
+
+
+
+
+R
+
+           where   
+
+
+
+
+
+B
+
+
+
+2
+
+N
+2
+
+S
+
+I
+
+M M
+
+
+1
+
+
+
+
+
+
+R
+
+
+
+
+
+AD M
+(
+
+)
+
+T
+R 
+
+                                                                  (22) 
+
+)
+
+(
+
+)
+
+(
+
+AD M calculated  at  the  CH  node  for  each  distributed  cluster  is  performed  before  data  aggregation 
+and finally send the most appropriate data to the sink node. Hence the purpose of verifying the data 
+AD M at  CH  node  for  each  distributed  cluster  is  to  confirm  that  the  most  accurate  data 
+accuracy 
+transmitted by  M sensor node can aggregate rather than aggregating all the redundant data at the CH 
+TR at the CH node for each 
+node. Once we perform the estimation to calculate the data accuracy 
+distributed cluster, the most precise data get aggregated and finally send to the sink node. 
+       The information accuracy model proposed in literature [18] shows that at first each sensor nodes 
+iS for observed data and then transmits the estimated data  ˆSi  to 
+i  can calculate the MMSE estimate  ˆ
+the  CH  node  i.e.  ˆSi in  order  to  find ˆS .  Finally  averaging  all  ˆ
+iS at  the  CH  node  for  the  cluster  for 
+M sensor  nodes  to  get  ˆS .But  in  Data  accuracy  model 
+AD M   ,  at  first  we  collect  all  the  observed 
+)
+
+(
+
+ 
+                                     
+ 
+ 
+                                                        
+ 
+ 
+                                                              
+ 
+                                                   
+ 
+ 
+                                                                
+ 
+ 
+                               
+ 
+ 
+ 
+                                                                
+ 
+data  from  M sensor  nodes  and  then  only  perform  the  MMSE  estimation  at  the  CH  node  for  each 
+distributed  cluster.  It  is  better  to  perform  the  MMSE  estimation  only  at  the  CH  node  rather  than 
+performing  the  MMSE  estimation  at  individual  nodes  and  then  averaging  it  at  the  CH  node  for 
+distributed cluster. We perform the MMSE at the CH node as it is the only central authority for each 
+distributed cluster and it knows the activities of cluster members. 
+
+     5. Simulation and Validation  
+
+( )
+
+( )
+
+( )
+
+( )
+
+1 =70,
+
+2 =1,  the  radius  r of 
+
+1    with 1 =70  and 
+
+     Data correlation model discussed in section-2, shows that the spatial correlation for observed data 
+( Si  and S j ) among sensor nodes  i and j . Spatial correlations for observed data are strong when it is 
+greater  than  some  threshold  value.  So  we  fixed  a  threshold  value    for 0
+1  .  Above  this 
+threshold value  , spatial data are strongly correlated among sensor nodes  i and j . Depending upon 
+the  threshold  value    ,we  get  a  radius  r for  each  sensor  node  i to  perform  data  correlation  with 
+cir i   around  each 
+neighboring  node 
+j ,approximated  by  a  circular  data  correlation  range  area 
+cir i for node  i  with data correlation radius of  r  , data are 
+node i . This means with in the range of 
+strongly  correlated  with  other  nodes j .    So  in  the  first  simulation  setup,  we  clarify  the  relation 
+between    and r .  In  the  Fig.  1(a),  we  plot  the  relation  between  threshold  values    and  the 
+corresponding  size  of  data  correlation  radius  r   for  node  i   of
+cir i .  If  the  threshold  value   
+cir i   decreases  exponentially.  In  Fig. 
+( )
+increases  for  0
+1(b), we show the sizes of data correlation radius  r for node  i  of 
+cir i   and the average number of 
+( )
+clusters based on spatial correlation for threshold values =0.5. If  r of 
+cir i  increases, the size of 
+cir i   increases  for 
+2 =1  and  the  average  number  of  distributed  clusters    based  on  spatial 
+correlation (discussed in section -3) decreases exponentially. 
+ grid based sensor topology 
+        In the second simulation set up, we have a sensor field of  2
+with CH node on one of the corner edge and a fixed tracing point located in the center as given in 
+Fig .2 according to literature [18]. We deployed thirty four sensor nodes and a CH node which forms 
+a  cluster  in  grid  based  sensor  topology.  We  are  interested  to  demonstrate  the  data  accuracy  with 
+respect  to  the  number  of  sensor  nodes.  We  set  the  same  sensor  field  topology  (Fig.2)  as  given  in 
+literature [18] where the position of sensing nodes are located at point (6,2),(8,4),(6,4),(4,4) and the 
+I M in 
+tracing  point  at  (6,4).  For  these  four  jointly  sensing  nodes,  the  information  accuracy 
+)
+(
+literature [18] is 0.7469 and our result for data accuracy 
+AD M is 0.7545. This shows our propose 
+Data  accuracy  model
+I M  
+)
+(
+proposed in literature [18] for the same sensor nodes with same topology. Moreover, if we introduce 
+a fifth sensing node located at (10, 4), the information accuracy 
+I M  is 0.7462. This clarifies that 
+(
+introduce of a fifth node which is far away from the tracing point dominates its observation results 
+AD M ,the  introduce  of 
+and  decreases  the  information  accuracy.  But  in  our  Data  accuracy  model 
+fifth node may increase the data accuracy of 0.7665. Hence introduce of a new sensor nodes in the 
+AD M .  Fig.3  shows  that  the  results  for  data 
+sensor  field  increase  data  accuracy  in  our  propose
+accuracy 
+I M   as  we  keep  increasing  the 
+(
+)
+number  of  sensor  nodes  for 
+2 =1.  Thus  our  propose  Data  accuracy  model  give  more 
+
+AD M   give  more  accurate  data  than  the  Information  accuracy  model
+
+AD M   is  always  greater  than  information  accuracy 
+
+1 =70  and 
+
+2m m
+
+( )
+
+(
+
+)
+
+(
+
+(
+
+)
+
+(
+
+)
+
+(
+
+)
+
+)
+
+)
+
+ 
+ 
+accurate data and better performance than the Information accuracy model with respect to number of 
+sensor nodes in a cluster. 
+
+80
+
+70
+
+60
+
+50
+
+40
+
+30
+
+20
+
+10
+
+e
+r
+t
+e
+m
+n
+
+i
+
+s
+u
+
+i
+
+d
+a
+r
+
+)
+i
+(
+r
+i
+
+c
+
+f
+o
+
+e
+z
+
+i
+
+S
+
+25
+
+20
+
+15
+
+10
+
+5
+
+s
+r
+e
+t
+s
+u
+C
+
+l
+
+f
+o
+
+r
+e
+b
+m
+u
+N
+
+e
+g
+a
+r
+e
+v
+A
+
+0
+0.3
+
+0.35
+
+0.4
+
+0.45
+
+0.5
+
+0.55
+Theshold Value 
+
+0.6
+
+0.65
+
+0.7
+
+0.75
+
+0
+
+0
+
+10
+
+20
+
+30
+
+40
+Size of cir(i) radius in metre 
+
+50
+
+60
+
+70
+
+80
+
+Fig.1 (a) Threshold value versus size of 
+
+cir i
+( )
+
+ radius  
+
+Fig.1(b) Size of 
+
+cir i
+( )
+
+ radius versus average number of clusters 
+
+8 
+
+6 
+
+4 
+
+2 
+
+0 
+
+
+
+Fig. 2 . Wireless sensor network topology: 
+
+ means sensor node , 
+
+ means CH node ,  means tracing point 
+
+  0            2           4              6             8           10          12  
+
+         Moreover, if we continuously increase the number of sensor nodes in the sensor field, the data 
+accuracy remains approximately same. Fig. 3 shows fifteen to twenty sensor nodes are sufficient to 
+perform the same data accuracy level which we achieve for thirty four sensor nodes. Hence we can 
+reduce  the  number  of  sensor  nodes  in  a  cluster  with  respect  to  data  accuracy.  It  is  unnecessary  to 
+deploy thirty four sensor nodes beyond this upper bound because fifteen to twenty sensor nodes are 
+sufficient to give approximately the same data accuracy level achieve in the cluster. Hence fifteen to 
+twenty  sensor  nodes  perform  the  data  accuracy  at  the  CH  node  for  the  cluster  and  transmit  the 
+accurate  data  to  the  sink  node.  Thus  fifteen  to  twenty  sensor  nodes  (optimal  cluster)  perform  the 
+communication process and rest of the sensor nodes goes to sleep mode in the cluster .Reducing the 
+number  of  sensor  nodes  to  fifteen  to  twenty  sensor  nodes  instead  of    deploying  thirty  four  sensor 
+nodes  can reduce communication overhead as well as energy consumption in a cluster.             
+
+ 
+     
+ 
+ 
+ 
+ 
+ 
+              
+ 
+ 
+ 
+        
+   
+   
+ 
+ 
+ 
+                                            
+ 
+             
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+y
+c
+a
+r
+u
+c
+c
+A
+a
+
+t
+
+a
+D
+
+0.98
+
+0.96
+
+0.94
+
+0.92
+
+0.9
+
+0.88
+
+0.86
+
+0.84
+
+0.82
+
+0.8
+
+0.78
+
+0
+
+Information Accuracy Model
+ Data Accuracy Model
+
+5
+
+10
+
+15
+
+20
+
+25
+
+30
+
+35
+
+Number of Sensor Nodes
+
+                     Fig.3. Number of sensor nodes versus data accuracy  
+
+)
+
+)
+
+m
+
+100
+
+m
+
+( )
+
+1 =70 and 
+
+(
+I M with decreasing data accuracy as given in Fig.4(b).  
+(
+
+     In  the  third  simulation  setup,  we  have  fixed  number  of  sensor  nodes  (
+4M  ),  which  forms  a 
+single cluster to sense and measure a single tracing point. We place four sensor nodes in a deployed 
+circular cluster and set a tracing point at the central co-ordinate of deployed circular cluster as shown 
+in Fig.4 (a). Since we have fixed number of sensor nodes, we vary the distance from  M number of 
+sensor nodes from the tracing point S  in a deployed circular topology. As we increase the radius of 
+the  deployed  circular  cluster  with  same  proportion  from  the  tracing  point  S   as  a  centre,  data 
+accuracy decreases for the value 
+2 =1. We compare our results from the results derived 
+in literature [18] and conclude that as the radius of the deployed circular cluster increases with same 
+AD M always  show  better  performance  than  Information 
+proportion  ,our  Data  accuracy  model 
+accuracy model
+     In the fourth simulation set up, we have deployed thirty sensor nodes randomly in a sensor field 
+of  100
+based sensor topology. Each sensor node  i  has a data correlation radius  r = 23.5432 
+cir i for an assumed threshold value = 0.5. The neighboring sensor nodes  j which falls under 
+of 
+cir i around each node  i as a centre, the spatial observed data ( iS  
+the circular data correlation range 
+and 
+jS )  are  strongly  correlated  among  them  for  which  it  is  greater  than    equal  to  a  threshold 
+value(
+cir i ,we  have 
+ 
+developed  a  distributed  clustering  algorithm  based  on  spatial  data  correlation  among  sensor  nodes 
+i and  j as  discuss  in  section-3.  The  sensor  nodes  form  distributed  non-overlapping  clusters  with 
+irregular  shape  and  size.  Each  distributed  cluster  can  sense  and  measure  a  single  tracing  point 
+located randomly with in the cluster. In a practical scenario, signal and noise variance of observed 
+data  changes  with  different  location  in  the  sensor  field.  For  example  the  temperature  variation 
+changes from place to place in a tropical dense forest. Thus we adopt slightly different signal and 
+noise variance of observed data for each distributed cluster in the sensor field. Once each distributed 
+cluster can measure the observed data for tracing point S , it calculates the data accuracy at the CH 
+node  for  the  respective  cluster  and  finally  transmits  the  most  appropriate  data  to  the  sink  node. 
+Table.1 shows the comparison between Information accuracy model
+I M  and Data accuracy model 
+(
+
+).Using  this  data  correlation  radius  r of  each  sensor  node  i for 
+
+( )
+
+( )
+
+0.5
+
+)
+
+                             
+ 
+ 
+ 
+)
+
+  with  respect  to  data  accuracy  for  our  proposed  distributed  clustering  algorithm  for  each 
+D MA
+(
+cluster.  Each  distributed  cluster  has  its  associate  nodes  along  with  a  CH  node  where  the  data 
+  gives  more 
+accuracy  is  performed.  From  Table.1,  we  can  conclude  that  the  result  for  our 
+degree  of  data  accuracy  than 
+I M implemented  in  our  clustering  algorithm  for  each  distributed 
+(
+cluster. 
+
+D MA
+(
+
+)
+
+)
+
+CH 
+
+N3 
+
+S 
+
+N1 
+
+N2 
+
+y
+c
+a
+r
+u
+c
+c
+A
+
+a
+
+t
+
+a
+D
+
+0.97
+
+0.965
+
+0.96
+
+0.955
+
+0.95
+
+0.945
+
+0.94
+
+0.935
+
+1
+
+1.2
+
+1.4
+
+Information Accuracy Model
+Data Accuracy Model
+
+1.6
+
+1.8
+
+2
+Radius of Depeloyed Circle
+
+2.2
+
+2.4
+
+2.6
+
+2.8
+
+3
+
+Fig. 4(a) Circular cluster topology with deployed nodes 
+
+Fig. 4(b) Radius of circular cluster versus Data accuracy 
+
+Cluster 
+Number 
+
+Cluster head 
+Node ID 
+
+Associated Nodes ID 
+in Cluster 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+29 
+
+7 
+
+26 
+
+13 
+
+11 
+
+17 
+
+1,3,5,9,14,23,24,25,30
+
+4,12,19,20 
+
+6,8,15,16 
+
+2.10.21.22 
+
+18,27,28 
+
+- 
+
+Information 
+Accuracy 
+I M  
+)
+(
+
+0.8909 
+
+0.8701 
+
+0.8393 
+
+0.8509 
+
+0.9095 
+
+0.9476 
+
+Data 
+Accuracy 
+D MA
+(
+0.9748 
+
+)
+
+0.9462 
+
+0.9541 
+
+0.9660 
+
+0.9701 
+
+0.9476 
+
+Table 1.  Data accuracy for each distributed cluster  
+
+ 
+ 
+ 
+ 
+ 
+     
+ 
+ 
+       
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+      6. Conclusions 
+
+      We  conclude  in  this  paper  that  a  non  overlapping  distributed  clustering  algorithm  based  upon 
+data correlation among sensor nodes is proposed which reduces the data redundancy in the wireless 
+sensor networks. We perform data accuracy for each distributed cluster at their respective CH node 
+based on spatial correlation of data which shows that our propose Data accuracy model collects more 
+accurate  data  and  give  better  performance  than  Information  accuracy  model.  Moreover  our 
+simulation results shows there exist an optimal cluster which is sufficient to perform approximately 
+the same data accuracy level achieve by a cluster. In a cluster, the optimal cluster can perform the 
+data accuracy at the CH node and rest of the sensor nodes goes in sleep mode. Thus it may reduce 
+the  communication  overhead,  energy  consumption  and  increase  the  life  time  of  distributed  sensor 
+networks. 
+
+      References  
+
+1.  I.F  Akyuildz  ,W.Su,  Y.Sankarasubramanian  and  E.  Cayirci,“A  Survey  on  Sensor  Networks  ”, 
+
+IEEE Communications Magazine ,vol.40,pp.102-114.Aug 2002. 
+
+2.  S.S. Pradhan ,K.Ramchandran ,“Distributed Source Coding : Symmetric Rates and Applications 
+to Sensor Networks”, in the proceedings of the data compressions conference ,pp.363-372, 2002. 
+3.  C.Zhang  ,B.Wang  ,S.Fang,Z  Li  ,“Clustering  Algorithm  for  Wireless  Sensor  Networks  using 
+Spatial  Data  Correlation  ”,  Proceedings  of  IEEE  International  Conference  on  Information  and 
+Automation ,pp.53-58,June 2008. 
+
+4.  Jyotirmoy Karjee , H.S Jamadagni ,“ Data Accuracy Estimation for Spatially Correlated Data in 
+Wireless  Sensor  Networks  under  Distributed  Clustering  ”,  Journal  of  Networks,vol-
+6,no.7,pp1072-1083,July 2011. 
+
+5.  A.Abbasi and M.Younis ,“A Survey on Clustering Algorithms for Wireless Sensor Networks ”, 
+
+Computer Communications ,vol-30,no.14-15,pp2826-2841,2007. 
+
+6.  W.B Heinzelman , Anantha P. Chandrakasan , “ An Application Specific Protocol Architecture 
+for  Wireless  Microsensor  Networks”,  IEEE  transactions on Wireless Communications , vol-1 , 
+no.  4 , pp. 660-670,Oct 2002. 
+
+7.  L.  Guo  ,  F  chen,  Z  Dai  ,  Z.  Liu,”  Wireless  Sensor Network Cluster Head Selection Algorithm 
+based on Neural Networks ”, International Conference on Machine vision and human machine 
+Interference , pp.258-260,2010. 
+
+8.  Georgios  Smaragdakis  ,Ibrahim  Matta  ,Azer  Bestavros,  “SEP:  A  stable  Election  Protocol  for 
+
+Cluster Heterogeneous Wireless Sensor Networks”. 
+
+9.  Chongqing  Zhang  ,Binguo  Wang  ,  Sheng  Fang  ,  Jiye Zheng, “ Spatial Data Correlation Based 
+Clustering  Algorithms  for  Wireless  Sensor  Networks”,  The  3rd  International  Conference  on 
+Innovative Computing Information and Control (ICICIC’08). 
+
+10. Zhikui chen , Song Yang , Liang Li and Zhijiang Xie ,“ A clustering Approximation Mechanism 
+based  on  Data  Spatial  Correlation  in  Wireless  Sensor  Networks”,  Proceedings  of  the  9th 
+International Conference on Wireless Telecommunication Symposium 2010. 
+
+11. Ali  Dabirmoghaddam  ,Majid  Ghaderi  ,Carey  Williamson,  “  Energy  Efficient  Clustering  in 
+Wireless sensor Networks with Spatially Correlated Data”, IEEE Infocom 2010 proceedings. 
+
+ 
+ 
+ 
+ 
+12. Kang  Cai,  Gang  Wei  and  Huifang  Li,  “Information  Accuracy  versus  Jointly  Sensing  Nodes  in 
+Wireless  Sensor  Networks  ”,IEEE  Asia  Pacific  Conference  on  Circuit  and  System  ,pp.1050-
+1053,2008. 
+
+13. M.Gastpar  ,M.Vetterli  ,  “Source  Channel  Communications  in  Sensor  Networks”,  Second 
+
+International Workshop on Information Processing in Sensor Networks ,(IPSN’2003). 
+
+14. Varun  M.C,Akan  O.B  and  I.F  Akyildz,  “Spatio  –Temporal  Correlation  :  Theory  and 
+Applications in Wireless Sensor Networks”, Computer Network Journal (Elsevier Science), vol. 
+45,pp.245-259,june 2004. 
+
+15. Jyotirmoy  Karjee,H.S  Jamadagni,  “  Data  Accuracy  Estimation  for  Cluster  with  Spatially 
+Correlated  Data  in  Wireless  Sensor  Networks”,  IEEE  International  Conference  on  Information 
+System and Computational Intelligence , vol-3,pp.28-291,Harbin , China, 2011. 
+
+16. Jyotirmoy  karjee,  Sudipto  Banerjee,  “Tracing  the  Abnormal  Behavior  of  Malicious  Nodes  in 
+MANET  ”,  Fourth  International  Conference  on  Wireless  Communications,  Networking  and 
+Mobile Computing, pp.1-7, Dalian , China ,2008. 
+
+17. T.Minming ,N Jieru, W Hu, Liu Xiaowen ,“A data Aggregation Model for underground Wireless 
+Sensor Network”, WRI World Congress on Computer Science and Information Engineering, vol 
+-1,pp.344-348,2009. 
+
+18. Huifang Li, Shengming Jiang , Gang Wei, “Information Accuracy Aware Jointly Sensing Nodes 
+
+Selection in Wireless Sensor Networks”, LNCS 4325.pp. 736-747, MSN Springer -2006. 
+
+19. J.O Berger, V.de Oliviera and B.Sanso , “ Objective Bayesian Analysis of Spatially Correlated 
+
+Data ”, Journal of Am. Statistics. Assoc., vol-96, pp.161-1374, 2001. 
+
+20. De  Oliveria  V,  Kedan  B  and  Short  D.A  ,“Bayesian  Predication  of  Transformed  Gaussian 
+
+Random Fields ”, Journal of American Statistical Association , pp. 1422-1433,1992. 
+
+21. T.J Goblick, “Theoretical Limitations on the transmission of data from Analog Sources”. IEEE 
+
+Transaction Theory, IT-11(4), pp.558-567,1965. 
+
+22. Steven  M.  Kay,  “Fundamentals  of  Statistical  Signal  Processing  –Estimation  Theory”,  Pearson, 
+
+Volume-1,2010. 
+
+23. V.Poor ,“An Introduction to Signal Detection and Estimation ”,Second Edition , Springer , Berlin 
+
+1994. 
+
+24. C.Y.  Cho,  C.L  Lin  ,  Y.H  Hsiao,  J  S  Wang  ,  K.C  Yong  ,  “  Data  Aggregation  with  Spatially 
+Correlated  Grouping  Techniques  on  Cluster  Based  WSNs”,  SENSOR  COMM,  pp-584-589, 
+Venice -2010. 
+
+25.  Shirshu  Varma  ,  Uma  Shankar  Tiwary,  “  Data  Aggregation  in  Cluster  Based  Wireless  Sensor 
+Networks”,  Proceedings  of  the  first  International  Conference  on  Intelligent  Human  Computer 
+Interaction , pp.391-400, part-5,2009. 
+
+26. S.Soro,Wedi  B.  Heinzelman  ,“Cluster  Head  Election  Techniques    for  coverage  Preservation  in 
+
+Wireless Sensor Networks”, Adhoc Networks, Elsevier, pp-955-972,2009. 
+
+27. D.Tian , N.Georganas ,“A Node Scheduling Scheme foe Energy Conservation in large Wireless 
+Sensor  Networks  ”,Wireless  Communications  and  Mobile  Computing  Journal,3(2):271-290, 
+March 2003. 
+
+ 
+  
+

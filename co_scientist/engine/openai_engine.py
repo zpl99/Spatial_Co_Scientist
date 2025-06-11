@@ -42,9 +42,9 @@ class OpenaiEngine():
 class AzureOpenaiEngine():
 
     def __init__(self, llm_engine_name):
-        self.client = AzureOpenAI(api_key="192cd313f4bb4a31b0fbba21a18f8c1a",
-        api_version="2024-10-01-preview",
-        azure_endpoint="https://seai.openai.azure.com/")
+        self.client = AzureOpenAI(api_key="3c744295edda4f13bf0ef198ddb4d24c",
+        api_version="2024-10-21",
+        azure_endpoint="https://ist-apim-aoai.azure-api.net/load-balancing/gpt-4.1")
         self.llm_engine_name = llm_engine_name
 
     def respond(self, user_input, temperature, top_p):
@@ -55,7 +55,6 @@ class AzureOpenaiEngine():
             top_p=top_p,
             max_tokens=2000,
             frequency_penalty=0,
-            presence_penalty=0
-        )
+            presence_penalty=0        )
 
         return response.choices[0].message.content, response.usage.prompt_tokens, response.usage.completion_tokens

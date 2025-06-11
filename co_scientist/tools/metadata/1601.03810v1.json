@@ -1,0 +1,16 @@
+{
+  "id": "http://arxiv.org/abs/1601.03810v1",
+  "title": "Dynamic Cluster Head Selection Using Fuzzy Logic on Cloud in Wireless   Sensor Networks",
+  "summary": "One of the most vital activities to reduce energy consumption in wireless sensor networks is clustering. In clustering, one node from a group of nodes is selected to be a cluster head, which handles majority of the computation and processing for the nodes in the cluster. This paper proposes an algorithm for fuzzy based dynamic cluster head selection on cloud in wireless sensor networks. The proposed algorithm calculates a Potential value for each node and selects cluster heads with high potential. The proposed algorithm minimizes cluster overlapping by spatial distribution of cluster heads and discards malicious nodes i.e. never allows malicious nodes to be cluster heads.",
+  "published": "2015-11-03T08:14:12Z",
+  "authors": [
+    "Payal Pahwa",
+    "Deepali Virmani",
+    "Akshay Kumar",
+    " Sahil",
+    "Vikas Rathi",
+    "Sunil Swami"
+  ],
+  "primary_category": "cs.NI",
+  "pdf_url": "http://arxiv.org/pdf/1601.03810v1"
+}

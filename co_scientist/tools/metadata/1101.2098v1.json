@@ -1,0 +1,12 @@
+{
+  "id": "http://arxiv.org/abs/1101.2098v1",
+  "title": "Data Accuracy Estimation for Spatially Correlated Data in Wireless   Sensor Networks under Distributed Clustering",
+  "summary": "Objective-The main purpose of this paper is to construct a distributed clustering algorithm such that each distributed cluster can perform the data accuracy at their respective cluster head node before data aggregation and transmit the data to the sink node. Design approach/Procedure - We investigate that the data are spatially correlated among the sensor nodes which form the clusters in the spatial domain. Due to high correlation of data, these clusters of sensor nodes are overlapped in the spatial domain. To overcome this problem, we construct a distributed clustering algorithm with non-overlapping irregular clusters in the spatial domain. Then each distributed cluster can perform data accuracy at the cluster head node and finally send the data to the sink node. Findings- Simulation result shows the associate sensor nodes of each distributed cluster and clarifies their data accuracy profile in the spatial domain. We demonstrate the simulation results for a single cluster to verify that their exist an optimal cluster which give approximately the same data accuracy level achieve by the single cluster. Moreover we find that as the distance from the tracing point to the number of sensor node increases the data accuracy decreases. Design Limitations - This model is only applicable to estimate data accuracy for distributed clusters where the sensed data are assumed to be spatially correlated with approximately same variations. Practical implementation - Measure the moisture content in the distributed agricultural field. Inventive/Novel idea- This is the first time that a data accuracy model is performed for the distributed clusters before data aggregation at the cluster head node which can reduce data redundancy and communication overhead.",
+  "published": "2011-01-11T11:17:52Z",
+  "authors": [
+    "Jyotirmoy Karjee",
+    "H. S Jamadagni"
+  ],
+  "primary_category": "cs.NI",
+  "pdf_url": "http://arxiv.org/pdf/1101.2098v1"
+}

@@ -1,0 +1,1497 @@
+Spatial Transcriptomics Iterative Hierarchical
+Clustering (stIHC): A Novel Method for
+Identifying Spatial Gene Co-Expression Modules
+
+Catherine Higgins ID 1, Jingyi Jessica Li ID 2*, Michelle Carey ID 1
+
+1School of Mathematics and Statistics, University College Dublin,
+Ireland.
+2Department of Statistics and Data Science, University of California,
+Los Angeles, United States of America.
+
+*Corresponding author(s). E-mail(s): jli@stat.ucla.edu;
+Contributing authors: catherine.higgins1@ucdconnect.ie;
+michelle.carey@ucd.ie;
+
+Abstract
+
+Recent advancements in spatial transcriptomics technologies allow researchers to
+simultaneously measure RNA expression levels for hundreds to thousands of genes
+while preserving spatial information within tissues, providing critical insights
+into spatial gene expression patterns, tissue organization, and gene functional-
+ity. However, existing methods for clustering spatially variable genes (SVGs)
+into co-expression modules often fail to detect rare or unique spatial expression
+patterns. To address this, we present spatial transcriptomics iterative hierarchi-
+cal clustering (stIHC), a novel method for clustering SVGs into co-expression
+modules, representing groups of genes with shared spatial expression patterns.
+Through three simulations and applications to spatial transcriptomics datasets
+from technologies such as 10x Visium, 10x Xenium, and Spatial Transcriptomics,
+stIHC outperforms clustering approaches used by popular SVG detection meth-
+ods, including SPARK, SPARK-X, MERINGUE, and SpatialDE. Gene Ontology
+enrichment analysis confirms that genes within each module share consistent bio-
+logical functions, supporting the functional relevance of spatial co-expression.
+Robust across technologies with varying gene numbers and spatial resolution,
+stIHC provides a powerful tool for decoding the spatial organization of gene
+expression and the functional structure of complex tissues.
+
+Keywords: Spatial Transcriptomics, Spatially Variable Genes, Gene Co-expression
+Modules, Functionally Related Genes, Functional Data Analysis
+
+1
+
+5
+2
+0
+2
+
+b
+e
+F
+3
+1
+
+]
+E
+M
+
+.
+t
+a
+t
+s
+[
+
+1
+v
+4
+7
+5
+9
+0
+.
+2
+0
+5
+2
+:
+v
+i
+X
+r
+a
+
+ 
+ 
+ 
+ 
+ 
+ 
+1 Introduction
+
+Recent advancements in spatial transcriptomics (ST) technologies have enabled the
+measurement of gene expression levels while preserving spatial information within
+tissues. These technologies include sequencing-based platforms such as Spatial Tran-
+scriptomics (Shah et al, 2016), 10x Visium (10xGenomics, 2019), and Slide-seq
+(Rodriques et al, 2019; Stickels et al, 2021), as well as imaging-based platforms such
+as 10x Xenium (Janesick et al, 2023), MERFISH (Chen et al, 2015), and seqFISH
+(Lubeck et al, 2014), which allow the quantification of hundreds to thousands of genes
+in relation to their spatial location.
+
+Many methods have been developed to identify spatially variable genes (SVGs),
+which exhibit significant spatial expression variability across a tissue. For a compre-
+hensive overview of these methods, see Yan et al (2024). Despite substantial progress
+in identifying SVGs, there remains a lack of methods for clustering these genes into
+co-expression modules—groups of genes with similar spatial expression patterns. Since
+biological pathways and processes are often driven by the coordinated activity of mul-
+tiple genes (Van Dam et al, 2018; Zinani et al, 2022; Russell et al, 2023), identifying
+co-expression modules can enhance our understanding of the spatial organization and
+function of tissues. For example, this approach can help identify regions in tumors
+with unique gene expression patterns and functional roles (Yuan et al, 2024).
+
+Numerous studies have focused on clustering cells or spatial spots in ST data;
+for an overview of these methods, see Cheng et al (2023). However, these methods
+differ fundamentally from our proposed method. Spot-based methods cluster spatial
+locations, typically corresponding to cell types, states, or functional regions within the
+tissue. In contrast, our focus is on gene co-expression modules, clustering at the gene
+level. Here, clusters represent groups of genes exhibiting similar spatial expression
+patterns across all spatial spots. Figure 1 illustrates this distinction. The left panel
+depicts the tissue slice, the middle panel overlays a grid representing the spatial spots
+where gene abundance is measured using ST technologies, and the right panel shows
+the resulting gene expression measurements for nine genes across the tissue slice. As
+shown, many genes exhibit similar spatial expression patterns; in this example, the
+nine genes display three distinct patterns. The aim of our method is to cluster genes
+with similar spatial behavior across the entire tissue into meaningful groups. This shift
+from spot-based analysis to gene-based analysis emphasizes uncovering relationships
+among genes rather than identifying cell types or spatial domains.
+
+Some existing methods for detecting SVGs in ST data incorporate gene clustering
+as a secondary step, but these methods primarily aim to identify SVGs rather than
+explicitly detect spatial gene co-expression modules. Typically, these methods identify
+SVGs using a statistic calculated for each gene and subsequently group the detected
+SVGs into clusters. For example, SpatialDE (Svensson et al, 2018) and SPARK (Sun
+et al, 2020) use Gaussian process regression to decompose the expression levels of each
+gene across tissue into a spatial component and an independent noise term, identifying
+a gene as an SVG if the spatial component is statistically significant. The effective-
+ness of Gaussian process regression depends heavily on how accurately the selected
+spatial covariance matrix (derived from a chosen kernel) models spatial patterns (Yan
+et al, 2024). After detecting SVGs, SpatialDE applies an extended Gaussian mixture
+
+2
+
+Fig. 1 Workflow of spatial transcriptomics analysis. (Left) Tissue section, adapted from the Allen
+Mouse Brain Atlas (mouse.brain-map.org) (Allen Institute for Brain Science, 2004). (Middle) Spatial
+transcriptomics grid overlay, representing spatially resolved gene expression measurements. (Right)
+Identified gene co-expression modules, illustrating groups of genes with distinct spatial expression
+patterns.
+
+model (McLachlan and Basford, 1988) to cluster SVGs, utilizing the same Gaussian-
+process-based prior employed during SVG detection. Another method SPARK-X (Zhu
+et al, 2021) identifies SVGs by testing the independence between two spot similar-
+ity matrices: one based on the expression levels of each gene and the other based on
+kernel-transformed spatial locations. A gene is identified as an SVG if the null hypoth-
+esis of independence is rejected. Like SpatialDE and SPARK, SPARK-X’s effectiveness
+relies on the ability of the chosen kernel to capture spatial patterns. Following SVG
+detection, both SPARK and SPARK-X apply a log transformation to the raw count
+data, scaling the counts of each SVG to zero mean and unit variance across spots, and
+then perform hierarchical agglomerative clustering to group SVGs into co-expression
+modules. MERINGUE (Miller et al, 2021), a graph-based method, constructs a neigh-
+borhood graph of spatial spots using Delaunay triangulation, assigning binary edge
+weights (wij = 1 if two spots are connected, wij = 0 otherwise). It detects SVGs based
+on Moran’s I, transforming it into a z-statistic and calculating a one-sided p-value for
+each gene. To cluster SVGs, MERINGUE calculates a spatial cross-correlation index
+for each SVG pair, generating a spatial cross-correlation matrix that is then used in
+hierarchical clustering to group SVGs into gene co-expression modules. While these
+methods incorporate clustering, their primary focus remains on identifying SVGs, and
+their clustering steps often rely on the same assumptions or data transformations used
+during SVG detection.
+
+Certain spatial patterns may involve a large number of co-expressed genes, while
+others may involve only a few or even a single gene. This pattern heterogeneity can
+
+3
+
+Gene 1,...,Gene p...,Cluster nCluster 1arise from factors such as pathological differences within tissue regions (e.g., tumor
+versus normal areas in cancer) or the presence of diverse or rare cell types (Sun et al,
+2020; Acharyya et al, 2022). Consequently, gene co-expression modules may be imbal-
+anced clusters, with some containing many genes while others are small or consist of
+a single gene. Standard clustering methods, such as mixture-model-based clustering
+(McLachlan and Basford, 1988) and hierarchical clustering (Eisen et al, 1998), often
+lack the flexibility to capture such imbalanced clusters effectively. Although this chal-
+lenge has been addressed in other contexts, such as time-course gene expression (Carey
+et al, 2016; Higgins and Carey, 2024), it has not, to our knowledge, been specifically
+addressed in the context of ST data.
+
+We present spatial transcriptomics iterative hierarchical clustering (stIHC), a novel
+two-step method designed to identify gene co-expression modules, including those with
+imbalanced sizes. In the first step, stIHC models the expression levels of SVGs across
+the spatial domain using a generalized penalized regression framework (Sangalli et al,
+2013; Wilhelm and Sangalli, 2016), enabling efficient modeling of spatial variation
+over complex domains, including those with intricate geometries. This step is essential
+because gene expression data typically exhibit substantial noise while also following an
+intrinsically smooth spatial pattern. By modeling a gene’s expression levels at spatial
+spots as a smooth, continuous function rather than discrete values, it becomes pos-
+sible to evaluate gene similarity across the entire tissue while accounting for spatial
+dependencies. This approach integrates relationships between adjacent spatial spots
+rather than treating a gene’s expression levels at different spots as independent obser-
+vations. In the second step, stIHC clusters SVGs into co-expression modules based on
+the estimated model coefficients. Recognizing that standard clustering methods often
+struggle with imbalanced gene clusters and fail to capture rare spatial expression pat-
+terns, stIHC employs the recently developed functional iterative hierarchical clustering
+(funIHC) (Higgins and Carey, 2024). This approach is specifically designed to handle
+imbalanced clusters, ensuring robust performance in identifying gene modules of any
+size that exhibit similar spatial expression patterns across a tissue slice.
+
+We evaluate the effectiveness of stIHC across three simulated and four ST datasets
+generated using 10x Visium, 10x Xenium, and Spatial Transcriptomics technologies.
+Its performance is compared against the clustering approaches used by SpatialDE
+(Svensson et al, 2018), SPARK (Sun et al, 2020), SPARK-X (Zhu et al, 2021), and
+MERINGUE (Miller et al, 2021) for grouping SVGs into co-expression modules. The
+performance of stIHC is assessed using the adjusted Rand index (ARI) and the
+Davies-Bouldin index (DBI) to determine its ability to identify coherent spatial gene
+expression modules and capture rare or unique spatial patterns, which are often missed
+by the clustering approaches employed in the four SVG detection methods. Addition-
+ally, we examine whether the identified co-expression modules are not only spatially
+coherent but also functionally relevant by analyzing their biological annotations and
+evaluating alignment with the known roles of the corresponding anatomical regions.
+
+The contributions of this paper are as follows: First, we introduce stIHC, a
+novel clustering method for ST data that identifies spatial co-expression gene mod-
+ules, including those with unique spatial expression patterns often overlooked or
+merged into larger clusters by existing methods. Second, our method is data-driven
+
+4
+
+and parameter-lean, requiring no user-defined input parameters. Finally, by revealing
+co-expression modules, our method provides valuable insights into the spatial orga-
+nization of gene expression, establishing a powerful framework for exploring tissue
+structure and spatially coordinated biological processes.
+
+The remainder of the paper is organized as follows: Section 2 introduces our pro-
+posed clustering method, stIHC. Section 3 presents simulation studies evaluating the
+performance of stIHC compared to existing approaches. Section 4 explores the func-
+tional annotation of gene clusters identified by stIHC. Section 5 demonstrates the
+application of stIHC to ST data from the mouse olfactory bulb. Finally, Section 6
+concludes with a summary and discussion.
+
+2 The stIHC Methodology
+
+ST data comprises gene expression levels measured at n distinct spatial locations, or
+“spots,” within a tissue sample. For each spot j = 1, . . . , n, its 2D spatial location is
+denoted as sj = (sj1, sj2)⊤ ∈ R2. The expression level of gene i = 1, . . . , G at spot j
+is represented by yji ∈ R. Our method, stIHC, identifies gene co-expression modules
+through a two-step process: (1) Modeling gene expression across the 2D tissue slice
+using a generalized penalized regression framework (Sangalli et al, 2013; Wilhelm and
+Sangalli, 2016), and (2) Clustering the basis coefficients obtained from the spatial
+model using funIHC, a functional iterative hierarchical clustering algorithm (Higgins
+and Carey, 2024).
+
+2.1 Step 1: Modeling Gene Expression in a 2D Tissue Slice
+Consider n locations s = (s1, . . . , sn) within a 2D tissue slice Ω ⊆ R2. At location sj,
+the observed expression level of gene i is denoted by yji ∈ R. We assume the response
+variable yji follows a distribution within the exponential family with mean µi. The
+exponential family includes many common distributions, such as Poisson, Binomial,
+Gamma, and Normal (McCullagh and Nelder, 1989). Thus, this framework can be used
+for modeling raw gene expression counts (e.g., Poisson) or normalized gene expression
+(e.g., Normal).
+
+To begin, the slice of interest Ω is partitioned into smaller regions using Delaunay
+triangulation (Shewchuk, 1996, 2002), an efficient algorithm for handling non-regular
+geometries, such as the irregular tissue shape shown in the left panel of Figure 1.
+Locally supported polynomial functions are defined over these triangles, providing a
+set of basis functions. Let ϕ(s) = (ϕ1(s), . . . , ϕK(s))⊤ represent an n × K matrix
+containing K piecewise linear basis functions evaluated at the locations s. Using these
+basis functions, we model µi via a generalized penalized regression framework (Sangalli
+et al, 2013; Wilhelm and Sangalli, 2016).
+
+Let g be a continuously differentiable and strictly monotone canonical link function,
+such as g(µ) = log(µ) (Poisson) or g(µ) = µ (Normal), and let f represent a smooth
+spatial field over Ω. Then:
+
+(1)
+g(µi) = fi(s) = ϕ(s)ci,
+where ci are the coefficients of the basis function expansion approximating the
+behavior of g(µi).
+
+5
+
+The coefficients ci are estimated by maximizing a penalized log-likelihood func-
+
+tional:
+
+Ls(ci) =
+
+n
+(cid:88)
+
+j=1
+
+l(yji; ci) − λ
+
+(cid:90)
+
+Ω
+
+(∆fi(s))2 ds,
+
+(2)
+
++ ∂2fi
+∂s2
+2
+
+where l(·) is the log-likelihood, λ > 0 is a smoothing parameter, and the Laplacian
+∆fi = ∂2fi
+measures the local curvature of the spatial field fi. Increased values
+∂s2
+1
+of the smoothing parameter λ yield smoother estimates of f , whereas decreased values
+of λ give estimates that more closely fit the data. The Laplacian serves as the opti-
+mal penalization choice for mitigating the effects of noise present in the data (Sangalli
+et al, 2013). Nevertheless, if the user has domain-specific insights that require penaliz-
+ing deviations from a more complex partial differential equation, such adjustments are
+possible; see Sangalli (2021) for further details. Using a penalized iterative reweighted
+least squares algorithm (Wilhelm and Sangalli, 2016), we solve the optimization prob-
+lem in (2) to estimate the coefficients ci for each gene i for fixed λ. The optimal
+smoothing parameter λ is estimated by minimizing the generalized cross-validation
+criterion, as proposed by Craven and Wahba (1978), across all genes, thereby deter-
+mining a unified λ that ensures consistent penalization throughout the entire gene set.
+Let C represent the G × K matrix of coefficients corresponding to the optimal λ con-
+figuration, where C = (c1, . . . , cG)⊤ denotes the complete set of coefficients for all G
+genes.
+
+2.2 Step 2: Clustering of Genes Based on Spatial Expression
+
+Patterns
+
+Using the resulting basis coefficients for all genes, the distance metric di,j, quantifying
+the dissimilarity between two genes i and j, is computed as one minus the Spearman
+correlation ρi,j between ci and cj, i.e., the ith and jth rows of C. The clustering
+procedure proceeds as follows:
+
+1. Define αmin and αmax as the minimum and maximum values of the Spearman
+correlation computed across all possible gene pairs {ρi,j}G
+i,j=1. Construct a grid
+spanning [αmin, αmax], comprising U equally spaced values. For each αu, where
+u = 1, . . . , U :
+
+i Cluster: Perform hierarchical clustering on the genes using the distance met-
+ric di,j with a threshold of 1−αu. Use the average linkage method to determine
+the dissimilarity between clusters. Denote the resulting number of clusters as
+P .
+
+ii Merge: Let µp represent the center of cluster p (p = 1, . . . , P ). Treat each µp
+as a new gene and apply the same criterion as in Step i to decide whether any
+cluster centers µp should be merged. If merging is identified, consolidate the
+respective clusters into a single one, resulting in R clusters, where R ≤ P .
+iii Prune: For each cluster r = 1, . . . , R, if the Spearman correlation ρi,r between
+µr and the ith gene within falls below αu, remove gene i from cluster r. All
+removed genes are allocated into single-gene clusters. This results in a total
+of R + S clusters, where S is the number of removed genes.
+
+6
+
+iv Repeat Steps ii and iii: Continue merging and pruning until the cluster
+
+assignment converges (see Appendix A for details).
+
+v Repeat Step ii: Repeat the merging step until all between-cluster-center
+
+Spearman correlations are less than αu.
+
+2. Determine the optimal value αopt from {α1, . . . , αU } by maximizing the average
+silhouette value across genes. The silhouette value for the ith gene is defined as:
+
+sili =
+
+bi − ai
+max(ai, bi)
+
+,
+
+where ai is the average distance from the ith gene to other genes in the same
+cluster, and bi is the minimum average distance from the ith gene to genes in
+any other cluster. The silhouette value ranges from −1 to 1, with higher values
+indicating stronger similarity within clusters and greater dissimilarity between
+clusters.
+
+3 Simulations
+
+We conducted three simulations to evaluate the clustering performance of stIHC for
+ST data in comparison to the clustering approaches used in four SVG detection meth-
+ods: SpatialDE (Svensson et al, 2018), SPARK (Sun et al, 2020), SPARK-X (Zhu et al,
+2021), and MERINGUE (Miller et al, 2021). Implementation details are provided in
+Appendix E. These simulations were based on the 10x Visium sagittal mouse brain
+slice dataset, available in the Seurat R package (Satija et al, 2015). The first simulation
+evaluates performance under an ideal scenario with balanced, equally sized clusters
+(Section 3.1). The second simulation tests performance with imbalanced cluster sizes
+(Section 3.2). The third simulation examines performance on sparse, imbalanced clus-
+ters to mimic the real ST data analyzed in Section 5 (Section 3.3). To assess the
+stability of stIHC, we repeated the simulations 100 times and observed that the method
+consistently produced identical clustering results across all runs. This demonstrates
+that stIHC is a robust method. We also note that stIHC does not introduce variability
+due to random initialization or stochastic processes, ensuring reproducible clustering
+on a particular dataset. Moreover, Appendix B presents the execution time in seconds
+for each method and simulation scenario. stIHC consistently demonstrates efficient
+computational performance across the three simulation settings.
+
+3.1 Clustering Performance with Equally Sized Spatial
+
+Co-expression Modules
+
+This first simulation evaluates clustering performance when all gene modules have
+clearly distinguishable spatial expression patterns and an equal number of genes in
+each module. To represent distinct spatial patterns, we selected four unique gene
+expression patterns from the 10x Visium sagittal mouse brain slice dataset, each serv-
+ing as the representative pattern for a different module. For a visual representation of
+these spatial expression patterns, refer to the top row of Figure 2.
+
+7
+
+We simulated the spatial expression patterns of 100 genes from the four represen-
+tative patterns (25 genes generated per pattern) using scDesign3 (Song et al, 2024).
+For illustration, an example of one simulated gene from each cluster is displayed in
+the bottom row of Figure 2. Full details of the data simulation process are provided
+in Appendix D.
+
+Fig. 2 Four genes from the 10x Visium sagittal mouse brain slice dataset representing the four
+clusters (top row). Example of one simulated gene from each cluster generated using scDesign3
+(bottom row).
+
+We applied five clustering methods: our proposed method, stIHC, along with the
+clustering approaches in SpatialDE, SPARK, SPARK-X, and MERINGUE. We evalu-
+ated the performance of each method using the Adjusted Rand Index (ARI) (Hubert
+and Arabie, 1985), which ranges from -1 to 1, with 1 indicating complete agreement
+between the clusters and the ground-truth gene modules. All methods successfully
+partitioned the 100 genes into their respective clusters, achieving a perfect clustering
+solution with an ARI of 1. These results indicate that the methods effectively clustered
+genes with similar spatial expression patterns in this balanced scenario with distinct
+clusters.
+
+3.2 Clustering Performance with Imbalanced Spatial
+
+Co-expression Modules
+
+The first simulation provided a baseline assessment of performance under ideal con-
+ditions with balanced gene modules. However, real-world ST data may have gene
+modules of varying sizes. To simulate this more realistic scenario, we adjusted the
+dataset from the first simulation to create imbalanced gene modules. Specifically, we
+simulated 6 genes in the first module with expression resembling Calb2, 2 genes in the
+second module resembling Ttr, 16 genes in the third module resembling Gpr88, and 25
+
+8
+
+genes in the fourth module resembling Cck (see Figure 2). Performance was assessed
+using the Adjusted Rand Index (ARI) (Hubert and Arabie, 1985) and the Davies-
+Bouldin Index (DBI) (Davies and Bouldin, 1979), which ranges from [0, ∞), with lower
+values indicating better clustering quality. Results are summarized in Table 1.
+
+When applied to this imbalanced dataset, stIHC was the only method to correctly
+identify all four modules along with the correct number of genes in each module. It
+achieved an ARI of 1 and the lowest DB index of 0.49. In contrast, SPARK, SPARK-
+X, and MERINGUE identified the same three clusters (sizes: 6, 18, and 25 genes)
+and failed to detect the smallest cluster of just two genes, resulting in an ARI of 0.94
+and a DB index of 0.54. SpatialDE performed the worst, identifying four clusters but
+completely misrepresenting the spatial patterns, resulting in cluster sizes of 16, 13, 8,
+and 12 genes, with a poor ARI of 0.11 and a high DB index of 4.54. These results
+highlight the limitations of SPARK, SPARK-X, MERINGUE, and SpatialDE, which
+tend to merge smaller clusters into larger ones. In contrast, stIHC effectively captures
+and preserves rare spatial patterns.
+
+Table 1 Adjusted Rand Index (ARI) and Davies-Bouldin Index (DBI) for each method on the
+imbalanced simulation.
+
+Metric
+
+stIHC
+
+SPARK
+
+SPARK-X
+
+MERINGUE
+
+SpatialDE
+
+ARI
+DBI
+
+1.00
+0.49
+
+0.94
+0.54
+
+0.94
+0.54
+
+0.94
+0.54
+
+0.11
+4.54
+
+We further evaluated the clustering methods by comparing the mean spatial
+expression patterns of the clusters identified by each method to the ground-truth pat-
+terns used in the simulation. As shown in Figure 3, methods that failed to capture
+the ground-truth gene modules produced distorted spatial expression patterns. The
+ground-truth spatial expression patterns of gene modules are presented in the top row,
+followed by the mean patterns identified by stIHC (second row), SpatialDE (third
+row), and SPARK, SPARK-X, and MERINGUE (bottom row).
+
+Specifically, stIHC accurately identified the correct clusters, maintaining clear,
+consistent, and distinct mean spatial expression patterns for each cluster. It was the
+only method to correctly capture the spatial pattern of Ttr. SpatialDE partially cap-
+tured the patterns of Calb2 and Cck but failed to capture the patterns of Ttr and
+Gpr88. SPARK, SPARK-X, and MERINGUE failed to capture the spatial pattern of
+Ttr but adequately captured the patterns of Calb2, Gpr88, and Cck. These findings
+demonstrate that SpatialDE, SPARK, SPARK-X, and MERINGUE are limited in
+their ability to capture the spatial expression patterns of rare or small gene modules,
+whereas stIHC effectively identifies these patterns.
+
+9
+
+Fig. 3 The ground-truth mean spatial expression patterns for each gene module in the imbalanced
+simulation (top row), followed by the mean spatial expression patterns identified by stIHC (second
+row), SpatialDE (third row), and SPARK, SPARK-X, and MERINGUE (bottom row).
+
+3.3 Clustering Performance with Sparse Spatial Resolution
+
+and Imbalanced Spatial Co-expression Modules
+
+This simulation evaluates clustering performance on a sparse version of the imbalanced
+dataset described in Section 3.2, where 260 spatial locations were randomly sampled.
+This sparse spatial resolution mimics the real dataset analyzed in Section 5 and is
+designed to test the stIHC’s effectiveness under reduced spatial resolution. We main-
+tained the same imbalanced module sizes as in Section 3.2: 6 genes in the first module
+reflecting the spatial expression pattern of Calb2, 2 genes in the second module reflect-
+ing the pattern of Ttr, 16 genes in the third module representing Gpr88, and 25 genes
+in the fourth module representing Cck. Performance was assessed using the Adjusted
+Rand Index (ARI) and the Davies-Bouldin Index (DBI), with results summarized in
+Table 2.
+
+When applied to this sparse imbalanced dataset, stIHC identified five clusters with
+sizes 6, 1, 1, 16, and 25. It correctly recovered the number of genes in the Calb2, Cck,
+and Gpr88 module but split the smallest module (Ttr ) into two separate clusters,
+each containing a single gene. Despite this, stIHC achieved the highest ARI of 0.99
+and the lowest DBI of 0.37 among all methods examined. Notably, stIHC was the only
+method capable of preserving the spatial expression pattern of the smallest module,
+
+10
+
+Expression02468Ground TruthExpression02468stIHCExpression02468SpatialDEExpression02468SPARK/SPARK−X/MERINGUEas evidenced by comparing its mean spatial expression patterns to the ground truth
+in Figure 4.
+
+In contrast, SPARK, SPARK-X, and MERINGUE identified only three clusters
+with sizes of 6, 18, and 25 genes, consistent with the results from Section 3.2. These
+methods failed to detect the smallest module of two genes, leading to a lower ARI
+of 0.94 and a higher DBI of 0.54. While the mean spatial expression patterns for the
+identified clusters retained the patterns of Calb2, Cck, and Gpr88, the spatial pattern
+of the smallest module (Ttr ) was entirely missed, as shown in Figure 4.
+
+SpatialDE performed the worst, identifying only two clusters with sizes 31 and 18.
+This resulted in a significantly lower ARI of 0.05 and a much higher DBI of 4.45. The
+mean spatial expression patterns produced by SpatialDE were significantly distorted
+compared to the ground truth, highlighting its limitations in handling sparse spatial
+resolution and imbalanced spatial co-expression modules (Figure 4).
+
+Table 2 Adjusted Rand Index (ARI) and Davies-Bouldin Index (DBI) for each method on the
+sparse imbalanced simulation with 260 sampled locations.
+
+Metric
+
+stIHC
+
+SPARK
+
+SPARK-X
+
+MERINGUE
+
+SpatialDE
+
+ARI
+DBI
+
+0.99
+0.37
+
+0.94
+0.54
+
+0.94
+0.54
+
+0.94
+0.54
+
+0.05
+4.45
+
+Fig. 4 The ground truth mean spatial expression patterns for each cluster in the sparse imbalanced
+simulation (top row), followed by the mean spatial expression patterns identified by stIHC (second
+row), SpatialDE (third row), and SPARK, SPARK-X, and MERINGUE (bottom row).
+
+11
+
+Expression12345678Ground TruthExpression12345678stIHCExpression0.51.01.52.02.53.0SpatialDEExpression0.51.01.52.02.53.03.54.0SPARK/SPARK−X/MERINGUE4 stIHC Identifies Functional Gene Modules by
+
+Clustering Spatial Expression Patterns
+
+To further validate stIHC, we applied it to three real ST datasets: 10x Visium mouse
+brain, 10x Xenium mouse brain, and 10x Visium human lung cancer (Sections 4.1, 4.2
+and 4.3, respectively). Our goal was to determine whether genes with similar spatial
+expression patterns also share biological functions. Specifically, we evaluated the bio-
+logical coherence and functional distinctiveness of each detected co-expression module.
+For the 10x Visium mouse brain and 10x Xenium mouse brain datasets, we assessed
+the spatial expression pattern similarity within clusters, alignment with known tissue
+structure, and gene ontology (GO) enrichment analysis. We also examined the consis-
+tency of results across the two platforms and tissue orientations. For the 10 Visium
+human lung cancer dataset, we evaluated the similarity of spatial expression patterns
+within clusters and performed GO enrichment analysis.
+
+Each dataset consisted of 50 curated genes identified as SVGs. This selection
+ensures high confidence in the SVGs and removes potential biases from SVG detec-
+tion methods, allowing for a focused evaluation of clustering performance. While our
+method supports datasets of any size, we limited this analysis to curated SVGs for
+consistency. Details of SVG selection are provided in Appendix D.
+
+4.1 10x Visium Mouse Brain Dataset
+
+The 10x Visium mouse brain dataset was preprocessed to include 50 curated SVGs
+(Appendix D). Using stIHC, we identified five co-expression modules containing 2,
+10, 16, 7, and 15 genes, respectively. Figure 5(a) shows the mean spatial expression
+pattern for each cluster, along with two representative genes per cluster. These spa-
+tially distinct patterns demonstrate that stIHC effectively captures the inherent spatial
+structure of the data.
+
+To evaluate the biological relevance of these clusters, we performed GO enrich-
+ment analysis using the clusterProfiler R package (Yu et al, 2012). Each cluster
+was enriched for unique biological processes (Figure 5(b)). Metrics such as p.adjust
+(adjusted p-value), gene ratio (the proportion of genes associated with a GO term),
+and count (the number of associated genes) confirm the distinct functional identities
+of the clusters. Full gene lists are provided in Appendix C.
+
+We compared the spatial expression patterns of these clusters with anatomical
+regions from the Allen Mouse Brain Atlas (Figure 5(c)). Each cluster corresponded to
+a specific brain region.
+• Cluster 1 (2 genes): Thalamus, aligning with pathways related to sensory and motor
+
+signal relay (Shine et al, 2023).
+
+• Cluster 2 (10 genes): Hippocampus, including the dentate gyrus and Ammon’s horn,
+with GO terms highlighting memory processes (Pang et al, 2019; Borzello et al,
+2023).
+
+• Cluster 3 (16 genes): Hypothalamus, associated with hormone regulation and
+
+production (Chrousos, 1995).
+
+• Cluster 4 (7 genes): Thalamus and hippocampus, enriched for catabolic processes.
+
+12
+
+• Cluster 5 (15 genes): Cortical subplate, linked to migration and ion transport
+
+(Luhmann et al, 2009).
+
+These findings confirm that the spatially distinct gene modules identified by stIHC
+align with the functional organization of the tissue.
+
+Fig. 5 (a) Mean spatial expression patterns of the five clusters with two representative genes per
+cluster in the 10x Visium mouse brain dataset. (b) GO enrichment terms for the clusters. (c) Anatom-
+ical regions from the Allen Mouse Brain Atlas and Allen Reference Atlas (mouse.brain-map.org and
+atlas.brain-map.org) (Allen Institute for Brain Science, 2004, 2011).
+
+4.2 10x Xenium Mouse Brain Dataset
+
+The 10x Xenium mouse brain dataset was similarly processed to include 50 SVGs
+(Appendix D). stIHC identified three co-expression modules containing 21, 17, and
+12 genes, respectively. Figure 6(a) shows the mean spatial expression patterns of the
+clusters alongside two representative genes per cluster. The clear spatial distinctions
+reflect the effectiveness of stIHC in capturing spatial structures, even with different
+sequencing technologies and tissue orientations.
+
+GO enrichment analysis revealed distinct biological functions for each cluster
+(Figure 6(b)), aligning with anatomical regions from the Allen Mouse Brain Atlas
+(Figure 6(c)).
+
+13
+
+Mbp_1Nrgn_1Pmch_1Kcne2_1Gm5741_1Hcrt_1Mobp_1Pou4f1_1Slc17a7_1Slc16a8_1Cluster 1 MeanCluster 2 MeanCluster 3 MeanCluster 4 MeanCluster 5 Mean1.00.50.01.51.00.50.02.01.51.00.50.02.01.51.00.50.01.251.000.750.500.250.00ExpressionExpressionExpressionExpressionExpressionHippocampusSubplateHypothalamus Thalamus(c)(b)(a)• Cluster 1 (21 genes): Hypothalamus, enriched for hormone regulation processes
+
+(Chrousos, 1995).
+
+• Cluster 2 (17 genes): Hippocampus, associated with learning and cognition (Pang
+
+et al, 2019; Borzello et al, 2023).
+
+• Cluster 3 (12 genes): Thalamus, linked to sleep regulation (Jan et al, 2009).
+
+Despite differences in spatial resolution, molecular profiling, and tissue preparation
+between the 10x Visium and 10x Xenium platforms, stIHC consistently identified
+key regions (hippocampus, thalamus, hypothalamus) with highly similar biologi-
+cal functions from both datasets. GO enrichment results for the hippocampus and
+hypothalamus clusters aligned across both platforms, reflecting learning and memory
+processes in the hippocampus and hormone regulation in the hypothalamus. These
+findings underscore the robustness and applicability of stIHC across ST platforms,
+demonstrating its ability to uncover biological phenomena beyond platform-specific
+artifacts.
+
+Fig. 6 (a) Mean spatial expression patterns of the three clusters with two representative genes
+per cluster in the 10x Xenium mouse brain dataset. (b) GO enrichment terms for the clusters.
+(c) Anatomical regions from the Allen Reference Atlas – Mouse Brain (atlas.brain-map.org) (Allen
+Institute for Brain Science, 2011).
+
+14
+
+Nrgn_1Clic6_1Abhd12b_1Ddn_1Tnnt1_1Baiap3_1Cluster 1 MeanCluster 2 MeanCluster 3 Mean2.01.51.00.50.01.51.00.50.01.51.00.5ExpressionExpressionExpression6  Thalamus Hypothalamus Hippocampus(a)(b)(c)4.3 10x Visium Human Lung Cancer Dataset
+
+The 10x Visium human lung cancer dataset underwent similar processing to include 50
+SVGs (Appendix D). Using stIHC, two co-expression modules were identified, consist-
+ing of 16 and 34 genes, respectively. Figure 7(a) presents the mean spatial expression
+pattern for each cluster, accompanied by two representative genes from each cluster.
+These distinct spatial patterns illustrate that stIHC successfully captures the underly-
+ing structure of the data. We performed GO enrichment analysis and identified unique
+biological functions associated with each cluster (Figure 7(b)).
+• Cluster 1 (16 genes): Associated with primary lung functions, as indicated by
+enrichment in muscle contraction, muscle system processes, and respiratory gaseous
+exchange by the respiratory system. Additionally,
+it is linked to the immune
+response, as evidenced by enrichment in the B cell receptor signaling pathway, which
+plays a role in the tumor microenvironment (Leong and Bryant, 2021). Furthermore,
+it includes genes involved in the cellular response to interleukin-6 (IL-6), which has
+been associated with lung cancer progression, resistance to antitumor therapies, and
+poor survival in lung cancer patients (Qu et al, 2015).
+
+• Cluster 2 (34 genes): Associated with pathways that support tumor growth and
+development, including peptide hormone processing, which plays a known role in
+lung cancer development (Yamaguchi et al, 1986); hemostasis, as dysregulation of
+the hemostatic system is common in lung cancer and serves as a prognostic indicator
+( ¨Unsal et al, 2004); and tissue homeostasis, which contributes to tumor growth and
+progression (Quail and Joyce, 2013).
+
+The region in the top right corner, where Cluster 1 is highly expressed and Cluster 2
+is lowly expressed, likely corresponds to a functionally distinct lung region enriched
+in primary lung functions and immune-related processes. This aligns with the biolog-
+ical role of Cluster 1 genes in muscle contraction, respiratory function, and immune
+processes, suggesting that this area may represent non-tumor tissue or a microenvi-
+ronment supportive of normal lung function, in contrast to tumor-associated regions
+where Cluster 2 is more highly expressed. These results indicate that the spatially dis-
+tinct gene modules identified by stIHC are associated with unique biological functions.
+Furthermore, stIHC demonstrates the capability to uncover spatial gene co-expression
+modules with potential disease-specific relevance.
+
+15
+
+Fig. 7 (a) Mean spatial expression patterns of the two clusters with two representative genes per
+cluster in the 10x Visium lung cancer dataset. (b) GO enrichment terms for the clusters.
+
+5 Application of stIHC to Mouse Olfactory Bulb
+
+Data
+
+To demonstrate the practical application of stIHC, we analyzed ST data from replicate
+11 of the mouse olfactory bulb, as described in St˚ahl et al (2016). This dataset, widely
+studied in previous research (Svensson et al, 2018; Sun et al, 2020; Miller et al, 2021),
+is publicly available at www.spatialresearch.org. Figure 8 shows a hematoxylin and
+eosin-stained brightfield image of the mouse olfactory bulb, providing a structural
+reference for the tissue. In this analysis, we applied two preprocessing pipelines and
+SVG detection methods—MERINGUE and SpatialDE—to assess the flexibility and
+robustness of stIHC across different analytical workflows.
+
+5.1 Data Preprocessing and Detection of SVGs
+
+The raw dataset comprised 262 probe spots and 15,928 genes. Data preprocessing
+and SVG identification were conducted using the guidelines of MERINGUE and
+SpatialDE:
+
+16
+
+TTR_1SFTPB_1CHGB_1SFTPC_1Cluster 1 MeanCluster 2 Mean2.0 1.5 1.0 0.50.02.0 1.5 1.0 0.5 0.0ExpressionExpressionmuscle contractionmuscle system processrespiratory gaseous exchangeby respiratory systemB cell receptor signalingpathwaycellular response tointer leukin−60.125 0.150 0.175 0.200 0.225 0.250GeneRatiopeptide hormone processingsignaling receptor ligandprecursor processinghemostasistissue homeostasishormone metabolic process0.100.12 0.14GeneRatio0.160.18Countp.adjustCountp.adjust2.0 2.5 3.03.5 4.00.0100.0150.02034560.0040.0060.0080.0100.0120.014Cluster 1 − GO EnrichmentCluster 2 − GO Enrichment(a)(b)• MERINGUE: Probe spots with fewer than 100 detected genes were excluded, retain-
+ing 260 spots. Genes with fewer than 100 total reads were removed, resulting in
+7,365 genes. Raw counts were normalized to counts per million (CPM) values.
+• SpatialDE: Genes with fewer than three total counts were filtered out. Variance
+stabilization was performed using Anscombe’s transformation to meet SpatialDE’s
+assumption of normally distributed data. Library size differences were adjusted by
+regressing out total counts for each gene. After preprocessing, 14,859 genes and 260
+spots remained.
+
+MERINGUE detected 886 SVGs, whereas SpatialDE identified 67 SVGs, highlighting
+substantial differences in SVG detection rates. While this study focuses on these two
+methods, stIHC is compatible with any SVG detection method and adaptive to diverse
+pipelines.
+
+5.2 Clustering SVGs into Co-Expression Modules
+
+The log-transformed counts (log(1+x)) of the detected SVGs were input into stIHC to
+cluster the genes into co-expression modules based on their spatial expression patterns.
+Unlike methods such as SpatialDE, SPARK, and SPARK-X, which require users to
+predefine the number of clusters, stIHC determines the optimal number of clusters
+automatically using an internal metric.
+
+For the 886 SVGs detected by MERINGUE, stIHC identified three clusters contain-
+ing 523, 341, and 22 genes. For the 67 SVGs detected by SpatialDE, stIHC identified
+two clusters containing 38 and 29 genes.
+
+Fig. 8 Hematoxylin and eosin-stained brightfield image of the mouse olfactory bulb. Image from
+www.spatialresearch.org.
+
+Figure 9 illustrates the spatial expression patterns of the three clusters identified
+by stIHC from the 886 SVGs detected using MERINGUE. The top row displays a
+representative gene from each cluster, while the middle and bottom rows illustrate the
+mean spatial expression patterns in the original spatial resolution and as a smoothed
+surface, respectively.
+• Cluster 1: Genes in this cluster exhibited high expression localized in the granular
+
+cell layer, consistent with prior findings (Sun et al, 2020).
+
+• Cluster 2: This cluster included genes with elevated expression in the central region
+
+but lacked a distinct spatial pattern.
+
+17
+
+• Cluster 3: Genes in this cluster showed high expression at the edges of the bulb,
+
+corresponding to the glomerular layer (Sun et al, 2020).
+
+The spatial patterns of Clusters 1 and 3 align with findings reported in Svensson et al
+(2018); Sun et al (2020); Miller et al (2021).
+
+Fig. 9 Three co-expression modules identified by stIHC from 886 SVGs detected by MERINGUE.
+Top row: representative genes for each cluster. Middle row: mean spatial expression patterns in the
+original resolution. Bottom row: smoothed spatial surfaces.
+
+Figure 10 illustrates the two co-expression modules identified by stIHC from the
+
+67 SVGs detected by SpatialDE:
+• Cluster 1: Genes in this cluster displayed high expression in the inner region,
+corresponding to the granular cell layer (analogous to MERINGUE’s Cluster 1).
+• Cluster 2: This cluster showed high expression at the bulb’s edges, aligning with
+
+MERINGUE’s Cluster 3 (glomerular layer).
+
+The absence of a cluster corresponding to MERINGUE’s Cluster 2 suggests that the
+larger SVG set identified by MERINGUE may include genes with less distinct or noisy
+spatial patterns, as Cluster 2 does not exhibit a clear spatial structure.
+
+These results highlight the flexibility and robustness of stIHC in identifying mean-
+ingful spatial co-expression modules from SVGs detected using different methods.
+Despite variations in preprocessing pipelines, the number of detected SVGs, and the
+resulting number of co-expression modules, stIHC consistently uncovered biologically
+relevant spatial patterns. Notably, stIHC preserved key spatial features, such as the
+
+18
+
+Fig. 10 Two co-expression modules identified by stIHC from 67 SVGs detected by SpatialDE. Top
+row: representative genes for each cluster. Middle row: mean spatial expression patterns in the original
+resolution. Bottom row: smoothed spatial surfaces.
+
+granular and glomerular layers, across both MERINGUE and SpatialDE analyses,
+demonstrating its effectiveness in capturing the functional organization of the mouse
+olfactory bulb.
+
+6 Conclusion
+
+We presented a novel clustering method, stIHC, designed to identify spatial co-
+expression gene modules from ST data. stIHC demonstrated significant advantages
+over existing methods in simulations, especially in detecting rare and unique spa-
+tial co-expression modules often overlooked by standard clustering approaches. While
+traditional methods perform adequately in datasets with balanced cluster sizes, they
+falter when clusters are imbalanced. By accommodating imbalanced clusters, stIHC
+consistently outperformed other methods, successfully identifying spatial co-expression
+modules even when represented by only a few genes.
+
+19
+
+When applied to ST datasets from the 10x Visium, 10x Xenium mouse brain
+datasets, and 10x Visium Human Lung Cancer dataset, stIHC effectively identified
+biologically meaningful co-expression modules. These modules exhibited distinct spa-
+tial expression patterns and, in the case of the mouse brain datasets, corresponded
+to known anatomical regions of the brain, supporting the hypothesis that spatially
+organized gene expression reflects the tissue’s functional structure. Gene Ontology
+enrichment analysis confirmed that genes within the same co-expression module shared
+coherent and distinct biological functions, further reinforcing the biological relevance
+of spatially co-expressed genes.
+
+We evaluated stIHC’s robustness and generalizability across multiple datasets and
+ST technologies, including 10x Visium, 10x Xenium, and Spatial Transcriptomics. As
+demonstrated in Section 4, stIHC consistently identified spatially co-expressed gene
+modules aligned with known biological pathways and anatomical structures, regardless
+of the technology or tissue orientation.
+
+As shown in Section 5, stIHC can be integrated with any SVG detection method,
+offering a data-driven and parameter-lean clustering approach that eliminates the
+need for user-defined input parameters. Its ability to preserve spatial patterns while
+detecting biologically and functionally relevant clusters makes it a powerful tool for
+exploring the complex spatial organization of tissues. The R implementation of stIHC
+is freely available at www.github.com/CatherineH1/stIHC.
+
+Acknowledgments. This research was supported by Science Foundation Ireland
+through the SFI Centre for Research Training in Genomics Data Science under Grant
+numbers 18/CRT/6214 and 18/CRT/6214(S4). For the purpose of Open Access,
+the author has applied a CC BY public copyright license to any Author Accepted
+Manuscript version arising from this submission.
+
+We thank Zhijian Li and Luca Pinello of the Broad Institute of MIT and Harvard
+
+for providing the data used in Section 4.
+
+Statements and Declarations
+
+All authors declare that they have no competing interests.
+
+20
+
+Appendix A Convergence of the IHC algorithm
+
+The within-cluster correlation quantifies the degree of similarity among curves within
+the same cluster. Conversely, the between-cluster correlation evaluates the distinctive-
+ness of the averages of curves across different clusters. The objective is to achieve a
+within-cluster correlation that surpasses the predefined threshold αu, while simulta-
+neously maintaining a between-cluster correlation that remains below αu. However,
+enforcing these dual conditions may lead to convergence challenges, attributable to
+their inherently conflicting nature. To address this, Step iv iterates through Steps ii
+and iii until one achieves convergence in the within-cluster correlation. Subsequently,
+Step v relaxes the stringent criterion on the within-cluster correlation. As a result, the
+clusters formed typically exhibit an average within-cluster correlation that is similar
+to αu, diverging from the more rigid requirement of consistently exceeding αu. For a
+comprehensive description of the IHC algorithm, the reader is referred to Carey et al
+(2016).
+
+Appendix B Computational efficiency
+
+Table B1 summarizes the execution time in seconds for each method across the three
+simulation scenarios. Simulation 3.1, which involves 100 genes across 2,696 spatial
+spots, is the most computationally demanding. This is followed by Simulation 3.2 with
+49 genes across 2,696 spatial spots, and Simulation 3.3 with 49 genes over 260 spa-
+tial spots. SPARK/SPARK-X is significantly faster than the other methods because,
+although they employ a modeling approach for detecting SVGs, they apply clustering
+directly to the raw gene expression data, which has been log-transformed and stan-
+dardized to have a mean of zero and a standard deviation of one across all spots.
+In contrast, stIHC, MERINGUE, and SpatialDE perform clustering on the modeled
+gene expression data. This step is crucial because raw gene expression data often
+contain substantial noise, which can negatively impact clustering accuracy. By mod-
+eling gene expression, this noise is reduced, leading to more robust gene clusters that
+are less affected by noise in gene expression measurements. While SPARK/SPARK-X
+is the fastest method, it fails to detect the smallest cluster in each of the simula-
+tions. However, longer computation time does not necessarily yield better clustering
+results, as demonstrated by SpatialDE, which has the longest runtime but performs
+the worst across the simulations. Overall, stIHC strikes a balance between efficiency
+and performance, achieving optimal clustering results while maintaining reasonable
+computational demands. The evaluation was conducted on a personal laptop with
+an 11th Gen Intel Core i7-1165G7 CPU (4 cores), 32GB RAM, and an Intel Iris Xe
+Graphics GPU. The system was equipped with a 1TB NVMe SSD (Samsung PM9A1).
+
+Table B1: Time in seconds to run each of the clustering methods.
+
+Method
+stIHC
+MERINGUE
+
+Simulation 3.1
+127s
+4005s
+
+Simulation 3.2
+63s
+1019s
+
+Simulation 3.3
+3s
+2s
+
+21
+
+Method
+SpatialDE
+SPARK/SPARK-X
+
+Simulation 3.1
+4278s
+0.34s
+
+Simulation 3.2
+3470s
+0.11s
+
+Simulation 3.3
+552s
+0.03s
+
+Appendix C Full list of genes from identified
+
+co-expression modules
+
+The full list of genes and associated GO terms are presented for 10x Visium mouse
+brain, 10x Xenium mouse brain, and 10x Visium human lung cancer analyzed in
+Section 4. Corresponding brain regions are presented for the 10x Visium mouse brain
+and 10x Xenium mouse brain.
+
+Table C2: 10x Visium mouse brain dataset cluster summary with
+gene information, GO Terms, and brain regions
+
+Gene Names
+
+GO Terms
+
+Cluster # of
+Genes
+2
+
+1
+
+Gm5741, Pou4f1
+
+Brain
+Region
+Thalamus
+
+Hippocampus
+
+Hypothalamus
+
+receptor
+postsynaptic
+
+equilibrioception,
+suckling behavior,
+peripheral nervous system neu-
+ron development,
+peripheral nervous system neu-
+ron differentiation,
+trigeminal nerve development
+of
+regulation
+postsynaptic
+neurotransmitter
+membrane
+receptor levels,
+neurotransmitter
+localization
+to
+specialization membrane,
+protein localization to post-
+synaptic specialization mem-
+brane,
+protein-containing
+localization,
+memory
+feeding behavior,
+drinking behavior,
+regulation of behavior,
+regulation of hormone secre-
+tion,
+neuropeptide signaling pathway
+
+complex
+
+2
+
+10
+
+Camk2n1, Nrgn, Slc17a7, Hpca,
+Nptxr, Olfm1, Ddn, Cck, Itpka,
+Camk2a
+
+3
+
+16
+
+Pmch, Agrp, Hcrt, Fezf1, Gal,
+Sparc, Nnat, Bc1,
+Baiap3,
+Resp18,
+Arhgap36,
+X6330403K07Rik, Hap1, Agt,
+Irs4
+
+Gpx3,
+
+22
+
+Brain
+Region
+Thalamus,
+Hippocam-
+pus
+
+Cortical sub-
+plate
+
+Brain
+Region
+Hypothalamus
+
+Hippocampus
+
+Cluster # of
+Genes
+7
+
+4
+
+5
+
+15
+
+Cluster # of
+Genes
+21
+
+1
+
+Gene Names
+
+GO Terms
+
+Mbp, Mobp, Enpp2, Prkcd, Pcp4,
+Tcf7l2, Ptgds
+
+Slc4a5,
+
+Defb11,
+
+Kcne2,
+Ttr,
+Wfdc2,
+Slc16a8,
+X2900040C04Rik,
+Kcnj13,
+X1500015O10Rik, Folr1, Prr32,
+Calml4, Clic6, Tmem72, Spink8
+
+phospholipid catabolic process,
+membrane lipid catabolic pro-
+cess,
+sphingolipid catabolic process,
+negative regulation of cell adhe-
+sion,
+regulation of oligodendrocyte
+differentiation
+monoatomic anion transport,
+potassium ion import across
+plasma membrane
+
+Table C3: 10x Xenium mouse brain dataset cluster summary with
+gene information, GO Terms, and brain regions
+
+Gene Names
+
+GO Terms
+
+Mfrp, Tmem72, Ecrg4, Dsp,
+Clic6, Baiap3, Gal, Gpr151,
+Dlk1, C1ql2, Arhgap36, Hap1,
+Adora2a, Cartpt, AW551984,
+Ndst4, Nnat, Lypd1, Gabrq,
+Calb2, Gpx3
+
+positive regulation of secretion,
+regulation of hormone secre-
+tion,
+positive regulation of secretion
+by cell,
+hormone secretion,
+regulation of synaptic transmis-
+sion, GABAergic
+
+learning or memory,
+cognition,
+memory,
+positive regulation of behavior,
+long-term memory,
+
+2
+
+17
+
+Agrp, Camk2n1, Slc17a7, Nrgn,
+Ddn, Snap25, Camk2a, Cck,
+Kcnh5, Vxn, Hpca, Psd, Olfm1,
+Slc30a3, Mef2c, Rtn1, Baiap2
+
+23
+
+Cluster # of
+Genes
+12
+
+3
+
+Gene Names
+
+GO Terms
+
+Ttr, Pmch, Hcrt, Prkcd, Mbp,
+Abhd12b, Tnnt1, Zic1, Pcp4,
+Rab37, Mobp, Tcf7l2
+
+regulation of protein localiza-
+tion to nucleus,
+positive regulation of protein
+localization to nucleus,
+positive regulation of protein
+transport,
+sleep,
+positive regulation of protein
+import into nucleus,
+
+Brain
+Region
+Thalamus
+
+Table C4: 10x Visium human lung cancer dataset cluster summary
+with gene information and GO Terms.
+
+Cluster # of
+Genes
+16
+
+1
+
+2
+
+34
+
+Gene Names
+
+GO Terms
+
+Sftpb, Mgp, Myh11, Sftpc, Tagln, Igha1,
+Ptgis, Myl9, Tpm2, Igkc, Acta2, Ogn,
+Thbs2, Fgg, Sftpa1, Ighg1
+
+Chga, Tff3, Ttr, Chgb, Tph1, Cartpt,
+Scg5, Cd24, Pcsk1, Gc, Aldh1a1,
+Pdk4, F5, Pebp1, Scg2, Pcsk1n, Apoh,
+Vstm2a, Cxcl13, Actg1, Ptprn, Hipk2,
+Cga, Serpina1, Ckb, Bex1, Tm4sf4,
+Cmip, Dio2, Aplp1, Meis2, Atp1b1,
+Cryba2, Syt13
+
+muscle contraction, muscle system pro-
+cess, respiratory gaseous exchange by
+respiratory system, B cell receptor sig-
+naling pathway, cellular response to
+inter leukin 6
+peptide hormone processing, signaling
+receptor ligand precursor processing,
+hemostasis, tissue homeostasis, hor-
+mone metabolic processes
+
+Appendix D Datasets
+
+Section 3: 10x Visium sagital mouse brain slice dataset The
+10x Visium sagital
+mouse brain slice dataset is available in the Seurat R package. To represent distinct
+spatial patterns, we selected four distinct gene expression patterns, each serving as
+the representative pattern for a different cluster. Using the scDesign3 R package we
+simulated 25 copies of each gene, resulting in a total of 100 genes grouped into four
+clusters. We followed the tutorial available at https://songdongyuan1994.github.io/
+scDesign3/docs/articles/scDesign3-spatial-vignette.html to generate this data.
+
+Section 4: 10x Visium, 10x Xenium Mouse Brain Data, and 10x Visium Human Lung Cancer Data
+The data used in Section 4 was generated by Zhijian Li and Luca Pinello and is
+available at: https://github.com/pinellolab/SVG Benchmarking/.
+scDesign3 was
+used to generate biologically realistic data with various spatial variability using
+
+24
+
+real-world spatial transcriptomics data as a reference. The marginal distribution of
+expression for each gene was modeled using the function fit marginal (mu formula
+= "s(spatial1, spatial2, bs = ’gp’, k = 500)", sigma formula = "1",
+family use = "nb"), which fitted the data with a generalized GP model under the
+Negative Binomial distribution. The joint distribution of genes was modeled using
+the function fit copula (family use = "nb", copula = "gaussian"). Next, they
+extracted the mean parameters for each gene across all spots, denoted by µs(s) to
+remove spatial correlation between the spots, generating a non-spatially variable mean
+function, and used the function simu new to generate simulation data as follows:
+
+µ(s) = α · µs(s) + (1 − α) · µns(s),
+
+where α denotes the fraction of spatial variability in simulated gene expression. For our
+analysis in this paper we selected the genes for which α = 1, meaning the expressions
+were generated from the GP model with the same spatial variability as the reference
+data.
+
+Section 5: Mouse Olfactory Bulb The mouse olfactory bulb data for the Replicate 11
+sample can be downloaded from www.spatialresearch.org
+
+Appendix E Existing method implementation
+
+SPARK and SPARK-X: To cluster genes SPARK and SPARK-X use the hierarchical
+agglomerative clustering algorithm in the R package amap with the two optional
+parameters in the R function set to be Euclidean distance and Ward’s criterion,
+respectively. We used this function for a range of cluster values and selected the
+optimal clustering partition by maximizing the silhouette index.
+
+MERINGUE: was implemented by following the tutorial available at https://jef.
+works/MERINGUE/mOB analysis
+
+SpatialDE: The Bioconductor version of SpatialDE was implemented by follow-
+ing the tutorial available at https://www.bioconductor.org/packages/release/bioc/
+vignettes/spatialDE/inst/doc/spatialDE.html
+
+25
+
+References
+
+10xGenomics
+
+(2019)
+
+Inside visium spatial capture technology https://pages.
+
+10xgenomics.com/rs/446-PBO-704/images/10x BR060 Inside Visium Spatial
+Technology.pdf
+
+Acharyya S, Zhou X, Baladandayuthapani V (2022) Spacex: gene co-expression
+network estimation for spatial transcriptomics. Bioinformatics 38(22):5033–5041
+
+Allen Institute for Brain Science (2004) Allen Mouse Brain Atlas. Available from
+
+mouse.brain-map.org
+
+Allen Institute for Brain Science (2011) Allen Reference Atlas – Mouse Brain. Available
+
+from atlas.brain-map.org
+
+Borzello M, Ramirez S, Treves A, et al (2023) Assessments of dentate gyrus function:
+
+discoveries and debates. Nature Reviews Neuroscience 24(8):502–517
+
+Carey M, Wu S, Gan G, et al (2016) Correlation-based iterative clustering methods for
+time course data: the identification of temporal gene response modules for influenza
+infection in humans. Infectious Disease Modelling 1(1):28–39
+
+Chen KH, Boettiger AN, Moffitt JR, et al (2015) Spatially resolved, highly multiplexed
+
+rna profiling in single cells. Science 348(6233):aaa6090
+
+Cheng A, Hu G, Li WV (2023) Benchmarking cell-type clustering methods for spatially
+
+resolved transcriptomics data. Briefings in bioinformatics 24(1):bbac475
+
+Chrousos GP (1995) The hypothalamic–pituitary–adrenal axis and immune-mediated
+
+inflammation. New England Journal of Medicine 332(20):1351–1363
+
+Craven P, Wahba G (1978) Smoothing noisy data with spline functions: estimat-
+ing the correct degree of smoothing by the method of generalized cross-validation.
+Numerische mathematik 31(4):377–403
+
+Davies DL, Bouldin DW (1979) A cluster separation measure. IEEE transactions on
+
+pattern analysis and machine intelligence (2):224–227
+
+Eisen MB, Spellman PT, Brown PO, et al (1998) Cluster analysis and display of
+genome-wide expression patterns. Proceedings of the National Academy of Sciences
+95(25):14863–14868
+
+Higgins C, Carey M (2024) Addressing class imbalance in functional data clustering.
+
+Advances in Data Analysis and Classification pp 1–28
+
+Hubert L, Arabie P (1985) Comparing partitions. Journal of classification 2:193–218
+
+26
+
+Jan JE, Reiter RJ, Wasdell MB, et al (2009) The role of the thalamus in sleep,
+pineal melatonin production, and circadian rhythm sleep disorders. Journal of pineal
+research 46(1):1–7
+
+Janesick A, Shelansky R, Gottscho AD, et al (2023) High resolution mapping of the
+tumor microenvironment using integrated single-cell, spatial and in situ analysis.
+Nature Communications 14(1):8353
+
+Leong TL, Bryant VL (2021) B cells in lung cancer—not just a bystander cell: a
+
+literature review. Translational lung cancer research 10(6):2830
+
+Lubeck E, Coskun AF, Zhiyentayev T, et al (2014) Single-cell in situ rna profiling by
+
+sequential hybridization. Nature methods 11(4):360–361
+
+Luhmann HJ, Kilb W, Hanganu-Opatz I (2009) Subplate cells: amplifiers of neuronal
+
+activity in the developing cerebral cortex. Frontiers in neuroanatomy 3:828
+
+McCullagh P, Nelder JA (1989) Generalized Linear Models. Monographs on Statistics
+
+and Applied Probability. Chapman & Hall, second edition
+
+McLachlan GJ, Basford KE (1988) Mixture models: Inference and applications to
+
+clustering, vol 38. M. Dekker New York
+
+Miller BF, Bambah-Mukku D, Dulac C, et al (2021) Characterizing spatial gene
+expression heterogeneity in spatially resolved single-cell transcriptomic data with
+nonuniform cellular densities. Genome research 31(10):1843–1855
+
+Pang CCC, Kiecker C, O’Brien JT, et al (2019) Ammon’s horn 2 (ca2) of the hip-
+pocampus: A long-known region with a new potential role in neurodegeneration.
+The Neuroscientist 25(2):167–180
+
+Qu Z, Sun F, Zhou J, et al (2015) Interleukin-6 prevents the initiation but enhances
+
+the progression of lung cancer. Cancer research 75(16):3209–3215
+
+Quail DF, Joyce JA (2013) Microenvironmental regulation of tumor progression and
+
+metastasis. Nature medicine 19(11):1423–1437
+
+Rodriques SG, Stickels RR, Goeva A, et al (2019) Slide-seq: A scalable technol-
+ogy for measuring genome-wide expression at high spatial resolution. Science
+363(6434):1463–1467
+
+Russell M, Aqil A, Saitou M, et al (2023) Gene communities in co-expression networks
+
+across different tissues. PLOS Computational Biology 19(11):e1011616
+
+Sangalli LM (2021) Spatial regression with partial differential equation regularisation.
+
+International Statistical Review 89(3):505–531
+
+27
+
+Sangalli LM, Ramsay JO, Ramsay TO (2013) Spatial spline regression models. Journal
+of the Royal Statistical Society Series B: Statistical Methodology 75(4):681–703
+
+Satija R, Farrell JA, Gennert D, et al (2015) Spatial reconstruction of single-cell gene
+
+expression data. Nature biotechnology 33(5):495–502
+
+Shah S, Lubeck E, Zhou W, et al (2016) In situ transcription profiling of single cells
+reveals spatial organization of cells in the mouse hippocampus. Neuron 92(2):342–
+357
+
+Shewchuk JR (1996) Triangle: Engineering a 2d quality mesh generator and delaunay
+triangulator. In: Workshop on applied computational geometry, Springer, pp 203–
+222
+
+Shewchuk JR (2002) Delaunay refinement algorithms for triangular mesh generation.
+
+Computational geometry 22(1-3):21–74
+
+Shine JM, Lewis LD, Garrett DD, et al (2023) The impact of the human thalamus on
+brain-wide information processing. Nature Reviews Neuroscience 24(7):416–430
+
+Song D, Wang Q, Yan G, et al (2024) scdesign3 generates realistic in silico data for
+
+multimodal single-cell and spatial omics. Nature Biotechnology 42(2):247–252
+
+St˚ahl PL, Salm´en F, Vickovic S, et al (2016) Visualization and analysis of gene
+expression in tissue sections by spatial transcriptomics. Science 353(6294):78–82
+
+Stickels RR, Murray E, Kumar P, et al (2021) Highly sensitive spatial transcriptomics
+at near-cellular resolution with slide-seqv2. Nature biotechnology 39(3):313–319
+
+Sun S, Zhu J, Zhou X (2020) Statistical analysis of spatial expression patterns for
+
+spatially resolved transcriptomic studies. Nature methods 17(2):193–200
+
+Svensson V, Teichmann SA, Stegle O (2018) Spatialde: identification of spatially
+
+variable genes. Nature methods 15(5):343–346
+
+¨Unsal E, Atalay F, Atikcan S, et al (2004) Prognostic significance of hemostatic
+
+parameters in patients with lung cancer. Respiratory medicine 98(2):93–98
+
+Van Dam S, Vosa U, van der Graaf A, et al (2018) Gene co-expression analysis for
+functional classification and gene–disease predictions. Briefings in bioinformatics
+19(4):575–592
+
+Wilhelm M, Sangalli LM (2016) Generalized spatial regression with differential
+regularization. Journal of Statistical Computation and Simulation 86(13):2497–2518
+
+Yamaguchi K, ABE K, ADACHI I, et al (1986) Peptide hormone production in small
+cell lung carcinomas with particular reference to gastrin-releasing peptide. Japanese
+Journal of Clinical Oncology 16(3):235–241
+
+28
+
+Yan G, Hua SH, Li JJ (2024) Categorization of 31 computational methods to detect
+spatially variable genes from spatially resolved transcriptomics data. arXiv preprint
+arXiv:240518779
+
+Yu G, Wang LG, Han Y, et al (2012) clusterprofiler: an r package for compar-
+ing biological themes among gene clusters. Omics: a journal of integrative biology
+16(5):284–287
+
+Yuan X, Ma Y, Gao R, et al (2024) Heartsvg: a fast and accurate method for
+identifying spatially variable genes in large-scale spatial transcriptomics. Nature
+Communications 15(1):5700
+
+Zhu J, Sun S, Zhou X (2021) Spark-x: non-parametric modeling enables scalable
+and robust detection of spatial expression patterns for large spatial transcriptomic
+studies. Genome biology 22(1):184
+
+Zinani OQ, Kesero˘glu K, ¨Ozbudak EM (2022) Regulatory mechanisms ensuring
+coordinated expression of functionally related genes. Trends in Genetics 38(1):73–81
+
+29
+
+

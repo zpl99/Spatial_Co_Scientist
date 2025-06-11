@@ -1,0 +1,9 @@
+name: search_literature
+description: Prompt the LLM to generate high quality reasoning and summary of literature
+template: |
+  Search and aggregate recent, relevant literature based on the following objective and context:
+  Objective: {goal}
+  Keywords: {keywords}
+  Also, there is a RAG database that may contain the relevant articles.
+  
+  Please summarize the most relevant articles (preferably 3-8), ordered by year, each with citation info, a 2-4 sentence summary, and your analysis of how it relates to the objective.

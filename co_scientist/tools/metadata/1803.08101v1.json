@@ -1,0 +1,11 @@
+{
+  "id": "http://arxiv.org/abs/1803.08101v1",
+  "title": "Clustering to Reduce Spatial Data Set Size",
+  "summary": "Traditionally it had been a problem that researchers did not have access to enough spatial data to answer pressing research questions or build compelling visualizations. Today, however, the problem is often that we have too much data. Spatially redundant or approximately redundant points may refer to a single feature (plus noise) rather than many distinct spatial features. We use a machine learning approach with density-based clustering to compress such spatial data into a set of representative features.",
+  "published": "2018-03-21T19:38:27Z",
+  "authors": [
+    "Geoff Boeing"
+  ],
+  "primary_category": "cs.LG",
+  "pdf_url": "http://arxiv.org/pdf/1803.08101v1"
+}

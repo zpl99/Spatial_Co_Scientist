@@ -1,0 +1,13 @@
+{
+  "id": "http://arxiv.org/abs/1805.04274v1",
+  "title": "Measuring heterogeneity in urban expansion via spatial entropy",
+  "summary": "The lack of efficiency in urban diffusion is a debated issue, important for biologists, urban specialists, planners and statisticians, both in developed and new developing countries. Many approaches have been considered to measure urban sprawl, i.e. chaotic urban expansion; such idea of chaos is here linked to the concept of entropy. Entropy, firstly introduced in information theory, rapidly became a standard tool in ecology, biology and geography to measure the degree of heterogeneity among observations; in these contexts, entropy measures should include spatial information. The aim of this paper is to employ a rigorous spatial entropy based approach to measure urban sprawl associated to the diffusion of metropolitan cities. In order to assess the performance of the considered measures, a comparative study is run over alternative urban scenarios; afterwards, measures are used to quantify the degree of disorder in the urban expansion of three cities in Europe. Results are easily interpretable and can be used both as an absolute measure of urban sprawl and for comparison over space and time.",
+  "published": "2018-05-11T08:40:06Z",
+  "authors": [
+    "Linda Altieri",
+    "Daniela Cocchi",
+    "Giulia Roli"
+  ],
+  "primary_category": "stat.AP",
+  "pdf_url": "http://arxiv.org/pdf/1805.04274v1"
+}

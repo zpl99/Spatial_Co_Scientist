@@ -1,0 +1,1454 @@
+Spatial-Temporal Cluster Relations: A Foundation
+for Trajectory Cluster Lifetime Analysis
+
+Ivens Portugal
+University of Waterloo
+Waterloo, Canada
+iportugal@uwaterloo.ca
+
+Paulo Alencar
+University of Waterloo
+Waterloo, Canada
+palencar@cs.uwaterloo.ca
+
+Donald Cowan
+University of Waterloo
+Waterloo, Canada
+dcowan@csg.uwaterloo.ca
+
+9
+1
+0
+2
+
+v
+o
+N
+5
+
+]
+
+B
+D
+.
+s
+c
+[
+
+1
+v
+5
+0
+1
+2
+0
+.
+1
+1
+9
+1
+:
+v
+i
+X
+r
+a
+
+Abstract—Spatial-temporal data, that is information about
+objects that exist at a particular location and time period, are rich
+in value and, as a consequence, the target of so many initiative
+efforts. Clustering approaches aim at grouping datapoints based
+on similar properties for classiﬁcation tasks. These approaches
+have been widely used in domains such as human mobility,
+ecology, health and astronomy. However, clustering approaches
+typically address only the static nature of a cluster, and do not
+take into consideration its dynamic aspects. A desirable approach
+needs to investigate relations between dynamic clusters and their
+elements that can be used to derive new insights about what
+happened to the clusters during their lifetimes. A fundamental
+step towards this goal is to provide a formal deﬁnition of spatial-
+temporal cluster relations. This report introduces, describes, and
+formalizes 14 novel spatial-temporal cluster relations that may oc-
+cur during the existence of a cluster and involve both trajectory-
+cluster membership conditions and cluster-cluster comparisons.
+We evaluate the proposed relations with a discussion on how
+they are able to interpret complex cases that are difﬁcult to be
+distinguished without a formal relation speciﬁcation. We conclude
+the report by summarizing our results and describing avenues
+for further research.
+
+Index Terms—Cluster analysis, spatial-temporal data, spatial-
+
+temporal relations
+
+I. INTRODUCTION
+Spatial-temporal data refers to pieces of information in
+which their spatial and the temporal aspects are relevant [1, 2].
+Some examples are a person walking on the street or a taxi
+driving on a busy road. Since location tracking devices became
+popular, spatial-temporal data is highly available, and their
+analysis is increasingly important.
+
+A well-known, widely used spatial-temporal data analysis
+technique is clustering [3]. Clusters are groups of similar
+elements, such that elements in a cluster are similar to each
+other and dissimilar to those outside the cluster [3]. These
+approaches have been widely used in domains such as hu-
+man mobility, ecology, health and astronomy. Two popular
+clustering approaches are the distance-based K-Means [4] and
+the density-based DBSCAN [5]. These approaches are able
+to identify static clusters (i.e. clusters that do not move) that
+can be useful for classiﬁcation of new data or outlier detection.
+Dynamic, moving, or spatial-temporal clusters are clusters that
+move on the space throughout time [6, 7]. Their analysis is
+signiﬁcantly more difﬁcult because of the many movement
+patterns that clusters may follow. Some popular approaches
+are ST-DBSCAN [8] and the work in [9].
+
+Despite recent advances, clustering approaches typically
+address only the static nature of a cluster, and do not take into
+consideration its dynamic aspects. Speciﬁcally, during tradi-
+tional analysis, spatial-temporal clustering approaches focus
+on identifying the clusters, but do not capture the dynamic
+cluster-cluster and cluster-trajectory relations that can be used
+to derive new insights about what happened to the clusters
+during their lifetimes. A fundamental required step in this
+direction is to provide a formal deﬁnition of spatial-temporal
+cluster relations.
+
+This report introduces, describes, and formalizes 14 cluster
+relations that can be used to identify higher level character-
+istics and behaviors of clusters and involve both trajectory-
+cluster membership conditions and cluster-cluster compar-
+isons. These new relations can lead to new insights in cluster
+analysis. For example, dynamic cluster relations such as merge
+and split can provide valuable information to support decision
+making involving situations in which clusters (e.g.,
+taxis,
+animals) grow, shrink, merge, or split.
+
+This report is divided into the following sections. Section
+II details some background information about spatial-temporal
+data, spatial and temporal relations, as well as gives insights
+about how the 14 relations were identiﬁed. Section III intro-
+duces, describes, and formalizes the 14 relations. Section IV
+discusses how these relations are able to interpret complex
+cases that are difﬁcult to be distinguished without a formal
+relation speciﬁcation. Finally Section V concludes the report.
+
+II. RELATED WORK
+
+A. Spatial-Temporal Data
+
+Spatial data is information about an element, such that its
+location in a space is considered [10, 11]. A common example
+is geographical spatial data, where objects exist somewhere
+on the planet. For example, the location of a store is spatial
+data. Other types of spatial data are molecules and their
+place in the human body, planets on the solar system or
+the universe, or even hypothetical multidimensional objects
+in a multidimensional space. Although the most common
+way to refer to spatial data is in terms of its latitude and
+longitude (sometimes even altitude), this is not the only one.
+Coordinates and relative positioning (radius in meters from a
+centroid) are also used. Usually, spatial data is reduced to a
+zero dimensional point for calculations and comparisons (e.g.
+
+ 
+ 
+ 
+ 
+ 
+ 
+centroid). However, when relevant, one (line), two (region),
+or even more (cube, hypercube) dimensions are considered in
+the calculations.
+
+Temporal data is information about an element, such that the
+time of its existence is considered [12, 13]. Usually, temporal
+data describe events. For example, an exam started at 10am
+and ﬁnished at 11am. Temporal data is usually instantaneous,
+but it can also be described in terms of a duration. Some
+concerns when describing temporal data are time granularity
+and time zones. Time granularity refers to the richness of the
+description of time. For example, it is sufﬁcient to describe
+a holiday by the day it happens, but
+the description of
+bank transactions should include hours, minutes, seconds, and
+perhaps milliseconds. Time zones are regions of the planet
+where a common standard time is used. The Americas, Europe,
+and Asia are in different time zones, and events described
+in one of these regions should be “temporally translated” to
+another region before any analysis. To avoid confusion, a
+Universal Time Coordinate is used.
+
+Spatial-temporal data refers to elements whose spatial and
+temporal dimensions are considered. A common example is a
+vehicle on a road, such that their location change with time.
+Since this type of data is described based on its spatial and
+temporal characteristics, concerns when describing these di-
+mensions are relevant here. Although it is intuitive to imagine a
+spatial-temporal object moving on space as time passes, this is
+not a strong requirement. For example, a sports match having
+its location and start and end times is an example of spatial
+data. Another example is weather balloons, where information
+about the weather is captured at several different locations
+at different timestamps. In fact, the work in [6] classiﬁes
+spatial-temporal data based on the relevance of its spatial and
+temporal dimensions, and its shape. See Figure 1. Note the
+difference between moving points and trajectories. Both refer
+to spatial-temporal objects that move throughout time, but only
+the most recent snapshot of information can be accessed from
+the former, whereas the entire history of movement is available
+from the latter.
+
+B. Spatial-Temporal Relations
+
+Spatial relations describe how spatial objects interact in the
+space. There are three major types described in the literature:
+topological, directional, and distance. Topological relations
+specify relations of containment, coverage, or intersection.
+For example, a house contained in a city, or the path left
+by two vehicles crosses. Note that topological relations can
+be described for objects of any number dimensions. The
+Dimensionally Extended nine-Intersection Model (DE-9IM)
+[14] expresses topological relations in a systematic way for
+objects in a two-dimensional space. It describes objects in
+terms of three of their regions: interior (I), boundary (B),
+and exterior (E). Then a matrix is constructed (See Figure 2)
+and the dimension of the intersection of these regions in both
+objects is evaluated. As an example, the contains relation is
+deﬁned by the matrix in Figure 3a and the matrix for equals
+is found in Figure 3b. The set of spatial relations that can
+
+Fig. 1: Classiﬁcation of spatial-temporal data based on its
+dimensions and shape characteristics. [6]
+
+be derived from the DE-9IM model include the following 10
+relations: equals, disjoint, touches, contains, covers, intersects,
+within, coveredBy, crosses, and overlaps,
+
+Directional spatial relations describe the relative positioning
+between spatial objects. For example, the pharmacy is on the
+left of the restaurant. They are mainly divided into two groups:
+the internal and external relations. As the name implies,
+internal directional spatial relations describe the positioning
+of an object that is contained in another object. Notice that
+higher dimensions are necessary. Some examples of internal
+relations are left, on the back, and athwart. Conversely, ex-
+ternal directional spatial relations describe the positioning of
+objects without a containment relation. Some examples are on
+the right of, behind, and in front of.
+
+Distance spatial relations take into consideration the prox-
+imity between objects when describing them. One example is
+the train is near the road. Notice that, the concept of near, far,
+and other distance relations are relative to the context. The
+moon is relatively close to the Earth when compared to the
+Sun, but two vehicles at the Earth-Moon distance are very far.
+Some distance relations are at, nearby, and far away.
+
+Temporal relations describe the occurrence of two events
+relative to each other. For example, the meeting happened
+before the lunch. The description of temporal relations can
+be done between time periods and timestamps. Notice that
+they are very similar to spatial relations between lines and
+points in a one-dimensional space, because of their nature. The
+World Wide Web Consortium (W3C)1 has an entire document
+dedicated to the description and formalization of a temporal
+ontology2. The document describes seven topological temporal
+relations between time periods. They are described in Table I
+and a visual representation is depicted in Figure 4.
+
+Spatial temporal relations describe the interactions between
+two spatial-temporal objects in a place across time. The liter-
+ature can still be enriched with novel ways to systematically
+
+1https://www.w3.org
+2https://www.w3.org/TR/owl-time
+
+DE9IM(a, b) =
+
+
+
+
+
+dim(I(a) ∩ I(b)) = 2
+dim(I(a) ∩ E(b)) = 2
+dim(I(a) ∩ B(b)) = 1
+dim(B(a) ∩ I(b)) = 1 dim(B(a) ∩ B(b)) = 0 dim(B(a) ∩ E(b)) = 1
+dim(E(a) ∩ E(b)) = 2
+dim(E(a) ∩ B(b)) = 1
+dim(E(a) ∩ I(b)) = 2
+
+
+
+
+
+Fig. 2: The DE-9IM model matrix for spatial relation speciﬁcation.
+
+
+
+
+
+
+∗
+∗
+T
+∗
+∗
+∗
+
+F F ∗
+
+
+
+
+
+∗ F
+T
+∗
+∗ F
+F F ∗
+
+
+
+
+
+(a) The contains relation.
+
+(b) The equals relation.
+
+Fig. 3: The contains and equals relations derived from the
+DE-9IM model.
+
+TABLE I: A description of topological temporal relations.
+
+Relation
+Before
+
+Inverse
+After
+
+Meets
+
+MetBy
+
+Overlaps
+
+OverlappedBy
+
+Starts
+During
+
+StartedBy
+Contains
+
+Finishes
+Equals
+
+FinishedBy
+Equals
+
+Description
+One time period occurs subsequent to an-
+other, but not immediately.
+One time period occurs subsequent to an-
+other, without any delay.
+There exists some temporal intersection be-
+tween the occurrence of two time periods.
+Two time periods start at the same time.
+One time period starts and ends while the
+other time period is occurring.
+Two time periods end at the same time.
+Two time periods start and end at the same
+time.
+
+deﬁne spatial-temporal relations, or with the description of
+such relations in several different conditions (e.g number of
+objects, their dimensions, the space dimensions). The work in
+[15] attempts to formalize and describe one such list of spatial-
+temporal relations. It divides relations based on the geometry
+and the presence or absence of moment of objects. Among the
+many relations describe are approaching, arriving, encounter,
+meeting, separating, moving-away, leaving, passing, jointly-
+
+Relation
+
+Before
+
+Meets
+
+Overlaps
+
+Starts
+
+During
+
+Finishes
+
+Equals
+
+Inverse
+
+After
+
+MetBy
+
+OverlappedBy
+
+StartedBy
+
+Contains
+
+FinishedBy
+
+Equals
+
+Fig. 4: A visual representation of the elementary temporal re-
+lations. Adapted from W3C’s temporal ontology speciﬁcation3
+
+moving, and separately-moving.
+
+This is by no means an extensive list of spatial, temporal,
+or spatial-temporal relations or their types. In fact, a detailed
+description and formalization of each of these types, relations,
+and additional relations, in different dimensions and situations,
+can be found in [16].
+
+III. DYNAMIC SPATIAL-TEMPORAL CLUSTER RELATIONS
+
+In this section, we introduce, describe, and formalize 14
+spatial-temporal cluster relations to augment the knowledge
+about what happens to clusters as they move throughout time.
+These relations are derived from the list of relations identiﬁed
+in [17] and [18], in which each relation was further divided
+in other cases. Table II lists each relation alongside a natural
+language description. Relations are divided into two groups,
+existential (the ﬁrst two relations) and spatial-temporal (the
+remaining relations), based on their nature. Following sections
+detail each relation. We end this section with a couple of
+examples to illustrate the usefulness of these relations.
+
+Let T RAJ = {traj1, . . . , trajm} be a set of m trajec-
+tories. Let trajj be trajectory j. Note that trajectories exist
+throughout time. In that case, trajj = [trajj,t] is a vector
+of trajectories, where trajj,t represents trajectory j during
+timestamp t.
+
+Let C = {c1, . . . , cn} be a set of n clusters. Let ci be cluster
+i. Note that a cluster also exists throughout time. For that
+reason, ci is a vector of static clusters ci,t, i.e. ci = [ci,t], where
+t denotes discrete timestamps. Let ci,t be cluster i during
+timestamp t. Once a timestamp is set, a cluster is deﬁned
+by the trajectories it contains. For example, in a prototype-
+based cluster, a cluster is the set of all trajectories within a
+speciﬁed radius, and in a density-based cluster, a cluster is the
+set of all of its core and border points (where points represent
+trajectories). Therefore, ci,t = {trajj,t} during timestamp t,
+for all trajj,t that satisﬁes the particular clustering technique
+being used. Note that, since density-based approaches are
+relevant in our future work, clusters are not deﬁned based on
+their centroids. Also note that we assume that a valid cluster
+has at least min cluster trajectories.
+
+1) START: The START relation characterizes the beginning
+of a cluster. See Figure 5a for a visual representation. This
+relation is heavily dependent on the clustering approach being
+used. For example in prototype-based cluster approaches, such
+as K-MEANS, a cluster ci undergoes a START relation if
+
+• ci,t−1 = ∅
+
+3https://www.w3.org/TR/owl-time
+
+Relation
+START
+END
+T ENTER
+T LEAVE
+GROUP
+DISPERSE
+
+#
+1
+2
+3
+4
+5
+6
+7 MERGE
+8
+9
+
+SPLIT
+C ENTER
+
+10
+
+11
+
+12
+
+13
+
+14
+
+C LEAVE
+
+JOIN
+
+DETACH
+
+C IN
+
+C OUT
+
+TABLE II: The 14 cluster spatial-temporal relations.
+
+Description
+A relation that represents the beginning of a cluster.
+A relation that represents the end of a cluster.
+A relation that represents a trajectory entering a cluster.
+A relation that represents a trajectory leaving a cluster.
+A relation that represents the creation of a cluster, when trajectories come together at a location at the same time.
+A relation that represents the end of a cluster, when each trajectories that compose the cluster follow a different path.
+A relation that represents the creation of a cluster, when two or more clusters come together at a location at the same time.
+A relation that represents the end of a cluster, when the cluster is divided into smaller clusters that follow a different path.
+A relation that represents a cluster entering another cluster. This relation is described from the perspective of the cluster who received
+another one.
+A relation that represents a cluster leaving another cluster. This relation is described from the perspective of the cluster who released
+another one.
+A relation that represents a cluster entering another cluster. This relation is similar to C ENTER, but described from the perspective
+of the cluster who entered another one.
+A relation that represents a cluster leaving another cluster. This relation is similar to C LEAVE, but described from the perspective
+of the cluster who left another one.
+A relation that represents when two clusters exchange a cluster of trajectories. This relation is described from the perspective of the
+cluster who released the exchanged cluster.
+A relation that represents when two clusters exchange a cluster of trajectories. This relation is described from the perspective of the
+cluster who received the exchanged cluster.
+
+• there exists at
+
+least one trajectory trajj,t such that
+distance(ˆci,t, trajj,t) < distance(ˆck,t, trajj,t) for k =
+1, . . . , n, k (cid:54)= i,
+
+where ˆci,t denotes the centroid of cluster ci during timestamp
+t. This deﬁnition assumes that an empty cluster is not a valid
+cluster.
+
+where ˆci,t denotes the centroid of cluster ci during timestamp
+t. Note that this deﬁnition does not consider an empty cluster
+as a valid cluster.
+
+The ﬁrst condition simply states that the cluster does not
+exist in the previous timestamp. The second condition is a
+requirement for a prototype-based cluster, based on a centroid,
+to exist, which is that there exists enough trajectories (or data
+points) close to the centroid and far from other centroids.
+
+In a density-based approach, such as DBSCAN, a cluster ci
+
+undergoes a START relation if
+
+• ci,t−1 = ∅
+• there exists at least min cluster trajectories (or data
+points), such that given any of these trajectories, say
+trajj,t, there exists minP ts of these trajectories, each
+of them individually represented by trajk,t, such that
+distance(trajj,t, trajk,t) < eps,
+
+where eps is a parameter that denotes the radius of a core
+point and is used to calculate density.
+
+The ﬁrst condition simply states that the cluster does not
+exist in the previous timestamp. The second condition is a
+requirement for a density-based cluster to exist, which is that
+there exists enough trajectories (or data points) mutually close,
+increasing the density.
+
+2) END: The END relation characterizes the end of a
+cluster. See Figure 5b for a visual representation. This relation
+is the semantic inverse of the START relation. The END
+relation is also dependent on the clustering approached being
+used. For example in prototype-based cluster approaches, such
+as K-MEANS, a cluster ci undergoes an END relation if
+
+• ci,t−1 (cid:54)= ∅
+• for all trajectories trajj,t, such that trajj,t−1 ∈ ci,t−1,
+there exists k (cid:54)= i, such that distance(ˆci,t, trajj,t) >
+distance(ˆck,t, trajj,t) for some k = 1, . . . , n, k (cid:54)= i,
+
+The ﬁrst condition simply states that the cluster does exist
+in the previous timestamp. The second condition falsiﬁes the
+requirement for a prototype-based cluster to exist, by asserting
+that there does not exist trajectories closer to a centroid than
+to other centroids.
+
+In a density-based approach, such as DBSCAN, a cluster ci
+
+undergoes a END relation if
+
+• ci,t−1 (cid:54)= ∅
+• there does not exist enough (min cluster) trajectories
+(or data points) in ci such that for any such trajectory,
+say trajj,t, there exists minP ts trajectories in ci, each
+of them individually represented by trajk,t, such that
+distance(trajj,t, trajk,t) < eps,
+
+where eps is a parameter that denotes the radius of a core
+point and is used to calculate density.
+
+The ﬁrst condition simply states that the cluster does exist
+in the previous timestamp. The second condition falsiﬁes the
+requirement for a density-based cluster to exist, by asserting
+that trajectories that would form a cluster are not mutually
+close or do not exist in enough number.
+
+3) GROUP: Intuitively, a cluster ci undergoes a GROUP
+relation when a group of enough trajectories decides to move
+together. See Figure 5c for a visual representation. Formally, a
+cluster ci undergoes a GROUP relation if the following three
+conditions are satisﬁed:
+
+• ci,t−1 = ∅
+• ci,t (cid:54)= ∅
+• there does not exist cluster cj,t−1 such that |ci,t∩cj,t−1| ≥
+
+min cluster.
+
+The ﬁrst and the second conditions simply assert the cre-
+ation of the cluster. The third condition states that the number
+of trajectories forming the new cluster and that come from
+a preexisting cluster is not enough to form a cluster by
+
+themselves. If that was the case, the relation would be a
+DETACH.
+
+4) DISPERSE: Intuitively, a cluster ci undergoes a DIS-
+PERSE relation when its trajectories decide to go to different
+ways. See Figure 5d for a visual representation. Formally, a
+cluster ci undergoes a DISPERSE relation if the following
+three conditions are satisﬁed:
+
+• ci,t−1 (cid:54)= ∅
+• ci,t = ∅
+• there does not exist cluster cj,t such that |ci,t−1 ∩ cj,t| ≥
+
+min cluster.
+
+The ﬁrst and the second conditions simply assert the ending
+of a cluster. The third condition states that the number of
+trajectories spreading from the ending cluster going to an
+existing cluster should not be enough to form a cluster by
+themselves. If that was the case, the relation would be a JOIN.
+5) JOIN: Intuitively, a cluster ci undergoes a JOIN relation
+when it joins an existing cluster. See Figure 5e for a visual rep-
+resentation. Formally, a cluster ci undergoes a JOIN relation
+if
+
+• ci,t−1 (cid:54)= ∅
+• ci,t = ∅
+• there exists only one cluster cj,t such that |ci,t−1 ∩cj,t| ≥
+
+min cluster.
+
+The ﬁrst and the second conditions simply assert the ending
+of a cluster. The third condition states that there exists one,
+and only one, cluster where enough trajectories go to. If that
+was not the case, then the relation would be a DISPERSE. If
+there existed more than one cluster where trajectories came
+from, then the relation would be a SPLIT.
+
+6) DETACH: Intuitively, a cluster ci undergoes a DETACH
+relation when it leaves an existing cluster. See Figure 5f for
+a visual representation. Formally, a cluster ci undergoes a
+DETACH relation if
+• ci,t−1 = ∅
+• ci,t (cid:54)= ∅
+• there exists only one cluster cj,t−1 such that
+
+|ci,t ∩
+
+cj,t−1| ≥ min cluster.
+
+The ﬁrst and the second conditions simply assert the cre-
+ation of a cluster. The third condition states that there exists
+one, and only one, cluster where enough are coming from. If
+that was not the case, then the relation would be a GROUP.
+If there existed more than one cluster where trajectories went
+to, then the relation would be a MERGE.
+
+7) MERGE: Intuitively, a cluster ci undergoes a MERGE
+relation when it is created by the combination (or union) of
+two or more clusters. See Figure 5g for a visual representation.
+Formally, a cluster ci undergoes a MERGE relation if
+
+• ci,t−1 = ∅
+• ci,t (cid:54)= ∅
+• there exists at least two clusters cj,t−1 and ck,t−1, j (cid:54)=
+i, k (cid:54)= i, such that |ci,t ∩ cj,t−1| ≥ min cluster and
+|ci,t ∩ ck,t−1| ≥ min cluster.
+
+The ﬁrst and the second conditions simply assert the cre-
+ation of a cluster. The third condition states that at least two
+
+clusters sent enough trajectories to take part in the new cluster
+formation. If that was not the case, the relation would be either
+a GROUP or a C ENTER.
+
+8) SPLIT:
+
+Intuitively, a cluster ci undergoes a SPLIT
+relation when it disappears by begin divided into two or more
+clusters. See Figure 5h for a visual representation. Formally,
+a cluster ci undergoes a SPLIT relation if
+
+• ci,t−1 (cid:54)= ∅
+• ci,t = ∅
+• there exists at least two clusters cj,t and ck,t, j (cid:54)= i, k (cid:54)= i,
+such that |ci,t−1 ∩ cj,t| ≥ min cluster and |ci,t−1 ∩
+ck,t| ≥ min cluster.
+
+The ﬁrst and the second conditions simply assert the ending
+of a cluster. The third condition states that the ending cluster
+sent enough trajectories left to at least two clusters. If that was
+not the case, the relation would be either a DISPERSE or a
+C LEAVE.
+
+a
+
+cluster
+
+Intuitively,
+
+9) C ENTER:
+
+ci undergoes
+
+a
+C ENTER relation when it receives a group of trajectories
+from a cluster (enough to be a cluster themselves), ending
+the sender cluster. Note that this relation is similar to the
+JOIN relation, but it is described from the perspective of the
+cluster who received another cluster. See Figure 5i for a visual
+representation. Formally, a cluster ci undergoes a C ENTER
+relation if
+
+• ci,t−1 (cid:54)= ∅
+• ci,t (cid:54)= ∅
+• there exists a cluster cj,t−1 such that |ci,t ∩ cj,t−1| ≥
+
+min cluster
+
+• cj,t = ∅.
+The ﬁrst and the second conditions simply assert that the
+cluster existed on both timestamps. The third condition states
+that enough trajectories entered the cluster coming from a
+previously existing cluster. The fourth condition asserts that
+the previously existing cluster ended. If that was not the case,
+the relation would be a C IN.
+
+10) C LEAVE:
+
+Intuitively, a cluster ci undergoes a
+C LEAVE relation when a group of trajectories (enough to
+form a new cluster) leaves the cluster, creating a new cluster.
+Note that this relation is similar to the DETACH relation, but
+it is described from the perspective of the cluster who released
+another cluster. See Figure 5j for a visual representation.
+Formally, a cluster ci undergoes a C LEAVE relation if
+
+• ci,t−1 (cid:54)= ∅
+• ci,t (cid:54)= ∅
+• there exists a cluster cj,t such that
+
+|ci,t−1 ∩ cj,t| ≥
+
+min cluster
+• and cj,t−1 = ∅.
+The ﬁrst and the second conditions simply assert that the
+cluster existed on both timestamps. The third condition states
+that enough trajectories left the cluster to a form a new cluster.
+The fourth condition asserts that the new cluster did not exist
+before. If that was not the case, the relation would be a
+C OUT.
+
+11) T ENTER:
+
+Intuitively, a cluster ci undergoes a
+T ENTER relation when a trajectory enters it, either from an-
+other cluster or not. See Figure 5k for a visual representation.
+Formally, a cluster ci undergoes a T ENTER relation if
+
+• trajj,t−1 /∈ ci,t−1
+• trajj,t ∈ ci,t
+
+These two conditions are required, but not sufﬁcient. More
+conditions are required depending on whether the trajectory
+entered the cluster from another cluster or not. In case trajj
+did not enter the cluster from another cluster, i.e. trajj,t−1 /∈
+ck,t−1 for all k = 1, . . . , n,
+then one the following two
+condition is necessary:
+
+• ci,t−1 (cid:54)= ∅
+• there exists cluster ck,t−1 such that |ci,t ∩ ck,t−1| ≥
+
+min cluster.
+
+If trajectory trajj did enter the cluster from another cluster,
+the following two conditions are necessary: let cl,t−1 be the
+cluster trajj came from, i.e. trajj,t−1 ∈ cl,t−1.
+
+• |ci,t ∩ cl,t−1| < min cluster
+• there exists at most one cluster ck,t−1 such that |ci,t ∩
+
+ck,t−1| ≥ min cluster.
+
+The ﬁrst
+
+two conditions simply assert
+
+that a trajectory
+entered a cluster. If this trajectory did not come from a cluster,
+then the two additional conditions assert that the trajectory
+is not part of a GROUP relation. If this trajectory did come
+from a cluster, then the two additional conditions assert that the
+trajectory is not part of a C ENTER (ﬁrst additional condition)
+or MERGE (second additional condition) relation.
+
+12) T LEAVE:
+
+Intuitively, a cluster ci undergoes a
+T LEAVE relation when one of its trajectories leaves it,
+either to another cluster or not. See Figure 5l for a visual
+representation. Formally, a cluster ci undergoes a T LEAVE
+relation if
+
+• trajj,t−1 ∈ ci,t−1
+• trajj,t /∈ ci,t
+
+These two conditions are required, but are not sufﬁcient. More
+conditions are required depending on whether the trajectory
+left to another cluster or not. In case trajj did not left to
+another cluster, i.e. trajj,t /∈ ck,t for all k = 1, . . . , n, then
+one the following two conditions is necessary:
+
+not part of a C LEAVE (ﬁrst additional condition) or SPLIT
+(second additional condition) relation.
+
+13) C IN: Intuitively, a cluster ci undergoes a C IN re-
+lation when a group of trajectories (enough to form a new
+cluster) leaves a cluster and enters ci, immediately after. See
+Figure 5m for a visual representation. Formally, a cluster ci
+undergoes a C IN relation if
+
+• ci,t (cid:54)= ∅
+• there exists a cluster cj,t−1 such that |ci,t ∩ cj,t−1| ≥
+
+min cluster
+
+• cj,t−1 (cid:54)= ∅
+The ﬁrst condition simply asserts that the receiving cluster
+exists after the transition. The second condition states that the
+number of trajectories exchanged is large enough to be deemed
+a cluster. The third condition states that the cluster who sent
+trajectories existed before the transition.
+
+14) C OUT: Intuitively, a cluster ci undergoes a C OUT
+relation when a group of trajectories (enough to form a new
+cluster) leaves ci and enters another cluster, immediately after.
+See Figure 5n for a visual representation. Formally, a cluster
+ci undergoes a C OUT relation if
+
+• ci,t−1 (cid:54)= ∅
+• there exists a cluster cj,t such that
+
+|ci,t−1 ∩ cj,t| ≥
+
+min cluster
+
+• cj,t (cid:54)= ∅
+The ﬁrst condition simply asserts that the cluster sending
+trajectories exists before the transition. The second condition
+states that the number of trajectories exchanged is large enough
+to be deemed a cluster. The third condition states that the
+receiving cluster exists after the transition.
+
+IV. EXAMPLES
+
+We now illustrate the applicability of these deﬁnitions with
+two examples that have ambiguous interpretations. In the
+examples, we use a function, derived from the Jaccard index
+[19], to calculate the similarity between clusters in different
+timestamps. Let c − i and cj be two clusters in different
+consecutive timestamps (we omit
+the timestmap from the
+notation for clarity). These clusters are the same if
+
+• ci,t (cid:54)= ∅
+• there exists cluster ck,t such that
+
+min cluster.
+
+|ci,t−1 ∩ ck,t| ≥
+
+and
+
+If trajectory trajj did leave to another cluster, the following
+two conditions are necessary: let cl,t be the cluster trajj went
+to, i.e. trajj,t ∈ cl,t.
+
+• |ci,t−1 ∩ cl,t| < min cluster
+• there exists at most one cluster ck,t such that |ci,t−1 ∩
+
+ck,t| ≥ min cluster.
+
+The ﬁrst two conditions simply assert that a trajectory left a
+cluster. If this trajectory did not leave to a cluster, then the two
+additional conditions assert that the trajectory is not part of a
+DISPERSE relation. If this trajectory did leave to a cluster,
+then the two additional conditions assert that the trajectory is
+
+|ci ∩ cj|
+|c∗
+i |
+
+|ci ∩ cj|
+|c∗
+j |
+
+≥ min shared
+
+≥ min shared
+
+i and c∗
+
+where c∗
+j are clusters ci and cj without trajectories that
+just entered of left the cluster, min shared is the minimum
+ratio of shared elements (e.g. 0.8 for 80%), and | · | is an
+operator to count the number of elements of a cluster.
+
+The ﬁrst example relates to the situation shown in Fig-
+ure 6. During timestamp t − 1, a cluster c1 contains 40
+trajectories. The cluster is divided into three other clusters
+during timestamp t. We assume that a valid cluster has at
+least three trajectories, i.e. min cluster = 3. Our intuition
+seems to resolve each case (the top and the bottom situations)
+
+trajj1,t−1
+trajj2,t−1
+trajjk,t−1
+
+ci,t
+
+ci,t
+
+trajj1,t−1
+trajj2,t−1
+trajjk,t−1
+
+(a) The START relation.
+
+(b) The END relation.
+
+trajj1,t−1
+trajj2,t−1
+...
+trajjk,t−1
+
+...
+
+ci,t
+
+...
+
+ci,t−1
+
+trajj1,t
+trajj2,t
+...
+trajjk,t
+
+(c) The GROUP relation.
+
+(d) The DISPERSE relation.
+
+cj,t−1
+
+ci,t−1
+
+(e) The JOIN relation.
+
+cj1,t−1
+cj2,t−1
+
+cjk,t−1
+
+...
+
+...
+
+cj,t
+
+ci,t
+
+cj,t−1
+
+cj,t
+
+ci,t
+
+(f) The DETACH relation.
+
+ci,t−1
+
+...
+
+cj1,t
+cj2,t
+
+cjk,t
+
+...
+
+(g) The MERGE relation.
+
+(h) The SPLIT relation.
+
+ci,t−1
+
+cj,t−1
+
+ci,t
+
+cj,t−1
+
+ci,t
+
+cj,t
+
+(i) The C ENTER relation.
+
+(j) The C LEAVE relation.
+
+ci,t−1
+
+trajj,t−1
+
+ci,t
+
+ci,t−1
+
+ci,t
+
+trajj,t
+
+(k) The T ENTER relation.
+
+(l) The T LEAVE relation.
+
+Fig. 5: The spatial-temporal relations.
+
+ci,t−1
+
+cj,t−1
+
+ci,t
+
+cj,t
+
+cj,t−1
+
+ci,t−1
+
+cj,t
+
+ci,t
+
+(m) The C IN relation.
+
+(n) The C OUT relation.
+
+Fig. 5: The spatial-temporal relations. Continued from previous page.
+
+reasonably well, and the notation under each cluster gives
+away what happened. An automated approach for recognizing
+what happened should follow our intuition. Using the relations
+described in this study, we ﬁrst start by analyzing the situation
+in Figure 6a. The ﬁrst step is calculate cross-temporal cluster
+identity. We assume min shared = 0.8. Since
+
+|c1,t−1 ∩ c1,t|
+|c1,t−1|
+
+=
+
+32
+40
+
+|c1,t−1 ∩ c1,t|
+|c1,t|
+
+=
+
+32
+32
+
+= 0.8 ≥ 0.8 = min shared
+
+= 1 ≥ 0.8 = min shared
+
+we, as expected, identify that c1,t−1 and c1,t are the same
+cluster. Note that the cross temporal cluster identity test fails
+for c2,t and c3,t, as expected. Intuitively, we understand that
+c2,t and c3,t should be regarded as clusters that left c1,t−1.
+Based on the deﬁnition of the C LEAVE relation with i = 1,
+and j = 2 (the case j = 3 is analogous),
+
+• c1,t−1 (cid:54)= ∅
+• c1,t (cid:54)= ∅
+• There exists a cluster c2,t such that |c1,t−1 ∩ c2,t| ≥
+
+min cluster
+
+• c2,t−1 = ∅
+In the situation of Figure 6b, the cross-temporal cluster
+identity test fails for all three clusters c1,t, c2,t, and c3,t. A
+SPLIT relation is underway, conﬁrmed by the following tests
+from the SPLIT deﬁnition, where i = 1 and j = 2 and k = 3
+
+• ci,t−1 (cid:54)= ∅
+• ci,t = ∅
+• There exists at least two clusters c2,t and c3,t such that
+|c1,t−1 ∩ c2,t| ≥ min cluster and |c1,t−1 ∩ c3,t| ≥
+min cluster
+
+For each situation, other types of relation do not apply to
+c1. Also, note that other relations do apply to the other clusters
+in each situation. For example, c2,t in Figure 6b undergoes a
+DETACH relation as noted below, following the deﬁnition of
+the relation with i = 2 and j = 1
+
+• c2,t−1 = ∅
+• c2,t (cid:54)= ∅
+• There exists only one cluster c1,t−1 such that |c2,t ∩
+
+c1,t−1| ≥ min cluster
+
+The second, more complex, example is illustrated in Figure
+7. In each situation, there are a cluster and three trajectories
+
+at timestamp t − 1, which, after some relations, become just
+timestamp t. We are mainly interested in
+two clusters at
+describing what relation happened to c1,t−1 and to c2,t. We
+assume min cluster = 3 and min shared = 0.8. Again,
+we start by calculating the cross-temporal cluster identity for
+c1,t−1 in each case. The calculations are not printed here,
+but the notation near each cluster shows the results. Consider
+Figure 7a. After identifying c1 across timestamps, we notice
+the cluster underwent a C LEAVE relation, creating c2. We
+also notice that c1,t is not a new cluster, we perceive the three
+trajectories at timestamp t − 1 as entering c2,t, causing it to
+undergo three T ENTER relations. Below are the requirements
+for a T ENTER relation with i = 2 and j = 1 (the cases j = 2
+and j = 3 are analogous).
+• traj1,t−1 /∈ c2,t−1
+• traj1,t ∈ c2,t
+• c2,t−1 (cid:54)= ∅
+Now, consider Figure 7b. The cluster c1 does not exist at the
+timestamp t, indicating that c1,t−1 underwent a SPLIT relation.
+In that case, cluster c2,t also underwent
+three T ENTER
+relations, as explained below with i = 2, j = 1, and k = 1
+(the cases j = 2 and j = 3 are analogous).
+
+• traj1,t−1 /∈ c2,t−1
+• traj1,t ∈ c2,t
+• There exists cluster c1,t−1 such that |c2,t ∩ c1,t−1| ≥
+
+min cluster
+
+Finally, in Figure 7c, cluster c1,t−1 undergoes a T LEAVE
+relation, since it continues as the cluster c1,t with 19 elements.
+Therefore, cluster c2,t is not formed from cluster c1,t−1, as
+in the previous examples, but from the grouping of many
+trajectories. Below is the deﬁnition of a GROUP relation with
+i = 2.
+
+• c2,t−1 = ∅
+• c2,t (cid:54)= ∅
+• There does not exist cluster cj,t−1 such that
+
+|c2,t ∩
+
+cj,t−1| ≥ min cluster
+
+The two previously described examples illustrate the ap-
+plicability of the spatial-temporal cluster relation deﬁnitions.
+The deﬁnitions could distinguish ambiguous cases and produce
+an intuitive result. In more complex situations, such as when
+many trajectories are constantly moving between clusters,
+human intuition may not helpful or feasible, and an automated
+support is required.
+
+40
+
+c1,t−1
+
+40
+
+c1,t−1
+
+4
+
+c2,t
+
+32 c1,t
+
+4
+
+c3,t
+
+(a) Two C LEAVE relations
+
+12 c2,t
+
+12 c3,t
+
+16 c4,t
+
+(b) A SPLIT relation
+
+Fig. 6: Example 1.
+
+V. CONCLUSIONS
+
+the dynamic nature of clusters,
+
+Spatial-temporal data is highly available and their analysis
+is of signiﬁcant importance. One way to analyze this type of
+data is using clustering approaches. Traditionally, clusters are
+static and very useful for classiﬁcation and anomaly detection.
+those who
+More recently,
+move in space across time are being considered in analysis.
+Unfortunately,
+traditional and recent clustering approaches
+limit themselves in the analysis of static clusters. Even the
+take into consideration a more
+clustering approaches that
+dynamic nature of clusters are limited in a sense that only
+the identiﬁcation of a dynamic cluster is performed. There
+exists a lack of approaches that observe clusters from different
+perspectives.
+
+Spatial-temporal, moving, or dynamic clusters can be de-
+scribed in terms of their relations with other elements, that is
+clusters or elements contained in the cluster. These relations
+summarize important
+the lifetime of a
+cluster and leads to novel perspectives on cluster dynamics
+and to signiﬁcant research opportunities.
+
+information about
+
+This report introduces, describes, and formalizes 14 spatial-
+temporal cluster relations that may happened during the exis-
+tence of a cluster. Two of these relations are existential and
+do not involve other elements. The remaining 12 relations
+describe interactions between two spatial-temporal clusters
+or a spatial-temporal cluster and one of its elements. Here,
+one cluster element is assumed to be a trajectory, that is,
+a spatial-temporal point
+that keeps their entire history of
+movement. A spatial-temporal cluster is a set of trajectories
+that are similar, according to the clustering approach. For
+example, for a density-based clustering approach, the distance
+between elements and the number of elements within a radius
+are crucial for the deﬁnition of a cluster. We concluded our
+description and formalization with two examples designed to
+
+traj1,t−1
+traj2,t−1
+traj3,t−1
+
+20
+
+c1,t−1
+
+7
+c2,t
+
+16
+c1,t
+
+(a) A C LEAVE and a T ENTER relation.
+
+traj1,t−1
+traj2,t−1
+traj3,t−1
+
+20
+
+c1,t−1
+
+13
+c2,t
+
+10
+c3,t
+
+(b) A SPLIT and a T ENTER relation.
+
+traj1,t−1
+traj2,t−1
+traj3,t−1
+
+20
+
+c1,t−1
+
+4
+c2,t
+
+19
+c1,t
+
+(c) A T LEAVE and a GROUP relation.
+
+Fig. 7: Example 2.
+
+be ambiguous that can happen in any domain. The set of
+relations is able to identify each situation and describe them
+in a way that matches our intuition.
+
+Finally, we provide some avenues for further research based
+on the new spatial-temporal relations. Although the set of
+proposed relations do assist in identifying events that occur
+during the existence of a spatial-temporal cluster, this set is not
+argued to be complete and this work can be extended in several
+ways. First, novel approaches could be provided to support
+automated cluster analysis based on the relations. We have
+conducted preliminary work in this direction. Second, novel
+spatial-temporal relations can be further derived to capture
+more complex situations. The proposed relations are limited
+to a two-dimensional world in which moving objects are
+considered points navigating in a 2D space. Novel relations
+can be created when higher dimensions are taken into account,
+for instance, when 3D moving objects navigate in a 3D space.
+Finally, it would be interesting to investigate how the proposed
+
+relations can be adapted to cases outside of the geographical
+context in domains such as microbiology or astronomy.
+
+January.
+Intelligence, 2015, pp. 2575–2581.
+
+International Joint Conferences on Artiﬁcial
+
+ACKNOWLEDGMENT
+
+The authors thank the Natural Sciences and Engineering
+Research Council of Canada (NSERC), and the Ontario Re-
+search Fund of the Ontario Ministry of Research, Innovation,
+and Science for their ﬁnancial support for this research.
+
+REFERENCES
+
+[1] X. Wang, X. Zhou, and S. Lu, “Spatiotemporal data mod-
+elling and management: A survey,” Proceedings of the
+Conference on Technology of Object-Oriented Languages
+and Systems, TOOLS, pp. 202–211, 2000.
+
+[2] J. Kent and K. Mardia, Modelling strategies for spatial-
+
+temporal data. CRC Press, 2002.
+
+[3] P.-N. Tan, M. Steinbach, A. Karpatne, and V. Kumar,
+
+Introduction to Data Mining. Pearson, 2018.
+
+[4] S. Lloyd, “Least squares quantization in pcm,” IEEE
+Transactions on Information Theory, vol. 28, no. 2, pp.
+129–137, 1982.
+
+[5] M. Ester, H.-P. Kriegel, J. Sander, and X. Xu, “A density-
+based algorithm for discovering clusters in large spatial
+the second
+databases with noise,” in Proceedings of
+international conference on knowledge discovery and
+data mining, 1996, pp. 226–231.
+
+[6] S. Kisilevich, F. Mansmann, M. Nanni, and S. Rinzivillo,
+Spatio-temporal clustering. Springer US, 2010, pp. 855–
+874.
+
+[7] M. Ansari, A. Ahmad, S. Khan, G. Bhushan, and Main-
+uddin, “Spatiotemporal clustering: a review,” Artiﬁcial
+Intelligence Review, 2019.
+
+[8] D. Birant and A. Kut, “St-dbscan: An algorithm for
+clustering spatial-temporal data,” Data and Knowledge
+Engineering, vol. 60, no. 1, pp. 208–221, 2007.
+
+[9] X. Chen, J. Faghmous, A. Khandelwal, and V. Kumar,
+“Clustering dynamic spatio-temporal patterns in the pres-
+ence of noise and missing data,” in IJCAI International
+Joint Conference on Artiﬁcial Intelligence, vol. 2015-
+
+[10] L. Forlizzi and E. Nardelli, “Some results on the mod-
+elling of spatial data,” Lecture Notes in Computer Science
+(including subseries Lecture Notes in Artiﬁcial Intelli-
+gence and Lecture Notes in Bioinformatics), vol. 1521,
+pp. 332–343, 1998.
+
+[11] A. Abdul-Rahman and M. Pilouk, Spatial data modelling
+
+for 3D GIS. Springer Berlin Heidelberg, 2008.
+
+[12] C. Jensen and R. Snodgrass, “Temporal data manage-
+ment,” IEEE Transactions on Knowledge and Data En-
+gineering, vol. 11, no. 1, pp. 36–44, 1999.
+
+[13] S. Laxman and P. Sastry, “A survey of temporal data
+mining,” Sadhana - Academy Proceedings in Engineering
+Sciences, vol. 31, no. 2, pp. 173–198, 2006.
+
+[14] E. Clementini, P. Di Felice, and P. Van Oosterom, “A
+small set of formal
+topological relationships suitable
+for end-user interaction,” Lecture Notes in Computer
+Science (including subseries Lecture Notes in Artiﬁcial
+Intelligence and Lecture Notes in Bioinformatics), vol.
+692 LNCS, pp. 277–295, 1993.
+
+[15] J. D. Mazimpaka, “A framework for analysing trajec-
+tories of movement in a dynamic geographic context,”
+Ph.D. dissertation, University of Augsburg, 2017.
+[16] M. Aiello, I. Pratt-Hartmann, and J. van Benthem, Hand-
+
+book of Spatial Logistics. Springer, 2007.
+
+[17] I. Portugal, P. Alencar, and D. Cowan, “Trajectory clus-
+ter lifecycle analysis: An evolutionary perspective,” in
+Proceedings - 2018 IEEE International Conference on
+Big Data, Big Data 2018.
+Institute of Electrical and
+Electronics Engineers Inc., 2019, pp. 3452–3455.
+[18] ——, “A software framework for cluster lifecycle anal-
+ysis in transportation,” in Proceedings - 2018 IEEE
+International Conference on Big Data, Big Data 2018.
+Institute of Electrical and Electronics Engineers Inc.,
+2019, pp. 4534–4539.
+
+[19] P. Jaccard, “Etude comparative de la distribution ﬂorale
+dans une portion des alpes et des jura,” Bulletin de la
+Soci´et´e Vaudoise des Sciences Natturelles, vol. 37, pp.
+547–579, 1901.
+
+

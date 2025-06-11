@@ -1,0 +1,560 @@
+3
+2
+0
+2
+
+t
+c
+O
+5
+2
+
+]
+
+G
+L
+.
+s
+c
+[
+
+1
+v
+2
+5
+5
+6
+1
+.
+0
+1
+3
+2
+:
+v
+i
+X
+r
+a
+
+DECWA : DENSITY-BASED CLUSTERING USING WASSERSTEIN
+DISTANCE
+
+Nabil El Malki
+IRIT
+elmalki.nabil@gmail.com
+
+Robin Cugny
+IRIT
+robin.cugny@irit.fr
+
+Olivier Teste
+IRIT
+olivier.teste@irit.fr
+
+Franck Ravat
+IRIT
+franck.ravat@irit.fr
+
+October 26, 2023
+
+ABSTRACT
+
+Clustering is a data analysis method for extracting knowledge by discovering groups of data called
+clusters. Among these methods, state-of-the-art density-based clustering methods have proven to
+be effective for arbitrary-shaped clusters. Despite their encouraging results, they suffer to ﬁnd low-
+density clusters, near clusters with similar densities, and high-dimensional data. Our proposals are
+a new characterization of clusters and a new clustering algorithm based on spatial density and prob-
+abilistic approach. First of all, sub-clusters are built using spatial density represented as probability
+density function (p.d.f ) of pairwise distances between points. A method is then proposed to ag-
+glomerate similar sub-clusters by using both their density (p.d.f ) and their spatial distance. The key
+idea we propose is to use the Wasserstein metric, a powerful tool to measure the distance between
+p.d.f of sub-clusters. We show that our approach outperforms other state-of-the-art density-based
+clustering methods on a wide variety of datasets.
+
+1 Introduction
+
+i=1Ci [1].
+
+Clustering methods are popular techniques widely used to extract knowledge from a variety of datasets in numerous
+applications [1]. Clustering methods aim at grouping similar data into a subset known as cluster. Formally, the
+clustering consists in partitioning a dataset annotated X = {x1, ..., xn} with n = |X| into c clusters C1, ..., Cc, so
+that X = ∪c
+In this paper, we only consider hard clustering [2] according to which ∀i ∈ [1..c], ∀j 6= i ∈ [1..c], Ci ∩ Cj = ∅. We
+focus on density-based clustering methods [3] that are able to identify clusters of arbitrary shape. Another interesting
+element in these approaches is that they do not require the user to specify the number of clusters c. Density-based
+clustering is based on the exploration of high concentrations (density) of points in the dataset [4]. In density-based
+clustering, a cluster in a data space is a contiguous region of high point density separated from other such clusters
+by contiguous regions of low point density [3]. Density-based clustering has difﬁculties to detect clusters having low
+densities regarding high-density clusters. Low-density points are either considered as outliers or included in another
+cluster. In the same way, near clusters of similar densities are often grouped in one cluster. Moreover, density-based
+clustering does not manage well in high-dimensional data [4] because the density is not evenly distributed and may
+vary severely. This paper tackles these challenging issues by deﬁning a new density-based clustering approach.
+
+Among the most known density-based algorithms are DBSCAN [5], OPTICS [6], HDBSCAN [7], DBCLASD [8],
+and DENCLUE [9]. Historically ﬁrst, DBSCAN introduces density as a minimum number of points within a given
+radius to discover clusters. Nevertheless, DBSCAN poorly manages clusters having different densities. OPTICS
+addresses these varying density clusters by ordering points according to a density measure. HDBSCAN improved
+the approach by introducing a new density measure and an optimization function aiming at ﬁnding the best clustering
+
+ 
+ 
+ 
+ 
+ 
+ 
+A PREPRINT - OCTOBER 26, 2023
+
+solution. Although these approaches solve part of the problem of varying density clusters, they suffer from unevenly
+distributed density and high-dimensional datasets. They still mismanage low-density clusters by tending to consider
+them as outliers or to merge them into a higher-density cluster.
+
+DBCLASD introduces a probabilistic approach of the density. DBCLASD assumes that clusters follow a uniform
+probability law allowing it to be parameter-free [9]. However, it suffers from detecting non-uniform clusters because
+of this strong assumption. As DBCLASD is also a grid-based approach, its density calculations are less precise when
+the dimension increases [4].
+
+Finally, DENCLUE detects clusters using the probability density function (p.d.f ) of points in data space. DENCLUE
+extends approaches of clustering such as DBSCAN [5] and K-means [9]. Therefore it also inherits from these the
+difﬁculty to detect low-density clusters when the density is not evenly distributed.
+
+The common problems of the existing density-based clustering approaches are related to the difﬁculty of handling
+low-density clusters, near clusters of similar densities, and high-dimensional data. The other limit concerns their
+inefﬁciency to properly handle nested clusters of different shapes and uneven distribution of densities. In this paper,
+we propose a new clustering approach that overcomes these limitations. Brieﬂy, the contributions of this article
+are as follows: (1) We propose DECWA (DEnsity-based Clustering using WAsserstein distance), a hybrid solution
+combining density and probabilistic approaches. It ﬁrst produces sub-clusters using the p.d.f deﬁned on pairwise
+distances. Then, it merges sub-clusters with similar p.d.f and close in distance. (2) We propose to consider every
+cluster as a contiguous region of points where the p.d.f has its own law of probability to overcome the previously
+explained limitations. (3) We conducted experiments on a wide variety of datasets, DECWA outperforms state-of-the-
+art density-based algorithms in clustering quality by an average of 20%. Also, it works efﬁciently in high-dimensional
+data comparing to the others.
+
+2 Contribution
+
+To address the limits described earlier, we propose to consider a cluster as a contiguous region of points where density
+follows its own law of probability. Formally, we represent a cluster Ci by a set of pairwise distances between the
+points contained in the cluster Ci. This set is annotated Di and follows any law of probability. Di is computed via any
+distance d : X × X → R+ that has to be at least symmetric and reﬂexive.
+The proposed solution consists of four consecutive steps: 1) The ﬁrst step transforms the dataset X into a k-nearest
+neighbor graph representation where nodes are points and edges are pairwise distances, k is a hyperparameter. The
+graph is then reduced to its Minimum Spanning Tree (MST) in order to keep signiﬁcant distances. 2) The second
+step consists in calculating the p.d.f from the signiﬁcant distances of the MST. This p.d.f is used to determines
+the extrema, from which extraction thresholds are determined. 3) The third step consists of extracting sub-graphs
+from the MST according to extraction thresholds and identifying corresponding sub-clusters. 4) The fourth step is
+to agglomerate sub-clusters according to spatial and probabilistic distances. We opt for the Wasserstein distance to
+measure the similarity between probability distributions.
+
+2.1 Graph-oriented modeling of the dataset
+
+To estimate the distance p.d.f , we must ﬁrst calculate distances between the points of the dataset. The computation
+strategy of pairwise distances is based on the k-nearest neighbor method [4].
+
+Therefore, the ﬁrst step is the construction of the k-nearest neighbor graph of the dataset. From the dataset X, an
+undirected weighted graph annotated G = (V, E) is constructed. V is the set of vertices representing data points, and
+E is the set of edges between data points. For each point, we determine k edges to k nearest neighbor points. The
+weight of each edge is the distance between the two linked points.
+
+To gain efﬁciency and accuracy, it is possible to get rid of many unnecessary distances. We favor short distances,
+avoiding keeping too large distances in the k-nearest neighbors. This idea tends to obtain dense (connected) sub-
+graphs. To do so, we generate a minimum spanning tree (MST) from G. An MST, denoted Gmin, is a connected
+graph where the sum of the edge weights is minimal. Several algorithms exist to generate an MST, we used Kruskal
+[10]. As k increases, the number of connections of each node in graph G gets bigger too. Consequently, it also
+increases the number of possible solutions for Kruskal. As a result, the MST is more optimal. This might lead
+DECWA to better clustering results.
+
+2
+
+A PREPRINT - OCTOBER 26, 2023
+
+2.2 Probability density estimation
+
+The overall objective is to identify homogeneous regions where linked points have similar distances. We then estimate
+the distance p.d.f to detect groups of points having a similar spatial density.
+
+For estimating the p.d.f , we use the kernel density estimation (KDE) [11]. Its interest lies in the fact that it makes
+no a priori hypothesis on the probability law of distances. The density function is deﬁned as the sum of the kernel
+functions K on every distance. The commonly used kernels are Gaussian, uniform and triangular. The KDE equation
+is below :
+
+1
+(n − 1)h
+
+n−1
+
+X
+i=1
+
+K(cid:16)
+
+a − ai
+
+h (cid:17)
+
+fh(a) =
+b
+
+In our case, a and ai correspond to the distances contained in Gmin. We have n = |X| (number of nodes in Gmin),
+and n − 1 is the number of distances (number of edges in Gmin).
+
+The smoothing factor h ∈]0; +∞[ is an hyperparameter, called bandwidth. It acts as a precision parameter, in our case,
+it inﬂuences the number of extrema detected in the p.d.f and therefore, the number of different densities.
+
+2.3 Graph division
+
+The overall objective is to separate different densities, hence, the next step is to ﬁnd where to cut the p.d.f . The
+signiﬁcantly different densities are detected with the maxima of the distance p.d.f curve. In order to separate highly
+represented distances to less represented distances, we consider an extraction threshold as the mid-distance between
+each maximum and its consecutive minimum, and conversely between each minimum and its consecutive maximum.
+Mid-distances allow capturing regions that are difﬁcult to detect (low-density regions, or dense regions containing few
+points). Another interesting consequence concerns overlapping regions that have the same densities. These regions
+are often very difﬁcult to capture properly, whilst our mid-distance approach makes it possible to detect these cases
+because overlapping between regions induces a density variation. Once the mid-distances are identiﬁed on the p.d.f.
+curve, we apply a process to treat successively the list of mid-distances in descending order. We generate sub-clusters,
+from the nodes of Gmin, and sets of distances of sub-clusters, from the edges of Gmin.
+From Gmin, we extract connected sub-graphs where all the nodes that are exclusively linked by edges greater than
+the current mid-distance. A node linked to an edge greater than the mid-distance and another edge less than the mid-
+distance is not included. A sub-cluster (Ci) is composed of points that belong to one connected sub-graph. For each
+sub-cluster, we produce its associated set of distances (Di) from edges between nodes of the sub-graph. A residual
+graph is made up of edges whose distances are less than the mid-distance, and all the nodes linked by these edges.
+This residual graph is used in the successive iterations. At the last iteration (i.e. the last mid-distance), the residual
+graph is also used to generate sub-clusters and associated sets of distances. After this step, some sub-graphs are close
+to each other while having a similar p.d.f . According to our cluster characteristics, they should be merged.
+
+2.4 Agglomeration of sub-clusters
+
+This step aims at generating clusters from sub-cluster agglomeration. The main difﬁculty of this step is to determine
+which sub-clusters should be merged. When the distances between two sub-clusters are close, it is difﬁcult to decide
+whether or not to merge them. To arbitrate this decision, we use their density, represented as the distance p.d.f .
+Only sub-clusters with similar distance p.d.f will be merged. The agglomeration process consists in merging every
+sub-clusters Ci and Cj that satisfy two conditions.
+
+The ﬁrst condition is that Ci and Cj must be spatially close enough. To ensure this, d(Ci, Cj) ≤ λ must be respected,
+with λ ∈ R+ a hyperparameter. It is necessary to determine the distance between sub-clusters (d(Ci, Cj)) to verify
+this condition. However, calculating every pairwise distance between two sub-clusters is a time-consuming operation.
+Therefore, we propose another solution based on Gmin. We consider that the value of the edge linking sub-graphs
+corresponding to Ci and Cj as the distance between Ci and Cj . Because of the MST structure, we assume that this
+distance is nearly the minimum distance between the points of Ci and Cj.
+
+The second condition relates to the similarity of the distance distributions Di and Dj. The purpose of this condition
+is to ensure ws(Di, Dj) ≤ α, with α ∈ R+ a hyperparameter, and ws the Wasserstein distance. We have opted for
+the Wasserstein [12] distance as a measure of similarity between probability distributions because it can capture small
+differences on similar density clusters. The values of α and λ allow new fusions as they increase, that tends to generate
+fewer clusters and conversely.
+
+3
+
+A PREPRINT - OCTOBER 26, 2023
+
+Table 1: Experimental results
+DBCLASD
+
+DECWA
+
+DENCLUE
+
+HDBSCAN
+
+Dataset
+
+dimensions size
+
+LD SD ARI outliers(%) ARI outliers(%) ARI outliers(%) ARI outliers(%)
+
+2
+2
+2
+2
+2
+4
+
+twodiamonds
+jain
+cluto-t7.10k
+compound
+pathbased
+iris
+cardiotocography 35
+65
+plant
+16064
+GCM
+26833
+new3
+10936
+kidney_uterus
+
+Average
+
+x
+
+800
+373
+10000
+399
+300
+150
+2126
+1600 x
+190
+x
+1519
+384
+
+x
+x
+x
+
+x
+x
+x
+x
+
+0.99 0.01
+1.00 0.00
+0.93 0.03
+0.93 0.00
+0.76 0.00
+0.84 0.03
+0.52 0.03
+0.22 0.00
+0.48 0.03
+0.41 0.03
+0.81 0.00
+
+0.72 0.02
+
+0.95 0.02
+0.90 0.03
+0.79 0.06
+0.77 0.06
+0.47 0.03
+0.62 0.07
+0.24 0.17
+0.04 0.07
+0.18 0.18
+0.09 0.45
+0.53 0.08
+
+0.51 0.11
+
+1.00 0.00
+0.45 0.06
+0.34 0.00
+0.82 0.05
+0.56 0.00
+0.74 0.00
+0.47 0.02
+0.14 0.17
+0.24 0.06
+0.08 0.13
+0.56 0.09
+
+0.49 0.05
+
+0.98 0.01
+0.94 0.01
+0.95 0.10
+0.83 0.04
+0.42 0.02
+0.57 0.00
+0.08 0.28
+0.04 0.38
+0.27 0.27
+0.13 0.27
+0.53 0.26
+
+0.52 0.15
+
+We introduce now an iterative process for merging sub-clusters. It consists in traversing Gmin by iterating on its edges.
+For each edge whose nodes are not in the same sub-clusters (e.g. Ci and Cj), we verify that d(Ci, Cj) ≤ λ and
+ws(Di, Dj) ≤ α. In this case, Ci and Cj are merged. This is operated by the union of Di, and Dj and considering
+the points of Ci and Cj as belonging to the same sub-cluster. The graph traversal of Gmin is repeated until there are
+no longer merges. The last iteration does not result in any merging.
+
+3 Experiments
+
+We conducted an experimental study to show the effectiveness and the robustness of DECWA compared to state-of-
+the-art density-based methods. It was applied to a variety of synthetic and real datasets, using different distances
+depending on the data. The synthetic datasets, as well as the Decwa advantages presentation, are available on this
+link1.
+
+3.1 Experiment protocol
+
+3.1.1 Algorithms.
+
+DECWA was compared to DBCLASD [8], DENCLUE [9] and HDBSCAN 2 [7]. For the experiments conducted in this
+paper, DECWA used Gaussian kernel in division phase and performed only one graph traversal in the agglomeration
+phase. Algorithm parameter values are deﬁned through the repetitive application of the random search approach (1000
+iterations). This, in order to obtain the best score that the four algorithms can have. DBCLASD (parameter-free and
+incremental) was subject to the same approach but by randomizing the order of the data points because it is sensitive to
+it. Clustering quality is measured by the commonly used metric named Adjusted Rand Index (ARI) [13]. In addition,
+we also report the ratio of outliers produced by each algorithm for each dataset.
+
+3.1.2 Synthetic datasets.
+
+The two-dimensional diamond, jain, cluto-t7.10k, compound, and pathbased datasets are synthetic. They contain
+clusters of different shapes and densities. For these data, the Euclidean distance was used.
+
+3.1.3 Real datasets.
+
+The cardiotocography dataset [14] is a set of 2126 fetal cardiotocogram records, with 35 attributes providing vital
+information on the state of the fetus, grouped into 10 classes. Canberra distance was applied to it. Plant dataset [15]
+consists of 1600 leaves of 100 different classes. Each leaf is characterized by 64 shape measurements retrieved from
+its binary image. The Euclidean distance was used on Plant. Another known dataset, Iris [16] (150 iris ﬂowers, 4
+dimensions, 3 classes) was used with the Manhattan distance. A collection of two very large biological datasets were
+
+1https://github.com/nabilEM/DECWA
+2The hierarchical structure proposed by HDBSCAN is exploited by the Excess Of Mass (EOM) method to extract clusters, as
+
+used by the authors in [7].
+
+4
+
+A PREPRINT - OCTOBER 26, 2023
+
+tested. The ﬁrst dataset, GCM [17], is used to diagnose the type of cancer (14 classes). It consists of 190 tumor
+samples. Each one represented by the expression levels of 16063 genes. The second dataset (kidney_uterus) [18]
+consists of 384 tumor samples to be classiﬁed into two classes (kidney or uterus). Each sample is the expression level
+of 10937 genes. Given that the attributes all correspond to the same nature (gene expression) then the Bray-Curtis
+distance was applied to it. New3 [19], a very high-dimensional dataset, is a set of 1519 documents (6 classes). Each
+document is represented by the term-frequency vector of size 26833.The cosine distance was used to measure the
+similarity between documents.
+
+3.2 Results and discussion
+
+The results are reported in the table 1 (best scores are in bold). LD column stands for low-density, it means that the
+datasets have at least one low-density cluster comparing to others. SD stands for near clusters of similar densities,
+it means that the marked datasets have at least two overlapping clusters with similar densities. These were detected
+according to the intra-cluster and inter-cluster distance using ground truth.
+
+In many cases, DECWA outperforms competing algorithms by a large margin on average 20% (e.g. jain dataset, ARI
+margin is 1 − 0.45 = 0.55). DECWA has the best results in datasets with a low-density cluster (e.g. compound and
+GCM). In this case, there is an ARI margin of 21% on average in favor of DECWA. Though datasets with very high
+dimensions are problematic for the other algorithms, DECWA is able to give good results. Indeed, there is an ARI
+margin of 30% on average in favor of DECWA for the last three datasets. Near clusters of similar densities are also
+correctly detected by DECWA. Some datasets like iris, kidney_uterus and pathbased have overlapping clusters and
+yet DECWA separates them correctly. There is an ARI margin of 25% in favor of DECWA for datasets having this
+problematic.
+
+The outlier ratio is not relevant in case of a bad ARI score because in this case, although the points are placed in
+clusters, clustering is meaningless. DECWA is the one that returns the least outliers on average while having a better
+ARI score.
+
+We conducted a statistical study, as recommended in [20], to conﬁrm the signiﬁcant difference in performance between
+the algorithms and the robustness of DECWA comparing to the others. The overall concept of the study has two steps.
+1) First, a statistical test (Iman-Davenport[21]) is performed to determine if there is a signiﬁcant difference between
+the algorithms at the ARI level. 2) If so, a pairwise comparison of algorithms is performed, via a post-hoc test (Shaffer
+[22]), to identify the gain of one method over the others. Both tests return a p-value (in the case of the second test, it
+is returned for each comparison). The p-value allows us to decide on the rejection of the hypothesis of equivalence
+between algorithms. To reject the hypothesis, the p-value must be lower than a signiﬁcance threshold s that we set at
+0.01. The p-value by returned the ﬁrst test is 5.38e−5. It is signiﬁcantly small compared to s. This means that the
+algorithms are different in terms of ARI performance. Second, these differences are analyzed by the Shaffer Post-hoc
+test. It returns a p-value for each test on a pair of algorithms. Indeed, for the case of DECWA, the p-value is much
+lower than s when comparing DECWA to others (3.6e−4 with DBCLASD, 3.0e−3 with DENCLUE and 1.0e−3 with
+HDBSCAN), which proves that DECWA is signiﬁcantly different from the others. For the others, the p-value is equal
+to 1.0 in all the tests concerning them, which statistically shows that they are equivalent. The ranking of the algorithms
+according to the ARI was done by Friedman’s aligned rank [23]. DECWA is ranked as the best. All in all, DECWA is
+signiﬁcantly different from the others and is the best performing.
+
+3.3 CONCLUSION AND PERSPECTIVES
+
+We proposed DECWA, a clustering algorithm based on spatial and probabilistic density adapted to high-dimensional
+data. We introduced a new cluster characterization to allow efﬁcient detection of clusters with different densities.
+Experiments were performed on various datasets and we showed statistically that DECWA outperforms state-of-the-
+art density-based methods. Our future research integrates the application of DECWA in speciﬁc domains and on
+complex data as multidimensional time series.
+
+References
+
+[1] Anil Jain. Data clustering: 50 years beyond k-means. Pattern Recognition Letters, 31:651–666, 06 2010.
+
+[2] Sergios Theodoridis and Konstantinos Koutroumbas. Chapter 14 - clustering algorithms iii: Schemes based on
+function optimization. In Pattern Recognition (Fourth Edition), pages 701 – 763. Academic Press, fourth edition
+edition, 2009.
+
+5
+
+A PREPRINT - OCTOBER 26, 2023
+
+[3] Hans-Peter Kriegel, Peer Kröger, Joerg Sander, and Arthur Zimek. Density-based clustering. Wiley Interdisc.
+
+Rew.: Data Mining and Knowledge Discovery, 1:231–240, 05 2011.
+
+[4] Charu C. Aggarwal and Chandan K. Reddy. Data Clustering: Algorithms and Applications. Chapman &
+
+Hall/CRC, 1st edition, 2013.
+
+[5] Martin Ester, Hans-Peter Kriegel, Joerg Sander, and Xiaowei Xu. A density-based algorithm for discovering
+
+clusters in large spatial databases with noise. volume 96, pages 226–231, 01 1996.
+
+[6] Mihael Ankerst, Markus Breunig, Hans-Peter Kriegel, and Joerg Sander. Optics: Ordering points to identify the
+
+clustering structure. volume 28, pages 49–60, 06 1999.
+
+[7] Ricardo Campello, Davoud Moulavi, and Joerg Sander. Density-based clustering based on hierarchical density
+
+estimates. volume 7819, pages 160–172, 04 2013.
+
+[8] Xiaowei Xu, Martin Ester, Hans-Peter Kriegel, and Joerg Sander. A distribution-based clustering algorithm for
+
+mining in large spatial databases. pages 324–331, 01 1998.
+
+[9] Alexander Hinneburg and Hans-Henning Gabriel. Denclue 2.0: Fast clustering based on kernel density estima-
+
+tion. volume 4723, pages 70–80, 09 2007.
+
+[10] Joseph B. Kruskal. On the Shortest Spanning Subtree of a Graph and the Traveling Salesman Problem. Proceed-
+
+ings of the American Mathematical Society, 1956.
+
+[11] Richard A. Davis, Keh-Shin Lii, and Dimitris N. Politis. Remarks on Some Nonparametric Estimates of a Density
+
+Function. In Selected Works of Murray Rosenblatt, pages 95–100. Springer New York, 2011.
+
+[12] Cédric Villani. Optimal transport : old and new. Springer, 2009.
+[13] L. Hubert and P. Arabie. Comparing partitions. Journal of classiﬁcation, 2(1):193–218, 1985.
+
+[14] Diogo Ayres-de Campos, João Bernardes, Antonio Garrido, Joaquim Marques-de Sá, and Luis Pereira-Leite.
+Sisporto 2.0: A program for automated analysis of cardiotocograms. The Journal of Maternal-Fetal Medicine,
+9(5):311–318, 2000.
+
+[15] Charles Mallah, James Cope, and James Orwell. Plant leaf classiﬁcation using probabilistic integration of shape,
+
+texture and margin features. Pattern Recognit. Appl., 3842, 02 2013.
+
+[16] Dheeru Dua and Casey Graff. UCI machine learning repository, 2017.
+
+[17] Sridhar Ramaswamy, Pablo Tamayo, Ryan Rifkin, Sayan Mukherjee, Chen-Hsiang Yeang, Michael Angelo,
+Christine Ladd, Michael Reich, Eva Latulippe, Jill P. Mesirov, Tomaso Poggio, William Gerald, Massimo Loda,
+Eric S. Lander, and Todd R. Golub. Multiclass cancer diagnosis using tumor gene expression signatures. PNAS,
+98:15149–15154, 2001.
+
+[18] Gregor Stiglic and Peter Kokol. Stability of ranked gene lists in large microarray analysis studies. Journal of
+
+biomedicine & biotechnology, 2010:616358, 06 2010.
+
+[19] Eui-Hong Han and George Karypis. Centroid-based document classiﬁcation: Analysis and experimental results.
+In Proceedings of the 4th European Conference on Principles of Data Mining and Knowledge Discovery, page
+424–431. Springer-Verlag, 2000.
+
+[20] Janez Demsar. Statistical comparisons of classiﬁers over multiple data sets. Journal of Machine Learning
+
+Research, 7:1–30, 01 2006.
+
+[21] David J. Sheskin. Handbook of Parametric and Nonparametric Statistical Procedures. Chapman & Hall/CRC,
+
+4 edition, 2007.
+
+[22] Juliet Shaffer. Modiﬁed sequentially rejective multiple test procedures. Journal of The American Statistical
+
+Association, 81:826–831, 09 1986.
+
+[23] Salvador Garía and Francisco Herrera. An extension on "statistical comparisons of classiﬁers over multiple data
+
+sets" for all pairwise comparisons. Journal of Machine Learning Research - JMLR, 9, 12 2008.
+
+6
+
+

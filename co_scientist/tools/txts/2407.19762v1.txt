@@ -1,0 +1,1201 @@
+4
+2
+0
+2
+
+l
+u
+J
+
+9
+2
+
+]
+
+N
+G
+.
+n
+o
+c
+e
+[
+
+1
+v
+2
+6
+7
+9
+1
+.
+7
+0
+4
+2
+:
+v
+i
+X
+r
+a
+
+Redefining Urban Centrality: Integrating Economic Complexity
+Indices into Central Place Theory
+
+Jonghyun Kima, Donghyeon Yua,b,c, Hyoji Choia, Dongwoo Seoa,b, Bogang Juna,c,d,∗
+
+aResearch Center for Small Businesses Ecosystem, Inha University, Incheon 22212, South Korea
+bDepartment of Statistics, Inha University, Incheon 22212, South Korea
+cDepartment of Data Science, Inha University, Incheon 22212, South Korea
+dDepartment of Economics, Inha University, Incheon 22212, South Korea
+
+Abstract
+
+This study introduces a metric designed to measure urban structures through the economic com-
+
+plexity lens, building on the foundational theories of urban spatial structure, the Central Place
+
+Theory (CPT) (Christaller, 1933). Despite the significant contribution in the field of urban studies
+
+and geography, CPT has limited in suggesting an index that captures its key ideas. By analyzing
+various urban big data of Seoul, we demonstrate that PCI and ECI effectively identify the key
+
+ideas of CPT, capturing the spatial structure of a city that associated with the distribution of eco-
+
+nomic activities, infrastructure, and market orientation in line with the CPT. These metrics for
+urban centrality offer a modern approach to understanding the Central Place Theory and tool for
+
+urban planning and regional economic strategies without privacy issues.
+
+Keywords: Complexity, Central Place Theory, Market Boundary
+
+1. Introduction
+
+Understanding the dynamic nature of urban structures is crucial for elucidating the economies
+of a city and for implementing effective urban planning policies. The urban areas have trans-
+
+formed their structure ceaselessly. The structure, for example, co-evolved with the introduction
+
+of new transportation and logistics systems, such as railways in the 19th century and automobiles
+
+in the early 20th century, along with the emergence of new industries (Anas et al., 1998). These
+
+transformations underscore the critical need to comprehend the underlying spatial structures, as
+
+these structures are associated with the distribution of economic activities, infrastructure, and
+
+∗Corresponding: bogang.jun@inha.ac.kr
+
+Preprint submitted to arXiv
+
+July 30, 2024
+
+ 
+ 
+ 
+ 
+ 
+ 
+market orientations—key components in urban planning and regional economic strategies. To
+
+keep pace with these evolutionary changes, it is imperative to develop metrics that can accu-
+
+rately measure and reflect the current status of a region’s urban structure.
+
+This study introduces a metric designed to measure urban structures through the economic
+
+complexity lens, building on the foundational theories of urban spatial structure, particularly
+
+Central Place Theory (CPT) (Christaller, 1933). Proposed by Walter Christaller in the 1930s,
+CPT has significantly influenced the field of urban studies and geography by offering a novel per-
+
+spective on how central functions are distributed across an urban landscape, driven by consumer
+
+behavior and market forces. According to Christaller, settlements are organized in a hierarchical
+
+manner where central places fulfill specific roles by providing goods and services, which in turn
+
+shape the geographical and economic context, and, recursively, are shaped by the context. While
+
+Christaller’s CPT is well-known for its hexagonal market boundaries, his primary focus was, in
+
+fact, on the interaction between product centrality and location assuming a homogeneous space
+
+and uniformly distributed consumers (Pacione, 2009). Over the decades, CPT has provided an
+
+analytical framework for understanding the clustering of economic activities, particularly in retail
+
+trade and service industries, and has profoundly influenced urban and regional planning (Mul-
+
+ligan et al., 2012; Bunge, 1962; Boussauw et al., 2014; Dale and Sjøholt, 2007; Neal, 2011;
+
+Shearmur and Doloreux, 2015).
+
+The incorporation of big data and advanced analytical techniques in recent years has rein-
+
+vigorated CPT, allowing researchers to explore the theory’s micro-foundations through detailed
+data analysis, thus reaffirming its relevance in contemporary urban studies. Van Meeteren and
+
+Poorthuis (2018), for example, show the relationship between threshold and range of goods and
+
+the various central functions for the case of Louisville, Kentucky, by using Twitter data, confirm-
+
+ing the micro-foundation of CPT. Kii et al. (2023) estimate the urban spatial structure based on
+
+remote sensing data of Tokyo, Japan, by estimating trip attraction. These researches have opened
+
+pathways to reconsider the main idea of CPT in the new light of the emergence of big data. Al-
+
+though the literature shows the applicability of CPT with big data, it is limited in developing a
+
+universal metric for CPT that highlights on a region and a product in terms of centrality. More-
+
+over, literature tends to focus on the hexagonal configuration itself, rather than the interaction
+
+between the products and the locations that was a key emphasis of Christaller.
+
+To suggest a metric for the universal measure of the centrality of products and locations,
+
+2
+
+Figure 1. Similarity of definitions between the Central Place theory (Christaller, 1933) and the
+Economic Complexity (Hidalgo and Hausmann, 2009)
+
+this study revisits the core principles of CPT, with more paying attention to the interaction be-
+
+tween the the characteristics of goods and services, and the location that provides the goods and
+
+services. When we focus on this fundamental aspect of CPT, which is the recursive interaction
+
+between the centrality of products and places, we can find the resemblance of CPT to the concept
+
+of economic complexity as depicted in Figure 1.
+
+The concept of economic complexity was introduced by Hidalgo and Hausmann (2009). In
+
+their seminal work, they derived two metrics, which are the Product Complexity Index(PCI)
+
+and the Economic Complexity Index(ECI), by looking at world trade data. The two complex-
+
+ity metrics show the recursive structure in their definition: a country with a high complexity
+
+measured by ECI is the country that produces complex products, while a product with a high
+
+complexity measured by PCI is the product that is produced in a country with high complexity.
+
+Hidalgo and Hausmann (2009) derived the PCI and ECI by solving the eigenvalue problem of
+
+the recursive equations. Thanks to the flexibility and applicability of two metrics, ECI and PCI,
+
+it has become popular tools in economic geography, international development, and innovation
+
+studies (Hidalgo, 2021).
+
+In this work, we suggest a more universal way of measuring the centrality of products and lo-
+
+cations in a city by combining the theoretical framework by Christaller and recent advancements
+
+in the field of Economic Complexity (Hidalgo and Hausmann, 2009; Hidalgo, 2021). We aim to
+
+show how the ECI and PCI reveal the urban structure in Seoul, which is a megacity, combining
+
+various big data, such as data on all the geo-locations of small businesses in Seoul; residential,
+
+labor, and floating population data; and credit card data with high spatial resolutions. Specifi-
+
+cally, our new measures for the centrality of products and places, PCI of a product and ECI of a
+
+3
+
+region, are calculated by using data on the geo-location of small businesses, which can be free
+
+from privacy issues so that it can be applied for the other cities easily.
+
+2. Results
+
+Detecting the spatial unit of analysis
+
+To explore the ECI and PCI of an urban area, we look at Seoul, which is a megacity, exhibiting
+
+a gross regional domestic product (GRDP) of $3, 739 million (20% of all GDP) and involving
+
+2,860,562 households, 823,624 firms, 5,226,997 workers and 9,662,041 residents in 2019. Then,
+
+based on the location data of the small businesses shops, we define the spatial unit of analysis.
+
+While administrative districts are often used as a spatial unit of analysis, this administrative
+
+boundary within the city level does not determine consumption behavior. Therefore, we define
+
+the spatial unit of analysis based on data showing how the small businesses are located (Hidalgo
+
+et al., 2020; Jun et al., 2022), resulting in 523 amenity clusters, whose average radius is 241
+
+meters. The following analysis is based on this detected spatial unit of analysis that is depicted
+
+with polygons in Figure 3.
+
+The optimal distance among markets over products
+
+We investigate the relationship between PCI and the spatial range of the market, using PCI
+
+in two ways. One focuses on products and services and examines their market boundaries–
+
+which reflect Christaller’s concept of the demand threshold, the minimum number of customers
+
+necessary for a central function to exist–by using the location data of all the small businesses in
+
+Seoul. The demand threshold is captured by the minimum distance among markets of a product.
+
+The other approach focuses on consumer behavior by using credit card data, by looking at how
+the distance between consumers’ residential area and their places of their consumption differs
+
+over products. This reflects the maximum distance that a consumer is willing to travel to obtain a
+
+central function (the range in Christaller’s concept). We construct two empirical models, which
+
+are Equation (1) and (2), to investigate economic-geographical characteristics of central place
+
+goods and central places in terms of the PCI and ECI.
+
+First, the demand threshold in Christaller’s idea is captured by the minimum distance among
+
+markets of a product. To calculate the minimum distance among markets, we start with calcu-
+lating Revealed Comparative Advantage of product p in cluster i (RCA = shopscp/ (cid:80)
+c shopscp/ (cid:80)
+
+p shopscp
+cp shopscp
+
+) by
+
+(cid:80)
+
+4
+
+looking at the number of shops in the cluster, shopscp, and figure out whether a product in a clus-
+
+ter has the comparative advantage (Balassa, 1965). RCAcp is greater or equal to 1 when the share
+
+of production of cluster on a given product p is larger than the share of that product on the entire
+
+city. When RCAcp is greater or equal to 1, we regard the market of product p exists in cluster c.
+
+Then, we look at the distance between every pairs of the market and pick the minimum distance
+
+among them. That is the minimum distance between clusters for a product p, Distp,c,c′ , which is
+
+our dependent variable. We construct the empirical specification in Equation (1) to investigate
+
+the spatial range of market by each product:
+
+Distp,c,c′ = β0 + β1PCIp + β2∆ECIc,c′ + β3∆Diversityc,c′ + B · X
+
++ µlocation + µindustry + εp,c,c′
+
+(1)
+
+where the dependent variable, Distp,c.c′ , is the minimum distance between two spatial units that
+
+shows comparative advantages in product p. Our variable of interests is the product complexity,
+PCIp. We also control for the difference in economic complexity of two spatial units, ∆ECIc,c′ ,
+and product diversity, ∆Diversityc,c′ . B · X includes other control variables, such as the demo-
+graphic characteristics, difference in labor, floating, and residential population in thousands of
+people, and the difference in land price between the spatial units. Additionally, we add vectors
+of dummy variables to control location-specific and industry-specific fixed effects and εp,c,c′ is
+the error term 1. The result is depicted in Columns (1) and (2) of Table 1.
+
+Before moving to the second empirical specification, we visualize our result on the relation-
+
+ship between the market boundaries of products and their PCI as shown in Figure 2. Figure 2 (A)
+
+is the conceptual framework suggested by Christaller (1933). He argues that the spatial config-
+
+uration of a city depends on the centrality of places. In turn, central places are those providing
+
+products and services with high centrality according to the iterative structure of his argument.
+Based on Christaller’s idea, we can draw the schematic market boundary of different products as
+
+depicted in Figure 2 (B). This shows that the more central products are likely to have a longer
+
+distance between the markets. As expected by the conceptual framework of Christaller (1933),
+
+Figure 2 (C) shows that the more complex product, which corresponds with the higher central-
+
+1The administrative district dummy variable was measured at the ward level gu, which is an intermediate step in the
+city’s administrative division. The dummy variable for industry classification is measured at the highest level, with a
+total of nine classifications.
+
+5
+
+Figure 2. Market boundaries over the level of PCI. (A) Hexagonal configuration the product
+centrality and (B) schematic market boundaries over different products suggested by Christaller
+(1933). (C) Calculated market boundaries of convenience store (PCI = 0.26, average market
+distance = 0.8 km), Second handed luxury goods (PCI = 0.46, average market distance = 1.6
+km), and Diamond trader shop (PCI = 0.84, average market distance = 2.9 km). Black dots
+represent the centers of small business clusters that exhibit the comparative advantage of the
+product.
+
+ity, tends to exhibit the larger market boundary. For example, in the case of convenience stores,
+
+which have lower centrality, the average distance among the market is 0.8 km, and its product
+
+complexity is 0.26. In contrast, diamond trader shops, which have higher centrality, have a long
+
+market distance, which is 2.9 km, with a PCI of 0.84. Although the spatial configuration is not
+
+the exact hexagonal shape as the conceptual framework expected in Figure 2 (A) and (B), which
+
+is based on the assumption with homogeneous space and uniformly distributed consumer, our
+
+results show the materialized world of the idea.
+
+Next, we construct the second empirical specification, Equation (2), to explore relationships
+
+between consumer’s purchasing mobility and the product centrality measured by PCI. Because
+
+of privacy issue, tracking individual consumer’s purchasing behavior is impossible using our
+
+data. Instead, given information aggregated by purchasing and residential location, and the de-
+
+mographic information on consumers, we constructed consumer group i by looking at their age
+
+(aggregated by 10s), gender, purchasing and residential location based on 50m × 50m cell units.
+
+Our empirical specification to see the purchasing behavior of consumer group i for product p is
+
+6
+
+following:
+
+Disti,d = β0 + β1PCIp + β2Counti,d + β3Femalei + B · X
+
++ µlocation + µindustry + εi,p
+
+(2)
+
+where the dependent variable, Disti,p, is the travel distance of consumers group i, who purchase
+
+goods of product type p in a region from their residential area. Our main variable of interest
+
+is again product complexity PCIp, while Counti,p is the aggregated purchase count for product
+
+p by consumer group i. Femalei is a binary indicator of consumers’ gender that takes 1 if
+
+consumers are female and 0 otherwise. B · X includes demographic controls, such as age groups
+of consumers. We also add the location and industry fixed effects, which are µlocation and µindustry,
+
+to control for the time-invariant characteristics of consumers’ residential location and the industry
+
+field of the goods2. εp,o is the error term. The result is depicted in Column (3) and (4) of Table 1.
+
+As reported in Table 1, a high PCI product is likely to have a broader market boundary,
+
+pulling consumers from a further distance. In Columns (1) and (2), the PCI is significantly and
+
+positively correlated with the minimum distance between two markets of product p. Since the
+ECI and PCI are normalized, the coefficients of PCIp in Columns (1) and (2) indicate that the
+
+minimum distance between markets is, on average, 0.297- 0.324 km further apart when the PCI
+value increases 1 unit of standard deviation. The difference between the case of minimum and
+
+maximum PCI is 2.1-2.3 kilometers further apart.
+
+Column (3) and (4) of Table 1 shows the second results that are associated with the empirical
+
+specification of Equation 2. Again, the dependent variable is the distance between the consumers’
+
+residential area and their consumption places. As shown in Columns (3) and (4), a product with
+
+a higher PCI is likely to be purchased by consumers who are visiting the market from longer
+apart. Interestingly, as shown by the positive and significant coefficient of Femalei, the mobility
+
+of female consumers is higher than that of male consumers. The results in Columns (3) and (4) of
+
+Table 1 show that on average, consumers travel 8.9 – 9.2 km further to purchase the more complex
+
+product (or service), when the PCI of the product increases 1 unit of standard deviation, and as
+
+suggested Christaller (1933), the higher centrality goods measured by the PCI are associated with
+
+2The administrative district dummy variable was measured at the ward level gu, which is an intermediate step in the
+city’s administrative division. The dummy variable for industry classification is measured at the highest level, with a
+total of nine classifications.
+
+7
+
+Table 1. Relationship between the market boundary and the PCI of products
+
+Market boundary focusing on product
+
+Market boundary focusing on consumer’s behavior
+
+(3)
+8.942∗∗∗
+(0.011)
+
+(4)
+9.228∗∗∗
+(0.011)
+
+(1)
+2.272∗∗∗
+(0.092)
+
+PCIp
+
+∆ECIc,c′
+
+∆Dc,c′
+
+Counti,d
+
+Femalei
+
+Demographics controls
+
+Land price controls
+
+FEindustry
+
+FElocation
+
+FEconsumerage
+
+✓
+
+✓
+
+✓
+
+✓
+
+(2)
+2.082∗∗
+(0.089)
+
+0.583∗∗∗
+(0.069)
+
+0.001∗∗∗
+(0.0005)
+
+✓
+
+✓
+
+✓
+
+✓
+
+0.195∗∗∗
+(0.004)
+
+✓
+
+✓
+
+✓
+
+✓
+
+−0.388∗∗∗
+(0.001)
+
+0.098∗∗∗
+(0.004)
+
+✓
+
+✓
+
+✓
+
+✓
+
+4,201,653
+0.294
+0.294
+4.155
+41,569.570∗∗∗
+
+Observations
+R2
+Adjusted R2
+Residual Std. Error
+F Statistic
+
+Note:
+
+22,215
+0.220
+0.201
+0.9156
+11.169∗∗∗
+
+22,215
+0.274
+0.256
+0.883
+14.768∗∗∗
+
+4,201,653
+0.277
+0.277
+4.200
+39,316.160∗∗∗
+
+∗p<0.1; ∗∗p<0.05; ∗∗∗p<0.01
+
+the longer boundary of the market of the product.
+
+Economic complexity of a region reveals the central place of a city
+
+We visualize ECI for each spatial unit in Seoul in Figure 3. Although we calculate the ECI
+
+by just looking at the locations of small businesses’ shops in a city, interestingly, the result shows
+
+that high ECI regions, which are in red, are mostly well-known place for city’s economically and
+
+politically central functions. For example, spatial units labelled H1 in Figure 3, primarily include
+
+the headquarters of major conglomerates or big companies. In these area, which has high ECI,
+complex products and services are more likely to provided/traded, as suggested by Christaller
+
+(1933). Likewise, other clusters with high ECI, which are in red, are also responsible for central
+
+function of city Seoul: regions labelled H2 include Seoul city hall and leading media companies,
+
+those with H3 are university town areas, those with H4 are financial hub in nation, those with
+8
+
+Figure 3. Economic complexity of amenity clusters in Seoul. Amenity clusters with high,
+medium, and low level of ECI are in red, gray, and blue, respectively.
+
+H5 are the small businesses’ cluster of small electronic shops in Yongsan, and those with H6 are
+
+the area where are the hub of foreign cultures or expensive amenity goods in Iteawon. Other
+
+regions with high ECI with yellow boxes are located in relatively peripheral area in Seoul but
+
+they are also serve for central city function with including central facilities, such as domestic
+
+airport, science park, cluster of private academies, enterprise zone for ICT companies, central
+market of agricultural and marine product in a country, administrative office of sub-district of
+Seoul, a central express bus terminal, amusement park, market for office supplies, and logistics
+
+& distribution hub. As demonstrated previously, the spatial concentration of economically and
+
+functionally important facilities on high ECI regions.
+
+Further, focusing of production side, we explore another spatial concentration on the high
+
+ECI regions, since according to Christaller (1933), not only do central places play a crucial role
+
+in consumption, but they are also pivotal in production. To examine this assertion, we analyzed
+
+the spatial concentration patterns of the labor force and potential consumers in Seoul by visual-
+
+izing the number of labor, floating, and residential populations within the city’s clusters. These
+
+9
+
+Figure 4. The level of ECI (A) and the density of floating (B), labor (C), and residential (D)
+population in Seoul. The high, medium, and low level of the values in a cluster are depicted in
+red, gray, and blue color, respectively.
+
+patterns are depicted in Figure 4. The results show that regions with high ECI correspond to
+
+areas with bigger number of both floating and labor populations. However, these high ECI re-
+
+gions do not necessarily coincide with a bigger number of residential population. This finding
+
+supports Christaller’s theory by illustrating that central places primarily support production activ-
+
+ities, whereas surrounding areas with lower centrality predominantly serve residential functions.
+
+Table 2. Correlations between the various characteristics of an area and the ECI of a region. ECIc
+is the economic complexity of the cluster, Diversityc is the diversity of small business shops,
+S hopsc is the number of shops in the cluster, and Pricec is the average land price of the area.
+Laborc, Floatc, and Resic are labor, floating, and residential population numbers, respectively.
+
+ECIc
+
+Diversityc
+
+S hopsc
+
+Laborc
+
+Floatc
+
+Resic
+
+Pricec
+
+ECIc
+Diversityc
+S hopsc
+Laborc
+Floatc
+Resic
+Pricec
+
+1
+0.056
+0.449
+0.564
+0.267
+−0.574
+0.661
+
+1
+0.706
+0.250
+0.638
+0.413
+−0.034
+
+1
+0.320
+−0.281
+0.442
+
+1
+0.271
+0.064
+
+1
+−0.481
+
+1
+
+1
+0.384
+0.667
+0.184
+0.222
+
+10
+
+To delve into the production side, we check the Pearson correlation coefficients between
+
+the population type in regions and the ECI of them (Table 2), and the point-biserial correlation
+
+between the labor share of industrial sector in a region and the ECI in the region3 (Table 3).
+
+Table 2 shows that the high correlation between the ECI and the labor population of the area,
+
+while negative correlation between the ECI and the residential population. Furthermore, the
+
+place with high ECI is corresponds with relatively higher land price as well. Interestingly, the
+
+diversity of amenity shops is not necessarily correspond with the high ECI of the area.
+
+Table 3. Correlation coefficients between labor share of industrial sector and the ECI of a region
+
+Industrial sector
+
+The level of ECI in a region
+Intermediate
+High
+
+Low
+
+Financial and insurance
+Professional, scientific and technical services
+Information and communication
+Wholesale and retail trade
+Business facilities management and business support services; rental and leasing activities
+Electricity, gas, steam and air conditioning supply
+Accommodation and food service activities
+Agriculture, forestry and fishing
+Public administration and defence; compulsory social security
+Mining and quarrying
+Transportation and storage
+Construction
+Real estate activities
+Manufacturing
+Water supply; sewage, waste management, materials recovery
+Arts, sports and recreation related services
+Education
+Human health and social work activities
+Membership organizations, repair and other personal services
+
+0.386
+0.383
+0.280
+0.222
+0.075
+0.042
+0.035
+0.014
+-0.014
+-0.028
+-0.099
+-0.109
+-0.131
+-0.162
+-0.193
+-0.224
+-0.311
+-0.378
+-0.386
+
+0.036
+0.138
+0.208
+0.012
+0.180
+-0.056
+-0.083
+-0.024
+-0.026
+0.084
+-0.135
+0.077
+-0.050
+-0.060
+-0.065
+-0.000
+-0.059
+-0.193
+-0.167
+
+-0.355
+-0.440
+-0.415
+-0.196
+-0.219
+0.013
+0.042
+0.009
+0.034
+-0.049
+0.199
+0.025
+0.153
+0.188
+0.218
+0.187
+0.3152
+0.483
+0.468
+
+Table 3 shows that population working in “financial and insurance sector” and “professional,
+
+scientific and technical services” are more likely to be concentrated in high ECI regions, by
+
+showing relatively high value of correlation 0.386 and 0.383, respectively. By contrast, labor
+
+shares in construction, manufacturing, and sectors related with infra structure, which are a bit far
+
+from the central role of a city, are higher in regions with relatively low ECI, with scoring negative
+
+correlation.
+
+According to Table 2 and 3, the high ECI regions exhibit the high ECI not only in terms of
+
+city function as shown in Figure 3 but also in production side. Our results confirms the hypothesis
+
+suggested by Christaller that the cenral places plays a crucial role in consumption and at the same
+
+time, in production as well.
+
+3The industrial sectors are classified by the Korean Standard Industrial Classification.
+
+11
+
+3. Discussion and Conclusion
+
+In the preface of his doctoral thesis, Christaller stated that the purpose of Central Place
+
+Theory (CPT) is to analyze the economic and geographical principles that determine the spa-
+
+tial arrangement of urban functions. Rather than merely describing these arrangements, as
+
+typified by the hexagonal configuration, he emphasized the interactions between central func-
+
+tions—represented by sets of goods and services—and their centrality within the city. Despite
+
+of the theoretical contribution of CPT, it has been limited to apply for the real world, since CPT
+
+was developed with assumption the uniformly distributed consumer in a homogeneous space.
+
+When focusing on the key principle of CPT, we could find the similarity between the concept of
+
+economic complexity, which is already widely used thanks to its flexibility and applicability, and
+
+suggest the two economic complexity indices, PCI and ECI, as a metric for the centrality in CPT.
+
+We calculate the PCI of products and the ECI of places by using the geo-location data of small
+
+businesses in Seoul and test whether these two metrics well capture the centrality of products
+
+and places.
+
+First, to capture the effect of PCI of a product on the market boundary of the product, we
+
+calculate the minimum distance among markets of the product by using the shop location data,
+and see the effect of the PCI on the minimum market distance. Our result show that a high PCI
+
+product is likely to have a broader market boundary. When 1 unit of the standard deviation of
+
+PCI increases, the minimum distance among the product’s markets increases, on average, 0.297-
+0.324 km. The difference in market distance between a product with the minimum PCI and that
+
+with the maximum PCI is 2.1-2.3 km. In addition, to capture the demand threshold of a product,
+
+which is the minimum number of customers necessary for a central function to exist, we look
+at the effect of PCI on the distance between the residential area and the shop the consumption
+
+behavior happen by using the card transaction data. Our results show that a consumer who
+
+purchase a high PCI product is more likely to be from further away from the shop. When the one
+
+standard deviation of the PCI of products increases, consumers travel 1.782-1.838 km further to
+purchase the product. The difference in market range between a product with the minimum PCI
+
+and that with the maximum PCI is 8.2–9.2 km.
+
+Second, following the logical process in the Christaller’s theory, we look at the economic
+
+complexity of places. According to him, the centrality of location is based on the accumulated
+
+functions provided by products and services on the place, given that there exist various products
+
+12
+
+in the place. We expected that the recursive structure of economic complexity index well capture
+
+this aspect and see whether the ECI of places successfully identify the central places in terms
+
+of city function and the production. When we visualized the ECI of places, we found that high
+
+ECI places are the well-known for Seoul’s economically and politically central places including,
+
+for example, the central bank of Korea, a terminal for high speed rail and express bus terminal,
+
+financial hub, headquarters of big firm, like Samsung. When checking the production side by
+
+looking at the population composition of a place and the industrial sector that the labor share
+
+is working at, we find that the high ECI places play a central role for more complex economic
+
+activities. Furthermore, the high ECI places are strongly correlated with the labor population,
+
+especially those associated with knowledge intensive industries. Our results confirm that ECI is
+
+well representing the level of centrality of places.
+
+Figure 5. Robustness of economic complexity indices as a measure for the centrality using the
+location data of all shops in Seoul. (A) ECI and (B) Diversity over the spatial units in Seoul.
+(C) Contingency matrix between ECI rank and PCI rank and (D) between Diversity rank and
+Uniqueness rank.
+
+One might argue that an alternative metric, such as the diversity of economic activity in a
+
+13
+
+place, could effectively represent the centrality of a place. This notion could be supported by
+
+Christaller’s argument that the most unique goods are produced in the most central locations,
+
+whereas ubiquitous goods are produced universally, independent of a place’s centrality. To ex-
+
+plore this, we examined the diversity of goods and their spatial distribution in Seoul, comparing
+
+to these findings with the results of PCI and ECI. As illustrated in Figures 5 (A) and (B), the
+regional diversity rankings in Seoul present a different picture to that depicted by the complex-
+
+ity index, with regions of high diversity not necessarily correlating with the central functions of
+
+Seoul.
+
+Further analysis involved examining a contingency matrix for the diversity versus the unique-
+
+ness of goods, as shown in Figure 5 (D), to investigate the recursive relationship between unique-
+
+ness and diversity. The dark area on the left side of Figure 5 (D), regardless of the level of
+
+diversity, indicates that the uniqueness of products does not correlate with diversity. A recur-
+
+sive structure, if present, would likely show products in the upper right corner of the matrix,
+
+indicating regions where high uniqueness products are produced alongside high diversity, as the
+relationship between PCI and ECI in Figure 5 (C). For the principle of low PCI/uniqueness prod-
+ucts being produced in low ECI/diversity regions to hold, the top left corner of the contingency
+
+matrix would need to be dark. However, this is observed only in the case of the economic com-
+
+plexity index (Figure 5 (C)), but not for diversity. These findings confirm that the economic
+complexity indices, PCI and ECI, effectively embody the recursive structure of centrality defined
+
+in CPT.
+
+Taken together, we present a metric to measure the centrality of a product and a region with
+
+borrowing the theoretical foundation of Christaller’s CPT. Given the core principle of CPT is the
+
+interaction between the centrality of products and places, our metrics, stemming from the field of
+
+economic complexity, are conceptually consistent with the centrality of products and places. Our
+
+findings supports our arguments that PCI of products are positively correlated with the market
+
+size of the products, and high ECI places is the place that provides the central city functions and
+
+complex products. Considering that we use the location data of shops that are free from the data
+
+privacy issue, our findings can contribute to the body of literature on urban economy and policy
+
+makers by capturing the dynamic nature of urban structure more precisely and easily.
+
+14
+
+4. Methods
+
+Detecting the spatial unit of analysis
+
+By using the location data of all small business shops in Seoul, first, we calculate the effective
+
+number of small businesses, Ai and detect the amenity dense neighborhood Hidalgo et al. (2020);
+
+Jun et al. (2022).
+
+Ai =
+
+N(cid:88)
+
+j=1
+
+e−γdi j
+
+(3)
+
+where N denotes the total number of stores in the city and di j is the geodesic distance between
+stores i and j. With the stand point of small business shop i, the effect of the existence of other
+
+store is diminishing over distance. γ, decay parameter capture this diminishing influence of
+
+distant stores. In our analysis, we set γ into 7.58.
+
+Second, by looking the spatial distribution of the effective number of shops, we identify the
+
+local peaks of Ai on the map. Then, as capturing the center of the cluster with the local peak, we
+
+allocate neigh by shops to the cluster until the boundaries of the cluster are overlapped, resulting
+
+in 523 amenity clusters, whose average radius is 241 meters. Following analysis is based on this
+
+detected spatial unit of analysis that are depicted in Figure 3.
+
+Data
+
+On the detected spatial unit of analysis, we accumulated various big data. To detect the
+
+amenity clusters and examine the composition of various amenity types they provides, we use
+
+data on small businesses sourced from the Korean Small Enterprise and Market Service (KSEMS).
+
+This dataset encompasses detailed information on the location and business categories of 401,071
+
+small businesses observed to be in operation during the period from March 2019 to June 2019.
+To investigate the urban structure without COVID-19 effects, we choose the data of 2019.
+
+To examine the structure of economic activities in urban areas, we use spatial statistics
+
+data on residential, labor, and floating populations in 2019 and credit card transactions in June
+
+2019. First, the residential and labor population data is from Korea National Statistical
+
+Office (KOSTAT). The residential and labor populations represent the number of people living
+
+in households and working within a given area based on 100m × 100m cell unit, respectively.
+
+Second, human mobility big data, a floating population, is collected from the cell phone activity
+
+15
+
+of personal subscribers to SK Telecom, the biggest network provider in South Korea. Here, float-
+
+ing population refers to the daily average of people staying or moving within a given area based
+
+on 50m × 50m cell unit.
+
+Finally, we also use credit card data provided by BC Credit Card Corporation for the ro-
+
+bustness check. The credit card data includes information on the total number and amount of
+
+purchases (in KRW), number of stores, location, and industry classification provided by BC. Due
+
+to privacy concerns, the information is provided with aggregated based on 50m × 50m cell unit.
+
+We reconfigure location information of the residential, labor, and floating population data
+
+and credit card data into our detected amenity clusters in Section 2. Again, there are 523 small
+
+business clusters in our analysis.
+
+Calculating complexity index of region and product
+
+Motivated by the Christaller’s conceptualization of place centrality Christaller (1933), whose
+
+bears resemblance to the principles underlying the Economic Complexity Index, we utilize eco-
+
+nomic complexity indices as proxies for the assessing the centrality of locations and goods.
+
+Figure 1 describe the concepts of centrality by Christaller and that of economic complexity,
+
+showing the similarity between the two in terms of recursive structure. Hidalgo and Hausmann
+
+(2009) introduced new metric on economic complexity, with describing that complex economies
+
+are those involved in complex activities, while complex activities are those performed by com-
+
+plex economies (Hidalgo, 2021). By using the method of reflection, Hidalgo and Hausmann
+
+(2009) derived the complexity indexes that the economic complexity index (ECI: the complex-
+
+ity of embedded production capability of a place), which is normalized average of the product
+
+complexity, and that the product complexity index (PCI: the complexity of required production
+
+capability for a product), which is normalized average of the economic complexity. Following
+
+Hidalgo and Hausmann (2009), we calculate ECI of a region and PCI of a product as shown in
+
+Equation 4 and 5.
+
+ECIc = Kc = 1
+Mc
+
+(cid:88)
+
+p
+
+McpKp
+
+(4)
+
+16
+
+PCIp = Kp = 1
+Mp
+
+(cid:88)
+
+c
+
+McpKc
+
+(5)
+
+where Mcp is a binary matrix consisted of 0 or 1, representing subscript c is cluster of small
+
+businesses, while p is product. To determine an element of the matrix, we calculate Revealed
+Comparative Advantage of a product p in the shops’ cluster c (RCA = shopscp/ (cid:80)
+c shopscp/ (cid:80)
+looking at the number of shops in a cluster, shopscp (Balassa, 1965). When Mcp equals to 1, we
+
+p shopscp
+cp shopscp
+
+) by
+
+(cid:80)
+
+regard a cluster c has the comparative advantage in product p.4
+
+Acknowledgement
+
+This work was supported by the National Research Foundation of Korea (NRF) Grant through
+
+the Korea Government [Ministry of Science and ICT (MSIT)] under Grant NRF-2022R1A5A7033499.
+
+We also thank the support from Inha University.
+
+Data Availability Statement
+
+The small business firm data is provided by Korean Small Enterprise and Market
+
+Service (KSEMS). The labor and residential population data is provided by Korea National
+
+Statistical Office (KOSTAT). The original small business firms and labor and residen-
+
+tial population data can be found in the OPENapi portal: https://www.data.go.kr/ and
+
+https://sgis.kostat.go.kr/.
+
+4We normalize the complexity indexes, between 0 and 1 for the convenience of interpreting results: ECIc =
+
+Kc−min(Kc)
+max(Kc)
+
+, PCIp = Kp−min(Kp)
+max(Kp)
+
+17
+
+References
+
+Anas, A., Arnott, R., Small, K.A., 1998. Urban spatial structure. Journal of economic literature 36, 1426–1464.
+
+Balassa, B., 1965. Trade liberalisation and “revealed” comparative advantage. Manchester School 33, 99–123.
+
+Boussauw, K., Van Meeteren, M., Witlox, F., 2014. Short trips and central places: The home-school distances in the
+
+flemish primary education system (belgium). Applied Geography 53, 311–322.
+
+Bunge, W., 1962. Theoretical geography. Lund studies in geography 1, 210p.
+
+Christaller, W., 1933. Die zentralen orte in s¨uddeutschland (the central places in southern germany). Jena: Gustav Fischer
+
+.
+
+Dale, B., Sjøholt, P., 2007. The changing structure of the central place system in trøndelag, norway, over the past 40
+
+years–viewed in the light of old and recent theories and trends. Geografiska Annaler: Series B, Human Geography
+
+89, 13–30.
+
+Hidalgo, C.A., 2021. Economic complexity theory and applications. Nature Reviews Physics 3, 92–113.
+
+Hidalgo, C.A., Casta˜ner, E., Sevtsuk, A., 2020. The amenity mix of urban neighborhoods. Habitat International 106,
+
+102205.
+
+Hidalgo, C.A., Hausmann, R., 2009. The building blocks of economic complexity. Proceedings of the national academy
+
+of sciences 106, 10570–10575.
+
+Jun, B., Jara-Figueroa, C., Yu, D., 2022. The economic resilience of a city: the effect of relatedness on the survival of
+
+amenity shops during the covid-19 pandemic. Cambridge Journal of Regions, Economy and Society 15, 551–573.
+
+Kii, M., Tamaki, T., Suzuki, T., Nonomura, A., 2023. Estimating urban spatial structure based on remote sensing data.
+
+Scientific Reports 13, 8804.
+
+Mulligan, G.F., Partridge, M.D., Carruthers, J.I., 2012. Central place theory and its reemergence in regional science. The
+
+Annals of Regional Science 48, 405–431.
+
+Neal, Z.P., 2011. From central places to network bases: A transition in the us urban hierarchy, 1900–2000. City &
+
+Community 10, 49–75.
+
+Pacione, M., 2009. Urban geography: A global perspective. Routledge.
+
+Shearmur, R., Doloreux, D., 2015. Central places or networks? paradigms, metaphors, and spatial configurations of
+
+innovation-related service use. Environment and Planning A: Economy and Space 47, 1521–1539.
+
+Van Meeteren, M., Poorthuis, A., 2018. Christaller and “big data”: recalibrating central place theory via the geoweb.
+
+Urban Geography 39, 122–148.
+
+18
+
+

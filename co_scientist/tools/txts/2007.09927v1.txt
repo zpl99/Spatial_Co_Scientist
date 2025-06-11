@@ -1,0 +1,6363 @@
+Spatially Clustered Varying Coeﬃcient
+Model
+
+Fangzheng Lin1, Yanlin Tang2, Huichen Zhu3 ∗ and Zhongyi Zhu1
+1Department of Statistics, Fudan University, China
+2Key Laboratory of Advanced Theory and Application in Statistics and Data Science - MOE,
+
+School of Statistics, East China Normal University, China
+3Department of Mathematics, Hong Kong University of Science and Technology, China
+
+Abstract
+
+In various applications with large spatial regions, the relationship between
+
+the response variable and the covariates is expected to exhibit complex spatial
+
+patterns. We propose a spatially clustered varying coeﬃcient model, where
+
+the regression coeﬃcients are allowed to vary smoothly within each cluster but
+
+change abruptly across the boundaries of adjacent clusters, and we develop
+
+a uniﬁed approach for simultaneous coeﬃcient estimation and cluster identi-
+
+ﬁcation. The varying coeﬃcients are approximated by penalized splines, and
+
+the clusters are identiﬁed through a fused concave penalty on diﬀerences in
+
+neighboring locations, where the spatial neighbors are speciﬁed by the min-
+
+imum spanning tree (MST). The optimization is solved eﬃciently based on
+
+the alternating direction method of multipliers, utilizing the sparsity structure
+
+from MST. Furthermore, we establish the oracle property of the proposed
+
+method considering the structure of MST. Numerical studies show that the
+
+proposed method can eﬃciently incorporate spatial neighborhood information
+
+∗Corresponding author, email: hczhu@ust.hk.
+
+1
+
+0
+2
+0
+2
+
+l
+u
+J
+
+0
+2
+
+]
+E
+M
+
+.
+t
+a
+t
+s
+[
+
+1
+v
+7
+2
+9
+9
+0
+.
+7
+0
+0
+2
+:
+v
+i
+X
+r
+a
+
+ 
+ 
+ 
+ 
+ 
+ 
+and automatically detect possible spatially clustered patterns in the regression
+
+coeﬃcients. An empirical study in oceanography illustrates that the proposed
+
+method is promising to provide informative results.
+
+Keywords: Augmented Lagrangian; Concave penalty; Minimum spanning tree; P -spline.
+
+1
+
+Introduction
+
+With the development of remote sensors, satellites and geographic software, spatial data
+
+from large region are increasingly collected in recent years. For instance, in the motivating
+
+water mass analysis in Section 5, the data are collected over Southern Hemisphere’s oceans,
+
+and we aim to investigate the complex relationship between temperature and salinity (T-S
+
+relationship) over this large region, which plays an important role in the ocean current and
+
+global climate system (Emery, 2001; Nandi et al., 2004). To model the T-S relationship over
+
+this large region, we have at least two main challenges. First, the Southern Hemisphere’s
+
+oceans consist of several water masses, and due to the nonlinear nature of geophysical
+
+ﬂuid dynamics (Vallis, 2006), the T-S relationship is likely to change rapidly across the
+
+narrow boundaries (termed as f ronts in geoscience) between adjacent water masses (Li
+
+and Sang, 2019). This phenomenon is ubiquitous in the ocean and the atmosphere, and it
+
+automatically leads to a spatially clustered pattern in the T-S relationship. Second, each
+
+valid water mass generally occupies a big region (Emery, 2001), though not as large as
+
+the whole Southern Hemisphere’s oceans. The regression coeﬃcients within a big region
+
+usually vary across diﬀerent locations (Propastin et al., 2008; Noresah and Ruslan, 2009),
+
+thus the T-S relationship is expected to vary within each water mass.
+
+Existing literature only partially deals with the ﬁrst or the second challenge mentioned
+
+2
+
+above. To model the relationship between the response variable and covariates over a
+
+region of interest, spatial regression models (Cressie, 1993) and spatial generalized linear
+
+regression models (Diggle et al., 1998) are widely used, where the coeﬃcients of explanatory
+
+variables are usually assumed to be constant over the whole region. However, such constant
+
+assumption is known to be restrictive over a large region, where the regression coeﬃcients
+
+are expected to vary (Finley, 2011), and/or possibly form spatially clustered pattern (Li
+
+and Sang, 2019). Among the existing literature, many methods were developed to capture
+
+the spatially-varying pattern of the regression coeﬃcients, i.e., address the second challenge,
+
+while literature addressing the ﬁrst challenge is relatively sparse. To capture the spatially-
+
+varying pattern in the second challenge, the geographically weighted regression (GWR)
+
+(Fotheringham et al., 2003) and spatially-varying coeﬃcient models (SVC) (Gelfand et al.,
+
+2003) are two popular methods. The GWR ﬁts a local weighted regression model at each
+
+observation, where the weight matrix is deﬁned by a kernel function. In the SVC method,
+
+spatially-varying coeﬃcients are modeled as a multivariate spatial Gaussian process and
+
+then ﬁtted into the Bayesian framework with some prior distributions. Other methods
+
+to capture the spatially-varying pattern can be found in Opsomer et al. (2008), Lu et al.
+
+(2009), Sangalli et al. (2013), Mu et al. (2018). The main drawback of these methods is
+
+that they can not deal with the possible spatially clustered pattern, i.e., the ﬁrst challenge,
+
+which may appear in practice (Talley, 2011). Limited work has been done on capturing the
+
+spatially clustered pattern in the ﬁrst challenge. Recently, Li and Sang (2019) developed a
+
+spatially clustered coeﬃcient (SCC) regression, which uses fused LASSO (Tibshirani, 1996,
+
+least absolute shrinkage and selection operator) to automatically detect spatially clustered
+
+patterns in the regression coeﬃcients. However, the SCC method requires that the values
+
+of regression coeﬃcients to be constant within each cluster, thus fails to address the second
+
+3
+
+challenge. Such constant restriction can lead to massive identiﬁed clusters when the true
+
+regression coeﬃcients vary within each cluster, see the simulation studies in Section 4.2. In
+
+the motivating water mass analysis in Section 5, the SCC method also identiﬁes massive
+
+clusters in the T-S relationship, strongly suggesting that the T-S relationship may vary
+
+within each cluster, see Figure 4(ii) in Section 5 for more details.
+
+In this paper, we propose a spatially clustered varying coeﬃcient model (SCVCM) to
+
+address both challenges discussed above, which can not only model the spatially clustered
+
+pattern, but also allow spatially-varying relationship between the response and the co-
+
+variates within each subregion. To address the SCVCM, we adopt the penalized splines
+
+(P-splines) to model the spatially-varying coeﬃcients, and apply fused penalties to en-
+
+courage homogeneity between spline coeﬃcient vectors at any two locations connected in
+
+an edge set, so that the spatially clustered pattern can be detected. The selection of the
+
+edge set should incorporate spatial neighborhood information of regression coeﬃcients, i.e.,
+
+coeﬃcients at proximate locations are likely to be similar, possibly resulting from similar
+
+conditions for small area (Finley, 2011).
+
+Inspired by Li and Sang (2019), we use mini-
+
+mum spanning tree (MST) to construct the edge set, where two locations are connected by
+
+the edge only when they are close in space, so that the spatial neighborhood information
+
+is utilized. Moreover, the number of corresponding penalized terms based on MST is
+
+small. Utilizing such property, we develop an eﬃcient algorithm to solve the optimization
+
+problem, based on the alternating direction method of multipliers (ADMM). Furthermore,
+
+in our theoretical investigation, we establish the oracle property of the proposed method
+
+considering the structure of MST; namely, for any two locations connected by MST, the
+
+proposed method works as well as we know whether they belong the same cluster or not. To
+
+our best knowledge, such theoretical results are novel, providing important insights about
+
+4
+
+the inﬂuence of MST on cluster recovering, see details in Section 3, and they may provide
+
+theoretical support when applying MST to other various models in the future.
+
+Compared to the most relevant SCC method in Li and Sang (2019), the proposed ap-
+
+proach has the following major diﬀerences and advantages. First, the proposed approach
+
+relaxes the constant restriction on the relationship between the response and covariates
+
+within each subregion, allowing spatial variability within each subregion, which is more
+
+reasonable in investigating the T-S relationship as discussed above the third paragraph, as
+
+well as other applications, see Wheeler and Waller (2009) and references therein. More-
+
+over, it is worth to point out that, within each subregion, the SCVCM degenerates to a
+
+commonly-used spatially-varying model (Fotheringham et al., 2003), but the SCC model
+
+degenerates to a simple linear regression model, which is often unreasonable in spatial
+
+analysis (Lloyd, 2010). Second, the SCC method is based on the fused LASSO penalty,
+
+which may not be able to correctly recover the clusters (Leng et al., 2006). In the proposed
+
+method, the penalties are taken to be some commonly-used concave penalties, say SCAD
+
+(Fan and Li, 2001, smoothly clipped absolute deviation) and MCP (Zhang et al., 2010,
+
+minimax concave penalty), which are known to result in better performance than LASSO
+
+in cluster recovering. Lastly, we establish the oracle property considering the structure of
+
+MST, which provides important insights about the inﬂuence of MST on cluster recovering.
+
+The proposed approach can be regarded as a model-based clustering method, which
+
+aims at detecting the spatially clustered pattern. Among the literature, Ma and Huang
+
+(2017), Zhang et al. (2019a) and Zhang et al. (2019b) proposed to identify subgroups for
+
+subjects, e.g., patients. All these methods are based on pairwise fused penalties, which are
+
+not suitable for the spatial data as pairwise construction totally ignores the spatial neigh-
+
+borhood information, resulting in massive redundant penalties. Tibshirani et al. (2005)
+
+5
+
+estimated homogeneous eﬀects of covariates, based on fused penalties on successive diﬀer-
+
+ences of regression coeﬃcients, which is not applicable to spatial data, as they do not have
+
+a natural order. Ke et al. (2015) also pursued the homogeneous eﬀects of covariates by
+
+adopting fused penalties based on a coeﬃcient order from preliminary estimates, which are
+
+estimated from independent replicates, usually unavailable for spatial data.
+
+The rest of the paper is organized as follows. We present SCVCM, its estimating
+
+method, and a computationally eﬃcient algorithm in Section 2, the asymptotic properties
+
+in Section 3. We assess the ﬁnite sample performance of the proposed method by extensive
+
+simulation studies in Section 4, and apply the proposed method to the water mass analysis
+
+in Section 5. Technical details are provided in the online Supplement.
+
+2 Model and method
+
+2.1 Background
+
+Suppose the spatial data {(X(si), y(si)), i = 1, · · · , n} are observed at locations s1, · · · , sn
+
+∈ D, where D ⊂ R2 is the region of interest, and the covariates X(si) = (x1(si), · · · , xp(si))T
+
+with x1(si) = 1. These locations are assumed to be ﬁxed, which is a feature of common
+
+spatial data, such as geostatistical data and lattice data (Schabenberger and Gotway, 2017).
+
+A commonly-used spatially-varying regression model (Fotheringham et al., 2003; Opsomer
+
+et al., 2008) is
+
+y(si) =
+
+p
+(cid:88)
+
+k=1
+
+xk(si)βk(si) + (cid:15)(si),
+
+(1)
+
+si, and {(cid:15)(si)}n
+
+where the regression coeﬃcient βk(si) is the value of a smooth function βk(s) at location
+i=1 are independent random errors with mean 0 and variance σ2; the spatial
+dependence in model (1) is usually assumed to be captured through the spatially-varying
+
+intercept (Finley, 2011). However, the model (1) does not consider the possible spatially
+
+6
+
+clustered pattern, which exists in many applications (Talley, 2011).
+
+2.2 SCVCM and its estimation
+
+{D1
+
+D1
+
+In this paper, we propose SCVCM to model the spatially clustered pattern. Let
+k, · · · , DGk
+k ∪ · · · ∪ DGk
+
+k } represent the Gk disjoint subregions for the k-th covariate, satisfying D =
+k , k = 1, · · · , p. Then, SCVCM is deﬁned as
+Gk(cid:88)
+
+p
+(cid:88)
+
+y(si) =
+
+xk(si)βgk
+
+k (si)I(si ∈ Dgk
+
+k ) + (cid:15)(si),
+
+(2)
+
+k=1
+
+gk=1
+
+where I(·) is the indicator function, and βgk
+
+k (si) is the value at location si of an unknown
+k . The assumption of (cid:15)(si) is the same as in model (1).
+Model (2) is a generalization of the model (1), allowing spatially clustered patterns for
+
+smooth function βgk
+
+k (s) over Dgk
+
+regression coeﬃcients, which has two important features. (i) Similar to model (1), it allows
+
+the associations between the response and covariates to exhibit smooth variation within
+
+each subregion. (ii) It allows the investigation of diﬀerent clustered patterns in diﬀerent
+
+regression coeﬃcients.
+
+We start from an ideal case, where {Dgk
+
+k , gk = 1, · · · , Gk}, k = 1, · · · , p, are known.
+k , we adopt the P -spline method, which is popular for mod-
+eling smooth variations in the context of spatial statistics (Ruppert et al., 2003). To be
+
+k (s) , s ∈ Dgk
+
+To estimate βgk
+
+speciﬁc, in the context of P -splines, it assumes that βgk
+
+k , can be approxi-
+mated suﬃciently well by (agk
+k ∈ RL is the spline coeﬃcient vector, and
+B(s) = (B1(s), · · · , BL(s))T is the basis function vector constructed by a large number of
+
+k )T B(s), where agk
+
+k (s) , s ∈ Dgk
+
+knot locations, see details in Section 2.3.2. As is commonly done in the P -spline context
+
+(Ruppert et al., 2003; Opsomer et al., 2008), we assume that L is large and ﬁxed, and
+
+the lack-of-ﬁt error βgk
+
+k (s) − (agk
+
+can simply take βgk
+
+k (s) = (agk
+
+k )T B(s) is negligible uniformly over s ∈ Dgk
+k (s) for s ∈ Dgk
+
+k )T B(s). Then, estimating βgk
+
+k
+
+k , so that we
+is equivalent
+
+7
+
+to estimate agk
+
+k , if and
+only if d1 (cid:54)= d2; see Lemma S.1 in Section S2 of the online Supplement. Such property of
+
+k . Moreover, we prove that, dT
+
+2 B(s) for some s ∈ Dgk
+
+1 B(s) (cid:54)= dT
+
+uniqueness guarantees that, model (2) can be uniquely transformed into
+
+y(si) =
+
+p
+(cid:88)
+
+Gk(cid:88)
+
+k=1
+
+gk=1
+
+xk(si)B(si)T agk
+
+k I(si ∈ Dgk
+
+k ) + (cid:15)(si).
+
+(3)
+
+In practice, neither the number of subregions Gk nor the speciﬁc subregion Dgk
+
+k is known.
+Denote ak,i as the spline coeﬃcient vector for k-th covariate at location si, k = 1, · · · , p,
+i = 1, · · · , n. From model (3), we know that ak,i’s are the same for all si ∈ Dgk
+
+k . To utilize
+such information, we should encourage homogeneity between spline coeﬃcient vectors,
+
+which motivates to minimize the following objective function,
+
+1
+2n
+
+n
+(cid:88)
+
+{y(si) −
+
+i=1
+
++
+
+p
+(cid:88)
+
+k=1
+p
+(cid:88)
+
+k=1
+
+xk(si)B(si)T ak,i}2
+
+(cid:88)
+
+(i,j)∈E
+(cid:124)
+
+Pλk ((cid:107)ak,i − ak,j(cid:107)2)
+
++
+
+p
+(cid:88)
+
+(cid:37)k
+
+n
+(cid:88)
+
+aT
+
+k,iHak,i
+
+,
+
+(4)
+
+(cid:123)(cid:122)
+clustering penalty
+
+(cid:125)
+
+i=1
+
+k=1
+(cid:124)
+
+(cid:123)(cid:122)
+smoothing penalty
+
+(cid:125)
+
+where (cid:107) · (cid:107)2 represents the L2-norm, Pλk(·) is a penalty function for cluster identiﬁcation,
+H is a diagonal matrix determined by the basis functions we choose, and {λk, (cid:37)k}p
+
+k=1
+
+are tuning parameters determining the strength of penalization.
+
+In (4), the smoothing
+
+penalty is usually adopted in the context of P -splines to address the overparameterized
+
+issue because of large L, and the clustering penalty is used to encourage homogeneity for
+
+the spline coeﬃcient vectors, whose corresponding locations are connected by an edge in
+
+E. The edges considered in this paper are undirected, i.e., the edge (i, j) equals (j, i). The
+
+selection of penalty function Pλk(·), the construction of the basis functions B(·), the edge
+set E, and the selection of tuning parameters {λk, (cid:37)k}p
+
+k=1, are four important ingredients
+
+8
+
+of (4), which are discussed in Section 2.3. Denote the spline coeﬃcient estimates as (cid:98)ak,i,
+then (cid:98)βgk
+k (si) = ((cid:98)ak,i)T B(si). Without causing ambiguity, we simply denote the procedure
+of minimizing (4) as SCVC.
+
+2.3 Implementation details
+
+2.3.1 Selection of fused penalty function
+
+Among existing literature, LASSO (Tibshirani, 1996), SCAD (Fan and Li, 2001) and
+
+MCP (Zhang et al., 2010) are commonly-used penalty functions encouraging sparsity:
+LASSO : Pλ(t) = λ|t|; MCP : Pλ,γ(t) = (λ|t| − t2
+SCAD : Pλ,γ(t) = λ|t|I(|t| ≤ λ) + 2γλ|t|−t2−λ2
+
+2γ )I(|t| ≤ γλ) + 1
+I(λ < |t| < γλ) + λ2(γ+1)
+
+2γλ2I(|t| > γλ), γ > 1;
+I(|t| ≥ γλ), γ > 2.
+
+2(γ−1)
+
+2
+
+LASSO assigns large penalties to large values of t, thus tends to underestimate t, and may
+
+not be able to correctly recover the true groups (Leng et al., 2006). To remedy this ﬂaw,
+
+SCAD and MCP adopt some concave functions that converge to constants as t increases,
+
+which can produce unbiased estimates and are more suitable for identifying the true groups
+
+(Ma and Huang, 2017). Hence, we adopt these concave penalty functions in (4).
+
+2.3.2 Selection of basis functions
+
+The commonly used tensor product spline basis functions are not suitable for spatial
+
+data, because the number of its basis functions is huge, which leads to extensive computa-
+
+tional burden and numerical instability (Crainiceanu et al., 2007; Opsomer et al., 2008).
+
+To address the accompanied issue of tensor product splines, we use low rank radial
+basis functions (Ruppert et al., 2003). To be speciﬁc, for s = (s1, s2)T ∈ R2 and the knots
+κl ∈ R2, l = 1, · · · , L1, the low rank radial basis function vector are
+
+1, s1, s2, C((cid:107)s − κ1(cid:107)2), · · · , C((cid:107)s − κL1(cid:107)2),
+
+(5)
+
+9
+
+where C(r) is a real-valued function; a common choice is C(r) = r2log r, which corresponds
+
+to the thin plate spline. The number of radial basis functions is L1 + 3, which is much
+
+smaller than that of the tensor product splines. To unify the magnitude of the elements
+
+in (5), similar with Li et al. (2020), we normalize the low rank radial basis function vector
+
+(5), through dividing each element of (5) by the mean of its corresponding absolute values
+
+calculated over all observed locations. With the radial basis functions, the corresponding
+
+diagonal matrix H in (4) is usually taken to be H = diag(0T
+
+L1), where 03 is a three-
+dimensional zero vector, and 1L1 is a L1-dimensional vector of ones. Moreover, we take
+
+3 , 1T
+
+L1 = max{20, min(n/4, 40)}, see similar choice in Ruppert et al. (2003).
+
+The remaining problem is how to select the knots κl ∈ R2, l = 1, · · · , L1. In a one-
+
+dimensional problem, the knots are usually taken to be equidistant or according to the
+
+sample quantiles. However, in the two-dimensional scenario, the equispaced choice tends
+
+to waste a lot of knots, and the sample quantile selection does not have a straightforward
+
+extension to the two-dimensional space (Ruppert et al., 2003). Following Ruppert et al.
+
+(2003) and Opsomer et al. (2008), we select the knots by the space ﬁlling designs (SFD), in
+
+which the knots are closest to the sample locations under the maximal separation principle
+
+(Johnson et al., 1990). Using the SFD can avoid wasting knots and ensure the coverage of
+
+sample locations. The cover.design function in R package Fields can implement the SFD.
+
+2.3.3 Construction of the edge set E
+
+Construction of the edge set E should utilize the spatial neighborhood information
+
+of regression coeﬃcients, i.e., coeﬃcients at proximate locations are likely to be similar,
+
+possibly resulting from similar conditions for small area (Finley, 2011). Thus, it is preferable
+
+to construct E, such that only proximate locations are connected, rather than connecting
+
+10
+
+two locations even when they are distant from each other (Ma and Huang, 2017).
+
+We use the minimum spanning tree (MST) following Li and Sang (2019). Suppose that
+we have an undirected graph G = (V, E0) with a weight function d(e), which assigns a
+weight to each edge e in the edge set E0, and V is the set of vertices. In this paper, we
+take d(e) to be the length of edge e in Euclidean space, V to be the observed locations,
+and E0 to be the edge set by pairwise construction. A spanning tree T = (V, E) is an
+undirected subgraph of G, i.e., E ⊂ E0, which connects all vertices with no cycles and a
+
+minimum number of edges. The MST is deﬁned as the spanning tree, whose total edge
+weight (cid:80)
+
+e∈E d(e) is minimal among all the spanning trees. Thus, MST only connects
+the proximate locations, utilizing the spatial neighborhood information. Moreover, MST
+
+enjoys two additional advantages. First, it leads to the connectivity of all data points,
+
+thus the overﬁtting issue due to isolated locations, would not happen. Second, the number
+
+of edges in MST is |V| − 1 ( |V| is the number of vertices in V), which is far less than
+
+that of pairwise construction. Such property allows us to develop an eﬃcient algorithm to
+
+minimize (4), through utilizing some sparsity structures, see more details in Section 2.4.
+
+The graphminspantree function in Matlab can be used to ﬁnd the MST.
+
+REMARK 1. We brieﬂy discuss how the edge set E constructed by MST inﬂuences the
+
+cluster identiﬁcation, and a formal discussion will be presented in Section 3. Given n ﬁxed
+
+locations, for any speciﬁc subregion in (2), say D1
+
+1, MST either connects all the locations
+
+in D1
+
+1, resulting in one group, or divides D1
+
+1 into several groups, where the locations within
+
+each group are connected by MST but diﬀerent groups are not connected. By (4), for the
+
+former case, all the locations in D1
+
+1 are expected to be assigned into the same cluster because
+
+they are connected; for the latter case, only those connected locations will be assigned into
+
+the same cluster, thus D1
+
+1 will be divided into more than one clusters.
+
+11
+
+2.3.4 Choices of λk and (cid:37)k
+
+To select the tuning parameters {λk, (cid:37)k}p
+
+k=1, we adopt the Bayesian information crite-
+k=1, we assume that { (cid:99)Mg∗
+rion (BIC). Given {λk, (cid:37)k}p
+k , g∗
+k} are the identiﬁed
+clusters, which is a partition of {1, · · · , n}, and (cid:98)G∗
+k is the number of identiﬁed clusters.
+Within each subgroup, the estimated spline coeﬃcient vectors (cid:98)ak,i are equal; see the ex-
+plicit deﬁnition of (cid:99)M1
+in Section 3.1. Without loss of generality, we assume
+k = {n (cid:98)G∗
+k = {1, · · · , n1
+that (cid:99)M1
+k + 1, · · · , n2
+k < · · · < n (cid:98)G∗
+1 ≤ n1
+
+k
+k = {n1
+< n, and let X
+
+k, · · · , (cid:99)M (cid:98)G∗
+k}, (cid:99)M2
+k−1
+
+k}, · · · , (cid:99)M (cid:98)G∗
+
++ 1, · · · , n}, where
+
+k = 1, · · · , (cid:98)G∗
+
+k
+), where
+
+k < n2
+
+k−1
+
+k
+
+k
+
+k
+
+k
+
+(cid:99)G∗ = (X 1
+(cid:99)G∗
+1
+
+, · · · , X p
+(cid:99)G∗
+p
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+X k
+(cid:98)G∗
+k
+
+=
+
+)T
+
+xk(sn1
+
+k
+
+xk(s1)B(s1)T
+...
+)B(sn1
+...
+0T
+...
+0T
+
+k
+
+· · ·
+
+· · ·
+. . .
+· · · xk
+
+(cid:18)
+
+s
+
+n
+
+· · ·
+
+0T
+...
+0T
+...
+B
+...
+xk(sn)B(sn)T
+
+(cid:19)
+
+(cid:18)
+
++1
+
+s
+
+−1
+
+n
+
+(cid:98)G∗
+k
+k
+
+(cid:98)G∗
+k
+k
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(cid:19)T
+
+−1
+
++1
+
+, k = 1, · · · , p.
+
+Following Tibshirani et al. (2012), the BIC criterion is deﬁned as
+
+BIC({λk, (cid:37)k}p
+
+k=1) = n log
+
+(cid:34)
+
+1
+n
+
+n
+(cid:88)
+
+i=1
+
+(cid:110)
+
+y(si) −
+
+p
+(cid:88)
+
+k=1
+
+xk(si)B(si)T
+
+(cid:98)ak,i
+
+(cid:35)
+
+(cid:111)2
+
++ df ∗ log n,
+
+(cid:110)
+
+(cid:111)
+
+where df = tr
+
+(cid:110)
+
+X
+
+(cid:99)G∗X
+
+(cid:99)G∗(X T
+k)H, · · · , (n − n (cid:98)G∗
+The remaining problem is to ﬁnd suitable {λk, (cid:37)k}p
+
+(cid:99)G∗ + 2n(cid:102)H)−1X T
+(cid:99)G∗
+(cid:111)
+
+kH, (n2
+n1
+
+k − n1
+
+)H
+
+k−1
+
+k
+
+diag
+
+, k = 1, · · · , p.
+
+k=1).
+An intuitive way is to search over a sequence of grid points. However, noticing the number
+
+k=1, which minimize BIC({λk, (cid:37)k}p
+
+, (cid:102)H = diag((cid:37)1 (cid:102)H1, · · · , (cid:37)p (cid:102)Hp) and (cid:102)Hk =
+
+of tuning parameters is greater than one, we need to search a large number of grid points
+
+to get a decent result. To address this, we use the NelderMead method (Singer and Nelder,
+2009) to minimize BIC({λk, (cid:37)k}p
+
+k=1), see details in Section S3 of the online Supplement,
+
+12
+
+and a brief description is given as follows. It is a direct search method, thus is suitable
+for minimizing BIC({λk, (cid:37)k}p
+
+k=1) whose derivatives are unknown. It tries to decrease the
+function values through a sequence of simplexes, and typically requires only one function
+
+evaluation in each iteration step. Moreover, it can give signiﬁcant improvements in the ﬁrst
+
+few iterations and quickly produce satisfactory results (Singer and Nelder, 2009), because it
+
+replaces the worst vertex in the simplex with a better one in each iteration step. According
+to our experience, minimizing BIC({λk, (cid:37)k}p
+
+k=1) with the NelderMead method generally
+converges within 50 iterations, which means that no more than 50 function evaluations are
+
+needed in total, far less than the number of function evaluations using the grid search.
+
+2.4 Computational algorithm
+
+Directly minimizing the objective function (4) is challenging, because the penalty func-
+
+tion is not separable in ak,i’s. We reparameterize (4) by introducing a new set of parameters
+
+ηk,ij = ak,i − ak,j. Then, minimizing (4) is equivalent to
+p
+(cid:88)
+
+p
+(cid:88)
+
+n
+(cid:88)
+
+(cid:88)
+
+{y(si)−
+
+xk(si)B(si)T ak,i}2 +
+
+min S(a, η) =
+
+1
+2n
+
+i=1
+
+k=1
+
+k=1
+
+(i,j)∈E
+
+s.t. ak,i − ak,j − ηk,ij = 0,
+
+(i, j) ∈ E,
+
+Pλk ((cid:107)ηk,ij(cid:107)2)+
+
+p
+(cid:88)
+
+(cid:37)k
+
+n
+(cid:88)
+
+k=1
+
+i=1
+
+aT
+
+k,iHak,i,
+
+(6)
+
+where a = (aT
+
+1 , · · · , aT
+
+p )T ,
+k,ij, (i, j) ∈ E}T . The above constrained optimization problem can be further
+
+k,n)T , k = 1, · · · , p, and η = (ηT
+
+p )T , ak = (aT
+
+k,1, · · · , aT
+
+1 , · · · , ηT
+
+ηk = {ηT
+
+converted to an augmented one,
+
+min S(a, η) +
+
+θ
+2
+
+p
+(cid:88)
+
+(cid:88)
+
+k=1
+
+(i,j)∈E
+
+(cid:107)ak,i − ak,j − ηk,ij(cid:107)2
+2,
+
+s.t. ak,i − ak,j − ηk,ij = 0, (i, j) ∈ E, (7)
+
+where θ is a positive ﬁxed parameter; see discussion of θ in Remark 2. Problems (6) and
+
+(7) are equivalent, because the quadratic penalty is zero when the constraints are satisﬁed.
+
+To solve the constrained problem (7), we use the Lagrangian method, by minimizing
+
+13
+
+L(a, η, υ) = S(a, η) +
+
+θ
+2
+
+p
+(cid:88)
+
+(cid:88)
+
+k=1
+
+(i,j)∈E
+
+(cid:107)ak,i − ak,j − ηk,ij(cid:107)2
+
+2 +
+
+p
+(cid:88)
+
+(cid:88)
+
+k=1
+
+(i,j)∈E
+
+υT
+
+k,ij (ak,i − ak,j − ηk,ij) , (8)
+
+where the dual variables υ = (υT
+
+k,ij, (i, j) ∈ E}T , k = 1, · · · , p, are
+the Lagrange multipliers. The expression (8) is usually called the augmented Lagrangian
+
+p )T , υk = {υT
+
+1 , · · · , υT
+
+for (6) (Boyd et al., 2011).
+
+We now present the computational algorithm based on ADMM for minimizing (8).
+
+Step 0. Initialize η(0) = 0 and υ(0) = 0.
+
+Step 1. Given (η(m), υ(m)), we update a by solving ∂L(a, η(m), υ(m))/∂a = 0, as
+
+a(m+1) = Π−1(cid:104)
+
+n−1BT Y +
+
+p
+(cid:88)
+
+(cid:88)
+
+(ek,i − ek,j){θη(m)
+
+k,ij − υ(m)
+k,ij }
+
+(cid:105)
+,
+
+(9)
+
+k=1
+
+(i,j)∈E
+
+where Π = n−1BT B+θ{(cid:80)p
+
+k=1
+
+(cid:80)
+
+(i,j)∈E(ek,i−ek,j)(ek,i−ek,j)T }+2H, Y = (y(s1), · · · , y(sn))T ,
+
+B = (B1, · · · , Bp), H = diag(H 1, · · · , H p),
+
+
+
+
+
+
+Bk =
+
+xk(s1)B(s1)T
+...
+0T
+
+· · ·
+. . .
+· · · xk(sn)B(sn)T
+
+0T
+...
+
+
+
+
+
+
+n×nL
+
+, H k = (cid:37)k
+
+
+
+
+
+
+H · · · 0
+...
+...
+. . .
+0 · · · H
+
+
+
+
+
+
+,
+
+nL×nL
+
+k = 1, · · · , p, and ek,i represents an npL × L matrix, where the (g, l)-th element of
+ek,i is e(g,l)
+k,i
+
+, equal to 1 if g = l + (k − 1)nL + (i − 1)L, 1 ≤ l ≤ L, and 0 otherwise.
+
+Step 2. Given (a(m+1), υ(m)), we update ηk,ij by minimizing
+
+1
+2
+k,ij = a(m+1)
+
+(δ(m)
+
+k,ij − ηk,ij)T (δ(m)
+
+k,ij − ηk,ij) +
+
+1
+θ
+
+Pλk ((cid:107)ηk,ij(cid:107)2) ,
+
+(10)
+
+where δ(m)
+
+θ υ(m)
+the minimizer of (10) has a simple closed-form expression as following:
+
+k,i − a(m+1)
+
+k,ij . When Pλk(·) is the MCP or SCAD penalty,
+
+k,j + 1
+
+• MCP: η(m+1)
+
+k,ij = γ
+M (z, t) = (1 − t
+
+γ−1M (δ(m)
+)+z;
+
+(cid:107)z(cid:107)2
+
+k,ij , λ1
+
+θ )I((cid:107)δ(m)
+
+k,ij (cid:107)2 ≤ γλ1
+
+θ ) + δ(m)
+
+k,ij I((cid:107)δ(m)
+
+k,ij (cid:107)2 > γλ1
+
+θ ), where
+
+14
+
+• SCAD: η(m+1)
+k,ij (cid:107)2 ≤ γλ1
+
+(cid:107)δ(m)
+
+k,ij
+
+= M (δ(m)
+
+k,ij , λ1
+k,ij I((cid:107)δ(m)
+
+θ )I((cid:107)δ(m)
+k,ij (cid:107)2 ≤ 2λ1
+k,ij (cid:107)2 > γλ1
+θ ).
+
+θ ) + δ(m)
+
+θ ) + γ−1
+
+γ−2M (δ(m)
+k,ij ,
+
+γλ1
+(γ−1)θ )I( 2λ1
+
+θ ≤
+
+Step 3. Update υk,ij as
+
+k,ij = υ(m)
+υ(m+1)
+
+k,ij + θ
+
+(cid:110)
+
+k,i − a(m+1)
+a(m+1)
+
+k,j − η(m+1)
+
+k,ij
+
+(cid:111)
+
+.
+
+(11)
+
+Repeat Steps 1-3 until a stopping rule is met, and denote the ﬁnal estimates as (cid:98)a, (cid:98)η, (cid:98)υ.
+In non-convex optimization, it is important to assign appropriate initial values to obtain
+
+a good solution. As shown in Step 0, we choose to initialize the ADMM algorithm with
+
+η(0) = 0 and υ(0) = 0, which is a common choice (Lv et al., 2020) and provides decent
+
+results in the simulation studies of Section 4.
+
+The updates from (10)-(11) are eﬃcient, and the main computational burden con-
+
+centrates on (9), which solves a linear system of equations, i.e., Πa(m+1) = ζ, where
+ζ = n−1BT Y + (cid:80)p
+k,ij }. Because E constructed by MST
+contains n−1 edges, the npL×npL matrix Π is quite sparse, with proportion of non-zero el-
+
+(i,j)∈E(ek,i − ek,j){θη(m)
+
+k,ij − υ(m)
+
+(cid:80)
+
+k=1
+
+ements at most 1
+
+npL . Such sparse linear system can be solved eﬃciently, through storing
+Π in a compressed, sparse, column-oriented format, which is implemented by sparseMa-
+
+n + 5
+
+trix in R package Matrix. Then, the linear system can be solved eﬃciently by the function
+
+solve( Π, ζ, sparse=TRUE) in R package Matrix.
+
+When E is obtained by pairwise construction, the spatial neighborhood information
+
+is not utilized, resulting in lots of redundant penalties with the number of n(n − 1)/2,
+
+which is far larger than n − 1, the number of penalty terms when utilizing the spatial
+
+neighborhood information to construct E through MST. It is widely known that, solving
+
+the optimization problem with n(n − 1)/2 penalties is almost infeasible when n is relatively
+
+15
+
+large, say n ≥ 300. Thus, pairwise construction can not be applied to the motivating water
+
+mass analysis in Section 5, where n = 5130.
+
+primal residual R(m+1) = {(a(m+1)
+the dual residual S(m+1) = θ (cid:80)p
+
+REMARK 2. Similar with Ma and Huang (2017), we track the algorithm based on the
+k,j − η(m+1)
+(i,j)∈E(ek,i − ek,j){η(m+1)
+
+k,ij }. The algorithm
+is terminated when (cid:107)R(m+1)(cid:107)2 ≤ δr and (cid:107)S(m+1)(cid:107)2 ≤ δs for some small positive values
+
+)T , (i, j) ∈ E, k = 1, · · · , p}T , and
+
+− a(m+1)
+(cid:80)
+
+k,ij − η(m)
+
+k=1
+
+k,ij
+
+k,i
+
+δr and δs. For a ﬁxed m, according to Boyd et al. (2011), larger θ usually results in
+
+smaller (cid:107)R(m+1)(cid:107)2 and larger (cid:107)S(m+1)(cid:107)2. Our numerical experience suggests that, θ = 1
+
+is a decent choice, for which both (cid:107)R(m+1)(cid:107)2 and (cid:107)S(m+1)(cid:107)2 reach small values within a
+
+moderate number of iterations. Such value of θ is also adopted in Ma and Huang (2017).
+
+3 Asymptotic properties
+
+In this section, we ﬁrst introduce the deﬁnition of true clusters considering the structure
+of EMST (the edge set constructed by MST), and we name these new clusters as “spatial
+
+neighborhood true clusters”, abbreviated as “SpaNeigh true clusters”. We will
+
+explain the reason for this name at the beginning of Section 3.1. Then, we study the
+oracle property of the SCVC method with EMST; namely, it works as well as the SpaNeigh
+
+true clusters are known. Finally, we deduce the minimum signal diﬀerence requirement for
+
+recovering SpaNeigh true clusters.
+
+3.1 Deﬁnition of the SpaNeigh true clusters
+
+As discussed in Remark 1, the structure of EMST plays an important role in cluster
+
+identiﬁcation. Accordingly, we ﬁrst give the deﬁnition of true clusters considering the
+structure of EMST, i.e., SpaNeigh true clusters, and the deﬁnition of identiﬁed clusters from
+the SCVC method with EMST. By the deﬁnition in the following, we will see that, SpaNeigh
+
+16
+
+true clusters exactly describe the oracle information in Section 1, i.e., for any two locations
+
+connected by MST, we know whether they belong to the same subregion or not. Based
+
+on the fact that MST only connects proximate locations, SpaNeigh true clusters actually
+
+describe the oracle information about whether the location and its neighbors belong to the
+
+same subregion or not, and this is the reason for its name. To our best knowledge, it is the
+ﬁrst time to consider the inﬂuence of the structure of EMST on cluster identiﬁcation.
+
+Let {a0
+
+k,i}n
+
+i=1 represent the true values of the spline coeﬃcient vectors, then from model
+
+k,i = agk
+
+k , where a0
+
+k,i = agk
+k , 1 ≤ i ≤ n}, or equivalently, Ggk
+
+(3), there are Gk distinct values agk
+k , gk = 1, · · · , Gk. Deﬁne
+Ggk
+k, · · · , GGk
+k = {i : a0
+k }
+forms a partition of {1, · · · , n}, representing the true clusters for k-th covariate without
+considering the structure of EMST. Considering the structure of EMST, we give the deﬁnition
+
+k for si ∈ Dgk
+k = {i : si ∈ Dgk
+
+k }, then {G1
+
+of the SpaNeigh true clusters by the following two steps, where the new cluster is either
+
+equal to one of Ggk
+
+k , or a subset, depending on EMST.
+
+k }, such that si1 and si2 are connected, then we reserve Ggk
+
+1. For a given gk ∈ {1, · · · , Gk}, if for any two locations si1, si2 in Ggk
+k , i.e., i1, i2 ∈ Ggk
+k ,
+there always exists a path made up of an edge/some edges in Egk
+k = {(i, j) : (i, j) ∈
+EMST, and i, j ∈ Ggk
+k as
+one cluster. Otherwise, we form a partition of Ggk
+k,f , f = 1, · · · , Fk,
+for some positive integer Fk, satisfying that for any two locations in Ggk
+k,f , they are
+connected through a path, made up of an edge/some edges in Egk
+k,f = {(i, j) : (i, j) ∈
+EMST, and i, j ∈ Ggk
+k,f , si4 ∈ Ggk
+k,f (cid:48)
+and f (cid:54)= f (cid:48), the corresponding edge (i3, i4) /∈ EMST; for example, {s1, s2} are not
+connected with {s3, s4} through EMST in Figure 1 (b), so that they are divided into
+
+k,f }. Meanwhile, for any two locations si3 ∈ Ggk
+
+k , denoted as Ggk
+
+two clusters though they are in the same subregion.
+
+2. Repeating the above step for gk = 1, · · · , Gk, we obtain either Ggk
+
+k or Ggk
+
+k,1, · · · , Ggk
+k,Fk
+
+.
+
+17
+
+We redeﬁne these subgroups as {Mg∗
+
+k
+
+for k-th covariate, where G∗
+in the paragraph above Theorem 1 is provided to further illustrate {Mg∗
+
+k
+
+k=1, and they are the SpaNeigh true clusters
+k
+g∗
+k ≥ Gk is the number of new clusters. A concrete example
+
+k }G∗
+
+k }G∗
+
+k=1.
+k
+g∗
+
+For the identiﬁed clusters, we assume that there are (cid:98)Gk distinct values in {(cid:98)ak,i}n
+
+i=1, de-
+
+noted as (cid:98)agk
+k , gk = 1, · · · , (cid:98)Gk. As a counterpart of the SpaNeigh true clusters, the identiﬁed
+clusters from the SCVC method with EMST, are obtained from the above two steps by re-
+placing a0
+
+k, · · · , (cid:99)M (cid:98)G∗
+k,i with (cid:98)ak,i, agk
+k ≥ (cid:98)Gk is the number of identiﬁed clusters from the SCVC method with EMST.
+
+k , and Gk with (cid:98)Gk. We denote them as { (cid:99)M1
+
+k with (cid:98)agk
+
+where (cid:98)G∗
+
+k },
+
+k
+
+By deﬁnition, the SpaNeigh true cluster Mg∗
+
+k for some gk ∈ {1, · · · , Gk},
+k = 1, · · · , G∗
+g∗
+k } exactly describes the oracle information in Sec-
+tion 1, i.e., for any two locations connected by MST, we know whether they belong to
+
+k is a subset of Ggk
+
+k, · · · , MG∗
+
+k, and {M1
+
+k
+
+k
+
+the same subregion or not. Based on the fact that MST only connects proximate loca-
+
+k, · · · , MG∗
+
+k
+
+tions, {M1
+
+cation and its neighbors belong to the same subregion or not. However, {G1
+
+k } actually describes the oracle information about whether the lo-
+k, · · · , GGk
+k }
+describes the oracle information, that for any two locations even they are distant from each
+
+other, we know whether they belong to the same subregion or not. Under the frame-
+
+work of spatial data, people may not care whether two locations belong to the same
+
+subregion if they are distant from each other, and just want to know whether the loca-
+
+people may only need to recover {M1
+
+tion and its neighbors can be assigned into the same cluster. From that point of view,
+k, · · · , MG∗
+k }. Moreover,
+we use a concrete example for further illustration, see Figure 1. In Figure 1(a), the lo-
+
+k } instead of {G1
+
+k, · · · , GGk
+
+k
+
+cations within subregion D1
+
+k (or D2
+all of them are connected by MST. Then, we have Gk = G∗
+
+k) are relatively close to each other, so that
+k, · · · , GGk
+k }
+k } = {{1, 2, 3, 4}, {5, 6, 7}, {8, 9}}. In Figure 1(b), within subregion D1
+k,
+
+k = 3 and {G1
+
+k, · · · , MG∗
+
+k, or D3
+
+= {M1
+
+k
+
+18
+
+the location set {1, 2} is distant from the location set {3, 4}, so that MST does not connect
+k, · · · , MG∗
+
+them. Then, we have G∗
+k, · · · , GGk
+
+Gk = 3 with {G1
+k, · · · , GGk
+k, · · · , GGk
+
+k } = {M1
+k } (cid:54)= {M1
+
+k = 4 with {M1
+k } = {{1, 2}, {3, 4}, {5, 6, 7}, {8, 9}}, and
+k } = {{1, 2, 3, 4}, {5, 6, 7}, {8, 9}}. For the former situation where
+k }, we call it “MST-equal”; for the latter situation where
+k }, we call it “MST-unequal”.
+
+k, · · · , MG∗
+k, · · · , MG∗
+
+{G1
+
+{G1
+
+k
+
+k
+
+k
+
+Theorem 1. Under EMST, the sets of SpaNeigh true clusters {M1
+clusters { (cid:99)M1
+
+k }, are existing and unique, k = 1, · · · , p.
+
+k, · · · , (cid:99)M (cid:98)G∗
+
+k
+
+k, · · · , MG∗
+
+k
+
+k } and identiﬁed
+
+REMARK 3. As discussed in Section 2.3.3, MST is inﬂuenced by the deﬁnition of dis-
+
+tance, and so is {M1
+
+k }. Diﬀerent distance metrics essentially reﬂect diﬀerent
+beliefs on the spatial neighborhood information, because they determine the similarity be-
+
+k
+
+k, · · · , MG∗
+
+tween locations. For instance, two locations, which are close to each other under Euclidean
+
+distance, can be distant from each other under other distances, such as, geodesic distance,
+
+proper use of spatial neighborhood information, thus the corresponding {M1
+
+see Wang and Ranalli (2007). Thus, for a speciﬁc problem, a proper distance leads to
+k, · · · , MG∗
+k }
+based on such distance may be more reasonable. Euclidean distance adopted in this paper
+
+k
+
+is widely used in spatial analysis, when the shape of a domain is regular. When the shape
+
+of a domain is irregular with complex boundaries or interior gaps and holes, geodesic dis-
+
+tance, that is, the length of the shortest path within the domain between two points, may
+
+more accurately reﬂect the spatial neighborhood information than Euclidean distance, as it
+
+considers the complex shape of the domain, see details in Wang and Ranalli (2007).
+
+19
+
+(a)
+
+(b)
+
+Figure 1: EMST consists of within/between-subregion (solid/dashed) connections.
+
+3.2 Oracle properties of the SCVC method with EMST
+
+When the SpaNeigh true clusters, i.e., M1
+
+k, · · · , MG∗
+
+k
+
+k , k = 1, · · · , p, are known, the
+
+oracle estimator for a = (aT
+
+1 , · · · , aT
+n
+(cid:88)
+
+p )T is
+p
+(cid:88)
+
+(cid:98)aor = arg min
+ak∈N k
+G is the subspace of RnL, deﬁned as
+
+{y(si) −
+
+G , k=1,··· ,p
+
+k=1
+
+i=1
+
+where N k
+
+1
+2n
+
+xk(si)BT (si)ak,i}2 +
+
+p
+(cid:88)
+
+(cid:37)k
+
+n
+(cid:88)
+
+k=1
+
+i=1
+
+aT
+
+k,iHak,i,
+
+(12)
+
+N k
+
+G = {ak = (aT
+
+k,1, · · · , aT
+
+k,n)T ∈ RnL : ak,i = ak,j for any i, j ∈ Mg∗
+
+k ≤ G∗
+
+k}.
+
+|Mg∗
+
+Let a0 be the true value of a, (cid:101)(cid:37) = max
+k |, where |Mg∗
+k . For any numbers an > 0
+max
+1≤k≤p,1≤g∗
+and bn > 0, let an (cid:16) bn represent limn→∞an/bn = c for some c > 0, and an >> bn represent
+n bn = o(1). For any s × t matrix A = (Aij)s,t
+a−1
+
+min
+1≤k≤p,1≤g∗
+k | is the number of elements in Mg∗
+
+k | and |Mmax| =
+
+(cid:37)k, |Mmin| =
+
+i=1,j=1, denote (cid:107)A(cid:107)∞ = max
+1≤i≤s
+
+j=1 |Aij|.
+
+k≤G∗
+k
+
+k≤G∗
+k
+
+1≤k≤p
+
+(cid:80)t
+
+k
+
+k
+
+k
+
+Theorem 2. Under the Assumptions (A1)-(A6) in the online Supplement, if |Mmin|
+
+>> (cid:112)(cid:80)p
+
+k=1 G∗
+k
+
+√
+
+n log n and (cid:101)(cid:37) <<
+
+√
+
+log n/(
+
+√
+
+n|Mmax| (cid:107)a0(cid:107)∞), we have
+
+(cid:107)(cid:98)aor − a0(cid:107)∞ ≤ rn,
+
+20
+
+k
+
+k , 1 ≤ g∗
+|Mg∗
+
+k
+
+with probability approaching one, where rn (cid:16) (cid:112)(cid:80)p
+
+k=1 G∗
+k
+
+√
+
+n log n/|Mmin|.
+
+REMARK 4. Let G∗
+
+k, by the condition |Mmin| >> (cid:112)(cid:80)p
+G∗
+
+k=1 G∗
+k
+
+√
+
+n log n
+
+in Theorem 2, we have G∗
+
+n log n << n, thus the maximum number of true clusters
+
+max = max
+1≤k≤p
+3/2√
+
+max
+max << (n/ log n)1/3.
+
+need to satisfy G∗
+
+Now we consider the theoretical properties of the SCVC method with EMST, in terms
+
+of cluster identiﬁcation and coeﬃcient estimation. It is expected that, the signal diﬀerence
+
+between diﬀerent clusters plays an important role, which is measured by the diﬀerence of
+
+the true spline coeﬃcient vectors in diﬀerent groups, and larger signal diﬀerence makes
+
+it easier for true cluster recovering. For k-th covariate, we deﬁne the minimum signal
+diﬀerence under the structure of EMST as
+
+ϑk =
+
+i ∈ Mg
+
+min
+k, j ∈ Mg(cid:48)
+(i, j) ∈ EMST.
+
+k , g (cid:54)= g(cid:48),
+
+(cid:107)a0
+
+k,i − a0
+
+k,j(cid:107)2,
+
+k = 1, · · · , p.
+
+(13)
+
+Therefore, to make ϑk > 0, we only require that the true spline coeﬃcient vector pairs
+k,i and a0
+a0
+diﬀerent subregions. Take the case in Figure 1(b) as an example, we have ϑk =
+
+k,j are diﬀerent, if the corresponding locations si and sj belong to two proximate
+
+min
+(i,j)∈{(2,5),(7,8)}
+
+(cid:107)a0
+
+k,i − a0
+
+k,j(cid:107)2. More discussion about ϑk can be found in Remark 5.
+
+Theorem 3. Suppose that the assumptions in Theorem 2 hold, (cid:101)(cid:37) <<
+
+√
+
+log n/{n((cid:107)a0(cid:107)∞
+
++rn)}, ϑk >> λk and
+
+λk >> max
+
+1≤g∗
+
+k≤G∗
+k
+
+{rn, |Mg∗
+
+k |(cid:112)log n/n},
+
+k
+
+k = 1, · · · , p.
+
+Then, there exists a local minimizer (cid:98)a of the objective function (4) with EMST, satisfying
+
+P ((cid:98)a = (cid:98)aor) → 1.
+
+21
+
+Theorem 3 shows that, the oracle estimator (cid:98)aor is a local minimizer of the objec-
+tive function (4) with EMST, with probability approaching one. By the deﬁnition of
+{ (cid:99)M1
+
+k }, we have the following corollary.
+
+k, · · · , (cid:99)M (cid:98)G∗
+
+k
+
+Corollary 1. Suppose the assumptions in Theorem 3 hold, we have
+
+(cid:16)
+
+P
+
+{ (cid:99)M1
+
+k, · · · , (cid:99)M (cid:98)G∗
+
+k
+
+k } = {M1
+
+(cid:17)
+k, · · · , MG∗
+k }
+
+k
+
+→ 1, k = 1, · · · , p.
+
+Corollary 1 shows that, the SCVC method with EMST can identify the SpaNeigh true
+
+clusters {M1
+
+k, · · · , MG∗
+
+k
+
+k } with probability approaching one.
+
+REMARK 5. We discussed the minimum signal diﬀerence ϑk in Theorem 3. From the
+
+conditions ϑk >> λk and λk >> max
+
+1≤g∗
+
+k≤G∗
+k
+
+{rn, |Mg∗
+k |
+
+k
+
+√
+
+log n/n}, we have
+
+ϑk >> max
+
+1≤g∗
+
+k≤G∗
+k
+
+{rn, |Mg∗
+
+k |(cid:112)log n/n},
+
+k
+
+k = 1, · · · , p.
+
+Suppose |Mmin| (cid:16) |Mmax|,
+
+(i) when n1/5 << G∗
+
+k << n1/3(log n)−1/3, then rn >> |Mg∗
+k |
+
+k
+
+log n/n, we have the
+
+√
+
+minimum signal diﬀerence satisfying ϑk >> rn;
+
+(ii) when 0 < G∗
+
+k << n1/5, then rn << |Mg∗
+k |
+and if the number of clusters is ﬁxed, we have ϑk >>
+
+log n/n,
+
+k
+
+√
+
+√
+
+so we need ϑk >> |Mg∗
+k |
+
+k
+
+√
+
+log n/n,
+
+log n, see a similar rate in
+
+Ke et al. (2015).
+
+4 Simulation studies
+
+We present two simulation studies to illustrate the ﬁnite-sample performance of SCVC
+
+method, based on the SCAD penalty with γ = 3.7 (Fan and Li, 2001; Zou and Li, 2008).
+
+Results based on MCP are similar and thus omitted. In the ﬁrst study, we consider constant
+
+22
+
+clustered coeﬃcients, i.e., the coeﬃcients remain constant within each cluster. In the second
+
+study, the true coeﬃcients are clustered, varying smoothly within each cluster.
+
+In each study, we consider two diﬀerent spatially clustered patterns in the square domain
+
+[0, 1]×[0, 1], made up of 1000 locations. Based on these locations, we generate the covariates
+
+as x1(si) ≡ 1 and {x2(si)}1000
+
+i=1 as realizations of a spatial Gaussian process with mean zero
+
+and covariance function Cov{x(si), x(sj)} = exp(−(cid:107)si − sj(cid:107)/φ), where φ is the range
+
+parameter, and φ = 0.1, 1 correspond to weak and strong spatial correlations. Based on
+
+these locations and covariates, the data generating process is
+
+y(si) = x1(si)β1(si) + x2(si)β2(si) + (cid:15)(si), i = 1, · · · , 1000,
+
+where (cid:15)(si) i.i.d.∼ N (0, 0.12), and we run 100 replicates to examine the behavior of SCVC in
+
+parameter estimation and cluster identiﬁcation.
+
+For comparison, we include the SCC (Li and Sang, 2019), the GWR (Fotheringham
+
+et al., 2003) method, and the common P -spline estimator (PSE) which is obtained by
+
+assuming the spline coeﬃcient vectors in (4) are the same for any locations. The SCC can
+
+deal with the spatially clustered pattern with constant regression coeﬃcients within each
+
+subregion, while the GWR and the PSE can deal with the scenario when the regression
+
+coeﬃcients vary smoothly over the whole region. Moreover, we also include the method
+
+by replacing the LASSO penalty in SCC with the SCAD penalty, and name it as “SCC*”.
+
+The algorithm and code provided by Li and Sang (2019) can not deal with SCC*, and we
+
+modify the ADMM algorithm in Section 2.4 to implement SCC*. Because the optimization
+
+problem for SCC* is non-convex, we try many types of initial values, such as zero, random
+
+initial values and initial values from the SCC estimates, and ﬁnd that the initial values
+
+from the SCC estimates result in the best performance of SCC* among these types of
+
+initial values. Thus, for comparison purpose, we report the results of SCC* with the initial
+
+23
+
+values from the SCC estimates. To quantify the performance of each method, we consider
+
+three criteria. (i) MSEβk: the mean-squared error for k-th covariate, deﬁned as
+
+MSEβk =
+
+1
+n
+
+n
+(cid:88)
+
+{ (cid:98)βk(si) − βk(si)}2,
+
+k = 1, 2.
+
+i=1
+
+(ii) RIk: the rand index for k-th covariate, a commonly used criterion in clustering analysis,
+
+which measures the percentage of correct identiﬁcations, deﬁned as
+
+RIk =
+
+TPk + TNk
+TPk + FPk + FNk + TNk
+
+,
+
+k = 1, 2.
+
+TPk/FPk (true positive/false positive) is the number of location pairs from diﬀerent subre-
+
+gions assigned to diﬀerent clusters/the same cluster; TNk/FNk (true negative/false nega-
+
+tive) is the number of pairs from the same subregion assigned to the same cluster/diﬀerent
+
+clusters. Higher values of RIk indicate better agreement of the identiﬁed clusters with the
+
+true subregions. (iii) ICk: the number of identiﬁed clusters for k-th covariate. All these
+
+criteria are averaged over 100 replicates.
+
+The tuning parameters in SCVC, SCC, SCC*, and PSE are chosen by BIC, and for the
+
+GWR, we employ an exponential kernel function with optimal bandwidth chosen by the
+
+cross-validation. The SCC and GWR are realized by the code from Li and Sang (2019),
+
+SCC* by modifying the ADMM algorithm in Section 2.4, and PSE by its closed expression.
+
+4.1 Study 1: Constant clustered coeﬃcients
+
+The true regression coeﬃcients {βk(si)}2
+
+k=1 in this study are spatially clustered and
+
+remain constant within each cluster, i.e., the SCC model is the true model. Moreover,
+
+two diﬀerent spatially clustered patterns are considered, as shown in Figure 2(a). The
+
+spatially clustered patterns in the left two panels of Figure 2(a) represent MST-equal, i.e.,
+
+{G1
+
+k, · · · , GGk
+
+k } = {M1
+
+k, · · · , MG∗
+
+k
+
+k }, k = 1, 2; the spatially clustered patterns in the right
+
+24
+
+two panels of Figure 2(a) represent MST-unequal, i.e., {G1
+
+k },
+k = 1, 2. Details about generating these two diﬀerent clustered patterns in Figure 2 can be
+
+k } (cid:54)= {M1
+
+k, · · · , GGk
+
+k
+
+k, · · · , MG∗
+
+found in Section S4 of the online Supplement.
+
+Table 1 compares the MSE, RI, and IC for SCVC, SCC, GWR, SCC*, and PSE, with
+
+patterns speciﬁed either by MST-equal or MST-unequal in Figures 2(a). The results in
+
+Table 1 suggest that the SCVC generally outperforms the SCC, GWR, and PSE. First, the
+
+MSEs of SCVC are smaller than those of SCC, GWR, and PSE. Second, SCVC gives a more
+
+reasonable number of identiﬁed clusters than SCC. Third, SCVC results in higher RI values
+
+than SCC. One possible explanation is that, compared to the SCAD penalty in the SCVC,
+
+the LASSO penalty in the SCC tends to result in a larger number of identiﬁed clusters
+
+and lower eﬃciency for estimation. This explanation is supported by the results of SCC*,
+
+which generally show better performance than SCC due to utilizing SCAD penalty. Now
+
+we compare the results of SCVC and SCC*, where both methods utilize SCAD penalty.
+
+For cluster identiﬁcation, both methods produce similar results. For coeﬃcient estimation,
+
+SCVC performs better than SCC for the estimation of β1(si) under MST-equal (or MST-
+
+unequal) with weak correlation; for the rest cases, SCVC and SCC* perform similarly or
+
+SCC* performs slightly better. One possible reason for the underperformance of SCC* in
+
+some cases is the sensitivity of SCC* to the initial value. If setting the initial values as
+
+the true values, the infeasible SCC* uniformly outperforms SCVC for coeﬃcient estimation
+
+and cluster identiﬁcation, see Section S5 in the online Supplement.
+
+4.2 Study 2: Smooth-varying clustered coeﬃcients
+
+In this study, the sample locations and clusters are the same as those in Study 1, except
+
+that the coeﬃcients within each cluster are smooth-varying, see Figure 2(b). The left two
+
+and right two panels in Figure 2(b) represent MST-equal and MST-unequal, respectively.
+
+25
+
+(a) Constant clustered coeﬃcients
+
+(b) Smooth-varying clustered coeﬃcients
+
+Figure 2: The points/colors represent the locations/coeﬃcient values, and the solid lines
+
+represent the edges in MST. From the top left cluster to the bottom right one: in (a), β2(s)
+
+equals 1, -1, 0.5, -0.5, respectively, and β1(s) equals -0.5, 1, -1, 0.5, respectively; in (b),
+
+with s = (sh, sv) and shv = sh + sv, β2(s) equals 1 + s2
+
+hv, −1 + s2
+
+hv, 0.5 + s2
+
+hv, −0.5 + s2
+
+hv,
+
+respectively, and β1(s) equals −0.5 + s1.5
+
+hv, −1 + s1.7
+
+hv , 0.5 + s1.5
+
+hv , respectively.
+
+hv , 1 + s2
+26
+
+Table 1: Summary of Study 1, with constant coeﬃcient within each cluster.
+
+Pattern
+
+Correlation
+
+Methods
+
+MSEβ2
+
+MSEβ1
+
+MST-equal
+
+MST-unequal
+
+SCVC
+
+SCC
+
+weak
+
+SCC*
+
+GWR
+
+PSE
+
+SCVC
+
+SCC
+
+strong
+
+SCC*
+
+GWR
+
+PSE
+
+SCVC
+
+SCC
+
+weak
+
+SCC*
+
+GWR
+
+PSE
+
+SCVC
+
+SCC
+
+strong
+
+SCC*
+
+GWR
+
+PSE
+
+0.021
+(0.001)
+0.029
+(0.001)
+0.024
+(0.001)
+0.199
+(0.004)
+0.855
+(0.002)
+
+0.086
+(0.006)
+0.197
+(0.004)
+0.050
+(0.001)
+1.364
+(0.023)
+1.741
+(0.009)
+0.096
+(0.002)
+0.118
+(0.001)
+0.130
+(0.001)
+0.447
+(0.003)
+1.088
+(0.002)
+
+0.850
+(0.024)
+1.321
+(0.018)
+0.926
+(0.004)
+4.450
+(0.137)
+2.494
+(0.008)
+
+0.010
+(0.001)
+0.079
+(0.001)
+0.090
+(0.001)
+0.214
+(0.004)
+0.907
+(0.003)
+
+0.099
+(0.013)
+0.288
+(0.005)
+0.130
+(0.001)
+1.932
+(0.043)
+1.505
+(0.008)
+0.054
+(0.003)
+0.200
+(0.002)
+0.155
+(0.001)
+0.707
+(0.004)
+1.386
+(0.003)
+
+2.307
+(0.075)
+4.067
+(0.057)
+2.732
+(0.001)
+3.024
+(0.043)
+2.715
+(0.018)
+
+RI2
+
+99.72
+(0.02)
+86.04
+(0.43)
+99.37
+(0.00)
+-
+-
+-
+-
+
+99.58
+(0.15)
+75.15
+(0.14)
+99.14
+(0.00)
+-
+-
+-
+-
+85.51
+(0.01)
+78.59
+(0.13)
+85.11
+(0.00)
+-
+-
+-
+-
+
+81.22
+(0.15)
+77.60
+(0.14)
+81.37
+(0.03)
+-
+-
+-
+-
+
+RI1
+
+99.96
+(0.01)
+78.69
+(0.25)
+99.60
+(0.00)
+-
+-
+-
+-
+
+98.46
+(0.29)
+73.26
+(0.17)
+99.05
+(0.00)
+-
+-
+-
+-
+87.77
+(0.02)
+78.59
+(0.13)
+87.72
+(0.00)
+-
+-
+-
+-
+
+82.66
+(0.15)
+75.86
+(0.07)
+84.06
+(0.03)
+-
+-
+-
+-
+
+IC2
+
+5.84
+(0.04)
+20.65
+(0.33)
+7.00
+(0.00)
+-
+-
+-
+-
+
+4.49
+(0.06)
+45.03
+(0.59)
+8.00
+(0.00)
+-
+-
+-
+-
+8.26
+(0.17)
+49.03
+(0.64)
+11.00
+(0.00)
+-
+-
+-
+-
+
+6.78
+(0.10)
+67.76
+(1.24)
+26.26
+(0.10)
+-
+-
+-
+-
+
+IC1
+
+4.48
+(0.05)
+20.51
+(0.34)
+4.00
+(0.00)
+-
+-
+-
+-
+
+4.19
+(0.04)
+39.19
+(0.39)
+8.00
+(0.00)
+-
+-
+-
+-
+12.78
+(0.07)
+42.35
+(0.55)
+12.82
+(0.04)
+-
+-
+-
+-
+
+8.79
+(0.25)
+40.22
+(0.79)
+14.69
+(0.07)
+-
+-
+-
+-
+
+SCVC: spatially clustered varying coeﬃcient method; SCC: spatially clustered coeﬃcient regression based on LASSO; SCC*:
+
+spatially clustered coeﬃcient regression based on SCAD; GWR: geographically weighted regression; PSE: P -spline estimator.
+
+MSEβk /RIk/ICk: mean squared error (×10)/rand index (×100)/number of identiﬁed clusters, for k-th covariate, k = 1, 2. Values
+in the parentheses are the standard errors. Note that GWR and PSE can not identify clusters.
+
+27
+
+Table 2 summarizes the comparison of the ﬁve methods under two diﬀerent spatially
+
+clustered patterns, i.e., MST-equal and MST-unequal. In this scenario, the assumptions
+
+for SCC, SCC*, GWR, and PSE are violated, thus SCVC performs much better. First,
+
+SCVC clearly outperforms SCC, SCC*, GWR, and PSE for coeﬃcient estimation, with
+
+considerably smaller MSE in all settings. Second, SCVC yields a reasonable number of
+
+clusters, while SCC and SCC* lead to a much larger number of clusters. The main reason
+
+is that, the SCC and SCC* require the coeﬃcients to be constant within each cluster, thus
+
+lead to more clusters when the true coeﬃcients are varying. Last, SCVC results in much
+
+higher RI values than SCC and SCC*, suggesting better agreement of the clusters.
+
+Additional simulations with the true coeﬃcients smooth over the whole region, i.e.,
+
+the assumption made in GWR and PSE holds, are provided in Section S6 of the online
+
+Supplement. The corresponding results show PSE performs slightly better than SCVC,
+
+and SCVC performs better than other remaining methods, see detailed discussion there.
+
+5 Water Mass Analysis
+
+In oceanography, water masses detection is important, as it strongly aﬀects the ocean
+
+current and global climate system (Nandi et al., 2004; Talley, 2011). The water masses
+
+are usually identiﬁed through the T-S relationship, because the T-S relationship is likely
+
+to change rapidly across the narrow boundaries (termed as f ronts in geoscience) between
+
+adjacent ﬂuid masses (Li and Sang, 2019). To study the T-S relationship and meanwhile
+
+detect diﬀerent water masses, we apply the proposed SCVC method. For comparison, the
+
+SCC, SCC*, GWR, and PSE methods are also included. The implementation of these ﬁve
+
+methods is the same as that in the simulation studies.
+
+The data set contains 5130 observations of temperature and salinity in the Southern
+
+Hemisphere, along 25◦W between 60◦S and the equator (0◦), see Figure 3. This data set can
+
+28
+
+Table 2: Summary of Study 2, with smooth-varying coeﬃcients within each cluster.
+
+Pattern
+
+Correlation
+
+Methods
+
+MSEβ2
+
+MSEβ1
+
+MST-equal
+
+MST-unequal
+
+SCVC
+
+SCC
+
+weak
+
+SCC*
+
+GWR
+
+PSE
+
+SCVC
+
+SCC
+
+strong
+
+SCC*
+
+GWR
+
+PSE
+
+SCVC
+
+SCC
+
+weak
+
+SCC*
+
+GWR
+
+PSE
+
+SCVC
+
+SCC
+
+strong
+
+SCC*
+
+GWR
+
+PSE
+
+0.025
+(0.001)
+0.279
+(0.008)
+0.254
+(0.001)
+0.235
+(0.005)
+0.828
+(0.002)
+
+0.085
+(0.009)
+1.663
+(0.027)
+1.456
+(0.009)
+1.906
+(0.024)
+1.681
+(0.008)
+0.071
+(0.001)
+0.349
+(0.008)
+0.352
+(0.001)
+0.515
+(0.003)
+1.107
+(0.002)
+
+0.580
+(0.020)
+2.226
+(0.025)
+1.972
+(0.005)
+4.989
+(0.131)
+2.485
+(0.008)
+
+0.011
+(0.001)
+0.348
+(0.009)
+0.390
+(0.001)
+0.256
+(0.005)
+0.854
+(0.002)
+
+0.083
+(0.011)
+1.611
+(0.031)
+1.300
+(0.009)
+2.887
+(0.049)
+1.437
+(0.008)
+0.062
+(0.002)
+0.579
+(0.009)
+0.528
+(0.002)
+0.836
+(0.005)
+1.447
+(0.003)
+
+1.390
+(0.064)
+4.312
+(0.049)
+3.907
+(0.013)
+4.387
+(0.047)
+2.705
+(0.018)
+
+RI2
+
+99.73
+(0.02)
+68.22
+(0.06)
+70.26
+(0.03)
+-
+-
+-
+-
+
+98.71
+(0.27)
+69.36
+(0.04)
+70.52
+(0.04)
+-
+-
+-
+-
+85.47
+(0.02)
+71.90
+(0.06)
+73.83
+(0.01)
+-
+-
+-
+-
+
+81.17
+(0.17)
+72.18
+(0.02)
+73.61
+(0.01)
+-
+-
+-
+-
+
+RI1
+
+99.91
+(0.01)
+68.26
+(0.05)
+75.28
+(0.02)
+-
+-
+-
+-
+
+99.30
+(0.21)
+68.91
+(0.05)
+75.34
+(0.02)
+-
+-
+-
+-
+84.73
+(0.01)
+72.43
+(0.05)
+75.90
+(0.01)
+-
+-
+-
+-
+
+81.97
+(0.21)
+73.94
+(0.08)
+79.03
+(0.01)
+-
+-
+-
+-
+
+IC2
+
+5.60
+(0.06)
+151.08
+(2.68)
+53.34
+(0.14)
+-
+-
+-
+-
+
+4.61
+(0.07)
+131.49
+(2.18)
+49.92
+(0.12)
+-
+-
+-
+-
+8.04
+(0.02)
+172.80
+(2.68)
+57.21
+(0.11)
+-
+-
+-
+-
+
+6.79
+(0.11)
+170.86
+(1.82)
+53.58
+(0.14)
+-
+-
+-
+-
+
+IC1
+
+5.00
+(0.00)
+120.60
+(1.74)
+35.15
+(0.11)
+-
+-
+-
+-
+
+4.11
+(0.03)
+101.80
+(1.30)
+45.50
+(0.16)
+-
+-
+-
+-
+8.86
+(0.07)
+124.43
+(1.74)
+63.36
+(0.15)
+-
+-
+-
+-
+
+7.38
+(0.12)
+83.16
+(0.94)
+26.95
+(0.04)
+-
+-
+-
+-
+
+SCVC: spatially clustered varying coeﬃcient method; SCC: spatially clustered coeﬃcient regression based on LASSO; SCC*:
+
+spatially clustered coeﬃcient regression based on SCAD; GWR: geographically weighted regression; PSE: P -spline estimator.
+
+MSEβk /RIk/ICk: mean squared error (×10)/rand index (×100)/number of identiﬁed clusters, for k-th covariate, k = 1, 2. Values
+in the parentheses are the standard errors. Note that GWR and PSE can not identify clusters.
+
+29
+
+be obtained from the World Atlas 2013, version 2 (WOA 13 V2), archived at the National
+
+Oceanographic Data Center (https://www.nodc.noaa.gov/OC5/woa13/). From Figure 3,
+
+we ﬁnd that the temperature is generally higher in the upper ocean and at lower latitudes,
+
+as a result of solar radiation, while the spatial structure of salinity is more complicated.
+
+Figure 3: Spatial distributions of (a) temperature(◦C) and (b) salinity(PSU) along 25◦W.
+
+To study the T-S relationship, we consider the following regression model,
+
+Sa(si) = T e(si)β(si) + β0(si) + (cid:15)(si),
+
+where Sa(si) is the salinity at location si = (sih, siv), |sih| represents the horizontal distance
+
+(km) to the equator, and |siv| is the vertical distance (km) to the sea surface; T e(si) is
+
+the temperature, β(si) measures the T-S relationship of interest, β0(si) is the intercept.
+
+Notice the magnitude of depth and width of the ocean are quite diﬀerent, leading to strong
+
+anisotropy. To alleviate this, a common practice in oceanic studies (Vallis, 2017) is to
+
+replace si by (sih/H, siv/V ), where H(V ) is the horizontal (vertical) length of the ocean.
+
+Figure 4(i) shows the estimated coeﬃcient β(si) from SCVC, SCC, SCC*, GWR and
+
+PSE. First, for the results from SCVC, the value of β(si) is generally higher when the
+
+location si is closer to the equator, which is possibly due to the fact that the salinity in
+
+Figure 3 is generally higher for the locations closer to the equator. Moreover, the value of
+
+β(si) is negative when the location si is between 45◦S and 60◦S, with depth from 0m to
+
+30
+
+−700m. One possible explanation is, the salinity is quite low for this area, as observed in
+
+Figure 3. Second, for the results from SCC and SCC*, the estimated coeﬃcient β(si) is
+
+lower between 30◦S and 0◦ than that of SCVC, and the negative values of β(si) between
+
+45◦S and 60◦S do not form a clear cluster. Moreover, it can be observed that, the estimated
+
+coeﬃcients are more likely to vary even in a small area (there are many such areas, and we
+
+circle some of them in Figure 4(i)-(b)), indicating its assumption of constancy within each
+
+subregion is violated. Third, for the results from GWR, the estimated coeﬃcient β(si) is
+
+quite noisy, even in the abyssal ocean, which is not consistent with the ﬂuid dynamics,
+
+because over such a short distance in the abyssal ocean, there is no dynamical process that
+
+can lead to changes of the T-S relationship (Talley, 2011). Lastly, for the results from PSE,
+
+the estimated coeﬃcient β(si) is generally positive/negative between 45◦S and 60◦S, with
+
+depth from 0m to −500m/ −4000m to −5000m, which are opposite to the results of other
+
+methods, and inconsistent with the fact that the salinity is quite low for the former area
+
+(indicating negative T-S relationship) and relatively high for the latter area, see Figure 3.
+
+Figure 4(ii) shows a clearer comparison of SCVC, SCC and SCC* in clusters’ detection.
+
+The clustered patterns from SCC and SCC* are quite noisy, and fail to identify the wa-
+
+ter masses. Using the SCVC method instead, we obtain a much clearer clustered pattern
+
+shown in Figure 4(ii)-(a). First, from the bottom of the ocean to the surface, the num-
+
+ber of identiﬁed clusters increases. This is consistent with the properties of salinity and
+
+temperature, whose variation is more severe near the sea surface (Emery, 2001). Second,
+
+the largest cluster between 60◦ S and 0◦, with depth from around −2000m to −5500m,
+
+corresponds to the North Atlantic Deep Water (Emery, 2001), which is essential to the
+
+Atlantic Meridional Overturning Circulation (AMOC) (Schmittner et al., 2007). Last, the
+
+cluster between 60◦S and 45◦S, with depth from 0m to −700m, corresponds to the Antarctic
+
+31
+
+Surface Water (Florindo and Siegert, 2008), whose salinity is quite low, see Figure 3.
+
+Supplementary Materials
+
+Online Supplement contains the technical assumptions, technical proofs of Theorems 1-
+
+3, the NelderMead algorithm for minimizing BIC({λk, (cid:37)k}p
+
+k=1), how to generate the spatially
+clustered pattern in the simulation studies, the results of SCC* with the initial values set
+
+as the true values, and additional simulation studies with smooth-varying coeﬃcients.
+
+Acknowledgments
+
+This work is partially supported by National Natural Science Foundation of China
+
+grants 11671096, 11690013, 11731011 and 11871376.
+
+32
+
+(ii)
+
+(i)
+
+33
+Figure 4: Five ﬁgures in (i) represent the T-S relationship β(si) estimated by (a) SCVC,
+
+(b) SCC, (c) SCC*, (d) GWR and (e) PSE, where the colors in (i) represent the values
+
+of β(si); circles in (b) contain some small areas where the estimated coeﬃcients from SCC
+
+vary. Three ﬁgures in (ii) represent the clustered pattern of estimated β(si) from (a) SCVC,
+
+(b) SCC and (c) SCC*, where diﬀerent colors in (ii) represent diﬀerent clusters.
+
+Supplementary to “Spatially Clustered Varying
+
+Coeﬃcient Model”
+
+The online Supplementary Materials contain the technical assumptions, technical proofs
+
+of Theorems 1-3, the NelderMead algorithm for minimizing BIC({λk, (cid:37)k}p
+
+k=1), how to gen-
+erate the spatially clustered pattern in the simulation studies, the results of SCC* with the
+
+initial values set as the true values, and additional simulation studies with smooth-varying
+
+coeﬃcients.
+
+S1 Technical assumptions
+
+For any s × t matrix A = (Aij)s,t
+i=1,j=1, denote (cid:107)A(cid:107)1 = max
+1≤j≤t
+1, · · · , (cid:101)Zk
+((cid:101)Zk
+l,1, · · · , Z k
+l,i = xk(si)Bl(si) ∈ R, i = 1, · · · , n. For t ∈ R and t = (t1, · · · , tL)T ∈ RL, denote
+Z k
+
+i=1 |Aij|. Denote (cid:101)Z k =
+l,n) ∈ Rn×n, l = 1, · · · , L, k = 1, · · · , p, where
+
+L) ∈ Rn×Ln, (cid:101)Zk
+
+l = diag(Z k
+
+(cid:80)s
+
+ρk(t) = λ−1
+
+k Pλk(t) and ¯ρk,l((cid:107)t(cid:107)2) = ρ(cid:48)
+
+k((cid:107)t(cid:107)2)Sgn(tl/(cid:107)t(cid:107)2), l = 1, · · · , L,
+
+where Sgn(tl/(cid:107)t(cid:107)2) = tl/(cid:107)t(cid:107)2 for (cid:107)t(cid:107)2 (cid:54)= 0; for (cid:107)t(cid:107)2 = 0, (Sgn(t1/(cid:107)t(cid:107)2), . . . , Sgn(tL/(cid:107)t(cid:107)2))T
+
+is any vector with L2 norm less than 1. For any square matrix C, λmin(C) and λmax(C)
+
+represent the smallest and largest eigenvalues of C, respectively.
+
+We recall the deﬁnition of N k
+
+G in the beginning of Section 3.2 of main paper here, that
+
+is,
+
+N k
+
+G = {ak = (aT
+
+k,1, · · · , aT
+
+k,n)T ∈ RnL : ak,i = ak,j for any i, j ∈ Mg∗
+
+k
+
+k , 1 ≤ g∗
+
+k ≤ G∗
+
+k}.
+
+For ak ∈ N k
+
+G , let (cid:101)αk,g∗
+
+αk = (αT
+
+k,1, · · · , αT
+
+k
+
+= ((cid:101)α1
+k,g∗
+k
+k,L)T ∈ RLG∗
+
+)T ∈ RL, where (cid:101)αk,g∗
+
+, · · · , (cid:101)αL
+k, k = 1, · · · , p, where αk,l = ((cid:101)αl
+
+= ak,i, ∀i ∈ Mg∗
+k,1, · · · , (cid:101)αl
+
+k,G∗
+k
+
+k,g∗
+k
+
+k
+
+k
+
+k . Denote
+)T ∈ RG∗
+k,
+
+1
+
+l = 1, · · · , L. According to the deﬁnition of ˆaor = ((ˆaor
+
+the main paper, the oracle estimator for α = (αT
+
+1 , · · · , αT
+
+p )T )T in Section 3.2 of
+
+1 )T , · · · , (ˆaor
+p )T ∈ RL((cid:80)p
+
+k=1 G∗
+
+k) is
+
+ˆαor = arg min
+
+α∈RL((cid:80)p
+
+k=1
+
+G∗
+k
+
+)
+
+1
+2n
+
+(cid:107)Y − Zα(cid:107)2
+
+2 + αT Πα,
+
+(S.1)
+
+l = (cid:101)Zk
+
+l Λk ∈ Rn×G∗
+= 1 for i ∈ Mg∗
+
+k
+
+k, l =
+
+where Z = (Z 1, · · · , Z p), Z k = (Zk
+
+1, · · · , Zk
+
+L) ∈ Rn×LG∗
+
+k and Zk
+
+k
+
+k
+
+} being the n × G∗
+
+1, · · · , L, with Λk = {Λi g∗
+
+k and
+= 0 otherwise; Π = diag((cid:37)1Π1, · · · , (cid:37)pΠp), where Πk = diag(h11 (cid:101)Λk, · · · , hLL (cid:101)Λk)
+k, (cid:101)Λk = ΛT
+
+k | be the number of elements in
+k , k = 1, · · · , p, and hll is the l−th diagonal element of H with hll = 0, l = 1, 2, 3 and
+
+k |), with |Mg∗
+
+k matrix with Λi g∗
+
+k Λk = diag(|M1
+
+k|, · · · , |MG∗
+
+Λi g∗
+∈ RLG∗
+Mg∗
+
+k
+
+k
+
+k
+
+k
+
+hll = 1, l = 4, · · · , L.
+
+We make the following assumptions.
+
+(A1) λmin(Z T Z) ≥ C1|Mmin| for a positive constant C1.
+
+(A2) Let Zk
+
+be the g∗
+
+k−th column of Zk
+
+l , and assume (cid:107)Zk
+
+(cid:107)2 ≤ C2
+
+l,g∗
+k
+
+l,g∗
+k
+k = 1, · · · , G∗
+g∗
+
+k, for some positive constant C2 ≥ 1.
+
+(cid:113)
+
+|Mg∗
+
+k
+
+k |, k = 1, · · · , p,
+
+(A3) (cid:107)(cid:101)Zk
+
+l (cid:107)∞ < C3, k = 1, · · · , p, l = 1, · · · , L, for some positive constant C3.
+
+(A4) For any k ∈ {1, · · · , p}, Pλk(t), i.e., the penalty function in (4) of the main paper, is
+
+a symmetric function of t, which is nondecreasing and concave in t ∈ [0, ∞). There
+
+exists a positive constant a0 such that ρk(t) is constant for all t ≥ a0λk, and ρk(0) = 0,
+k(t) exists and is continuous except for a ﬁnite number of t and ρ(cid:48)
+ρ(cid:48)
+
+k(0+) = 1.
+
+(A5) The noise vector (cid:15) = {(cid:15)(s1), · · · , (cid:15)(sn)}T has sub-Gaussian tails such that P (|aT (cid:15)| >
+(cid:107)a(cid:107)2x) ≤ 2exp(−c1x2) for any vector a ∈ Rn and x > 0, where 0 < c1 < ∞.
+
+(A6) Each subregion Dgk
+
+k contains a open set, gk = 1, · · · , Gk, k = 1, · · · , p.
+
+2
+
+Assumptions (A1)-(A3) are regular conditions in the context of subgroup analysis. As-
+
+sumption (A1) is similar with Assumption (C1) in Ma and Huang (2017). Assumptions
+
+(A2)-(A3) can be easily satisﬁed under inﬁll domain. It is because, under inﬁll domain,
+
+all the locations si, i = 1, · · · , n, are within a bounded domain, indicating that Bl(si),
+
+l = 1, · · · , L are bounded. Thus, Assumptions (A2)-(A3) are satisﬁed, when the covariate
+
+xk(si), i = 1, · · · , n are bounded. Assumption (A4) are satisﬁed for common concave penal-
+
+ties such as MCP and SCAD. Assumption (A5) is commonly assumed in high-dimensional
+
+settings. Assumption (A6) is quite weak, indicating that the area of each subregion is not
+
+zero.
+
+S2 Technical proofs
+
+LEMMA S.1. For the basis functions B(s) deﬁned in Section 2.3.2, we have, dT
+
+1 B(s) (cid:54)=
+
+2 B(s) for some s ∈ Dgk
+dT
+
+k , if and only if d1 (cid:54)= d2.
+
+Proof of Lemma S.1. First, we prove that, if dT
+
+1 B(s) (cid:54)= dT
+
+2 B(s) for some s ∈ Dgk
+k ,
+
+we have d1 (cid:54)= d2. This is obvious.
+
+Second, we prove that, if d1 (cid:54)= d2, we have dT
+
+2 B(s) for some s over Dgk
+k .
+k , we have d1 = d2.
+Noticing the basis functions B(s), deﬁned in Section 2.3.2, are analytic over D, according
+
+It is equivalent to prove that, if dT
+
+2 B(s) for all s over Dgk
+
+1 B(s) (cid:54)= dT
+
+1 B(s) = dT
+
+to the uniqueness of analytic continuation and Assumption (A6), we know that, dT
+2 B(s) for all s over Dgk
+dT
+only need to prove that, if dT
+
+k , if and only if, dT
+1 B(s) = dT
+
+2 B(s) for all s over D, we have d1 = d2. By
+
+2 B(s) for all s over D. Thus, we
+
+1 B(s) = dT
+
+1 B(s) =
+
+1 B(s) = dT
+dT
+
+2 B(s) over D, we have
+
+dT
+1
+
+(cid:90)
+
+D
+
+B(s)B(s)T ds = dT
+2
+
+(cid:90)
+
+D
+
+3
+
+B(s)B(s)T ds.
+
+(S.2)
+
+Because for valid basis functions, it is the basic requirement that (cid:82)
+
+D B(s)B(s)T ds is pos-
+itive deﬁnite, see Zhou et al. (1998). Thus, by multiplying its inverse matrix in both sides
+of (S.2), we have d1 = d2. Proof is completed. (cid:3)
+
+Proof of Theorem 1. To prove that the set of true clusters {M1
+
+and is unique, we only need to prove that for the Ggk
+
+k } exists
+k , in which not all the location pairs
+
+k, · · · , MG∗
+
+k
+
+can be connected through a path, made up of the edges in Egk
+
+k , the partition Ggk
+
+k,1, · · · , Ggk
+k,Fk
+
+exists and is unique.
+
+through the edges in Egk
+
+For the proof of existence, we randomly select a starting location si, i ∈ Ggk
+
+k , then
+k , we can ﬁnd the location index set L1 containing i, satisfying that,
+for any two locations si1 and si2, i1 ∈ L1, i2 ∈ L1, they are connected by a path, made up of
+edges in EL1 = {(i, j) : (i, j) ∈ EMST, and i, j ∈ L1}, and for any two locations si3, i3 ∈ L1,
+and si4, i4 ∈ Ggk
+k \ L1, they satisfy the edge (i3, i4) /∈ EMST. Similarly, we can construct L2
+by randomly selecting a starting location si5, i5 ∈ Ggk
+k \ L1. Repeat the constructing process
+until Ggk
+k,f = Lf , f = 1, · · · , Fk. By the constructing process,
+k,f , f = 1 · · · , Fk, they are connected by a path,
+k,f }; meanwhile, for
+k,f (cid:48) and f (cid:54)= f (cid:48), the corresponding edge (i, j) /∈ EMST;
+
+k = L1 ∪ · · · ∪ LFk, and let Ggk
+we have that, for any two locations in Ggk
+
+made up of some edges in Egk
+any two locations si ∈ Ggk
+
+k,f = {(i, j) : (i, j) ∈ EMST, and i, j ∈ Ggk
+
+k,f , sj ∈ Ggk
+
+Thus, the existence is proved.
+
+For the proof of uniqueness, it is equivalent to prove that for any starting locations
+
+si, i ∈ Ggk
+
+k , the resulting partition is still L1, · · · , LFk with repeating the above process.
+Thus, we only need to prove that, for the starting point si, i ∈ Lf , f ∈ {1, · · · , Fk}, by the
+
+above process, the ﬁrst partition is Lf . The proof is quite straightforward by the property
+
+of Lf , thus is omitted here.
+
+From the above discussion, proof is completed. Moreover, the proof for the existence
+
+4
+
+and uniqueness of the set of estimated clusters { (cid:99)M1
+(cid:3)
+
+k, · · · , (cid:99)M (cid:99)G∗
+
+k
+
+k } is similar, thus is omitted.
+
+Proof of Theorem 2: According to (S.1), we have
+
+ˆαor = (Z T Z + 2nΠ)−1Z T Y .
+
+Let Ω = Z T Z, and α0 represent the true value of α, then
+
+ˆαor − α0 = {Ω + 2nΠ}−1 Z T (cid:15) + (cid:8)(Ω + 2nΠ)−1 − Ω−1(cid:9) Ωα0 := I1 + I2.
+
+(S.3)
+
+For I1, we have
+
+(cid:107)I1(cid:107)∞ ≤ (cid:107) {Ω + 2nΠ}−1 (cid:107)∞(cid:107)Z T (cid:15)(cid:107)∞.
+
+(S.4)
+
+By Assumption (A1), we have (cid:107)(Ω+nλ2Π)−1(cid:107)∞ ≤ (cid:112)L((cid:80)p
+for some constant c > 0,
+
+k=1 G∗
+
+k)C −1
+
+1 |Mmin|−1. Moreover,
+
+P ((cid:107)Z T (cid:15)(cid:107)∞ > c(cid:112)nlog n) ≤
+
+p
+(cid:88)
+
+k=1
+
+P ((cid:107)(Z k)T (cid:15)(cid:107)∞ > c(cid:112)nlog n),
+
+and by Assumptions (A2) and (A5),
+
+P ((cid:107)(Z k)T (cid:15)(cid:107)∞ > c(cid:112)nlog n) ≤
+
+L
+(cid:88)
+
+l=1
+
+P ((cid:107)(Zk
+
+l )T (cid:15)(cid:107)∞ > c(cid:112)nlog n)
+
+≤
+
+≤
+
+L
+(cid:88)
+
+G∗
+k(cid:88)
+
+l=1
+
+g∗
+k=1
+
+L
+(cid:88)
+
+G∗
+k(cid:88)
+
+l
+
+g∗
+k=1
+
+p
+(cid:88)
+
+≤ 2L (
+
+k=1
+
+P (|
+
+(cid:88)
+
+l,i(cid:15)i| > c(cid:112)nlog n)
+Z k
+
+i∈M
+
+g∗
+k
+k
+
+(cid:88)
+
+P (|
+
+Z k
+
+l,i(cid:15)i| > cC −1
+2
+
+i∈M
+
+g∗
+k
+k
+
+(cid:118)
+(cid:117)
+(cid:117)
+(cid:116)
+
+(cid:88)
+
+(Z k
+
+l,i)2(cid:112)log n)
+
+i∈M
+
+g∗
+k
+k
+
+G∗
+
+k) exp(−c2c1C −2
+
+2 log n).
+
+(S.5)
+
+5
+
+By (S.5), taking c = c−1/2
+
+1 C2, we have
+
+P ((cid:107)Z T (cid:15)(cid:107)∞ > c(cid:112)nlog n) ≤
+
+2pL((cid:80)p
+k=1 G∗
+k)
+n
+
+.
+
+Therefore, by (S.4), with probability at least 1 − 2pL((cid:80)p
+(cid:118)
+(cid:117)
+(cid:117)
+(cid:116)L(
+
+1 |Mmin|−1c−1/2
+
+(cid:107)I1(cid:107)∞ ≤
+
+k)C −1
+
+p
+(cid:88)
+
+G∗
+
+1 C2
+
+k=1 G∗
+
+k)/n,
+
+(cid:112)nlog n.
+
+(S.6)
+
+For I2, according to A−1 − B−1 = B−1(B − A)A−1 for any invertible matrices A and
+
+k=1
+
+B, we have
+
+(cid:107)I2(cid:107)∞ = (cid:107) (cid:8)Ω−1 − (Ω + 2nΠ)−1(cid:9) Ωα0(cid:107)∞ = (cid:107) (Ω + 2nΠ)−1 (2nΠ)α0(cid:107)∞
+
+≤(cid:107) (Ω + 2nΠ)−1 (cid:107)∞(cid:107)2nΠ(cid:107)∞(cid:107)α0(cid:107)∞ ≤
+
+(cid:118)
+(cid:117)
+(cid:117)
+(cid:116)L(
+
+p
+(cid:88)
+
+k=1
+
+G∗
+
+k)C −1
+
+1 |Mmin|−12n(cid:101)(cid:37)|Mmax| (cid:107)α0(cid:107)∞,
+
+where the second inequality comes from the deﬁnition of Π.
+
+(S.7)
+
+Combing (S.3), (S.6) and (S.7), with probability at least 1 − 2pL((cid:80)p
+
+k=1 G∗
+
+k)/n, we have
+
+(cid:107) ˆαor − α0(cid:107)∞ ≤ rn,
+
+where rn = (cid:112)L((cid:80)p
+completed. (cid:3).
+
+k=1 G∗
+
+k)C −1
+
+1 |Mmin|−1{c−1/2
+
+1 C2
+
+√
+
+nlog n + 2n(cid:101)(cid:37)|Mmax| (cid:107)α0(cid:107)∞}. Proof is
+
+Proof of Theorem 3: We ﬁrst introduce some notations which are frequently used
+
+in this proof. For 1 ≤ g∗
+Mg∗
+
+k , or i ∈ Mg∗
+
+k < g∗
+k
+and j ∈ Mg∗
+
+(cid:48) ≤ G∗
+k }, and |Cg∗
+
+k
+k
+
+k
+
+k
+
+(cid:48)
+
+(cid:48)
+
+k, let Cg∗
+
+kg∗
+k
+
+(cid:48) = {(i, j) ∈ EMST : i ∈ Mg∗
+kg∗
+k
+(cid:48)| denote the number of elements in Cg∗
+
+k and j ∈
+(cid:48).
+
+k
+
+kg∗
+k
+
+Let F k
+
+G be the subspace of Rn, deﬁned as
+
+G = {b = (b1, · · · , bn)T ∈ Rn : bi = bj, for any i, j ∈ Mg∗
+F k
+
+k
+
+k , 1 ≤ g∗
+
+k ≤ G∗
+
+k}.
+
+6
+
+Introducing the mapping Tk : F k
+
+G → RG∗
+
+k, where Tk(b) is the G∗
+
+and its g∗
+
+k−th coordinate equals to the common value of bi for i ∈ Mg∗
+k : Rn → RG∗
+
+k
+
+Note that Tk is a bijection and T −1
+k (b) = {|Mg∗
+
+such that T ∗
+
+k |−1 (cid:80)
+
+k
+
+is well-deﬁned. Let T ∗
+bi}G∗
+k=1. It is easy to see that, for b ∈ F k
+k
+g∗
+
+k
+
+G , we have
+k )T . These mappings act as a bridge in the proving process to
+k (b) = Tk(b) = (b1
+T ∗
+link a and α, where a is the unknown parameter vector in the objective function (4) of
+
+k, · · · , bG∗
+
+i∈M
+
+g∗
+k
+k
+
+k
+
+k−dimensional vector,
+k , denoted as bg∗
+k .
+k be the mapping
+
+k
+
+the SCVC in the main paper, and α is the unknown vector in the oracle procedure (S.1).
+
+In the following part, there are many new notations based on a and α, we summarize
+
+them in this paragraph. Let al
+
+k,i be the l−th element of ak,i, l = 1, · · · , L, where ak,i,
+
+k = 1, · · · , p, i = 1, · · · , n, is the spline coeﬃcient vector in (4) of the main paper. Consider
+
+the following matrix,
+
+k,1, a2
+a1
+
+k,1, · · · , aL
+
+k,1,
+
+a1
+k,2, a2
+
+k,2, · · · , aL
+
+k,2,
+
+...
+
+(S.8)
+
+a1
+k,n, a2
+
+k,n, · · · , aL
+
+k,n.
+
+k,1, · · · , al
+
+k,1, · · · , aT
+
+p )T , ak = (aT
+
+1 , · · · , aT
+p )T , where (cid:101)ak = ((cid:101)aT
+
+Then, ak,i is the i−th row of matrix (S.8). We deﬁne the l−th column of matrix (S.8) as (cid:101)ak,l,
+k,n)T , l = 1, · · · , L. By the deﬁnition below (6) in the main paper,
+i.e., (cid:101)ak,l = (al
+k,n)T , k = 1, · · · , p. Similarly, we deﬁne
+we have a = (aT
+k,L)T , k = 1, · · · , p. Thus, (cid:101)a is a permutation
+1 , · · · , (cid:101)aT
+(cid:101)a = ((cid:101)aT
+k,l = T −1
+of elements in a. Furthermore, we let (cid:101)a∗
+k ((cid:101)ak,l)), which actually replaces each
+element in (cid:101)ak,l with the average over the corresponding SpaNeigh true cluster. We then
+denote (cid:101)a∗
+p)T )T . Same as
+the relationship between a and (cid:101)a, we can deﬁne a∗ based on (cid:101)a∗. Same as the relationship
+p)T )T
+between ak/ak,i and a, we can deﬁne a∗
+
+k,L)T }T , k = 1, · · · , p, and (cid:101)a∗ = (((cid:101)a∗
+
+k,i based on a∗, i.e., a∗ = ((a∗
+
+k,1)T , · · · , ((cid:101)a∗
+
+1)T , · · · , ((cid:101)a∗
+
+k,1, · · · , (cid:101)aT
+
+1)T , · · · , (a∗
+
+k = {((cid:101)a∗
+
+k and a∗
+
+k (T ∗
+
+7
+
+and a∗
+
+k = (a∗
+k,1
+
+T , · · · , a∗
+
+k,n
+
+T )T , k = 1, · · · , p. Now we recall the deﬁnition of α above
+
+(S.1), the deﬁnition of α is essentially based on a with knowing the information of the
+
+SpaNeigh true clusters. For ak ∈ N k
+ak,i, ∀i ∈ Mg∗
+k,1, · · · , αT
+(αT
+
+G , let (cid:101)αk,g∗
+k . Then, we denote αk,l = ((cid:101)αl
+k,L)T , k = 1, · · · , p, and α = (αT
+
+)T , l = 1, · · · , L, and let αk =
+p )T . Moreover, whenever adding zero
+in the superscript of a symbol, it represents the corresponding true value, for example, α0
+
+= ((cid:101)α1
+k,g∗
+k
+k,1, · · · , (cid:101)αl
+1 , · · · , αT
+
+, · · · , (cid:101)αL
+
+k,g∗
+k
+
+)T ∈ RL, where (cid:101)αk,g∗
+
+k
+
+=
+
+k,G∗
+k
+
+k
+
+k
+
+is the true value of α.
+
+Based on the above notations, we can write the objective function (4) of the SCVC with
+
+EMST in the main paper, in a compact form. Let
+
+Ln((cid:101)a) =
+
+LG
+
+n(α) =
+
+1
+2n
+
+1
+2n
+
+(cid:107)Y − (cid:101)Z (cid:101)a(cid:107)2
+
+2 + (cid:101)aT Π∗
+
+(cid:101)a, Pn((cid:101)a) =
+
+(cid:107)Y − Zα(cid:107)2
+
+2 + αT Πα, P G
+
+n (α) =
+
+k=1
+
+p
+(cid:88)
+
+k=1
+
+p
+(cid:88)
+
+λk
+
+(cid:88)
+
+ρk ((cid:107)ak,i − ak,j(cid:107)2),
+
+(i,j)∈EMST
+
+(cid:88)
+
+λk
+
+(cid:16)
+
+|Cg∗
+
+kg∗
+k
+
+(cid:48)|ρk
+
+(cid:107) (cid:101)αk,g∗
+
+k
+
+− (cid:101)αk,g∗
+
+k
+
+(cid:48)(cid:107)2
+
+(cid:17)
+
+,
+
+|C
+
+(cid:48) | (cid:54)= 0
+
+k g∗
+g∗
+k
+k < g∗
+k
+
+(cid:48) ≤ G∗
+k
+
+1 ≤ g∗
+
+where Π∗ = diag((cid:37)1Π∗
+
+1, · · · , (cid:37)pΠ∗
+
+p), Π∗
+
+k = diag(h11, · · · , h11
+(cid:125)
+(cid:124)
+
+(cid:123)(cid:122)
+n
+
+, · · · , hLL, · · · , hLL
+(cid:125)
+
+(cid:124)
+
+(cid:123)(cid:122)
+n
+
+) ∈ RnL,
+
+k = 1, · · · , p, and (cid:101)Z = ( (cid:101)Z 1, · · · , (cid:101)Z p). Deﬁne
+
+Qn((cid:101)a) = Ln((cid:101)a) + Pn((cid:101)a) and QG
+
+n(α) = LG
+
+n(α) + P G
+
+n (α).
+
+Then, Qn((cid:101)a) is the compact form of the objective function (4) of the SCVC with EMST in
+the main paper, and QG
+
+n(α) is deﬁned based on Qn((cid:101)a) for technical purpose.
+
+We illustrate the relationship between Qn((cid:101)a) and QG
+
+n(α). For every (cid:101)ak,l ∈ F k
+
+G , l =
+
+1, · · · , L, denote Tk((cid:101)ak) = (Tk((cid:101)ak,1)T , · · · , Tk((cid:101)ak,L)T )T , and T ((cid:101)a) = (T1((cid:101)a1)T , · · · , Tp((cid:101)ap)T )T .
+By routine calculation, we have P G
+
+n (T ((cid:101)a)) = Pn((cid:101)a). Moreover, for every αk,l ∈ RG∗
+k,
+
+k = 1, · · · , p, denote
+
+8
+
+k (αk) = (T −1
+T −1
+then we can obtain Pn(T −1(α)) = P G
+
+k (αk,1)T , · · · , T −1
+
+n (α). Hence,
+
+k (αk,L)T )T and T −1(α) = (T −1
+
+1 (α1)T , · · · , T −1
+
+p (αp)T )T ,
+
+Qn((cid:101)a) = QG
+
+n(T ((cid:101)a)), Qn(T −1(α)) = QG
+
+n(α).
+
+(S.9)
+
+Considering the neighborhood of (cid:101)a0 (true value of (cid:101)a),
+
+Θn = (cid:8)
+
+(cid:101)a ∈ RpnL : (cid:107){(cid:101)a − (cid:101)a0(cid:107)∞ ≤ rn
+
+(cid:9) .
+
+By Theorem 2, there is an event E1 satisfying P (E1) ≥ 1 − 2pL((cid:80)p
+
+k=1 G∗
+
+k)/n, and on the
+
+event E1,
+
+or
+
+(cid:107)ˆ
+(cid:101)a
+
+− (cid:101)a0(cid:107)∞ ≤ rn,
+
+(S.10)
+
+is the corresponding permutation of ˆaor, and ˆaor can be found in (12) of the
+
+or
+
+where ˆ
+(cid:101)a
+main paper. Accordingly, on the event E1, we have ˆ
+(cid:101)a
+
+or
+
+∈ Θn.
+
+By the following two steps, we show that, with probability approaching one, ˆ
+(cid:101)a
+is a
+strictly local minimizer of Qn((cid:101)a), i.e., the objective function (4) of the SCVC with EMST
+in the main paper. To prove this, we use Qn((cid:101)a∗) to link Qn(ˆ
+(cid:101)a
+
+) with Qn((cid:101)a).
+
+or
+
+or
+
+(i) On the event E1, for any (cid:101)a ∈ Θn,
+
+Qn((cid:101)a∗) > Qn(ˆ
+(cid:101)a
+
+or
+
+),
+
+if (cid:101)a∗ (cid:54)= ˆ
+(cid:101)a
+
+or
+
+.
+
+(ii) There is an event E2 such that P (E2) > 1 − 2n−1. On the event E1 ∩ E2, there exists
+
+Bn, a neighborhood of ˆ
+(cid:101)a
+
+or
+
+, such that
+
+Qn((cid:101)a) ≥ Qn((cid:101)a∗),
+
+∀ (cid:101)a ∈ Θn ∩ Bn.
+
+By the above two steps, on the event E1 ∩ E2, we have Qn((cid:101)a) > Qn(ˆ
+(cid:101)a
+
+or
+
+) for any
+
+(cid:101)a ∈ Θn ∩ Bn and (cid:101)a (cid:54)= ˆ
+(cid:101)a
+E1 ∩ E2 with P (E1 ∩ E2) ≥ 1 − 2pL((cid:80)p
+
+.Hence, ˆ
+(cid:101)a
+
+or
+
+or
+
+is a strict local minimizer of Qn((cid:101)a) on the event
+k=1 G∗
+
+k)/n − 2n−1.
+
+9
+
+Now we prove the result in (i). We ﬁrst show that P G
+Θn, where Cn is a constant independent of (cid:101)a, T ∗((cid:101)a) = (T ∗
+k ((cid:101)ak) = (T ∗
+T ∗
+deﬁnition of P G
+
+n (T ∗((cid:101)a)) = Cn for any (cid:101)a ∈
+1 ((cid:101)a1)T , · · · , T ∗
+p((cid:101)ap)T )T , and
+k ((cid:101)ak,L)T )T , k = 1, · · · , p. For α ∈ {T ∗((cid:101)a) : (cid:101)a ∈ Θn}, by the
+n (T ∗((cid:101)a)) = Cn, it is suﬃcient to
+(cid:48)| (cid:54)= 0, where the
+
+n (α) and Assumption (A4), to prove P G
+
+k ((cid:101)ak,1)T , · · · , T ∗
+
+prove (cid:107) (cid:101)αk,g∗
+positive constant a0 can be found in Assumption (A4). Noticing
+
+(cid:48)(cid:107)2 > a0λk for any 1 ≤ g∗
+
+k and |Cg∗
+
+− (cid:101)αk,g∗
+
+k < g∗
+k
+
+(cid:48) ≤ G∗
+
+kg∗
+k
+
+k
+
+k
+
+(cid:107) (cid:101)αk,g∗
+
+k
+
+− (cid:101)αk,g∗
+
+k
+
+(cid:48)(cid:107)1
+
+k
+
+(cid:48)(cid:107)2 ≥ L−1/2(cid:107) (cid:101)αk,g∗
+≥ L−1/2((cid:107) (cid:101)α0
+≥ L−1/2((cid:107) (cid:101)α0
+
+k,g∗
+k
+
+k,g∗
+k
+
+k
+
+− (cid:101)αk,g∗
+− (cid:101)α0
+− (cid:101)α0
+
+k,g∗
+k
+
+k,g∗
+k
+
+(cid:48)(cid:107)1 − 2L(cid:107)α − α0(cid:107)∞)
+
+(S.11)
+
+(cid:48)(cid:107)2 − 2L(cid:107)α − α0(cid:107)∞),
+
+and
+
+(cid:107)α − α0(cid:107)∞ =
+
+max
+1 ≤ k ≤ p, 1 ≤ l ≤ L,
+
+|(cid:101)αl
+
+k,g∗
+k
+
+− (cid:101)αl,0
+
+k,g∗
+k
+
+| =
+
+(cid:12)
+(cid:12)
+max
+(cid:12)
+1 ≤ k ≤ p, 1 ≤ l ≤ L,
+
+1 ≤ g∗
+
+k ≤ G∗
+k
+
+≤
+
+max
+1 ≤ k ≤ p, 1 ≤ l ≤ L,
+
+{ max
+g∗
+k
+i∈M
+k
+
+1 ≤ g∗
+
+k ≤ G∗
+k
+
+1 ≤ g∗
+
+k ≤ G∗
+k
+k,i|} = (cid:107)(cid:101)a − (cid:101)a0(cid:107)∞ ≤ rn,
+
+|al
+
+k,i − al,0
+
+(cid:88)
+
+i∈M
+
+g∗
+k
+k
+
+k,i − al,0
+al
+|Mg∗
+k |
+
+k,i
+
+k
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(S.12)
+
+k
+
+− (cid:101)αk,g∗
+
+k
+
+so that (cid:107) (cid:101)αk,g∗
+√
+2
+
+(cid:48)(cid:107)2 ≥ L−1/2(ϑk − 2Lrn) > a0λk, following the assumption ϑk >>
+n(T ∗((cid:101)a)) =
+n ( ˆαor) = Cn.
+n( ˆαor) for T ∗((cid:101)a) (cid:54)=
+n(α), then LG
+n( ˆαor). Following (S.9), it is straightforward
+
+La0λk >> rn. Thus, for any (cid:101)a ∈ Θn, we have P G
+n(T ∗((cid:101)a)) + Cn. Moreover, on the event E1, we have ˆ
+LG
+(cid:101)a
+Since ˆαor is the unique global minimizer of LG
+n(T ∗((cid:101)a)) > QG
+) for (cid:101)a∗ (cid:54)= ˆ
+(cid:101)a
+
+n (T ∗((cid:101)a)) = Cn, so QG
+∈ Θn by (S.10), so P G
+n(T ∗((cid:101)a)) > LG
+
+ˆαor. Thus, on the event E1, QG
+to obtain Qn((cid:101)a∗) > Qn(ˆ
+(cid:101)a
+
+. The result in (i) is proved.
+
+or
+
+or
+
+or
+
+Then, we prove (ii). Let
+
+(cid:110)
+
+Bn =
+
+(cid:101)a ∈ RpnL : (cid:107)(cid:101)a − ˆ
+(cid:101)a
+
+or
+
+(cid:107)2 ≤ tn
+
+(cid:111)
+
+,
+
+10
+
+where {tn} is a positive sequence. For (cid:101)a ∈ Θn ∩ Bn, by Taylor expansion, we have
+
+Qn((cid:101)a) − Qn((cid:101)a∗) = I3 + I4,
+
+where
+
+I3 = −
+
+1
+n
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+(cid:32)
+
+Y −
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+k=1
+
+l=1
+
+k=1
+
+l=1
+
+(cid:33)T
+
+(cid:101)Zk
+l (cid:101)am
+
+k,l
+
+((cid:101)Zk
+
+l )T ((cid:101)ak,l−(cid:101)a∗
+
+k,l)+2
+
+p
+(cid:88)
+
+(cid:37)k
+
+L
+(cid:88)
+
+k=1
+
+l=1
+
+hll((cid:101)am
+
+k,l)T ((cid:101)ak,l−(cid:101)a∗
+
+k,l),
+
+and
+
+I4 =
+
+p
+(cid:88)
+
+n
+(cid:88)
+
+k=1
+
+i=1
+
+∂Pn((cid:101)am)
+∂ak,i
+
+(ak,i − a∗
+
+k,i),
+
+where (cid:101)am
+
+k,l = π(cid:101)ak,l + (1 − π)(cid:101)a∗
+
+k,l, and (cid:101)am = π(cid:101)a + (1 − π)(cid:101)a∗ for some π ∈ (0, 1).
+
+For I4, by the deﬁnition of Pn((cid:101)am), we have
+
+p
+(cid:88)
+
+λk
+
+I4 =
+
+(cid:88)
+
+¯ρk((cid:107)am
+
+k,i − am
+
+k,j(cid:107)2)T {(ak,i − a∗
+
+k,i) − (ak,j − a∗
+
+k,j)},
+
+k=1
+
+(i,j)∈EMST
+k,j(cid:107)2) = (cid:0)¯ρk,1((cid:107)am
+
+k,i−am
+
+where ¯ρk((cid:107)am
+
+k,i − am
+¯ρk,l(·), l = 1, · · · , L, is given in the beginning of Section S1, and am
+i = 1, · · · , n. When i, j ∈ Mg∗
+
+k,j(cid:107)2), · · · , ¯ρk,L((cid:107)am
+
+for any g∗
+
+k,i − am
+
+k ∈ {1, · · · , G∗
+
+k
+k
+
+k,j(cid:107)2)(cid:1)T , the deﬁnition of
+k,i = πak,i + (1 − π)a∗
+k,i,
+k,i = a∗
+
+k,j, hence
+
+k}, we know a∗
+
+k,i − am
+am
+
+k,j = π(ak,i − ak,j). Then,
+
+I4 =
+
+p
+(cid:88)
+
+k=1
+
+λk
+
+G∗
+k(cid:88)
+
+g∗
+k=1
+
++
+
+p
+(cid:88)
+
+k=1
+
+λk
+
+(cid:88)
+
+(i,j)∈EMST, i,j∈M
+
+g∗
+k
+k
+
+(cid:88)
+
+k((cid:107)am
+ρ(cid:48)
+
+k,i − am
+
+k,j(cid:107)2)(cid:107)ak,i − ak,j(cid:107)2
+
+¯ρk((cid:107)am
+
+k,i − am
+
+k,j(cid:107)2)T {(ak,i − a∗
+
+k,i) − (ak,j − a∗
+
+k,j)}.
+
+i, j /∈ M
+
+g∗
+k , g∗
+k
+
+k = 1, · · · , G∗
+k,
+
+(i, j) ∈ EMST
+
+Similar with the proving process in (S.11), for (i, j) ∈ EMST, i, j /∈ Mg∗
+k = 1, · · · , p, we can obtain (cid:107)am
+
+k,j(cid:107)2 > a0λk, thus ¯ρk((cid:107)am
+
+k = 1, · · · , G∗
+k,
+k,j(cid:107)2) = 0 by Assumption
+
+k,i−am
+
+k,i−am
+
+k , g∗
+
+k
+
+11
+
+(A4). Hence,
+
+I4 =
+
+p
+(cid:88)
+
+k=1
+
+λk
+
+G∗
+k(cid:88)
+
+g∗
+k=1
+
+(cid:88)
+
+(i,j)∈EMST, i,j∈M
+
+g∗
+k
+k
+
+k((cid:107)am
+ρ(cid:48)
+
+k,i − am
+
+k,j(cid:107)2)(cid:107)ak,i − ak,j(cid:107)2.
+
+(S.13)
+
+Similar with the proof of (S.12), we have (cid:107)a∗ − ˆaor(cid:107)∞ ≤ (cid:107)a − ˆaor(cid:107)∞. Then, for (i, j) ∈
+EMST, i, j ∈ Mg∗
+k ,
+
+k
+
+(cid:107)am
+
+k,i − am
+
+k,j(cid:107)2 ≤ (cid:107)am
+
+k,i − am
+
+k,j(cid:107)1 ≤ 2L(cid:107)am − a∗(cid:107)∞ ≤ 2L(cid:107)a − a∗(cid:107)∞
+
+≤ 4L(cid:107)a − ˆaor(cid:107)∞ ≤ 4Ltn.
+
+Therefore, ρ(cid:48)
+
+k((cid:107)am
+
+k,i − am
+
+k,j(cid:107)2) ≥ ρ(cid:48)
+
+k(4Ltn) by the concavity of ρk(·). According to (S.13),
+
+I4 ≥
+
+p
+(cid:88)
+
+k=1
+
+λkρ(cid:48)
+
+k(4Ltn)
+
+G∗
+k(cid:88)
+
+g∗
+k=1
+
+(cid:88)
+
+(cid:107)ak,i − ak,j(cid:107)2.
+
+(i,j)∈EMST, i,j∈M
+
+g∗
+k
+k
+
+k
+
+k , according to the deﬁnition of Mg∗
+
+For every i∗, j∗ ∈ Mg∗
+k , we know there is a path i∗ =
+p1 → p2 → · · · → pM = j∗, connecting i∗ and j∗, where (pm−1, pm) ∈ (cid:101)Eg∗
+k , m = 2, · · · , M ,
+and (cid:101)Eg∗
+k }. Moreover, we can always let the path
+satisfy that {pm}M
+1 are mutually unequal, otherwise suppose pm1 = pm2, m1 < m2, the path
+after deleting pm1+1 → · · · → pm2 still can connect i∗, j∗. Therefore, for every i∗, j∗ ∈ Mg∗
+k ,
+
+k = {(i, j) : (i, j) ∈ EMST, and i, j ∈ Mg∗
+
+k
+
+k
+
+k
+
+k
+
+k
+
+(cid:107)ak,i∗ − ak,j∗(cid:107)2 ≤
+
+(cid:88)
+
+(cid:107)ak,i − ak,j(cid:107)2
+
+(i,j)∈EMST, i,j∈M
+
+g∗
+k
+k
+
+=⇒
+
+(cid:88)
+
+(cid:107)ak,i − ak,j(cid:107)2 ≤
+
+i<j, i,j∈M
+
+g∗
+k
+k
+
+|Mg∗
+
+k
+
+k |(|Mg∗
+2
+
+k
+
+k | − 1)
+
+(cid:88)
+
+(cid:107)ak,i − ak,j(cid:107)2.
+
+(i,j)∈EMST, i,j∈M
+
+g∗
+k
+k
+
+Hence,
+
+I4 ≥
+
+p
+(cid:88)
+
+k=1
+
+λkρ(cid:48)
+
+k(4Ltn)
+
+G∗
+k(cid:88)
+
+g∗
+k=1
+
+2
+k |(|Mg∗
+
+k
+
+|Mg∗
+
+k
+
+k | − 1)
+
+(cid:88)
+
+i<j, i,j∈M
+
+g∗
+k
+k
+
+(cid:107)ak,i − ak,j(cid:107)2.
+
+(S.14)
+
+12
+
+Now we consider I3. Denote W k
+
+l = (wk
+
+1,l, · · · , wk
+
+n,l)T = −(cid:101)Zk
+
+l
+
+(cid:16)
+
+Y − (cid:80)p
+
+k=1
+
+(cid:80)L
+
+l=1 (cid:101)Zk
+
+l (cid:101)am
+
+k,l
+
+(cid:17)
+
++
+
+2n(cid:37)khll(cid:101)am
+
+k,l. Then, we have
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+k=1
+
+l=1
+
+(W k
+
+l )T ((cid:101)ak,l − (cid:101)a∗
+
+k,l) =
+
+1
+n
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+G∗
+k(cid:88)
+
+(cid:88)
+
+k=1
+
+l=1
+
+g∗
+k=1
+
+i∈M
+
+g∗
+k
+k
+
+wk
+
+i,l(al
+
+k,i − al,∗
+k,i)
+
+(cid:16)
+
+wk
+i,l
+
+al
+k,i −
+
+1
+|Mg∗
+k |
+
+k
+
+(cid:88)
+
+(cid:17)
+
+al
+k,j
+
+j∈M
+
+g∗
+k
+k
+
+wk
+i,l
+|Mg∗
+k |
+
+k
+
+(cid:0)al
+
+k,i − al
+k,j
+
+(cid:1)
+
+I3 =
+
+=
+
+=
+
+=
+
+=
+
+1
+n
+
+1
+n
+
+1
+n
+
+1
+n
+
+1
+n
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+G∗
+k(cid:88)
+
+(cid:88)
+
+k=1
+
+l=1
+
+g∗
+k=1
+
+i∈M
+
+g∗
+k
+k
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+G∗
+k(cid:88)
+
+(cid:88)
+
+k=1
+
+l=1
+
+g∗
+k=1
+
+i,j∈M
+
+g∗
+k
+k
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+G∗
+k(cid:88)
+
+(cid:88)
+
+k=1
+
+l=1
+
+g∗
+k=1
+
+i<j, i,j∈M
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+G∗
+k(cid:88)
+
+(cid:88)
+
+k=1
+
+l=1
+
+g∗
+k=1
+
+i<j, i,j∈M
+
+g∗
+k
+k
+
+g∗
+k
+k
+
+wk
+i,l
+|Mg∗
+k |
+
+k
+
+(cid:0)al
+
+k,i − al
+k,j
+
+(cid:1) +
+
+1
+n
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+G∗
+k(cid:88)
+
+(cid:88)
+
+k=1
+
+l=1
+
+g∗
+k=1
+
+g∗
+k
+i<j, i,j∈M
+k
+
+wk
+j,l
+|Mg∗
+k |
+
+k
+
+(cid:0)al
+
+k,j − al
+k,i
+
+(cid:1)
+
+wk
+
+i,l − wk
+j,l
+|Mg∗
+k |
+
+k
+
+(cid:0)al
+
+k,i − al
+k,j
+
+(cid:1) .
+
+Hence,
+
+|I3| ≤
+
+1
+n
+
+max
+1 ≤ k ≤ p, 1 ≤ l ≤ L
+
+|wk
+
+i,l − wk
+j,l|
+
+p
+(cid:88)
+
+G∗
+k(cid:88)
+
+k=1
+
+g∗
+k=1
+
+√
+
+L
+|Mg∗
+k |
+
+k
+
+1 ≤ i, j ≤ n
+
+Moreover, for any k ∈ {1, · · · , p} and l ∈ {1, · · · , L},
+
+(cid:88)
+
+i<j, i,j∈M
+
+g∗
+k
+k
+
+(cid:107)ak,i − ak,j(cid:107)2.
+
+(S.15)
+
+max
+1≤i,j≤n
+
+|wk
+
+i,l − wk
+
+j,l| ≤ 2(cid:107)W k
+
+l (cid:107)∞
+
+≤ 2(cid:107)(cid:101)Zk
+
+l (cid:107)∞
+
+(cid:110)
+
+(cid:107)(cid:15)(cid:107)∞ +
+
+p
+(cid:88)
+
+L
+(cid:88)
+
+k=1
+
+l=1
+
+(cid:107)(cid:101)Zk
+
+l (cid:107)∞(cid:107)(cid:101)am
+
+k,l − (cid:101)a0
+
+k,l(cid:107)∞
+
+(cid:111)
+
++ 2n(cid:37)k(cid:107)(cid:101)am
+
+k,l(cid:107)∞.
+
+Similar with the proof of (S.12), we have (cid:107)(cid:101)a∗
+
+k,l − (cid:101)a0
+
+k,l(cid:107)∞ ≤ (cid:107)(cid:101)ak,l − (cid:101)a0
+
+k,l(cid:107)∞, so that
+
+(cid:107)(cid:101)am
+
+k,l − (cid:101)a0
+
+k,l(cid:107)∞ ≤ π(cid:107)(cid:101)ak,l − (cid:101)a0
+
+k,l(cid:107)∞ + (1 − π)(cid:107)(cid:101)a∗
+
+k,l − (cid:101)a0
+
+k,l(cid:107)∞ ≤ (cid:107)(cid:101)a − (cid:101)a0(cid:107)∞ ≤ rn.
+
+13
+
+(S.16)
+
+(S.17)
+
+Then,
+
+By Assumption (A5),
+
+(cid:107)(cid:101)am
+
+k,l(cid:107)∞ ≤ (cid:107)(cid:101)a0
+
+k,l(cid:107)∞ + rn ≤ (cid:107)a0(cid:107)∞ + rn.
+
+P ((cid:107)(cid:15)(cid:107)∞ >
+
+(cid:113)
+
+2c−1
+1
+
+(cid:112)log n) ≤ 2n−1.
+
+(S.18)
+
+(S.19)
+
+Thus, there is an event E2 such that P (Ec
+
+2) ≤ 2n−1, and on the event E1 ∩ E2, by (S.16)-
+
+(S.19) and Assumption (A3), we have
+(cid:26)(cid:113)
+
+max
+1 ≤ k ≤ p, 1 ≤ l ≤ L
+
+|wk
+
+i,l − wk
+
+j,l| ≤ 2C3
+
+(cid:112)log n + pLC3rn
+
+(cid:27)
+
++ 2n(cid:101)(cid:37)((cid:107)a0(cid:107)∞ + rn) = ψn.
+
+2c−1
+1
+
+1 ≤ i, j ≤ n
+
+Combining (S.15), we have
+
+|I3| ≤
+
+ψn
+n
+
+p
+(cid:88)
+
+G∗
+k(cid:88)
+
+k=1
+
+g∗
+k=1
+
+√
+
+L
+|Mg∗
+k |
+
+k
+
+(cid:88)
+
+i<j, i,j∈M
+
+g∗
+k
+k
+
+(cid:107)ak,i − ak,j(cid:107)2.
+
+(S.20)
+
+Let tn = o(1), then ρ(cid:48)
+
+k(4Ltn) → 1. Thus, by (S.14) and (S.20), under the rate assumption
+
+of λk and (cid:37)k in Theorem 3, we have
+
+Qn((cid:101)a) − Qn((cid:101)a∗) = I3 + I4
+(cid:40)
+
+p
+(cid:88)
+
+G∗
+k(cid:88)
+
+≥
+
+k(4Ltn)
+
+2λkρ(cid:48)
+k |(|Mg∗
+
+k
+
+k
+
+k | − 1)
+
+|Mg∗
+
+k=1
+
+g∗
+k=1
+
+√
+
+ψn
+L
+n|Mg∗
+k |
+
+k
+
+−
+
+(cid:41)
+
+(cid:88)
+
+i<j, i,j∈M
+
+g∗
+k
+k
+
+(cid:107)ak,i − ak,j(cid:107)2 ≥ 0.
+
+The result in (ii) is proved. Together with the result in (i), proof is completed. (cid:3)
+
+S3 The NelderMead algorithm
+
+Following Singer and Nelder (2009), the NelderMead algorithm for minimizing BIC
+
+({λk, (cid:37)k}p
+
+k=1) contains the following steps.
+
+14
+
+Step 1. Initial simplex.
+
+The initial simplex S is constructed by generating 2p+1 vertices, i.e., xj = (λj
+
+1, · · · , λj
+
+p, (cid:37)j
+
+1, · · · , (cid:37)j
+
+p),
+
+j = 0, · · · , 2p. The common method for generating xj is
+
+xj = x0 + hjej,
+
+j = 1, · · · , 2p,
+
+where hj ∈ R is the step size, and ej ∈ R2p is the unit vector with j−th element
+
+equal to one, others equal to zero. A decent choice of x0 and hj can be obtained by
+
+comparing the value of objective function over a small number of grid. To be speciﬁc,
+
+we calculate the BIC values over a small number of grid, and take the x0 as the point
+
+corresponding to the smallest BIC value, and h = (h1, · · · , h2p)T can take the value
+
+with magnitude being the same as x0, such as h = x0/2.
+
+Step 2. Ordering.
+
+Order according to the values at these vertices:
+
+BIC(x(0)) ≤ BIC(x(1)) ≤ · · · ≤ BIC(x(2p)),
+
+where x(j) is the corresponding vertex with (j + 1)-th smallest BIC value. If x(j),
+
+j = 0, · · · , 2p are close to each other, terminate the algorithm, and take x(0) as the
+minimizer of the objective function. If not, let xc = 1
+2p
+
+j=0 x(j).
+
+(cid:80)2p−1
+
+Step 3. Reﬂection.
+
+Compute reﬂected point xr = xc + α(xc − x(2p)) with α > 0. If the reﬂected point
+
+satisﬁes BIC(x(0)) ≤ BIC(xr) < BIC(x(2p−1)), then obtain a new simplex by replacing
+
+the worst point x(2p) with the reﬂected point xr, and go to Step 2.
+
+15
+
+Step 4. Expansion.
+
+If the reﬂected point satisﬁes BIC(xr) < BIC(x(0)), then compute the expanded point
+
+xe = xc + γ(xr − xc) with γ > 1. If BIC(xe) < BIC(xr), then obtain a new simplex
+
+by replacing the worst point x(2p) with the expanded point xe, and go to Step 2, else
+
+obtain a new simplex by replacing the worst point x(2p) with the reﬂected point xr,
+
+and go to Step 2.
+
+Step 5. Contraction.
+
+If the reﬂected point satisﬁes BIC(xr) ≥ BIC(x(2p−1)), then compute the contracted
+
+point xt = xc + ρ(x(2p) − xc) with 0 < ρ ≤ 0.5.
+
+If the contracted point satisﬁes
+
+BIC(xt) < BIC(x(2p)), then obtain a new simplex by replacing the worst point x(2p)
+
+with the contracted point xt, and go to Step 2.
+
+Step 6. Shrink.
+
+If the contracted point satisﬁes BIC(xt) ≥ BIC(x(2p)), then obtain a new simplex by
+
+replacing x(j) with x(0) + σ(x(j) − x(0)), j = 1, · · · , 2p, and go to Step 2.
+
+The standard values, used in most implementations are α = 1, γ = 2, ρ = 0.5 and
+
+σ = 0.5.
+
+S4 Generate spatially clustered pattern
+
+Here, we take the spatially clustered patterns of β2(s) in Figure 2(a) of the main paper
+
+as an example, to demonstrate how to generate spatially clustered patterns of MST-equal
+
+and MST-unequal.
+
+For the MST-equal pattern of β2(s) in Figure 2(a), we construct it through following
+
+steps,
+
+16
+
+Step 1. Randomly generate a location (s1, s2), where s1 and s2 are from [0, 1] uniform
+
+distribution.
+
+Step 2. Compute the distance from (s1, s2) to three lines y = x + 0.5, y = x and
+
+y = x − 0.5, respectively. Denote them as d1, d2 and d3.
+
+Step 3. Set a tolerance parameter δ = 0.02, if min(d1, d2, d3) ≥ δ, keep this location,
+
+otherwise abandon it.
+
+Step 4. Repeat Step 1-3 until the number of locations reaches 1000, then we form
+
+four clusters based on these 1000 locations, which is deﬁned by {si : s2 > s1 + 0.5},
+
+{si : s1 + 0.5 ≥ s2 > s1}, {si : s1 ≥ s2 > s1 − 0.5} and {si : s1 − 0.5 ≥ s2}. And the
+
+values of β2(s) in these four clusters are 1, -1, 0.5, -0.5, respectively.
+
+The tolerance parameter δ controls the minimum distance between diﬀerent proximate
+
+clusters, which can be easily observed in Figure 2 of the main paper. As discussed in Section
+
+2.3.3 of the main paper, MST only connects the proximate locations. Thus, if δ is relatively
+
+large, i.e., the minimum distance between diﬀerent proximate clusters is relatively large,
+
+all the locations within the same cluster are more likely to be connected through the edges
+
+of MST, resulting in the MST-equal pattern; if δ is relatively small, some locations may
+
+be isolated from its belonging cluster and connected to a diﬀerent cluster due to closer
+
+distance. In the Step 3 above, we set the tolerance parameter δ = 0.02 to generate the
+
+MST-equal pattern. To generate the MST-unequal pattern, we set δ = 0.01 and details are
+
+given as follows.
+
+For the MST-unequal pattern of β2(s) in Figure 2(a), we construct it through following
+
+steps,
+
+Step* 1. The same as Step 1.
+
+17
+
+Step* 2. The same as Step 2.
+
+Step* 3. Set a tolerance parameter δ = 0.01, if min(d1, d2, d3) ≥ δ, keep this location,
+
+otherwise abandon it.
+
+Step* 4. Repeat Step* 1-3 until the number of locations reaches 1000. We form four
+
+clusters of β2(s) by following two steps. First, divide these 1000 locations into four
+
+parts, that is, {si : s2 > s1 + 0.5}, {si : s1 + 0.5 ≥ s2 > s1}, {si : s1 ≥ s2 > s1 − 0.5}
+
+and {si : s1 − 0.5 ≥ s2}, and the values of β2(s) in these four parts are 1, -1, 0.5,
+
+-0.5, respectively. Second, based on these four parts, we can obtain the corresponding
+Mg∗
+
+k,1 ∈ {1, · · · , G∗
+one or two, which violates the theoretical requirement of the sample size in M
+
+g∗
+k,1
+k may be
+.
+
+k}, the sample size in M
+
+k. For some g∗
+
+k = 1, · · · , G∗
+
+k , g∗
+
+k
+
+g∗
+k,1
+k
+
+Thus, we form four clusters ( locations in the same cluster have the same value of
+
+β2(s)), through replacing the value of β2(si), i ∈ M
+
+g∗
+k,2
+j ∈ M
+k
+g∗
+k,1
+k
+
+M
+
+, g∗
+
+k,2 ∈ {1, · · · , G∗
+
+k} , where the sample size of M
+
+and M
+
+g∗
+k,2
+k
+
+are connected by the edge of MST.
+
+g∗
+k,1
+k with the value of β2(sj),
+is relatively large, and
+
+g∗
+k,2
+k
+
+S5 Simulation study: SCC* with the initial values set
+
+as the true values
+
+The setting of this simulation study is the same as that in Section 4.1 of the main
+
+paper. Table S1 summarizes the results of the infeasible SCC* with the initial values set
+
+as the true values. Compared to the results of Table 1 in the main paper, the infeasible
+
+SCC* gives uniformly better performance than SCVC, SCC, GWR, PSE, and SCC* with
+
+the initial values set by the SCC estimates. It is because the SCC model is the true model
+
+and the initial values are set as the true values.
+
+18
+
+Table S1: The summarized results of SCC* under Study 1 in the main paper (the SCC
+
+model is the true model in Study 1), with the initial values set as the true values.
+
+Pattern
+
+Correlation MSEβ2
+
+MSEβ1
+
+RI2
+
+RI1
+
+IC2
+
+IC1
+
+MST-equal
+
+MST-unequal
+
+weak
+
+strong
+
+weak
+
+strong
+
+0.0004
+(0.0000)
+0.0008
+(0.0001)
+
+0.0008
+(0.0001)
+0.0018
+(0.0001)
+
+0.0004
+(0.0000)
+0.0008
+(0.0001)
+
+0.0012
+(0.0001)
+0.0041
+(0.0001)
+
+100.00
+(0.00)
+100.00
+(0.00)
+
+85.75
+(0.00)
+85.75
+(0.00)
+
+100.00
+(0.00)
+100.00
+(0.00)
+
+88.18
+(0.00)
+88.18
+(0.00)
+
+4
+(0.00)
+4
+(0.00)
+
+7
+(0.00)
+7
+(0.00)
+
+4
+(0.00)
+4
+(0.00)
+
+8
+(0.00)
+8
+(0.00)
+
+SCC*: spatially clustered coeﬃcient regression based on SCAD. MSEβk : mean squared error
+
+(×10) for k-th covariate, k = 1, 2; RIk: rand index (×100) for k-th covariate; ICk: the number
+
+of identiﬁed clusters for k-th covariate. Values in the parentheses are the standard errors.
+
+19
+
+S6 Simulation study: Smooth-varying coeﬃcients
+
+The true regression coeﬃcients {βk(si)}2
+
+k=1 in this study are smooth over the whole
+
+region, i.e., the assumption made in GWR and PSE holds, see Figure S1. Other settings
+
+are the same as those in Section 4 of the main paper.
+
+Table S2 summarizes the results of the ﬁve methods. SCVC performs slightly worse than
+
+PSE and better than other methods. This is because the assumption made in PSE holds
+
+under this setting. It is worth to point out that PSE performs much better than GWR,
+
+although the assumption in GWR also holds under this setting. One possible explanation
+
+is that the PSE is based on a global smoothing method, which utilizes all the information
+
+of samples, however the GWR is based on a local smoothing method, and only a small
+
+number of samples are used for estimation.
+
+References
+
+Boyd, S., N. Parikh, E. Chu, B. Peleato, and J. Eckstein (2011). Distributed optimization and
+
+statistical learning via the alternating direction method of multipliers. Foundations and Trends
+
+in Machine Learning 3 (1), 1–122.
+
+Crainiceanu, C. M., D. Ruppert, R. J. Carroll, A. Joshi, and B. Goodner (2007). Spatially
+
+adaptive bayesian penalized splines with heteroscedastic errors. Journal of Computational and
+
+Graphical Statistics 16 (2), 265–288.
+
+Cressie, N. (1993). Statistics for Spatial Data. New York: Wiley.
+
+Diggle, P. J., J. A. Tawn, and R. A. Moyeed (1998). Model-based geostatistics. Journal of the
+
+Royal Statistical Society: Series C (Applied Statistics) 47 (3), 299–350.
+
+Emery, W. J. (2001). Water types and water masses. Encyclopedia of Ocean Sciences 6, 3179–
+
+3187.
+
+20
+
+Figure S1: The points/colors represent the locations/coeﬃcient values, and the solid lines
+
+represent the edges in MST. For s = (sh, sv) and shv = sh+sv, β2(s) = s2
+
+hv and β1(s) = s1.7
+hv .
+
+21
+
+Table S2: Summary of results for smooth-varying coeﬃcients.
+
+Correlation Methods MSEβ2
+
+MSEβ1
+
+RI2
+
+RI1
+
+IC2
+
+IC1
+
+SCVC
+
+SCC
+
+weak
+
+SCC*
+
+GWR
+
+PSE
+
+SCVC
+
+SCC
+
+strong
+
+SCC*
+
+GWR
+
+PSE
+
+0.004
+(0.000)
+0.204
+(0.002)
+0.231
+(0.001)
+0.112
+(0.001)
+0.004
+(0.000)
+
+0.022
+(0.001)
+1.390
+(0.015)
+1.246
+(0.005)
+0.940
+(0.007)
+0.019
+(0.001)
+
+0.006
+(0.000)
+0.231
+(0.003)
+0.259
+(0.001)
+0.151
+(0.002)
+0.005
+(0.000)
+
+0.069
+(0.002)
+2.513
+(0.025)
+2.469
+(0.010)
+1.783
+(0.013)
+0.052
+(0.002)
+
+100
+(0.00)
+1.47
+(0.02)
+3.15
+(0.01)
+-
+-
+-
+-
+
+94.28
+(1.57)
+1.97
+(0.04)
+2.61
+(0.01)
+-
+-
+-
+-
+
+100
+(0.00)
+1.94
+(0.03)
+5.44
+(0.04)
+-
+-
+-
+-
+
+100
+(0.00)
+11.49
+(0.29)
+14.22
+(0.07)
+-
+-
+-
+-
+
+1.00
+(0.00)
+176.98
+(1.37)
+57.88
+(0.15)
+-
+-
+-
+-
+
+1.20
+(0.05)
+148.32
+(1.78)
+63.45
+(0.19)
+-
+-
+-
+-
+
+1.00
+(0.00)
+126.07
+(1.31)
+34.31
+(0.11)
+-
+-
+-
+-
+
+1.00
+(0.00)
+48.05
+(0.88)
+27.43
+(0.10)
+-
+-
+-
+-
+
+SCVC: spatially clustered varying coeﬃcient method; SCC: spatially clustered coef-
+
+ﬁcient regression based on LASSO; SCC*:
+
+spatially clustered coeﬃcient regression
+
+based on SCAD; GWR: geographically weighted regression; PSE: P -spline estimator.
+
+MSEβk /RIk/ICk: mean squared error (×10)/rand index (×100)/number of identiﬁed clus-
+
+ters, for k-th covariate, k = 1, 2. Values in the parentheses are the standard errors. Note
+
+that GWR and PSE can not identify clusters.
+
+22
+
+Fan, J. and R. Li (2001). Variable selection via nonconcave penalized likelihood and its oracle
+
+properties. Journal of the American Statistical Association 96 (456), 1348–1360.
+
+Finley, A. O. (2011). Comparing spatially-varying coeﬃcients models for analysis of ecological
+
+data with non-stationary and anisotropic residual dependence. Methods in Ecology and Evolu-
+
+tion 2 (2), 143–154.
+
+Florindo, F. and M. Siegert (2008). Antarctic Climate Evolution, Volume 8. Elsevier.
+
+Fotheringham, A. S., C. Brunsdon, and M. Charlton (2003). Geographically Weighted Regression:
+
+the Analysis of Spatially Varying Relationships. John Wiley & Sons.
+
+Gelfand, A. E., H.-J. Kim, C. Sirmans, and S. Banerjee (2003). Spatial modeling with spatially
+
+varying coeﬃcient processes. Journal of the American Statistical Association 98 (462), 387–396.
+
+Johnson, M. E., L. M. Moore, and D. Ylvisaker (1990). Minimax and maximin distance designs.
+
+Journal of Statistical Planning and Inference 26 (2), 131–148.
+
+Ke, Z. T., J. Fan, and Y. Wu (2015). Homogeneity pursuit. Journal of the American Statistical
+
+Association 110 (509), 175–194.
+
+Leng, C., Y. Lin, and G. Wahba (2006). A note on the lasso and related procedures in model
+
+selection. Statistica Sinica 16, 1273–1284.
+
+Li, F. and H. Sang (2019). Spatial homogeneity pursuit of regression coeﬃcients for large datasets.
+
+Journal of the American Statistical Association 114 (527), 1050–1062.
+
+Li, X., L. Wang, H. J. Wang, and A. D. N. Initiative (2020). Sparse learning and structure
+
+identiﬁcation for ultrahigh-dimensional image-on-scalar regression. Journal of the American
+
+Statistical Association 00 (0), 1–15.
+
+Lloyd, C. D. (2010). Local Models for Spatial Analysis. CRC press.
+
+Lu, Z., D. J. Steinskog, D. Tjøstheim, and Q. Yao (2009). Adaptively varying-coeﬃcient spa-
+
+tiotemporal models. Journal of the Royal Statistical Society: Series B (Methodological) 71 (4),
+
+859–880.
+
+23
+
+Lv, Y., X. Zhu, Z. Zhu, and A. Qu (2020). Nonparametric cluster analysis on multiple outcomes
+
+of longitudinal data. Statistica Sinica 30 (4), 1–35.
+
+Ma, S. and J. Huang (2017). A concave pairwise fusion approach to subgroup analysis. Journal
+
+of the American Statistical Association 112 (517), 410–423.
+
+Mu, J., G. Wang, and L. Wang (2018). Estimation and inference in spatially varying coeﬃcient
+
+models. Environmetrics 29 (1), e2485.
+
+Nandi, P., W. S. Holbrook, S. Pearse, P. P´aramo, and R. W. Schmitt (2004). Seismic reﬂection
+
+imaging of water mass boundaries in the norwegian sea. Geophysical Research Letters 31 (23),
+
+1–4.
+
+Noresah, M. and R. Ruslan (2009). Modelling urban spatial structure using geographically
+
+weighted regression. In 18th World IMACS congress and MODSIM09 international congress
+
+on modelling and simulation, The Australian National University Canberra, ACT.
+
+Opsomer, J. D., G. Claeskens, M. G. Ranalli, G. Kauermann, and F. Breidt (2008). Non-
+
+parametric small area estimation using penalized spline regression. Journal of the Royal Sta-
+
+tistical Society: Series B (Methodological) 70 (1), 265–286.
+
+Propastin, P., M. Kappas, and S. Erasmi (2008). Application of geographically weighted regression
+
+to investigate the impact of scale on prediction uncertainty by modelling relationship between
+
+vegetation and climate. International Journal of Spatial Data Infrastructures Research 3 (3),
+
+73–94.
+
+Ruppert, D., M. P. Wand, and R. J. Carroll (2003). Semiparametric Regression. Number 12.
+
+Cambridge University Press.
+
+Sangalli, L. M., J. O. Ramsay, and T. O. Ramsay (2013). Spatial spline regression models. Journal
+
+of the Royal Statistical Society: Series B (Methodological) 75 (4), 681–703.
+
+Schabenberger, O. and C. A. Gotway (2017). Statistical methods for spatial data analysis. CRC
+
+press.
+
+24
+
+Schmittner, A., J. C. Chiang, and S. R. Hemming (2007). Introduction: The ocean’s meridional
+
+overturning circulation. Washington DC American Geophysical Union Geophysical Monograph
+
+Series 173, 1–4.
+
+Singer, S. and J. Nelder (2009). Nelder-mead algorithm. Scholarpedia 4 (7), 2928.
+
+Talley, L. D. (2011). Descriptive Physical Oceanography: An Introduction. Academic press.
+
+Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. Journal of the Royal
+
+Statistical Society: Series B (Methodological) 58 (1), 267–288.
+
+Tibshirani, R., M. Saunders, S. Rosset, J. Zhu, and K. Knight (2005). Sparsity and smoothness
+
+via the fused lasso. Journal of the Royal Statistical Society: Series B (Methodological) 67 (1),
+
+91–108.
+
+Tibshirani, R. J., J. Taylor, et al. (2012). Degrees of freedom in lasso problems. The Annals of
+
+Statistics 40 (2), 1198–1232.
+
+Vallis, G. (2006). Atmospheric and Oceanic Fluid Dynamics: fundamentals and large-scale circu-
+
+lation. Cambridge: Cambridge University Press.
+
+Vallis, G. K. (2017). Atmospheric and Oceanic Fluid Dynamics. Cambridge University Press.
+
+Wang, H. and M. G. Ranalli (2007). Low-rank smoothing splines on complicated domains. Bio-
+
+metrics 63 (1), 209–217.
+
+Wheeler, D. C. and L. A. Waller (2009). Comparing spatially varying coeﬃcient models: a case
+
+study examining violent crime rates and their relationships to alcohol outlets and illegal drug
+
+arrests. Journal of Geographical Systems 11 (1), 1–22.
+
+Zhang, C.-H. et al. (2010). Nearly unbiased variable selection under minimax concave penalty.
+
+The Annals of Statistics 38 (2), 894–942.
+
+Zhang, Y., H. J. Wang, and Z. Zhu (2019a). Quantile-regression-based clustering for panel data.
+
+Journal of Econometrics 213 (1), 54–67.
+
+Zhang, Y., H. J. Wang, and Z. Zhu (2019b). Robust subgroup identiﬁcation.
+
+Statistica
+
+25
+
+Sinica 29 (4), 1873–1889.
+
+Zhou, S., X. Shen, and D. Wolfe (1998). Local asymptotics for regression splines and conﬁdence
+
+regions. The Annals of Statistics 26 (5), 1760–1782.
+
+Zou, H. and R. Li (2008). One-step sparse estimates in nonconcave penalized likelihood models.
+
+The Annals of Statistics 36 (4), 1509.
+
+26
+
+

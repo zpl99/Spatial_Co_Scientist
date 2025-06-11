@@ -1,0 +1,466 @@
+Urban morphology meets deep learning: Exploring
+urban forms in one million cities, town and villages
+across the planet
+
+Vahid Moosavi
+
+Chair for Computer Aided Architectural Design, Department of Architecture, ETH Zurich, 8093, Switzerland
+
+svm@arch.ethz.ch
+
+ABSTRACT
+
+Study of urban form is an important area of research in urban planning/design that contributes to our understanding of how
+cities function and evolve. However, classical approaches are based on very limited observations and inconsistent methods.
+As an alternative, availability of massive urban data collections such as Open Street Map from the one hand and the recent
+advancements in machine learning methods such as deep learning techniques on the other have opened up new possibilities
+to automatically investigate urban forms at the global scale.
+In this work for the ﬁrst time, by collecting a large data set of street networks in more than one million cities, towns and villages
+all over the world, we trained a deep convolutional auto-encoder, that automatically learns the hierarchical structures of urban
+forms and represents them via dense and comparable vectors. We showed how the learned urban vectors could be used for
+different investigations. Using the learned urban vectors, one is able to easily ﬁnd and compare similar urban forms all over the
+world, considering their overall spatial structure and other factors such as orientation, graphical structure, and density and
+partial deformations. Further cluster analysis reveals the distribution of the main patterns of urban forms all over the planet.
+
+Introduction
+
+Cities are among the most complex cultural products that are expanded all over the planet. Although each city has its own
+unique story, study of cities at the global scale has been an important area of research for a long time. Within the domain of
+urban studies, urban morphology is the classical study of urban forms and their underlying formation processes and forces over
+time. Historically, urban morphologist study cities based on qualitative approaches and personal observations and limited to few
+famous cities or even one speciﬁc location1–3. This approach usually leads to qualitative and conceptual urban models such as
+those tripartite models of Cedric Price’s analogy of cities with three different ways of cooking eggs (see Figure 1 ), identiﬁed by
+medieval cities with concentric patterns, industrial cities with mechanical grids and ecological cities with polycentric patterns
+and organic forms4.
+
+7
+1
+0
+2
+
+p
+e
+S
+2
+1
+
+]
+
+V
+C
+.
+s
+c
+[
+
+2
+v
+9
+3
+9
+2
+0
+.
+9
+0
+7
+1
+:
+v
+i
+X
+r
+a
+
+Figure 1. Qualitative and conceptual urban models: Analogy of urban forms with an egg by Cedric Price
+
+As another example of qualitative studies of urban forms and street networks at the neighborhood level one can refer to
+famous archetypical models such gridirons, fragmented parallel, warped parallel, loops and lollipops and lollipops on a stick5.
+Next to qualitative studies, recently there have been several attempts to study urban forms based on quantitative methods,
+usually based on complexity theory or network science point of view or the so called city science among the community of
+physicists6–11. Most of these studies are either based on theoretical models of urban morphology such as fractals12 or based on
+very limited samples of city networks, usually less than 100 networks6–8, 10, 13. Further, most of these quantitative studies, are
+
+ 
+ 
+ 
+ 
+ 
+ 
+trying to generalize their ﬁndings into universal equations in terms of scaling laws or distributions of size and densities of the
+built environments. A complete list of these quantitative measures of urban forms can be found at14.
+
+To sum up, as Boeing15 argues, current quantitative studies suffer from four main limitations of small sample sizes, excessive
+network simpliﬁcation, difﬁcult reproducibility, and the lack of consistent and easy-to-use research tools. In addition to these
+limits, comparing to qualitative approaches, one of the main critiques to current quantitative approaches in urban morphology
+is that they sometimes loose the big picture by the use of detailed analytical metrics, while the overall visual and qualitative
+patterns are also very important for architects and urban designers.
+
+At the same time, nowadays cities are producing enormous amounts of data about different aspects of life in our planet. If
+we couple these different sources together, they will reveal very interesting aspects of cities and the ways they function. One of
+the great sources of urban data is Open Street Map (OSM), which is an open source project that provides a free and publicly
+available map of the whole planet. Figure 2 shows the spatial distribution of more than one million indexed locations across the
+planet.
+
+Figure 2. Data from more than one million cities, towns and villages that are indexed in Open Street Map is available as a free
+Big Data set on cities and built environments all over the world.
+
+In this work, our goal is to investigate the potential beneﬁts of this large collection of urban data for architects and urban
+design researchers. To the best of our knowledge this is the ﬁrst time that we investigate the urban forms of more than one
+million locations across the planet. Ultimately we would like to develop a search engine of urban forms that automatically
+indexes millions of locations and makes it possible for the researchers and practitioners to explore and investigate different
+aspects of urban forms all over the planet. From the point of view of machine learning this can be framed as an unsupervised
+learning task such as feature learning and data-clustering, where for example, one is interested to identify the main urban
+patterns based on their spatial form or supervised learning tasks, where one is interested to study urban forms regarding to other
+urban qualities such as trafﬁc, population health or urban pollution. In this paper, we only report the results of our ﬁrst step
+toward clustering and pattern recognition of urban forms.
+
+Technically speaking, similar to texts or images, urban forms have complex and hierarchical structures, composed of
+building layouts, street segments, neighborhood layouts and main street networks. Therefore, while network based analytics
+is the common approach in quantitative urban studies, as we will show later considering the inherent complexity of urban
+patterns, the use of the so-called representation learning and deep learning algorithms16 such as Convolutional Neural Networks
+(CNNs)17, 18 in computer vision and natural language processing seems very promising. Similar to the idea of Word2vec
+project19, where each word gets a unique representation in vector space, after training a deep learning model, each unique
+urban form gets a vector based representation, where similar urban forms gets similar representations based on their similarities
+in density, orientation and overall structures, regardless of translations, partial deformations and rotations. Next, we use the
+learned vectors for further analyses such as clustering and pattern recognition.
+
+In the next section, we ﬁrst explain our experimental set up and the data collection pipeline from OSM. Next, we describe
+the architecture of the deep learning model we used in this work. Then, we describe the main results and ﬁnally we discuss
+possible next steps and conclude the paper.
+
+2/10
+
+Methods
+
+Experimental set up and data collection
+While, OSM is a wiki-style project, based on several studies20–24 it has a relatively high quality data set in terms of coverage of
+the whole planet. At the time of our data collection, according to the tags of indexed places (See taginfo.) there were 8,325
+cities, 84,785 towns and 1,036,494 villages, totally 1,130,591 locations indexed in OSM. OSM freely provides data sets as
+a special form of XML via its APIs such as Overpass or in bulk mode from several different sources such as GEOFABRIC.
+These data sets can be converted to shape ﬁles or standard graphical formats15.
+
+While ultimately it would be interesting to compare the urban forms via graph-based kernels and CNN models with
+non-Euclidean kernels25, since graphical methods focus on connectivity and the topology of the networks, they might loose the
+information on spatial and visual patterns. Further, converting OSM data of more than a million locations to graphs and the
+graph analysis processes can be time consuming or depending on the computational power almost infeasible in a reasonable
+time. One quick solution is to take the images of the cities at the same spatial scale and use them to train a standard image
+based CNN. Another advantage of using image representation over the graphical representations of urban forms is that it is
+easily possible to combine different aspects of cities such as buildings, streets and land use information next to each other in
+one single image, while they can not be easily incorporated into one single graphical representation.
+
+Next, while the immediate idea would be to use the satellite images, since we were interested only in urban forms, we
+designed our images with speciﬁc color codes and styles across the planet, using Mapbox studio web application. Mapbox
+studio is a web application for map styling, where one can easily design a visual map and select few speciﬁc layers to be shown
+on the map with speciﬁc styles including the thicknesses of the lines and the colors of polygons. Therefore, a nice and easy
+solution for us would be to create a styled map, where for example the roads are red, buildings are blue and the greeneries
+are green. Further, the thickness of the lines speciﬁes the primary, secondary and tertiary roads as well as their types such as
+highways, railroads and tunnels, etc. Next, by using the static API of Mapbox and providing the geographic coordinates of the
+locations that were extracted from OSM we downloaded the images of each urban form, with the same spatial scale (i.e. zoom
+level). However, unfortunately, the building information (i.e. the building footprints) is missing in many locations all over the
+world. Therefore, in this work, we only focused on road networks. Note that also it is possible that for some locations there is
+no spatial information and as a result the static API returns an empty ﬁle, which will be removed from the training data sets.
+Since we ﬁxed the spatial scale of images, it is logically expected that while a single image can easily capture one village, with
+the same size, we only can capture a small part of a large city such as Beijing or London. Nevertheless, in this experiment,
+we only took one image from the center of each location, regardless of its overall size. Finally, we collected 962,639 images.
+The initial images have the size of 2400x2400x1, which are very large for typical deep learning applications. Therefore, after
+cropping, we resized them to 256x256x1 binary images. Figure 3 shows few examples of the styled maps in several randomly
+chosen locations. In the next section we describe the architecture of the deep learning model we used in this study.
+
+Deep learning model
+Recently, CNNs17, 18 have changed the landscape of computer vision applications26, 27 as they efﬁciently learn complex
+hierarchical patterns in image data sets or in general in any homogenous type of data such as texts or different time series related
+applications. Although, it is usually common to train CNNs in supervised learning tasks such as classiﬁcation with labeled data
+sets, here we do not have any labeled data set. In this case the usual scenario is to use Auto Encoder (AE) networks28, 29, where
+the model learns to minimize its reconstruction loss. In other words, the network learns to predict its input. An AE has two main
+parts of encoder and decoder, where the input of the encoder will be the target output of the decoder. Usually the activations of
+the trained middle layer (i.e. the last layer of the encoder) can be used as a dense vector based representation of the inputs.
+Then, these vectors can be used for further tasks such as learning a low dimensional embedding or data clustering. While, the
+original AE networks are based on stacks of fully connected layers, they do not easily scale with high dimensional images.
+Therefore, a common choice of architecture is to combine convolutional kernels in AE architecture, known as Convolutional
+Auto Encoders (CAE)29, 30. CAEs scale very well to high dimensional images comparing to fully connected AEs, which require
+a relatively larger number of parameters to be learned. Further, CAEs consider the 2D structure of images, while in fully
+connected AEs one needs to ﬂatten the images to a high dimensional vector, where each pixel is one dimension. This introduces
+a redundancy in the parameters of the model, as all the features need to play globally in all the dimensions. This is opposite to
+CAEs, where different kernels learn to focus on certain patterns.
+
+In our work, we trained a CAE with tied weights with convolution layers in the encoder layers and the de-convolution (or
+transposed convolutions)31 in the decoder layers with no fully connected layers. It is very common to alternate convolution
+layers with max-pooling layers in the context of classiﬁcations. However, replacing max-pooling layers with strides will also
+give competitive results32. In our work, we chose the stride of 2 in all the layers, which divides the widths and lengths of
+images to two after each layer in the encoder part and vice versa in the decoder part. Also, we added ReLu nonlinearity on top
+of the output of each convolution operation. We tested several architectures and ﬁnally we chose a network with 5 encoder
+
+3/10
+
+Figure 3. Images of urban forms at randomly selected cities, towns or villages, all with the same spatial scale
+
+layers with 15,15,15,10,10 kernels in each layer correspondingly. For all the layers we used the kernels with the size of 5x5.
+We used an implementation of this algorithm in TensorFlow environment with CPU. A complete training cycle with batch size
+of 50 and 50 epochs took around a week on an IMAC 5k.
+
+Results
+
+Reconstruction quality of the trained auto-encoder
+After training the network, we also visually inspected the reconstruction quality of the trained auto-encoder for several random
+images. Figure 4 shows several reconstructed images in comparison to their original images. As we can see, while the model is
+able to reconstruct the overall image, it misses some ﬁne-grained details at the neighborhood levels. Next, we projected all the
+
+Figure 4. Original input (top) and the reconstructed (bottom) images by the trained convolutional auto-encoder
+
+images to the trained network and saved the activations of the last encoder layer that gave us an 8x8x10 matrix for each input
+image. After unrolling each matrix we had a 640 dimensional vector for each image. This gives us a dense representation of the
+high dimensional input images (from originally 256x256x1 or 65,536 dimensions to 8x8x10 or 640 dimensions). Hereafter, we
+call these dense vectors urban vectors. In principle, while the notion of similarity between two urban forms is hard to quantify,
+we expect that the learned urban vectors represent the hierarchical structure of the underlying road networks and capture the
+
+4/10
+
+overall urban form considering the important issues such as density, deformations, orientations, translation and partial rotations.
+
+Urban form exploration
+Similar to Word2Vec19, where similar words have similar dense vector based representations, here in the ﬁrst step we used
+the learned urban vectors to ﬁnd similar urban forms. Fitting a KNN model to the urban vectors, we achieved very satisfying
+results. In Figure 5 each column shows the 6 most similar urban forms to the chosen urban form in the ﬁrst cell of that column.
+Here, the similarity is deﬁned based on the Euclidean distance between the urban vectors. As expected, the learned urban
+vectors nicely represent the visual urban forms, considering their density, main structure, translation, orientation, and partial
+deformations. However, with the use of normal convolutional kernels, the model does not fully learn the rotation invariances.
+
+Figure 5. Finding the 6 most similar urban forms using the learned urban vectors
+
+A spectrum of urban forms across the planet
+Next, using the urban vectors of all the cities, we trained a large Self Organizing Map (SOM)33, which projects the 640
+dimensional urban vectors to a regular 2D grid. The common option for the dimensionality reduction and visualization is
+T-SNE34. However, T-SNE is very slow with large and high dimensional data sets. Opposite to T-SNE, since SOM is performing
+the data reduction and dimensionality reduction at the same time, it scales very well with the size of the data. Figure 6 shows a
+section of an automatically generated spectrum of urban forms all over the world. As four zoomed areas of this map show
+similar urban forms are placed next to each other in a way that overall they create a very smooth spectrum of urban forms all
+over the planet. An interactive version of this spectrum can be found at the project website.
+
+Analyzing the clusters of urban forms
+Next to visual explorations of the urban forms, we clustered all the urban forms via the learned urban vectors. Toward this
+goal we used SOM algorithm, which has been shown to be a powerful clustering algorithm. One unique beneﬁt of SOM for
+data clustering is that unlike other clustering algorithms, it labels the clusters in a way that similar clusters get similar indices.
+We trained a SOM with a one-dimensional grid topology that indexes the high dimensional vectors into an ordered series of
+one-dimensional indexes35, 36. Each index (i.e. each node of the trained SOM) will represent a cluster of urban forms, while
+similar indices are referring to similar high dimensional urban forms. Therefore, in addition to clustering and data reduction the
+trained SOM creates an intuitive spectrum of urban forms, which can be easily visualized in a colored geo-map36. (See Figure
+8 and Figure 10.) Further, since the labels are comparable, we can study the distribution of main clusters of urban forms in an
+intuitive manner.
+
+We trained a one-dimensional SOM with 2000 nodes and all the urban vectors as the training data set. The ﬁrst cluster
+always automatically collects those locations that do not have a lot of spatial information or are very sparse. Therefore, we
+removed the ﬁrst cluster from all our analyses. Figure 7 shows the distribution of urban forms within the identiﬁed clusters. As
+
+5/10
+
+Figure 6. An automatically generated spectrum of urban development patterns for around 1 million cities, towns and villages
+across the planet
+
+expected, this distribution has a long tail, which corresponds to unique cities with high levels of density. Further there are two
+peaks in the distribution, which are reﬂecting the most common types of urban forms, corresponding to towns and villages
+mainly. Using the trained one-dimensional SOM we can easily render the urban forms in a single geo-map, where similar urban
+
+Figure 7. Distribution of urban forms within 2000 identiﬁed clusters
+
+forms get similar colors based on their assigned cluster numbers36. In this way, we can also visualize the spatial (dis-) similarity
+of urban forms. As Figure 8 shows the ﬁrst peak in the distribution of the urban forms (starting from blue color) corresponds
+to villages or underdeveloped areas. Further, the majority of towns and small cities in developed areas are placed around the
+second peak of the distribution. Further, unique cities and very dense cities like the ones in Japan are placed on the right tale of
+the distribution of urban forms and get a red color on the map. In usual visualizations of low dimensional grids of SOM, (e.g.
+in Figure 6), all the clusters are uniformly rendered in a rectangular grids. However, inspired by Topological Data Analysis
+(TDA)37, one can study the topological shape of urban patterns by considering the degree of similarity between each pairs of
+clusters. By setting a threshold in the similarity between two nodes of SOM we can represent the trained SOM as a graph,
+where if the similarity of two nodes are more than the threshold, there is an edge between two nodes. Similar to the idea of
+persistence diagram in TDA, by changing the similarity thresholds, we can identify the most persistent shape of this graph.
+We tested several similarity thresholds with different cluster sizes. Finally, with similarity threshold of 80 percent (based on
+normalized Euclidean similarities) and 2000 clusters, Figure 9 shows the topology of urban forms, considering all the locations
+over the planet. In this diagram each node corresponds to one cluster of the trained SOM. The size of each node is proportional
+to the number of unique urban forms within that cluster. As it is shown, there is a ring naturally formed by the clusters on one
+side of the spectrum, followed by a very long tale to the other extreme of urban forms, which are expanded to different unique
+
+6/10
+
+Figure 8. Global distribution of urban forms: Similar colors refer to similar urban patterns
+
+clusters with few members. The colors of the nodes correspond to the cluster labels in the same way that is shown in Figure 8.
+
+Figure 9. The topology of urban forms: each node represents a cluster of urban forms. similar gets are closer to each other
+and have similar color codes.
+
+Further, it is worth to mention that the learned urban vectors can be used for comparison of any selection of urban forms
+or in general can be transferred for any other analysis. For instance, using the learned vectors of urban forms limited to
+North America, we trained another SOM to visualize the spatial patterns of development in this region. Figure 10 shows the
+distribution of 33,875 cities, towns and villages in North America, where similar locations with similar color codes creates
+meaningful spatial patterns of development around main metropolitans.
+
+Discussion
+
+Availability of large spatial data sets across the planet such as OSM offers new opportunities for the study of urban development
+patterns all over the world. However, most of the traditional approaches do not cope with these large data sets. Majority of
+existing studies on urban form and urban morphology are based on limited observations and qualitative approaches that are not
+easily reproducible or lack consistent and easy to use research tools.
+
+As an alternative to the traditional methods, in this work we used a deep neural network that automatically learns and
+
+7/10
+
+Figure 10. Distribution of 33,875 urban forms in North America: Similar colors refer to similar urban forms that all together
+they create meaningful spatial patterns of development around main metropolitans
+
+encodes the complex and hierarchical patterns of urban forms all over the world. We trained a deep convolutional auto encoder
+over the images of street networks in around one million cities, towns and villages. The trained model encodes the images
+of the urban forms to vector based representations, while it considers the overall spatial structure and other factors such as
+orientation, graphical structure, density and partial deformations of urban forms. The learned urban vectors were used for
+searching, comparing and ﬁnding similar urban patterns. Further, we developed an interactive spectrum of urban forms that can
+be easily explored by urban planners and researchers. Further, by analysis of clusters of urban forms and using the ideas from
+topological data analysis we investigated the distribution of the current urban forms all over the planet.
+
+These results are among very early outputs of an ongoing project, where by coupling large multimodal urban data sets with
+machine learning algorithms, new ways of comparative research at the global scale is becoming feasible. The long-term goal
+of this project is to develop a city explorer and a search engine of cities, where depending on a speciﬁc goal (e.g. a certain
+question about a speciﬁc city), one can ﬁnd similar developments somewhere in the world. Thinking about this approach in the
+same way that people use Internet as a complex and dynamic library, it can introduce new ways of working with complex urban
+phenomena. In this regard, the role of machine learning is very essential as a powerful “mediator” that produces very useful
+extracts from multimodal Big Data collections, which is deﬁnitely not possible to address by classical approaches.
+
+In addition to explorative analyses of urban forms, it is also possible to ask targeted questions related to urban forms and
+functions. For instance, one can simultaneously consider the effect of urban form on urban indicators in terms of economy,
+health, environment, and transportation quality in cities. As an example, American Community Survey (ACS) with a lot of
+information on more than 60K locations (census tracts) in USA is an immediate Big Data for training several multimodal
+deep-learning models. In the next step we will investigate the performance of these types of supervised models.
+
+Data availability
+
+All the collected data and the codes to generate the results are available from the project website.
+
+References
+
+1. Salat, S., Labb´e, F. & Nowacki, C. Cities and forms: on sustainable urbanism (CSTB Urban Morphology Laboratory,
+
+2011).
+
+2. Lynch, K. Good city form (MIT press, 1984).
+
+3. Lynch, K. The image of the city (vol. 11) (1960).
+
+4. Shane, D. G. Recombinant urbanism: conceptual modeling in architecture, urban design, and city theory (Academy Press,
+
+2005).
+
+5. Southworth, M. & Ben-Joseph, E. Streets and the Shaping of Towns and Cities (Island Press, 2013).
+
+8/10
+
+6. Barth´elemy, M. & Flammini, A. Modeling urban street patterns. Phys. review letters 100, 138702 (2008).
+
+7. Buhl, J. et al. Topological patterns in street networks of self-organized urban settlements. The Eur. Phys. J. B-Condensed
+
+Matter Complex Syst. 49, 513–522 (2006).
+
+8. Cardillo, A., Scellato, S., Latora, V. & Porta, S. Structural properties of planar graphs of urban street patterns. Phys. Rev. E
+
+73, 066107 (2006).
+
+9. Masucci, A. P., Smith, D., Crooks, A. & Batty, M. Random planar graphs and the london street network. The Eur. Phys. J.
+
+B-Condensed Matter Complex Syst. 71, 259–271 (2009).
+
+10. Strano, E. et al. Urban street networks, a comparative analysis of ten european cities. Environ. Plan. B: Plan. Des. 40,
+
+1071–1086 (2013).
+
+11. Fiasconaro, A., Strano, E., Nicosia, V., Porta, S. & Latora, V. Spatio-temporal analysis of micro economic activities in
+
+rome reveals patterns of mixed-use urban evolution. PloS one 11, e0151681 (2016).
+
+12. Batty, M. The size, scale, and shape of cities. science 319, 769–771 (2008).
+
+13. Louf, R. & Barthelemy, M. A typology of street patterns. J. The Royal Soc. Interface 11, 20140924 (2014).
+
+14. Boeing, G. Measuring the complexity of urban form and design (2017).
+
+15. Boeing, G. Osmnx: New methods for acquiring, constructing, analyzing, and visualizing complex street networks. Comput.
+
+Environ. Urban Syst. 65, 126–139 (2017).
+
+16. Bengio, Y., Courville, A. & Vincent, P. Representation learning: A review and new perspectives. IEEE transactions on
+
+pattern analysis machine intelligence 35, 1798–1828 (2013).
+
+17. Fukushima, K. & Miyake, S. Neocognitron: A self-organizing neural network model for a mechanism of visual pattern
+
+recognition. In Competition and cooperation in neural nets, 267–285 (Springer, 1982).
+
+18. LeCun, Y. et al. Handwritten digit recognition with a back-propagation network. In Advances in neural information
+
+processing systems, 396–404 (1990).
+
+19. Mikolov, T., Sutskever, I., Chen, K., Corrado, G. S. & Dean, J. Distributed representations of words and phrases and their
+
+compositionality. In Advances in neural information processing systems, 3111–3119 (2013).
+
+20. Corcoran, P., Mooney, P. & Bertolotto, M. Analysing the growth of openstreetmap networks. Spatial Stat. 3, 21–32 (2013).
+
+21. Arsanjani, J. J., Zipf, A., Mooney, P. & Helbich, M. An introduction to openstreetmap in geographic information science:
+
+Experiences, research, and applications. In OpenStreetMap in GIScience, 1–15 (Springer, 2015).
+
+22. Barron, C., Neis, P. & Zipf, A. A comprehensive framework for intrinsic openstreetmap quality analysis. Transactions GIS
+
+18, 877–895 (2014).
+
+23. Girres, J.-F. & Touya, G. Quality assessment of the french openstreetmap dataset. Transactions GIS 14, 435–459 (2010).
+
+24. Haklay, M. How good is volunteered geographical information? a comparative study of openstreetmap and ordnance
+
+survey datasets. Environ. planning B: Plan. design 37, 682–703 (2010).
+
+25. Defferrard, M., Bresson, X. & Vandergheynst, P. Convolutional neural networks on graphs with fast localized spectral
+
+ﬁltering. In Advances in Neural Information Processing Systems, 3844–3852 (2016).
+
+26. Krizhevsky, A., Sutskever, I. & Hinton, G. E. Imagenet classiﬁcation with deep convolutional neural networks. In Advances
+
+in neural information processing systems, 1097–1105 (2012).
+
+27. He, K., Zhang, X., Ren, S. & Sun, J. Deep residual learning for image recognition. In Proceedings of the IEEE conference
+
+on computer vision and pattern recognition, 770–778 (2016).
+
+28. Hinton, G. E. & Salakhutdinov, R. R. Reducing the dimensionality of data with neural networks. science 313, 504–507
+
+(2006).
+
+29. Huang, F. J., Boureau, Y.-L., LeCun, Y. et al. Unsupervised learning of invariant feature hierarchies with applications to
+object recognition. In Computer Vision and Pattern Recognition, 2007. CVPR’07. IEEE Conference on, 1–8 (IEEE, 2007).
+
+30. Masci, J., Meier, U., Cires¸an, D. & Schmidhuber, J. Stacked convolutional auto-encoders for hierarchical feature extraction.
+
+Artif. Neural Networks Mach. Learn. 2011 52–59 (2011).
+
+31. Zeiler, M. D., Krishnan, D., Taylor, G. W. & Fergus, R. Deconvolutional networks. In Computer Vision and Pattern
+
+Recognition (CVPR), 2010 IEEE Conference on, 2528–2535 (IEEE, 2010).
+
+9/10
+
+32. Springenberg, J. T., Dosovitskiy, A., Brox, T. & Riedmiller, M. Striving for simplicity: The all convolutional net. arXiv
+
+preprint arXiv:1412.6806 (2014).
+
+33. Kohonen, T. The self-organizing map. Neurocomputing 21, 1–6 (1998).
+
+34. Maaten, L. v. d. & Hinton, G. Visualizing data using t-sne. J. Mach. Learn. Res. 9, 2579–2605 (2008).
+
+35. Moosavi, V. Computing with contextual numbers. arXiv preprint arXiv:1408.0889 (2014).
+
+36. Moosavi, V. Contextual mapping: Visualization of high-dimensional spatial patterns in a single geo-map. Comput. Environ.
+
+Urban Syst. 61, 1–12 (2017).
+
+37. Carlsson, G. Topology and data. Bull. Am. Math. Soc. 46, 255–308 (2009).
+
+10/10
+
+

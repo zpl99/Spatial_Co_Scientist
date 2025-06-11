@@ -1,0 +1,11 @@
+{
+  "id": "http://arxiv.org/abs/2312.08827v1",
+  "title": "Artificial Intelligence and Human Geography",
+  "summary": "This paper examines the recent advances and applications of AI in human geography especially the use of machine (deep) learning, including place representation and modeling, spatial analysis and predictive mapping, and urban planning and design. AI technologies have enabled deeper insights into complex human-environment interactions, contributing to more effective scientific exploration, understanding of social dynamics, and spatial decision-making. Furthermore, human geography offers crucial contributions to AI, particularly in context-aware model development, human-centered design, biases and ethical considerations, and data privacy. The synergy beween AI and human geography is essential for addressing global challenges like disaster resilience, poverty, and equitable resource access. This interdisciplinary collaboration between AI and geography will help advance the development of GeoAI and promise a better and sustainable world for all.",
+  "published": "2023-12-14T11:20:22Z",
+  "authors": [
+    "Song Gao"
+  ],
+  "primary_category": "cs.AI",
+  "pdf_url": "http://arxiv.org/pdf/2312.08827v1"
+}

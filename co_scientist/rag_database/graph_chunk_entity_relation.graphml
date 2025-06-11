@@ -1,0 +1,1125 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d7" for="edge" attr.name="order" attr.type="long" />
+  <key id="d6" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d5" for="edge" attr.name="description" attr.type="string" />
+  <key id="d4" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d3" for="node" attr.name="clusters" attr.type="string" />
+  <key id="d2" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d1" for="node" attr.name="description" attr.type="string" />
+  <key id="d0" for="node" attr.name="entity_type" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="&quot;IC348&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"IC348 is a star-forming region with well-sampled brown dwarf and stellar populations, located in the Perseus molecular cloud."&lt;SEP&gt;"IC348 is a young star cluster where the study analyzes the spatial distribution of stars and brown dwarfs (BDs), with findings of homogeneous BD distributions."&lt;SEP&gt;"IC348 is a young stellar cluster often analyzed to understand star and substellar formation processes."&lt;SEP&gt;"IC348 is an astronomical cluster characterized by centrally condensed configurations for bright sources and fractal structures for fainter sources, located at a distance of 315 pc."&lt;SEP&gt;"IC348 is an embedded star-forming cluster where the spatial distribution of stellar and substellar objects is studied to test formation hypotheses."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-ed23a045d73bb0386fc1bdb693d2db91&lt;SEP&gt;chunk-8b41265b8f03a460d633d563c92c21a8&lt;SEP&gt;chunk-c68927fbc89ac043e69a551a5b174859&lt;SEP&gt;chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 7}]</data>
+    </node>
+    <node id="&quot;ORION TRAPEZIUM CLUSTER&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The Orion Trapezium Cluster (OTC) is a star cluster located in the central part of the Orion Nebula Cluster, notable for the study of the spatial distribution of stars and brown dwarfs."&lt;SEP&gt;"The Orion Trapezium Cluster is a star cluster in the Orion Nebula, significant for studying substellar objects."&lt;SEP&gt;"The Orion Trapezium Cluster is an embedded star-forming region studied for the spatial distribution of stellar and substellar objects."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-8b41265b8f03a460d633d563c92c21a8&lt;SEP&gt;chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d3">[{"level": 0, "cluster": 4}]</data>
+    </node>
+    <node id="&quot;M. S. N. KUMAR&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"M. S. N. Kumar is a researcher from the Centro de Astrofísica da Universidade do Porto, specializing in astrophysics and star-forming clusters."&lt;SEP&gt;"M. S. N. Kumar is one of the authors of the study analyzing the spatial distribution of substellar objects in IC348 and the Orion Trapezium Cluster."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d3">[{"level": 0, "cluster": 5}]</data>
+    </node>
+    <node id="&quot;S. SCHMEJA&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"S. Schmeja is a researcher from the Centro de Astrofísica da Universidade do Porto, contributing to the study of brown dwarfs and stellar populations."&lt;SEP&gt;"S. Schmeja is one of the authors of the study analyzing the spatial distribution of substellar objects in IC348 and the Orion Trapezium Cluster."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d3">[{"level": 0, "cluster": 5}]</data>
+    </node>
+    <node id="&quot;EJECTED STELLAR EMBRYOS SCENARIO&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"The concept suggests that substellar objects, such as brown dwarfs, form as prematurely ejected protostellar embryos in clusters."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d3">[{"level": 0, "cluster": 4}]</data>
+    </node>
+    <node id="&quot;BROWN DWARFS&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Brown dwarfs are substellar objects particularly luminous in their early stages, whose spatial distribution and formation mechanisms are studied."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d3">[{"level": 0, "cluster": 4}]</data>
+    </node>
+    <node id="&quot;CENTRO DE ASTROFÍSICA DA UNIVERSIDADE DO PORTO&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"A research institution in Porto, Portugal, where studies on star-forming clusters and substellar objects are conducted."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d3">[{"level": 0, "cluster": 5}]</data>
+    </node>
+    <node id="&quot;PORTO, PORTUGAL&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"Porto, Portugal is the location of the Centro de Astrofísica da Universidade do Porto, where the research on star-forming clusters was conducted."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;MINIMUM SPANNING TREE METHOD (MST)&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"The MST method is a statistical tool used to analyze the spatial distribution of stellar and substellar objects in clusters."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;K-BAND DATA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"K-band data refers to near-infrared observations that effectively sample the substellar population in star-forming clusters."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;CLUSTER CORE RADIUS (RC)&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Cluster Core Radius refers to the assumed central region of a star cluster, used as a key parameter in the study's spatial analysis."&lt;SEP&gt;"Cluster Core Radius represents the central region of a star-forming cluster, used in analyzing spatial distributions of stars and substellar objects."&lt;SEP&gt;"Cluster core radius refers to the boundary defining the central region of a cluster, derived from radial profile modeling."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-8b41265b8f03a460d633d563c92c21a8&lt;SEP&gt;chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 7}]</data>
+    </node>
+    <node id="&quot;RADIAL DISTRIBUTION&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Radial Distribution is a measure of the spatial spread of objects, such as stars and brown dwarfs, around the center of a cluster."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;GRAVITATIONAL POTENTIAL WELL&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"A Gravitational Potential Well represents the gravitational pull of a cluster that binds its members, influencing their spatial distribution."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;TAURUS MOLECULAR CLOUD&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The Taurus Molecular Cloud is a region of star formation studied for the spatial distribution and kinematics of stars and brown dwarfs."&lt;SEP&gt;"The Taurus Molecular Cloud is a significant star-forming region where studies found no substantial spatial differences between brown dwarfs and stars over a large area."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a&lt;SEP&gt;chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;CHAMELEON STAR FORMING REGION&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The Chameleon Star Forming Region is another location analyzed to compare the velocity dispersion between stars and brown dwarfs."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;NUMERICAL SIMULATIONS OF STAR FORMATION&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Numerical simulations are computational models that replicate the star formation process and are compared against observational data."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;INFRARED SURVEYS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Infrared surveys involve deep near-infrared observations that reveal the substellar population in embedded clusters."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;EMBEDDED CLUSTERS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Embedded Clusters are groups of stars and substellar objects formed in molecular clouds, serving as labs for studying star and substellar formation."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;BROWN DWARFS AND PLANETARY MASS OBJECTS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Brown dwarfs and planetary mass objects are substellar entities often grouped for analysis in star-forming clusters."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;MUENCH ET AL. (2003)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"A key study that analyzed the radial distribution of brown dwarfs and stars in the IC348 cluster, revealing their spatial variations."&lt;SEP&gt;"Muench et al. (2003) is a study referenced for its findings on the homogeneous distribution of brown dwarfs in IC348."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 9}]</data>
+    </node>
+    <node id="&quot;LUCAS ET AL. (2005)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"A study that investigated brown dwarfs in embedded clusters using near-infrared surveys, contributing to the understanding of their formation."&lt;SEP&gt;"Lucas et al. (2005) is a group of researchers who studied near-infrared data obtained through the GEMINI South telescope focusing on the Trapezium cluster."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8&lt;SEP&gt;chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 8}]</data>
+    </node>
+    <node id="&quot;REIPURTH &amp; CLARKE (2001)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"A pivotal paper that introduced the 'ejected stellar embryos' scenario to explain brown dwarf formation."&lt;SEP&gt;"Reipurth &amp; Clarke (2001) is a study that discusses ejection velocities of low-mass objects such as brown dwarfs."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;LUHMAN ET AL. (2007)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"A study comparing the velocity dispersion of stars and brown dwarfs in star-forming regions like Taurus and Chameleon."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;LADA &amp; LADA (2003)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"A study examining the structure and mass segregation in embedded clusters, which informs the spatial analysis of stellar and substellar populations."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;HILLENBRAND &amp; HARTMANN (1998)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Hillenbrand &amp; Hartmann provided the King Model fits that established the cluster core radius for the Orion Trapezium Cluster."&lt;SEP&gt;"Research that explored the radial distribution and gravitational dynamics of stars in clusters, often referenced in brown dwarf studies."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8&lt;SEP&gt;chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 8}]</data>
+    </node>
+    <node id="&quot;KING MODELS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"King Models are theoretical frameworks used to describe the radial distribution of stars in clusters, supporting studies on stellar mass segregation."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;STATISTICAL ANALYSIS OF OBSERVED DATA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Statistical analysis techniques, like the MST method, help to quantitatively evaluate the spatial structure of star-forming clusters."</data>
+      <data key="d2">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+    </node>
+    <node id="&quot;ORION TRAPEZIUM CLUSTER (OTC)&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"OTC is a stellar cluster with central condensation that weakens for fainter sources, located at a distance of 500 pc and associated with the Trapezium stars at its center."&lt;SEP&gt;"The Orion Trapezium Cluster (OTC) is a nearby and well-studied star-forming region with significant data on brown dwarf and stellar populations."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859&lt;SEP&gt;chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 8}]</data>
+    </node>
+    <node id="&quot;MUENCH ET AL. (2002)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Muench et al. (2002) is a group of researchers who conducted a study to catalog near-infrared point sources in the Trapezium cluster."&lt;SEP&gt;"Muench et al. provided the radial distribution and boundary values for IC348, facilitating the determination of cluster core radii."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859&lt;SEP&gt;chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 7}]</data>
+    </node>
+    <node id="&quot;FLAMINGOS SURVEY&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The FLAMINGOS survey is an observational project that provided near-infrared data for regions like IC348 and the Orion Trapezium Cluster."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 7}]</data>
+    </node>
+    <node id="&quot;CARTWRIGHT &amp; WHITWORTH (2004)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Cartwright &amp; Whitworth (2004) are researchers who developed quantitative methods like the MST method for analyzing the structure of star-forming clusters."&lt;SEP&gt;"Cartwright &amp; Whitworth are authors of a study referenced for the interpretation of the Q parameter and its role in distinguishing centrally condensed clusters from those with fractal substructures."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859&lt;SEP&gt;chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 6}]</data>
+    </node>
+    <node id="&quot;SCHMEJA &amp; KLESSEN (2006)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Schmeja &amp; Klessen (2006) are researchers who applied and refined the MST method to analyze cluster structures."&lt;SEP&gt;"Schmeja &amp; Klessen are authors cited for combining the normalized mean edge length and correlation length in the Q parameter calculation."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859&lt;SEP&gt;chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 6}]</data>
+    </node>
+    <node id="&quot;2MASS SURVEY&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The 2MASS survey provided a point source catalog, including control fields for IC348 and the Orion region, used for comparative analysis."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 8}]</data>
+    </node>
+    <node id="&quot;BATE ET AL. (2003)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Bate et al. (2003) are researchers who conducted numerical simulations of star formation processes on molecular cloud scales."&lt;SEP&gt;"Bate et al. (2003) refers to a numerical simulation study cited to explain the early distribution and velocities of brown dwarfs."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d3">[{"level": 0, "cluster": 3}]</data>
+    </node>
+    <node id="&quot;MOLECULAR CLOUDS&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"Molecular clouds are regions in space where star formation occurs, and their structure is analyzed using simulations and observational data."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;MINIMUM SPANNING TREE (MST) METHOD&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"The Minimum Spanning Tree (MST) method is a statistical tool used to analyze the spatial distribution and structure of stellar clusters."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;NEAREST NEIGHBOUR METHOD&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"The Nearest Neighbour Method is a statistical approach used to analyze the physical parameters of clusters based on their proximity."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;BROWN DWARFS (BDS)&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Brown Dwarfs (BDs) are substellar objects with masses below the threshold for hydrogen fusion, studied in star-forming clusters like IC348 and OTC."&lt;SEP&gt;"Brown dwarfs are substellar objects examined in various clusters and regions to understand their formation and spatial distribution patterns, especially under the ejected stellar embryos scenario."&lt;SEP&gt;"Brown dwarfs are substellar objects studied for their spatial distribution in star clusters such as IC348 and the Orion Trapezium Cluster."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-c68927fbc89ac043e69a551a5b174859&lt;SEP&gt;chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 9}]</data>
+    </node>
+    <node id="&quot;OBSERVATIONAL DATA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Observational data refers to information gathered from surveys, like FLAMINGOS and 2MASS, used for studying star-forming clusters."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;PRE-MAIN SEQUENCE EVOLUTIONARY TRACKS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Pre-Main Sequence Evolutionary Tracks are theoretical models used to estimate the physical characteristics of stars and brown dwarfs."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;K-BAND DETECTION LIMIT&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"The K-Band detection limit refers to the sensitivity level in near-infrared imaging, used to distinguish stars and substellar objects."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;PERSEUS MOLECULAR CLOUD&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The Perseus Molecular Cloud is a star-forming region, home to clusters like IC348, studied for its substellar and stellar populations."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;IRAS SURVEY&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The IRAS survey produced large-area infrared maps used for selecting low-emission regions for control field data."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;HILLENBRAND &amp; CARPENTER (2000)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Hillenbrand &amp; Carpenter (2000) are researchers whose data on the Orion Trapezium Cluster contributed to subsequent near-infrared surveys."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;SUBSTELLAR OBJECTS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Substellar objects are objects like brown dwarfs that have masses too low to sustain hydrogen fusion, studied in clusters like IC348 and OTC."</data>
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+    </node>
+    <node id="&quot;PRIM (1957)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Prim is credited with the algorithm used to construct the minimum spanning tree (MST) in this analysis."</data>
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+    </node>
+    <node id="&quot;TRAPEZIUM STARS&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Trapezium Stars are key celestial elements at the center of the Orion Trapezium Cluster, around which clustering behavior is noted."</data>
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 8}]</data>
+    </node>
+    <node id="&quot;B STAR IN IC348&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The B Star in IC348 is a central stellar element associated with clustering in its vicinity, indicating its influence on spatial distribution."</data>
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 0}, {"level": 1, "cluster": 7}]</data>
+    </node>
+    <node id="&quot;FLAMINGOS K BAND DATA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Flamingos K Band Data is observational data used for MST analysis in IC348 to study point source magnitudes and spatial distribution."&lt;SEP&gt;"Flamingos K Band Data refers to the dataset used in the analysis of the spatial distribution of point sources, complete to K=18 mag."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 5}]</data>
+    </node>
+    <node id="&quot;Q PARAMETER&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"The Q parameter quantifies cluster structure, distinguishing between centrally condensed configurations (Q &gt; 0.8) and fractal structures (Q &lt; 0.8)."</data>
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 6}]</data>
+    </node>
+    <node id="&quot;MINIMUM SPANNING TREE (MST)&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"The MST is a method used to analyze spatial distributions by connecting points with the smallest cumulative edge lengths."</data>
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 6}]</data>
+    </node>
+    <node id="&quot;BDS (BROWN DWARFS)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Brown Dwarfs are substellar objects whose spatial distribution and clustering were evaluated using MST in IC348 and OTC."</data>
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 6}]</data>
+    </node>
+    <node id="&quot;RADIAL PROFILE MODELING&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Radial profile modeling is an approach used to describe the boundaries and spatial distribution of sources in a cluster based on distance from the center."</data>
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+    </node>
+    <node id="&quot;CONTROL FIELDS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Control fields are regions analyzed alongside clusters like IC348 and OTC to compare the spatial distribution and Q parameter variations."</data>
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 6}]</data>
+    </node>
+    <node id="&quot;STARS&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Stars in the study are stellar objects sampled to compare their spatial distributions with those of brown dwarfs in IC348 and the Orion Trapezium Cluster."&lt;SEP&gt;"Stellar sources in IC348 and OTC were analyzed using MST to study their clustering behavior and edge lengths inside and outside cluster boundaries."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d3">[{"level": 0, "cluster": 6}]</data>
+    </node>
+    <node id="&quot;SOURCE MAGNITUDE&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Source magnitude refers to the brightness of a point source, used to study variations in spatial distribution and the Q parameter."</data>
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+    </node>
+    <node id="&quot;THE STUDY&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The study focuses on the spatial distribution of substellar objects, stars, and brown dwarfs in IC348 and the Orion Trapezium Cluster based on data analysis."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d3">[{"level": 0, "cluster": 5}]</data>
+    </node>
+    <node id="&quot;2MASS&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"2MASS (Two Micron All Sky Survey) is an astronomical survey providing control field data for the study's analysis."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d3">[{"level": 0, "cluster": 5}]</data>
+    </node>
+    <node id="&quot;MST ANALYSIS&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"MST (Minimum Spanning Tree) Analysis is a computational method used in the study to analyze the spatial distribution of stars and brown dwarfs."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d3">[{"level": 0, "cluster": 5}]</data>
+    </node>
+    <node id="&quot;MINIMAL SPANNING TREE&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Minimal Spanning Tree is a data structure used to describe the geometric relationship of point sources in the spatial analysis."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+    </node>
+    <node id="&quot;ORION NEBULA CLUSTER&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The Orion Nebula Cluster is a larger star-forming region that contains the Orion Trapezium Cluster."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d3">[{"level": 0, "cluster": 4}]</data>
+    </node>
+    <node id="&quot;KING MODEL FIT&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"King Model Fit is a theoretical model used to estimate the radius and structure of the Trapezium cluster in the study."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d3">[{"level": 0, "cluster": 4}]</data>
+    </node>
+    <node id="&quot;HILLENBRAND (1997)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Hillenbrand (1997) is a study cited for its description of the Trapezium Cluster being a central region of the Orion Nebula Cluster."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+    </node>
+    <node id="&quot;KROUPA &amp; BOUVIER (2003)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Kroupa &amp; Bouvier (2003) is a theoretical study whose predictions of ejection velocities and dispersion rates are referenced in the analysis."&lt;SEP&gt;"Kroupa &amp; Bouvier are researchers whose study predicted higher dispersion velocities for brown dwarfs and provided critical insights into the formation mechanism for substellar objects."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa&lt;SEP&gt;chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 3}]</data>
+    </node>
+    <node id="&quot;EJECTION VELOCITIES&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Ejection Velocities refer to the speeds at which brown dwarfs might leave the cluster core, shaping their spatial distribution."</data>
+      <data key="d2">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d3">[{"level": 0, "cluster": 3}]</data>
+    </node>
+    <node id="&quot;IC348 CLUSTER&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The IC348 cluster is a star-forming region that contains brown dwarfs (BDs) and stars, with their spatial distribution being examined in studies to understand the ejected stellar embryos scenario."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 11}]</data>
+    </node>
+    <node id="&quot;OTC&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The OTC (Orion Trapezium Cluster) is a 1 Myr old star-forming region where brown dwarfs appear more centrally concentrated compared to older clusters, providing data for the study of stellar embryo ejection."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 11}]</data>
+    </node>
+    <node id="&quot;CHAMAELEON I CLOUD&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The Chamaeleon I Cloud is a star-forming region where the distribution of brown dwarfs and low-mass stars was found to be similar in spatial patterns."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 10}]</data>
+    </node>
+    <node id="&quot;LUPUS CLOUD&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The Lupus Cloud is a star-forming region where brown dwarfs were found close to their birth sites, suggesting limited spatial displacement."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 12}]</data>
+    </node>
+    <node id="&quot;MST TECHNIQUE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The MST (Minimum Spanning Tree) technique is a statistical method used in this study to analyze the spatial distribution of stars and brown dwarfs in clusters like IC348 and OTC."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 11}]</data>
+    </node>
+    <node id="&quot;REIPURTH &amp; CLARKE 2001&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"A study proposing the ejected stellar embryos scenario as a mechanism for the formation of substellar objects like brown dwarfs."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 3}]</data>
+    </node>
+    <node id="&quot;KROUPA &amp; BOUVIER 2003&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"A study that predicted higher dispersion in ejection velocities for brown dwarfs, providing support for the ejected stellar embryos scenario."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 9}]</data>
+    </node>
+    <node id="&quot;LUHMAN 2006&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Luhman examined the Taurus Molecular Cloud and found no significant differences in the spatial distribution of brown dwarfs and stars, influencing the analysis of star-forming regions."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;GOODWIN ET AL. (2005)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Goodwin et al. are researchers who examined the spatial distribution of brown dwarfs produced by the decay of small stellar systems, contributing to ejection scenario studies."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 9}]</data>
+    </node>
+    <node id="&quot;LÓPEZ MARTÍ ET AL. (2004)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"López Martí and team conducted studies in the Chamaeleon I Cloud to investigate the spatial distribution differences between stars and brown dwarfs."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 10}]</data>
+    </node>
+    <node id="&quot;LÓPEZ MARTÍ ET AL. (2005)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"López Martí and team examined the Lupus Cloud, finding that brown dwarfs tend to stay close to their birth locations."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 2}, {"level": 1, "cluster": 12}]</data>
+    </node>
+    <node id="&quot;BRICEÑO ET AL. (2002)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Briceño et al. studied the Taurus Molecular Cloud and analyzed the nearest neighbor distributions of objects with certain spectral indices, influencing spatial distribution studies."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;MARTÍN ET AL. (2001)&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Martín et al. conducted studies on T-Tauri stars in the Taurus region, hinting at an anticorrelation between star densities and brown dwarf densities."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;ANONYMOUS REFEREE&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"An unidentified reviewer who provided useful suggestions for improving the research article."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+    </node>
+    <node id="&quot;T-TAURI STARS&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"T-Tauri stars are young stellar objects examined in the Taurus Molecular Cloud for spatial distribution patterns and their connection to brown dwarfs."</data>
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;MSNK&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"MSNK is one of the researchers supported by a research grant POCTI/CFE-AST/55691/2004."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;SS&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"SS is one of the researchers supported by a research grant POCTI/CFE-AST/55691/2004."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;FCT&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"FCT (Fundação para a Ciência e a Tecnologia) is an organization providing funding for the research project."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;POCTI&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"POCTI is a funding program supported by FCT and the European Community."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;EUROPEAN COMMUNITY PROGRAMME FEDER&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"FEDER (European Regional Development Fund) supports the research financially."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;UNIVERSITY OF MASSACHUSETTS&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"The University of Massachusetts is one of the principal contributors to the Two Micron All Sky Survey."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;INFRARED PROCESSING AND ANALYSIS CENTER/CALIFORNIA INSTITUTE OF TECHNOLOGY&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"The Infrared Processing and Analysis Center at the California Institute of Technology contributes to the Two Micron All Sky Survey and is funded by NASA and the NSF."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;NATIONAL AERONAUTICS AND SPACE ADMINISTRATION (NASA)&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"NASA funds the Two Micron All Sky Survey as part of its astronomical initiatives."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;NATIONAL SCIENCE FOUNDATION (NSF)&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"The NSF is another funding body for the Two Micron All Sky Survey."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;SIMBAD&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"SIMBAD is a database operated at the CDS in Strasbourg for facilitating astronomical data access."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;VIZIER&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"VizieR is a database of large astronomical catalogues operated at the CDS in Strasbourg."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;CDS, STRASBOURG, FRANCE&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"CDS (Centre de Données astronomiques de Strasbourg) is located in Strasbourg, France, and operates the SIMBAD and VizieR databases."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;TWO MICRON ALL SKY SURVEY (2MASS)&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"2MASS is an astronomical survey conducted jointly by the University of Massachusetts and the Infrared Processing and Analysis Center, funded by NASA and the NSF."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;BATE, M. R.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Bate, M. R. is an author of research work cited in relation to the study of substellar objects."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;BONNELL, I. A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Bonnell, I. A. is a co-author of a paper contributing to the understanding of substellar objects."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;BROMM, V.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Bromm, V. is a co-author of a study cited in the context of substellar object dynamics."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;BRICEÑO, C.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Briceño, C. is a researcher referenced for work on astronomical studies regarding substellar objects."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;LUHMAN, K. L.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Luhman, K. L. is a prominent researcher whose work on protostars and substellar objects is cited multiple times."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;HARTMANN, L.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Hartmann, L. is a researcher contributing to the study of young stars and substellar objects."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;STAUFFER, J. R.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Stauffer, J. R. is a researcher known for contributions to star formation and stellar evolution studies."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;KIRKPATRICK, J. D.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Kirkpatrick, J. D. is referenced in the context of research on substellar objects."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;CARTWRIGHT, A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Cartwright, A. is a researcher cited in relation to models of stellar and substellar interactions."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;WHITWORTH, A. P.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Whitworth, A. P. is a co-author of various papers on astronomy and substellar phenomena."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;GOODWIN, S. P.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Goodwin, S. P. is a researcher contributing to the understanding of the conditions for substellar object formation."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;PRIM, R. C.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Prim, R. C. is cited for statistical techniques applicable to the study of spatial distribution in astronomy."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;PROTOSTARS &amp; PLANETS V&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Protostars &amp; Planets V is a collection of scholarly works edited by Reipurth, Jewitt, and Keil on topics of star and planet formation."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;HILLENBRAND, L. A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Hillenbrand, L. A. is an influential researcher in astronomy, with works referenced multiple times in the context of stellar populations."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;REIPURTH, B.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Reipurth, B. is a researcher known for contributions to the field of protostars and substellar object studies."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;JEWITT, D.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Jewitt, D. is an editor of works on protostars and planets, contributing to the academic understanding of substellar objects."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;KEIL, K.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Keil, K. is an academic editor for the book series 'Protostars &amp; Planets,' focusing on star and planet formation."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;KROUPA, P.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Kroupa, P. is a researcher cited for their contributions to modeling the dynamics of substellar bodies."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;GOWER, J. C.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Gower, J. C. is recognized for statistical methods that aid in analyzing spatial distributions in astronomy."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;ROSS, G. J. S.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Ross, G. J. S. is co-cited for applying statistical principles to studies on spatial distributions."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;LADA, C. J.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Lada, C. J. is well-known for research contributions on star clusters and their substellar components."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;LADA, E. A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Lada, E. A. is a referenced researcher working alongside C. J. Lada on star formation."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;LUCAS, P. W.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Lucas, P. W. is cited in research for contributions to substellar object studies related to the Orion Nebula."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;ROCHE, P. F.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Roche, P. F. is an astronomer contributing to the analysis and understanding of substellar phenomena."</data>
+      <data key="d2">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+    </node>
+    <node id="&quot;CLUSTER STRUCTURE ANALYSIS&quot;">
+      <data key="d2">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d1">"Cartwright &amp; Whitworth (2004) developed the MST method to provide a statistical framework for analyzing cluster structures."</data>
+      <data key="d0">"UNKNOWN"</data>
+      <data key="d3">[{"level": 0, "cluster": 6}]</data>
+    </node>
+    <node id="&quot;MINIMUM SPANNING TREE&quot;">
+      <data key="d2">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d1">"Prim provided the algorithm used to construct the MST for analyzing spatial distributions."</data>
+      <data key="d0">"UNKNOWN"</data>
+    </node>
+    <node id="&quot;STUDY RESULTS&quot;">
+      <data key="d2">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d1">"The anonymous referee provided valuable suggestions that improved the study’s analysis and conclusions."</data>
+      <data key="d0">"UNKNOWN"</data>
+    </node>
+    <edge source="&quot;IC348&quot;" target="&quot;ORION TRAPEZIUM CLUSTER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Both IC348 and the Orion Trapezium Cluster are star-forming regions studied for the spatial distribution of substellar and stellar objects."</data>
+      <data key="d6">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;BROWN DWARFS&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Brown dwarfs in IC348 are spatially distributed homogeneously, supporting the ejected stellar embryos formation scenario."</data>
+      <data key="d6">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;ORION TRAPEZIUM CLUSTER (OTC)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Both IC348 and OTC are nearby star-forming regions that have been analyzed for their brown dwarf and stellar populations using similar observational techniques."</data>
+      <data key="d6">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;FLAMINGOS SURVEY&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The FLAMINGOS survey provided the near-infrared data used to analyze the spatial distribution of substellar objects in IC348."</data>
+      <data key="d6">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;2MASS SURVEY&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The 2MASS survey provided control field data for the region around the IC348 star-forming cluster, used for comparative analysis."</data>
+      <data key="d6">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;B STAR IN IC348&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The clustering behavior in IC348 coincides with the location of the B Star, indicating its influence on the spatial arrangement."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;FLAMINGOS K BAND DATA&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The Flamingos K Band Data was utilized to analyze the spatial distribution of sources in IC348."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;CLUSTER CORE RADIUS (RC)&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The cluster core radius for IC348 was defined to analyze the spatial distribution of sources inside and outside its boundaries."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;MUENCH ET AL. (2002)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Muench et al. defined the radial profile and boundaries for spatial studies of IC348."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;THE STUDY&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"IC348 is one of the star clusters analyzed for the spatial distribution of stars and brown dwarfs in the study."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;BROWN DWARFS (BDS)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Brown dwarfs in IC348 are noted for their homogeneous spatial distribution in the cluster region."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348&quot;" target="&quot;STARS&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Stars in IC348 display a different distribution pattern from brown dwarfs, being more centrally concentrated."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER&quot;" target="&quot;BROWN DWARFS&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Brown dwarfs in the Orion Trapezium Cluster show similar spatial distributions that align with the ejected stellar embryos scenario."</data>
+      <data key="d6">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER&quot;" target="&quot;THE STUDY&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The Orion Trapezium Cluster is analyzed in the study for its spatial distribution of stars and brown dwarfs."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER&quot;" target="&quot;BROWN DWARFS (BDS)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The spatial distribution of brown dwarfs in the Orion Trapezium Cluster shows slight central concentration."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER&quot;" target="&quot;STARS&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Stars in the Orion Trapezium Cluster are centrally concentrated, unlike the more dispersed brown dwarfs."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER&quot;" target="&quot;CLUSTER CORE RADIUS (RC)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Cluster core radius is a parameter used to define the spatial extent of the Orion Trapezium Cluster."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER&quot;" target="&quot;KING MODEL FIT&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"The King Model Fit helps estimate the radius and spatial structure of the Orion Trapezium Cluster."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER&quot;" target="&quot;ORION NEBULA CLUSTER&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The Orion Trapezium Cluster is located at the center of the larger Orion Nebula Cluster."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;M. S. N. KUMAR&quot;" target="&quot;CENTRO DE ASTROFÍSICA DA UNIVERSIDADE DO PORTO&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"M. S. N. Kumar is affiliated with the Centro de Astrofísica da Universidade do Porto."</data>
+      <data key="d6">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;M. S. N. KUMAR&quot;" target="&quot;S. SCHMEJA&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"M. S. N. Kumar and S. Schmeja co-authored the study on the spatial distribution of substellar objects in IC348 and the Orion Trapezium Cluster."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;M. S. N. KUMAR&quot;" target="&quot;THE STUDY&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"M. S. N. Kumar is one of the authors who conducted the study on IC348 and the Orion Trapezium Cluster."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;S. SCHMEJA&quot;" target="&quot;CENTRO DE ASTROFÍSICA DA UNIVERSIDADE DO PORTO&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"S. Schmeja is affiliated with the Centro de Astrofísica da Universidade do Porto."</data>
+      <data key="d6">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;S. SCHMEJA&quot;" target="&quot;THE STUDY&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"S. Schmeja is one of the authors who participated in conducting the study on IC348 and the Orion Trapezium Cluster."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;EJECTED STELLAR EMBRYOS SCENARIO&quot;" target="&quot;BROWN DWARFS&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The Ejected Stellar Embryos Scenario is one explanation for the formation of brown dwarfs."</data>
+      <data key="d6">chunk-8b41265b8f03a460d633d563c92c21a8</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;CLUSTER CORE RADIUS (RC)&quot;" target="&quot;ORION TRAPEZIUM CLUSTER (OTC)&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The Rc boundary was used to study source distribution in OTC based on King Model fits."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;TAURUS MOLECULAR CLOUD&quot;" target="&quot;LUHMAN 2006&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Luhman (2006) examined the Taurus Molecular Cloud to study the spatial distribution of brown dwarfs and stars on a large scale."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;TAURUS MOLECULAR CLOUD&quot;" target="&quot;BRICEÑO ET AL. (2002)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The team analyzed nearest neighbor distributions in the Taurus Molecular Cloud to understand spatial patterns of stars and brown dwarfs."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;TAURUS MOLECULAR CLOUD&quot;" target="&quot;MARTÍN ET AL. (2001)&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"The research hinted at an anticorrelation between the densities of stars and brown dwarfs in portions of the Taurus Molecular Cloud."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;MUENCH ET AL. (2003)&quot;" target="&quot;BROWN DWARFS (BDS)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Muench et al. (2003) supports findings on the homogeneous spatial distribution of brown dwarfs in IC348."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;LUCAS ET AL. (2005)&quot;" target="&quot;ORION TRAPEZIUM CLUSTER (OTC)&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"Lucas et al. (2005) focused on obtaining deep infrared data for parts of the Trapezium cluster and contributed to its overall data set."</data>
+      <data key="d6">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;HILLENBRAND &amp; HARTMANN (1998)&quot;" target="&quot;ORION TRAPEZIUM CLUSTER (OTC)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Hillenbrand &amp; Hartmann established the Rc boundary for OTC using King Model fits."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER (OTC)&quot;" target="&quot;MUENCH ET AL. (2002)&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"Muench et al. (2002) cataloged near-infrared point sources in the Trapezium cluster and contributed key data for its analysis."</data>
+      <data key="d6">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER (OTC)&quot;" target="&quot;FLAMINGOS SURVEY&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The FLAMINGOS survey provided near-infrared data for the OTC, aiding in its structure and population analysis."</data>
+      <data key="d6">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER (OTC)&quot;" target="&quot;2MASS SURVEY&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The 2MASS survey provided control field data for the Orion region, aiding in the study of spatial distributions."</data>
+      <data key="d6">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ORION TRAPEZIUM CLUSTER (OTC)&quot;" target="&quot;TRAPEZIUM STARS&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The spatial clustering in OTC is associated with the Trapezium Stars, which serve as central elements of the cluster."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;CARTWRIGHT &amp; WHITWORTH (2004)&quot;" target="&quot;CLUSTER STRUCTURE ANALYSIS&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Cartwright &amp; Whitworth (2004) developed the MST method to provide a statistical framework for analyzing cluster structures."</data>
+      <data key="d6">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;CARTWRIGHT &amp; WHITWORTH (2004)&quot;" target="&quot;Q PARAMETER&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"Cartwright &amp; Whitworth provided the interpretation of how the Q parameter distinguishes between central condensation and fractal substructures."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;SCHMEJA &amp; KLESSEN (2006)&quot;" target="&quot;CLUSTER STRUCTURE ANALYSIS&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Schmeja &amp; Klessen (2006) refined and applied the MST method to cluster structure analysis, including star-forming regions."</data>
+      <data key="d6">chunk-c68927fbc89ac043e69a551a5b174859</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;SCHMEJA &amp; KLESSEN (2006)&quot;" target="&quot;Q PARAMETER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Schmeja &amp; Klessen contributed to the methodology for calculating the Q parameter through normalized statistical measures."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;BATE ET AL. (2003)&quot;" target="&quot;EJECTION VELOCITIES&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Bate et al. (2003) explains the higher dispersion and velocities of brown dwarfs during the early evolution of clusters."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;BROWN DWARFS (BDS)&quot;" target="&quot;IC348 CLUSTER&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The spatial distribution of brown dwarfs within the IC348 cluster has been analyzed, confirming central concentration and limited spatial displacement consistent with the ejected stellar embryos scenario."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;BROWN DWARFS (BDS)&quot;" target="&quot;OTC&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The OTC data showed that brown dwarfs display a slightly higher central concentration and limited spatial spread, aligning with predictions of ejection scenarios."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;BROWN DWARFS (BDS)&quot;" target="&quot;REIPURTH &amp; CLARKE 2001&quot;">
+      <data key="d4">10.0</data>
+      <data key="d5">"The study by Reipurth &amp; Clarke (2001) proposed the ejected stellar embryos scenario, which provides a theoretical framework for the formation of brown dwarfs."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;BROWN DWARFS (BDS)&quot;" target="&quot;KROUPA &amp; BOUVIER 2003&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The study by Kroupa &amp; Bouvier (2003) predicted higher dispersion velocities for brown dwarfs, supporting the observations made in the ICO348 and OTC clusters."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;BROWN DWARFS (BDS)&quot;" target="&quot;CHAMAELEON I CLOUD&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"The Chamaeleon I Cloud was studied for similarities in the spatial distribution of brown dwarfs and low-mass stars."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;BROWN DWARFS (BDS)&quot;" target="&quot;LUPUS CLOUD&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Brown dwarfs in the Lupus Cloud were found to remain close to their birth sites, suggesting limited spatial displacement."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;BROWN DWARFS (BDS)&quot;" target="&quot;GOODWIN ET AL. (2005)&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"Goodwin et al. examined the spatial distribution of brown dwarfs resulting from stellar system decay, providing insights into their spatial spread."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;BROWN DWARFS (BDS)&quot;" target="&quot;T-TAURI STARS&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"T-Tauri stars have been studied in relation to brown dwarfs to investigate spatial distribution patterns and star formation processes."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;PRIM (1957)&quot;" target="&quot;MINIMUM SPANNING TREE&quot;">
+      <data key="d4">10.0</data>
+      <data key="d5">"Prim provided the algorithm used to construct the MST for analyzing spatial distributions."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;FLAMINGOS K BAND DATA&quot;" target="&quot;THE STUDY&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The Flamingos K Band Data is used as a basis for analyzing the distribution of point sources in IC348 and the Orion Trapezium Cluster."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;Q PARAMETER&quot;" target="&quot;MINIMUM SPANNING TREE (MST)&quot;">
+      <data key="d4">10.0</data>
+      <data key="d5">"The Q parameter is derived using the minimum spanning tree to measure spatial clustering and structural forms."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;Q PARAMETER&quot;" target="&quot;CONTROL FIELDS&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Control fields were used for comparison, showing no significant Q parameter variations, unlike IC348 and OTC."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;MINIMUM SPANNING TREE (MST)&quot;" target="&quot;STARS&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The MST method was used to analyze spatial distributions and edge lengths of stars in IC348 and OTC."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;MINIMUM SPANNING TREE (MST)&quot;" target="&quot;BDS (BROWN DWARFS)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The MST method was applied to evaluate clustering behavior and edge lengths of brown dwarfs in IC348 and OTC."</data>
+      <data key="d6">chunk-fa04c5844714f0cc761141575ea8df78</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;THE STUDY&quot;" target="&quot;2MASS&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"2MASS provides control field data used for comparisons in the spatial analysis of point sources in the study."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;THE STUDY&quot;" target="&quot;MST ANALYSIS&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"MST Analysis is a computational method applied in the study to understand the spatial distribution of stars and brown dwarfs."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;KROUPA &amp; BOUVIER (2003)&quot;" target="&quot;EJECTION VELOCITIES&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Kroupa &amp; Bouvier (2003) predict the ejection velocities and dispersion of brown dwarfs, aligning with the study's findings."</data>
+      <data key="d6">chunk-e3c37252143d0ede180af9e5c854fdfa</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;KROUPA &amp; BOUVIER (2003)&quot;" target="&quot;REIPURTH &amp; CLARKE 2001&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The findings of Kroupa &amp; Bouvier support and expand on the ejected stellar embryos scenario proposed by Reipurth &amp; Clarke (2001)."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;IC348 CLUSTER&quot;" target="&quot;MST TECHNIQUE&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The MST technique was effectively applied to analyze the spatial distribution of stars and brown dwarfs in the IC348 cluster."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;OTC&quot;" target="&quot;MST TECHNIQUE&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The MST technique provided insights into the spatial distribution of stars and brown dwarfs in the OTC cluster."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;CHAMAELEON I CLOUD&quot;" target="&quot;LÓPEZ MARTÍ ET AL. (2004)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"López Martí et al. analyzed the spatial distribution of stars and brown dwarfs in the Chamaeleon I Cloud."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;LUPUS CLOUD&quot;" target="&quot;LÓPEZ MARTÍ ET AL. (2005)&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"López Martí et al. found that brown dwarfs in the Lupus Cloud remained close to their birth sites, supporting limited displacement links."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;MARTÍN ET AL. (2001)&quot;" target="&quot;T-TAURI STARS&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"The research focused on T-Tauri stars in Taurus, hinting at spatial density relationships with brown dwarfs."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ANONYMOUS REFEREE&quot;" target="&quot;STUDY RESULTS&quot;">
+      <data key="d4">6.0</data>
+      <data key="d5">"The anonymous referee provided valuable suggestions that improved the study’s analysis and conclusions."</data>
+      <data key="d6">chunk-1416faf97fcd39007a7e5057ec33d71a</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;MSNK&quot;" target="&quot;SS&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"MSNK and SS are both supported by the same research grant, suggesting collaboration on a shared project."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;MSNK&quot;" target="&quot;POCTI&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"MSNK's research grant is funded by POCTI, establishing a direct funding relationship."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;SS&quot;" target="&quot;POCTI&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"SS's research grant is funded by POCTI, establishing a direct funding relationship."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;FCT&quot;" target="&quot;POCTI&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"POCTI is an initiative supported by FCT as part of its research funding programs."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;POCTI&quot;" target="&quot;EUROPEAN COMMUNITY PROGRAMME FEDER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"POCTI receives additional funding from the European Community Programme FEDER."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;UNIVERSITY OF MASSACHUSETTS&quot;" target="&quot;TWO MICRON ALL SKY SURVEY (2MASS)&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The University of Massachusetts is a principal contributor to the Two Micron All Sky Survey project."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;INFRARED PROCESSING AND ANALYSIS CENTER/CALIFORNIA INSTITUTE OF TECHNOLOGY&quot;" target="&quot;TWO MICRON ALL SKY SURVEY (2MASS)&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The Infrared Processing and Analysis Center at the California Institute of Technology is a key contributor to the Two Micron All Sky Survey."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;NATIONAL AERONAUTICS AND SPACE ADMINISTRATION (NASA)&quot;" target="&quot;TWO MICRON ALL SKY SURVEY (2MASS)&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"NASA provides funding for the Two Micron All Sky Survey."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;NATIONAL SCIENCE FOUNDATION (NSF)&quot;" target="&quot;TWO MICRON ALL SKY SURVEY (2MASS)&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The National Science Foundation provides funding for the Two Micron All Sky Survey."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;SIMBAD&quot;" target="&quot;CDS, STRASBOURG, FRANCE&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The SIMBAD database is operated by the CDS, which is located in Strasbourg, France."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;SIMBAD&quot;" target="&quot;VIZIER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Both SIMBAD and VizieR are astronomical data services operated by the CDS."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;VIZIER&quot;" target="&quot;CDS, STRASBOURG, FRANCE&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The VizieR database is operated by the CDS, which is located in Strasbourg, France."</data>
+      <data key="d6">chunk-ed23a045d73bb0386fc1bdb693d2db91</data>
+      <data key="d7">1</data>
+    </edge>
+  </graph>
+</graphml>

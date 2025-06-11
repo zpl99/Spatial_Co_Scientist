@@ -1,0 +1,566 @@
+Available online at www.sciencedirect.com 
+
+ScienceDirect 
+
+Procedia Computer Science00 (2014) 000–000 
+
+ www.elsevier.com/locate/procedia 
+
+Dynamic Cluster Head Selection Using Fuzzy Logic on Cloud in 
+Wireless Sensor Networks 
+
+Payal Pahwa, Deepali Virmani, Akshay Kumar, Sahil, Vikas Rathi, Sunil Swami 
+
+Department of Computer Science and Engineering/Information Technology 
+Bhagwan Parshuram Institute of Technology, Sector 17, Rohini, New Delhi – 110089, India 
+
+Abstract 
+
+One of the most vital activities to reduce energy consumption in wireless sensor networks is clustering. In clustering, one node 
+from a group of nodes is selected to be a cluster head, which handles majority of the computation and processing for the nodes in 
+the cluster. This paper proposes an algorithm for fuzzy based dynamic cluster head selection on cloud in wireless sensor networks. 
+The proposed algorithm calculates a Potential value for each node and selects cluster heads with  high potential. The proposed 
+algorithm  minimizes cluster overlapping by spatial distribution of cluster heads and discards malicious nodes i.e. never allows 
+malicious nodes to be cluster heads. 
+© 2014 The Authors. Published by Elsevier B.V. 
+Selection and peer-review under responsibility of scientific committee of Missouri University of Science and Technology. 
+
+Keywords:Wireless Sensor Networks, Cloud, Fuzzy Logic, Clustering 
+
+1. Introduction 
+
+Owing to the rampant development of communication, computation and hardware technology in the past decade, 
+Wireless  Sensor  Networks  (WSNs)  have  emerged  in  the  fields  of  agriculture,  homeland  security,  navy,  weather 
+forecasting etc. [1]. WSNs consist of spatially distributed sensor nodes which communicate wirelessly, have limited 
+energy  and  computation  power.  A  huge  amount  of  research  on  WSNs  is  directed  towards  increasing  the  network 
+lifetime of WSNs by making them energy efficient. One of the key activities to increase network lifetime in WSNs is 
+clustering. 
+
+Clustering in WSNs is the process of dividing the WSN into smaller groups, aimed to increase network lifetime. 
+Each group/cluster consists of a cluster head/ sink node. The cluster head is responsible for majority of the processing 
+and  computation  of  the  cluster.  Clustering  helps  in  increasing  the  energy  efficiency  of  WSNs  by  minimizing  the 
+number of communications in the network [2]. In most clustering techniques a cluster head is selected solely on the 
+basis of its energy level. However, there are a few additional essential factors which make a node an ideal candidate 
+to be a cluster head, such as: 
+
+  Reachability to nearby nodes 
+  Quality of connection to base station 
+  Node reliability [3] 
+
+Clustering techniques such as CHUFL[4] and CHEF[5] make use of 2 of these additional factors in selecting a 
+cluster head using fuzzy logic within the WSN. These techniques, through their soft computations, add substantial 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Author name / Procedia Computer Science00 (2014) 000–000 
+
+2 
+
+processing overhead on the WSN. The integration of cloud and WSNs [6] offers the computational power needed. 
+The fuzzy based computation in the proposed algorithm runs on the cloud, thereby eliminating the added processing 
+overhead. The proposed algorithm also caters to all 3 additional factors. 
+
+2. Related Work 
+
+In [1] paper, detailed introduction to wireless sensor networks and their properties has been presented. In [2] paper, 
+distance based Cluster head selection algorithm has been proposed for improving the sensor network life time. In [3] 
+paper, effects of Blackhole attack are measured on the network parameters are presented along with the technique for 
+the detection and prevention of Blackhole attack in WSN. In [4] paper, Cluster Head selection protocol using Fuzzy 
+Logic  (CHUFL)  has  been  presented.  Cluster  Head  Election  mechanism  using  Fuzzy  Logic  protocol  (CHEF)  is 
+discussed in [5]. In [6] paper, exponential trust based mechanism has been presented to detect malicious nodes. In 
+[12] paper, ACE algorithm evaluates every node’s potential one by one for cluster head selection. 
+
+3. Proposed Algorithm: Dynamic Cluster Head Selection Using Fuzzy Logic on Cloud in Wireless Sensor 
+Networks (DCHFC) 
+
+DCHFC operates in 4 phases 
+
+  Malicious Node detection [7] and removal in WSN  
+  Application of fuzzy logic to calculate Potential [12] for each node in Cloud 
+  Cluster head selection with spatial distribution in Cloud 
+  Clustering in WSN 
+
+3.1. Malicious Node Detection and Removal 
+
+A trust factor based malicious node detection algorithm [3] is used 
+
+For each ith node: 
+1.  Compute Trust Factor of ith node. 
+2.  𝑇𝐹i = 100(x^𝑛) where 𝑛i is the no of consecutive data packets dropped. 
+3. 
+
+If 𝑇𝐹i <= TTF (threshold trust factor) value then broadcast 𝑖th node as malicious.  
+
+All detected malicious nodes are then removed i.e. not considered for cluster head selection. 
+
+3.2. Application of Fuzzy Logic to Calculate Potential for each Node 
+
+Cloud calculates the Potential value for all nodes, except detected malicious nodes, in the wireless sensor network. 
+
+Potential is calculated by the following input variables [4]: 
+
+  Residual_Energy 
+  Reachability 
+  Reception_Power 
+
+Where, Residual_Energy is the remaining energy in the node. Reachability is the measure of how accessible the 
+
+node is to its neighboring nodes, which is defined as [4] 
+
+𝑟(𝑖) =
+
+1
+
+𝑁
+
+(∑
+
+𝑗=𝑁−1
+𝑗=1
+
+𝑑𝑖𝑗
+
+) 
+
+         (1) 
+
+Reception_Power is defined in [4] as Link Quality Indicator/Distance (LQI/Distance) of node from cloud. Distance is 
+the distance between the node and cloud, and LQI has been defined in [8] can be determined by radio chips [9]. Nodes 
+with higher Reception_Power are more likely to become cluster heads [10]. Fuzzy linguistic variables (Low, Medium 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Author name / Procedia Computer Science00 (2014) 000–000 
+
+3 
+
+High) are assigned to each of these input variables as per their membership functions in [4]. Potential is determined 
+by the Fuzzy rule base table for cluster head selection [4]. 
+
+3.3. Cluster Head Selection with Spatial Distribution 
+
+Initially  8-10%  of  the  nodes  (Pinitial)  with  highest  Potential  are  chosen  to  be  cluster  heads.  Then  onwards  each 
+remaining node with the highest Potential is taken and its distance D to each of the cluster heads is calculated. If the 
+minimum calculated distance Dmin > Dthreshhold the node is selected to be a cluster head, where Dthreshold is the minimum 
+distance needed to be kept between two cluster heads.  If Dmin < Dthreshhold the node is rejected i.e. is not made a cluster 
+head, to avoid cluster overlapping. 
+
+3.4. Clustering in wireless sensor network 
+
+Clustering is done in sensor network as per CHUFL rule [4], in which the selected cluster heads broadcast a message 
+in  their  transmission  range.  Non-cluster  head  nodes  receive  the  broadcasted  message  and  select  the  source  of  the 
+highest signal strength as its cluster head. On ties, the cluster head with least node ID is chosen. In figure (Fig. 1.) the 
+simulation is carried out assuming that the signal strength is directly proportional to the distance D between nodes. 
+
+4. Simulation and Analysis 
+
+a. 
+
+b. 
+
+Fig. 1. (a) Cluster formation in CHUFL; (b) Cluster formation in DCHFC  
+
+a. 
+
+b. 
+
+Fig. 2. (a) Cluster overlapping in CHUFL; (b) Cluster overlapping in DCHFC 
+
+Fig. 1. (a)shows the cluster formation in WSN using CHUFL[4] by taking 14% nodes as cluster heads and Fig. 1. 
+(b) shows the cluster formation in DCHFC. Table 1. and Table 2. correspond to the simulation of DCHFC and CHUFL 
+respectively. Cluster overlapping is significantly reduced in DCHFC as shown in Fig. 2. 
+
+ 
+ 
+Author name / Procedia Computer Science00 (2014) 000–000 
+
+4 
+
+a. 
+
+)
+
+%
+
+(
+
+s
+s
+o
+L
+
+t
+e
+k
+c
+a
+P
+
+60
+
+50
+
+40
+
+30
+
+20
+
+10
+
+0
+
+b. 
+
+CHUFL
+
+DCHFC
+
+)
+
+%
+
+(
+
+t
+u
+p
+h
+g
+u
+o
+r
+h
+T
+
+80
+78
+76
+74
+72
+70
+68
+66
+64
+62
+60
+
+20
+
+30
+
+40
+
+50
+
+60
+
+70
+
+80
+
+90 100
+
+Simulation Time
+
+20
+
+30
+
+40
+
+DCHFC
+
+Exiting
+Systems
+
+90
+
+100
+
+60
+
+50
+Simulation Time
+
+70
+
+80
+
+Fig. 3. (a) Packet Loss vs Simulation Time; (b) Throughput vs Simulation Time 
+
+Table 1. Simulation of DCHFC 
+
+Simulator 
+
+NetBeans[11] 
+
+Pintitial 
+
+8% 
+
+Table 2. Simulation of CHUFL 
+
+Total no. of 
+nodes 
+122 
+
+No. of cluster 
+heads (red) 
+16 
+
+No. of malicious 
+nodes (black) 
+13 
+
+No of clusters 
+
+14 
+
+Simulator 
+
+NetBeans 
+
+Percentage of 
+cluster heads 
+14% 
+
+Total no. of 
+nodes 
+122 
+
+No. of cluster 
+heads (red) 
+17 
+
+No. of malicious 
+nodes (black) 
+13 
+
+No of clusters 
+
+12 
+
+Dthreshhold 
+
+200m 
+
+Dthreshhold 
+
+200m 
+
+The simulation shows that DCHFC offers spatially distributed cluster heads and creates more clusters to cater to 
+nodes at all distances. Spatially distributed clusters regulate the energy consumption of nodes in the WSN. DCHFC 
+also rejects malicious nodes, resulting in a lower packet loss and higher throughput (Fig. 3.). Simulations show that 
+total residual energy of nodes in DCHFC is higher compared to CHFUL(Fig. 4. a). DCHFC offers a prolonged network 
+lifetime with its nodes surviving longer than CHUFL (Fig. 4. b.). 
+
+a. 
+
+)
+J
+(
+
+s
+e
+d
+o
+n
+f
+o
+y
+g
+r
+e
+n
+e
+
+l
+
+a
+u
+d
+i
+s
+e
+r
+
+f
+o
+m
+u
+S
+
+550
+500
+450
+400
+350
+300
+250
+200
+150
+100
+50
+0
+
+b. 
+
+Lifetime of the network
+
+DCHFC
+
+CHUFL
+
+s
+d
+n
+u
+o
+R
+
+500
+450
+400
+350
+300
+250
+200
+150
+100
+50
+0
+
+20
+
+40
+
+60
+
+80
+
+100
+
+120
+
+140
+
+160
+
+Rounds
+
+FND
+
+HNA
+
+LND
+
+CHUFL
+
+DCHFC
+
+Fig. 4. (a) Total residual energy of network; (b) Time for First Node Dies (FND), Half of the Nodes Alive (HNA) and Last Node Dies (LND) 
+
+5. CONCLUSION 
+
+Protocols  for  Wireless  Sensor  Networks  need  to  be  energy  efficient  to  prolong  network  lifetime.  To  achieve 
+enhancement  in  network lifetime and reliable and efficient  communication  in WSNs, deploying a good clustering 
+technique  is  essential.  The  proposed  algorithm  (DCHFC)  for  clustering  offers  spatially  distributed  cluster  heads 
+selection, which reduces cluster overlapping. DCHFC detects malicious nodes and never allows them to be the cluster 
+head; thereby DCHFC increases the reliability and makes sensor networks fault tolerant. Cluster head selection by 
+DCHFC is based on potential value calculated using fuzzy. The spatial distribution of clusters prevents overlapping. 
+Having all these features DCHFC proves to be the better choice for energy consumption and enhancement of network 
+lifetime. 
+
+ 
+ 
+        
+            
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Author name / Procedia Computer Science00 (2014) 000–000 
+
+5 
+
+6. REFERENCE  
+
+1.  Raghavendra V. Kulkarni, Anna Forster, and Ganesh Kumar Venayagamoorthy, “Computational Intelligence 
+in Wireless Sensor Networks: A Survey,” IEEE Communications Surveys and Tutorials, vol. 13, no. 1, pp.68-
+96, 2011. 
+
+2.  Bhawnesh  Kumar,  Vinit  Kumar  Sharma,  Distance  based  Cluster  Head  Selection  Algorithm  for  Wireless 
+Sensor Network. International Journal of Computer Applications (0975 – 8887) Volume 57– No.9, November 
+2012. 
+
+3.  Mohammad Wazid, Avita Katal, Roshan Singh, Sachan, R H Goudar, D P Singh, Detection and Prevention 
+Mechanism for Blackhole Attack in Wireless Sensor Network. International conference on Communication 
+and Signal Processing, April 3-5, 2013. 
+
+4.  Sachin Gajjar, Mohanchur Sarkar, Kankar Dasgupta, Cluster Head Selection Protocol using Fuzzy Logic for 
+Wireless Sensor Networks. International Journal of Computer Applications (0975 – 8887) Volume 97– No.7, 
+July 2014. 
+
+5.  J. M. Kim, S. H. Park, Y. J. Han, and T. M. Chung, “CHEF: cluster head election mechanism using fuzzy logic 
+in wireless sensor networks”, Proc. of International Conference on Advanced Communication Technology, 
+pp. 654–659, 2008.  
+
+6.  Yuanpeng Xie, Jinsong  Zhang, Ge  Fu, Hong Wen, Qiyi Han, Xiping  Zhu, Yixin Jiang,  Xiaobin Guo, The 
+Security  Issue  of  WSNs  Based  on  Cloud  Computing.  IEEE  Conference  on  Communications  and  Network 
+Security 2013 - Poster Session. 
+
+7.  Dr. Deepali Virmani, Manas Hemrajani, Shringarica Chandel, Exponential Trust Based Mechanism to Detect 
+
+8. 
+
+Black Hole attack in Wireless Sensor Network. 
+IEEE  Standard  802.15.4,”Wireless  LAN  Medium  Access  Control  (MAC)  and  Physical  Layer  (PHY) 
+specifications 
+[Online]  Available: 
+http://standards.ieee.org/develop/ project/ 802.11.15.4. html 
+
+low-rate  wireless  personal  area  networks 
+
+(WPANS)”, 
+
+for 
+
+9.  Texas Instruments, CC2500 datasheet [Online] Available: http: //focus.ti.com/lit/ds/symlink/cc2500 
+10.  T. S. Rappaport,”Wireless Communications: Principles and Practice”, 2nd Edition, Prentice Hall Publications,  
+
+Englewood Cliffs, NJ, 2001 
+
+11.  https://netbeans.org/ 
+12.  Chan H. and Perrig A. “ACE: An Emergent Algorithm for Highly Uniform Cluster Formation”, Proc. of 1st 
+
+European Workshop on Sensor Networks, pp. 154–171, 2004. 
+
+ 
+ 
+ 
+ 
+

@@ -1,0 +1,1757 @@
+Spatial Cluster-based Copula Model to Interpolate Skewed Conditional Spatial 
+
+Random Field 
+Debjoy Thakur1, Ishapathik Das2, Shubhashree Chakravarty 3 
+
+[1,2]Department of Mathematics and Statistics, Indian Institute Of Technology, Tirupati.  
+[3]Machine Intelligence Unit, Indian Statistical Institute, Kolkata. 
+
+Abstract 
+
+ Interpolating a skewed conditional spatial random field with missing data is cumbersome 
+
+in the absence of Gaussianity assumptions. Maintaining spatial homogeneity and continuity 
+around the observed random spatial point is also challenging, especially when interpolating 
+along a spatial surface, focusing on the boundary points as a neighborhood. Otherwise, the point 
+far away from one may appear the closest to another. As a result, importing the hierarchical 
+clustering concept on the spatial random field is as convenient as developing the copula with the 
+interface of the Expectation-Maximization algorithm and concurrently utilizing the idea of the 
+Bayesian framework. This paper introduces a spatial cluster-based C-vine copula and a modified 
+Gaussian kernel to derive a novel spatial probability distribution. Another investigation in this 
+paper uses an algorithm in conjunction with a different parameter estimation technique to make 
+spatial-based copula interpolation more compatible and efficient. We apply the proposed spatial 
+interpolation approach to the air pollution of Delhi as a crucial circumstantial study to 
+demonstrate this newly developed novel spatial estimation technique.  
+
+  Keywords— Von-Mises distribution, Expectation-Maximization algorithm, Hierarchical 
+
+Spatial Clustering, Spatial Copula Interpolation, Bayesian Spatial Copula Interpolation 
+
+1  Introduction 
+ The  upward  trend  of  Particulate  Matter  (𝑃𝑀)  concentrations  in  the  atmosphere  and  air 
+pollution has become the greatest threat to human civilization daily. Every year, nearly 0.8 million 
+people die due to the direct and indirect effects of air pollution, and approximately 4.6 million 
+people  suffer  from  serious  diseases  such  as  chronic  obstructive  pulmonary  disease  (COPD), 
+respiratory hazards, premature deaths, and so on [ (Auerbach, 2012), (Lim, 2012), (WHO, 2016)]. 
+It is unavoidable that the air-pollutant concentration is estimated with greater accuracy to control 
+air  pollution.  The  spatial  and  spatio-temporal  application  of  geostatistics  is  crucial  during 
+prediction.  
+
+A very interesting task in geostatistics is, to interpolate a value of the target variable at a 
+specific  time  stand,  in  an  unobserved  location,  taking  its  surroundings  into  account.  In  this 
+scenario, the researchers prefer to use Inverse Distance Weight (IDW), Ordinary Kriging (OK), 
+Universal Kriging (UK), Disjunctive Kriging (DK), etc [ (Cressie, 2015), (Isaaks, 1989)]. Because 
+
+1 debjoythakur95@gmail.com 
+2 ishapathik@iitp.ac.in 
+3 chasubha@gmail.com 
+
+1 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+of significant advances in data science, many scientists prefer neural networking-based spatial and 
+spatio-temporal  interpolation  techniques  like  Geo-Long  Short  Time  Memory  (Geo-LSTM), 
+Random Forest Regression Kriging (RFK), and others [ (Ma, 2019), (Shao, 2020)]. The previously 
+mentioned algorithms use the variance-covariance function as a measure of dependence. The main 
+drawback of this traditional spatial interpolation algorithm is the gaussianity assumption, rarely 
+met.  The  neural  networking-based  algorithms  outperform,  but  the  mathematical  justification  is 
+difficult;  as  a  result,  applying  this  model  in  other  cases  can  be  challenging.  These  significant 
+limitations promote the use of the copula-based spatial and spatio-temporal interpolation approach. 
+This  copula-based  spatial  interpolation  technique  is  both  theoretically  and  practically  flexible. 
+Spatial variability is easily captured using copula, and then spatial lag-based Gaussian and non-
+Gaussian  bi-variate  copulas  are  created  to  interpolate  four  different  groundwater  quality 
+parameters  in  Baden-Wurttemberg  [  (Bardossy  A.  ,  2006)].  Following  that,  many  advances  in 
+spatial copula are established, for example, the utilization of asymmetric copulas to measure spatial 
+independence  [  (Bardossy  A.  a.,  2009)],  the  use  of  Gaussian  and  non-Gaussian  vine  copula  to 
+derive the conditional distribution in the unobserved location [ (Bardossy A. , 2011)], employing 
+the convex combination of archimedean copulas to kriging [ (Sohrabian, 2021)]. Besides these, 
+application  of  the  Gaussian  Copula  (GC)  via  bayesian  framework  to  predict  the  maximum 
+temperatures  in  the  Extremadura  Region  in  southwestern  Spain,  for  the  period  1980–2015  [ 
+(Garcia,  2021)],  and  making  use  of  a  bi-variate  copula  [  (Masseran,  2021)]measures  the 
+dependence  between  air  pollution  severity  and  duration.  Employing  the  copula-based  bias-
+correction  method  [  (Alidoost,  Stein,  Su,  &  Sharifi,  2021)]  develops  three  multivariate  copula 
+based quantile regression to map daily air temperature data, modeling the spatial pattern and spatial 
+dependence structure of different climate variables, for instance, precipitation, air temperature by 
+using regular (C- and D-) Vine copula and the student t-copula [ (Khan, Spöck, & Pilz, 2020)]. 
+Utilizing extreme value  models like, the generalized Pareto  distribution (GPD), [  (Masseran & 
+Hussain, 2020)] proposes a combination of a GPD model with copulas to establish a dependence 
+model between PM 10 and a set of four major pollutant variables, namely, CO, NO 2, SO 2, and 
+O3,  employing  the  concept  of  an  extra-parameterized  multivariate  extreme  valued  copula  [ 
+(Carreau & Toulemonde, 2020)] introduces a spatial copula model, application of D-vine copula 
+based quantile regression to model the spatial and Spatio-temporal data of COVID-19 in Italy [ 
+(D’Urso, De Giovanni, & Vitale, 2022)]. After capturing the seasonality and temporal dependency 
+of the daily mean temperature data set a new spatial distance based R-vine copula is introduced [ 
+(Erhardt,  Czado,  &  Schepsmeier,  2015)],  and  the  usage  of  spatial  vine  copula  based  upon  the 
+spatial  lag  [  (Gräler,  2014),  (Bostan,  Stein,  Alidoost,  &  Osei,  2021)].  With  the  help  of  the 
+Metropolis-Hastings  Algorithm  (MHA),  they  have  improved  spatial  copula  in  the  Bayesian 
+framework to approximate the posterior predictive density whereas, this method is limited to the 
+Gaussian copula family [ (Kazianka & Pilz, 2011)]. Utilizing spatial vine copula and dimension 
+reduction transformation [ (Musafer & Thompson, 2017)] creates a non-linear optimal multivariate 
+spatial design to mitigate prediction uncertainty of more than one variable. Introducing the copula-
+based semi-parametric algorithm [ (Quessy, Rivest, & Toupin, 2015)] models the stationary and 
+isotropic spatial random fields. Considering the concept of generalized method of moments [ (Bai, 
+Kang,  &  Song,  2014)]  proposes  a  pairwise  composite  likelihood  with  the  help  of  pair  copula. 
+Discovering  a  spatial  factor  copula  model  [  (Krupskii,  Huser,  &  Genton,  2018)]  combines  the 
+flexibility of a copula, the accountability of factor models, and the tractability of GC in higher 
+dimensions  to  fit  spatial  data  at  different  temporal  replicates.  Extending  the  spatial  GC 
+interpolation method [ (Gnann, Allmendinger, Haslauer, & Bárdossy, 2018)] predict the primary 
+
+2 
+
+ 
+variable, groundwater quality using the categorical information of the primary variable considered 
+as  a  secondary  variable.  Introducing  two  spatial  copula  interpolation  methods,  accountable  to 
+justify  the  spatial  dependency  of  an  air  temperature  of  a  particular  location  on  its  geo-spatial 
+neighborhood, and another mixture copula [ (Alidoost, Stein, & Su, 2018)] explain the relationship 
+of a variable with other covariates. A translation process (TP) is discovered [ (Richardson, 2021)] 
+for a non-Gaussian spatial copula interpolation process and too effective to model, where the link 
+function  is  not  well  defined.  [  (Wang,  Wang,  Deng,  Zou,  &  Wang,  2021)]  develops  a  spatio-
+temporal  heterogeneous  copula-based  kriging  (HSTCAK).  The  space-time  dependency  is 
+measured  by  the  copula  function  and  the  spatial  variability  with  temporal  similarity  and  fuzzy 
+clustering  employed  for  partition  to  mitigate  the  heterogeneity  problem.  Introducing  crucial 
+advancements in the spatial copula approach like tail dependency and asymmetric dependency and 
+extension of the linear model of coregionalization specifically for modeling the multivariate spatial 
+data [ (Krupskii & Genton, 2019)], and they use cross-covariance function as the measure of spatial 
+dependence.  
+
+The research articles used copulas in the spatial interpolation very well in the literature, but 
+there are some constraints that the previous authors have ignored. To estimate parameters, they 
+use the Maximum Likelihood estimate, which does not provide a good estimate in presence of 
+missing data. (ii) After creating spatial copula interpolation, they fix one point and calculate the 
+probability distribution at different lags from that point. As a result, the copula is limited within 
+the fixed reference frame, but the reference frame is random in reality. That is why, we consider 
+the  random  points  and  form  a  cluster,  based  on  relative  distance.  (iii)  At  the  time  of  spatial 
+clustering, they disregard the significance of creating the disjoint regions, thus the intersection part 
+is the most affected area, where the different effects of different clusters become confused with 
+each other (iv) They use conditional expectation for interpolation, but it is invalid for the extremely 
+valued probability density function (PDF). 
+
+In  this  study  we  evolve  a  novel  spatial  cluster-based  copula  modeling  in  different 
+frameworks. We devide the entire spatial domain into k spatial clusters to get m number of spatial 
+regions i.e. ℒ𝒾 ⊆ 𝐑𝟐×𝟐 which is the class of all possible set of points in a spatial region. We create 
+a  conditional  spatial  random  field 𝑌: ℒ𝒾 × ℱ𝜇∗ → ℳ.  Here, ℱ𝜇∗ is  an  induced  probability  space 
+and  ℱ𝜇∗ = {𝐴 ∈ ℒ𝒾  |  𝐴  is  𝜇∗ −
+created 
+measurable  𝑖. 𝑒.  𝜇∗(𝐴) ≤ 𝛿} and 𝑌 is < ℒ𝒾 × ℱ𝜇∗, ℳ > measurable  random  field  and ℳ ⊆ 𝐑. 
+Our objective in this research is to predict 𝑌 at an unobserved location on 𝑠0 ∈ ℒ𝒾 based upon the 
+n  distinct  observed  location 𝑠1, 𝑠2, . . . . , 𝑠𝑛 ∈ ℒ𝒾  using  spatial  copula  interpolation  algorithm  in 
+classical and bayesian framework. 
+
+caratheodory’s 
+
+extension 
+
+theorem 
+
+using 
+
+The outline of this study is as follows: the details of the algorithm are introduced in Section 
+(2), the study area and the behavior of data are described in Section (3), the results and discussion 
+regarding the case study are summarized in Section (4) and the conclusion is made in Section (5). 
+
+2  Method 
+
+2.1  Fitting Marginal Distribution 
+ In this particular section, we illustrate how to fit the ideal univariate parametric distribution 
+on  the  empirical  marginal  likelihood  distribution.  We  have  divided  the  complete  appropriate 
+procedure  into  a  few  steps:  (i)  Choice  of  a  family  of  distributions,  (ii)  Some  sort  of  suitable 
+
+3 
+
+ 
+ 
+ 
+ 
+  
+marginal  probability  distribution  among  that  family,  and  (iii)  Typically  the  estimate  of  the 
+parameter of these suited marginal probability distribution. For step (i) we use the Cullen and Frey 
+graph of skewness-kurtosis plot, for step (ii) we utilize Kernel Density Estimation (KDE) centering 
+on Akaike Information Criteria (AIC), and Bayesian Information Criteria (BIC), Log-likelihood 
+value  (LogLik),  and  Kolmogrov  Smirnov  (KS)  values.  Although  we  face  a  real  challenge  in 
+coordination (iii) because there is missing data so the Maximum Likelihood Estimation (MLE) of 
+the  parameter  is  not  recommendable.  Therefore,  for  the  Parametric  Exponential  Family 
+distribution  (PEF)  we  are  making  the  use  of  Expectation-Maximization  algorithm  (EM)  [ 
+(McLachlan & Krishnan, 2007)] and for the circular probability distributions, we use Uniformly 
+Minimum  Variance  Unbiased  Estimator  (UMVUE)  technique.  For  PEF  we  consider  the  fitted 
+distribution  is  Log-Normal  (LN)  probability  distribution  then, 𝑙𝑜𝑔𝑊 ∼ 𝒩(𝜇, 𝜎2).  Let, 𝑤𝑖; 𝑖 =
+1,2,3, . . . , 𝑛1 are  the  observed  data  points  and 𝑤𝑖; 𝑖 = 𝑛1 + 1, 𝑛1 + 2, 𝑛1 + 3, . . . , 𝑛2 are  the  un-
+observed data points. The likelihood function of (𝜇, 𝜎) based upon the observed data: 
+
+𝑙𝑜𝑔𝐿𝑜(𝜇, 𝜎) =
+−𝜎 ⋅ √2𝜋 ∑𝑛1
+
+𝑖=1 𝑙𝑜𝑔𝑤𝑖
+
+−1
+
+2𝜎2 ⋅ ∑𝑛1
+
+𝑖=1 (𝑙𝑜𝑔𝑤𝑖 − 𝜇)2
+
+(1) 
+
+complete, 
+
+ The 
+respectively,  𝒙 =
+(𝑤1, 𝑤2, 𝑤3, . . . , 𝑤𝑛2)𝑇 ; 𝒚 = (𝑤1, 𝑤2, 𝑤3, . . . , 𝑤𝑛1)𝑇  and  𝒛 = (𝑤𝑛1+1, 𝑤𝑛1+2, 𝑤𝑛1+3, . . . , 𝑤𝑛2)𝑇 
+reveals 𝒙 = 𝒚 ⋃ 𝒛. The complete data log-likelihood function is: 
+
+and  missing 
+
+observed 
+
+vectors 
+
+data 
+
+are 
+
+𝑙𝑜𝑔𝐿𝑐(𝜇, 𝜎) =
+−𝜎 ⋅ √2𝜋 ∑𝑛2
+
+𝑖=1 𝑙𝑜𝑔𝑤𝑖
+
+−1
+
+2𝜎2 ⋅ ∑𝑛2
+
+𝑖=1 (𝑙𝑜𝑔𝑤𝑖 − 𝜇)2
+
+(2) 
+
+ Let’s consider the E-step on the (𝑚 + 1)𝑡ℎ iteration of the EM algorithm where (𝜇 (𝑚), 𝜎(𝑚)) is 
+the  value  after  the 𝑚𝑡ℎ  iteration  of  EM.  Using  the  Equation  (2)  we  compute  the  conditional 
+expectation of log-likelihood of the complete data (CElikC) based upon the updated value at the 
+𝑚𝑡ℎ iteration, defined as 𝒬 ((𝜇, 𝜎)|(𝜇 (𝑚), 𝜎(𝑚))) in the following: 
+
+𝒬 ((𝜇, 𝜎)|(𝜇 (𝑚), 𝜎(𝑚)))
+= 𝐸(𝜇(𝑚),𝜎(𝑚))[𝑙𝑜𝑔𝐿𝑐(𝜇, 𝜎)|𝒚]
+= ∫𝒛
+= ∫𝒛
+
+(𝑙𝑜𝑔𝐿𝑐(𝜇, 𝜎)|𝒚) ⋅ 𝑓(𝒛|𝒚, (𝜇 (𝑚), 𝜎(𝑚))𝑑𝒛
+(𝑙𝑜𝑔𝐿𝑐(𝜇,𝜎)|𝒚)
+𝑓(𝑦;(𝜇(𝑚),𝜎(𝑚))
+
+) ⋅ 𝑓(𝒛, 𝒚; (𝜇 (𝑚), 𝜎(𝑚))𝑑𝒛
+
+(3) 
+
+≤ 𝐸(𝜇(𝑚),𝜎(𝑚)) [
+
+𝑙𝑜𝑔𝐿𝑐(𝜇,𝜎)
+𝑙𝑜𝑔𝐿𝑜(𝜇(𝑚),𝜎(𝑚))
+ Using the Equation (1), (2) we will simplify the Equation (3) and then in M-step we maximize 
+𝒬 ((𝜇, 𝜎)|(𝜇 (𝑚), 𝜎(𝑚))). Therefore the updated values are (𝜇 (𝑚+1), 𝜎(𝑚+1)) which is defined in 
+the following: 
+
+]
+
+(𝜇 (𝑚+1), 𝜎(𝑚+1)) = 𝑎𝑟𝑔𝑚𝑎𝑥(𝜇,𝜎)𝒬 ((𝜇, 𝜎)|(𝜇(𝑚), 𝜎(𝑚))) 
+(4) 
+ Utilizing Equation (4), we get the estimate of the parameter. But to estimate the parameter of a 
+circular  probability  distribution  for  example,  Von-Mises  (VM)  distribution,  avoiding  the 
+computational complexity of EM algorithm, absence of closed form, and due to the presence of 
+
+4 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bessel Function (𝐼𝑛(𝑘)) we introduce a new theorem regarding the completeness and sufficiency 
+of an estimator to deduce a UMVUE of the parameter of VM distribution in the following:  
+
+Theorem 2.1  If X 𝑖 ∼𝑖𝑖𝑑 VM then 
+
+𝐼0(𝑘)⋅𝑐𝑜𝑠(𝑥𝑖)
+𝐼1(𝑘)
+
+ and 
+
+𝐼0(𝑘)⋅𝑠𝑖𝑛(𝑥𝑖)
+𝐼1(𝑘)
+
+ are the UMVUE of cos𝜇 and 
+
+sin𝜇 respectively and their corresponding variances are 
+
+𝑣𝑎𝑟(𝑐𝑜𝑠(𝑥𝑖)) =
+
+𝑣𝑎𝑟(𝑠𝑖𝑛(𝑥𝑖)) =
+
+1
+
+2
+
+1
+
+2
+
++
+
+−
+
+𝐼2(𝑘)⋅𝑐𝑜𝑠(2𝜇)
+2𝐼0(𝑘)
+𝐼2(𝑘)⋅𝑠𝑖𝑛(2𝜇)
+2𝐼0(𝑘)
+
+− (
+
+− (
+
+2
+
+)
+2  
+
+𝐼1(𝑘)⋅𝑐𝑜𝑠(𝜇)
+𝐼0(𝑘)
+𝐼1(𝑘)⋅𝑠𝑖𝑛(𝜇)
+)
+𝐼0(𝑘)
+
+(5) 
+
+Proof. See Appendix (6.1)  
+ Using  Theorem  (2.1)  and  trigonometric  inverse  function  we  get  the  initial  value  and, 
+
+update the parameter values of VM distribution like LN (see Appendix (6.2)).  
+
+2.2  Copula 
+  A copula is used to model the dependence between two or more random variables, for 
+formulating the joint multivariate distribution from the marginal cumulative distribution function 
+(CDF).  Let, 𝑋1, 𝑋2, . . . , 𝑋𝑛 be 𝑛 random  variables  (RV)  with  corresponding  marginal  CDF  s  are 
+respectively,  𝐹1(𝑥1), 𝐹2(𝑥2), . . . , 𝐹𝑛(𝑥𝑛) .  The  joint  distribution  function  can  be  defined  as, 
+𝐹𝑋1,𝑋2,...,𝑋𝑛(𝑥1, 𝑥2, . . . , 𝑥𝑛)  which  is  the  product  of  marginal  and  conditional  distribution  but, 
+because of the complexity of this approach with the increasing number of random variables this 
+approach is not applicable for the large number of random variables. Therefore, the copula function 
+is defined to create a multivariate distribution from the 𝑛 marginal distribution [ (Nelsen, 2007), 
+(Sklar, 1973)] to model the dependence between the multidimensional variables in the following 
+way:  
+
+𝐶: [0,1]𝑛 → [0,1] 
+
+𝐹𝑋1,𝑋2,...,𝑋𝑛(𝑥1, 𝑥2, . . . , 𝑥𝑛) = 𝐶(𝐹1(𝑋1), 𝐹2(𝑋2), . . . , 𝐹𝑛(𝑋𝑛)). 
+
+(6) 
+
+There are different types of copula families, for example, Gaussian, Archimedean, Product, 
+etc and they behave in a different manner in the tail part of the distribution. Compared to the other 
+traditional multivariate, elliptical, Archimedean copulas, and vine copulas (VC) are more flexible 
+to  capture  the  inherent  dependency.  Under  some  certain  regularity  conditions  it’s  possible  to 
+express the 𝑛 −dimensional multivariate copula mentioned in the Equation (6) as multiplication 
+of pair-copulas [ (Aas, Czado, Frigessi, & Bakken, 2009)] in the following iterative approach. For 
+𝑛 = 2 the bi-variate probability density function (BPDF) is: 
+
+(7) 
+𝑓(𝑥1, 𝑥2) = 𝑓12(𝑥1|𝑥2) ⋅ 𝑓2(𝑥2) = 𝑐12(𝐹1(𝑥1), 𝐹2(𝑥2)) ⋅ 𝑓1(𝑥1) ⋅ 𝑓2(𝑥2). 
+ In the Equation (7) 𝑐12(. , . ) is the applicable pair-copula density function (PCDF) for 𝐹1(𝑥1) and 
+𝐹2(𝑥2). For 𝑛 = 3 the tri-variate probability density function (TPDF) is: 
+
+5 
+
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+𝑓(𝑥1, 𝑥2, 𝑥3) = 𝑓123(𝑥1|𝑥2, 𝑥3) ⋅ 𝑓23(𝑥2|𝑥3) ⋅ 𝑓3(𝑥3)
+= 𝑐12(𝐹1(𝑥1), 𝐹2(𝑥2)) ⋅ 𝑐23(𝐹2(𝑥2), 𝐹3(𝑥3))
+⋅ 𝑐13|2(𝐹(𝑥1|𝑥2), 𝐹(𝑥3|𝑥2)) ⋅ 𝑓1(𝑥1) ⋅ 𝑓2(𝑥2) ⋅ 𝑓3(𝑥3).
+ In  Equation  (8) 𝑐23(. , . ), 𝑐13|2(. , . ) are  the  applicable  PCDF  and  conditional  PCDF  (CPCDF) 
+respectively. Likewise, for 𝑛 = 4 the four-variate probability density function (FPDF) is: 
+
+(8) 
+
+𝑓(𝑥1, 𝑥2, 𝑥3, 𝑥4) = 𝑓4123(𝑥4|𝑥1, 𝑥2, 𝑥3) ⋅ 𝑓312(𝑥3|𝑥1, 𝑥2) ⋅
+𝑓21(𝑥2|𝑥1) ⋅ 𝑓1(𝑥1) = 𝑐12(𝐹1(𝑥1), 𝐹2(𝑥2)) ⋅
+𝑐13(𝐹1(𝑥1), 𝐹3(𝑥3)) ⋅ 𝑐14(𝐹1(𝑥1), 𝐹4(𝑥4)) ⋅
+𝑐23|1(𝐹(𝑥2|𝑥1), 𝐹(𝑥3|𝑥1)) ⋅ 𝑐24|1(𝐹(𝑥2|𝑥1), 𝐹(𝑥4|𝑥1)) ⋅
+𝑐34|2(𝐹(𝑥3|𝑥2), 𝐹(𝑥4|𝑥2)) ⋅ 𝑓1(𝑥1) ⋅ 𝑓2(𝑥2) ⋅ 𝑓3(𝑥3) ⋅ 𝑓4(𝑥4)
+ VC  is  a  graphical  approach  representing  an  𝑛 -dimensional  multivariate  PDF  (MPDF)  using 
+𝑛.(𝑛−1)
+ suitable PCDF in a hierarchical manner where the dependence structures of (𝑛 − 1) have 
+unconditional PCDF and that of the remaining has conditional PCPDF (CPCDF). In this paper, we 
+focus on C-Vine Copula (C-VC), because of its better flexibility. 
+
+(9) 
+
+2
+
+Figure  1: Detail of the tree of the Vine Copula. 
+
+   A C-VC with 4-variables has 3 trees, 𝑇𝑗 and each tree, 𝑇𝑗 has 4 − 𝑗 + 1 nodes and 4 − 𝑗 
+edges  where 𝑗 = 1,2,3 like  Figure  (1).  In  tree 𝑇1  each  edge  between  two  nodes  represent  the 
+PCDF. From Figure (1) in tree 𝑇2 the edges between each node is CPCDF where 𝑐13|4 denotes the 
+CPCDF of the first and third variable given the fourth variable and 𝑐23|4 represents the CPCDF of 
+the second and third variable given the fourth variable. In the tree 𝑇3 each node is connected by an 
+edge  representing  CPCDF  (Figure  (1)  )  of  the  first  and  second  variable  given  third  and  fourth 
+variable where 𝐶12|34 = 𝐹(𝑥1, 𝑥2|𝑥3, 𝑥4). 
+
+2.3  Spatial Interpolation 
+ In this section we propose two novel spatial interpolation approaches combining spatial 
+clustering, knowledge of copula and C-VC assuming the directional stationarity of data is defined 
+in the following:  
+
+2.3.1  Spatial Copula Estimation 
+ Let 𝒮 be the spatial domain of interest for the spatial interpolation purpose. This spatial 
+clustering technique is established upon the distance and degree of similarity between two spatial 
+points. Hierarchical spatial clustering (HSC) is performed using the complete linkage method [ 
+(Hubert, 1974)], cutoff values of Haversine distance (HD) [ (Gade, 2010)] and auto-correlation 
+
+6 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+between  each  pair  of  points.  Here,  the  number  of  HSC  and  HSC’s  radius  are  the  two  most 
+important parameters. According to the principle of HSC, it is obvious that the sum of squares 
+within  a  cluster  (SSW)  should  be  lesser  than  the  sum  of  squares  between  the  clusters  (SSB). 
+Making use of the Elbow method while the SSW reaches a plateau, we will consider that is the 
+optimal number of HSC and to determine HSC’s radius arranging HSC’s height in ascending order, 
+that considers a significant height as a HSC’s radius. Therefore, in this context, we can think of 
+the HSC as a spatial field defined in the following Equation (10) 
+
+𝑁𝑖 = {(𝑜𝑏𝑖1, 𝑜𝑏𝑖2): 𝐻𝐷(𝑜𝑏𝑖1, 𝑜𝑏𝑖2) ≤ 𝐻𝐷𝑐𝑢𝑡  &  𝜌(||𝑜𝑏𝑖1 − 𝑜𝑏𝑖2||) ≥ 𝑟𝑐𝑢𝑡  &  𝑖1 ≠ 𝑖2}
+⋃ {(𝑜𝑏𝑖𝑗, 𝑦𝑖𝑗) : 𝐻𝐷(𝑜𝑏𝑖𝑗, 𝑦𝑖𝑗) ≤ 𝐻𝐷𝑐𝑢𝑡  &  𝜌(||𝑜𝑏𝑖𝑗 − 𝑦𝑖𝑗||) ≥ 𝑟𝑐𝑢𝑡}
+
+(10) 
+
+Let 𝑁1, 𝑁2, . . . , 𝑁𝑘  be  the 𝑘 clusters, 𝑦𝑖𝑗  be  the 𝑗𝑡ℎ unobserved  point,  and 𝑜𝑏𝑖𝑗  be  the 𝑗𝑡ℎ 
+observed point of the 𝑖𝑡ℎ HSC where, 𝑗 = 1,2, . . . , 𝑛𝑖; 𝑖 = 1,2,3, . . . , 𝑘 where 𝑛𝑖 be the number of 
+the  unobserved  points  in 𝑖𝑡ℎ HSC  and 𝑐𝑖,  the  centre  of 𝑖𝑡ℎ cluster.  A  threeshold  HD  (𝐻𝐷𝑐𝑢𝑡)  is 
+chosen ∋ 𝑑𝑖𝑠𝑡(𝑐𝑖, 𝑦𝑖𝑗) ≤ 𝐻𝐷𝑐𝑢𝑡 that is surrounding the centre of each HSC, a circle is constructed 
+with radius of 𝐻𝐷𝑐𝑢𝑡 units and 𝑟𝑐𝑢𝑡 refers the spatial auto correlation cutoff to maintain the spatial 
+continuity of HSC. For 𝑘 clusters maximum number of distinct spatial regions (SR) is 2𝑘 − 1. Let 
+𝑣⃗ be  the  presence  vector  of  all  unobserved  points 𝑦𝑖𝑗 = (𝑙𝑜𝑛, 𝑙𝑎𝑡),  where 𝑙𝑜𝑛 and 𝑙𝑎𝑡 stand  for 
+longitude and latitude of an unobserved point respectively. Now, we create a linear map in the 
+following:  
+
+𝑓: ℛ2×1 → ℛ𝑘×1 ⇒ 𝑓(𝑦𝑖𝑗) = 𝑣⃗ 
+
+(11) 
+
+ In the Equation (11) 𝑣⃗ is a binary vector of length 𝑘, where 𝑣⃗ = [𝑣1, 𝑣2, . . . , 𝑣𝑘] 
+
+1  𝑖𝑓   (𝑙𝑜𝑛, 𝑙𝑎𝑡) ∈ 𝐶𝑙
+0  𝑜𝑡ℎ𝑒𝑟𝑤𝑖𝑠𝑒   
+
+𝑣𝑙 = {
+where 𝑙 = 1,2,3, . . . , 𝑘. The maximum number of presence vectors for 𝑘 clusters is 2𝑘 − 1. 
+As a result, we obtain at most 2𝑘 − 1 distinct SR in our entire study area. Let 𝑅1, 𝑅2, . . . , 𝑅𝑚 be the 
+𝑚  SR  where  𝑚 ≤ 2𝑘 − 1 .  Let  𝑣𝑖 = 0  ∀  𝑖 = 1,2, . . . , (𝑖 − 1), (𝑖 + 1), . . . , 𝑘  and  𝑣𝑖 = 1  that 
+denotes 𝑦𝑖𝑗 is inside 𝑁𝑖 only. 
+
+           (a) 
+
+7 
+
+ 
+ 
+ 
+ 
+  
+             
+ 
+ 
+(b) 
+
+Clustering of the Spatial Field 
+
+Figure  2: (a) The entire spatial domain, Delhi is divided into four clusters and the 
+corresponding monitoring stations. 
+
+(b) The entire geographical area is split up into some disjoint regions which are shaded by 
+
+different colour and the corresponding observed points belonging into each region.  
+
+  In Figure (2 a) we divide the entire spatial domain into some HSC grounded on the HD 
+of monitoring stations and degree of homogeneity where each circle denotes a HSC, and the dotted 
+points represent the observed monitoring stations contained in that HSC. As a result, the whole 
+area is split into some disjoint SR and the dotted points represent the monitoring stations, included 
+in that SR (Figure (2 b)) are salient points to interpolate along the surface of each SR.  
+
+8 
+
+ 
+ 
+ 
+     
+Utilizing the concept of copula, we transform a HSC to a spatial random field (SRF) to 
+predict the values on the unobserved location. Therefore, we first concentrate on the univariate 
+marginal probability distribution (MDF) of inclusion of the latitude (𝜔𝑖) and longitude (𝛽𝑖) of an 
+observed  location  being  included  in  𝑅𝑖  separately.  The  corresponding  MDF  are  respectively 
+𝑃({𝜔: 𝜔 ∈ 𝑅𝑖}) and 𝑃({𝛽: 𝛽 ∈ 𝑅𝑖}). Using the concept of copula, we have created the Bi-variate 
+probability distribution function (BDF) of inclusion of latitude and longitude in the 𝑖𝑡ℎ SR, and 
+Kendall’s 𝜏 is considered as the measure of association between two RVs. So, the joint BDF is as 
+follows:  
+
+𝐻(𝑥1, 𝑥2) = 𝐶(𝐹𝜔(𝑋1𝜔), 𝐹𝛽(𝑋2𝛽)) where 𝐶: [0,1]2 → [0,1]. 
+To evaluate the CDF of that spatial random process (SRP), a composite function of two 
+
+RVs i.e., 
+
+𝑌(. , . ) ≡ {𝑌(𝜔, 𝛽): 𝜔 ∈ 𝑅𝑖, 𝛽 ∈ 𝑅𝑖} we implement the KDE to get the MDF of 𝑌 i.e., 𝐹(𝑦) 
+and making use of copula we deduce the joint Tri-variate probability distribution (TDF) as follows:  
+
+𝐻(𝑥1, 𝑥2, 𝑦) = 𝐶(𝐹𝜔(𝑋1𝜔), 𝐹𝛽(𝑋2𝛽), 𝐹(𝑌)) where 𝐶: [0,1]3 → [0,1]. 
+After getting, the BDF (𝐻(𝑥1, 𝑥2)) and TDF (𝐻(𝑥1, 𝑥2, 𝑦)) using copula we find out the 
+
+conditional PDF (CPDF) defined in the following two equations: 
+
+𝑓(𝑦1|𝑥1, 𝑥2) =
+
+𝜕3𝐻(𝑥1,𝑥2,𝑦)
+𝜕𝑥1𝜕𝑥2,𝜕𝑦
+𝜕2𝐻(𝑥1,𝑥2)
+𝜕𝑥1𝜕𝑥2
+
+(12) 
+
+ Here,  we  assume  two  RVs,  latitude  ( 𝑋1 )  and  longitude  ( 𝑋2 )  follow  Uniform[ 𝑎1, 𝑏1 ]  and 
+Uniform[𝑎2, 𝑏2]  respectively.  Now  we  generate  random  points (𝑥1, 𝑥2) along, 𝒮 to  measure  the 
+CDF of SRP i.e., 𝑌(𝑥1, 𝑥2) having different CDF for each geographical position. Since, there are 
+some missing data, we use EM algorithm to estimate the parameter at the time of fitting MDF. 
+Applying copula we get the joint TDF of 𝑌(𝑥1, 𝑥2), 𝑋1, 𝑋2 is defined as 𝐹(𝑦, 𝑥1, 𝑥2). Next, we will 
+introduce  the  HSC-based  SI  that  Spatial  Copula  interpolation  (SC).  Therefore,  we  split 𝒮 in 𝑚 
+number of regions making use of the HSC algorithm, discussed earlier. Let’s consider, 𝑅1 has three 
+observed locations 𝑜𝑏1, 𝑜𝑏2, 𝑜𝑏3. In that region we can generate a number of gridded points not 
+necessarily  of uniform  size, out  of those unobserved points we consider one unobserved point, 
+𝑗  which is the 𝑗𝑡ℎ point in 𝑅1. Applying the conditional copula (from Equation (12)) 
+defined as 𝑢𝑛𝑅1
+we establish the conditional copula based probability distribution function (CCDF) for each un-
+observed point in a SR i.e. 𝐹
+
+𝑗 (𝑦).  
+
+𝑢𝑛𝑅1
+
+𝐹
+
+𝑗 (𝑦) = 𝑃[𝑌(𝑥
+
+𝑢𝑛𝑅1
+
+, 𝑥
+
+𝑗
+1,𝑢𝑛𝑅1
+
+2,𝑢𝑛𝑅1
+
+𝑗 ) ≤ 𝑦|𝑋1 = 𝑥
+
+𝑗
+1,𝑢𝑛𝑅1
+
+, 𝑋2 = 𝑥
+
+𝑗 ] 
+
+2,𝑢𝑛𝑅1
+
+(13) 
+
+ From the Equation (13) we get the CCDF of 𝑗𝑡ℎ un-observed point included in the first SR. That 
+lets us calculate the CCDF of SRP, 𝑌 at the unobserved centroid of a cluster and making the use 
+of CCDF we can calculate conditional copula based probability density function (CCPDF). The 
+mathematical formulation is described in the following:  
+
+𝐹
+
+𝑗 (𝑦)
+
+𝑢𝑛𝑅1
+
+⇒ 𝑓
+
+𝑗 (𝑦)
+
+𝑢𝑛𝑅1
+⇒ 𝑎𝑟𝑔𝑚𝑎𝑥𝑦𝑓
+
+= ∑𝑖∈𝑅1 𝛼𝑖𝑗 ⋅ 𝑃[𝑌(𝑥1,𝑜𝑏𝑖, 𝑥2,𝑜𝑏𝑖) ≤ 𝑦|𝑋1 = 𝑥1,𝑜𝑏𝑖, 𝑋2 = 𝑥2,𝑜𝑏𝑖]
+= ∑𝑖∈𝑅1 𝛼𝑖𝑗 ⋅ 𝑓𝑜𝑏𝑖(𝑦|𝑥1, 𝑥2)
+𝑗 (𝑦) = ∑𝑖∈𝑅1 𝛼𝑖𝑗 ⋅ 𝑎𝑟𝑔𝑚𝑎𝑥𝑦𝑓𝑜𝑏𝑖(𝑦|𝑥1, 𝑥2)
+
+𝑢𝑛𝑅1
+
+(14) 
+ In the Equation (14) the weights are defined as 𝛼𝑖𝑗. This weights are the proportional to the spatial 
+auto  correlation  function  (ACF)  but  inversely  proportional  to  the  degree  of  separation.  So  the 
+
+9 
+
+ 
+ 
+ 
+ 
+ 
+ 
+required 𝛼𝑖𝑗 is defined in the following assuming the fact that, 𝑜𝑏𝑖, 𝑢𝑛𝑗 ∈ 𝑅1  
+
+𝛼𝑖𝑗 =
+
+𝑑𝑖𝑗⋅𝜌(||𝑜𝑏𝑖−𝑢𝑛𝑗||)
+∑𝑖∈𝑅1 𝑑𝑖𝑗⋅𝜌(||𝑜𝑏𝑖−𝑢𝑛𝑗||)
+
+(15) 
+
+ In the Equation (15) 𝑑𝑖𝑗 is the degree of seperation established upon the HD and the degree of 
+departure of two PDFs defined on the SRF in the following Equation (16)  
+1
+0 |𝑓𝑜𝑏𝑖(𝑦|𝑥1, 𝑥2) − 𝑓𝑢𝑛𝑗(𝑦|𝑥1, 𝑥2)|𝑝]
+
+𝑑𝑖𝑗 = 𝜖 + exp − ([∫
+
+𝑑𝑦) ⋅ 
+
+1/𝑝
+
+exp − (sin−1 [√sin2 (
+
+𝑥1,𝑜𝑏𝑖
+
+−𝑥
+
+1,𝑢𝑛𝑗
+
+2
+
+) + cos(𝑥1,𝑜𝑏𝑖) ⋅ cos(𝑥2,𝑢𝑛𝑗) ⋅ sin2 (
+
+𝑥2,𝑜𝑏𝑖
+
+−𝑥
+
+2,𝑢𝑛𝑗
+
+2
+
+)]) (16) 
+
+ In the Equation (16) 𝜖 is included here for the computational adjustment [ (Machuca-Mory, 2013)] 
+
+along  the  boundary  points  of  each  SR;  exp − ([∫
+
+1
+
+0 |𝑓𝑜𝑏𝑖(𝑦|𝑥1, 𝑥2) − 𝑓𝑢𝑛𝑗(𝑦|𝑥1, 𝑥2)|𝑝]
+
+1/𝑝
+
+𝑑𝑦) 
+
+specifying  modified  gaussian  distance  kernel  and  here,  as  a  distance  we  apply  the  degree  of 
+separation between two conditional copula based spatial probability density function (CCSPDF) 
+to capture the probabilistic spatial dissimilarity, and the last part is HD. For 𝜌(||𝑜𝑏𝑖 − 𝑢𝑛𝑗||) in 
+the Equation (15) choice of suitable covariance function is necessary. Therefore, we choose the 
+suitable  covariance  function  among  well-defined  variogram  clouds,  for  example,  Exponential, 
+Gaussian and Spherical, [ (Cressie, 2015)] etc. Applying this concept we adopt the Algorithm (1) 
+to interpolate over the entire spatial surface:  
+
+𝑗=1 𝑅𝑗 
+
+Algorithm1: Algorithm of SC Interpolation 
+0 < 𝑚 ≤ 2𝑘 − 1; 𝑅𝑖 ∩ 𝑅𝑗 = 𝜙 
+ 𝒮 ← ⋃𝑘
+𝑖=1 𝑁𝑖 = ⋃𝑚
+𝐺𝑒𝑛𝑗 = {(𝑙𝑜𝑛𝑗, 𝑙𝑎𝑡𝑗)}                                                                                                   # Set of 
+randomly generated points 
+For each 𝑗 ∈ 𝐺𝑒𝑛𝑗 do 
+ 𝑣⃗ ← 𝑃𝑟𝑒𝑠𝑒𝑛𝑐𝑒(𝐺𝑒𝑛𝑗)                                                                    #𝑃𝑟𝑒𝑠𝑒𝑛𝑐𝑒(. ) is  a  binary  vector  like 
+𝑓(. ) in Equation(11) 
+       IF 𝑓𝑟𝑒𝑞(𝑣⃗) = 1     Then                                                                                             # 𝑓𝑟𝑒𝑞(. ) 
+returns the sum of 𝑣⃗ 
+              𝑖𝑛𝑑𝑒𝑥 ← 𝐼𝑛𝑑𝑒𝑥(𝑣⃗)                                                                                      #𝐼𝑛𝑑𝑒𝑥(. ) returns 
+position of 1 in 𝑣⃗ 
+                {𝑜𝑏1, 𝑜𝑏2, . . . , 𝑜𝑏𝑟} ← observed location in 𝑖𝑛𝑑𝑒𝑥𝑡ℎ HSC 
+                 𝑆𝑅(𝑗) ← Choose 𝑝𝑡ℎ closest SR from {𝑜𝑏1, 𝑜𝑏2, . . . , 𝑜𝑏𝑟} close to (𝑙𝑜𝑛𝑗, 𝑙𝑎𝑡𝑗) 
+               𝑆𝐶𝑗 ← ∑𝑖∈𝑆𝑅(𝑗) 𝛼𝑖𝑗𝑎𝑟𝑔𝑚𝑎𝑥𝑦𝑓𝑜𝑏𝑗(𝑦|𝑙𝑜𝑛, 𝑙𝑎𝑡)   
+        Else 
+                  𝐼⃗𝑛𝑑 ← 𝐼𝑛𝑑𝑒𝑥(𝑣⃗)  
+                   For each 𝑞 ∈ 𝐼⃗𝑛𝑑    do 
+
+           {𝑜𝑏1, 𝑜𝑏2, . . . , 𝑜𝑏𝑟} ← observed location in 𝑞𝑡ℎ HSC 
+
+                                𝑆 ← 𝑆. 𝑎𝑝𝑝𝑒𝑛𝑑({𝑜𝑏1, 𝑜𝑏2, . . . , 𝑜𝑏𝑟}             # 𝑋. 𝑎𝑝𝑝𝑒𝑛𝑑(. ) adds the argument 
+to existing 𝑋 values 
+
+10 
+
+ 
+ 
+ 
+ 
+ 
+                           End For 
+
+               𝑆𝑅(𝑗) ← 𝑈𝑛𝑖𝑞𝑢𝑒(𝑆)                          #𝑈𝑛𝑖𝑞𝑢𝑒(. ) removes the duplicate elements 
+
+from its argument 
+
+                𝑆𝑅(𝑗) ← Choose 𝑝𝑡ℎ closest SR from {𝑜𝑏1, 𝑜𝑏2, . . . , 𝑜𝑏𝑟} close to (𝑙𝑜𝑛𝑗, 𝑙𝑎𝑡𝑗) 
+               𝑆𝐶𝑗 ← ∑𝑖∈𝑆𝑅(𝑗) 𝛼𝑖𝑗𝑎𝑟𝑔𝑚𝑎𝑥𝑦𝑓𝑜𝑏𝑗(𝑦|𝑙𝑜𝑛, 𝑙𝑎𝑡)      
+
+            End IF 
+
+End For 
+
+2.3.2  Spatial Bayesian Vine-Copula Estimation 
+ In  this  section,  we  introduce  spatial  vine  copula  estimation  based  upon  the  Bayesian 
+statistical  approach  (SBVC).  Under  the  square  error  loss  function  employing  MHA  we  do  the 
+posterior estimate of the parameter in the following way:  
+
+𝜋(𝜃⃗) =
+
+𝑓𝑋1,𝑋2|𝑋3,𝑋4(𝑥1,𝑥2,𝑥3,𝑥4|𝜃⃗⃗⃗)⋅𝑝(𝜃⃗⃗⃗)
+∫ 𝑓𝑋1,𝑋2|𝑋3,𝑋4(𝑥1,𝑥2,𝑥3,𝑥4|𝜃⃗⃗⃗)⋅𝑝(𝜃⃗⃗⃗)𝑑𝜃⃗⃗⃗ 
+In the Equation (17) 𝑓(. |. ) defines the conditional copula based PDF (CCPDF) derived 
+making use the inherited concept of Figure (1), 𝑝(𝜃⃗) denotes the prior PDF of 𝜃⃗ and 𝜋(𝜃⃗) defines 
+the posterior PDF (PPDF) of 𝜃⃗. Using the PPDF we’ll calculate the posterior estimation of 𝜃⃗ under 
+the absolute error loss function. After getting the most updated values 𝜃⃗ using MHA we find out 
+the conditional bayesian prediction of two variables in the following: 
+
+(17) 
+
+|𝑋1, 𝑋2, 𝑋3, 𝑋4) = ∫ 𝜃⃗ ⋅ 𝜋(𝜃⃗)𝑑𝜃⃗
+
+𝐸(𝜃⃗̂
+𝐸(𝑋1, 𝑋2|𝑋3, 𝑋4) = ∫ ∫ 𝑥1 ⋅ 𝑥2 ⋅ 𝑓𝑋1,𝑋2|𝑋3,𝑋4(𝑥1, 𝑥2, 𝑥3, 𝑥4|𝜃⃗̂
+
+)𝑑𝑥1𝑑𝑥2
+
+(18) 
+
+Using this Equation (18) we can easily spatially interpolate the target variables on target 
+locations. Here, we consider two SRPs those are, 𝑌1(𝑥1, 𝑥2) and 𝑌2(𝑥1, 𝑥2) and apply the concept 
+of tail-dependency of a bi-variate copula to measure their hidden reliance. Utilizing VC we find 
+the  CCPDF  i.e.,  𝐹(𝑦1, 𝑦2|𝑥1, 𝑥2; 𝜃⃗) = 𝑃[𝑌1(𝑥1, 𝑥2) ≤ 𝑦1, 𝑌2(𝑥1, 𝑥2) ≤ 𝑦2|𝑋1 = 𝑥1, 𝑋2 = 𝑥2; 𝜃⃗] . 
+Regarding parameter estimation, during fitting MDF, we use UMVUE, EM etc, but to estimate the 
+parameter of the copula family we only consider the posterior estimate. Then using the conditional 
+expectation technique we estimate the 𝑌1  &  𝑌2 values all the randomly generated gridded points 
+and interpolate the values.  
+
+2.4  Model validation 
+ The accuracy of the models are validated by the following three methods where, 𝑌(𝑠⃗𝑖) is 
+
+the observed data points and, 𝑌̂(𝑠⃗𝑖) is the predicted value: 
+
+ 1.  Mean of Absolute Error (MAE) 
+
+𝑀𝐴𝐸 =
+
+2.  Root of Mean Square Error (RMSE) 
+
+∑𝑛
+𝑖=1 |𝑌(𝑠⃗𝑖)−𝑌̂(𝑠⃗𝑖)|
+𝑛
+
+𝑅𝑀𝑆𝐸 = √∑𝑛
+
+𝑖=1 (𝑌(𝑠⃗𝑖)−𝑌̂(𝑠⃗𝑖))2
+𝑛
+
+(19) 
+
+(20) 
+
+ 3.  K-fold CV 
+ Then, using Equation (20), (19) we measure the accuracy of the proposed model. K-fold 
+CV is carried out assuming K as 10. The 10-folded CV indicates that the data set is divided into 
+the 10 random sub-sets, and among these data sets, 9 sub-sets are taken as training data set, and 
+
+11 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+the rest 1 is taken as a test data set which is termed as one-leave-one out CV (OLOCV). It helps 
+compare the MAE of proposed and old models  
+
+3  Study area and Data 
+To demonstrate the SC, SBVC, and to compare with OK we take Delhi-air pollution as a 
+
+circumstance study. Delhi, the capital of India is the most polluted due to, rapid urbanization, 
+boosting amounts of traffic, increasing population, and energy consumption at an alarming level. 
+Sometimes, the level of PM 2.5 concentration in air has reached up to 999 𝜇𝑔/𝑚3 [ (Mukherjee, 
+et al., 2018)] and, among all other air pollutants, it affects public health [ (Zheng, Pozzer, Cao, & 
+Lelieveld, 2015)] badly. Boosting levels of automobiles, cars, etc cause higher pollutant 
+concentrations in the air [ (Samal, Gupta, Pathania, Mohan, & Suresh, 2013)]. We look at the air 
+pollution data collected by the monitoring stations, maintained by the Central Pollution Control 
+Board (CPCB), Delhi Pollution Control Committee (DPCC), and the Indian Institute of Tropical 
+Meteorology (IITM). To get the research goal, we collected data on several air pollutants, such 
+as PM 2.5, PM 10, NO, NO 2, NO 𝑥 and wind direction (WD), from the CPCB websites. To map 
+the Spatio-temporal distribution of air quality and deduce the effect of WD on the air pollution in 
+Delhi, these data play an important role. The data were collected over 24 hours, and the period 
+was taken from 1𝑠𝑡 February 2017 to 31𝑠𝑡 December 2021. The Figure (4) depicts the temporal 
+variability of daily PM 2.5 emission which is cyclic in nature after a fixed time stand. There is 
+always a higher concentration witnessed from almost the end of November to the end of 
+December (Figure (4)) around 400𝜇𝑔/𝑚3 and sometimes it grows up to 800𝜇𝑔/𝑚3 which is 
+very much alarming for the human life, primarily during winter due to burning of firecrackers, 
+agricultural crop burning, etc.  
+
+PM 𝟐.𝟓 concentration over the whole spatial surface 
+
+Figure  3: The interpolated PM 2.5 values of November in the year, 2019 
+
+   There are 38 monitoring stations in this data set, as shown in Figure (2 B). According to 
+Figure (3), we detect that the Northern part of Delhi is very much sensitive to pollution whereas 
+the Central, East, and West parts of Delhi are less sensitive regarding the pollutant concentrations 
+in the air. According to Figure (3), the PM 2.5 concentration in the Northern part of Delhi can reach 
+up to 220𝜇𝑔/𝑚3 whereas in the Central, East, and West part of Delhi that is limited into 190 to 
+200 𝜇𝑔/𝑚3. As a result, the Spatio-temporal variability in air pollutant concentrations is visible. 
+
+12 
+
+ 
+ 
+  
+ 
+However, there are two shortcomings to applying spatial interpolation techniques to interpolate (i) 
+the Delhi NCR region is far away from other monitoring stations in Delhi, (ii) The missing Data.  
+Temporal Variability of PM 𝟐.𝟓 
+
+Figure  4: The time series plot of daily PM 2.5 emission from 1𝑠𝑡 Feburary, 2017 to 31𝑠𝑡 
+December, 2021 in the study area, Delhi. 
+
+Histogram of daily PM 𝟐.𝟓 emission 
+
+Figure  5: The Histogram of daily PM 2.5 emission from 1𝑠𝑡 Feburary, 2017 to 31𝑠𝑡 December, 
+2021 in the study area, Delhi. 
+
+   We can easily conclude from the Figure (5) that the observed frequency distribution of 
+daily PM 2.5 emission during this period is positively skewed which gives an idea of how to fit the 
+positively skewed distribution such as log-Normal, Gamma, Exponential, Weibull, etc depending 
+upon  the  tail  distribution.  Precisely  there  is  a  higher  concentration  in  the  interval  from 30 −
+40𝜇𝑔/𝑚3. Figure (6) provides a brief overview of the variability and a five-point summary of the 
+pollutants  and  WD  which  establishes  the  fact  that  PM 10  and  PM 2.5  have  higher  variability 
+compared to other pollutants and the variance of WD also sensitive. 
+
+13 
+
+ 
+ 
+  
+    
+ 
+  
+ 
+ 
+ 
+Box-plot of daily emission of pollutans and WD 
+
+Figure  6: The Box-Plot of daily PM 2.5, PM 10, NO 2, NO 𝑥 emission and WD from 1𝑠𝑡 
+Feburary, 2017 to 31𝑠𝑡 December, 2021 in the study area, Delhi. 
+
+4  Results and Discussion 
+
+ This section goes over how to compare two new models, SC and SBVC to other well-
+
+14 
+
+ 
+ 
+ 
+ 
+  
+ 
+   
+ 
+ 
+ 
+known spatial models step by step. Following that, we will attempt to provide a brief overview of 
+pollutant  concentrations  in  the  future,  as  well  as  discuss  how  an  important  meteorological 
+parameter can affect pollution concentrations mathematically.  
+
+Marginal CDF and PDF and Spatial Variability 
+
+(a) 
+
+(b)  
+
+Figure  7: (a) The emperical marginal CDF is fitted by the marginal positively skewed 
+parametric CDF and the fitting of marginal PDF. (b) The nature of spatial variation of a RV. 
+
+  We fit the parametric marginal CDF and PDF on the empirical CDF and PDF of an RV 
+
+15 
+
+ 
+ 
+ 
+ 
+ 
+ 
+     
+based on the AIC, BIC value, and KS test statistic value in Figure (7 a). Because the empirical 
+PDF is positively skewed, we only consider well-known positively skewed distributions such as 
+Weibull, Log-normal (LN), Gamma, and Exponential distributions, and Table (1) shows that the 
+LN  distribution  is  suitable  to  fit  based  on  the  lowest  AIC,  BIC,  and  KS  test  statistic  value. 
+Similarly, we fit the circular family distributions on WD and discover that the VM distribution is 
+the best PDF to fit.   
+
+Table  1: The value of KS statistic, AIC and BIC to determine the feasible marginal 
+parametric PDF 
+ Log-normal  
+ 0.02849193  
+ 322.296  
+ 330.035  
+
+   Test Criteria   Weibull  
+KS  
+AIC  
+BIC  
+
+ Gamma  
+ 0.06276518  
+ 346.187  
+ 353.926  
+
+ Exponential 
+ 0.1478233 
+ 413.547 
+ 417.416 
+
+ 0.06884229  
+ 365.360  
+ 373.098  
+
+  The  next  step  is  to  estimate  the  parameter  of  the  MDF.  We  already  discussed  the 
+disadvantages of using MLE to estimate the parameter in Section (2.1). As a result, we can use the 
+EM algorithm to obtain the updated shape and scale parameters of the LN distribution. We discuss 
+how the LogLik value converges to a fixed value after a certain number of iterations in Figure (8). 
+The required number of iterations for the EM algorithm in this case study is 223, after which the 
+difference between the two LogLik values is negligible. Figure (7 b) depicts how the PM 2.5 value 
+varies with respect to latitude and longitude. While the Longitude (Lon) ranges from 77.0 to 77.1 
+and  the  Latitude  (Lat)  varies,  from 28.5 to 28.6,  the  PM 2.5 concentration  is  generally  within 
+100 − 150𝜇𝑔/𝑚3 but if Lon varies from 77.15 to 77.3, the PM 2.5 concentration becomes high 
+and it ranges from 150 − 200𝜇𝑔/𝑚3. Similarly, while Lat is varying from 28.6 − 28.7 then the 
+most spatial variability of PM 2.5 is detected in every interval of Lon and sometimes reaches up to 
+300𝜇𝑔/𝑚3  while  the  Lat  varies  from  28.7 − 28.8 the  spatial  variation  is  identified  and  the 
+variation of PM 2.5 is almost lying between 200 − 250𝜇𝑔/𝑚3.  
+
+Figure  8: The convergence of the Log-Likelihood value after updating the value of the 
+parameters in each iteration using EM algorithm. 
+
+   However,  during  fitting  VM  distribution  we  use  the  concept  of  UMVUE  which  is 
+
+16 
+
+ 
+ 
+ 
+ 
+  
+mentioned in the Theorem (2.1) in the Section (2.1) to get the shape and scale parameter of the 
+VM distribution with better accuracy. In the following Table (2) we discuss the shape and scale 
+parameters of LN and VM PDF and corresponding the last updated LogLik values.   
+Table  2: Details and updated values of shape and scale parameter and the corresponding 
+Log-likelihood values 
+ Shape  
+
+ LogLik 
+
+ Scale  
+
+PDF  
+
+LN  
+
+VM  
+
+ 4.3764856    0.7701984    -
+
+ 3.583  
+
+ 1.908  
+
+1959.331124 
+ -32.41559 
+
+   Our  goal  now  is  to  run  the  two  novel  spatial  interpolation  algorithms  mentioned  in 
+Sections (2.3.1) and Section (2.3.2) and compare them to other spatial interpolation approaches. 
+Using the threshold criteria mentioned in Section (2.3.1) we divide the entire spatial domain into 
+4 HSC and consider the cutoff radius is 18026m as shown in Figure (9 a).  
+
+Optimal number of HSC and optimal HSC size 
+
+(a) 
+
+(b) 
+
+Figure  9: Optimal number of spatial HSC showed in (a), and in (b) we present its 
+
+optimum HD. 
+
+17 
+
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+In Figure (9 (A)) of the cluster dendrogram, the height represents the HD, and in Figure (9 (B)) we 
+plot  SSW  along  the  Y-axis  and  the  optimal  number  of  HSC  along  the  X-axis.  The  following 
+discussion focuses on the tail dependence of two RVs, as shown in Figure (10). These two RVs in 
+this case study are PM 2.5 and WD.  
+
+Tail-dependency and Joint-CDF 
+
+Figure  10: In the (left) part the discussion regarding the lower tail and upper tail dependency of 
+two RV and in the (right) part the joint CDF of two RV. 
+
+   The  upper  tail  dependence  and  lower  tail  dependence  between  two  RVs,  X  and  Y  is 
+
+defined in the following:   
+
+𝑑𝑢 = lim
+𝑢→1
+𝑑𝑙 = lim
+𝑢→0
+
+𝑃[𝑌 ≥ 𝐹𝑦
+
+−1(𝑢)|𝑋 ≥ 𝐹𝑥
+
+𝑃[𝑌 ≤ 𝐹𝑦
+
+−1(𝑢)|𝑋 ≤ 𝐹𝑥
+
+𝐶(1−𝑢,1−𝑢)
+
+(1−𝑢)
+
+−1(𝑢)] = lim
+𝑢→1
+−1(𝑢)] = lim
+𝑢→0
+
+𝐶(𝑢,𝑢)
+
+𝑢
+
+(21) 
+
+The  Equation  (21)  shows  the  behaviour  of  one  RV  while  othe  one  converging  to  the  extreme 
+values. We can conclude from this Figure (10) left that after 0.8 the upper tail of their distributions 
+is independent and lesser than 0.1, the lower tail of their distributions is independent. As a result, 
+we can say that higher values of PM 2.5 concentration are unaffected by WD because there is a 
+very low concentration at that point but where the marginal PDF of PM 2.5 is moderate, there is a 
+significant tail dependence on WD. The joint CDF of PM 2.5 and WD is plotted in the Figure (10) 
+on right applying 𝐵𝑖𝐶𝑜𝑝𝑆𝑒𝑙𝑒𝑐𝑡() function in R, where the fitted copula is Rotated Twan Type-2 
+Copula with estimated Kendall’s 𝜏 = 0.1341 and the LogLik value is −1.204 which is the highest 
+of any copula family, including GC, t-Copula, Frank, Clayton, Joe, and so on. We want to use our 
+novel copula-based spatial interpolation algorithm (SC) in a Bayesian framework after fitting the 
+copula using 𝐶𝐷𝑉𝑖𝑛𝑒𝐶𝑜𝑛𝑑𝐹𝑖𝑡() function in R. The posterior distribution and posterior estimate 
+of the parameter are critical in this context. MHA is used in this context to obtain the posterior 
+estimate of the parameters. 
+
+Rate of convergence of MHA Algorithm 
+
+(a) 
+
+18 
+
+ 
+ 
+ 
+ 
+            
+ 
+ 
+ 
+(b) 
+
+Figure  11: The rate of convergence of the two parameters of Rotated Tawn Type-2 copula 
+family. In (b) the first parameter of the copula family and in (a) the second parameter of the 
+copula family are estimated. 
+
+   According  to  this  Figure  (11)  we  use  the  concept  of  Bayesian  Inference  to  give  the 
+posterior  estimate,  assuming  that  the  parameter  prior  distributions  are  uniform  and  truncated 
+normal distributions. Following that, we use MHA to obtain the posterior estimate under the MSE 
+loss function, which is 0.04898261 (from Figure (11 a)) and −13.61893 (from Figure (11 b)), 
+respectively. The rate of convergence of two parameters is plotted in the Figure (11), depicting 
+that the rate of convergence of parameter 1 is faster than that of Parameter 2. Now we will look at 
+how WD and spatial clustering affect the variance of PM 2.5 in Table (3) and the Figure (15).   
+Table  3: Two-way ANOVA to explain the dependence of PM 𝟐.𝟓 emission on WD and SC  
+   Treatment  
+  WD  
+Cluster  
+Cluster⋅ WD  
+Residuals  
+
+ SS  
+ 20599.2864  
+ 3623  
+ 1283  
+ 2389  
+
+ MS  
+ 980.9184  
+ 1207.8  
+ 427.7  
+ 265.4  
+
+ P-Value 
+ 0.02404* 
+ 0.0334* 
+ 0.2543 
+
+ F Ratio  
+ 3.696  
+ 4.550  
+ 1.611  
+
+ Df  
+ 21  
+ 3  
+ 3  
+ 9  
+
+  Signif. codes: 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1   
+As  a  result,  in  the  two-way  analysis  of  the  variance  model  (Two  way  ANOVA),  we 
+
+19 
+
+ 
+ 
+  
+  
+ 
+consider PM 2.5 as a dependent variable and WD and clusters as independent variables. Along with 
+the columns of Table (3), we represent Treatments, Degrees of freedom (Df), Sum of square (SS), 
+Mean Square (MS), F-Ratio, and P-value, and along the rows, we represent WD, Cluster, their 
+interaction effect, and residuals. We can see from Table (3) that there is a significant impact of 
+WD and clustering on PM 2.5 emission at the 0.05 level of significance. However, the interaction 
+effect of WD and Clusters has no significant impact on PM 2.5 emission. To aid comprehension, 
+we present a graphical representation of these ANOVA tables in Figure (15) in Section (6.3) where 
+WD  is  represented  along  the  X-axis,  PM 2.5 is  represented  along  the  Y-axis,  and  each  spatial 
+cluster is used as a panel. In the SC interpolation method, we investigate another factor, spatial 
+ACF, which is employed as an important weight to counteract spatial variability across all lags.  
+
+Figure  12: Spatial ACF corresponding to every spatial lag, we plot the lag distance along the X-
+axis and the ACF along the Y-axis. 
+
+   As a result, in the Figure (12), we investigate how the ACF varies with respect to the 
+spatial lag. In this Figure (12), we notice that the value of ACF is comparatively higher for nearby 
+stations than for stations further away, and we use the blue shaded region to give a brief idea of 
+the interval of variation of ACF values. In this case study the fitted variogram model is Matern 
+variogram model with nugget: 0; sill: 617; range: 0.02 and kappa: 0.09. Utilizing this value and 
+the other distance weights in the Equation (14) we calculate CCPDF in every unobserved location. 
+In this case study, we assume that 𝜖 is 0.4224 and 𝑝 = 2 in the Equation (14) .  
+
+The entire framework is now ready to execute the new spatial copula interpolation (SC) 
+described  in  Section  (2.3.1)  and  Bayesian  Spatial-Vine  Copula  (SBVC)  described  in  Section 
+(2.3.2). As a result, we create an SRF within each HSC and focus on the spatial region between 
+them. For SC, we assume that Lat and Lon have a bi-variate uniform distribution, and PM 2.5 has 
+a  LN  distribution,  and  the  suitable  copula  is  Clayton  Copula  among  other  copula  familes  like, 
+Gauusian, t-copula, archimedian-copulas, based  on  AIC, BIC, and  LogLik  values, to  find their 
+joint CDF using 𝑚𝑣𝑑𝑐() function in R, with a parameter of 0.01697 and a dimension of 3. Then, 
+using the Equation (22), we obtain the required CCDF.  
+
+20 
+
+ 
+𝐹(𝑦1|𝑥1, 𝑥2)
+
+=
+
+𝑘1⋅(𝑥1𝑥2)−𝑘2⋅∫
+
+𝑦1
+−∞ (1+(
+
+1
+𝜃+
+𝑥1
+
+1
+𝜃−1)⋅(𝐹𝑌1(𝑡))
+𝑥2
+
+𝑐(𝑥1,𝑥2)
+
+−𝑘3⋅(𝐹𝑌1(𝑡))𝑘3−𝑘2⋅𝑓𝑌1(𝑡)𝑑𝑡
+
+(22) 
+
+ Using the Equation (14), (15), and (16) we get the CCPDF of each unobserved location. Then 
+using the Algorithm (1) we get the interpolated values.  
+
+Spatial Interpolation 
+
+Figure  13: Spatial Interpolation of PM 2.5 during the month of November, in 2019, 2020 and 
+2021. In Top the spatial interpolation technique SC is used and in below the SBVC algorithm is 
+used as a spatial interpolation algorithm. Along X-axis we plot Longitude, along Y-axis we plot 
+latitude and along the whole surface we plot the PM 2.5. 
+
+   In the Figure (13) we plot the monthly PM 2.5 emission during the month of November 
+for the three years, 2019, 2020, and 2021. According to this Figure (13) we detect that using SC 
+in  November,  2019,  the  PM 2.5 emission  varies  from 180 − 220𝜇𝑔/𝑚3 whereas  using  SBVC 
+ranges from 120 − 280𝜇𝑔/𝑚3 (Figure (13)), similar patterns are observed in the year 2020 and 
+2021 as well. If we carefully examine Figure (13) carefully we can look that the variation of SBVC 
+is  greater  than  that  of  SC  and  the  Northern  and  South-East  part  of  Delhi  is  highly  sensitive  to 
+pollution. We notice that in the western part of Delhi the SBVC is too effective to show the strong 
+spatial trend, as a result the PM 2.5 emission is random in nature (Figure (13)). We investigate the 
+
+21 
+
+ 
+ 
+ 
+  
+ 
+relationship between the observed and predicted values of three methods: SC, SBVC, and OK in 
+the Figure (14 (Top)), and we discover that there is a strong relationship between the observed and 
+predicted values in SC, followed by SBVC, and finally OK. As a result, we can make the critical 
+observation that the power of explainable variation in SC is greater than SBVC, which is better 
+than OK. It is clear that, the measurement error, MAE and RMSE of SC is lesser than SBVC, and 
+lastly OK as demonstrated by Figure (14 (Bottom)). 
+
+Although  the  SC  method  outperforms  the  other  two,  there  are  some  areas  where 
+improvements are possible, such as: (i) When clustering, we assume that the rate of inclusion of 
+geo-spatial points in a cluster is constant, but this can vary in practice. (ii) we ignore the effect of 
+extreme  values  during  interpolation;  (iii)  we  use  the  concept  of  degree  of  departure  of 
+characteristics between observed and unobserved points and spatial continuity concurrently, but it 
+sometimes contradicts the concept of spatial continuity; and (iv) we do not pay enough attention 
+to  the  data  set’s  temporal  stationarity;  (v)  to  estimate  the  parameter  of  copula,  applying  EM 
+algorithm.  SBVC  accepts  the  same  drawbacks,  but  one  additional  drawback  is  that  when 
+determining spatial trend, but it is sometimes ineffective to explore.  
+
+Quality of interpolation of SC, SBVC, and OK 
+
+Figure  14: (Top)Relationship between the observed and predicted values of three methods: SC, 
+SBVC, and OK. (Bottom) Comparison of the performance of three methods: SC, SBVC, and 
+OK. Along Y-axis we plot the RMSE and MAE of the four years from January, 2018 to 
+December, 2021. 
+
+22 
+
+ 
+ 
+  
+ 
+  
+ 
+5  Conclusion 
+ The introduced SC and SBVC are extensions of the previous spatial copula-based models 
+that address issues such as bin selection, the use of MLE to estimate the parameter in missing data 
+sets, and so on. When compared to other geo-statistical models, the entire SC and SBVC are very 
+effective and provide nearly accurate results (from Figure (14 (Bottom))). This SC model produces 
+better results for specially skewed spatial random fields and provides a mathematical argument for 
+selecting  important  covariates.  This  study  provides  an  idea  of  alternative  distance  weights  and 
+distance functions that are very effective in capturing spatial variation. A temporal extension of 
+this algorithm is possible, which motivates further research. This model is explained in this study 
+using a real-world data set of PM 2.5 concentrations in the air, but this algorithm can be used in 
+other scenarios such as mining, temperature modeling, meteorological modeling, and so on. This 
+algorithm may be more advantageous than other spatial estimation models because it makes no 
+assumptions about gaussian distribution, stationarity, dynamic behavior, or skewed data sets. 
+
+6  Appendix 
+
+6.1  Proof of Theorem (2.1) 
+
+Proof. If 𝑋 ∼ 𝑉𝑀(𝑘, 𝜇) then we know the corresponding charachteristic function of 𝑋 is 
+
+𝜙𝑛(𝑥) = 𝐸[𝑒𝑖𝑛𝑥] 
+
+𝑑𝑥
+
+(23) 
+
+ In the Equation (23) the term 𝐼𝑛(𝑘) =
+
+. In Equation (23) putting 𝑛 = 1 we get,  
+
+ and putting 𝑛 = −1 we get,  
+
+ Adding and subtracting Equation (24) and Equation (25) we get  
+
+𝐸(𝑒−𝑖𝑥) =
+
+𝐼1(𝑘)⋅𝑒−𝑖𝜇
+𝐼0(𝑘)
+
+𝑒𝑖𝑛𝑥⋅𝑒𝑘⋅𝑐𝑜𝑠(𝑥−𝜇)
+2𝜋𝐼0(𝑘)
+
+2𝜋
+𝐸[𝑒𝑖𝑛𝑥] = ∫
+0
+𝐼|𝑛|(𝑘)⋅𝑒𝑖𝑛𝜇
+𝐼0(𝑘)
+𝜋
+0 𝑒𝑘⋅𝑐𝑜𝑠(𝑥)𝑐𝑜𝑠(𝑛𝑥)𝑑𝑥
+∫
+𝜋
+
+=
+
+𝐸(𝑒𝑖𝑥) =
+
+𝐼1(𝑘)⋅𝑒𝑖𝜇
+𝐼0(𝑘)
+
+𝐸(
+
+𝐸(
+
+𝐼0(𝑘)⋅𝑐𝑜𝑠(𝑥)
+𝐼1(𝑘)
+𝐼0(𝑘)⋅𝑠𝑖𝑛(𝑥)
+𝐼1(𝑘)
+
+) = 𝑐𝑜𝑠𝜇
+
+) = 𝑠𝑖𝑛𝜇
+
+(24) 
+
+(25) 
+
+(26) 
+
+ Therefore, from the Equation (26) the statistic 𝑇1(𝑥) =
+unbiased estimators of 𝑐𝑜𝑠𝜇 and 𝑠𝑖𝑛𝜇 respectively. 
+
+𝐼0(𝑘)⋅𝑐𝑜𝑠(𝑥)
+𝐼1(𝑘)
+
+ and 𝑇2(𝑥) =
+
+𝐼0(𝑘)⋅𝑠𝑖𝑛(𝑥)
+𝐼1(𝑘)
+
+ are the 
+
+Here, the PDF of 𝑋 is denoted as 𝑓(𝑥) and the parameter space is defined as Φ and support 
+
+is defined as 𝒳.  
+
+𝑓(𝑥) =
+
+𝑒𝑘⋅𝑐𝑜𝑠(𝑥−𝜇)
+2𝜋⋅𝐼0(𝑘)
+
+= 𝑒𝑥𝑝[𝑘 ⋅ 𝑐𝑜𝑠(𝑥 − 𝜇) − 𝑙𝑜𝑔(2𝜋𝐼0(𝑘))]
+= 𝑒𝑥𝑝[𝑘 ⋅ 𝑐𝑜𝑠(𝑥)𝑐𝑜𝑠(𝜇) + 𝑘 ⋅ 𝑠𝑖𝑛(𝑥)𝑠𝑖𝑛(𝜇) − 𝑙𝑜𝑔(2𝜋) − 𝑙𝑜𝑔(𝐼0(𝑘))]
+ From the Equation (27) we write the likelihood function as product of two terms moreover this 
+VM distribution satisfying the following properties: 
+
+(27) 
+
+23 
+
+ 
+ 
+  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    1.  𝒳 is [0,2𝜋] therefore, it is independent upon the parameter.  
+    2.  Φ = {(𝜇, 𝑘): 𝜇 ∈ ℛ; 𝑘 > 0} which indicating it is an open interval.  
+    3.  Here {1, 𝑐𝑜𝑠(𝑥), 𝑠𝑖𝑛(𝑥)} and {1, 𝑐𝑜𝑠(𝜇), 𝑠𝑖𝑛(𝜇)} are Linearly Independent (LIN).  
+ Therefore, we tell that the PDF is belonging Two-PEF. Therefore, 𝑐𝑜𝑠(𝑥) and 𝑠𝑖𝑛(𝑥) are 
+complete and sufficient statistic of 𝑐𝑜𝑠(𝜇) and 𝑠𝑖𝑛(𝜇). Using Lehmann-Scheffe Theorem they are 
+the UMVUE. Moreover, using Equation (23) replacing 𝑛 = 2 we get  
+
+𝐸[𝑐𝑜𝑠2𝑥] =
+
+𝐼2(𝑘)
+𝐼0(𝑘)
+⇒ 𝐸(𝑐𝑜𝑠2(𝑥)) =
+
+⇒ 𝐸(𝑠𝑖𝑛2(𝑥)) =
+
+1
+
+2
+1
+
+2
+
++
+
+−
+
+𝐼2(𝑘)⋅𝑐𝑜𝑠(2𝜇)
+2𝐼0(𝑘)
+𝐼2(𝑘)⋅𝑠𝑖𝑛(2𝜇)
+2𝐼0(𝑘)
+
+ Using Equation (28) we get  
+
+𝑣𝑎𝑟(𝑐𝑜𝑠(𝑥)) =
+
+𝑣𝑎𝑟(𝑠𝑖𝑛(𝑥)) =
+
+1
+
+2
+
+1
+
+2
+
++
+
+−
+
+𝐼2(𝑘)⋅𝑐𝑜𝑠(2𝜇)
+2𝐼0(𝑘)
+𝐼2(𝑘)⋅𝑠𝑖𝑛(2𝜇)
+2𝐼0(𝑘)
+
+− (
+
+− (
+
+2
+
+𝐼1(𝑘)⋅𝑐𝑜𝑠(𝜇)
+)
+𝐼0(𝑘)
+2  
+𝐼1(𝑘)⋅𝑠𝑖𝑛(𝜇)
+𝐼0(𝑘)
+
+)
+
+(28) 
+
+(29) 
+
+6.2  EM algorithm estimation of parameters of VM distribution 
+  Likewise LN distribution 𝒬 ((𝜇, 𝑘)|(𝜇 (𝑚), 𝑘(𝑚))) is the updated CElikC at 𝑚𝑡ℎ iteration 
+
+is: 
+
+𝒬 ((𝜇, 𝑘)|(𝜇 (𝑚), 𝑘(𝑚)))
+
+𝑐
+
+= 𝐸(𝜇(𝑚),𝑘(𝑚))
+
+[
+
+∑𝑛2
+∑𝑛1
+
+𝑖=1 𝑘𝑐𝑜𝑠(𝑤𝑖−𝜇)−𝑛2⋅𝑙𝑜𝑔(2𝜋𝐼0(𝑘))
+𝑖=1 𝑘𝑐𝑜𝑠(𝑤𝑖−𝜇)−𝑛1⋅𝑙𝑜𝑔(2𝜋𝐼0(𝑘))
+
+]
+
+(30) 
+
+ Using the Equation (30) we complete M-step and find the most updated values.  
+
+6.3  Two-way ANOVA 
+
+24 
+
+ 
+  
+ 
+ 
+ 
+  
+  
+ 
+ 
+ 
+ 
+  
+Figure 15: How WD and Spatial cluster make an impact on PM 2.5 in this case study. 
+
+7  Data Availability  
+The data will be available upon request to the corresponding author. Otherwise it can be 
+link 
+
+possible 
+can  be  downloaded 
+“https://app.cpcbccr.com/ccr/#/caaqm-dashboard-all/caaqm-landing/data” . 
+
+the  data  directly 
+
+to  download 
+
+from 
+
+this 
+
+8  Acknowledgments 
+Funding: No funding for this paper. 
+Author Contributions: The three authors have made equal contribution to this paper. 
+Competing interests: Authors state no conflict of interest. 
+
+References 
+
+Aas, K., Czado, C., Frigessi, A., & Bakken, H. (2009). Pair-copula constructions of multiple 
+
+dependence. Insurance: Mathematics and economics, 44, 182–198. 
+https://doi.org/10.1016/j.insmatheco.2007.02.001 
+
+Alidoost, F., Stein, A., & Su, Z. (2018). Copula-based interpolation methods for air temperature 
+
+data using collocated covariates. Spatial statistics, 28, 128–140. 
+https://doi.org/10.1016/j.spasta.2018.08.003 
+
+Alidoost, F., Stein, A., Su, Z., & Sharifi, A. (2021). Multivariate copula quantile mapping for 
+bias correction of reanalysis air temperature data. Journal of spatial science, 66, 299–
+315. https://doi.org/10.1080/14498596.2019.1601138 
+
+Auerbach, A. &. (2012). The effect of environmental oxidative stress on airway inflammation. 
+
+Current Opinion in Allergy and Clinical Immunology, 12(2), 133. 
+https://doi.org/10.1097/ACI.0b013e32835113d6 
+
+Bai, Y., Kang, J., & Song, P. X.-K. (2014). Efficient pairwise composite likelihood estimation 
+
+for spatial-clustered data. Biometrics, 70, 661–670.  
+https://doi.org/10.1111/biom.12199 
+
+Bardossy, A. (2006). Copula-based geostatistical models for groundwater quality parameters. 
+Water Resources Research, 42(11). https://doi.org/10.1029/2005WR004754 
+
+Bardossy, A. (2011). Interpolation of groundwater quality parameters with some values below 
+
+the detection limit. Hydrology and Earth System Sciences, 15(9), 2763-
+2775.  https://doi.org/10.5194/hess-15-2763-2011, 2011. 
+
+Bardossy, A. a. (2009). Copula based multisite model for daily precipitation simulation. 
+
+Hydrology and Earth System Sciences, 13(12), 2299-2314. https://doi.org/10.5194/hess-
+13-2299-2009, 2009. 
+
+Bostan, P., Stein, A., Alidoost, F., & Osei, F. (2021). Minimum temperature mapping with 
+
+spatial copula interpolation. Spatial statistics, 42, 100464. 
+https://doi.org/10.1016/j.spasta.2020.100464 
+
+Carreau, J., & Toulemonde, G. (2020). Extra-parametrized extreme value copula: Extension to a 
+
+spatial framework. Spatial Statistics, 40, 100410. 
+https://doi.org/10.1016/j.spasta.2020.100410 
+
+Cressie, N. (2015). Statistics for spatial data. John Wiley \& Sons. 
+D’Urso, P., De Giovanni, L., & Vitale, V. (2022). A D-vine copula-based quantile regression 
+model with spatial dependence for COVID-19 infection rate in Italy. Spatial statistics, 
+100586. https://doi.org/10.1016/j.spasta.2021.100586 
+
+Erhardt, T. M., Czado, C., & Schepsmeier, U. (2015). R-vine models for spatial time series with 
+
+25 
+
+ 
+ 
+ 
+ 
+an application to daily mean temperature. Biometrics, 71, 323–332. 
+https://doi.org/10.1111/biom.12279 
+
+Gade, K. (2010). A non-singular horizontal position representation. The journal of navigation, 
+
+63, 395–417. https://doi.org/10.1017/S0373463309990415 
+
+Garcia, J. A. (2021). A Bayesian Hierarchical Spatial Copula Model: An Application to Extreme 
+
+Temperatures in Extremadura (Spain). Atmosphere, 12(7), 897. 
+https://doi.org/10.3390/atmos12070897 
+
+Gnann, S. J., Allmendinger, M. C., Haslauer, C. P., & Bárdossy, A. (2018). Improving copula-
+based spatial interpolation with secondary data. Spatial statistics, 28, 105–127. 
+https://doi.org/10.1016/j.spasta.2018.07.001 
+
+Gräler, B. (2014). Modelling skewed spatial random fields through the spatial vine copula. 
+Spatial Statistics, 10, 87–102. https://doi.org/10.1016/j.spasta.2014.01.001 
+Hubert, L. (1974). Approximate evaluation techniques for the single-link and complete-link 
+
+hierarchical clustering procedures. Journal of the American Statistical Association, 69, 
+698–704. 
+
+Isaaks, E. a. (1989). Applied geostatistics. Oxford University Press. 
+Kazianka, H., & Pilz, J. (2011). Bayesian spatial modeling and interpolation using copulas. 
+
+Computers & Geosciences, 37, 310–319. https://doi.org/10.1016/j.cageo.2010.06.005 
+
+Khan, F., Spöck, G., & Pilz, J. (2020). A novel approach for modelling pattern and spatial 
+
+dependence structures between climate variables by combining mixture models with 
+copula models. International Journal of Climatology, 40, 1049–1066. 
+https://doi.org/10.1002/joc.6255 
+
+Krupskii, P., & Genton, M. G. (2019). A copula model for non-Gaussian multivariate spatial 
+
+data. Journal of Multivariate Analysis, 169, 264–277. 
+https://doi.org/10.1016/j.jmva.2018.09.007 
+
+Krupskii, P., Huser, R., & Genton, M. G. (2018). Factor copula models for replicated spatial 
+
+data. Journal of the American Statistical Association, 113, 467–479. 
+https://doi.org/10.1080/01621459.2016.1261712 
+
+Lim, S. S.-R. (2012). A comparative risk assessment of burden of disease and injury attributable 
+to 67 risk factors and risk factor clusters in 21 regions, 1990--2010: a systematic analysis 
+for the Global Burden of Disease Study 2010. The lancet, 380(9859), 2224-2260. 
+https://doi.org/10.1016/S0140-6736(12)61766-8 
+
+Ma, J. a. (2019). A temporal-spatial interpolation and extrapolation method based on geographic 
+
+Long Short-Term Memory neural network for PM2. 5. Journal of Cleaner Production, 
+237, 117729. 
+https://doi.org/10.1016/j.jclepro.2019.117729 
+
+Machuca-Mory, D. F. (2013). Non-stationary geostatistical modeling based on distance weighted 
+
+statistics and distributions. Mathematical Geosciences, 45(1), 31-48. 
+https://doi.org/10.1007/s11004-012-9428-z 
+
+Masseran, N. (2021). Modeling the Characteristics of Unhealthy Air Pollution Events: A Copula 
+
+Approach. International journal of environmental research and public health, 18(16), 
+8751.  https://doi.org/10.3390/ijerph18168751 
+
+Masseran, N., & Hussain, S. I. (2020). Copula modelling on the dynamic dependence structure 
+
+of multiple air pollutant variables. Mathematics, 8, 1910. 
+https://doi.org/10.3390/math8111910 
+
+McLachlan, G. J., & Krishnan, T. (2007). The EM algorithm and extensions (Vol. 382). John 
+
+26 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Wiley & Sons. 
+
+Mukherjee, T., Asutosh, A., Pandey, S. K., Yang, L., Gogoi, P. P., Panwar, A., . . . others. 
+
+(2018). Increasing potential for air pollution over megacity New Delhi: A study based on 
+2016 Diwali episode. Aerosol and Air Quality Research, 18, 2510–2518. 
+https://doi.org/10.4209/aaqr.2017.11.0440   
+
+Musafer, G. N., & Thompson, M. H. (2017). Non-linear optimal multivariate spatial design using 
+
+spatial vine copulas. Stochastic environmental research and risk assessment, 31, 551–
+570. https://doi.org/10.1007/s00477-016-1307-6 
+
+Nelsen, R. B. (2007). An introduction to copulas. Springer Science & Business Media. 
+Quessy, J.-F., Rivest, L.-P., & Toupin, M.-H. (2015). Semi-parametric pairwise inference 
+methods in spatial models based on copulas. Spatial Statistics, 14, 472–490. 
+https://doi.org/10.1016/j.spasta.2015.08.002 
+
+Richardson, R. (2021). Spatial Generalized Linear Models with Non-Gaussian Translation 
+Processes. Journal of Agricultural, Biological and Environmental Statistics, 1–18. 
+https://doi.org/10.1007/s13253-021-00458-y 
+
+Samal, C. G., Gupta, D., Pathania, R., Mohan, S., & Suresh, R. (2013). Air pollution in micro-
+
+environments: A case study of India habitat centre enclosed vehicular parking, New 
+Delhi. Indoor and Built Environment, 22, 710–718. 
+https://doi.org/10.1177/1420326X12448489 
+
+Shao, Y. a. (2020). Estimating daily ground-level PM2. 5 in China with random-forest-based 
+
+spatiotemporal kriging. Science of The Total Environment, 740, 139761. 
+https://doi.org/10.1016/j.scitotenv.2020.139761 
+
+Sklar, A. (1973). Random variables, joint distribution functions, and copulas. Kybernetika, 9, 
+
+449–460. 
+
+Sohrabian, B. (2021). Geostatistical prediction through convex combination of Archimedean 
+
+copulas. Spatial Statistics, 41, 100488. 
+https://doi.org/10.1016/j.spasta.2020.100488 
+
+Wang, J., Wang, Z., Deng, M., Zou, H., & Wang, K. (2021). Heterogeneous spatiotemporal 
+
+copula-based kriging for air pollution prediction. Transactions in GIS, 25, 3210–3232. 
+https://doi.org/10.1111/tgis.12823 
+
+WHO. (2016). Ambient air pollution: A global assessment of exposure and burden of disease. 
+
+World Health Organization. 
+
+Zheng, S., Pozzer, A., Cao, C. X., & Lelieveld, J. (2015). Long-term (2001–2012) concentrations 
+
+of fine particulate matter (PM 2.5) and the impact on human health in Beijing, China. 
+Atmospheric Chemistry and Physics, 15, 5715–5725. 
+https://doi.org/10.5194/acp-15-5715-2015 
+
+27 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

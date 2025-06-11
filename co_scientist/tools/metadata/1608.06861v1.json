@@ -1,0 +1,14 @@
+{
+  "id": "http://arxiv.org/abs/1608.06861v1",
+  "title": "Parallel K-Medoids++ Spatial Clustering Algorithm Based on MapReduce",
+  "summary": "Clustering analysis has received considerable attention in spatial data mining for several years. With the rapid development of the geospatial information technologies, the size of spatial information data is growing exponentially which makes clustering massive spatial data a challenging task. In order to improve the efficiency of spatial clustering for large scale data, many researchers proposed several efficient clustering algorithms in parallel. In this paper, a new K-Medoids++ spatial clustering algorithm based on MapReduce for clustering massive spatial data is proposed. The initialization algorithm to decrease the number of iterations is combined with the MapReduce framework. Comparative Experiments conducted over different dataset and different number of nodes indicate that the proposed K-Medoids spatial clustering algorithm provides better efficiency than traditional K-Medoids and scales well while processing massive spatial data on commodity hardware.",
+  "published": "2016-08-24T15:21:24Z",
+  "authors": [
+    "Xia Yue",
+    "Wang Man",
+    "Jun Yue",
+    "Guangcao Liu"
+  ],
+  "primary_category": "cs.DC",
+  "pdf_url": "http://arxiv.org/pdf/1608.06861v1"
+}

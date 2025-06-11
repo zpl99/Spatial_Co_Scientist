@@ -1,0 +1,13 @@
+{
+  "id": "http://arxiv.org/abs/1911.02105v1",
+  "title": "Spatial-Temporal Cluster Relations -- A Foundation for Trajectory   Cluster Lifetime Analysis",
+  "summary": "Spatial-temporal data, that is information about objects that exist at a particular location and time period, are rich in value and, as a consequence, the target of so many initiative efforts. Clustering approaches aim at grouping datapoints based on similar properties for classification tasks. These approaches have been widely used in domains such as human mobility, ecology, health and astronomy. However, clustering approaches typically address only the static nature of a cluster, and do not take into consideration its dynamic aspects. A desirable approach needs to investigate relations between dynamic clusters and their elements that can be used to derive new insights about what happened to the clusters during their lifetimes. A fundamental step towards this goal is to provide a formal definition of spatial-temporal cluster relations. This report introduces, describes, and formalizes 14 novel spatial-temporal cluster relations that may occur during the existence of a cluster and involve both trajectory-cluster membership conditions and cluster-cluster comparisons. We evaluate the proposed relations with a discussion on how they are able to interpret complex cases that are difficult to be distinguished without a formal relation specification. We conclude the report by summarizing our results and describing avenues for further research.",
+  "published": "2019-11-05T22:00:15Z",
+  "authors": [
+    "Ivens Portugal",
+    "Paulo Alencar",
+    "Donald Cowan"
+  ],
+  "primary_category": "cs.DB",
+  "pdf_url": "http://arxiv.org/pdf/1911.02105v1"
+}

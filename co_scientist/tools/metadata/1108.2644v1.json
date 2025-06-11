@@ -1,0 +1,12 @@
+{
+  "id": "http://arxiv.org/abs/1108.2644v1",
+  "title": "Data Accuracy Model for Distributed Clustering Algorithm based on   Spatial Data Correlation in Wireless Sensor Networks",
+  "summary": "Objective: The main objective of this paper is to construct a distributed clustering algorithm based upon spatial data correlation among sensor nodes and perform data accuracy for each distributed cluster at their respective cluster head node. Design Procedure/Approach: We investigate that due to deployment of high density of sensor nodes in the sensor field, spatial data are highly correlated among sensor nodes in spatial domain. Based on high data correlation among sensor nodes, we propose a non -overlapping irregular distributed clustering algorithm with different sizes to collect most accurate or precise data at the cluster head node for each respective distributed cluster. To collect the most accurate data at the cluster head node for each distributed cluster in sensor field, we propose a Data accuracy model and compare the results with Information accuracy model. Finding: Simulation results shows that our propose Data accuracy model collects more accurate data and gives better performance than Information accuracy model at the cluster head node for each respective distributed cluster in our propose distributed clustering algorithm.Morover there exist a optimal cluster of sensor nodes which is adequate to perform approximately the same data accuracy achieve by a cluster. Practical Implementation: Measuring humidity and moisture content in an agricultural field, measuring temperature in physical environment. Inventive /Novel Idea: A distributed clustering algorithm is proposed based on spatial data correlation among sensor nodes with Data accuracy model.",
+  "published": "2011-08-12T15:32:54Z",
+  "authors": [
+    "Jyotirmoy Karjee",
+    "H. S Jamadagni"
+  ],
+  "primary_category": "cs.NI",
+  "pdf_url": "http://arxiv.org/pdf/1108.2644v1"
+}

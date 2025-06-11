@@ -1,0 +1,1234 @@
+8
+1
+0
+2
+
+y
+a
+M
+1
+1
+
+]
+P
+A
+
+.
+t
+a
+t
+s
+[
+
+1
+v
+4
+7
+2
+4
+0
+.
+5
+0
+8
+1
+:
+v
+i
+X
+r
+a
+
+Measuring heterogeneity in urban expansion via spatial entropy
+
+Linda Altieri, Daniela Cocchi, Giulia Roli
+Department of Statistical Sciences, University of Bologna, via Belle Arti, 41, 40126, Bologna, Italy
+
+Abstract
+
+The lack of efﬁciency in urban diffusion is a debated issue, important for biologists, urban
+specialists, planners and statisticians, both in developed and new developing countries. Many
+approaches have been considered to measure urban sprawl, i.e. chaotic urban expansion; such
+idea of chaos is here linked to the concept of entropy. Entropy, ﬁrstly introduced in informa-
+tion theory, rapidly became a standard tool in ecology, biology and geography to measure the
+degree of heterogeneity among observations; in these contexts, entropy measures should in-
+clude spatial information. The aim of this paper is to employ a rigorous spatial entropy based
+approach to measure urban sprawl associated to the diffusion of metropolitan cities. In order to
+assess the performance of the considered measures, a comparative study is run over alternative
+urban scenarios; afterwards, measures are used to quantify the degree of disorder in the urban
+expansion of three cities in Europe. Results are easily interpretable and can be used both as an
+absolute measure of urban sprawl and for comparison over space and time.
+
+Keywords: urban sprawl, environmental heterogeneity, spatial entropy, categorical
+variables.
+
+1
+
+Introduction
+
+Urban sprawl is characterized by uncontrolled development of cities into surrounding areas, which
+has aroused wide social focus because its induced urbanization is inefﬁcient, dispersed and may
+impede sustainable development. Rapid urban growth is quite alarming worldwide, and the im-
+portance of conducting research on this topic is strongly felt (Johnson, 2001; Ewing, 2008; Rosni
+and Noor, 2016). Although an accurate deﬁnition of urban sprawl is still debated, the general con-
+sensus is that urban sprawl is characterized by ‘unplanned and uneven pattern of growth, driven
+by a multitude of processes and leading to a inefﬁcient resource utilization’ (Bhatta et al., 2010).
+More deﬁnitions appear in Jaeger et al. (2010) and focus on the negative consequences of sprawl.
+The negative impacts of urban sprawl concern many aspects, not only for human life quality (e.g.
+increased costs and time for transportation), but also for the environment. The dispersion of ur-
+ban areas increases pollution, waste of soil and soil consumption. This endangers ecosystems
+and species, and reduces the availability of land for agriculture, water bodies, forests and other
+natural areas (EEA and FOEN, 2016). In addition, urban sprawl does not foster climate changes
+mitigation, even if variations in climate do not immediately ﬁt with the velocity of uncontrolled
+urbanization. Any spatial planning strategy has a different impact on climate change (Bart, 2010;
+Stone, 2012), but the standard consequences of uncontrolled urbanization concern strong precipi-
+tation events, additional heat due to increased emission of carbon dioxide and, in particular, heat
+island effects.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+In Europe, urban sprawl is an increasing issue (EEA, 2006; Couch et al., 2007; EEA and
+FOEN, 2016), which can be evaluated according to several viewpoints. For instance, EEA and
+FOEN (2016) stress that the spatial conﬁguration of the built up areas is a fundamental component
+of urban proliferation. Different arguments in EEA reports point out the impact of urban sprawl:
+the negative effects mentioned before are even more evident if the costs for future generations are
+taken into account, and are related to the ideas of fragmentation, degradation and consequences on
+ecosystems.
+
+The literature about sprawl is voluminous (e.g. Torrens, 2008; Bhatta et al., 2010; Cabral et al.,
+2013; Ewing and Hamidi, 2015; Oueslati et al., 2015); the quantiﬁcation of the phenomenon devel-
+ops according to different routes that keep into account alternative formulations of demographic,
+social and economic variables. This is partly due to the difﬁculties of a unique deﬁnition. More-
+over, characterisation of sprawl in the literature is often narrative and subjective, and measurement
+largely depends on data, to the point that existing studies yield contrary results for the same cities
+in several cases (Torrens, 2008; Bhatta et al., 2010). The basic sprawl indicator is the low level
+of population density over an area; in other words, it declares whether an unnecessary waste of
+urbanised land occurs. Alternatively, sprawl may be deﬁned in cost terms, as in Benﬁeld et al.
+(1999), or by ratios of urban growth (Ewing and Hamidi, 2015). A lot of sprawl measures are
+indeed based on ratios: relative measures quantify attributes of urban growth and can be compared
+among cities, among different zones within a city, or across different times (Bhatta et al., 2010).
+Such ratios are easy to interpret and receive a lot of discussion, but are statistically poor. In order
+to capture different aspects that are related to sprawl, Jiang et al. (2007) proposed an integrated ur-
+ban sprawl measure that combines 13 indices; unfortunately, the ﬁnal measure requires extensive
+inputs of temporal data, and does not mention any threshold to characterise a city as sprawling or
+non-sprawling.
+
+Among the proposals for urban sprawl measurements, there is a number of spatial or landscape
+metrics, that have long been used in landscape ecology. Landscape metrics aim at evaluating the
+spatial pattern of land cover classes or entire landscape mosaics of a geographic area. Indeed,
+the urbanization of a territory can be assessed according to the exhibited pattern of land cover
+classes: a sprawled city is in contrast with a compact one, with ’empty’ (i.e. non-urban) spaces
+and scattered urban areas denoting inefﬁcient development. Consequently, land cover and land
+use data are particularly suitable for urban sprawl measurements. Such data usually are vector
+(polygonal) or raster (pixel) spatial data coming from remote sensing images, where the territory
+is classiﬁed in a ﬁnite number of categories according to the prevailing land use, after a deﬁnition
+about what land use classes are considered as urban or non-urban. Then, the pattern of urban
+areas and its evolution over time can be exploited to quantify urban dispersion as lack of spatial
+clustering (compactness) of the urban patch. For an approach to sprawl measurement based on a
+comparative use of Moran’s I with land use data, see Altieri et al. (2014).
+
+Two aspects need to be considered when assessing the presence of urban sprawl with land use
+data. First, the objective is to detect lack of compactness, i.e. heterogeneity, in the territory by
+looking at the spatial dispersion of the urban tissue. Secondly, the variable of interest, land use, is
+qualitative and unordered; this aspect is particularly critical for environmental statistics, as it limits
+the set of tools for data analysis. The need to deal with categorical variables and the detection of
+
+2
+
+heterogeneity in the territory support the idea of employing entropy measures. Shannon’s entropy
+is used in several ﬁelds, such as geography, ecology, biology, to assess the heterogeneity of a
+population over an area. Ecological concepts, such as evenness and richness, are strictly related
+to heterogeneity, and entropy represents the utmost index to measure heterogeneity in a dataset.
+In the context of urban sprawl, entropy has proved to be a stringent measurement tool (Yeh and
+Li, 2001), and is still a widely used technique, suitable for integration of remote sensing and GIS
+(Bhatta et al., 2010; Chong, 2017; Liu and Chen, 2018). While entropy succeeds in working with
+qualitative variables and quantifying the heterogeneity of a dataset, it suffers from the drawback of
+not considering the role of space as a source of heterogeneity in determining the variable outcomes.
+Indeed, Shannon’s entropy is computed based on the proportions of the land use classes, not on
+their spatial conﬁgurations, and two territories with the same proportions and very different degrees
+of compactness for the urban tissue have the same entropy value; the same holds for territories with
+different area size. Shannon’s entropy is not affected by size, shape and number of sub-areas of a
+spatial territory, while a spatial metric for urban sprawl should be. The urban sprawl issue is tightly
+bond to the spatial location of land use data. Therefore, appropriate studies of sprawl which make
+use of entropy measures should introduce spatial information.
+
+Over the past decades, two main approaches have been adopted to include spatial information
+into an entropy measure. Extending Theil’s work (1972), Batty (1974, 1976, 2010) introduced the
+ﬁrst approach by deﬁning a spatial entropy measure accounting for unequal space partition into
+sub-areas. In 2002, this proposal was modiﬁed by Karlstr¨om and Ceccato to satisfy the property
+of additivity, i.e. decomposing of the global index into local components. The main drawback of
+this approach is that such entropy can only be computed for a binary variable. Moreover, the local
+terms are not entropies and do not possess the properties of the global one, and results are heavily
+affected by the selected area partition. Nevertheless, the approach proves to be informative in the
+context of urban sprawl. The second approach to spatial entropy is based on a suitable transfor-
+mation of the study variable that accounts for the distance between realizations (co-occurrences).
+The main proposals have been made by O’Neill et al. (1988), Li and Reynolds (1993), Leibovici
+(2009) and Leibovici et al. (2014), but all these distance-based measures do not enjoy the addi-
+tivity property and rely on the choice of a single distance without capturing the behaviour of the
+studied variable. A recent work by Altieri et al. (2018a) fulﬁls desirable properties by propos-
+ing a set of spatial entropy measures starting from the co-occurrence approach and focusing on
+pairs of realizations. The resulting entropy is decomposed into the information due to space and
+the remaining information brought by the variable itself once space is considered. The proposal
+preserves additivity and disaggregates results, allowing for partial and global syntheses.
+
+The properties of spatial entropy measures make them an appealing tool to evaluate urban
+sprawl from a spatial perspective. A spatial entropy measure is sensitive to the spatial dispersion
+of urban patches over an area and may be able to separate the heterogeneity of land use data due
+to the lack of spatial compactness from the heterogeneity due to other components. They enjoy
+basic desirable properties of any spatial index (Anselin, 1995), i.e.
+the additivity between local
+and global results. They also receive interpretation and are suitable for delivering results across
+different areas of expertise.
+
+The main aim of this work is to adopt entropy based tools for measuring urban sprawl in terms
+
+3
+
+of spatial compactness or dispersion. If sprawl is considered as a negative condition, and is mea-
+sured by means of spatial entropy, a low level of entropy is desirable, i.e. a non-chaotic (compact)
+urban conﬁguration. We present a thorough assessment of the advantages and disadvantages of a
+selection of spatial entropy measures which have not been employed in the context of urban sprawl
+measurement yet, both with a comparative study on simulated data and via a case study on three
+European cities. The simulation study compares spatial entropy values across representative ur-
+ban conﬁgurations: the monocentric, the polycentric and the decentralized city. In addition, the
+resulting ranges of entropy values may be used as reference intervals for comparison to real case
+studies, as in the application, where we propose an example of comparison over space and time,
+that can be extended as wished. Our results can be combined with measures integrating relevant
+demographic, social or economical variables affecting urban sprawl.
+
+The motivating case study comes from ofﬁcial European land use data. We selected two time
+points, 1990 and 2012, for the commuting belts of three cities in Europe: Bologna (also studied in
+Altieri et al., 2014), Eindhoven and Lublin. They belong to countries with different levels of urban
+sprawl (EEA, 2006).
+
+Though spatial entropy is applied to the speciﬁc issue of urban sprawl, the techniques illustrated
+in the present paper may be used for any phenomenon whose spatial distribution and heterogeneity
+is of interest. Their evaluation is relevant for climate and meteorology studies, e.g. the spatial dis-
+tribution of metereological phenomena, for ecological purposes, e.g. species distribution (Altieri
+et al., 2018a), for general landscape and geographical studies, for the assessment of environmental
+risks, e.g. earthquakes and wildﬁres, for atmospheric studies, e.g. polluting substances, for disease
+mapping.
+
+In the present paper, in Section 2 we revisit the works by Batty (1974) and Karlstr¨om and Cec-
+cato (2002) under a uniﬁed statistical framework. We also illustrate the approach of Altieri et al.
+(2018a) with a special focus on its use in urban sprawl studies. In Section 3, we build a simulation
+study, which compares, evaluates and discusses the performance of the two approaches for spa-
+tial entropy measures under different urban scenarios. This is useful both for further applications,
+since the study covers the main urban conﬁgurations, and as a contribution to the statistical theory
+of spatial entropy measures. In Section 4, the measures are applied to the case study; this consti-
+tutes a further practical contribution to the discussion on urban sprawl. Some concluding remarks
+can be found in Section 5.
+
+This work is implemented in R (R Core Team, 2017). It makes use of the packages sp (Bivand
+et al., 2013), spatstat (Baddeley et al., 2015) and dependencies, and of the recent package
+SpatEntropy (Altieri et al., 2018b) now available on CRAN.
+
+2 The use of spatial information in entropy measures
+
+In many environmental and urban studies, the deﬁnition of entropy measures coincides with Shan-
+non’s formula: given a categorical variable X with I possible outcomes, the entropy is
+
+H(X) =
+
+I
+(cid:88)
+
+i=1
+
+p(xi) log
+
+(cid:18) 1
+
+(cid:19)
+
+p(xi)
+
+4
+
+(1)
+
+where p(xi) is the probability of the ith outcome and log (1/p(xi)) is the information function,
+which measures the information brought by outcome xi (Cover and Thomas, 2006). Entropy is a
+non-negative quantity, which measures the average ’information’ or ’surprise’ concerning an out-
+come of X. The more the categories of X are equally likely, the higher the entropy; if a category
+of X is far more likely than others, the entropy is low, as one can predict the behaviour of X and
+data do not carry much information. Thus, entropy synthesizes the heterogeneity of X outcomes
+in a single number; data with very different spatial conﬁgurations but the same probability mass
+function for X share the same entropy. In the context of urban sprawl, this is not desirable. For
+example, an area which is partly urbanized and partly rural may be compact, with an urban nu-
+cleous and rural surroundings, or dispersed, i.e. sprawled, with many small scattered urban areas.
+Shannon’s entropy does not detect the difference in the two patterns and returns the same value if
+the proportion of urbanized and non-urbanized territory is the same across the two conﬁgurations.
+For this reason, an extension to spatial entropy is needed. The seminal attempt to extend
+(1) into a spatial entropy measure developed by Batty (1974) is presented in Section 2.1.1; its
+most relevant extension, proposed by Karlstr¨om and Ceccato (2002) is sketched in Section 2.1.2.
+A recent approach to spatial entropy, proposed by Altieri et al. (2018a), is in Section 2.2. All
+measures assume a peculiar meaning in the analysis of urban sprawl. They are very suitable in
+distinguishing the desirable situation of urban compactness from urban sprawl.
+
+Most spatial entropy measures make use of the concepts of spatial adjacency and neighbour-
+hood. The notion of neighbourhood is linked to the assumption that occurrences at certain locations
+are inﬂuenced, in a positive or negative sense, by what happens at surrounding locations, i.e. their
+neighbours. The system can be represented by a graph (Bondy and Murty, 2008), where each loca-
+tion is a vertex and neighbouring locations are connected by edges. The simplest way of represent-
+ing a neighbourhood system is via an adjacency matrix: for G spatial units, A = {agg(cid:48)}g,g(cid:48)=1,...,G
+is a square G × G matrix such that agg(cid:48) = 1 when there is an edge from vertex g to vertex g(cid:48), and
+agg(cid:48) = 0 otherwise; in other words, agg(cid:48) = 1 if g(cid:48) ∈ N (g), the neighbourhood of area g. Its diago-
+nal elements are all zero by default. In this work, spatial units may be pixels or polygons, deﬁned
+via representative coordinate pairs, such as the area centroids, which are used to measure distances
+and deﬁne what units are neighbours. In the remainder of the paper, the word ’adjacent’ is used
+accordingly to mean ’neighbouring’, i.e. connected in the graph, while the word ’contiguous’ is
+used for pixels or polygons sharing a border on the map, i.e. a topological contact.
+
+2.1 Towards additive spatial entropy
+
+2.1.1 Batty’s spatial entropy
+
+A very appreciable attempt to include spatial information into Shannon’s entropy starts from a re-
+formulation of (1). The categorical variable X is recoded into I dummy variables, each identifying
+the occurrence of a speciﬁc category of X, where, by construction, pi = p(xi).
+
+This approach is proposed by Batty (1974; 1976) to deﬁne a spatial entropy which extends
+Theil’s work (1972). In a spatial context, a phenomenon of interest F occurs over an observation
+window of size T partitioned into G areas of size Tg. This deﬁnes G dummy variables identifying
+the occurrence of F over a generic area g, g = 1, . . . , G. Given that F occurs somewhere over the
+
+5
+
+window, its occurrence in area g takes place with probability pg, where (cid:80)
+g pg = 1. The intensity
+is obtained as λg = pg/Tg, where Tg is the area size, and is assumed constant within each area.
+Shannon’s entropy of F may be written as
+
+H(F ) =
+
+G
+(cid:88)
+
+g=1
+
+pg log
+
+(cid:19)
+
+(cid:18) 1
+pg
+
+=
+
+G
+(cid:88)
+
+g=1
+
+λgTg log
+
+(cid:19)
+
+(cid:18) 1
+λg
+
++
+
+G
+(cid:88)
+
+g=1
+
+λgTg log
+
+(cid:19)
+
+.
+
+(cid:18) 1
+Tg
+
+(2)
+
+Batty (1976) shows that the ﬁrst term on the right hand side of the formula converges to the contin-
+uous version of Shannon’s entropy (R´enyi, 1961), namely the differential entropy, as the area size
+Tg tends to zero. The differential entropy is rewritten in terms of pg, giving Batty’s spatial entropy
+
+HB(F ) =
+
+G
+(cid:88)
+
+g=1
+
+pg log
+
+(cid:19)
+
+.
+
+(cid:18) Tg
+pg
+
+(3)
+
+It expresses the average amount of information brought by the occurrence of F over the areas, and
+includes Tg that accounts for unequal space partition. Analogously to Shannon’s entropy, which
+is high when the I categories of X are equally represented over a (non spatial) data collection,
+Batty’s entropy is high when the phenomenon of interest F is equally intense over the G areas
+partitioning the observation window (i.e. when λg = λ for all g). Batty’s entropy HB(F ) reaches
+a minimum value equal to log(Tg∗) when pg∗ = 1 and pg = 0 for all g (cid:54)= g∗, with g∗ denoting the
+area with the smallest size. The maximum value of Batty’s entropy is log(T ), reached when the
+intensity of F is the same over all areas, i.e. λg = 1/T for all g. This maximum value does not
+depend on the area partition, nor on the discrete or continuous nature of F , but only on the size of
+the observation window. When Tg = 1 for each g, HB(F ) is a Shannon’s entropy of F equivalent
+to (1), and the index ranges accordingly in [0, log(G)].
+
+When the target is to measure urban sprawl, F denotes the presence of urbanization. A high
+level for Batty’s entropy is not desirable, as it indicates constant urban intensity, i.e. scattering of
+urban patches across regions, denoting sprawl. A low level, on the contrary, indicates that some
+areas in the window have a very high urban density (usually, the city centre) while others tend not
+to present urbanization (i.e. the outside areas). Therefore, when Batty’s entropy is low the city is
+compact and a scarce level of sprawl is present, which is interpreted as a positive condition.
+
+2.1.2 A LISA version of Batty’s spatial entropy
+
+A challenging attempt to introduce additive properties and to include the idea of neighbourhood
+in Batty’s entropy index (3) is due to Karlstr¨om and Ceccato (2002), following the LISA theory
+(Anselin, 1995). Karlstr¨om and Ceccato’s entropy index HKC(F ) starts by weighting the proba-
+bility of occurrence of F in a given spatial unit g, pg, with its neighbouring values:
+
+(cid:101)pg =
+
+G
+(cid:88)
+
+g(cid:48)=1
+
+agg(cid:48)pg(cid:48).
+
+6
+
+(4)
+
+Then, an information function is deﬁned, ﬁxing Tg = 1, as I((cid:101)pg) = log (1/(cid:101)pg). In this proposal,
+the elements on the diagonal of the adjacency matrix A are non-zero, i.e. each area neighbours
+itself and enters the computation of I((cid:101)pg). Karlstr¨om and Ceccato’s entropy index is
+
+HKC(F ) =
+
+G
+(cid:88)
+
+g=1
+
+pg log
+
+(cid:19)
+
+.
+
+(cid:18) 1
+(cid:101)pg
+
+(5)
+
+The maximum of HKC(F ) does not depend on the choice of the neighbourhood and is log(G). As
+the neighbourhood reduces, i.e. as A tends to the identity matrix, HKC(F ) coincides with Batty’s
+spatial entropy (3) in the case of Tg = 1 for all g. The sum of local measures pgI((cid:101)pg) constitutes
+the global index (5), preserving the LISA property of additivity.
+
+One major disadvantage of (3) and (5) is that a categorical variable X with I > 2 outcomes
+cannot be used, since only one category enters the measure. In other words, F may be a speciﬁc
+category of X, say F = X ∗
+i ) is computed to assess the spatial conﬁguration of the
+realizations of X ∗
+i ) are computed, but no way
+is proposed to synthesize them into a single spatial entropy measure for X. Moreover, the local
+components are not entropy measures themselves. Lastly, conclusions are affected by the choice
+of the area partition. Nevertheless, Batty’s and Karlstr¨om and Ceccato’s approach is expected to
+be helpful in the context of urban sprawl, and is assessed in Sections 3 and 4.
+
+i . Thus, for a categorical X, I different HKC(X ∗
+
+i , and HKC(X ∗
+
+2.2 Spatial entropy based on a transformation of the study variable
+
+A second way to build a spatial entropy measure consists in deﬁning a new categorical variable
+Z, where each realization identiﬁes pairs {xi, xj} of occurrences of X over space (O’Neill et al.,
+1988; Li and Reynolds, 1993; Leibovici, 2009). Such change of variable is crucial in a spatial
+context, since space is now considered via the distances between observations forming a pair. For
+I categories of X, the new variable Z has R = (I 2 +I)/2 categories. The attention moves from the
+computation of (1), namely H(X), to an index of the same form, Shannon’s entropy of Z, H(Z).
+Altieri et al. (2018a) follow the approach based on Z and introduce a second discrete variable
+W , that represents space by classifying the distances at which the two occurrences take place.
+These classes wk, with k = 1, . . . , K, cover all possible distances within the observation window.
+The deﬁnition of the classes is exogenous and depends on the study at hand (Altieri et al., 2018a).
+Each distance category wk implies the choice of a corresponding adjacency matrix Ak, which
+identiﬁes pairs where the two realizations of X lie at a distance belonging to the range wk.
+
+Thanks to the introduction of W , the entropy of Z may be decomposed as
+
+H(Z) = M I(Z, W ) + H(Z)W
+
+(6)
+
+following the fundamentals of Information Theory (Cover and Thomas, 2006):
+the ﬁrst term
+M I(Z, W ) is known as mutual information and measures the amount of the entropy of Z which is
+explained by its relatioship with W , while the second term H(Z)W is the conditional, or residual,
+entropy, quantifying the remaining amount of entropy of Z once the effect of W is removed. In a
+spatial context, the two terms acquire a new meaning: M I(Z, W ) is the quantity of interest in this
+
+7
+
+context, and is called spatial mutual information, because Z identiﬁes pairs of categories of spatial
+observations and W collects categories of distances where pairs can take place. Spatial mutual
+information quantiﬁes the part of entropy of Z due to the spatial conﬁguration W ; for the same
+reason, H(Z)W is the spatial global residual entropy, quantifying the information brought by Z af-
+ter space has been taken into account. The more Z depends on W , i.e. the more the realizations of
+X are spatially associated, the higher the spatial mutual information. Conversely, when the spatial
+association among the realizations of X is weak, the entropy of Z is mainly due to spatial global
+residual entropy.
+
+When it comes to sprawl, the variable of interest X has categories urban/non-urban, and Z iden-
+tiﬁes pairs with the three possible unordered combinations of urban/non-urban areas (urban/urban,
+urban/non-urban, non-urban/non-urban). A compact city represents the situation where the X out-
+comes should be highly positively correlated. In such case, spatial mutual information tends to
+be high, because urban areas generally have urban neighbours, while non-urban areas have non-
+urban neighbours; space plays a relevant role in determining the entropy of Z. The overall value
+of M I(Z, W ), however, is negatively inﬂuenced by what happens at large distance ranges, where
+usually scarce correlation is present. Hence, spatial mutual information for the whole dataset may
+approach zero even when a compact pattern occurs.
+
+The variable W helps in overcoming this drawback, since the two terms forming H(Z) can be
+further decomposed. Indeed, K subsets of realizations of Z are available, denoted by Z|wk; for
+all the distance classes wk a set of K conditional distributions is obtained, that sum up to the two
+components of (6). When measuring urban sprawl, this means that the degree of compactness of a
+city may be quantiﬁed at different distance ranges, which can help in understanding the extent and
+seriousness of the sprawl phenomenon.
+
+From Information Theory, spatial mutual information:
+
+M I(Z, W ) =
+
+K
+(cid:88)
+
+k=1
+
+p(wk)P I(Z|wk) =
+
+K
+(cid:88)
+
+k=1
+
+p(wk)
+
+R
+(cid:88)
+
+r=1
+
+p(zr|wk) log
+
+(cid:19)
+
+(cid:18) p(zr|wk)
+p(zr)
+
+(7)
+
+is a weighted sum of partial terms P I(Z|wk), each quantifying the contribution of the kth distance
+range to the spatial mutual information between Z and W .
+In other words, each partial term
+measures the degree of association (compactness) in the city pattern at each distance range. The
+focus is expected to be on short distance ranges, where the difference between a compact city and
+a dispersed one is more evident. By exploring these terms, an indication of the degree of sprawl
+can be provided.
+Analogously,
+
+H(Z)W =
+
+K
+(cid:88)
+
+k=1
+
+p(wk)H(Z|wk) =
+
+K
+(cid:88)
+
+k=1
+
+p(wk)
+
+R
+(cid:88)
+
+r=1
+
+p(zr|wk) log
+
+(cid:18)
+
+1
+p(zr|wk)
+
+(cid:19)
+,
+
+(8)
+
+where the partial residual entropy terms measure the partial contributions to the entropy of Z due
+to sources other than the spatial conﬁguration. As regards sprawl, a great value for H(Z|wk),
+especially at short distance ranges, is a hint for urban dispersion.
+
+8
+
+The additive terms in (7) and (8), together with their sums, constitute a rich set of spatial
+entropy measures. In particular, spatial mutual information has theoretical support to be considered
+a reliable method for measuring urban heterogeneity. It is able to maintain the information about
+the categories of X by exploiting the trasformed variable Z, to consider different distance ranges
+simultaneously, to quantify the overall role of space, and to be easily interpretable. A comparative
+study for different urban conﬁgurations is developed in what follows, in order to verify its ability
+to detect sprawl.
+
+3 Spatial entropy measures on simulated urban settings
+
+The ﬂexibility and informativity of the spatial entropy indices discussed in Section 2 are assessed
+with a comparative study, which aims at understanting the differences between the two approaches
+over three main urban conﬁgurations. Following Tsai (2005), they are identiﬁed as monocentric
+city, polycentric city and decentralized city. The monocentric city is considered the most positive
+situation as regards the urban pattern; the polycentric city is an intermediate, less compact, situation
+which may suffer from sprawl; the decentralized conﬁguration is concerned by the sprawl issue.
+An example of the three settings is shown in Figure 1.
+
+Insert Figure 1 about here
+
+The three scenarios initially come as point patterns on a square area of size 100. The monocentric
+and polycentric scenarios are generated from the intensity function of a Thomas process (Baddeley
+et al., 2015), i.e. a Poisson cluster point process, with one cluster for the monocentric case and
+four clusters for the polycentric case. The decentralized pattern is generated following the intensity
+function of a homogeneous Poisson process. For the three urban scenarios, 1000 datasets are
+simulated. Then, the point patterns are gridded and turned into raster data: each data matrix is
+40×40 pixels, so that each pixel has side 0.25 and area size 0.0625. The binary variable is X
+with x1 = urban and x0 = non-urban. Consequently, Z has 3 categories: z1 = {urban, urban},
+z2 = {urban, non-urban}, z3 = {non-urban, non-urban}. Parameters for data generation are
+such that, for each of the 1000 realizations, the number of urban and non-urban pixels is the same
+across the three scenarios. This way, Shannon’s entropy would not be able to distinguish among
+the conﬁgurations, while we check how the measures of Section 2 succeed in detecting sprawl.
+
+3.1 Batty’s and Karlstr¨om and Ceccato’s entropy
+
+Entropies of Section 2.1 cannot be computed directly on the pixel grid, since only one realization
+of X occurs over each pixel, while such entropy measures need a population of pixels over a wider
+area. The phenomenon F is here deﬁned as the occurrence of urban pixels, i.e. F = X1. Since
+these measures are substantially affected by the area partition, we check two different options
+for splitting the observation area into sub-areas. Firstly, the observation area is partitioned into
+G1 = 20 areas of different size, by randomly generating 20 centroids over the area and then
+performing a Dirichlet tessellation, i.e. assigning each pixel to the area with the closest centroid.
+
+9
+
+A second option, more appropriate in the context of urban sprawl, is to partition the observation
+area into concentric sub-areas, which can give a better idea of city expansion into surrounding
+areas. We choose G2 = 5 annuli, deﬁned by concentric rings, with the same width, i.e. the same
+difference between the radius of the outer ring and the one of the inner ring. The annuli center is
+the observation area centroid, and their width is chosen so that they cover the whole area. The two
+options are shown in Figure 2 for a monocentric dataset. For both options, the probabilities pg are
+estimated in each of the 1000 simulations as the proportions of urban pixels over the sub-areas.
+
+Insert Figure 2 about here
+Insert Figure 3 about here
+
+Batty’s entropy for the three scenarios and the two partition options is shown in the boxplots Figure
+3. The measure is able to distinguish among the three urban conﬁgurations as regards spatial
+the monocentric, non sprawled case has a lower entropy distribution, the polycentric
+entropy:
+scenario returns intermediate values and the decentralized pattern returns a distribution of very
+high entropy values, close to Batty’s maximum. The distinction between the decentralized scenario
+and the other two is evident with both partition options, but the concentric one, more suitable in an
+urban context, shows that the ranges for all three scenarios do not overlap: this case can be used
+as a reference set in real studies. For comparison purposes, relative values (i.e. divided by the
+maximum log(100)) should be used: the lowest value for the decentralized pattern is 0.985, thus
+considered a benchmark for urban sprawl.
+
+For Karlstr¨om and Ceccato’s entropy, different possibilities for the neighbourhood distances
+between the sub-areas’ centroids are considered, in order to quantify I((cid:101)pg). For partition option 1,
+three neighbourhoods are set using the 5th percentile, ﬁrst quartile and median of the distribution
+of distances among the G1 = 20 areas’ centroids; they are equal to nd11 = 1.473, nd12 = 3.654
+and nd13 = 5.335. For option 2, four neighbourhoods are possible over the 5 annuli, i.e. up to
+the jth farthest area, j = 1, . . . , 4. We name them nd21 = 1Ann, nd22 = 2Ann, nd23 = 3Ann
+and nd24 = 4Ann, where jAnn means ’up to the jth farthest annulus’. The estimates of (cid:101)pg are
+computed for the 3 neighbourhoods of the ﬁrst case and the 4 neighbourhoods of the second case
+as averages of the neighbouring estimated probabilities.
+
+Results for Karlstr¨om and Ceccato’s entropy are shown in Figure 4, again for the three urban
+conﬁgurations and all neighbourhood options. This entropy measure distinguishes the ﬁrst two
+urban patterns from the decentralized one when the neighbourhood distance is small. The sec-
+ond partition option (lower panels) yields again more suitable results. However, the interquartile
+ranges tend to overlap, therefore, the measure is not generally able to determine what type of urban
+conﬁguration is present. While Karlstr¨om and Ceccato’s extension to Batty’s entropy is interesting
+from a theoretical point of view because of the LISA-type properties, it does not seem to provide
+major advantages in practical situations. Widening the neighbourhood (from left to right panels
+in both lines of Figure 4) tends to increase all entropy values and to generate confounding among
+patterns. It should also be remembered that the results shown in the panels represent choices that
+are separately, not jointly, computed, with the consequence of obtaining limited information in
+applied case studies.
+
+Insert Figure 4 about here
+
+10
+
+The overall limit of this approach is that results are heavily affected by the choice of the area
+
+partition.
+
+3.2 Spatial mutual information and residual entropy
+
+For the computation of the entropy set of Section 2.2, breaks for the distance ranges must be
+chosen, where the distance concerns pairs of pixels, not sub-areas as in Section 2.1.2, and is mea-
+sured between pixel centroids. [1.13] Two options are considered in the simulation study. The
+ﬁrst one is motivated by the tradition of spatial statistics, where the so called 4 nearest neigh-
+bour system (i.e. pixels sharing a border) and the analogous 12 nearest neighbours system are of
+standard use (Anselin, 1995). Accordingly, the ﬁrst two distance breaks chosen for option 1 are
+w11 = [0, 0.25] and w12 =]0.25, 0.5], where 0.25 is the distance between contiguous pixels’ cen-
+troids; the remaining breaks are w13 =]0.5, 1.25], i.e. up to 5 pixels along the cardinal directions,
+and w14 =]1.25, dmax], dmax = 13.789 being the maximum distance between pixels within the
+observation area. This way, the ﬁrst three classes are quite small, while the last one is very large.
+In the measurement of urban sprawl, the focus is on what happens at small distance ranges, where
+a lack of spatial association, i.e. a high presence of pairs of type {urban, non-urban}, indicates
+dispersion, thus sprawl. Therefore, detailed results are needed for small distances, while aggre-
+gate results are enough at large distances. The second option follows the same criterion as the
+neighbourhood distance choice in Section 3.1 [1.13]: the empirical distribution of pixel distances
+is computed, and the breaks are chosen as the 5th, 25th and 50th percentile: w21 = [0, 1.346],
+w22 =]1.346, 3.260], w23 =]3.260, 5.130], w24 =]5.130, 13.789]. The global values are not affected
+by the choice of the wk and can be further modiﬁed if wished. Pairs are built for each distance range
+wk according to the speciﬁc adjacency matrix Ak, which identiﬁes the pairs of pixels at a distance
+that belongs to the kth range. The rule of moving rightward and downward is adopted along the
+observation window in order to identify neighbouring pairs, to avoid double counting. Then, each
+pZ|wk is estimated using proportions for the three categories of Z at the speciﬁc distance range.
+
+Shannon’s entropy computed for X or Z is the same, and does not depend on the spatial conﬁg-
+uration. Thus, entropy H(Z) can be safely used to evaluate the entropy of the variable of interest,
+i.e. urbanization, with the additional advantage of considering distances between urban/non-urban
+pixels. Spatial mutual information illustrates how the role of space is detected following the three
+considered spatial conﬁgurations. Since the main focus of this work is on the contribution of the
+partial terms, rather than on the global value, spatial partial information terms are shown in Figure
+5 for the two distance class options.
+
+Insert Figure 5 about here
+
+For the ﬁrst distance option (higher panels) an appreciable inﬂuence of space is detected at very
+short distances for the ﬁrst two spatial patterns (mono- and polycentric), while the difference be-
+tween the two becomes more evident as distance increases. For spatial mutual information, we
+ought to obtain the same results for mono- and polycentric cities at w11: when only contiguous
+pixels are considered, the spatial behaviour of the two conﬁgurations is the same. The second
+option (lower panels) has wider distance classes: class w21 aggregates former classes w11, w12
+
+11
+
+and w13. Here, the distinction among conﬁgurations is very evident for w21. For further distance
+ranges, the role of space is only detected in the monocentric scenario. No mutual information is
+detected at any distance over the decentralized patterns, where no spatial structure is present and
+space does not help in explaining the data behaviour. Spatial mutual information can be interpreted
+as a sprawl detector: a high mutual information value implies positive association among urban
+areas and positive association among non-urban ones, and indicates a compact urban expansion.
+Another appreciable advantage of this measure is that information at different distance ranges is
+available and knowledge is gained about the data spatial behaviour. The boxplots in Figure 5 can
+be used as reference intervals for assessing real case studies, since no overlap occurs between a
+compact and a sprawled situation. At very broad distance classes (right hand side panels) the lack
+of distinction among patterns is expected and is of scarce interest in sprawl studies. The choice of
+the classes does not affect the global result, unlike the choice of Batty’s area partition.
+
+Results are not shown for spatial residual entropy, as its interpretation is symmetrical to the
+interpretation of spatial mutual information: a high proportion of residual entropy at short distance
+ranges denotes urban sprawl. We believe spatial mutual information to be the key component of
+entropy for drawing conclusions on sprawl. Beyond enjoying the theoretical properties summa-
+rized in Section 2, spatial mutual information proves to be effective in measuring urban sprawl and
+distinguishing among scenarios.
+
+4 Measuring urban sprawl in Europe via spatial entropy
+
+The case study comes from ofﬁcial European sources. Land use data for the entire European terri-
+tory are made available by CORINE (COoRdination of INformation on the Environment) project
+(EEA, 2011), which integrates remote sensing images and photo interpretation to produce a dataset
+classifying the spatial units (pixels) into 44 land use classes. The coordinate system is EPSG:4326
+from the World Geodetic System 1984, used in GPS. The datasets are made of pixels of size
+250×250 metres. Guidelines are then provided to dichotomize the dataset into urban and non-
+urban pixels, transforming land use data in Urban Morphological Zone (UMZ) data. An Urban
+Morphological Zone can be deﬁned as ‘a set of urban areas laying less than 200m apart’ (EEA,
+2011). The Corine Land Cover classes used to build the Urban Morphological Zone dataset are:
+‘Continuous urban fabric’, ‘Discontinuous urban fabric’, ‘Industrial or commercial units’, ‘Green
+urban areas’. Moreover, ‘Port areas’, ‘Airports’, ‘Road and rail networks’ and ‘Sport and leisure
+facilities’ are also considered if they are neighbours to the core classes. UMZ data are useful to
+identify shapes and patterns of urban areas, and thus to detect urban sprawl (Altieri et al., 2014).
+Data are available for years 1990, 2006 and 2012; we selected the ﬁrst and last time point for
+three cities in different areas of Europe. Cities are chosen based on results in EEA and FOEN
+(2016): this report measures sprawl at country level based on three indices which take different
+aspects into account. We focused on the DIS, dispersion of built-up areas, which characterises the
+settlement pattern according to a geometric perspective. The ﬁrst city is Eindhoven, The Nether-
+lands, chosen because the country is classiﬁed among the highly sprawled ones. The second city
+is Lublin, Poland, one of the countries below the average European sprawl level. The third one is
+
+12
+
+Bologna, Italy, a country with an average level of sprawl. They were selected together with their
+commuting belts, i.e. an extension of the urban centre when this stretches beyond the administra-
+tive city boundaries; the belts include the municipalities surrounding (i.e. sharing borders) with the
+main city. For Eindhoven, they are Best, Eersel, Geldrop, Heeze-Leende, Nuenen, Oirschot, Son
+en Breugel, Veldhoven and Waalre. For Lublin, they are Głusk, Jastk´ow, Konopnica, Niedrzwica
+Du˙za, Niemce, ´Swidnik and W´olka. For Bologna, they are Anzola dell’Emilia, Calderara di Reno,
+Casalecchio di Reno, Castel Maggiore, Castenaso, Granarolo dell’Emilia, Pianoro, San Lazzaro di
+Savena, Sasso Marconi, Zola Predosa. A total of six binary raster datasets is thus considered: 3
+cities at 2 time points, see Figure 6.
+
+Insert Figure 6 about here
+
+Polygonal maps with administrative boundaries are superimposed over Europe for selecting
+the areas of interest. The three cities have a similar population and spatial extension. Indeed, the
+enclosing rectangle around Eindhoven is 121×127 pixels, and the urbanized ones are 18% of the
+total in 1990 and 25% in 2012. The rectangle around Lublin is 167×140 pixels, with 9% urban
+pixels in 1990 and 16% in 2012. Bologna’s rectangle is 135×124 pixels, and its percentage of
+urban pixels is 16% in 1990 and 18% in 2012.
+
+4.1 Batty’s and Karlstr¨om and Ceccato’s entropy
+
+The area of each city with its commuting belt is partitioned following two different criteria. The
+ﬁrst one corresponds to the administrative boundaries of the municipalities. The second option
+is the analogous of the equivalent option introduced for the simulation study in Section 3.1: it
+considers concentric sub-areas deﬁned by 5 annuli with the same width, covering the whole area
+and centered in the centroid of each main city.
+
+Under the administrative boundary partition, three neighbourhood distances for Karlstr¨om and
+Ceccato’s entropy are chosen following the same idea of the simulation study: the 5th percentile,
+ﬁrst quartile and median of the distribution of distances among sub-areas. For the concentric area
+partition, the three distances are set to include from 1 to 3 neighbouring sub-areas. This way, a
+total of six neighbourhood systems are considered for each city with its commuting belt.
+
+In order to compare results, entropies are divided by their maxima indicated in Sections 2.1.1
+
+and 2.1.2.
+
+Insert Table 1 about here
+
+Results in Table 1 show that, for both partitions, Batty’s entropy conﬁrms the EEA country level
+sprawl ranking: the area of Lublin is the less sprawled, the highest level is detected for Eind-
+hoven and Bologna constitutes an intermediate case. Moreover, Eindhoven can be classiﬁed as
+a sprawled city following the reference set of Section 3.1:
+its entropy values are greater than
+0.985, the relative benchmark corresponding to the decentralized conﬁguration. When introducing
+neighbourhood distances for Karlstr¨om and Ceccato’s entropy, this ranking is further emphasized,
+especially at distances nd1 and nd2 under both the administrative boundary and concentric area
+partition. Conversely, extending the neighbourhood to nd3 is less informative in this case study:
+
+13
+
+entropies become similar, without help in detecting urban sprawl. By comparing the results over
+time, urban sprawl tends to increase for all cities, especially for Lublin.
+
+4.2 Spatial mutual information and residual entropy
+
+Partial terms of spatial mutual information and residual entropy are computed following the same
+two distance options of Section 3.2. In particular, the ﬁrst one sets w1 and w2 to the 4 and 12
+nearest neighbour systems, w3 begins at the ﬁnal point of w2 and considers up to 5 pixels along
+the cardinal directions, w4 captures all greater distances. For the second option, the 5th, 25th, 50th
+percentile of the empirical distribution of distances for each city is used to choose the breaks of the
+4 distance classes w1 to w4. All distances refers to pairs of pixels and are measured between pixel
+centroids.
+
+Insert Figure 7 about here
+
+Results are summarized in Figure 7, which plots the values of partial spatial mutual information
+P I(Z|wk) and partial residual entropies H(Z|wk) for the ﬁrst option. To allow space and time
+comparisons, their proportional versions are computed by setting the sum P I(Z|wk) + H(Z|wk)
+to 1 at each distance class wk. The ranking of the cities in terms of urban sprawl is more evident in
+1990 than in 2012, again aligning with the EEA country results: Eindhoven has a low proportion
+of spatial information at all distances, identifying a high sprawl level; Lublin is the least sprawled,
+with the highest values of partial spatial information terms. Urban sprawl increases along time,
+and the differences in spatial mutual information and residual entropy terms across cities become
+almost negligible. The most informative distance classes for detecting urban sprawl are again the
+smallest ones. At higher distances, spatial mutual information terms decrease and the sprawl level
+is difﬁcult to assess. By considering the distributions for the three scenarios identiﬁed in Section
+3.2, at distance w1 the partial mutual information of Lublin belongs to the range of values of a
+monocentric city; with the same criterion, Eindhoven has a decentralized conﬁguration; ﬁnally,
+Bologna’s partial mutual information is in the lowest tail of the distribution for a polycentric city.
+Results for the second distance option (not shown) are not useful to detect and compare the
+urban sprawl of the three cities over space and time. Indeed, the partial terms of spatial mutual
+information are all very low. This is due to the fact that the most informative distances have already
+been declared to be the smallest ones. This cannot be appreciated with the second distance option,
+which is not a proper choice for the problem at hand.
+
+5 Concluding remarks
+
+In this work, the approaches proposed by Batty (1976), Karlstr¨om and Ceccato (2002) and Altieri
+et al. (2018a) are employed to quantify the level of urban sprawl, i.e.
+the chaotic expansion of
+cities, and their properties are assessed with a comparative study.
+
+From the theoretical point of view, Batty (1976) and Karlstr¨om and Ceccato (2002)’s approach
+represents an interesting proposal because of the LISA-type properties, however it requires a di-
+chotomous (or dichotomized) variable, focuses on a single deﬁnition of neighbourhood and is
+
+14
+
+affected by the choice of the area partition. The advantages of spatial mutual information and
+spatial residual entropy of Altieri et al. (2018a) lie in the possibility of managing variables with
+any number of categories, decomposing the entropy due to space from that due to other sources of
+heterogeneity, investigating the global values and the partial terms jointly, to identify the role of
+space for different distance ranges.
+
+The comparative study of Section 3 and the application of Section 4 highlight the ability of both
+approaches to distinguish among urban patterns and detect urban sprawl. In particular, Batty’s
+entropy allows to obtain non overlapping distributions which can be used as a reference set for
+classifying sprawl in real studies. Spatial mutual information and residual entropy enrich results
+by jointly quantifying in proportional terms the level of urban sprawl at different distance ranges,
+and without the need of area partitions. Some conclusive points, according to both approaches,
+derive from the case study of Eindhoven, Lublin and Bologna. Firstly, the EEA country ranking in
+terms of dispersion of built up areas is reproduced here at a city level: Lublin is the least sprawled,
+Bologna has an intermediate level of sprawl and Eindhoven is the most sprawled. Secondly, the
+situation of Eindhoven is the most critical, since its entropy values belong to the range of values of
+the decentralized pattern. Thirdly, all cities become more affected by the sprawl issue over time,
+denoting a negative urban expansion from 1990 to 2012. The selected spatial entropy measures
+allow both an absolute classiﬁcation of cities in terms of urban sprawl, and comparison across
+space and time via their relative versions. This is a desirable feature of such measures, which
+represent a contribution to the diffusion of intuitive, easily interpretable and comparable results
+regarding the phenomenon of urban sprawl.
+
+In the study of urban sprawl, the most interesting distances are the smallest ones. At this regard,
+spatial mutual information and spatial residual entropy are very ﬂexible, as they can focus on the
+most informative distance range to interpret the phenomenon under study. The distance classes
+must be suitably proposed according to the context, as shown by the different options checked in
+Section 3 and 4. The focus on small distances is not an issue for the set of spatial entropy measure,
+as the choice of the classes does not affect the global result; the theoretical framework illustrated
+in this paper shows that, when distance classes change, these measures can be easily, rapidly and
+intuitively adapted.
+
+When working with data, one should use the ﬁnest available resolution, i.e. points if data are
+a point pattern, or the ﬁnest grid provided if data are lattice; this is the case in the present paper.
+Pixel aggregation is not recommended unless motivated, as it may reduce precision in the results
+and requires expertise in classifying the new pixel according to land use classes.
+
+These well performing measures capture the spatial aspect of the complex phenomenon of
+dispersed urbanization; they can be integrated with other indices in order to obtain a comprehensive
+quantiﬁcation of sprawl. This helps in focusing on the worst developed areas and contributes
+to solving environmental issues such as dangers to ecosystems, forest destruction, pollution and
+climate change.
+
+Acknowledgements
+This work is developed under the PRIN2015 supported project ’Environmental processes and hu-
+man activities: capturing their interactions via statistical methods (EPHASTAT)’ [grant number
+
+15
+
+20154X8K23] funded by MIUR (Italian Ministry of Education, University and Scientiﬁc Re-
+search).
+
+References
+
+Altieri, L., D. Cocchi, G. Pezzi, E. Scott, and M. Ventrucci (2014). Urban sprawl scatterplots for
+
+Urban Morphological Zones data. Ecological Indicators 36, 315–323.
+
+Altieri, L., D. Cocchi, and G. Roli (2018a). A new approach to spatial entropy measures. Environ-
+
+mental and Ecological Statistics 25, 95–110.
+
+Altieri, L., D. Cocchi, and G. Roli (2018b). SpatEntropy: Spatial Entropy Measures. R package
+
+version 0.1.0.
+
+Anselin, L. (1995). Local indicators of spatial association - LISA. Geographical Analysis 27,
+
+94–115.
+
+Baddeley, A., E. Rubak, and R. Turner (2015). Spatial Point Patterns: Methodology and Applica-
+
+tions with R. London: Chapman and Hall/CRC Press.
+
+Bart, I. (2010). Urban sprawl and climate change: a statistical exploration of cause and effect, with
+
+policy options for the EU. Land Use Policy 27, 283–292.
+
+Batty, M. (1974). Spatial entropy. Geographical Analysis 6, 1–31.
+
+Batty, M. (1976). Entropy in spatial aggregation. Geographical Analysis 8, 1–21.
+
+Batty, M. (2010). Space, scale, and scaling in entropy maximizing. Geographical Analysis 42,
+
+395–421.
+
+Benﬁeld, F., M. Raimi, and D. Chen (1999). Once there were greenﬁelds: how urban sprawl
+is undermining Americas environment, economy and social fabric. Technical report. Natural
+Resources Defense Council.
+
+Bhatta, B., S. Saraswati, and D. Bandyopadhyay (2010). Urban sprawl measurement from remote
+
+sensing data. Applied Geography 30, 731–740.
+
+Bivand, R. S., E. Pebesma, and V. Gomez-Rubio (2013). Applied spatial data analysis with R.
+
+Second edition. New York: Springer.
+
+Bondy, J. A. and U. S. R. Murty (2008). Graph Theory. Springer.
+
+Cabral, P., G. Augusto, M. Tewolde, and Y. Araya (2013). Entropy in urban systems. Entropy 15,
+
+5223–5236.
+
+16
+
+Chong, C. H.-S. (2017). Comparison of Spatial Data Types for Urban Sprawl Analysis Using
+
+Shannon’s Entropy. University of Southern California: Dissertation.
+
+Couch, C., L. Leontidu, and G. Petschel-Held (2007). Urban Sprawl in Europe. Landscapes, Land
+
+Use Change & Policy. Oxford, Malden, MA: Wiley-Blackwell.
+
+Cover, T. M. and J. A. Thomas (2006). Elements of Information Theory. Second Edition. Hoboken,
+
+New Jersey: John Wiley & Sons, Inc.
+
+EEA (2006). Urban sprawl in Europe - the ignored challenge. Technical report. EEA Report No
+
+10/2006.
+
+EEA (2011).
+
+Corine land cover 2000 raster data.
+
+Technical report. Downloadable at
+
+http://www.eea.europa.eu/data-and-maps/ data/corine-land-cover-2000-raster-1.
+
+EEA and FOEN (2016). Urban sprawl in Europe - joint EEA-FOEN report. Technical report. EEA
+
+Report No 11/2016.
+
+Ewing, R. (2008). Characteristics, Causes, and Effects of Sprawl: A Literature Review. Springer,
+Boston: In J.M. Marzluff, E. Shulenberger, W. Endlicher, et al. (eds) Urban ecology: an inter-
+national perspective on the interaction of humans and nature, 519-535.
+
+Ewing, R. and S. Hamidi (2015). Compactness versus sprawl. A review of recent evidence from
+
+the United States. Journal of Planning Literature 30, 413–432.
+
+Jaeger, J. A. G., R. Bertiller, C. Schwick, and F. Kienast (2010). Suitability criteria for measures
+
+of urban sprawl. Ecological Indicators 28, 427–441.
+
+Jiang, F., S. Liu, H. Yuan, and Q. Zhang (2007). Measuring urban sprawl in Beijing with geospatial
+
+indices. Journal of Geographical Sciences 17, 469–478.
+
+Johnson, M. P. (2001). Environmental impacts of urban sprawl: a survey of the literature and a
+
+proposed research agenda. Environmental and Planning A 33, 717–735.
+
+Karlstr¨om, A. and V. Ceccato (2002). A new information theoretical measure of global and local
+spatial association. The Review of Regional Research (Jahrbuch F¨ur Regionalwissenschaft) 22,
+13–40.
+
+Leibovici, D. G. (2009). Deﬁning spatial entropy from multivariate distributions of co-
+occurrences. Berlin, Springer: In K. S. Hornsby et al. (eds.): COSIT 2009, Lecture Notes
+in Computer Science 5756, 392-404.
+
+Leibovici, D. G., C. Claramunt, D. LeGuyader, and D. Brosset (2014). Local and global spatio-
+temporal entropy indices based on distance ratios and co-occurrences distributions. International
+Journal of Geographical Information Science 28, 1061–1084.
+
+17
+
+Li, H. and J. F. Reynolds (1993). A new contagion index to quantify spatial patterns of landscapes.
+
+Landscape Ecology 8, 155–162.
+
+Liu, Y. and K. Chen (2018). An information entropy-based sensitivity analysis of radar sensing of
+
+rough surface. Remote Sensing 10.
+
+O’Neill, R. V., J. R. Krummel, R. H. Gardner, G. Sugihara, B. Jackson, D. L. DeAngelis, B. T.
+Milne, M. G. Turner, B. Zygmunt, S. W. Christensen, V. H. Dale, and R. L. Graham (1988).
+Indices of landscape pattern. Landscape Ecology 1, 153–162.
+
+Oueslati, W., S. Alvanides, and G. Garrod (2015). Determinants of urban sprawl in European
+
+cities. Urban studies 52, 1594–1614.
+
+R Core Team (2017). R: A Language and Environment for Statistical Computing. Vienna, Austria:
+
+R Foundation for Statistical Computing.
+
+R´enyi, A. (1961). On Measures of Entropy and Information. University of California Press,
+pp 547-561: Proceedings of the Fourth Berkeley Symposium on Mathematical Statistics and
+Probability.
+
+Rosni, N. and N. Noor (2016). A review of literature on urban sprawl: assessment of factors and
+
+causes. Journal of Architecture, Planning & Construction Management 6, 12–35.
+
+Stone, B. J. (2012). The city and the changing climate: Climate change in the places we live.
+
+Cambridge, MA, USA: Cambridge University Press.
+
+Theil, H. (1972). Statistical Decomposition Analysis. Amsterdam: North Holland.
+
+Torrens, P. (2008). A toolkit for measuring sprawl. Applied Spatial Analysis and Policy 1, 5–36.
+
+Tsai, Y. (2005). Quantifying urban form: compactness versus sprawl. Urban Studies 42, 141–161.
+
+Yeh, A. and X. Li (2001). Measurement and monitoring of urban sprawl in a rapidly growing
+
+region using entropy. Photogrammetric Engineering and Remote Sensing 67, 83–90.
+
+18
+
+Table 1: Results for Batty’s and Karlstr¨om and Ceccato’s (KC) entropy with two partition options
+Administrative boundary partition
+
+Batty
+
+KC - nd1
+
+KC - nd2
+
+KC - nd3
+
+1990
+0.987
+0.955
+0.980
+
+2012
+0.990
+0.978
+0.983
+
+1990
+0.784
+0.530
+0.766
+
+2012
+0.814
+0.776
+0.804
+
+1990
+0.931
+0.865
+0.869
+
+2012
+0.933
+0.989
+0.881
+
+1990
+0.946
+0.993
+0.935
+
+2012
+0.948
+0.990
+0.937
+
+Concentric area partition
+
+Batty
+
+KC - nd1
+
+KC - nd2
+
+KC - nd3
+
+1990
+0.988
+0.953
+0.976
+
+2012
+0.991
+0.982
+0.982
+
+1990
+0.660
+0.536
+0.594
+
+2012
+0.670
+0.623
+0.640
+
+1990
+0.777
+0.683
+0.683
+
+2012
+0.787
+0.772
+0.778
+
+1990
+0.861
+0.683
+0.683
+
+2012
+0.861
+0.861
+0.861
+
+Eindhoven
+Lublin
+Bologna
+
+Eindhoven
+Lublin
+Bologna
+
+19
+
+Figure 1: Examples of the three urban scenarios: monocentric, polycentric, decentralized.
+
+Figure 2: Two options for area partition in Batty’s entropy over an example of monocentric dataset.
+Left panel: 20 random areas; right panel: 5 concentric rings.
+
+Figure 3: Results for Batty’s entropy over the three urban scenarios, 1000 simulations, with the
+two partition options: 20 random areas (left panel), 5 concentric rings (right panel).
+
+20
+
+as.im(mono.list[[2]], W = win)as.im(poly.list[[7]], W = win)as.im(dec.list[[2]], W = win)lllllllllllllll2.02.53.03.54.04.55.0llllllllllllllllllllllllllllllll2.02.53.03.54.04.55.0llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll2.02.53.03.54.04.55.0MonoPolyDecllllllllllllllllllllllllllll2.02.53.03.54.04.55.0llll2.02.53.03.54.04.55.0llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll2.02.53.03.54.04.55.0MonoPolyDecFigure 4: Results for Karlstr¨om and Ceccato’s entropy over the three urban scenarios, 1000 simu-
+lations, with the two partition options: 20 random areas (higher panels), 5 concentric rings (lower
+panels), at different neighbourhood distances.
+
+Figure 5: Spatial partial information for the three urban scenarios, 1000 simulations. First option
+for the distance ranges in the higher panels, second option in the lower panels.
+
+21
+
+llllllllllllllllllll1.01.52.02.53.0nd1llllllllllllllllllllllllllll1.01.52.02.53.0lllllllllllllllllllllllllllllllllllllllllllllllllllllllll1.01.52.02.53.0MonoPolyDecllllllllll1.01.52.02.53.0nd2lllllllllllllllllllllllllllllllllll1.01.52.02.53.0lllllllllllllllllllllllllllllllllllllll1.01.52.02.53.0MonoPolyDeclllllllllllllllllllllllllllllllllllllllllllllllllll1.01.52.02.53.0nd3lllllllllllllllllllllllllllllllll1.01.52.02.53.0llllllllllllllllllllllllllllllllllllllllll1.01.52.02.53.0MonoPolyDecIndexkarl.rand[[d]]$monolll0.51.01.5nd1ll0.51.01.5lllllllllllllllllllllllllll0.51.01.5MonoPolyDeclll0.51.01.5nd2ll0.51.01.5llllllllllllllllllllllllllll0.51.01.5MonoPolyDeclll0.51.01.5nd3ll0.51.01.5llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll0.51.01.5MonoPolyDeclll0.51.01.5nd4ll0.51.01.5lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll0.51.01.5MonoPolyDec0.00.20.40.61:(3 * n.dist)MonoPolyDecMonoPolyDecMonoPolyDecMonoPolyDec0.00.20.40.6w10.00.20.40.6w20.00.20.40.6w30.00.20.40.6w40.00.20.40.6MonoPolyDecMonoPolyDecMonoPolyDecMonoPolyDec0.00.20.40.6w10.00.20.40.6w20.00.20.40.6w30.00.20.40.6w4Figure 6: From left to right, Eindhoven, Lublin and Bologna together with their commuting belts,
+in 1990 (higher panels) and 2012 (lower panels).
+
+22
+
+Eindhoven 1990Lublin 1990Bologna 1990Eindhoven 2012Lublin 2012Bologna 2012Figure 7: Proportional partial spatial mutual information (grey area) and residual entropy (white
+area), for the ﬁrst option. From left to right, Eindhoven, Lublin and Bologna in 1990 (higher
+panels) and 2012 (lower panels).
+
+23
+
+w1w2w3w4Eindhoven 19900.00.20.40.60.81.0w1w2w3w4Lublin 19900.00.20.40.60.81.0w1w2w3w4Bologna 19900.00.20.40.60.81.0w1w2w3w4Eindhoven 20120.00.20.40.60.81.0w1w2w3w4Lublin 20120.00.20.40.60.81.0w1w2w3w4Bologna 20120.00.20.40.60.81.0

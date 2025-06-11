@@ -1,0 +1,14 @@
+{
+  "id": "http://arxiv.org/abs/2007.09927v1",
+  "title": "Spatially Clustered Varying Coefficient Model",
+  "summary": "In various applications with large spatial regions, the relationship between the response variable and the covariates is expected to exhibit complex spatial patterns. We propose a spatially clustered varying coefficient model, where the regression coefficients are allowed to vary smoothly within each cluster but change abruptly across the boundaries of adjacent clusters, and we develop a unified approach for simultaneous coefficient estimation and cluster identification. The varying coefficients are approximated by penalized splines, and the clusters are identified through a fused concave penalty on differences in neighboring locations, where the spatial neighbors are specified by the minimum spanning tree (MST). The optimization is solved efficiently based on the alternating direction method of multipliers, utilizing the sparsity structure from MST. Furthermore, we establish the oracle property of the proposed method considering the structure of MST. Numerical studies show that the proposed method can efficiently incorporate spatial neighborhood information and automatically detect possible spatially clustered patterns in the regression coefficients. An empirical study in oceanography illustrates that the proposed method is promising to provide informative results.",
+  "published": "2020-07-20T08:17:55Z",
+  "authors": [
+    "Fangzheng Lin",
+    "Yanlin Tang",
+    "Huichen Zhu",
+    "Zhongyi Zhu"
+  ],
+  "primary_category": "stat.ME",
+  "pdf_url": "http://arxiv.org/pdf/2007.09927v1"
+}

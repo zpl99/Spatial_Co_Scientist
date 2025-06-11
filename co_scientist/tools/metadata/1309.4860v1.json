@@ -1,0 +1,12 @@
+{
+  "id": "http://arxiv.org/abs/1309.4860v1",
+  "title": "Modeling complex spatial dynamics of two-population interaction in   urbanization process",
+  "summary": "This paper is mainly devoted to lay an empirical foundation for further research on complex spatial dynamics of two-population interaction. Based on the US population census data, a rural and urban population interaction model is developed. Subsequently a logistic equation on percentage urban is derived from the urbanization model so that spatial interaction can be connected mathematically with logistic growth. The numerical experiment by using the discretized urban-rural population interaction model of urbanization shows a period-doubling bifurcation and chaotic behavior, which is identical in patterns to those from the simple mathematical models of logistic growth in ecology. This suggests that the complicated dynamics of logistic growth may come from some kind of the nonlinear interaction. The results from this study help to understand urbanization, urban-rural population interaction, chaotic dynamics, and spatial complexity of geographical systems.",
+  "published": "2013-09-19T05:01:17Z",
+  "authors": [
+    "Yanguang Chen",
+    "Feng Xu"
+  ],
+  "primary_category": "physics.soc-ph",
+  "pdf_url": "http://arxiv.org/pdf/1309.4860v1"
+}

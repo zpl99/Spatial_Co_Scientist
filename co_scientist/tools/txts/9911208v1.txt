@@ -1,0 +1,1120 @@
+9
+9
+9
+1
+
+v
+o
+N
+1
+1
+
+1
+v
+8
+0
+2
+1
+1
+9
+9
+/
+h
+p
+-
+o
+r
+t
+s
+a
+:
+v
+i
+X
+r
+a
+
+Limber equation for luminosity dependent
+correlations
+
+A. Gardini a,c,d,1 S.A. Bonometto b,c,2 A. Macci`o a,3
+
+aDipartimento di Fisica, Universit`a di Milano, Via Celoria 16, I-20133 Milano,
+ITALY
+bDipartimento di Fisica G. Occhialini, Universit`a di Milano–Bicocca, ITALY
+cINFN sezione di Milano, Via Celoria 16, I-20133 Milano, ITALY
+dCILEA – Segrate (Milano), ITALY
+
+Abstract
+
+The passage from angular to spatial correlations, in the case of spatial clustering
+length depending on the average distance between nearby objects is studied. We
+show that, in a number of cases, the scaling law of angular correlation amplitudes,
+which holds for constant spatial clustering length, is still true also for a luminosity
+dependent spatial correlation. If the Limber equation is then naively used to ob-
+tain ‘the’ spatial clustering length from the angular function amplitude, a quantity
+close to the average object separation is obtained. The case of cluster clustering is
+explicitly considered.
+
+Key words: Large scale structure of the universe, Galaxies: clusters
+PACS: : 98.65.Cw, 98.80
+
+1
+
+Introduction
+
+Initial studies on clustering properties over large scales were performed using
+2–dimensional samples (Totsuji & Kihara 1969, Peebles 1980; see also Sharp,
+Bonometto & Lucchin 1984). Spatial properties were then deduced from an-
+gular ones using the Limber equation (Limber 1953). However, even in the
+
+1 E-mail: gardini@mi.infn.it
+2 E-mail: bonometto@mi.infn.it
+3 E-mail: andrea@axrialto.uni.mi.astro.it
+
+Preprint submitted to New Astronomy
+
+6 September 2018
+
+ 
+ 
+ 
+ 
+present epoch of large redshift samples, the technique used to pass from angu-
+lar to spatial statistical properties is far from becoming obsolete. For instance,
+cluster samples are available and in preparation, selected with a ﬁxed apparent
+magnitude limit. Even though the typical redshift of each cluster is given, the
+diﬀerent intrinsical luminosity limit at diﬀerent distances forces to cut oﬀ some
+information, to extract volume and intrinsical magnitude limited subsamples,
+where the spatial 2–point function can be directly estimated. Working out
+the angular function and using the Limber equation to extract spatial proper-
+ties, might then seem a more convenient alternative approach. This approach
+was followed, e.g., by Dalton et al (1997), when discussing the clustering of
+clusters in catalogues extracted from the APM Galaxy Survey. In the ﬁnal
+section we shall comment on the results of their analysis. The point is that
+this approach meets a diﬀerent obstacle, as the cluster correlation length rc
+may depend on cluster luminosities L (see Bahcall & West 1988 for a review
+of Abell cluster clustering data; see Nichol et al 1992, Dalton et al 1994, Croft
+et al 1997, for APM cluster clustering data; the whole set of data has been
+recently reanalysed by Lee & Park (1999), with the inclusion of X–ray catalog
+data).
+
+Owing also to the diﬀerent deﬁnition of clusters in diﬀerent observational
+samples or simulations, it is usual to work out from the cumulative cluster lu-
+minosity functions n(> L) the average distance between nearby objects DL ≡
+n−1/3(> L) and to seek the dependence of rc on DL. For 30 h−1Mpc
+(h is the Hubble constant in units of 100 km/s/Mpc), the Bahcall & West
+(1988) conjecture that
+
+< DL
+∼
+
+< 60 h−1Mpc
+∼
+
+rc ≃
+
+0.4DL
+
+(1.1)
+
+approaches most data, although, clearly, it cannot be considered an obser-
+vational output. However, over greater scales, there is no agreement among
+results obtained from diﬀerent samples and it is not clear how much this may
+depend on the diﬀerent cluster deﬁnitions. For Abell clusters, however, eq.
+90 h−1Mpc. In this work, we shall assume the
+(1.1) approaches data up to
+validity of eq. (1.1), as an example of gross discrepancy from assuming that
+rc is L–independent.
+
+∼
+
+In the presence of such kind of L–dependence, two questions arise: (i) As a
+byproduct of the Limber equation, a scaling law holds, among the coeﬃcients
+of the angular functions for samples with diﬀerent limiting magnitudes. Is
+such scaling law still valid? We shall show that the same scaling law holds
+in the case (1.1), as in the constant rc case. (ii) If the Limber equation is
+then formally used to work out the spatial clustering length, which value
+of rc is obtained? We shall show that a naive use of the standard Limber
+equation leads to working out an apparent correlation length, close to the
+average distance between nearby clusters for the whole sample.
+
+As is obvious, our treatment applies to any kind of objects, not to clusters only.
+
+2
+
+Furthermore, the law (1.1) can be relaxed in various ways, obtaining related
+results, provided that the luminosity dependence of the clustering length (rc)
+can be expressed through a function of the mutual distance of the objects be-
+longing to an intrinsical luminosity limited set (DL). Such generalizations will
+not be debated here. Our treatment also neglects departures from euclidean
+geometry and κ–correction. Their inclusion does not change the conclusions
+of the paper, although slightly complicating ﬁnal expressions; of course, for
+several detailed applications, they are to be included, but, at this stage, they
+are unessential to make our points.
+
+In order to show our points, we shall ﬁrst need to reobtain the Limber equation
+in a way slightly diﬀerent from textbooks (see, e.g., Peebles 1980a); this is the
+content of section 2 and 3. Using algorithms and expressions deduced in these
+sections, in section 4 we show the points made in the Introduction. Section 5
+contains a few ﬁnal remarks.
+
+2 Sample deﬁnition
+
+The Limber equation was introduced to work out the spatial 2–point corre-
+lation function from angular data assuming that: (i) the 2-point function is
+luminosity independent; (ii) there exists a universal luminosity function for
+the class of objects considered.
+
+If the objects are galaxies, the luminosity function can be given the Schechter
+form (Schechter 1976):
+
+φ(L) =
+
+−α
+
+φ∗
+L∗ (cid:18)
+
+L
+L∗ (cid:19)
+
+exp
+
+L
+L∗ (cid:19)
+
+(cid:18)−
+
+(2.1)
+
+Here α(
+1.1–1.2) is a phaenomenological parameter; L∗ is a typical galaxy
+luminosity, close to the top luminosity of the sample. The number density of
+galaxies with luminosity exceeding L reads
+
+∼
+
+∞
+
+n(> L) =
+
+dL φ(L) = φ∗U(L/L∗)
+
+(2.2)
+
+with
+
+ZL
+
+U(λ) =
+
+∞
+
+Zλ
+
+du u−α exp(u)
+
+(2.3)
+
+and, henceforth, φ(L) =
+
+dn(> L)/dL.
+
+−
+
+If we deal with clusters or other kinds of objects, the expression (2.1) may
+no longer be a fair approximation. In the sequel, however, we shall only need
+
+3
+
+that n(> L) can be expressed as in eq. (2.2), even though U(λ) has not the
+expression (2.3). In eq. (2.2), φ∗ should be expressed in Mpc−3h3 and approach
+the total number density for the class of objects considered and, of course,
+there must also exist a typical luminosity L∗, even though the distribution
+around it is not given by eq. (2.1). As previously stated, let us then deﬁne
+
+clearly dn/dD =
+
+DL ≡
+3/D4.
+
+−
+
+n−1/3(> L) ; n(> L)
+
+D−3
+L ,
+
+≡
+
+(2.4)
+
+The apparent luminosity of a source of intrinsical luminosity L, at a distance
+r from the observer, is l = L/4πr2 and the depth d∗ of a sample of objects,
+with apparent luminosity l > lm, is deﬁned so that
+
+lm = L∗/4πd2
+
+∗ .
+
+(2.5)
+
+Hence, requiring that an object at distance r has l > lm, means that its
+intrinsical luminosity
+
+L > L∗(r/d∗)2 .
+
+(2.6)
+
+For instance, the angular density of objects, in a sample of depth d∗, reads
+
+nΩ(d∗) =
+
+∞
+
+Z0
+
+dr r2
+
+∞
+
+ZL∗(r/d∗)2
+
+dL φ(L) =
+
+∞
+
+Z0
+
+dr r2D−3
+
+L∗(r/d∗)2 = d3
+
+∗G ,
+
+where
+
+G =
+
+∞
+
+Z0
+
+dq q2D−3
+
+L∗q2 =
+
+1
+2L3/2
+∗
+
+∞
+
+Z0
+
+dL√LD−3
+L
+
+(2.7)
+
+(2.8)
+
+is a universal constant, provided that φ(L) is a universal distribution, quite
+d3
+independently from the explicit form of U(λ). According to eq. (2.7), nΩ ∝
+∗,
+a well known volume eﬀect.
+
+3 The case of luminosity independent correlations
+
+All above relations hold provided that the assumption (ii) is true. For a sample
+of objects of depth d∗, the angular 2–point function
+
+∞
+
+∞
+
+w(θ) = n−2
+Ω
+
+dr1r2
+1
+
+dL1φ(L1)
+
+Z0
+
+Z
+L∗(r1/d∗)2
+
+∞
+
+Z0
+
+dr2r2
+2
+
+∞
+
+Z
+L∗(r2/d∗)2
+
+dL2φ(L2) ζ(r12, L1, L2)
+
+(3.1)
+is obtainable from the spatial 2–point functions ζ(r12, L1, L2) and from the
+luminosity function φ(L).
+
+4
+
+Let us ﬁrst review the standard case, when also the assumption (i) holds,
+i.e. ζ = (r0/r)γ with constant (luminosity independent) γ and r0 (correlation
+length). In this case, changing integration variables, eq. (3.1) immediately
+yields:
+
+w(θ) = n−2
+
+Ω rγ
+
+0
+
+∞
+
+Z0
+
+dr1r2
+1
+
+∞
+
+ZDL∗(r1/d∗)2
+
+dD1
+
+3
+D4
+1
+
+∞
+
+Z0
+
+dr2r2
+2
+
+∞
+
+ZDL∗(r2/d∗)2
+
+dD2
+
+3
+D4
+2
+
+−γ
+12
+
+r
+
+(3.2)
+
+and, therefore,
+
+w(θ) = n−2
+
+Ω rγ
+
+0
+
+∞
+
+Z0
+
+dr1r2
+
+1D−3
+
+L∗(r1/d∗)2
+
+∞
+
+Z0
+
+dr2r2
+
+2D−3
+
+L∗(r2/d∗)2r
+
+−γ
+12
+
+(3.3)
+
+Herefrom, using eq. (2.7) and performing the changes of variables:
+
+2r = r1 + r2 , q = r/d∗ , ud∗θ = r1 −
+ud∗θ(q2 + u2)1/2, we work out
+
+in order that r12 ≃
+
+r2
+
+(3.4)
+
+w(θ) = Aγ
+
+γ
+
+r0
+d∗ (cid:19)
+
+(cid:18)
+
+θ1−γ
+
+with
+
+where
+
+Aγ = cγ
+
+∞
+
+∞
+
+0 dq q5−γD−6
+L∗q2
+0 dq q2D−3
+L∗q2]2
+[
+R
+R
+
+= 2 cγ Lγ/2
+
+∗
+
+∞
+
+∞
+
+0 dL L2−γ/2D−6
+L
+0 dL √LD−3
+L ]2
+[
+R
+R
+
++∞
+
+cγ =
+
+du (1 + u2)−γ/2
+
+Z−∞
+
+(3.5)
+
+(3.6)
+
+(3.7)
+
+is a purely numerical constant.
+
+In above relations, the distances DL were used, instead of the number densities
+n(> L) = D−3
+L , which might even seem more convenient, in order to facilitate
+the forthcoming passage to the case of luminosity dependent correlations.
+
+Eq. (3.5) puts in evidence the scaling properties of the angular 2–point func-
+tion. The only dependence on the depth of the sample (d∗) is factorized, as
+Aγ is a universal expression (still, provided that φ(L) is a universal distribu-
+tion). It is often stated that such scaling is arises from the fact that r0 does
+not depend on luminosities. Here we shall verify that such scaling is a more
+general property.
+
+5
+
+4 The case of luminosity–dependent correlations
+
+In the case of galaxy clusters, we shall now assume that the Bahcall and West
+conjecture holds:
+
+ξ(r12, > L) = a (DL/r12)γ .
+0.4 and D−3
+L = n(> L) is the number density
+Here the numerical constant a
+of clusters with luminosity > L (see eq. 2.5). Eq. (4.1) is an integral corre-
+lation law, as it concerns all objects with luminosities above L. In principle,
+it is possible to deﬁne also a diﬀerential correlation law, holding if objects of
+intrinsical luminosities L1 and L2 only are considered. Such diﬀerential law is
+not to be measured, but we want to show that, the integral expression (4.1)
+follows from assuming that the diﬀerential law
+
+(4.1)
+
+≃
+
+ζ(r12, L1, L2) = ζ∗(
+
+D1D2/r12)γ
+
+(4.2)
+
+holds, provided that a = ζ∗(1
+
+q
+
+γ/6)−2. In fact
+
+−
+
+ξ(r12, > L) = n−2(> L) ζ∗
+
+∞
+
+ZL
+
+dL1φ(L1)Dγ/2
+L1
+
+∞
+
+ZL
+
+dL2φ(L2)Dγ/2
+L2 r
+
+−γ
+12
+
+(4.3)
+
+and, changing variables as we did to pass from eqs. (3.1) to (3.2),
+
+ξ(r12, > L) =
+
+ζ∗D6
+L
+rγ
+12
+
+according to eq. (4.1).
+
+∞
+
+dD
+
+ZDL
+
+
+
+
+
+
+2
+
+3
+D4−γ/2 
+
+
+
+= ζ∗(1
+
+−
+
+γ/6)−2
+
+γ
+
+DL
+r12 (cid:19)
+
+(cid:18)
+
+(4.4)
+
+Let us now use the expression (4.2) to work out the angular function. In this
+case the correlation length has a precise dependence on luminosities. In spite
+of that, we shall ﬁnd that eq. (3.5) is still formally true and, in particular w(θ)
+has the same scaling properties as in the case of luminosity independent r0.
+
+In fact, if we replace the expression (4.2) in eq. (3.1) and perform the opera-
+tions leading there to eqs. (3.2) and (3.3), we ﬁnd
+
+∞
+
+∞
+
+w(θ) = n−2
+
+Ω ζ∗
+
+dr1r2
+1
+
+Z0
+
+ZDL∗(r1/d∗)2
+
+dD1
+
+3
+D4−γ/2
+
+1
+
+∞
+
+Z0
+
+dr2r2
+2
+
+∞
+
+ZDL∗(r2/d∗)2
+
+dD2
+
+3
+D4−γ/2
+
+2
+
+−γ
+12
+
+r
+
+= n−2
+
+Ω ζ∗(1
+
+γ/6)−2
+
+−
+
+∞
+
+Z0
+
+dr1r2
+
+1D
+
+−3+γ/2
+L(r1/d∗)2
+
+∞
+
+Z0
+
+dr2r2
+
+2D
+
+−3+γ/2
+L(r2/d∗)2r
+
+−γ
+12
+
+(4.5)
+
+6
+
+Performing here again the changes of variables (3.4), we obtain
+
+w(θ) = n−2
+
+Ω ζ∗(1
+
+−
+
+γ/6)−2d6−γ
+
+∗
+
+θ1−γ
+
+∞
+
+Z0
+
++∞
+
+dq q4D
+
+−6+γ
+L∗q2
+
+Z−∞
+
+du (q2 + u2)−γ/2
+
+(4.6)
+
+and, using eq. (2.7), we return to
+
+w(θ) = ˜Aγ
+
+γ
+
+˜r0
+d∗ (cid:19)
+
+(cid:18)
+
+θ1−γ
+
+provided that
+
+˜rγ
+0
+
+˜Aγ = cγ
+
+(cγ is deﬁned in eq. 3.7).
+
+∞
+
+∞
+
+0 dq q5−γD
+0 dq q2D−3
+[
+R
+R
+
+−6+γ
+L∗q2
+L∗q2]2
+
+= 2 cγ Lγ/2
+
+∗
+
+R
+
+∞
+
+∞
+
+−6+γ
+0 dL L2−γ/2D
+L
+0 dL √LD−3
+L ]2
+[
+R
+
+(4.7)
+
+(4.8)
+
+Besides of ﬁnding the same scaling properties as in the case of L–independent
+r0, we can now try to answer a practical question: If we interpret angular
+dγ
+∗, as originating from a L–
+results, possibly because of the scaling w
+independent r0 and work out the r0 value, what value is obtained?
+
+∝
+
+This question is answered by requiring that
+
+rγ
+0 Aγ = ˜rγ
+
+0
+
+˜Aγ
+
+(4.9)
+
+and, using eqs. (3.6) and (4.8), this yields
+
+−6+γ
+0 dL L2−γ/2 D
+L
+0 dL L2−γ/2 D−6
+R
+which is the apparent value of r0.
+
+rγ
+0 =
+
+∞
+
+∞
+
+R
+
+L
+
+,
+
+(4.10)
+
+Eq. (4.10) can be used either with simulations, working out DL from them and
+performing numerically the two integrations, or with analytical expressions. In
+the case of the Schechter law (2.1), using the function U(λ) deﬁned in eq. (2.3),
+it is easy to see that
+
+r0 = φ1/3
+
+∗
+
+∞
+
+α
+
+∞
+
+0 dλ λ2−γ/2U 2−γ/3
+0 dλ λ2−γ/2U 2
+R
+
+(λ)
+α(λ) #
+
+" R
+
+1/γ
+
+.
+
+(4.11)
+
+The expression in square brackets can be turned into:
+
+[Γ(α)]γ/3v(α, γ)
+
+x) xe1
+
+−
+
+∞
+0 dx exp(
+∞
+R
+0 dx exp(
+R
+
+t)
+
+∞
+0 dt exp(
+−
+∞
+0 dt exp(
+
+t1−α
+x/(2−γ/3)+t
+t) t1−α
+x/2+t
+
+(cid:16)R
+x) xe2
+
+−
+
+(cid:16)R
+
+2−γ/3
+
+(cid:17)
+2
+
+(cid:17)
+
+−
+
+7
+
+γ
+
+1.6
+
+1.8
+
+2.0
+
+2.2
+
+c1
+
+c2
+
+-1.95
+
+3.29
+
+-1.93
+
+3.25
+
+-1.91
+
+3.20
+
+-1.88
+
+3.15
+
+−
+
+γ/3)(1
+
+γ/2 + (2
+
+α), while
+with e1 = 2
+v(α, γ) = 2e2+1/(2
+γ/3)e1+1. Using a Gauss-Laguerre integration algorithm,
+double integrals can be then turned into double summations and analytically
+evaluated. For the narrow α interval, for which such expression is needed,
+however, we can verify that the linear expression
+
+α) and e2 = 2
+
+γ/2 + 2(1
+
+−
+
+−
+
+−
+
+−
+
+−
+
+r0/φ1/3
+
+∗ = c1 ∗
+
+α + c2
+
+(4.12)
+
+is better approximated than 0.2 %.
+
+In Table 1 we give c1 and c2 for the relevant γ interval. Using such values
+it is easy to see that the discrepancy between the correlation length r0 and
+< 10 %. Such
+the average distance between nearby objects is expected to be
+∼
+result, clearly, depends on the use of the Shechter law (2.1), which also allows
+a confortable numerical integration. We have considered a few other expres-
+sions, e.g. the expression deduced from the Press & Schecter (PS) cluster mass
+function, assuming a constant spectral index nt for the transfered ﬂuctuation
+M 2. In most such cases, numerical integration only is
+spectrum and L
+possible and integration details are cumbersome. For the PS case, however,
+the expression (4.12) give results approximated up to some percents, provided
+2π−1/2ntν∗, where ν∗ = ρm/M∗ (ρm is the average matter
+that we assume φ∗
+density and M∗ is the mass attributed to the cluster with typical luminosity
+L∗).
+
+∝
+
+≡
+
+5 Final remarks
+
+According to Peebles (1980a), the scaling relation (3.5) played an important
+role in testing that the angular correlations of galaxies in the catalogs do reﬂect
+the presence of a uniform spatial galaxy clustering, rather than something else,
+e.g. systematic errors due to patchy obscuration in the Milky Way. This work
+does not contradict such statement, corresponding to the point (ii) at the
+beginning of section 2. However, Hauser and Peebles (1973), in their seminal
+work on cluster clustering, made use of the scaling relation (3.5), as a test for
+30 h−1Mpc they obtained for Abell clusters.
+the cluster correlation length rc ∼
+This test, as we showed, has only a partial validity.
+
+8
+
+≃
+
+For the sake of curiosity, let us outline that, if the galaxy luminosity function
+values, φ∗
+10−2 and α
+1.2 are used in eq. (4.11), we obtain a galaxy
+≃
+6 h−1Mpc, for γ values in the interal 1.6–1.9. This
+correlation length rg ≃
+output should not be overstressed, as it has been known for a long time that
+the average distance between nearby galaxies Dg and the galaxy correlation
+length rg have close values. In the case of galaxies, there is little evidence of
+a linear relation between rg values and Dg values for intrinsical magnitude
+limited samples. However, as galaxy luminosities essentially arise from stellar
+populations, they may be subject to signiﬁcant variations, as their stellar
+and dust contents evolve on time scales certainly longer than observational
+times (see, e.g., Silva et al 1999). It is possible that the proximity of rg and
+Dg indicates that, averaging luminosities over suitable time scales, a relation
+similar to clusters holds also for galaxies.
+
+In the case of galaxy clusters, Dalton et al (1997) investigated the scaling
+properties of the angular functions for two diﬀerent samples with apparent
+magnitudes m > 18.94 and 19.3 < m < 19.5, for which they had obtained
+suitable U(λ) expressions. Assuming a constant spatial clustering length rc,
+they obtained that the predicted scaling properties hold, while γ = 2.14 and
+rc = 14.3 h−1Mpc. According to this work, ﬁnding a fair scaling does not
+require a constant rc and, henceforth, any conclusion based on its existence is
+somehow premature.
+
+References
+
+Bahcall, N.A., & West, M.J., 1992, ApJ, 392, 419
+
+Croft, R.A.C., Dalton, G.B., Efstathiou, G., & Sutherland, W.J., 1997, MNRAS,
+
+291, 305
+
+Dalton, G.B., Efstathiou, G., Maddox, S.J., & Sutherland, W.J., 1992, ApJ, 338,
+
+L5
+
+Dalton, G.B., Maddox, S.J., Sutherland, W.J., & Efstathiou, G., 1997, MNRAS,
+
+289, 263
+
+Hauser, M.G., & Peebles, P.J.E., 1973, ApJ, 185, 757
+
+Lee, S., & Park, C., ApJ, submitted, preprint astro-ph/9909008
+
+Limber, D.N., 1953, ApJ, 117, 134
+
+Nichol, R.C., Collins, C.A., Guzzo, L., & Lumsden, S.L., 1992, MNRAS, 255, 21P
+
+Peebles, P.J.E. – Large Scale Structure of the Universe – Princeton Series in Physics
+
+– Princeton 1980
+
+9
+
+Peebles, P.J.E. – Large Scale Structure of the Universe. Sec 50 – Princeton Series
+
+in Physics – Princeton 1980
+
+Sharp, N., Bonometto, S.A., & Lucchin F., 1984, A&A, 130, 79
+
+Schechter, P., 1976, ApJ, 203, 297
+
+Silva L., Granato G.L., Bressan A., Lacey C.G., Baugh C.M., Cole S., Frenk
+C.S. (1999) astro-ph/9903350; to appear on “The Evolution of Galaxies on
+Cosmological Timescales” – Nov 30–Dec 5 1998, Puerto de la Cruz, Spain
+
+Totsuji H., & Kihara T., 1969, PASJ, 21, 221
+
+10
+
+
