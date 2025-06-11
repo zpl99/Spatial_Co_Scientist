@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d6" for="edge" attr.name="order" attr.type="long" />
+  <key id="d5" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d4" for="edge" attr.name="description" attr.type="string" />
+  <key id="d3" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d2" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d1" for="node" attr.name="description" attr.type="string" />
+  <key id="d0" for="node" attr.name="entity_type" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="&quot;THE GOVERNMENT&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"The Government is the entity responsible for initiating and overseeing the redevelopment project in 2018."</data>
+      <data key="d2">chunk-fb5dbe5e35be7e19371374fb0856cce8</data>
+    </node>
+    <node id="&quot;REDEVELOPMENT PROJECT&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The Redevelopment Project, initiated in 2018, significantly altered urban areas by removing several green zones."</data>
+      <data key="d2">chunk-fb5dbe5e35be7e19371374fb0856cce8</data>
+    </node>
+    <node id="&quot;GREEN ZONES&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"Green Zones refer to areas rich in vegetation, which were removed as part of the 2018 redevelopment project."</data>
+      <data key="d2">chunk-fb5dbe5e35be7e19371374fb0856cce8</data>
+    </node>
+    <node id="&quot;2018&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"The year 2018 marks when the redevelopment project was initiated, marking a key event in the timeline."</data>
+      <data key="d2">chunk-fb5dbe5e35be7e19371374fb0856cce8</data>
+    </node>
+    <node id="&quot;URBAN AREAS&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"Urban Areas are the locations where the redevelopment project took place, involving the removal of green zones."</data>
+      <data key="d2">chunk-fb5dbe5e35be7e19371374fb0856cce8</data>
+    </node>
+    <node id="&quot;REDEVELOPMENT PROJECT MANAGEMENT&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"An implied entity focused on executing and managing the redevelopment project."</data>
+      <data key="d2">chunk-fb5dbe5e35be7e19371374fb0856cce8</data>
+    </node>
+    <edge source="&quot;THE GOVERNMENT&quot;" target="&quot;REDEVELOPMENT PROJECT&quot;">
+      <data key="d3">45.0</data>
+      <data key="d4">"The Government initiated and managed the Redevelopment Project in 2018."</data>
+      <data key="d5">chunk-fb5dbe5e35be7e19371374fb0856cce8</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="&quot;REDEVELOPMENT PROJECT&quot;" target="&quot;GREEN ZONES&quot;">
+      <data key="d3">40.0</data>
+      <data key="d4">"The Redevelopment Project in 2018 led to the removal of several Green Zones."</data>
+      <data key="d5">chunk-fb5dbe5e35be7e19371374fb0856cce8</data>
+      <data key="d6">1</data>
+    </edge>
+  </graph>
+</graphml>
