@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="07b9d078-9d35-42f2-b10e-b9df9ae47cec" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../co_scientist/generatorAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/../co_scientist/generatorAgent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../co_scientist/literatureAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/../co_scientist/literatureAgent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../co_scientist/prompt/generator/hypothesis.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../co_scientist/prompt/generator/hypothesis.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../co_scientist/prompt/literature/search.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../co_scientist/prompt/literature/search.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../co_scientist/rag_database/graph_chunk_entity_relation.graphml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../co_scientist/rag_database/kv_store_community_reports.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../co_scientist/rag_database/kv_store_full_docs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../co_scientist/rag_database/kv_store_llm_response_cache.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../co_scientist/rag_database/kv_store_text_chunks.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../co_scientist/rag_database/vdb_entities.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file:///opt/anaconda3/envs/ai_agent/lib/python3.10/site-packages/nano_graphrag/_llm.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2yKQKjREu2XJxnKusaWP2ogRNFg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/nano-graphrag-main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.26053.29" />
+        <option value="bundled-python-sdk-b1dbf8ef85a6-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.26053.29" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="07b9d078-9d35-42f2-b10e-b9df9ae47cec" name="Changes" comment="" />
+      <created>1749580722674</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749580722674</updated>
+      <workItem from="1749580723901" duration="11272000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

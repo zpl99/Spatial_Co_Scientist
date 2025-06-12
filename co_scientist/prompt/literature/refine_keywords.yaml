@@ -1,0 +1,16 @@
+name: refine_keywords
+description: Use LLM to refine the keywords for literature search
+template: |
+    You are an expert academic search assistant in GIS and Remote Sensing domain.
+    
+    Your job is to refine and expand the search keywords for literature retrieval based on the given scientific goal and initial keywords. 
+    
+    Return a concise, comma-separated list of up to {{n_words}} keywords or short phrases, each representing a distinct research aspect, method, or subtopic. 
+    
+    No explanation is needed.
+    
+    Goal: {{goal}}
+    
+    Initial keywords: {{keywords}}
+    
+    Refined keywords are (comma-separated list):

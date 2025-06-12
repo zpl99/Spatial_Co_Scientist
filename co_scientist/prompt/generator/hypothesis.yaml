@@ -16,6 +16,7 @@ template: |
   {{ instructions }}
   
   Literature review and analytical rationale (chronologically ordered, beginning with the most recent analysis):  
+  
   {{ articles_with_reasoning }}
   
   Proposed hypothesis (detailed description for domain experts):

@@ -3,15 +3,12 @@ from litellm import model_cost
 from litellm.utils import trim_messages
 import requests
 import time
+from prompt import prompt_manager
 
 SYSTEM_PROMPT = """You are a scientific literature assistant. Your job is to search, summarize, and analyze relevant research papers for a given scientific objective, and provide a chronologically ordered list (from most recent to oldest) of literature and reasoning. 
 Your summary should focus on key findings, methods, relevance, and analytical insights, formatted for domain experts."""
-
-SEARCH_PROMPT = """Search and aggregate recent, relevant literature based on the following objective and context:
-Objective: {goal}
-Keywords: {keywords}
-Existing hypothesis: {source_hypothesis}
-Please summarize the most relevant articles (preferably 3-8), ordered by year, each with citation info, a 2-4 sentence summary, and your analysis of how it relates to the objective. If possible, include recent arXiv preprints."""
+p_manager = prompt_manager.PromptManager(
+    "/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/prompt")
 
 
 class LiteratureAgent:
@@ -61,7 +58,7 @@ class LiteratureAgent:
         time.sleep(5)  # 每次请求间隔5秒，防止限流
         return papers
 
-    def articles_with_reasoning(self, goal, keywords, source_hypothesis=""):
+    def articles_with_reasoning(self, goal, keywords):
         search_results = self.search_arxiv(keywords, self.max_results)
 
         search_text = "\n\n".join([
@@ -69,9 +66,18 @@ class LiteratureAgent:
             for i, paper in enumerate(search_results)
         ])
 
-        prompt = SEARCH_PROMPT.format(
-            goal=goal, keywords=keywords, source_hypothesis=source_hypothesis
-        ) + "\n\nSearch Results:\n" + search_text
+        refine_keywords = self.refine_keywords(goal,keywords)
+
+        SEARCH_PROMPT =  p_manager.render_prompt(
+            agent="literature",
+            prompt_name="search",
+            variables={
+                "goal": goal,
+                "keywords": refine_keywords,
+            }
+        )
+
+        prompt =  SEARCH_PROMPT + "\n\nSearch Results:\n" + search_text
 
         trimmed_prompt = trim_messages(
             [{'role': 'user', 'content': SYSTEM_PROMPT + "\n\n" + prompt}],
@@ -80,31 +86,63 @@ class LiteratureAgent:
         )[0]['content']
 
         user_input = [{'role': 'user', 'content': trimmed_prompt}]
+
         output, prompt_tokens, completion_tokens = self.llm_engine.respond(user_input, temperature=0.1, top_p=0.95)
+
         self.history.append({'role': 'user', 'content': trimmed_prompt})
+
         self.history.append({'role': 'assistant', 'content': output})
+
         cost = (
                 self.llm_cost["input_cost_per_token"] * prompt_tokens +
                 self.llm_cost["output_cost_per_token"] * completion_tokens
         )
         return output, cost
 
+    def refine_keywords(self, goal, keywords, n_words=6):
+        """
+        基于目标和初始关键词，自动生成一组更合适/覆盖更广/更主流/更高检索价值的关键词组合。
+        """
+
+
+        prompt = p_manager.render_prompt(
+            agent="literature",
+            prompt_name="refine_keywords",
+            variables={
+                "goal": goal,
+                "keywords": keywords,
+                "n_words": n_words,
+
+            }
+        )
+
+        user_input = [{"role": "user", "content": prompt}]
+        output, prompt_tokens, completion_tokens = self.llm_engine.respond(
+            user_input, temperature=0.2, top_p=0.92
+        )
+
+        # only keywords
+        refined = output.split("\n")[0].strip()
+        # 最终返回字符串（可直接用于检索）
+        return refined
+
     def solve_task(self, task):
 
         goal = task.get("goal") or task.get("task_inst")
         keywords = task.get("keywords", "spatial clustering")
-        source_hypothesis = task.get("source_hypothesis", "")
-        output, cost = self.articles_with_reasoning(goal, keywords, source_hypothesis)
+        output, cost = self.articles_with_reasoning(goal, keywords)
         return {"articles_with_reasoning": output, "cost": cost, "history": self.history}
 
 
 if __name__ == "__main__":
+
     agent = LiteratureAgent("gpt-4.1", context_cutoff=14000)
+
     task = {
-        "goal": "Design a new spatial clustering hypothesis for urban facility distribution.",
+        "goal": "Design a new spatial clustering workflow for urban facility distribution.",
         "keywords": "spatial clustering urban facilities",
-        "source_hypothesis": "Traditional models assume clusters follow population density gradients."
     }
+
     results = agent.solve_task(task)
 
     print("\n=== 文章与分析 Reasoning 输出 ===\n")
