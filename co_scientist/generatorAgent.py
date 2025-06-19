@@ -8,101 +8,119 @@ from shutil import copyfile, rmtree
 import os
 import re
 import subprocess
-import literatureAgent
+from literatureAgent import LiteratureAgent
+import json
 from prompt import prompt_manager
-SYSTEM_PROMPT = """You are an expert Python programming assistant that helps scientist users to write high-quality code to solve their tasks.
-Given a user request, you are expected to write a complete program that accomplishes the requested task and save any outputs in the correct format.
-Please wrap your program in a code block that specifies the script type, python. For example:
-```python
-print("Hello World!")
-```"""
+from nano_graphrag import GraphRAG, QueryParam
+from expert_interact_agent import expert_interact_workflow
+
+manager = prompt_manager.PromptManager(
+    "/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/prompt")
+
+graph_func = GraphRAG(working_dir="/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/rag_database",using_azure_openai=True)
 
 
-SELF_DEBUG_PROMPT = """The user may execute your code and report any exceptions and error messages.
-Please address the reported issues and respond with a fixed, complete program."""
-
-FORMAT_PROMPT = """Please keep your response concise and do not use a code block if it's not intended to be executed.
-Please do not suggest a few line changes, incomplete program outline, or partial code that requires the user to modify.
-Please do not use any interactive Python commands in your program, such as `!pip install numpy`, which will cause execution errors."""
-
-REQUEST_PROMPT = "Here's the user request you need to work on:"
-
-DATA_INFO_PROMPT = """You can access the dataset at `{dataset_path}`. Here is the directory structure of the dataset:
-```
-{dataset_folder_tree}
-```
-Here are some helpful previews for the dataset file(s):
-{dataset_preview}"""
+literatureAgent = LiteratureAgent("gpt-4.1")
 
 
 class GeneratorAgent():
-    def __init__(self, llm_engine_name, context_cutoff=28000, use_self_debug=False, use_knowledge=False):
+    def __init__(self, llm_engine_name, context_cutoff=28000, use_rag=True, use_literature=True):
         self.llm_engine = LLMEngine(llm_engine_name)
         self.llm_cost = model_cost[llm_engine_name]
 
         self.context_cutoff = context_cutoff
-        self.use_self_debug = use_self_debug
-        self.use_knowledge = use_knowledge
+        self.use_rag = use_rag
+        self.use_literature = use_literature
 
         self.sys_msg = ""
         self.history = []
 
-    def get_sys_msg(self, task):
-        sys_msg = (
-                SYSTEM_PROMPT + "\n\n" +
-                FORMAT_PROMPT + "\n\n" + REQUEST_PROMPT
-        )
+    def save_formatted_output(self, assistant_output, save_dir, fname_base="hypothesis"):
 
-        sys_msg += (
-                "\n" + task["task_inst"] +
-                ("\n" + str(task["domain_knowledge"]) if self.use_knowledge else "")
-        )
+        os.makedirs(save_dir, exist_ok=True)
+        clean_output = re.sub(r'\n\s*\n', '\n\n', assistant_output.strip())
 
+        txt_path = os.path.join(save_dir, f"{fname_base}.txt")
+        with open(txt_path, "w", encoding="utf-8") as f:
+            f.write(clean_output)
+        # 写json（每一节单独为一项，便于后续处理）
+        print(f"Assistant output saved to:\n  {txt_path}")
 
-        sys_msg += (
-                "\n" +
-                DATA_INFO_PROMPT.format(
-                    dataset_path=task['dataset_path'],
-                    dataset_folder_tree=task['dataset_folder_tree'],
-                    dataset_preview=task["dataset_preview"]
-                )
-        )
-
-        trimmed_sys_msg = trim_messages(
-            [{'role': 'user', 'content': sys_msg}],
-            self.llm_engine.llm_engine_name,
-            max_tokens=self.context_cutoff - 2000
-        )[0]["content"]
-
-        if len(trimmed_sys_msg) < len(sys_msg):
-            sys_msg = trimmed_sys_msg + "..."
-
-        return sys_msg
-
-    def literature_review(self):
+    def literature_review(self, task):
+        return literatureAgent.solve_task(task)
 
     def set_hypothesis_prompt(self, task):
-        manager = prompt_manager.PromptManager(
-            "/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/prompt")
+        literature_results = self.literature_review(task) if self.use_literature else ""
 
+        expert_contex = graph_func.query(
+            task.get("goal"),
+            param=QueryParam(mode="local", only_need_context=True)
+        ) if self.use_rag else ""
         rendered_prompt = manager.render_prompt(
             agent="generator",
             prompt_name="hypothesis",
             variables={
-                "goal": "How to cluster urban facilities?",
-                "preferences": 3,
-                "source_hypothesis": None,
-                "instructions":"aaa",
-                "articles_with_reasoning": "bbb"
+                "goal": task.get("goal"),
+                "preferences": task.get("preferences", ""),
+                "source_hypothesis": task.get("source_hypothesis", ""),
+                "articles_with_reasoning": literature_results,
+                "expert_contexts": expert_contex,
 
             }
         )
+        trimmed_sys_msg = trim_messages(
+            [{'role': 'user', 'content': rendered_prompt}],
+            self.llm_engine.llm_engine_name,
+            max_tokens=self.context_cutoff - 2000
+        )[0]["content"]
 
-    def solve_task(self, task, out_fname):
+        if len(trimmed_sys_msg) < len(rendered_prompt):
+            rendered_prompt = trimmed_sys_msg + "..."
+
+        return rendered_prompt
+    def refine_hypothesis(self, task):
+        while True:
+            self.sys_msg = self.set_hypothesis_prompt(task)
+
+            user_input = [
+                {'role': 'user', 'content': self.sys_msg}
+            ]
+
+            assistant_output, prompt_tokens, completion_tokens = self.llm_engine.respond(user_input, temperature=0.2,
+                                                                                         top_p=0.95)
+            self.save_formatted_output(assistant_output, "./", fname_base="hypothesis")
+
+            cost = (
+                    self.llm_cost["input_cost_per_token"] * prompt_tokens +
+                    self.llm_cost["output_cost_per_token"] * completion_tokens
+            )
+
+            self.history.append(
+                {'role': 'assistant', 'content': assistant_output}
+            )
+
+            self.history = [
+                               {'role': 'user', 'content': self.sys_msg}
+                           ] + self.history
+
+            expert_feedback = expert_interact_workflow(
+                "Hypothesis",self.history,
+                assistant_output,
+                graph_func,
+            )
+            if not expert_feedback.strip():
+                break
+            else:
+                task["source_hypothesis"] = expert_feedback
+
+
+
+    def solve_task(self, task):
+
         # Clean history
         self.history = []
 
-        self.sys_msg = self.get_sys_msg(task)
+        self.sys_msg = self.set_hypothesis_prompt(task)
 
         user_input = [
             {'role': 'user', 'content': self.sys_msg}
@@ -110,24 +128,15 @@ class GeneratorAgent():
 
         assistant_output, prompt_tokens, completion_tokens = self.llm_engine.respond(user_input, temperature=0.2,
                                                                                      top_p=0.95)
-
+        self.save_formatted_output(assistant_output,"./")
         cost = (
                 self.llm_cost["input_cost_per_token"] * prompt_tokens +
                 self.llm_cost["output_cost_per_token"] * completion_tokens
         )
 
-        self.write_program(assistant_output, out_fname)
-
         self.history.append(
             {'role': 'assistant', 'content': assistant_output}
         )
-
-        if self.use_self_debug:
-            for t in range(10):
-                halt, new_cost = self.step(out_fname, task["output_fname"])
-                cost += new_cost
-                if halt:
-                    break
 
         self.history = [
                            {'role': 'user', 'content': self.sys_msg}
@@ -137,20 +146,18 @@ class GeneratorAgent():
 
 
 if __name__ == "__main__":
+
     agent = GeneratorAgent(
         "gpt-4.1",  # "gpt-4o-mini-2024-07-18",
         context_cutoff=28000,
-        use_self_debug=False,
-        use_knowledge=False
+        use_rag=True,
+        use_literature=True
     )
 
     task = {
-        "goal":"sss",
-        "preferences":"aaa",
-        "instructions":"bbb",
-        "key_words":"ddd"
-
+        "goal":"How can we make sure that the clusters we generate in complex spatial datasets are both statistically meaningful, and make sense to people who know the area or the problem well?",
+        "preferences":"supported for academic publication",
+        "key_words":"spatial clustering"
     }
 
-    trajectory = agent.solve_task(task, out_fname="pred_programs/pred_dkpes.py")
-    print(trajectory)
+    trajectory = agent.solve_task(task)
