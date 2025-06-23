@@ -1,10 +1,12 @@
 import re
+from sys import flags
+import json
 import dspy
 from tools.expert_interact import rag_expert_input_fn
 
 def split_sections(text):
     """
-    自动按 section 标题（##）切分为list of dict: [{"title":..., "content":...}]
+    split the text into sections based on the pattern of headings.
     """
     section_pattern = r"(## [0-9.]+ .+)"
     matches = list(re.finditer(section_pattern, text))
@@ -17,27 +19,59 @@ def split_sections(text):
         sections.append({"title": title, "content": content})
     return sections
 
+def json_to_title_content_list(data):
+    data = json.loads(data)
+    result = []
 
-def llm_sections_need_expert(sections, history, llm_engine):
-    """
-    Use LLM to determine whether expert intervention is recommended for each section and return a boolean list.
-    """
-    results = []
-    for sec in sections:
-        prompt = f"""Here is the history of the conversation:
-        {history}
-        You are an expert assistant. Decide if the following section of a hypothesis proposal would benefit from domain expert review (e.g., if it involves contextual judgment, unclear assumptions, or choices that may affect downstream validity). 
-        Return "YES" if you recommend expert input, "NO" if not.
-        Section Title: {sec['title']}
-        Section Content:
-        {sec['content']}
-        ----
-        Reply YES or NO."""
+    # 处理单条字符串的键值对
+    def add_entry(title, content):
+        if isinstance(content, list):
+            # 列表转成多行字符串
+            content_str = "\n".join(str(item) for item in content)
+        elif isinstance(content, dict):
+            # dict直接转json字符串
+            import json
+            content_str = json.dumps(content, ensure_ascii=False, indent=2)
+        else:
+            content_str = str(content)
+        result.append({"title": title, "content": content_str})
 
-        output,_,_ = llm_engine.respond([{'role': 'user','content': prompt}])
-        flag = "YES" in output.strip().upper()
-        results.append(flag)
-    return results
+    # 针对你给的结构，逐个字段处理
+    # 这些字段都可以当成一个条目
+    for key in data:
+        add_entry(key, data[key])
+
+    return result
+
+def llm_sections_need_expert(sections, history, llm_engine, n_recent_history=5):
+    """
+    sections: List[str], 每一节文本
+    history: List[dict], [{role, content}], 全局历史
+    llm_engine: 你的LLM对象，有 respond(user_input, ...)
+    return: List[bool]
+    """
+    flags = []
+    # short history excerpt for context
+    hist_excerpt = "\n".join([f"[{h['role']}]: {h['content']}" for h in [history[0], history[-1]]])
+    for section in sections:
+        prompt = f"""You are assisting in scientific hypothesis writing. Below is a section from the draft and the conversation history. 
+
+        Your job: decide if this section requires review or modification by a human domain expert (e.g., because it contains ambiguous reasoning, lacks expert-specific context, uses uncertain language, or is methodologically controversial).
+        
+        Return only "True" if it should be reviewed by an expert, otherwise return "False".
+        
+        ## Section:
+        {section}
+        
+        ## Recent Conversation History:
+        {hist_excerpt}
+        
+        Does this section require expert intervention? Return only "True" or "False".
+        """
+        user_input = [{"role": "user", "content": prompt}]
+        output, *_ = llm_engine.respond(user_input, temperature=0, top_p=1)
+        flags.append("true" in output.lower())
+    return flags
 
 def expert_review_sections(sections, need_expert_flags, expert_input_fn=None):
     """
@@ -53,9 +87,9 @@ def expert_review_sections(sections, need_expert_flags, expert_input_fn=None):
             if expert_input_fn:
                 feedback = expert_input_fn(sec['title'], sec['content'])
             else:
-                feedback = input("请专家批注/建议修改（直接回车为通过）：\n")
+                feedback = input("Ask experts to make remarks/suggestions for modification. (Press Enter to pass.)\n")
             if feedback.strip():
-                sec['content'] += f"\n\n【专家修订】\n{feedback}"
+                sec['content'] += f"\n\nExpert edit: \n{feedback}"
         revised_sections.append(sec)
     return revised_sections
 
@@ -70,9 +104,10 @@ def merge_sections_to_text(sections):
 
 def expert_interact_workflow(agent_output, history, llm_engine, expert_input_fn=None):
     # 1. split
-    sections = split_sections(agent_output)
+    sections = json_to_title_content_list(agent_output)
     # 2. judge whether expert intervention is needed
-    need_expert_flags = llm_sections_need_expert(sections, llm_engine)
+    # need_expert_flags = llm_sections_need_expert(sections, history, llm_engine)
+    need_expert_flags = [False, True, True, True, True, True, False]  # For demo, assume all sections need expert review
     # 3. expert interaction
     revised_sections = expert_review_sections(sections, need_expert_flags, expert_input_fn)
     # 4. merge the sections back to text

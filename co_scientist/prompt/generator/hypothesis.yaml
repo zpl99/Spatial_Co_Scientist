@@ -25,14 +25,16 @@ template: |
   - Think step by step. Do not skip any required element.
 
   # Output Format
-  Your output should include each of the following, in order:
+  Your output should include each of the following, each is a section, for in order:
     - Restatement of goal and problem if clarifying.
     - Reasoning and analysis steps (step by step).
     - Synthesis of literature (chronologically ordered, most recent first).
+    - Integration of expert interviews.
     - Logical framework/rationale connecting literature and hypothesis.
     - Detailed hypothesis statement.
     - Brief mapping of how the hypothesis satisfies each criterion.
-
+  ......
+ 
   # Context (auto-populated)
   Goal: {{ goal }}
 
@@ -51,4 +53,4 @@ template: |
   Proposed hypothesis (detailed description for domain experts):
 
   # Final Instructions
-  Do not summarize or conclude until all requirements above have been satisfied. Only end when the hypothesis is clearly presented and fully justified for a domain expert audience.
+  Do not summarize or conclude until all requirements above have been satisfied. Only end when the hypothesis is clearly presented and fully justified for a domain expert audience. Please output every section and its content in the order specified and in a json format. Make sure only 7 sections and the output content can be interpreted by json.loads() .

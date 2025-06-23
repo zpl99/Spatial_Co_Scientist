@@ -78,40 +78,55 @@ class GeneratorAgent():
             rendered_prompt = trimmed_sys_msg + "..."
 
         return rendered_prompt
-    def refine_hypothesis(self, task):
-        while True:
-            self.sys_msg = self.set_hypothesis_prompt(task)
 
-            user_input = [
-                {'role': 'user', 'content': self.sys_msg}
-            ]
+    def refine_hypothesis(self, draft_text, round_idx=0):
+        """
+        multi rounds of hypothesis refinement with expert feedback.
+        """
+        current_text = draft_text
+        # 1. log the draft response
+        self.history.append({
+            "role": "llm_draft",
+            "content": current_text,
+            "meta": {"round": round_idx}
+        })
 
-            assistant_output, prompt_tokens, completion_tokens = self.llm_engine.respond(user_input, temperature=0.2,
-                                                                                         top_p=0.95)
-            self.save_formatted_output(assistant_output, "./", fname_base="hypothesis")
+        # 2. judge whether expert intervention is needed
+        expert_feedback = expert_interact_workflow(current_text,self.history,self.llm_engine)
+        self.history.append({
+            "role": "expert_review",
+            "content": expert_feedback,
+            "meta": {"round": round_idx}
+        })
 
-            cost = (
-                    self.llm_cost["input_cost_per_token"] * prompt_tokens +
-                    self.llm_cost["output_cost_per_token"] * completion_tokens
-            )
+        # 3. 合成prompt，带入所有历史，交给LLM重新输出
+        merge_prompt = (
+            "Below is the latest hypothesis draft and expert feedback history.\n"
+            "Your job is to integrate the expert feedback into the hypothesis, "
+            "refining and improving the text for publication, ensuring clarity, scientific rigor, and coherence. "
+            "If any expert suggestions conflict, use your best judgment as a domain expert to resolve.\n\n"
+            "====\n"
+            "History (from earliest to latest):\n"
+        )
+        history = f"Round {round_idx}:\n Role: {self.history[-1]['role']}\n Content: {self.history[-1]['content']}\n"
+        merge_prompt += history
 
-            self.history.append(
-                {'role': 'assistant', 'content': assistant_output}
-            )
+        merge_prompt += "\n---\nOutput the fully revised hypothesis below (since you have revised the overall process, so here you just output the final revised hypothesis, do not include other content):\n"
 
-            self.history = [
-                               {'role': 'user', 'content': self.sys_msg}
-                           ] + self.history
+        # 4. generate new hypothesis
+        revised_text, _, _ = self.llm_engine.respond(
+            [{'role': 'user', 'content': merge_prompt}],
+            temperature=0.2, top_p=0.95
+        )
 
-            expert_feedback = expert_interact_workflow(
-                "Hypothesis",self.history,
-                assistant_output,
-                graph_func,
-            )
-            if not expert_feedback.strip():
-                break
-            else:
-                task["source_hypothesis"] = expert_feedback
+        self.history.append({
+            "role": "llm_refined",
+            "content": revised_text,
+            "meta": {"round": round_idx}
+        })
+
+
+        return revised_text
 
 
 
@@ -122,17 +137,19 @@ class GeneratorAgent():
 
         self.sys_msg = self.set_hypothesis_prompt(task)
 
+        self.history.append({"role": "system", "content": self.sys_msg, "meta": {}})
+
         user_input = [
             {'role': 'user', 'content': self.sys_msg}
         ]
 
         assistant_output, prompt_tokens, completion_tokens = self.llm_engine.respond(user_input, temperature=0.2,
                                                                                      top_p=0.95)
-        self.save_formatted_output(assistant_output,"./")
-        cost = (
-                self.llm_cost["input_cost_per_token"] * prompt_tokens +
-                self.llm_cost["output_cost_per_token"] * completion_tokens
-        )
+
+
+        final_hypothesis = self.refine_hypothesis(assistant_output, round_idx=0)
+        print(final_hypothesis)
+        self.save_formatted_output(final_hypothesis,"./")
 
         self.history.append(
             {'role': 'assistant', 'content': assistant_output}
@@ -142,7 +159,7 @@ class GeneratorAgent():
                            {'role': 'user', 'content': self.sys_msg}
                        ] + self.history
 
-        return {"history": self.history, "cost": cost}
+        return {"history": self.history,}
 
 
 if __name__ == "__main__":

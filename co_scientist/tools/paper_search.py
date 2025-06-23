@@ -9,6 +9,7 @@ p_manager = prompt_manager.PromptManager("/Users/zepingliu/Library/CloudStorage/
 llm_engine = LLMEngine('gpt-4.1')
 def SemanticScholarHighCiteSearch(refine_keywords:str, min_citation_count: int = 50,top_n:int = 50, year_from:int = 2015):
     """search high cited paper from Semantic Scholar API based on the user query"""
+    refine_keywords = refine_keywords.replace(", ", "|")
     query_params = {
         "query": refine_keywords,
         "fields": "title,authors,citationCount,url,year,abstract,openAccessPdf",

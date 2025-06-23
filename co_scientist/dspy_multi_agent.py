@@ -35,16 +35,15 @@ class HypothesisGeneration(dspy.Signature):
     )
 
 if __name__ == "__main__":
-
     agent = dspy.ReAct(
-        HypothesisGeneration,
+        PaperSearch,
         tools=[
-            # SemanticScholarHighCiteSearch,
-            # refine_keywords,
+            SemanticScholarHighCiteSearch,
+            refine_keywords,
             # get_knowledge_rag,
-            rag_expert_input_fn,
-            cli_expert_input_fn,
-            expert_in_the_loop
+            # rag_expert_input_fn,
+            # cli_expert_input_fn,
+            # expert_in_the_loop
         ],
         max_iters=10
     )
@@ -54,6 +53,7 @@ if __name__ == "__main__":
 
     dspy.configure(lm=lm)
 
-    result = agent(goal="How can we make sure that the clusters we generate in complex spatial datasets are both statistically meaningful, and make sense to people who know the area or the problem well?", preference="supported for academic publication")
+    result = agent(goal="How can we make sure that the clusters we generate in complex spatial datasets are both statistically meaningful, and make sense to people who know the area or the problem well?", preference="spatial clustering")
 
     print(result)
+
