@@ -1,0 +1,2653 @@
+**Toolset:** Network Analyst
+
+**Tool:** Add Field To Analysis Layer
+
+**Description:** This tool adds a field to a sublayer of a network analysis layer. It is typically used to transfer fields from input features to sublayers, such as adding a UniqueID field to a Facilities sublayer in a Service Area layer.
+
+**Parameters:**
+- **Input Network Analysis Layer:** The network analysis layer to which the new field will be added. Type: Network Analyst Layer.
+- **Sub Layer:** The sublayer of the network analysis layer to which the new field will be added. Type: String.
+- **Field Name:** The name of the field that will be added to the specified sublayer. Type: String.
+- **Field Type:** Specifies the field type for the new field. Options include Text, Float, Double, Short, Long, Date, BLOB, GUID, BIGINTEGER, TIMEONLY, DATEONLY, TIMESTAMPOFFSET. Type: String.
+
+**Derived Output:**
+- **Output Layer:** The updated network analysis layer. Type: Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the network analysis layer and sublayer
+network_analysis_layer = "Service Area"
+sublayer = "Facilities"
+
+# Define the field name and type
+field_name = "UniqueID"
+field_type = "LONG"
+
+# Add the field to the analysis layer
+arcpy.na.AddFieldToAnalysisLayer(network_analysis_layer, sublayer, field_name, field_type)
+```
+**Toolset:** Network Analyst
+
+**Tool:** Add Fleet Routing Breaks
+
+**Description:** The Add Fleet Routing Breaks tool is used to create breaks in a Vehicle Routing Problem (VRP) layer. It appends rows to the Breaks sublayer of a VRP layer, allowing for the addition of breaks such as time window breaks or maximum travel time breaks to routes within the layer.
+
+**Parameters:**
+- **Input Vehicle Routing Problem Layer:** The VRP analysis layer to which the breaks will be added. Type: Network Analyst Layer.
+- **Target Route Name (Optional):** The specific route to which the breaks will apply. If not specified, breaks are created for each existing route. Type: String.
+- **Break Type (Optional):** Specifies the type of breaks to be added. Options include Time Window Break, Maximum Travel Time Break, and Maximum Work Time Break. Type: String.
+- **Append To Existing Breaks (Optional):** Determines whether new breaks will be appended to the existing set in the breaks attribute table. Type: Boolean.
+
+**Derived Output:**
+- **Output Vehicle Routing Problem Layer:** The updated network analyst layer with the added breaks. Type: Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = "C:/Data/NetworkAnalysis.gdb"
+
+# Define the input VRP layer
+in_vrp_layer = "VehicleRoutingProblemLayer"
+
+# Define optional parameters
+target_route = "Route1"
+break_type = "TIME_WINDOW_BREAK"
+
+# Execute the Add Fleet Routing Breaks tool
+arcpy.na.AddVehicleRoutingProblemBreaks(
+    in_vrp_layer,
+    target_route,
+    break_type,
+    append_to_existing_breaks=True
+)
+```
+
+Feel free to ask if you need further details on using this tool or have other questions about ArcGIS Pro.
+**Toolset:** Network Analyst
+
+**Tool:** Add Fleet Routing Routes
+
+**Description:** The Add Fleet Routing Routes tool is used to create routes within a vehicle routing problem, last mile delivery, or waste collection analysis layer. It appends rows to the Routes sublayer, allowing for specific settings and unique naming conventions for each route.
+
+**Parameters:**
+- **Input Vehicle Routing Problem Layer:** The analysis layer to which routes will be added. Type: Network Analyst Layer.
+- **Number of Routes (Optional):** Specifies the number of routes to be added. Type: Long.
+- **Route Name Prefix (Optional):** A prefix added to each route's name, followed by an incrementing numerical suffix. Type: String.
+- **Start Depot Name (Optional):** The name of the starting depot for the route. Type: String.
+- **End Depot Name (Optional):** The name of the ending depot for the route. Type: String.
+
+**Derived Output:**
+- **out_network_analysis_layer:** The updated network analysis layer. Type: Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/Data/SanFrancisco.gdb"
+arcpy.env.overwriteOutput = True
+
+# Define the input parameters
+input_layer = "VehicleRoutingProblemLayer"
+number_of_routes = 5
+route_name_prefix = "WeekdayRoute"
+start_depot_name = "DepotA"
+end_depot_name = "DepotB"
+
+# Execute the Add Fleet Routing Routes tool
+arcpy.na.AddFleetRoutingRoutes(
+    input_layer,
+    number_of_routes,
+    route_name_prefix,
+    start_depot_name,
+    end_depot_name
+)
+
+print("Routes added successfully.")
+```
+**Toolset:** Network Analyst
+
+**Tool:** Add Locations
+
+**Description:** The Add Locations tool in ArcGIS Pro is used to add input features or records to a network analysis layer, specifically to sublayers such as stops and barriers. It calculates network locations of the inputs when the network analysis layer references a network dataset, unless precalculated network location fields are mapped from the inputs.
+
+**Parameters:**
+- **Input Network Analysis Layer:** The network analysis layer to which the network analysis objects will be added. Type: Network Analyst Layer.
+- **Sub Layer:** The name of the sublayer of the network analysis layer to which the network analysis objects will be added. Type: String.
+- **Input Locations:** The feature class or table containing the locations to be added to the network analysis sublayer. Type: Table View.
+- **Field Mappings (Optional):** The mapping between the input fields of the network analysis sublayer and the fields in the input data or specified constants. Type: Various.
+
+**Derived Output:**
+- **output_layer:** The updated network analysis layer. Type: Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the path to the input feature class
+hospitals = "C:/Data/SanFrancisco.gdb/Analysis/Hospitals"
+
+# Run the Add Locations tool to add stops to a route analysis layer named 'Route'
+arcpy.na.AddLocations("Route", "Stops", hospitals)
+```
+**Toolset:** Network Analyst
+
+**Tool:** Calculate Locations
+
+**Description:**  
+The Calculate Locations tool locates input features on a network and adds fields to the input features that describe the network locations. It is typically used to precalculate the network locations of inputs for a Network Analyst workflow, enhancing performance during analysis.
+
+**Parameters:**
+- **Input Network Analysis Layer:** The network analysis layer to which the network analysis objects will be added.  
+  *Type:* Network Analyst Layer.
+- **Sub Layer:** The name of the sublayer of the network analysis layer to which the network analysis objects will be added.  
+  *Type:* String.
+- **Input Locations:** The feature class or table containing the locations to be added to the network analysis sublayer.  
+  *Type:* Table View.
+- **Field Mappings (Optional):** The mapping between the input fields of the network analysis sublayer and the fields in the input data or specified constants.  
+  *Type:* Various.
+
+**Derived Output:**
+- **out_point_feature_class:** The updated input features.  
+  *Type:* Table View.
+- **output_layer:** If the in_point_features parameter value was a sublayer of a network analysis layer, this derived output parameter returns the sublayer's parent network analysis layer.  
+  *Type:* Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Check out the Network Analyst extension
+arcpy.CheckOutExtension("network")
+
+# Define the network dataset and input features
+network = "C:/Data/Paris.gdb/Transportation/ParisMultimodal_ND"
+input_facilities = "C:/Data/Paris.gdb/Analysis/Stores"
+travel_mode = "Driving Time"
+
+# Make a network dataset layer
+nd_layer = arcpy.nax.MakeNetworkDatasetLayer(network).getOutput(0)
+
+# Run Calculate Locations to calculate the network locations of the points
+arcpy.nax.CalculateLocations(
+    input_facilities, 
+    nd_layer, 
+    search_tolerance="500 Meters", 
+    search_criteria=[
+        ["Streets", "SHAPE"], 
+        ["Metro_Entrances", "SHAPE"]
+    ], 
+    search_query=[["Streets", "FUNC_CLASS <> '1'"]], 
+    travel_mode=travel_mode
+)
+
+# Check in the Network Analyst extension
+arcpy.CheckInExtension("network")
+```
+**Toolset:** Network Analyst
+
+**Tool:** Copy Network Analysis Layer
+
+**Description:** The Copy Network Analysis Layer tool duplicates a network analysis layer, maintaining the same analysis settings and network data source as the original. It is typically used to create a copy of an existing network analysis layer for further analysis or comparison.
+
+**Parameters:**
+- **Input Network Analysis Layer:** The network analysis layer to copy. Type: Network Analyst Layer.
+- **Output Layer Name (Optional):** The name of the network analysis layer that will be created. Type: String.
+
+**Derived Output:**
+- **Output Network Analysis Layer:** The newly created network analysis layer. Type: Network Analyst Layer.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Retrieve the existing network analysis layer named "Route" from the map
+project = arcpy.mp.ArcGISProject("CURRENT")
+map_object = project.listMaps()[0]
+route_layer = map_object.listLayers("Route")[0]
+
+# Copy the existing layer to a new layer
+copied_route_layer = arcpy.na.CopyNetworkAnalysisLayer(route_layer, "Copied Route").getOutput(0)
+
+# Perform further analysis as desired
+arcpy.na.Solve(copied_route_layer)
+```
+**Toolset:** Network Analyst
+
+**Tool:** Copy Traversed Source Features
+
+**Description:** The Copy Traversed Source Features tool creates two feature classes and a table containing the edges, junctions, and turns that are traversed while solving a network analysis layer. This tool is typically used to analyze which streets are most frequently used during emergencies or other scenarios requiring route analysis.
+
+**Parameters:**
+- **input_network_analysis_layer:** The network analysis layer from which traversed source features will be copied. If the network analysis layer does not have a valid result, the layer will be solved to produce one. Type: Network Analyst Layer.
+- **output_location:** The workspace where the output table and two feature classes will be saved. Type: Workspace; Feature Dataset.
+- **edge_feature_class_name:** The name of the feature class that will contain information about the traversed edge source features. If the solved network analysis layer doesn't traverse any edge features, an empty feature class will be created. Type: String.
+- **junction_feature_class_name:** The name of the feature class that will contain information about the traversed junction source features, including system junctions and relevant points from the input network analysis layer. If the solved network analysis layer doesn't traverse any junctions, an empty feature class will be created. Type: String.
+- **turn_table_name:** The name of the table that will contain information about the traversed global turns and turn features that scale cost for the underlying edges. If the solved network analysis layer doesn't traverse any turns, an empty table will be created. Type: String.
+
+**Derived Output:**
+- **edge_features:** A feature class containing the network dataset edges that were traversed in the network analysis. Type: Feature Class.
+- **junction_features:** A feature class containing the network dataset junctions that were traversed in the network analysis. Type: Feature Class.
+- **turn_table:** A table containing the network dataset turns that were traversed in the network analysis. Type: Table.
+- **modified_input_network_analysis_layer:** The solved network analysis layer. Type: Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Check out Network Analyst license
+if arcpy.CheckExtension("network") == "Available":
+    arcpy.CheckOutExtension("network")
+else:
+    raise arcpy.ExecuteError("Network Analyst Extension license is not available.")
+
+# Set environment settings
+output_dir = "C:/Data"
+env.workspace = os.path.join(output_dir, "Output.gdb")
+env.overwriteOutput = True
+
+# Set local variables
+input_network_analysis_layer = "Route"
+output_location = "C:/Data/Output.gdb"
+edge_feature_class_name = "TraversedEdges"
+junction_feature_class_name = "TraversedJunctions"
+turn_table_name = "TraversedTurns"
+
+# Execute CopyTraversedSourceFeatures
+arcpy.na.CopyTraversedSourceFeatures(
+    input_network_analysis_layer,
+    output_location,
+    edge_feature_class_name,
+    junction_feature_class_name,
+    turn_table_name
+)
+```
+**Toolset:** Network Analyst
+
+**Tool:** Delete Network Analysis Layer
+
+**Description:** The Delete Network Analysis Layer tool is used to remove a network analysis layer and its associated analysis data, such as feature classes and tables referenced by the layer's sublayers and subtables. This tool is particularly useful in workflows where network analysis layers are created as intermediate steps, helping to prevent unwanted accumulation of sublayer data in the project geodatabase.
+
+**Parameters:**
+- **Input Network Analysis Layers:** The network analysis layer or layers to delete.  
+  *Type:* Network Analyst Layer.
+
+**Derived Output:**
+- **Delete Succeeded:** Indicates whether the deletion was successful.  
+  *Type:* Boolean.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Create a Vehicle Routing Problem analysis layer
+layer = arcpy.na.MakeVehicleRoutingProblemAnalysisLayer("NetworkDataset", "VRP").getOutput(0)
+
+# Perform additional workflow steps here
+
+# Delete the network analysis layer
+arcpy.na.DeleteNetworkAnalysisLayer(layer)
+```
+**Toolset:** Network Analyst
+
+**Tool:** Directions
+
+**Description:** The Directions tool generates turn-by-turn directions from a network analysis layer with routes. It is typically used to create detailed travel instructions for navigating routes, which can be output in various formats such as text, XML, or HTML.
+
+**Parameters:**
+- **Input Network Analysis Layer:** The network analysis layer for which directions will be generated. Type: Network Analyst Layer.
+- **Output File Type:** Specifies the format for the output directions file. Type: String.
+- **Output Directions File:** The full path to the directions file that will be written. Type: File.
+- **Report Length in These Units:** Specifies the linear units for the directions file. Type: String.
+- **Report Travel Time:** Specifies whether travel time will be reported in the directions file. Type: Boolean.
+
+**Derived Output:**
+- **out_network_analysis_layer:** The new network analysis layer. Type: Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Check out Network Analyst license
+arcpy.CheckOutExtension("network")
+
+# Set environment settings
+arcpy.env.workspace = "C:/Data/Output.gdb"
+arcpy.env.overwriteOutput = True
+
+# Define inputs
+network_layer = "Route"
+output_file_type = "TEXT"
+output_directions_file = "C:/Data/Route_Directions.txt"
+length_units = "Miles"
+report_time = "REPORT_TIME"
+
+# Generate directions
+arcpy.na.Directions(network_layer, output_file_type, output_directions_file, length_units, report_time)
+```
+**Toolset:** Network Analyst
+
+**Tool:** Make Closest Facility Analysis Layer
+
+**Description:** The Make Closest Facility Analysis Layer tool creates a network analysis layer to determine the closest facility or facilities to an incident based on a specified network cost. This tool is typically used in scenarios such as finding the nearest hospital to an accident site or the closest fire station to an emergency.
+
+**Parameters:**
+- **Input Analysis Network:** The network dataset on which the closest facility analysis will be performed. Type: Network Dataset Layer.
+- **Output Layer Name:** Name of the closest facility network analysis layer to create. Type: String.
+- **Impedance Attribute:** The cost attribute that will be used as impedance in the analysis. Type: String.
+- **Travel From or To Facility (Optional):** Specifies the direction of travel between facilities and incidents. Type: String.
+- **Default Cutoff (Optional):** Default impedance value at which to stop searching for facilities for a given incident. Type: Double.
+- **Number of Facilities to Find (Optional):** Specifies the number of facilities to find for each incident. Type: Long.
+- **Accumulate Attributes (Optional):** A list of cost attributes to be accumulated during analysis. Type: String.
+- **Allow U-Turns (Optional):** Specifies whether U-turns are allowed. Type: String.
+- **Restrictions (Optional):** Specifies which restrictions should be honored when solving the analysis. Type: String.
+- **Use Hierarchy (Optional):** Specifies whether hierarchy should be used when finding the closest facility. Type: String.
+- **Time of Day (Optional):** Specifies the time of day for the analysis. Type: Date.
+- **Time Zone for Time Fields (Optional):** Specifies the time zone for the time of day fields. Type: String.
+- **Line Shape (Optional):** Specifies the shape of the output routes. Type: String.
+- **Generate Directions on Solve (Optional):** Specifies whether directions will be generated when running the analysis. Type: Boolean.
+- **Ignore Invalid Locations (Optional):** Specifies whether invalid input locations will be ignored. Type: Boolean.
+
+**Derived Output:**
+- **out_network_analysis_layer:** The newly created network analysis layer. Type: Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy import env
+import os
+
+# Set environment settings
+output_dir = "C:/Data"
+env.workspace = os.path.join(output_dir, "Output.gdb")
+env.overwriteOutput = True
+
+# Set local variables
+input_gdb = "C:/Data/Paris.gdb"
+network = os.path.join(input_gdb, "Transportation", "ParisMultimodal_ND")
+layer_name = "ClosestWarehouse"
+travel_mode = "Driving Time"
+facilities = os.path.join(input_gdb, "Analysis", "Warehouses")
+incidents = os.path.join(input_gdb, "Analysis", "Stores")
+
+# Create a new closest facility analysis layer
+result_object = arcpy.na.MakeClosestFacilityAnalysisLayer(
+    network, layer_name, travel_mode, "TO_FACILITIES", number_of_facilities_to_find=1
+)
+
+# Get the layer object from the result object
+layer_object = result_object.getOutput(0)
+
+# Get the names of all the sublayers within the closest facility layer
+sublayer_names = arcpy.na.GetNAClassNames(layer_object)
+
+# Stores the layer names that we will use later
+facilities_layer_name = sublayer_names["Facilities"]
+incidents_layer_name = sublayer_names["Incidents"]
+
+# Load the warehouses as Facilities using the default field mappings and search tolerance
+arcpy.na.AddLocations(layer_object, facilities_layer_name, facilities, "", "")
+
+# Load the stores as Incidents. Map the Name property from the NOM field using field mappings
+field_mappings = arcpy.na.NAClassFieldMappings(layer_object, incidents_layer_name)
+field_mappings["Name"].mappedFieldName = "NOM"
+arcpy.na.AddLocations(layer_object, incidents_layer_name, incidents, field_mappings, "")
+
+# Solve the closest facility layer
+arcpy.na.Solve(layer_object)
+
+# Save the solved closest facility layer as a layer file on disk
+output_layer_file = os.path.join(output_dir, layer_name + ".lyrx")
+layer_object.saveACopy(output_layer_file)
+
+print("Script completed successfully")
+```
+No information available.
+No information available.
+**Toolset:** Network Analyst
+
+**Tool:** Make OD Cost Matrix Analysis Layer
+
+**Description:** The Make OD Cost Matrix Analysis Layer tool creates an origin-destination (OD) cost matrix network analysis layer, which is useful for calculating and representing the costs from a set of origin locations to a set of destination locations. This tool is typically used in logistics, delivery, and routing analyses to determine the least-cost paths and measure travel times or distances between multiple origins and destinations.
+
+**Parameters:**
+- **Input Analysis Network:** The network dataset on which the OD cost matrix analysis will be performed. Type: Network Dataset Layer.
+- **Output Layer Name:** Name of the OD cost matrix network analysis layer to create. Type: String.
+- **Impedance Attribute:** The cost attribute used as impedance in the analysis. Type: String.
+- **Default Cutoff (Optional):** Default impedance value at which to cut off searching for destinations for a given origin. Type: Double.
+- **Default Number of Destinations to Find (Optional):** Default number of destinations to find for each origin. Type: Long.
+- **Accumulators (Optional):** A list of cost attributes to be accumulated during analysis. Type: String.
+- **U-Turn Policy (Optional):** Specifies the U-turn policy at junctions. Type: String.
+- **Ignore Invalid Locations (Optional):** Specifies whether invalid input locations will be ignored. Type: Boolean.
+
+**Derived Output:**
+- **out_network_analysis_layer:** The newly created network analysis layer. Type: Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy import env
+import os
+
+# Check out Network Analyst license
+if arcpy.CheckExtension("network") == "Available":
+    arcpy.CheckOutExtension("network")
+else:
+    raise arcpy.ExecuteError("Network Analyst Extension license is not available.")
+
+# Set environment settings
+output_dir = "C:/Data"
+env.workspace = os.path.join(output_dir, "Output.gdb")
+env.overwriteOutput = True
+
+# Set local variables
+input_gdb = "C:/Data/Paris.gdb"
+network = os.path.join(input_gdb, "Transportation", "ParisMultimodal_ND")
+layer_name = "WarehouseToStoreDrivetimeMatrix"
+travel_mode = "Driving Time"
+
+# Create a new OD Cost matrix layer
+result_object = arcpy.na.MakeODCostMatrixAnalysisLayer(
+    network, layer_name, travel_mode
+)
+
+# Get the layer object from the result object
+layer_object = result_object.getOutput(0)
+
+# Get the names of all the sublayers within the OD layer
+sublayer_names = arcpy.na.GetNAClassNames(layer_object)
+
+# Store the layer names for later use
+origins_layer_name = sublayer_names["Origins"]
+destinations_layer_name = sublayer_names["Destinations"]
+
+# Load store features as origins using the geometry of store features
+stores = os.path.join(input_gdb, "Analysis", "Stores")
+search_tolerance = "500 Meters"
+search_query = [["Streets", '"FREEWAY" = 0'], ["Streets_ND_Junctions", ""]]
+
+arcpy.na.AddLocations(
+    layer_object, origins_layer_name, stores, "", search_tolerance, search_query=search_query
+)
+
+# Solve the OD cost matrix layer
+arcpy.na.Solve(layer_object)
+```
+**Toolset:** Network Analyst
+
+**Tool:** Make Route Analysis Layer
+
+**Description:**  
+The Make Route Analysis Layer tool creates a route network analysis layer and sets its analysis properties. This tool is typically used to determine the best route between a set of network locations based on a specified network cost.
+
+**Parameters:**
+- **Input Analysis Network**: The network dataset on which the route analysis will be performed.  
+  *Type: Network Dataset Layer*.
+- **Output Layer Name**: Name of the route network analysis layer to create.  
+  *Type: String*.
+- **Impedance Attribute**: The cost attribute that will be used as impedance in the analysis.  
+  *Type: String*.
+- **Reorder Stops to Find Optimal Route (Optional)**: 
+  - *Checked*: The stops will be reordered to find the optimal route, changing the route analysis from a shortest-path problem to a traveling salesperson problem (TSP). 
+  - *Unchecked*: The stops will be visited in the input order.  
+  *Type: Boolean*.
+- **Preserve Ordering of Stops (Optional)**: Specifies the ordering of stops when the "Reorder stops to find optimal route" parameter is checked. Options include:
+  - *Preserve first and last stops*: The first and last stops by input order will be preserved as the first and last stops in the route.
+  - *Preserve first stop*: The first stop by input order will be preserved as the first stop in the route, but the last stop can be reordered.
+  - *Preserve last stop*: The last stop by input order will be preserved as the last stop in the route, but the first stop can be reordered.  
+  *Type: String*.
+- **Use Time Windows (Optional)**: Specifies whether time windows will be used at the stops. 
+  - *Checked*: The route will consider time windows on the stops. If a stop is arrived at before its time window, there will be wait time until the time window starts. 
+  - *Unchecked*: Time windows will not be considered.  
+  *Type: Boolean*.
+- **Generate Directions on Solve (Optional)**: Specifies whether directions will be generated when the analysis is solved.  
+  *DIRECTIONS*: Turn-by-turn directions will be generated on solve.  
+  *NO_DIRECTIONS*: Turn-by-turn directions will not be generated on solve. This is the default.  
+  *Type: Boolean*.
+- **Time Zone for Time Fields (Optional)**: Specifies the time zone that will be used to interpret the time fields included in the input tables, such as the fields used for time windows.  
+  *LOCAL_TIME_AT_LOCATIONS*: The dates and times in the time fields for the stop will be interpreted according to the time zone in which the stop is located. This is the default.  
+  *UTC*: The dates and times in the time fields for the stop refer to coordinated universal time (UTC).  
+  *Type: String*.
+- **Ignore Invalid Locations (Optional)**: Specifies whether invalid input locations will be ignored. Typically, locations are invalid if they cannot be located on the network.  
+  *SKIP*: Invalid input locations will be ignored and only valid locations will be used. This is the default.  
+  *HALT*: All input locations will be used. Invalid locations will cause the analysis to fail.  
+  *Type: Boolean*.
+
+Derived Output:
+- **out_network_analysis_layer**: The output network analysis layer.  
+  *Type: Network Analyst Layer*.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/Data/SanFrancisco.gdb"
+
+# Set local variables
+network = "Transportation/Streets_ND"
+output_layer_name = "WorkRoute"
+impedance_attribute = "TravelTime"
+
+# Create a new route analysis layer
+arcpy.na.MakeRouteAnalysisLayer(network, output_layer_name="WorkRoute", impedance_attribute="TravelTime")
+```
+`No information available.`
+**Toolset:** Network Analyst
+
+**Tool:** Make Vehicle Routing Problem Analysis Layer
+
+**Description:** The Make Vehicle Routing Problem Analysis Layer tool creates a vehicle routing problem (VRP) network analysis layer, which is useful for optimizing a set of routes using a fleet of vehicles. This tool can be used with a local network dataset or a service hosted online or in a portal.
+
+**Parameters:**
+- **Input Network Dataset:** The network dataset used to create the VRP analysis layer. Type: Network Analyst Layer.
+- **Layer Name:** The name of the VRP analysis layer. Type: String.
+- **Travel Mode:** Specifies the travel mode for the analysis. Type: String.
+- **Time Units:** The units used for time-based attributes. Type: String.
+- **Distance Units:** The units used for distance-based attributes. Type: String.
+- **Line Shape:** Specifies the shape of the output routes. Options include STRAIGHT_LINES, NO_LINES, and ALONG_NETWORK. Type: String.
+- **Generate Directions on Solve:** Specifies whether turn-by-turn directions will be generated. Type: Boolean.
+- **Ignore Invalid Locations:** Specifies whether invalid input locations will be ignored. Type: Boolean.
+
+**Derived Output:**
+- **out_network_analysis_layer:** The new network analysis layer created by the tool. Type: Network Analyst Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/Data/SanFrancisco.gdb"
+
+# Define local variables
+network = "Transportation/Streets_ND"
+layer_name = "FridayRoutes"
+travel_mode = "Driving Time"
+time_units = "Minutes"
+distance_units = "Miles"
+line_shape = "STRAIGHT_LINES"
+
+# Create a new Vehicle Routing Problem (VRP) layer
+result_object = arcpy.na.MakeVehicleRoutingProblemAnalysisLayer(
+    network, layer_name, travel_mode, time_units, distance_units, line_shape
+)
+
+# Get the layer object from the result object
+layer_object = result_object.getOutput(0)
+```
+No information available.
+No information available.
+No information available.
+**Toolset: Network Dataset**
+
+**Tool: Build Network**
+
+**Description:**  
+The Build Network tool is used to reconstruct the network connectivity and attribute information of a network dataset. It is typically used after edits are made to the attributes or features of a participating source feature class. The tool ensures that the network connectivity is re-established only in the areas that have been edited, which speeds up the build process. However, if network attributes are edited, the entire network dataset is rebuilt, which can be time-consuming for large datasets.
+
+**Parameters:**
+- **Input Network Dataset**: The network dataset to be built.  
+  *Type: Network Dataset Layer*.
+- **Force Full Build (Optional)**: Specifies whether the full network will be built or only the parts of the network in dirty areas.  
+  *Type: Boolean*.
+
+**Derived Output:**
+- **Updated Input Network Dataset**: The updated network dataset.  
+  *Type: Network Dataset Layer*.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Check out the Network Analyst license
+if arcpy.CheckExtension("network") == "Available":
+    arcpy.CheckOutExtension("network")
+else:
+    raise arcpy.ExecuteError("Network Analyst Extension license is not available.")
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/SanFrancisco.gdb"
+
+# Set local variables
+inNetworkDataset = "Transportation/Streets_ND"
+
+# Build the network dataset
+arcpy.na.BuildNetwork(in_network_dataset=inNetworkDataset, force_full_build="NO_FORCE_FULL_BUILD")
+
+# If there are any build errors, they are recorded in a BuildErrors.txt file
+# present in the system temp directory. So copy this file to the directory
+# containing this script
+import os
+import shutil
+import sys
+
+# First get the path to the system temp directory
+temp_dir = os.environ.get("TEMP")
+if temp_dir:
+    shutil.copy2(os.path.join(temp_dir, "BuildErrors.txt"), sys.path[0])
+
+print("Script completed successfully.")
+```
+**Toolset:** Network Dataset
+
+**Tool:** Create Network Dataset
+
+**Description:** The Create Network Dataset tool is used to create a network dataset within an existing feature dataset. This network dataset can be utilized to perform network analysis on the data contained within the feature dataset.
+
+**Parameters:**
+- **Target Feature Dataset:** The feature dataset where the network dataset will be created. It should contain the source feature classes that will participate in the network dataset. Type: Feature Dataset.
+- **Network Dataset Name:** The name of the network dataset to be created. The specified name must not already exist in the target feature dataset or its parent geodatabase. Type: String.
+- **Source Feature Classes:** The names of the feature classes to be included in the network dataset as network source features. This should be specified as a list of strings, and at least one line feature class must be included. Type: String.
+- **Elevation Model:** Specifies the model used to control vertical connectivity in the network dataset. Options include ELEVATION_FIELDS, Z_COORDINATES, and NO_ELEVATION. Type: String.
+
+**Derived Output:**
+- **out_network_dataset:** The newly created network dataset. Type: Network Dataset.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Check out the Network Analyst extension
+arcpy.CheckOutExtension("network")
+
+# Define parameters
+target_feature_dataset = r"C:\Data\Network.gdb\Transportation"
+network_dataset_name = "Streets_ND"
+source_feature_classes = ["Streets", "Turns"]
+elevation_model = "ELEVATION_FIELDS"
+
+# Create the network dataset
+arcpy.na.CreateNetworkDataset(target_feature_dataset, network_dataset_name, source_feature_classes, elevation_model)
+```
+**Toolset:** Network Dataset
+
+**Tool:** Create Network Dataset From Template
+
+**Description:** The "Create Network Dataset From Template" tool is used to create a new network dataset using the schema from an existing template file (.xml). This tool is typically used when you have a predefined schema and need to replicate it across multiple datasets, ensuring consistency in network analysis configurations.
+
+**Parameters:**
+- **Network Dataset Template:** The template file (.xml) created by the "Create Template From Network Dataset" tool containing the schema of the output network dataset to be created.  
+  *Type:* File.
+- **Output Feature Dataset:** The feature dataset containing the feature classes that will take part in the network dataset being created. The network will be created in this dataset using the name specified in the network dataset template.  
+  *Type:* Feature Dataset.
+
+**Derived Output:**
+- **Output Network:** A new network dataset with the schema contained in the template file.  
+  *Type:* Network Dataset.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Check out the Network Analyst extension
+arcpy.CheckOutExtension("network")
+
+# Define the path to the XML template and the output feature dataset
+xml_template = "C:/data/NDTemplate.xml"
+new_network_location = "C:/data/NewNetwork.gdb/Transportation"
+
+# Create the network dataset from the template
+arcpy.na.CreateNetworkDatasetFromTemplate(xml_template, new_network_location)
+
+# Build the network dataset
+arcpy.na.BuildNetwork(new_network_location + "/Network_ND")
+
+# Check in the Network Analyst extension
+arcpy.CheckInExtension("network")
+```
+**Toolset:** Network Dataset
+
+**Tool:** Create Template From Network Dataset
+
+**Description:** This tool generates a file containing the schema of an existing network dataset. The resulting template file can be used to create a new network dataset with the same schema, facilitating the replication of network dataset configurations.
+
+**Parameters:**
+- **network_dataset:** The network dataset whose schema will be written to the output template file.  
+  *Type:* Network Dataset Layer.
+- **output_network_dataset_template:** The output file (.xml) that will contain the schema of the input network dataset.  
+  *Type:* File.
+
+**Derived Output:**
+- No derived outputs are specified for this tool.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+network = "C:/data/SanDiego.gdb/Transportation/Streets_ND"
+output_xml_file = "C:/data/NDTemplate.xml"
+
+# Execute the tool
+arcpy.na.CreateTemplateFromNetworkDataset(network, output_xml_file)
+```
+**Toolset:** Network Dataset
+
+**Tool:** Dissolve Network
+
+**Description:**  
+The Dissolve Network tool creates a network dataset with fewer line features than the input network dataset. This reduction in line features results in more efficient network analyses, faster drawing of results, and quicker generation of driving directions. The tool outputs a new network dataset and source feature classes, leaving the input network dataset and its source features unchanged.
+
+**Parameters:**
+- **in_network_dataset:** The network dataset to be dissolved. It must be a file or personal geodatabase network dataset with exactly one edge source. The edge source must have an endpoint connectivity policy and an elevation policy of either None or Elevation Fields.  
+  **Type:** Network Dataset Layer.
+- **out_workspace_location:** The geodatabase workspace where the dissolved network dataset will be created. This must be an ArcGIS 10 geodatabase or later and different from the one containing the input network dataset.  
+  **Type:** Workspace.
+
+**Derived Output:**
+- **out_network_dataset:** A network dataset with fewer line features, resulting in faster network analyses.  
+  **Type:** Network Dataset.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Check out the Network Analyst extension license
+if arcpy.CheckExtension("network") == "Available":
+    arcpy.CheckOutExtension("network")
+else:
+    raise arcpy.ExecuteError("Network Analyst Extension license is not available.")
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/SanFrancisco.gdb"
+arcpy.env.overwriteOutput = True
+
+# Set local variables
+inNetworkDataset = "Transportation/Streets_ND"
+outFolder = "C:/data/output"
+outputGDBName = "SanFranciscoDissolved"
+
+# Create a new file geodatabase for the dissolved network
+result = arcpy.management.CreateFileGDB(outFolder, outputGDBName)
+outputGDB = result.getOutput(0)
+
+# Dissolve the network dataset
+result = arcpy.na.DissolveNetwork(inNetworkDataset, outputGDB)
+dissolvedNetworkDataset = result.getOutput(0)
+
+# Build the network dataset
+arcpy.BuildNetwork(dissolvedNetworkDataset)
+
+print("Script completed successfully")
+```
+No information available.
+**Toolset:** Turn Feature Class
+
+**Tool:** Create Turn Feature Class
+
+**Description:** Creates a turn feature class to store turn features that model turning movements in a network dataset. This tool is typically used in transportation network analysis to represent and manage turn restrictions and penalties in a network dataset.
+
+**Parameters:**
+- **out_location**: The workspace where the new turn feature class will be created. Type: String.
+- **out_name**: The name of the new turn feature class. Type: String.
+- **maximum_edges**: The maximum number of edges per turn in the new turn feature class. The default value is 5, and the maximum value is 50. Type: Long.
+- **in_network_dataset** (Optional): The network dataset with which the turn feature class will be associated. Type: Feature Dataset.
+- **in_template_feature_class** (Optional): A template feature class to define the attribute schema of the new turn feature class. Type: Feature Layer.
+- **spatial_reference** (Optional): The spatial reference for the output turn feature class. Type: Spatial Reference.
+- **config_keyword** (Optional): Specifies the configuration keyword for storage parameters if the output is in a workgroup or enterprise geodatabase. Type: String.
+- **spatial_grid_1** (Optional): Deprecated parameter. Type: Double.
+- **spatial_grid_2** (Optional): Deprecated parameter. Type: Double.
+- **spatial_grid_3** (Optional): Deprecated parameter. Type: Double.
+- **has_z** (Optional): Specifies whether the coordinates in the turn feature class will have elevation (z) values. Type: Boolean.
+
+**Derived Output:**
+- **out_turn_features**: The output turn feature class with turn features. Type: Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/SanFrancisco.gdb"
+
+# Set local variables
+out_location = "C:/Data/SanFrancisco.gdb/Transportation"
+out_name = "DelayTurns"
+maximum_edges = 3
+in_network_dataset = "Transportation/Streets_ND"
+
+# Create a turn feature class
+arcpy.na.CreateTurnFeatureClass(out_location, out_name, maximum_edges, in_network_dataset)
+
+print("Turn feature class created successfully.")
+```
+**Toolset:** Turn Feature Class
+
+**Tool:** Increase Maximum Edges
+
+**Description:** The "Increase Maximum Edges" tool is used to increase the maximum number of edges per turn in a turn feature class. This is typically used in network datasets to accommodate more complex turning movements.
+
+**Parameters:**
+- **Input Turn Feature Class:** The turn feature class that is having its maximum number of edges raised.  
+  *Type:* Feature Layer.
+- **Maximum Edges:** The new maximum number of edges in the input turn feature class. The value must be at least one higher than the existing maximum number of edges and cannot be greater than 50.  
+  *Type:* Long.
+
+**Derived Output:**
+- **Updated Input Turn Feature Class:** The updated turn feature class.  
+  *Type:* Feature Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/SanFrancisco.gdb/Transportation"
+
+# Set local variables
+inTurnFeatures = "RestrictedTurns"
+maxEdges = 5
+
+# Increase the edges for turn features
+arcpy.na.IncreaseMaximumEdges(inTurnFeatures, maxEdges)
+
+print("Script completed successfully.")
+```
+**Toolset:** Turn Feature Class
+
+**Tool:** Populate Alternate ID Fields
+
+**Description:** The "Populate Alternate ID Fields" tool creates and populates additional fields in turn feature classes that reference network edges by alternate IDs. This ensures the integrity of turn features when edge source ObjectID values change due to editing operations.
+
+**Parameters:**
+- **Input Network Dataset:** The network dataset whose turn feature classes will receive alternate ID fields. Type: Network Dataset Layer.
+- **Alternate ID Field Name:** The name of the alternate ID field on the edge feature sources of the network dataset. All edge feature sources referenced by turns must have the same name for the alternate ID field. Type: String.
+
+**Derived Output:**
+- **Updated Input Network Dataset:** The updated network dataset. Type: Network Dataset Layer.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/SanFrancisco.gdb/Transportation"
+
+# Set local variables
+inNetworkDataset = "Streets_ND"
+altIDFieldName = "ID"
+
+# Populate alternate IDs on all turn sources in the network dataset
+arcpy.na.PopulateAlternateIDFields(inNetworkDataset, altIDFieldName)
+
+print("Script completed successfully.")
+```
+**Toolset:** Turn Feature Class
+
+**Tool:** Turn Table To Turn Feature Class
+
+**Description:** Converts an ArcView turn table or ArcInfo Workstation coverage turn table into an ArcGIS turn feature class. This tool is typically used to integrate legacy turn data into modern network datasets for enhanced routing and analysis.
+
+**Parameters:**
+- **turn_table:** The path to the input turn table, which can be an ArcView or ArcInfo Workstation turn table. Type: String.
+- **network_lines:** The path to the network line features that the turn table references. Type: Feature Layer.
+- **reference_nodes (Optional):** The path to the reference nodes table, which is used to identify the nodes in the network. Type: String.
+- **maximum_edges (Optional):** The maximum number of edges per turn in the new turn feature class. The default value is 5, and the maximum value is 50. Type: Long.
+
+**Derived Output:**
+- **out_turn_features:** The newly created turn feature class. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/SanFrancisco.gdb/Transportation"
+
+# Set local variables
+turn_table = "C:/Data/DelayTurns.dbf"
+network_lines = "Streets"
+out_turn_feature_class_name = "DelayTurns"
+reference_nodes = "C:/Data/nodes.dbf"
+max_edges = 7
+
+# Convert the ArcView 3.x Turn table to a geodatabase turn feature class
+arcpy.na.TurnTableToTurnFeatureClass(turn_table, network_lines, out_turn_feature_class_name, reference_nodes, max_edges)
+
+print("Script completed successfully.")
+```
+**Toolset:** Turn Feature Class
+
+**Tool:** Update By Alternate ID Fields
+
+**Description:**  
+The "Update By Alternate ID Fields" tool updates all the edge references in turn feature classes using an alternate ID field to identify the corresponding edge features for each turn. This tool is typically used after making edits to the edge source feature classes that alter ObjectID values, ensuring the integrity of turn features in a network dataset.
+
+**Parameters:**
+- **Input Network Dataset:** The network dataset whose turn feature classes will be updated by their alternate ID fields.  
+  *Type:* Network Dataset Layer.
+- **Alternate ID Field Name:** The name of the alternate ID field on the edge feature sources of the network dataset. All edge feature sources referenced by turns must have the same name for the alternate ID field.  
+  *Type:* String.
+
+**Derived Output:**
+- **Updated Input Network Dataset:** The updated network dataset.  
+  *Type:* Network Dataset Layer.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+# Name: UpdateByAlternateIDFields_ex02.py
+# Description: Update the edge references in the turn feature classes using alternate IDs and build the network dataset.
+# Requirements: Network Analyst Extension
+
+# Import system modules
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/SanFrancisco.gdb"
+
+# Set local variables
+inNetworkDataset = "Transportation/Streets_ND"
+altIDFieldName = "ID"
+
+# Update the edge references in the turn features using alternate ID fields
+arcpy.na.UpdateByAlternateIDFields(inNetworkDataset, altIDFieldName)
+
+# Since we have modified the edge references for turn sources, we should rebuild
+# the network dataset so that the turn features are correctly interpreted by the network dataset
+arcpy.na.BuildNetwork(inNetworkDataset)
+
+print("Script completed successfully.")
+```
+No information available.
+No information available.
+**Toolset:** Trace Network
+
+**Tool:** Convert Geometric Network To Trace Network
+
+**Description:** This tool converts an existing geometric network into a trace network within ArcGIS Pro. It is typically used to migrate geometric networks to the trace network model, which supports advanced network analysis and management capabilities.
+
+**Parameters:**
+- **Input Geometric Network:** The geometric network that will be converted to a trace network. **Type:** Geometric Network.
+- **Output Trace Network Name:** The name of the output trace network. **Type:** String.
+
+**Derived Output:**
+- **Output Trace Network:** The resulting trace network after conversion. **Type:** Trace Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Define the input geometric network and the desired output trace network name
+input_geometric_network = "C:\\MyTNProject\\NHD.gdb\\Hydro\\HydroGN"
+output_trace_network_name = "HydroTN"
+
+# Execute the conversion tool
+arcpy.tn.ConvertGeometricNetworkToTraceNetwork(input_geometric_network, output_trace_network_name)
+```
+**Toolset:** Trace Network
+
+**Tool:** Enable Network Topology
+
+**Description:**  
+The "Enable Network Topology" tool is used to establish a network topology for a trace network, which is essential for performing analytic operations such as tracing and creating network diagrams. It also helps in identifying error features within the network.
+
+**Parameters:**
+- **Input Trace Network:** The trace network for which the network topology will be enabled.  
+  *Type:* Trace Network; Trace Network Layer.
+  
+- **Maximum number of errors (Optional):** The maximum number of errors that can be discovered before the process of enabling the network topology will stop. Errors are recorded in the errors tables. A value of -1 or no value allows an unbounded number of errors.  
+  *Type:* Long.
+  
+- **Only generate errors (Optional):** Specifies whether the topology will be enabled or only network errors will be generated. If checked, the trace network will only be evaluated for network errors, and the topology will not be enabled.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **Updated Trace Network:** The updated trace network after enabling the topology.  
+  *Type:* Trace Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Enable network topology for a trace network named 'MyNetwork'
+# Set the maximum number of errors to 500
+arcpy.tn.EnableNetworkTopology('MyNetwork', 500)
+
+# Example to only generate errors without enabling the topology
+arcpy.tn.EnableNetworkTopology('MyNetwork', '', 'ONLY_ERRORS')
+```
+
+Feel free to ask if you need more details on using the Trace Network tools or any other ArcGIS Pro functionalities.
+**Toolset:** Trace Network
+
+**Tool:** Disable Network Topology
+
+**Description:**  
+The "Disable Network Topology" tool is used to disable the network topology for an existing trace network. This is typically done to perform administrative tasks such as adding or setting network attributes or before loading large amounts of data to enhance performance. Disabling the topology is necessary when adding or assigning network attributes, and it is recommended to do so before data loading to improve performance.
+
+**Parameters:**
+- **Input Trace Network**: The trace network where the network topology will be disabled.  
+  *Type: Trace Network; Trace Network Layer.*
+
+**Derived Output:**
+- **Updated Trace Network**: The updated trace network after the topology has been disabled.  
+  *Type: Trace Network.*
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the input trace network
+in_trace_network = 'GridNetwork'
+
+# Disable the network topology for the specified trace network
+arcpy.tn.DisableNetworkTopology(in_trace_network)
+```
+**Toolset:** Trace Network
+
+**Tool:** Set Flow Direction
+
+**Description:** The Set Flow Direction tool is used to establish the flow direction of line features within a version 1 trace network. It is typically used to manage how resources flow along network edges, which is crucial for performing network traces.
+
+**Parameters:**
+- **Input Trace Network:** The trace network containing the line feature class where the flow direction will be set. This parameter requires a Trace Network Version 1 as input. Type: Trace Network; Trace Network Layer.
+- **Feature Layers:** The polyline features that participate in the input trace network. Type: Feature Layer.
+- **Flow Direction:** Specifies the flow direction of the edges. Options include:
+  - *With digitized direction* — Flow direction will be along the digitized direction of the edges.
+  - *Against digitized direction* — Flow direction will be against the digitized direction of the edges.
+  - *Indeterminate direction* — Flow direction will be indeterminate. Type: String.
+
+**Derived Output:**
+- **Updated Trace Network:** The updated trace network after setting the flow direction. Type: Trace Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the flow direction with digitized direction for the HydroLines edge class
+arcpy.tn.SetFlowDirection(
+    "C:\\MyProject\\NHD.gdb\\Hydro\\HydroNetwork_v1", 
+    "HydroLines", 
+    "WITH_DIGITIZED_DIRECTION"
+)
+```
+**Toolset:** Trace Network
+
+**Tool:** Add Network Attribute
+
+**Description:** The "Add Network Attribute" tool is used to add a network attribute to a trace network. This tool is typically used to enhance trace networks by associating specific attributes with network features, which can be used in trace analyses to control traversability and model the cost of paths in the network.
+
+**Parameters:**
+- **Input Trace Network:** The trace network to which the network attribute will be added.  
+  *Type:* Trace Network; Trace Network Layer.
+- **Attribute Name:** The name of the network attribute to add to the trace network.  
+  *Type:* String.
+- **Attribute Type:** Specifies the data type of the network attribute. Options include Short (16-bit integer), Long (32-bit integer), Double (64-bit floating point), and Date.  
+  *Type:* String.
+- **Nullable (Optional):** Specifies whether the network attribute will support null values.  
+  *Type:* Boolean.
+- **Apportionable (Optional):** Specifies whether the network attribute will be apportioned across multiple edges belonging to the same feature. This is only supported with double network attributes.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **out_trace_network:** The updated trace network.  
+  *Type:* Trace Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Define the parameters for the Add Network Attribute tool
+input_trace_network = "Trace Network"
+attribute_name = "Velocity"
+attribute_type = "DOUBLE"
+is_apportionable = "APPORTIONABLE"
+
+# Execute the Add Network Attribute tool
+arcpy.tn.AddNetworkAttribute(input_trace_network, attribute_name, attribute_type, is_apportionable)
+```
+**Toolset:** Trace Network
+
+**Tool:** Set Network Attribute
+
+**Description:** The Set Network Attribute tool assigns a network attribute to a feature class field within a trace network. This is typically used to prepare the network for trace operations by associating specific attributes that control traversability or model costs within the network.
+
+**Parameters:**
+- **Input Trace Network:** The trace network that contains the network attribute to set. Type: Trace Network; Trace Network Layer.
+- **Network Attribute:** The network attribute to be assigned to the feature class field. Type: String.
+- **Feature Class:** The input feature class that contains the field that will be used to set the network attribute. Type: String.
+- **Field:** An existing field that will be assigned the network attribute. The field data type must match the data type of the network attribute. Type: String.
+
+**Derived Output:**
+- **Updated Trace Network:** The updated trace network. Type: Trace Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the parameters for the Set Network Attribute tool
+in_trace_network = "Trace Network"
+network_attribute = "Friction Factor"
+feature_class = "BlackLines"
+field = "frictionvalue"
+
+# Execute the Set Network Attribute tool
+arcpy.tn.SetNetworkAttribute(in_trace_network, network_attribute, feature_class, field)
+```
+**Toolset:** Trace Network
+
+**Tool:** Trace
+
+**Description:** The Trace tool in ArcGIS Pro is used to analyze paths within a trace network by identifying features based on connectivity or traversability from specified starting points. It is typically used to solve network-related problems, such as determining upstream or downstream paths, finding the shortest path, or confirming connectivity between features.
+
+**Parameters:**
+- **Input Trace Network:** The trace network on which the trace will be run. Type: Trace Network; Trace Network Layer.
+- **Trace Type:** Specifies the type of trace to execute, such as Connected, Upstream, Downstream, or Shortest Path. Type: String.
+- **Starting Points:** The feature class used to specify starting points for the trace. Type: Feature Class.
+- **Barriers (Optional):** The feature class used to specify barriers for the trace. Type: Feature Class.
+- **Include Barrier Features (Optional):** Specifies whether barrier features should be included in the trace results. Type: Boolean.
+- **Ignore Barriers At Starting Points (Optional):** Specifies whether barriers at starting points should be ignored. Type: Boolean.
+- **Output JSON (Optional):** The name and location of the .json file that will be generated. Type: File.
+
+**Derived Output:**
+- **Updated Trace Network:** The updated trace network after the trace operation. Type: Any Value.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/MyProject/MyNetworkGdb.gdb"
+
+# Define the input parameters
+in_trace_network = "Hydro Trace Network"
+trace_type = "Upstream"
+starting_points = "TN_Temp_Starting_Points"
+barriers = "TN_Temp_Barriers"
+
+# Execute the Trace tool
+arcpy.tn.Trace(
+    in_trace_network=in_trace_network,
+    trace_type=trace_type,
+    starting_points=starting_points,
+    barriers=barriers,
+    include_barriers=True,
+    ignore_barriers_at_starting_points=False
+)
+```
+**Toolset:** Trace Network
+
+**Tool:** Validate Network Topology
+
+**Description:**  
+The Validate Network Topology tool is used to ensure the integrity of a trace network by validating its topology. This process is essential after modifications to network attributes or feature geometries to maintain accurate network analysis and tracing operations.
+
+**Parameters:**
+- **Input Trace Network:** The trace network for which the network topology will be validated. This parameter is required and must be from a trace network service when working with an enterprise geodatabase.  
+  *Type:* Trace Network; Trace Network Layer.
+- **Extent (Optional):** Specifies the geographical area for which the network topology will be validated. Options include Current Display Extent, Entire Extent, or a custom extent.  
+  *Type:* Extent.
+
+**Derived Output:**
+- **Validated Network Topology:** The validated trace network.  
+  *Type:* Trace Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the path to the trace network
+trace_network_path = "C:\\MyTNProject\\NHD.gdb\\HydroNetwork"
+
+# Validate the network topology for the specified trace network
+arcpy.tn.ValidateNetworkTopology(trace_network_path)
+```
+No information available.
+**Toolset:** Utility Network
+
+**Tool:** Export Subnetwork
+
+**Description:**  
+The Export Subnetwork tool is used to export information about a subnetwork into a JSON file. This information can be utilized by external systems such as outage management and asset tracking programs. The tool also allows for the deletion of a row from the Subnetworks table if the subnetwork controller has been removed, indicated by the Is deleted attribute being set to true.
+
+**Parameters:**
+- **Input Utility Network:** The utility network from which the subnetwork will be exported.  
+  *Type: Utility Network; Utility Network Layer.*
+- **Domain Network:** The domain network containing the subnetwork.  
+  *Type: String.*
+- **Tier:** The tier containing the subnetwork.  
+  *Type: String.*
+- **Subnetwork Name:** The name of the subnetwork to export.  
+  *Type: String.*
+- **Set export acknowledged (Optional):** Specifies whether to delete the record of any subnetwork controllers from the Subnetworks table that have been removed.  
+  *Type: Boolean.*
+- **Output JSON:** The location and name of the JSON file to be created.  
+  *Type: File.*
+- **Include geometry (Optional):** Specifies whether feature geometry will be included in the output JSON file.  
+  *Type: Boolean.*
+- **Include domain descriptions (Optional):** Specifies whether domain descriptions will be included in the output JSON file.  
+  *Type: Boolean.*
+
+**Derived Output:**
+- **Output JSON:** The JSON file containing the exported subnetwork information.  
+  *Type: File.*
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the parameters
+input_utility_network = "UtilityNetwork"
+domain_network = "Electric"
+tier = "Medium Voltage"
+subnetwork_name = "RMT003"
+output_json = "C:\\Temp\\subnetwork_export.json"
+
+# Execute the Export Subnetwork tool
+arcpy.un.ExportSubnetwork(
+    in_utility_network=input_utility_network,
+    domain_network=domain_network,
+    tier=tier,
+    subnetwork_name=subnetwork_name,
+    output_json=output_json,
+    set_export_acknowledged=True,
+    include_geometry=True,
+    include_domain_descriptions=True
+)
+```
+No information available.
+**Toolset:** Utility Network
+
+**Tool:** Update Is Connected
+
+**Description:**  
+The Update Is Connected tool updates the IsConnected attribute for all network features within a specified utility network based on their connectivity to subnetwork controllers. This tool is typically used to identify isolated network features and ensure accurate connectivity information across the network.
+
+**Parameters:**
+- **Utility Network:** The utility network where the IsConnected attribute will be updated.  
+  *Type:* Utility Network; Utility Network Layer.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network with modified IsConnected attributes.  
+  *Type:* Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Update the IsConnected attribute for a utility network called GridNetwork
+arcpy.un.UpdateIsConnected("GridNetwork")
+```
+**Toolset:** Utility Network
+
+**Tool: Update Subnetwork**
+
+**Description:**  
+The "Update Subnetwork" tool is used to refresh and update subnetwork information within a utility network. It updates the Subnetworks table, the SubnetLine feature class, and subnetwork system diagrams for specified subnetworks. This tool is typically used to ensure that the subnetwork information is current, reflecting any changes in the network topology, such as the addition or removal of subnetwork controllers or changes in the subnetwork's geometry and attributes.
+
+**Parameters:**
+- **Input Utility Network**: The utility network that contains the subnetwork. Type: Utility Network; Utility Network Layer.
+- **Domain Network**: The domain network that contains the subnetwork. Type: String.
+- **Tier**: The tier that contains the subnetwork. Type: String.
+- **All subnetworks in tier (Optional)**: Specifies whether all subnetworks in the tier will be updated. Checked—All subnetworks in the tier will be updated. This option uses asynchronous processing to update the subnetworks using the system UtilityNetworkTools geoprocessing service. The service is reserved for utility network geoprocessing tasks and has a longer default time-out setting of 7,200 seconds (120 minutes).
+
+**Derived Output:**
+- **Updated Utility Network**: The updated utility network. Type: Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = "C:/Projects/MyProject/unowner.sde"
+
+# Define the input utility network
+input_utility_network = "Naperville.UNOWNER.Naperville/Naperville.UNOWNER.Naperville"
+
+# Define the domain network and tier
+domain_network = "ElectricDistribution"
+tier = "MediumVoltage"
+
+# Run the Update Subnetwork tool
+arcpy.un.UpdateSubnetwork(
+    in_utility_network=UN,
+    domain_network=domain_network,
+    tier="MediumVoltage",
+    all_subnetworks_in_tier=True
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Validate Network Topology
+
+**Description:** The Validate Network Topology tool is used to validate features with dirty areas in the network topology of a utility network after edits have been made. It ensures that the network topology is consistent and up-to-date, which is crucial for accurate network analysis and operations.
+
+**Parameters:**
+- **Input Utility Network:** The utility network for which the network topology will be validated.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Extent (Optional):** The geographical extent that will be used to validate the network topology. Options include Current Display Extent, Draw Extent, Extent of a Layer, and more.  
+  *Type:* Extent.
+
+**Derived Output:**
+- **out_utility_network:** The validated utility network.  
+  *Type:* Utility Network.
+- **out_json_payload:** The subnetworks marked as dirty during the validation operation.  
+  *Type:* String.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the input utility network and optional extent
+input_utility_network = 'GridNetwork'
+extent = None  # Replace with specific extent if needed
+
+# Validate the network topology
+arcpy.un.ValidateNetworkTopology(input_utility_network, extent)
+```
+
+Feel free to ask if you need more details on using this tool or any other aspect of ArcGIS Pro.
+**Toolset:** Utility Network
+
+**Tool:** Rebuild Network Topology
+
+**Description:** The Rebuild Network Topology tool is used to rebuild the network topology within a specified extent to address errors identified during a validate network topology or trace operation. This tool is particularly useful when failures prevent the completion of validation operations, allowing for the repair of inconsistencies in the network topology.
+
+**Parameters:**
+- **in_utility_network:** The utility network for which the network topology will be rebuilt. Type: Utility Network; Utility Network Layer.
+- **extent:** Specifies the geographical extent that will be used to rebuild the network topology. Options include:
+  - **MAXOF:** The maximum extent of all inputs will be used.
+  - **MINOF:** The minimum area common to all inputs will be used.
+  - **DISPLAY:** The extent is equal to the visible display.
+  - **Layer name:** The extent of the specified layer will be used.
+  - **Extent object:** The extent of the specified object will be used.
+  - **Space delimited string of coordinates:** The extent of the specified string will be used. Coordinates are expressed in the order of x-min, y-min, x-max, y-max.
+
+**Derived Output:**
+- **out_utility_network:** The rebuilt utility network. Type: Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the utility network and extent
+utility_network = "GridNetwork"
+extent = "1952602 294196 1953546 296176"
+
+# Execute the Rebuild Network Topology tool
+arcpy.un.RebuildNetworkTopology(utility_network, extent)
+```
+**Toolset:** Utility Network
+
+**Tool:** Repair Network Topology
+
+**Description:** The Repair Network Topology tool is designed to verify and repair inconsistencies in the network topology system tables of a utility network. It is typically used to ensure the integrity and consistency of the network topology, especially after changes or updates have been made.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that will be repaired. Type: Utility Network; Utility Network Layer.
+- **Output Log File (Optional):** The folder location and name of the file where discovered issues will be logged. Type: File.
+
+**Derived Output:**
+- **Output Utility Network:** The repaired utility network. Type: Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the path to the utility network and the output log file
+utility_network = "C:\\MyProject\\sdeConn.sde\\progdb.user1.MyUtilityNetwork"
+log_file = "C:\\temp\\VerifyLog.log"
+
+# Execute the Repair Network Topology tool
+arcpy.un.RepairNetworkTopology(utility_network, log_file)
+```
+**Toolset:** Utility Network
+
+**Tool: Set Association Role**
+
+**Description:**  
+The "Set Association Role" tool is used to assign or modify the association role of a network feature class or table at the asset type level within a utility network. This tool is essential for defining how certain network features participate as containers or structures, which allows them to contain or attach other features.
+
+**Parameters:**
+- **Input Utility Network**: The utility network that contains the asset type with an association role to set. Type: Utility Network; Utility Network Layer.
+- **Domain Network**: The domain network that contains the asset type with an association role to set. Type: String.
+- **Input Table**: The utility network feature class or table where the association role will be set. Type: String.
+- **Asset Group**: The asset group that contains the asset type. Type: String.
+- **Asset Type**: The asset type that the association role will be set for. Type: String.
+- **Role Type**: Specifies the type of association role that will be assigned to the asset type. Options include:
+  - *Container*: Allows features to act as a container to other features.
+  - *Structure*: Allows features to act as a structure to which other features can be attached.
+  - *None*: No role type will be assigned.
+  Type: String.
+- **Deletion Semantics**: Specifies the deletion semantics for the network features, which defines how content or attachment network features will be managed when the container or structure is deleted. Options include:
+  - *Cascade*: When the container or structure is deleted, all content or attachment network features will be deleted.
+  - *None*: When the container or structure is deleted, its content or attachment features will not be deleted but will be removed from the containment or structural attachment association.
+  - *Restricted*: Not specified in the available information.
+- **View Scale (Optional)**: The scale at which to enter into containment edit mode for point features participating in the association role. Type: String.
+- **Split Policy**: Specifies whether content features will be split when the container is split. Options include:
+  - *Do Not Split Content* (default)
+  - *Split Content* Type: String.
+
+Derived Output:
+- No specific derived outputs are mentioned in the available information.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = "C:/MyProject/databaseConn.sde"
+
+# Define parameters
+input_utility_network = "mygdb.USER1.ElectricNetwork"
+domain_network = "ElectricDistribution"
+input_table = "mygdb.USER1.ElectricNetwork/StructureJunction"
+asset_group = "Pole"
+asset_type = "WoodPole"
+role_type = "Structure"
+deletion_semantics = "Cascade"
+view_scale = "1:100"
+split_policy = "Do Not Split Content"
+
+# Set Association Role
+arcpy.un.SetAssociationRole(
+    in_utility_network=input_table,
+    domain_network=domain_network,
+    asset_group=asset_group,
+    asset_type=asset_type,
+    role_type="Structure",
+    deletion_semantics="Cascade",
+    view_scale=view_scale,
+    split_policy=split_policy
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Set Edge Connectivity
+
+**Description:** The Set Edge Connectivity tool defines how features will connect to a line or edge object of a given asset type within a utility network. It is typically used to control the editor snapping environment behavior for edge connectivity of line features and enable midspan connectivity on edge object tables.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that contains the asset type with the edge connectivity to set. Type: Utility Network; Utility Network Layer.
+- **Domain Network:** The domain network that contains the asset type with the edge connectivity to set. Type: String.
+- **Input Table:** The name of the input feature class or table that contains the asset type with the edge connectivity to set. Type: String.
+- **Asset Group:** The asset group that contains the asset type with the edge connectivity to set. Type: String.
+- **Asset Type:** The asset type that requires the edge connectivity to set. Type: String.
+- **Edge Connectivity:** Specifies the edge connectivity type that will be assigned to the asset type. Options include:
+  - **Any vertex:** Features will connect anywhere along the edge including end vertices.
+  - **End vertex:** Features will only connect to the end vertex of an edge. Type: String.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network. Type: Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set edge connectivity to 'AnyVertex' for the underground asset type in the Electric Distribution domain network
+arcpy.un.SetEdgeConnectivity(
+    in_utility_network="Utility Network",
+    domain_network="ElectricDistribution",
+    line_featureclass="ElectricDistributionLine",
+    assetgroup="Low Voltage",
+    assettype="Underground",
+    edge_connectivity="AnyVertex"
+)
+
+# Set edge connectivity to 'EndVertex' for the connector asset type in the Electric Distribution domain network
+arcpy.un.SetEdgeConnectivity(
+    in_utility_network="Utility Network",
+    domain_network="ElectricDistribution",
+    line_featureclass="ElectricDistributionLine",
+    assetgroup="Connector",
+    assettype="Connector",
+    edge_connectivity="EndVertex"
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Set Network Attribute
+
+**Description:** The Set Network Attribute tool assigns a network attribute to a feature class or table within a utility network. Network attributes are used in tracing operations to control traversability and model the cost of paths in the network.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that contains the network attribute to set. Type: Utility Network; Utility Network Layer.
+- **Network Attribute:** The network attribute to be assigned to the field in the feature class or table. Type: String.
+- **Domain Network:** The domain network that contains the feature class or table that will have a network attribute set on it. Type: String.
+- **Input Table:** The input feature class or table that contains the field that will be used to set the network attribute. Type: String.
+- **Field:** An existing field that will be assigned the network attribute. The field data type must match the data type of the network attribute. Type: String.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network. Type: Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set a network attribute named Lifecycle Status to use the lifecyclestatus field in the ElectricDistributionLine feature class
+arcpy.un.SetNetworkAttribute(
+    in_utility_network="Utility Network",
+    network_attribute="Lifecycle Status",
+    domain_network="ElectricDistribution",
+    featureclass="ElectricDistributionLine",
+    field="lifecyclestatus"
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Set Network Category
+
+**Description:** The Set Network Category tool assigns a network category to a feature class or table at the asset type level, which is used during tracing operations. This tool is essential for defining how different asset types participate in network analyses, such as tracing, by categorizing them for specific operations.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that contains the network category.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Domain Network:** The domain network in the utility network that contains the network category.  
+  *Type:* String.
+- **Input Table:** The utility network feature class or table to which the asset type belongs.  
+  *Type:* String.
+- **Asset Group:** The asset group to which the asset type belongs.  
+  *Type:* String.
+- **Asset Type:** The asset type that will be used to alter the category configuration.  
+  *Type:* String.
+- **Categories (Optional):** The categories that will be assigned to the asset type. These categories replace the current categories assigned to the asset type.  
+  *Type:* String.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network after the network category assignment.  
+  *Type:* Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set network category for a specific asset type
+arcpy.un.SetNetworkCategory(
+    in_utility_network="Utility Network",
+    domain_network="ElectricDistribution",
+    featureclass="ElectricDistributionDevice",
+    assetgroup="Fuse",
+    assettype="Air Powered",
+    category=["Disconnect", "Protective"]
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Set Subnetwork Definition
+
+**Description:** The Set Subnetwork Definition tool in ArcGIS Pro is used to configure properties for subnetworks at the tier level within a utility network. This tool allows users to define how subnetworks are structured and managed, including setting valid features, controllers, and trace configurations. It is typically used to ensure that subnetworks are correctly defined for analysis and operational purposes.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that contains the subnetwork.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Domain Network:** The domain network that contains the subnetwork.  
+  *Type:* String.
+- **Tier:** The tier that contains the subnetwork.  
+  *Type:* String.
+- **All subnetworks in tier (Optional):** Specifies whether all subnetworks in the tier will be updated.  
+  *Type:* Boolean.
+- **Subnetwork Name (Optional):** The name of the subnetwork that will be updated from the tier.  
+  *Type:* String.
+- **Continue on failure (Optional):** Specifies whether the update process will stop if a subnetwork fails to update.  
+  *Type:* Boolean.
+- **Condition Barriers (Optional):** Defines a feature or object that will stop an operation based on network attributes and categories.  
+  *Type:* Value Table.
+- **Function Barriers (Optional):** Defines a feature or object that will stop an operation based on a function.  
+  *Type:* Value Table.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network.  
+  *Type:* Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set up the parameters for the Set Subnetwork Definition tool
+input_utility_network = "Utility Network"
+domain_network = "ElectricDistribution"
+tier = "Medium Voltage"
+subnetwork_name = "SPECIFIC_SUBNETWORK"
+continue_on_failure = "CONTINUE_ON_FAILURE"
+
+# Execute the Set Subnetwork Definition tool
+arcpy.un.SetSubnetworkDefinition(
+    input_utility_network,
+    domain_network,
+    tier,
+    subnetwork_name=subnetwork_name,
+    continue_on_failure=continue_on_failure
+)
+```
+**Toolset:** Utility Network
+
+**Tool: Set Terminal Configuration**
+
+**Description:**  
+The "Set Terminal Configuration" tool is used to assign a terminal configuration to an asset type within a utility network. This is essential for defining the valid configuration of the internal connectivity of device or junction objects that have terminals. It allows for the specification of terminal directionality and valid paths, which are crucial for managing complex network features like switching devices.
+
+**Parameters:**
+- **Input Utility Network:** The utility network containing the terminal configuration to be assigned to a specific asset type.  
+  Type: Utility Network; Utility Network Layer.
+  
+- **Domain Network:** The domain network to which the asset type belongs.  
+  Type: String.
+
+- **Input Table:** The utility network feature class or table to which the asset type belongs.  
+  Type: String.
+
+- **Asset Group:** The asset group to which the asset type belongs.  
+  Type: String.
+
+- **Asset Type:** The asset type that will receive the terminal configuration.  
+  Type: String.
+
+- **Terminal Configuration:** The terminal configuration that will be assigned to the asset type.  
+  Type: String.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network.  
+  Type: Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = "C:/MyProject/UtilityNetwork.sde"
+
+# Define parameters
+in_utility_network = "Utility Network"
+domain_network = "ElectricDistribution"
+device_featureclass = "ElectricDistributionDevice"
+assetgroup = "Circuit Breaker"
+assettype = "Air powered"
+terminal_configuration = "Dual terminal"
+
+# Execute the Set Terminal Configuration tool
+arcpy.un.SetTerminalConfiguration(
+    in_utility_network=in_utility_network,
+    domain_network=domain_network,
+    device_featureclass=device_featureclass,
+    assetgroup=assetgroup,
+    assettype=assettype,
+    terminal_configuration=terminal_configuration
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Verify Network Topology
+
+**Description:** The Verify Network Topology tool checks the consistency of a network topology within a utility network and logs any discovered inconsistencies to an output log file. It is typically used to identify potential issues that may affect the ability to validate the network topology.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that will be verified for consistency.  
+  **Type:** Utility Network; Utility Network Layer.
+- **Output Log File (Optional):** The output log file containing the discovered issues.  
+  **Type:** File.
+
+**Derived Output:**
+- No specific derived outputs are mentioned in the provided information.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the path to the utility network and the output log file
+utility_network = "C:\\MyProject\\sdeConn.sde\\progdb.user1.MyUtilityNetwork"
+output_log_file = "C:\\temp\\VerifyLog.log"
+
+# Execute the Verify Network Topology tool
+arcpy.un.VerifyNetworkTopology(utility_network, output_log_file)
+```
+
+This script demonstrates how to use the Verify Network Topology tool in ArcPy, specifying the utility network to be verified and the optional output log file to capture any issues found during the verification process.
+**Toolset:** Utility Network
+
+**Tool:** Enable Network Topology
+
+**Description:**  
+The Enable Network Topology tool is used to establish connectivity between features in a utility network, creating a network topology necessary for analytic operations such as tracing and network diagrams. It can also be used to discover errors before fully enabling the topology.
+
+**Parameters:**
+- **Input Utility Network:** Specifies the utility network for which the network topology will be enabled.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Maximum number of errors (Optional):** Sets the maximum number of errors that can be generated before the process stops. Errors are recorded in the dirty areas sublayer.  
+  *Type:* Long.
+- **Only generate errors (Optional):** Determines whether the topology will be enabled or only network errors will be generated.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **Updated Utility Network:** The utility network with the enabled topology.  
+  *Type:* Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the utility network and parameters
+utility_network = "C:\\Path\\To\\Your\\UtilityNetwork.sde\\YourUtilityNetwork"
+max_errors = 10000  # Optional parameter
+
+# Enable network topology
+arcpy.un.EnableNetworkTopology(utility_network, max_errors)
+```
+**Toolset:** Utility Network
+
+**Tool:** Export Associations
+
+**Description:**  
+The Export Associations tool is used to export associations from a utility network to a comma-separated values (CSV) file. This tool is typically used to document or share the types of associations present in a utility network, such as connectivity, containment, and structural attachments.
+
+**Parameters:**
+
+- **Input Utility Network:**  
+  *Explanation:* The utility network containing the associations to export.  
+  *Type:* Utility Network; Utility Network Layer.
+
+- **Association Type:**  
+  *Explanation:* Specifies the type of association to export. Options include All, Junction-junction connectivity, Containment, Attachment, and various types of Junction-edge connectivity.  
+  *Type:* String.
+
+- **Output File:**  
+  *Explanation:* The name and location of the CSV file that will be generated.  
+  *Type:* File.
+
+**Derived Output:**
+
+- **Output CSV File:**  
+  *Explanation:* The generated CSV file containing the exported associations.  
+  *Type:* File.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+
+```python
+import arcpy
+
+# Export all types of associations from a utility network called "GridNetwork"
+arcpy.un.ExportAssociations(
+    in_utility_network="GridNetwork",
+    association_type="ALL",
+    out_csv_file=r"C:\Temp\AllAssociations.csv"
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Export Rules
+
+**Description:** The Export Rules tool in ArcGIS Pro is used to export network rules from a utility network to a CSV file. These rules define how different types of features can connect or associate with each other within the network. Typical use cases include exporting rules for documentation, analysis, or transfer to another system.
+
+**Parameters:**
+- **Input Utility Network:** Specifies the utility network from which the rules will be exported.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Rule Type:** Specifies the type of rule to export. Options include:
+  - **ALL:** Exports all rules.
+  - **JUNCTION_JUNCTION_CONNECTIVITY:** Exports junction-junction connectivity rules.
+  - **JUNCTION_EDGE_CONNECTIVITY:** Exports junction-edge connectivity rules.
+  - **CONTAINMENT:** Exports containment rules.
+  - **STRUCTURAL_ATTACHMENT:** Exports structural attachment rules.
+  - **EDGE_JUNCTION_EDGE_CONNECTIVITY:** Exports edge-junction-edge connectivity rules.  
+  *Type:* String.
+- **Output File:** The location and name of the CSV file to be created.  
+  *Type:* File.
+
+**Derived Output:**
+- **Output CSV File:** The CSV file containing the exported rules.  
+  *Type:* File.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Define the utility network and output file path
+utility_network = "GridNetwork"
+rule_type = "ALL"  # Export all types of rules
+output_csv = r"C:\Temp\AllAssociationRules.csv"
+
+# Execute the Export Rules tool
+arcpy.un.ExportRules(utility_network, rule_type, output_csv)
+```
+**Toolset:** Utility Network
+
+**Tool:** Export Subnetwork Controllers
+
+**Description:** The Export Subnetwork Controllers tool is used to export subnetwork controllers from a utility network into a CSV file. This tool is typically used to extract information about subnetwork controllers, which can then be imported into another utility network or used for analysis.
+
+**Parameters:**
+- **in_utility_network:** The utility network from which subnetwork controllers will be exported. **Type:** Utility Network; Utility Network Layer.
+- **out_csv_file:** The location and name of the CSV file to be generated. **Type:** File.
+
+**Derived Output:**
+- There are no additional derived outputs specified for this tool.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the input utility network and output CSV file path
+in_utility_network = "GridNetwork"
+out_csv_file = "C:\\Temp\\mySources.csv"
+
+# Execute the Export Subnetwork Controllers tool
+arcpy.un.ExportSubnetworkControllers(in_utility_network, out_csv_file)
+```
+
+Feel free to ask if you need more details on using this tool or have other questions about ArcGIS Pro.
+**Toolset:** Utility Network
+
+**Tool:** Import Associations
+
+**Description:**  
+The Import Associations tool is used to import associations from a CSV file into an existing utility network. This tool is typically used to establish connectivity, containment, or structural attachment associations between features in a utility network, ensuring that the necessary rules exist to support these associations.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that will receive the associations.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Association Type:** Specifies the type of association to import. Options include:
+  - All
+  - Junction-junction connectivity
+  - Containment
+  - Attachment
+  - Junction-edge connectivity (from side of edge)
+  - Junction-edge connectivity (midspan)
+  - Junction-edge connectivity (to side of edge)  
+  *Type:* String.
+- **Input File:** The CSV file containing the associations to be imported. The file must be formatted correctly and include necessary columns such as ASSOCIATIONTYPE, FROMFEATURECLASS, FROMASSETGROUP, etc.  
+  *Type:* File.
+
+**Derived Output:**
+- **Updated Utility Network:** The utility network with the newly imported associations.  
+  *Type:* Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Define the utility network and CSV file path
+utility_network = "GridNetwork"
+association_type = "ALL"
+csv_file_path = "C:\\Temp\\AllAssociations.csv"
+
+# Execute the Import Associations tool
+arcpy.un.ImportAssociations(utility_network, association_type, csv_file_path)
+```
+**Toolset:** Utility Network
+
+**Tool:** Import Rules
+
+**Description:** The Import Rules tool in ArcGIS Pro is used to import network rules from a CSV file into a utility network. This tool is typically used to manage and update the rules that govern feature connectivity and associations within a utility network, ensuring that the network topology is correctly configured according to business practices.
+
+**Parameters:**
+- **Input Utility Network:** Specifies the utility network to which the rules will be imported. Type: Utility Network; Utility Network Layer.
+- **Rule Type:** Specifies the type of rules to import. Options include:
+  - **All:** Imports all types of rules.
+  - **Junction-junction connectivity:** Junction-junction connectivity association rules.
+  - **Junction-edge connectivity:** Junction-edge connectivity rules.
+  - **Containment:** Containment association rules.
+  - **Structural attachment:** Structural attachment association rules.
+  - **Edge-junction-edge connectivity:** Edge-junction-edge association rules. Type: String.
+- **Input File:** Specifies the CSV file containing the rules to import. Type: File.
+
+**Derived Output:**
+- **Updated Utility Network:** The utility network that has been updated with the imported rules. Type: Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the parameters
+utility_network = "GridNetwork"
+rule_type = "ALL"
+csv_file = "C:\\Temp\\AllRules.csv"
+
+# Execute the Import Rules tool
+arcpy.un.ImportRules(utility_network, rule_type, csv_file)
+```
+
+Feel free to ask more about the Utility Network toolset or explore other functionalities within ArcGIS Pro.
+**Toolset:** Utility Network
+
+**Tool:** Import Subnetwork Controllers
+
+**Description:** The Import Subnetwork Controllers tool is used to import subnetwork controllers from a CSV file into a utility network. This process involves setting features as subnetwork controllers, which define the origin of a subnetwork within a tier. Typical use cases include updating or configuring utility networks to reflect changes in network topology or to initialize a network with predefined subnetwork controllers.
+
+**Parameters:**
+- **Input Utility Network:** The utility network to which the subnetwork controllers will be imported. **Type:** Utility Network; Utility Network Layer.
+- **Input File:** The CSV file containing the subnetwork controllers to import. **Type:** File.
+
+**Derived Output:**
+- **Updated Utility Network:** The utility network that has been updated with the imported subnetwork controllers. **Type:** Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Define the utility network and CSV file path
+in_utility_network = "GridNetwork"
+csv_file = "C:\\Temp\\mySources.csv"
+
+# Execute the Import Subnetwork Controllers tool
+arcpy.un.ImportSubnetworkControllers(in_utility_network, csv_file)
+```
+**Toolset:** Utility Network
+
+**Tool:** Analyze Network Data
+
+**Description:** The Analyze Network Data tool evaluates an input utility network to identify common topological inconsistencies such as self-intersecting lines, stacked points, and invalid connectivity. It generates a mobile geodatabase containing feature classes and tables that describe the discovered error types, which can be used to understand and resolve these errors.
+
+**Parameters:**
+- **Input Utility Network:** Specifies the utility network to be analyzed. Type: Utility Network.
+- **Output Location:** The path to a folder where the output mobile geodatabase will be stored. Type: Folder.
+- **Output Name:** The name for the output mobile geodatabase. Default is "AnalysisResults". Type: String.
+- **Set default resolution actions:** Determines if default action attribute values will be populated in the Error Resolutions table for specified error types. Type: Boolean.
+
+**Derived Output:**
+- **ErrorLocations:** Point feature class describing distinct locations in the network where errors were discovered. Type: Feature Class.
+- **ErrorSummary:** Point feature class summarizing all unique combinations of errors in the network using a multipart feature. Type: Feature Class.
+- **ErrorRecords:** Table containing information about all the features present at each error location and the type of error associated. Type: Table.
+- **ErrorResolution:** Table used to describe the desired resolution for errors. Type: Table.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the input utility network and output parameters
+input_utility_network = "MyUtilityNetwork"
+output_location = "C:\\Temp\\Output\\"
+output_name = "AnalysisResults"
+set_default_resolution_actions = False
+
+# Run the Analyze Network Data tool
+arcpy.un.AnalyzeNetworkData(input_utility_network, output_location, output_name, set_default_resolution_actions)
+```
+**Toolset:** Utility Network
+
+**Tool:** Apply Error Resolutions
+
+**Description:**  
+The Apply Error Resolutions tool automates the resolution of common error types in a utility network by implementing error resolution actions defined in the ErrorAction field of the Error Resolutions table. This tool is typically used to address errors discovered in a utility network, ensuring the network's integrity and functionality.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that will be updated with the edit actions defined in the Error Resolutions table.  
+  *Type:* Utility Network Layer.
+  
+- **Resolution Table:** The error resolutions table defining the edit actions that will be applied to the utility network classes to resolve errors.  
+  *Type:* Table View.
+  
+- **Output Location (Optional):** The output folder where the folder specified in the Output Name parameter will be created.  
+  *Type:* Folder.
+  
+- **Output Name (Optional):** The name of the output folder. This folder contains output .csv log files with information about features modified by the operation.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Utility Network:** The updated utility network.  
+  *Type:* Utility Network.
+  
+- **Output Folder:** The output folder containing .csv files for each feature class modified by the operation.  
+  *Type:* Folder.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the input parameters
+input_utility_network = "MyUtilityNetwork"
+resolution_table = "C:\\Temp\\Test.geodatabase\\main.ErrorResolution"
+output_location = "C:\\Output\\Logs"
+output_name = "ResolutionLogs"
+
+# Apply error resolutions
+arcpy.un.ApplyErrorResolutions(
+    in_utility_network=input_utility_network,
+    in_resolution_table=resolution_table,
+    in_folder=output_location,
+    output_name=output_name
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Migrate To Utility Network
+
+**Description:** The Migrate To Utility Network tool creates a utility network in a mobile geodatabase using existing data, schema, and mapping parameters. It supports basic editing and tracing workflows, allowing organizations to convert network data from geometric networks or nonnetwork data into a utility network while preserving the existing feature class schema.
+
+**Parameters:**
+- **Service Territory Feature Class:** Represents the geographical extent covered by the domain network. Type: Feature Set.
+- **Output Folder:** Specifies the output path and folder for the mobile geodatabase containing the utility network dataset. Type: Folder.
+- **Utility Network Version:** Specifies the version of the utility network to be created. Options include Current, Version 7, Version 6, and Version 5. Type: String.
+- **Feature Dataset Name:** Name for the utility network's feature dataset. Default is UtilityNetwork. Type: String.
+- **Output Name:** Name for the mobile geodatabase. Default is MigrationDatabase. Type: String.
+- **Load Data:** Specifies whether data or schema only will be loaded from the source classes to the output utility network. Type: Boolean.
+- **Merge fields to utility network classes:** Specifies whether fields from the source classes will be merged and combined in the output utility network classes. Type: Boolean.
+
+**Derived Output:**
+- **out_utility_network:** The output utility network. Type: Utility Network.
+- **out_controller:** The output subnetwork controllers. Type: File.
+- **out_layer_file:** An output layer file containing subtype group layers for each class controlled by the utility network. Type: File.
+- **out_loading_workspace:** A data loading workspace mapping the source data to the output utility network. Type: File.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the parameters for the Migrate To Utility Network tool
+service_territory_fc = r"C:\temp\LocalGovernment.gdb\wServiceBoundary"
+output_folder = r"C:\temp"
+utility_network_version = "Current"
+feature_dataset_name = "UtilityNetwork"
+output_name = "MigrationDatabase"
+load_data = True
+merge_fields = True
+
+# Execute the Migrate To Utility Network tool
+arcpy.un.MigrateToUtilityNetwork(
+    service_territory_fc,
+    output_folder,
+    utility_network_version,
+    feature_dataset_name,
+    output_name,
+    load_data,
+    merge_fields
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Create Utility Network
+
+**Description:** The Create Utility Network tool is used to establish a utility network within a specified geodatabase feature dataset. It creates a structure network that is shared across all domain networks, modeling structural features that support or contain other features. This tool is typically used to automate the creation of a utility network using existing data, supporting basic editing and tracing workflows.
+
+**Parameters:**
+- **in_feature_dataset:** The geodatabase feature dataset where the utility network and schema will be created. Type: Feature Dataset.
+- **in_utility_network_name:** The name of the utility network to be created. Type: String.
+- **service_territory_feature_class:** The existing polygon feature class used to define the geographical extent of the utility network. This feature class must be z- and m-enabled. Type: Feature Layer; Feature Class.
+- **utility_network_version (Optional):** Specifies the version of the utility network to be created. Options include CURRENT, VERSION_7, VERSION_6, VERSION_5. Type: String.
+
+**Derived Output:**
+- **out_utility_network:** The output utility network. Type: Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the input parameters
+in_feature_dataset = r"C:\MyProject\unownerconnection.sde\UNdatabase.UNOWNER.EsriCoOp"
+in_utility_network_name = "MyNetwork"
+service_territory_feature_class = "ServiceArea"
+
+# Create the utility network
+arcpy.un.CreateUtilityNetwork(
+    in_feature_dataset,
+    in_utility_network_name,
+    service_territory_feature_class
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Add Domain Network
+
+**Description:** The Add Domain Network tool is used to add a domain network to an existing utility network. This tool is typically used when a utility network needs to manage multiple types of utility services, such as electric, water, or gas, by creating separate domain networks for each service.
+
+**Parameters:**
+- **Input Utility Network:** The utility network to which the domain network will be added. Type: Utility Network; Utility Network Layer.
+- **Domain Network Name:** The name of the new domain network, which will prefix the feature class names created. Type: String.
+- **Tier Definition:** Specifies the tier definition for the new domain network. Options include Hierarchical or Partitioned. Type: String.
+- **Subnetwork Controller Type:** Specifies the type of subnetwork controllers, either Source or Sink. Type: String.
+- **Domain Network Alias Name (Optional):** An alias name for the domain network. Type: String.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network after adding the domain network. Type: Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the parameters
+input_utility_network = "MyUtilityNetwork"
+domain_network_name = "ElectricDistribution"
+tier_definition = "HIERARCHICAL"
+subnetwork_controller_type = "SOURCE"
+
+# Execute the Add Domain Network tool
+arcpy.AddDomainNetwork_un(input_utility_network, domain_network_name, tier_definition, subnetwork_controller_type)
+```
+**Toolset:** Utility Network
+
+**Tool:** Add Network Attribute
+
+**Description:** The Add Network Attribute tool is used to add a network attribute to a utility network. Network attributes are values stored in the network topology, derived from attributes on corresponding features in the network. They are used to control traversability and model the cost of paths in the network, particularly during tracing operations.
+
+**Parameters:**
+- **Input Utility Network:** The utility network where the network attribute will be added.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Attribute Name:** The name of the network attribute to be added.  
+  *Type:* String.
+- **Attribute Type:** Specifies the data type of the network attribute. Options include SHORT, LONG, DOUBLE, DATE, BIGINTEGER.  
+  *Type:* String.
+- **is_inline (Optional):** Specifies whether the network attribute will be persisted in line.  
+  *Type:* Boolean.
+- **is_apportionable (Optional):** Specifies if the network attribute will be apportioned across multiple edges.  
+  *Type:* Boolean.
+- **domain (Optional):** The domain associated with the network attribute.  
+  *Type:* String.
+- **is_overridable (Optional):** Specifies if the network attribute can be overridden.  
+  *Type:* Boolean.
+- **is_nullable (Optional):** Specifies if the network attribute will support null values.  
+  *Type:* Boolean.
+- **is_substitution (Optional):** Specifies if the network attribute will be used as a substitution.  
+  *Type:* Boolean.
+- **network_attribute_to_substitute (Optional):** The network attribute that will be used as a substitution.  
+  *Type:* String.
+
+**Derived Output:**
+- **out_utility_network:** The updated utility network.  
+  *Type:* Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Add a network attribute named "Device Status" with a short attribute type
+arcpy.un.AddNetworkAttribute(
+    in_utility_network="Utility Network",
+    attribute_name="Device Status",
+    attribute_type="SHORT",
+    is_inline="INLINE",
+    is_apportionable="NOT_APPORTIONABLE",
+    domain="",
+    is_overridable="",
+    is_nullable="NOT_NULLABLE",
+    is_substitution="",
+    network_attribute_to_substitute=""
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Add Network Category
+
+**Description:** The Add Network Category tool is used to add a network category to an existing utility network. Network categories are utilized to control analysis at the asset group and asset type levels, such as defining whether a particular asset group or asset type is a protective device. This tool is essential for managing how trace analysis is executed within a utility network.
+
+**Parameters:**
+- **Input Utility Network:** The utility network where the network category will be added.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Category Name:** The name of the category to be created.  
+  *Type:* String.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network after the category has been added.  
+  *Type:* Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Define the input utility network and the category name
+in_utility_network = 'Utility Network'
+category_name = 'Protective'
+
+# Add the network category
+arcpy.un.AddNetworkCategory(in_utility_network, category_name)
+```
+**Toolset:** Utility Network
+
+**Tool:** Add Rule
+
+**Description:**  
+The Add Rule tool in ArcGIS Pro is used to add network rules to a utility network. These rules define which types of features or objects can connect or associate within the network, based on asset group and asset type levels. The tool is typically used to ensure the correctness of asset relationships in a network by adhering to business practices and feature restrictions.
+
+**Parameters:**
+- **Input Utility Network:** Specifies the utility network for which the rule will be added.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Rule Type:** Specifies the type of rule that will be created. Options include junction-junction connectivity, containment, structural attachment, junction-edge connectivity, and edge-junction-edge connectivity.  
+  *Type:* String.
+- **From Table:** The utility network feature class or nonspatial object that will be included in the rule.  
+  *Type:* Table; Feature Class.
+- **From Asset Group:** The asset group of the from table parameter value.  
+  *Type:* String.
+- **From Asset Type:** The asset type of the from table parameter value.  
+  *Type:* String.
+- **From Terminal:** The terminal participating in the rule, if applicable.  
+  *Type:* String.
+- **To Table:** The utility network feature class or nonspatial object that will be included in the rule.  
+  *Type:* Table; Feature Class.
+- **To Asset Group:** The asset group of the to table parameter value.  
+  *Type:* String.
+- **To Asset Type:** The asset type of the to table parameter value.  
+  *Type:* String.
+- **To Terminal:** The terminal participating in the rule, if applicable.  
+  *Type:* String.
+- **Via Class:** The junction utility network feature class or table to which the rule will apply, used only for edge-junction-edge connectivity rules.  
+  *Type:* String.
+- **Via Asset Group:** An asset group of the via class parameter value to which the rule will apply, used only for edge-junction-edge connectivity rules.  
+  *Type:* String.
+- **Via Asset Type:** An asset type of the via class parameter value to which the rule will apply, used only for edge-junction-edge connectivity rules.  
+  *Type:* String.
+- **Via Terminal:** The terminal from the via class parameter value to which the rule will apply, used only for edge-junction-edge connectivity rules.  
+  *Type:* String.
+
+**Derived Output:**
+- **out_utility_network:** The updated utility network.  
+  *Type:* Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Example of adding a junction-junction connectivity rule
+arcpy.un.AddRule(
+    "Distribution Network", 
+    "JUNCTION_JUNCTION_CONNECTIVITY", 
+    "ElectricDistributionDevice", 
+    "CircuitBreaker", 
+    "Air powered", 
+    "ElectricDistributionLine", 
+    "Transformer", 
+    "High"
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Add Terminal Configuration
+
+**Description:** The Add Terminal Configuration tool is used to create a terminal configuration for a utility network. This configuration defines logical connection points on a device or junction object, which are essential for establishing paths through which a commodity can travel. Typical use cases include setting up terminals for devices like transformers or switches in an electric utility network.
+
+**Parameters:**
+- **Input Utility Network:** The utility network for which the terminal configuration is being created. Type: Utility Network.
+- **Name:** A name for the terminal configuration, limited to 32 characters. Type: String.
+- **Directionality:** Specifies whether the terminals are directional or bidirectional. Type: String.
+- **Terminals:** Names for each terminal in the configuration, with a minimum of two and a maximum of eight terminals. Each name is limited to 32 characters and cannot contain commas or hyphens. Type: String.
+- **Valid Path(s):** Specifies valid paths within a network feature for resource travel. Options include "All," "None," or specific terminal pairs. Type: String.
+- **Default Path:** The default path assigned to new features with this terminal configuration. Options include "All" or "None." Type: String.
+
+**Derived Output:**
+- **Updated Utility Network:** The utility network with the new terminal configuration applied. Type: Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Example 1: Add a bidirectional terminal configuration with three terminals
+arcpy.un.AddTerminalConfiguration(
+    'Electric Utility Network', 
+    'config1', 
+    'BIDIRECTIONAL', 
+    None, 
+    'A;B;C', 
+    'Top A-B;Bottom A-C', 
+    'Top'
+)
+
+# Example 2: Add a directional terminal configuration with three terminals
+arcpy.un.AddTerminalConfiguration(
+    'Electric Utility Network', 
+    'config2', 
+    'DIRECTIONAL', 
+    'A true;B true;C false', 
+    None, 
+    'Top A-B;Bottom A-C', 
+    'Bottom'
+)
+
+# Example 3: Add a directional terminal configuration with valid paths
+arcpy.un.AddTerminalConfiguration(
+    'Electric Utility Network', 
+    'config3', 
+    'DIRECTIONAL', 
+    'A true;B false;C false', 
+    None, 
+    "AB A-B;ABAC 'A-B;A-C'", 
+    'AB'
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Add Tier
+
+**Description:** The Add Tier tool is used to create a new tier within a domain network in a utility network. This tool is essential for organizing subnetworks into groups, allowing for efficient subnetwork management and tracing operations.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that contains the domain network where the tier will be added. Type: Utility Network; Utility Network Layer.
+- **Domain Network:** The domain network where the tier will be created. Type: String.
+- **Name:** The name of the new tier, which must be unique within the entire utility network. Type: String.
+- **Rank:** The rank of the tier being added, with the highest rank being number 1. Type: Long.
+- **Topology Type (Optional):** Specifies the topology type for the new tier, such as mesh or radial. Type: String.
+- **Tier Group Name (Optional):** The existing tier group to which the new tier will be added, required for hierarchical domain networks. Type: String.
+- **Subnetwork Field Name (Optional):** The name of the field where subnetwork names for this tier will be stored. Type: String.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network after the tier has been added. Type: Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define parameters
+utility_network = "Utility Network"
+domain_network = "GasDistribution"
+tier_name = "Distribution System"
+rank = 1
+topology_type = "MESH"
+tier_group_name = "Distribution"
+subnetwork_field_name = "System"
+
+# Execute Add Tier tool
+arcpy.un.AddTier(
+    utility_network,
+    domain_network,
+    tier_name,
+    rank,
+    topology_type,
+    tier_group_name,
+    subnetwork_field_name
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Add Tier Group
+
+**Description:**  
+The "Add Tier Group" tool is used to add a new tier group to an existing domain network within a utility network. This is typically used in hierarchical domain networks to organize systems such as water, gas, and wastewater into tier groups, which can then have tiers added to them using the "Add Tier" tool.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that contains the domain network where the tier group will be added.  
+  *Type: Utility Network; Utility Network Layer.*
+- **Domain Network:** The name of the domain network to which the tier group will be added. Tier groups can only be added to domain networks that have a hierarchical tier definition. Type: String.
+- **Tier Group Name:** A unique name for the new tier group. The name can be a maximum of 64 characters in length. Type: String.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network. Type: Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the input parameters
+in_utility_network = "Utility Network"
+domain_network = "GasDistribution"
+name = "Distribution"
+
+# Add a new tier group
+arcpy.un.AddTierGroup(in_utility_network, domain_network, name)
+```
+**Toolset:** Utility Network
+
+**Tool:** Calculate Cluster Keys
+
+**Description:** The Calculate Cluster Keys tool populates the CLUSTERKEY attribute field on all utility network classes with an integer value. This facilitates the grouping of features and nonspatial objects in the network topology, enabling more efficient analytical operations, particularly when working with nonspatial junction and edge objects.
+
+**Parameters:**
+- **Input Utility Network:** The utility network containing the classes to which the CLUSTERKEY attribute field will be added.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Overwrite (Optional):** Specifies whether existing cluster key values will be overwritten with new values.  
+  *Type:* Boolean.
+- **Extent (Optional):** The geographical extent that will be used to generate the cluster keys. If no extent is provided, the tool will use the full extent of the utility network.  
+  *Type:* Extent.
+
+**Derived Output:**
+- **Output Utility Network:** The updated utility network.  
+  *Type:* Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the utility network and parameters
+utility_network = 'My Utility Network'
+overwrite_values = 'DO_NOT_OVERWRITE_VALUES'
+extent = '-10210419.36935838 2192709.92528272 -1010791.46945935 2462417.33676915'
+
+# Calculate cluster keys
+arcpy.un.CalculateClusterKeys(utility_network, overwrite_values, extent)
+```
+
+Feel free to ask if you need further details on using this tool or any other aspect of ArcGIS Pro.
+**Toolset:** Utility Network
+
+**Tool:** Delete Network Category
+
+**Description:** The Delete Network Category tool is used to remove a network category from a utility network. This tool is typically used when a network category is no longer needed or must be unassigned from all asset types before deletion.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that contains the network category to be deleted. *Type:* Utility Network; Utility Network Layer.
+- **Category Name:** The name of the network category to delete. *Type:* String.
+
+**Derived Output:**
+- **Updated Utility Network:** The utility network after the network category has been deleted. *Type:* Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the utility network and category name
+utility_network = 'Utility Network'
+category_name = 'Disconnect'
+
+# Execute the Delete Network Category tool
+arcpy.un.DeleteNetworkCategory(utility_network, category_name)
+```
+**Toolset:** Utility Network
+
+**Tool:** Delete Rule
+
+**Description:** The Delete Rule tool in ArcGIS Pro is used to permanently remove specific rules from a utility network. This is crucial for managing network configurations, especially when certain connectivity or association rules are no longer needed. Care should be taken as deleting rules that support existing features can lead to errors when the network topology is re-enabled.
+
+**Parameters:**
+- **in_utility_network:** The utility network from which the rule will be removed.  
+  *Type:* Utility Network; Utility Network Layer.
+- **rule_type:** Specifies the type of rule to be deleted. Options include:
+  - ALL — Deletes all rules.
+  - JUNCTION_JUNCTION_CONNECTIVITY — Deletes a junction-junction connectivity association rule.
+  - CONTAINMENT — Deletes a containment association rule.
+  - STRUCTURAL_ATTACHMENT — Deletes a structural attachment association rule.
+  - JUNCTION_EDGE_CONNECTIVITY — Deletes a junction-edge connectivity rule.
+  - EDGE_JUNCTION_EDGE_CONNECTIVITY — Deletes an edge-junction-edge connectivity rule.  
+  *Type:* String.
+- **rule_desc:** Specifies the rules to be removed, including the rule ID and description.  
+  *Type:* String.
+
+**Derived Output:**
+- **out_utility_network:** The updated utility network after the rule has been deleted.  
+  *Type:* Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Example: Delete a junction-junction connectivity rule
+arcpy.un.DeleteRule(
+    in_utility_network="Electric Network",
+    rule_type="JUNCTION_JUNCTION_CONNECTIVITY",
+    rule_desc="2: From[ElectricDistributionDevice.ServicePoint] From[ElectricDistributionDevice.CircuitBreaker.Load]"
+)
+```
+**Toolset:** Utility Network
+
+**Tool:** Delete Terminal Configuration
+
+**Description:** The Delete Terminal Configuration tool is used to remove a terminal configuration from a utility network. This operation is typically performed when a terminal configuration is no longer needed or before the network topology is enabled for the first time, as terminal configurations cannot be deleted once the topology is enabled.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that contains the terminal configuration to be deleted.  
+  *Type:* Utility Network; Utility Network Layer.
+- **Name:** The name of the terminal configuration to delete.  
+  *Type:* String.
+
+**Derived Output:**
+- **Updated Utility Network:** The utility network after the terminal configuration has been deleted.  
+  *Type:* Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Define the utility network and terminal configuration name
+utility_network = 'Utility Network'
+terminal_configuration_name = 'Dual terminal'
+
+# Execute the Delete Terminal Configuration tool
+arcpy.un.DeleteTerminalConfiguration(utility_network, terminal_configuration_name)
+```
+
+Feel free to ask if you need more details on using this tool or any other aspect of ArcGIS Pro.
+**Toolset:** Utility Network
+
+**Tool:** Disable Network Topology
+
+**Description:**  
+The "Disable Network Topology" tool is used to disable the network topology for an existing utility network. This is typically necessary when performing administrative tasks such as adding, importing, or deleting rules, or when loading large amounts of data to enhance performance.
+
+**Parameters:**
+- **Input Utility Network:** The utility network where the network topology will be disabled.  
+  **Type:** Utility Network; Utility Network Layer.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network after the topology has been disabled.  
+  **Type:** Utility Network.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Disable the network topology for a utility network called 'GridNetwork'
+arcpy.un.DisableNetworkTopology('GridNetwork')
+```
+**Toolset:** Utility Network
+
+**Tool:** Enable Cluster Keys
+
+**Description:** The Enable Cluster Keys tool creates a CLUSTERKEY attribute field on classes in utility network versions 4 through 7. This attribute field is used to facilitate the grouping of features and objects in the network topology, enabling more efficient analytical operations, especially when working with nonspatial junction and edge objects.
+
+**Parameters:**
+- **Input Utility Network:** The utility network containing the classes to which the CLUSTERKEY attribute field will be added. Type: Utility Network; Utility Network Layer.
+- **Overwrite (Optional):** Specifies whether existing cluster key values will be overwritten with new values. Type: Boolean.
+
+**Derived Output:**
+- **Updated Utility Network:** The updated utility network with the CLUSTERKEY attribute field added. Type: Utility Network.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the utility network
+utility_network = 'My Utility Network'
+
+# Enable cluster keys on the utility network
+arcpy.un.EnableClusterKeys(utility_network)
+```
+**Toolset:** Indoors Network
+
+**Tool:** Create Indoor Network Dataset
+
+**Description:** The Create Indoor Network Dataset tool is designed to create an indoor network dataset that includes necessary feature classes for maintaining indoor network data. This dataset supports indoor routable networks, enabling turn-by-turn navigation within facilities.
+
+**Parameters:**
+- **Target Geodatabase:** The target file or enterprise geodatabase that will contain the output indoor network dataset. Type: Workspace.
+- **Indoor Network Dataset Name:** The unique name of the output indoor network dataset, also used for the preliminary indoor network dataset. The default name is IndoorNetwork. Type: String.
+- **Coordinate System:** The spatial reference of the output indoor network dataset. You can specify this using a feature class, a SpatialReference object, or a well-known text (WKT) string. Type: Spatial Reference.
+
+**Derived Output:**
+- **Output Dataset:** The indoor network dataset and preliminary indoor network dataset generated in the target geodatabase. Type: Feature Dataset.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set tool parameters
+target_gdb = "C:/Indoors/ExampleCampus.gdb"
+indoor_network_dataset_name = "IndoorNetwork"
+spatial_reference = arcpy.SpatialReference("WGS 1984 Web Mercator (auxiliary sphere)", "WGS 1984")
+
+# Run the tool
+arcpy.indoors.CreateIndoorNetworkDataset(target_gdb, indoor_network_dataset_name, spatial_reference)
+```
+No information available.
+**Toolset:** Indoors Network
+
+**Tool:** Classify Indoor Pathways
+
+**Description:** The Classify Indoor Pathways tool is used to classify pathways that pass through selected unit spaces, such as conference rooms or service areas, as lower priority. This is typically used to prioritize routing through hallways and open areas over less accessible spaces.
+
+**Parameters:**
+- **Input Unit Features:** The input polygon features representing spaces in a building for which the Target Pathways parameter values will be classified. In the ArcGIS Indoors Information Model, this is the Units layer. *Type: Feature Layer*.
+- **Target Pathways:** The existing feature class or feature layer in which pathways will be updated. In the Indoors model, this is the Pathways layer. *Type: Feature Layer*.
+
+**Derived Output:**
+- **Updated Pathways:** The updated Target Pathways parameter layer. *Type: Feature Class*.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set tool parameters
+unit_features = arcpy.management.SelectLayerByAttribute(
+    r"C:\Indoors\ExampleCampus.gdb\Indoor\Units", 
+    "NEW_SELECTION", 
+    "USE_TYPE = 'Conference Room'"
+)
+pathway_features = r"C:\Indoors\ExampleCampus.gdb\IndoorNetwork\Pathways"
+
+# Run the tool
+arcpy.indoors.ClassifyIndoorPathways(unit_features, pathway_features)
+```
+**Toolset:** Indoors Network
+
+**Tool:** Generate Facility Entryways
+
+**Description:** This tool creates or updates points representing a facility's entry or exit locations. It analyzes input unit features to identify the exterior edges of a facility and generates point features for doors located near those edges. These entryway points are used by the ArcGIS Indoors network for routing into, out of, and between buildings.
+
+**Parameters:**
+- **Input Level Features:** Polygon feature layer or feature class conforming to the Indoors model for the Levels feature class. Type: Feature Layer or Feature Class.
+- **Input Unit Features:** Polygon feature layer or feature class conforming to the Indoors model for the Units feature class. Type: Feature Layer or Feature Class.
+- **Input Door Features:** Polyline feature layer conforming to the Indoors model for the Details feature class. Type: Feature Layer.
+- **Exterior Unit Expression:** Defines which input unit features will be treated as exterior to a facility. Type: String.
+
+**Derived Output:**
+- **Entryway Points:** Points representing entry or exit locations for a facility. Type: Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set input parameters
+input_level_features = r"C:\ExampleCampus.gdb\Indoors\Levels"
+input_unit_features = r"C:\ExampleCampus.gdb\Indoors\Units"
+input_door_features = r"C:\ExampleCampus.gdb\Indoors\Doors"
+exterior_unit_expression = "USE_TYPE IN ('Patio', 'External Stairway')"
+
+# Run the tool
+arcpy.indoors.GenerateFacilityEntryways(
+    input_level_features=input_level_features,
+    input_unit_features=input_unit_features,
+    input_door_features=input_door_features,
+    exterior_unit_expression=exterior_unit_expression
+)
+```
+**Toolset:** Indoors Network
+
+**Tool:** Generate Floor Transitions
+
+**Description:** The Generate Floor Transitions tool creates or updates transition line features that connect floors vertically within a facility. It is typically used to generate vertical transitions such as stairs and elevators, which are essential for creating a connected and routable indoor network.
+
+**Parameters:**
+- **Transition Unit Features:** Defines areas of a floor plan for which transitions will be generated, such as stairs and elevators. Type: Feature Layer or Feature Class.
+- **Pathway Features:** Contains preliminary pathways features for spaces that will be processed by the tool. Type: Polyline Feature Layer or Feature Class.
+- **Target Transitions:** The new transitions will be written here for use in creating the network dataset. Type: Polyline Feature Layer or Feature Class.
+- **Elevator Delay:** Improves routing and transit time calculations by factoring in expected wait times for elevator passengers. Type: Double.
+
+**Derived Output:**
+- **Target Transitions:** The updated polyline feature class containing the new transition features. Type: Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set input parameters
+transition_unit_features = r"C:\ExampleCampus.gdb\Indoors\Units"
+pathway_features = r"C:\ExampleCampus.gdb\PrelimNetwork\PrelimPathways"
+target_transitions = r"C:\ExampleCampus.gdb\PrelimNetwork\PrelimTransitions"
+elevator_delay = 30  # Example delay in seconds
+
+# Run the Generate Floor Transitions tool
+arcpy.indoors.GenerateFloorTransitions(
+    Transition_Unit_Features=transition_unit_features,
+    Pathway_Features=pathway_features,
+    Target_Transitions=target_transitions,
+    Elevator_Delay=elevator_delay
+)
+```
+
+Feel free to ask if you need further details or have other questions about ArcGIS Pro tools.
+No information available.

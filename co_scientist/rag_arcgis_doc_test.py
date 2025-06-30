@@ -34,7 +34,7 @@ core_concepts = [
     },
     {
         "name": "Network",
-        "description": "Network information answers questions about connectivity. "
+        "description": "Network information answers questions about connectivity, which is central to space and spatial information. It captures binary relationships among arbitrary numbers of objects, called the nodes or vertices of a network. Any relation of interest can connect the nodes and be represented by edges. The spatiality of a network results from positioning the nodes in some space and may involve geometric properties of the edges, such as their length or shape. The two main kinds of networks encountered in spatial information are link and path networks. Link networks capture logical or other abstract relationships between nodes, such as friendships, business relations, or treaties between social agents. Path or transportation networks model systems of paths along which matter, energy, or information flows. Examples are roads, utilities, communication lines, synapses, blood vessels, or electric circuits. Network applications benefit from the well-studied representations of networks as graphs and the correspondingly vast choice of algorithms and data structures. Partly due to this sound mathematical and computational basis, networks are the spatial concept that is most broadly recognized and applied across disciplines. One may speculate from this success story that a similar level of understanding and formalization of the other core concepts will encourage their use in transdisciplinary work. As the exposure here shows, such a level has not yet been reached in most cases."
     },
     {
         "name": "Event",
@@ -57,6 +57,8 @@ core_concepts = [
         "description": "The final core concept proposed is that of value. Information about values attached to or affected by spatial information answers questions about the roles played by spatial information in society. The prototypical value is economic, but the valuation of spatial information as a good in society goes far beyond monetary considerations. It includes assessing the relation of spatial information to other important values in society, such as privacy, trust, infrastructure, or heritage. Given the wide-ranging aspects of spatial information values, no coherent theoretical framework for them can be expected any time soon. Even theories about the economic value of spatial information remain sketchy and difficult to apply, because they involve parameters that are hard to generalize, control, and measure. The values of information, economic and other, tend to accrue holistically and unpredictably, by new questions that can be asked and answered."
     }
 ]
+
+
 def get_urls_for_tier(tier: str = "dev") -> tuple[str, str]:
     base_url_key = f"BASE_URL_{tier.upper()}"
     token_url_key = f"TOKEN_URL_{tier.upper()}"
@@ -289,12 +291,14 @@ def extract_toolset_names(response):
                 toolset_names.append(toolset_name)
     return list(dict.fromkeys(toolset_names))
 
+
 def extract_tools(response):
     """Robustly extract tool names from a comma-separated string, always return a list."""
     if not response or not isinstance(response, str):
         return []
     tools = [t.strip() for t in response.split(",") if t.strip() and t.strip().lower() != "none"]
     return list(dict.fromkeys(tools))
+
 
 def llm_supervisor(message):
     prompt = f"""Review the LLM output below to clean out the list of real and usable names and output only the final list of valid entries. An empty list is returned if the content is invalid.
@@ -303,8 +307,8 @@ The result is just a json array with no explanation. For example: ["toolset1", "
 """
     try:
         client = openai.AzureOpenAI(api_key="3c744295edda4f13bf0ef198ddb4d24c",
-        api_version="2024-10-21",
-        azure_endpoint="https://ist-apim-aoai.azure-api.net/load-balancing/gpt-4o")
+                                    api_version="2024-10-21",
+                                    azure_endpoint="https://ist-apim-aoai.azure-api.net/load-balancing/gpt-4o")
 
         response = client.chat.completions.create(
             model="gpt-4o",
@@ -320,6 +324,7 @@ The result is just a json array with no explanation. For example: ["toolset1", "
     except Exception as e:
         print(f"Supervisor error: {e}")
         return []
+
 
 if __name__ == "__main__":
     print("Available tiers:")
@@ -372,7 +377,7 @@ if __name__ == "__main__":
     os.environ["BASE_URL_PRD"] = BASE_URL_PRD
     os.environ["TOKEN_URL_PRD"] = TOKEN_URL_PRD
 
-    tier_choice ="2"
+    tier_choice = "2"
 
     tier_map = {
         "1": "dev",
@@ -385,157 +390,151 @@ if __name__ == "__main__":
     tier = tier_map.get(tier_choice, "dev")
     print(f"Using tier: {tier}")
 
-    # prompt_1_template = """
-    # Here is a spatial core concept:
-    # Core Concept: {core_name}
-    # Description: {core_desc}
-    # Task:
-    # Please list all Toolset names available in ArcGIS Pro Toolboxes that are potentially relevant to the above core concept.
-    # Just output the Toolset names—no need to list the individual tools yet.
-    # Please provide as many relevant Toolsets as possible, covering building, editing, analyzing, visualizing, or any spatial operations related to this concept.
-    #
-    # Response format:
-    # Toolset names:
-    # - Toolset Name 1
-    # - Toolset Name 2
-    # - Toolset Name 3
-    # ...
-    # You must return a list of toolset names, even if you find no relevant toolsets.
-    #
-    # """
     prompt_1_template = """
-    Here is a spatial core concept: Core Concept: {core_name} Description: {core_desc}Please list all Toolset names available in ArcGIS Pro Toolboxes that are potentially relevant to the above core concept.
+    Here is a spatial core concept:
 
+    Core Concept: {core_name}
+    Description: {core_desc}
+
+    Task:
+    Please list all Toolset names available in ArcGIS Pro Toolboxes that are potentially relevant to the above core concept.
+    Just output the Toolset names—no need to list the individual tools yet.
+    Please provide as many relevant Toolsets as possible, covering building, editing, analyzing, visualizing, or any spatial operations related to this concept.
+
+    Response format:
+    Toolset names:
+    - Toolset Name 1
+    - Toolset Name 2
+    - Toolset Name 3
+    ...
     """
     prompt_2_template = """
     You are provided with a list of ArcGIS Pro toolsets that may be relevant to the following spatial core concept:
-    
+
     Core Concept:
     {name}: {desc}
-    
+
     Toolset:
     {toolset}
-    
+
     Task:
     For the toolset above, list all individual tools within that toolset that are relevant to the core concept.
-    
+
     Only provide the tool names (no description or details needed at this step).
-    
+
     Output the results in the following structured format, please do not include any additional text or explanations:
     <Tool Name 1>, <Tool Name 2>, <Tool Name 3>, ......
     """
-    # prompt_3_template="""
-    # Context:
-    #
-    # You are provided with the following ArcGIS Pro tool information:
-    #
-    # Toolset name: {toolset_name}
-    #
-    # Tool name: {tool_name}
-    #
-    # Spatial core concept: {core_name}: {core_desc}
-    #
-    # Task:
-    #
-    # For the specified tool, provide the following details in a structured format:
-    #
-    # 1. Description:
-    # A concise summary (1–2 sentences) explaining what the tool does and its typical use cases.
-    #
-    # 2. Parameters:
-    # List all input parameters. For each parameter, include:
-    #     -Name
-    #     -Description
-    #     -Data type
-    #
-    # 3. Derived Outputs:
-    # List all derived or output parameters with their name, description, and data type.
-    #
-    # 4. Example ArcPy code:
-    # Provide a minimal working ArcPy script using the tool and its key parameters.
-    # The script should include all necessary imports and setup for execution.
-    #
-    # Response format:
-    #
-    # Toolset: <Toolset Name>
-    #
-    # Tool: <Tool Name>
-    #
-    # Description: <Concise description>
-    #
-    # Parameters:
-    # - <param1>: <explanation> Type: <Data Type>.
-    # - <param2>: <explanation> Type: <Data Type>.
-    # ...
-    #
-    # Derived Output:
-    # - <out_param1>: <explanation> Type: <Data Type>.
-    # - <out_param2>: <explanation> Type: <Data Type>.
-    # ...
-    # Example ArcPy code (include all the necessary imports and context to successfully run the code):
-    # ```python
-    # import arcpy
-    # arcpy.<toolbox_alias>.<tool_function>(
-    #     <param1>=<value1>,
-    #     <param2>=<value2>,
-    #     ...
-    # )
-    # ...
-    # If the tool or parameters are not found, or there is no relevant information, respond only with:  `No information available.`
-    # """
-    prompt_3_template = """
-        Context:
+    prompt_3_template="""
+    Context:
 
-        You are provided with the following ArcGIS Pro tool information:
+    You are provided with the following ArcGIS Pro tool information:
 
-        Toolset name: {toolset_name}
+    Toolset name: {toolset_name}
 
-        Tool name: {tool_name}
+    Tool name: {tool_name}
 
-        Spatial core concept: {core_name}: {core_desc}
+    Task:
 
-        Task:
+    For the specified tool, provide the following details in a structured format:
 
-        For the specified tool, provide the following details in a structured format:
+    1. Description:
+    A concise summary (1–2 sentences) explaining what the tool does and its typical use cases.
 
-        1. Description:
-        A detailed summary explaining what the tool does and its typical use cases. Give some examples of how it can be used in spatial analysis or GIS workflows.
+    2. Parameters:
+    List all input parameters. For each parameter, include:
+        -Name
+        -Description
+        -Data type
 
-        2. Parameters:
-        List all input parameters. For each parameter, include:
-            -Name
-            -Description
-            -Data type
+    3. Derived Outputs:
+    List all derived or output parameters with their name, description, and data type.
 
-        3. Derived Outputs:
-        List all derived or output parameters with their name, description, and data type.
+    4. Example ArcPy code:
+    Provide a minimal working ArcPy script using the tool and its key parameters.
+    The script should include all necessary imports and setup for execution.
 
-        Response format:
+    Response format:
 
-        Toolset: <Toolset Name>
+    Toolset: <Toolset Name>
 
-        Tool: <Tool Name>
+    Tool: <Tool Name>
 
-        Description: <very detailed description with examples>
+    Description: <Concise description>
 
-        Parameters:
-        - <param1>: <explanation> Type: <Data Type>. 
-        - <param2>: <explanation> Type: <Data Type>. 
+    Parameters:
+    - <param1>: <explanation> Type: <Data Type>.
+    - <param2>: <explanation> Type: <Data Type>.
+    ...
+
+    Derived Output:
+    - <out_param1>: <explanation> Type: <Data Type>.
+    - <out_param2>: <explanation> Type: <Data Type>.
+    ...
+    Example ArcPy code (include all the necessary imports and context to successfully run the code):
+    ```python
+    import arcpy
+    arcpy.<toolbox_alias>.<tool_function>(
+        <param1>=<value1>,
+        <param2>=<value2>,
         ...
-
-        Derived Output:
-        - <out_param1>: <explanation> Type: <Data Type>. 
-        - <out_param2>: <explanation> Type: <Data Type>. 
-    
-        If the tool or parameters are not found, or there is no relevant information, respond only with:  `No information available.`
-        """
+    )
+    ...
+    If the tool or parameters are not found, or there is no relevant information, respond only with:  `No information available.`
+    """
+    # prompt_3_template = """
+    #     Context:
+    #
+    #     You are provided with the following ArcGIS Pro tool information:
+    #
+    #     Toolset name: {toolset_name}
+    #
+    #     Tool name: {tool_name}
+    #
+    #     Spatial core concept: {core_name}: {core_desc}
+    #
+    #     Task:
+    #
+    #     For the specified tool, provide the following details in a structured format:
+    #
+    #     1. Description:
+    #     A detailed summary explaining what the tool does and its typical use cases. Give some examples of how it can be used in spatial analysis or GIS workflows.
+    #
+    #     2. Parameters:
+    #     List all input parameters. For each parameter, include:
+    #         -Name
+    #         -Description
+    #         -Data type
+    #
+    #     3. Derived Outputs:
+    #     List all derived or output parameters with their name, description, and data type.
+    #
+    #     Response format:
+    #
+    #     Toolset: <Toolset Name>
+    #
+    #     Tool: <Tool Name>
+    #
+    #     Description: <very detailed description with examples>
+    #
+    #     Parameters:
+    #     - <param1>: <explanation> Type: <Data Type>.
+    #     - <param2>: <explanation> Type: <Data Type>.
+    #     ...
+    #
+    #     Derived Output:
+    #     - <out_param1>: <explanation> Type: <Data Type>.
+    #     - <out_param2>: <explanation> Type: <Data Type>.
+    #
+    #     If the tool or parameters are not found, or there is no relevant information, respond only with:  `No information available.`
+    #     """
     try:
         token = get_token(tier)
         base_url, _ = get_urls_for_tier(tier)
         client = Client(base_url=base_url, timeout=60.0)
         skill_json = get_skill_ids(client, auth_token=token)
         for core in core_concepts:
-            if core["name"] in ["Location","Neighbourhood", "Field","Object"]:
+            if core["name"] in ["Location", "Neighbourhood"]:
                 continue
             # prompt = input("> ")
             print(core)
@@ -547,7 +546,7 @@ if __name__ == "__main__":
             response_text = extract_response(answer, "doc_ai_assistant")
             toolset_names = extract_toolset_names(response_text)
             # toolset_names = llm_supervisor(str(toolset_names)) or toolset_names
-            print(f"core concept {core} has {toolset_names}" )
+            print(f"core concept {core} has {toolset_names}")
 
             for toolset in toolset_names:
                 prompt_2 = prompt_2_template.format(toolset=toolset, name=core["name"], desc=core["description"])
@@ -556,17 +555,17 @@ if __name__ == "__main__":
                     client=client, skill_id="doc_ai_assistant", message=prompt_2, auth_token=token, context=context
                 )
                 response_text = extract_response(answer, "doc_ai_assistant")
-                all_tools =extract_tools(response_text)
+                all_tools = extract_tools(response_text)
                 # all_tools = llm_supervisor(str(all_tools)) or all_tools
                 print(f"core concept {core} has {toolset_names}, which contains {all_tools}")
                 for tool in all_tools:
                     print("processing tool:", tool)
-                    prompt_3 = prompt_3_template.format(toolset_name = toolset, tool_name=tool.strip(), core_name=core["name"], core_desc=core["description"])
+                    prompt_3 = prompt_3_template.format(toolset_name=toolset, tool_name=tool.strip())
                     answer = chat_with_skill(
                         client=client, skill_id="doc_ai_assistant", message=prompt_3, auth_token=token, context=context
                     )
                     response_text = extract_response(answer, "doc_ai_assistant")
-                    with open(f"{core['name']}.txt", "a") as f:
+                    with open(f"{core['name']}_new.txt", "a") as f:
                         f.write(response_text + "\n")
                         print("file saved:", f"{core['name']}.txt")
 

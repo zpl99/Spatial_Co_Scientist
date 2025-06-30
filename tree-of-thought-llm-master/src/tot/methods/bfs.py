@@ -49,7 +49,7 @@ def get_samples(task, x, y, n_generate_sample, prompt_sample, stop):
 def solve(args, task, idx, to_print=True):
     global gpt
     gpt = partial(gpt, model=args.backend, temperature=args.temperature)
-    print(gpt)
+    print(gpt.args)
     x = task.get_input(idx)  # input
     ys = ['']  # current output candidates
     infos = []

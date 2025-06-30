@@ -1,0 +1,155 @@
+**Toolset:** Data Enrichment
+
+**Tool:** Calculate Motion Statistics
+
+**Description:**  
+The Calculate Motion Statistics tool is designed to compute motion statistics for points within a time-enabled feature class. This tool is particularly useful in spatial analysis workflows where understanding the movement patterns of entities over time is crucial. Typical use cases include analyzing the movement of vehicles, animals, or weather phenomena such as hurricanes. By calculating statistics like speed, acceleration, and bearing, users can gain insights into the dynamics of tracked entities, which can be applied in fields such as transportation planning, wildlife monitoring, and meteorological studies.
+
+**Parameters:**
+- **Input Layer:** The time-enabled point features on which motion statistics will be calculated.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** The output feature class or layer containing the points with new fields for each motion statistic that was calculated.  
+  *Type:* Feature Class.
+  
+- **Track Fields:** One or more fields that will be used to identify distinct entities.  
+  *Type:* Field.
+  
+- **Track History Window (Optional):** The number of observations (including the current observation) that will be used for summary statistics. The default value is 3, which means that the summary statistics will be calculated at each point in a track using the current observation and the previous two observations.  
+  *Type:* Long.
+  
+- **Motion Statistics (Optional):** Specifies the group containing the statistics that will be calculated and written to the result. If no value is specified, all statistics from all groups will be calculated.  
+  *Type:* Various (Distance, Duration, Speed, Acceleration, Elevation, Slope, Idle).
+
+**Derived Output:**
+- **Output:** The output point features with motion statistics.  
+  *Type:* Feature Set.
+
+Feel free to ask more about how this tool can be integrated into your specific GIS workflows or any other ArcGIS Pro tools you might be interested in.
+**Toolset: Find Locations**
+
+**Tool: Detect Incidents**
+
+**Description:**  
+The Detect Incidents tool is designed to create a layer that identifies features meeting specific conditions. This tool is part of the Find Locations toolset, which is used to pinpoint areas based on defined criteria, such as attribute or spatial queries. For example, it can be used to detect incidents where certain conditions are met, such as identifying parcels that are vacant or areas within a specific distance from a river. This tool is particularly useful in spatial analysis workflows for tracking events or conditions over time, such as monitoring environmental changes or urban development patterns.
+
+**Parameters:**
+- **Track:** A sequence of features that are time-enabled with a time type of instant. Type: Feature Class.
+- **Incident:** Features that meet a condition of interest. Type: Feature Class.
+- **Instant:** A single moment in time represented by a start time and no end time. Type: Date/Time.
+- **Interval:** A duration of time represented by a start and an end time. Type: Date/Time.
+- **Feature of Interest:** Describes the feature being analyzed. Type: Feature Class.
+
+**Derived Output:**
+- **Output Layer:** A layer containing features that meet the specified condition. Type: Feature Class.
+
+If you have further questions or need clarification on any aspect of the tool, feel free to ask.
+**Toolset:** Find Locations
+
+**Tool:** Find Dwell Locations
+
+**Description:**  
+The Find Dwell Locations tool is designed to identify locations where moving objects have stopped or dwelled, using specified time and distance thresholds. This tool is particularly useful in scenarios where tracking the stationary periods of objects is necessary, such as monitoring vehicle stops, animal resting points, or any other application requiring the detection of idle periods. For example, a city might use this tool to analyze the dwell locations of snow plow trucks to optimize routes or identify areas needing more frequent service. The tool works by analyzing time-enabled point features that represent instants in time, defining dwell locations as sequential observations with minimal movement over a specified period.
+
+**Parameters:**
+- **Input Features:** The point tracks in which dwells will be found. The input must be a time-enabled layer with features that represent instants in time.  
+  *Type:* Feature Set.
+  
+- **Output Dataset:** The name of the output feature service.  
+  *Type:* String.
+  
+- **Track Fields:** One or more fields that will be used to identify unique tracks.  
+  *Type:* Field.
+  
+- **Distance Method:** Specifies how the distances between dwell features will be calculated. Options include Geodesic and Planar.  
+  *Type:* String.
+  
+- **Distance Tolerance:** The maximum distance between points to be considered a single dwell location.  
+  *Type:* Linear Unit.
+  
+- **Time Tolerance:** The minimum time duration to be considered a single dwell location. Both time and distance are considered.  
+  *Type:* Time Unit.
+
+**Derived Output:**
+- **Dwell Location Features:** Represents dwell features as either points, convex hulls, or mean centers, indicating where tracks have been stationary given specified time and distance parameters.  
+  *Type:* Feature Set.
+
+If you have further questions or need clarification on any aspect of the tool, feel free to ask.
+**Toolset: Find Locations**
+
+**Tool: Find Similar Locations**
+
+**Description:**  
+The "Find Similar Locations" tool in ArcGIS Pro is designed to identify candidate features that are most similar or dissimilar to one or more input features based on their attributes. This tool is particularly useful in spatial analysis and GIS workflows where identifying patterns, trends, and anomalies in large datasets is necessary. For example, it can be used to find stores that are most similar to a top-performing store based on attributes such as "SickDays," "TotalCustomers," and "AvgPurchaseAmount." This tool is part of the GeoAnalytics Desktop tools, which utilize a parallel processing framework for efficient analysis of big data on a desktop machine using Apache Spark.
+
+**Parameters:**
+- **Input Layer**: The reference layer (or a selection on a layer) containing the features to be compared.  
+  Type: Record Set.
+  
+- **Search Layer**: The candidate layer (or a selection on a layer) containing candidate-matching features. The tool searches for features most similar (or dissimilar) to the Input Layer parameter among these candidates. Type: Record Set.
+  
+- **Output Name**: The name of the output feature class that will contain a record for each of the Input Layer parameters and the most similar or dissimilar candidate features. Type: String.
+
+- **Analysis Fields**: The fields used to determine similarity. These fields are used to calculate the similarity or dissimilarity between the reference and candidate features. Type: Field.
+
+- **Most Or Least Similar**: Specifies whether to find the most similar or least similar features. Type: String.
+
+- **Match Method**: Specifies the method used to determine similarity or dissimilarity. Options include "ATTRIBUTE_VALUES" and "ATTRIBUTE_PROFILES." Type: String.
+
+- **Number of Results**: The number of most similar or dissimilar features to find. Entering zero or a number larger than the total number of search_layer features will return rankings for all the candidate features, with a maximum of 10. Type: Long.
+
+- **Append Fields**: An optional list of attributes to include with the output features. These fields are not used to determine similarity; they are only included in the output parameter attributes for your reference. Type: List of Fields.
+
+**Derived Output:**
+
+- **Output Feature Class**: Contains a record for each of the Input Layer parameters and the most similar or dissimilar candidate features. Type: Feature Class.
+**Toolset: Manage Data**
+
+**Tool: Calculate Field**
+
+**Description:**  
+The **Calculate Field** tool in ArcGIS Pro is used to compute the values of a field for a feature class, feature layer, or raster. This tool is particularly useful for performing both simple and complex calculations on field values within a table, allowing for batch updates of many records simultaneously. It is commonly used in spatial analysis and GIS workflows to update or populate fields with calculated values based on existing data. For example, it can be used to calculate the area of polygons, update population density fields, or derive new data attributes from existing ones using mathematical expressions. The tool supports calculations on string, number, and date fields and can automatically apply calculations to selected records if a selection set is present.
+
+**Toolset:** Manage Data
+
+**Tool: Calculate Field**
+
+**Description:**  
+The Calculate Field tool is used to compute the values of a field for a feature class, feature layer, or raster. It is particularly useful for updating or populating fields with calculated values, which can be based on mathematical operations or expressions. This tool is often used in data management and preparation tasks, such as calculating new fields or modifying existing ones in a dataset. For instance, it can be used to compute the total area of a set of polygons or to update a field with new values derived from other fields using expressions written in Arcade, Python, SQL, or VBScript.
+
+**Parameters:**
+- **Input Layer**: The input features that will have a field calculated. Type: *Record Set*.
+- **Output Name**: The name of the output feature service. Type: String.
+- **Field Name**: The name of the field that will have values calculated. This can be an existing field or a new field. Type: String.
+- **Field Type**: Specifies the field type for the calculated field. Options include:
+  - String — Any string of characters
+  - Integer — Whole numbers
+  - Double — Fractional numbers
+  - Date — Date
+- **Expression**: Calculates values in the field. Expressions are written in Arcade and can include operators like [+ - * / ] and multiple expressions. Type: String.
+- **Track Aware (Optional)**: Specifies whether the expression will use a track-aware expression. Checked—The expression will use a track-aware expression, and a track field must be specified. Type: Boolean.
+
+Derived Output:
+- **Output Dataset**: A new dataset with calculated fields. Type: Feature Class; Table.
+
+If you have further questions or need more details, feel free to ask!
+**Toolset:** Manage Data
+
+**Tool:** Clip Layer
+
+**Description:**  
+The Clip Layer tool in ArcGIS Pro is designed to extract input features that fall within specified polygon boundaries. It is commonly used to create a geographic subset of features from a larger feature class, often referred to as a study area or area of interest (AOI). This tool acts like a cookie cutter, clipping point, line, or polygon features using one or more features from another feature class. The output will contain the input layer features that overlay the clip layer polygons, maintaining the same geometry type as the input features. For example, clipping line features within a polygon will result in line outputs. This tool is particularly useful in spatial analysis workflows where defining a specific area of interest is necessary, such as environmental studies, urban planning, or resource management.
+
+**Parameters:**
+- **Input Layer:** The dataset containing the point, line, or polygon features to be clipped.  
+  *Type:* Feature Layer
+- **Clip Layer:** The dataset containing the polygon features used to clip the input features.  
+  *Type:* Feature Layer
+- **Output Feature Class:** The output feature class with clipped features.  
+  *Type:* Feature Class
+
+**Derived Output:**
+- **Output Feature Class:** The clipped output containing features from the input layer that overlay the clip layer polygons.  
+  *Type:* Feature Class
+
+The tool is powered by ArcGIS GeoAnalytics Server, which performs the analysis on the server and stores results in ArcGIS Enterprise. For optimal performance, it is recommended to use data local to the GeoAnalytics Server and set the extent environment to focus on data of interest.

@@ -1,0 +1,4195 @@
+**Toolset:** Fields
+
+**Tool:** Add Field
+
+**Description:** The Add Field tool in ArcGIS Pro is used to add a new field to a table, feature class, or raster with an attribute table. This tool is typically used to modify the schema of the input data by adding new attributes for data management and analysis purposes.
+
+**Parameters:**
+- **Input Table:** The table, feature class, or shapefile to which the new field will be added. Type: Table View.
+- **Field Name:** The name of the field to be added. Type: String.
+- **Field Type:** Specifies the type of the field, such as Text, Float, or Double. Type: String.
+- **Field Precision:** The number of digits that can be stored in the field. Type: Integer.
+- **Field Scale:** The number of decimal places for float and double fields. Type: Integer.
+- **Field Length:** The length of the field for text fields. Type: Integer.
+- **Field Alias:** An alternate name for the field. Type: String.
+- **Field Is Nullable:** Specifies whether the field can contain null values. Type: Boolean.
+- **Field Is Required:** Specifies whether the field is required. Type: Boolean.
+
+**Derived Output:**
+- **out_table:** The updated input table with the new field added. Type: Table View.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/airport.gdb"
+
+# Define local variables
+inFeatures = "schools"
+fieldName1 = "ref_ID"
+fieldPrecision = 9
+fieldAlias = "refcode"
+fieldName2 = "status"
+fieldLength = 10
+
+# Add fields using AddField tool
+arcpy.management.AddField(inFeatures, fieldName1, "LONG", fieldPrecision, field_alias=fieldAlias, field_is_nullable="NULLABLE")
+arcpy.management.AddField(inFeatures, fieldName2, "TEXT", field_length=fieldLength)
+```
+**Toolset:** Fields
+
+**Tool:** Add Fields
+
+**Description:** The Add Fields tool in ArcGIS Pro is used to add multiple new fields to a table, feature class, or raster. This tool is typically used to modify the schema of input data by adding new attributes, which can be useful for data management and analysis tasks.
+
+**Parameters:**
+- **Input Table:** The input table, feature class, or shapefile where the fields will be added. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Properties (Optional):** Specifies the fields and their properties to be added. This includes:
+  - **Field Name:** The name of the field to be added. Type: String.
+  - **Field Type:** The type of the new field (e.g., Text, Float). Type: String.
+  - **Field Alias:** An alternate name for the field, applicable only to geodatabases. Type: String.
+  - **Field Length:** The maximum number of characters for text fields. Type: Integer.
+
+**Derived Output:**
+- **out_table:** The updated input table, feature class, or shapefile. Type: Table View; Raster Layer; Mosaic Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/district.gdb"
+
+# Define the input table
+input_table = 'school'
+
+# Define the fields to be added
+fields_to_add = [
+    ['school_name', 'TEXT', 'Name', 255, 'Hello world', ''],
+    ['street_number', 'LONG', 'Street Number', None, 35, 'StreetNumDomain'],
+    ['year_start', 'DATE', 'Year Start', None, '2017-08-09 16:05:07', '']
+]
+
+# Add fields to the input table
+arcpy.management.AddFields(input_table, fields_to_add)
+```
+**Toolset:** Fields
+
+**Tool:** Alter Field
+
+**Description:** The Alter Field tool allows you to rename fields or field aliases for a geodatabase table or feature class. It is typically used to modify the field alias of a field in a table or view registered with the geodatabase. If the input field is a required field, only the field alias can be modified.
+
+**Parameters:**
+- **Input Table:** The input geodatabase table or feature class that contains the field to be altered. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name:** The name of the field that will be altered. If the field is a required field, only the field alias will be altered. Type: Field.
+- **New Field Name (Optional):** The new name for the field. Type: String.
+- **New Field Alias (Optional):** The new field alias for the field. Type: String.
+- **New Field Type (Optional):** Specifies the new field type for the field. This parameter is only applicable if the input table is empty (does not contain records). Type: Various (e.g., Short, Long, Float, Double, Text, Date).
+
+**Derived Output:**
+- No specific derived outputs are listed for this tool.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+in_table = "C:/Data/Garbo.gdb/trails"
+field = "condition_rating"
+new_field_name = "notes"
+new_field_alias = "Comments on Trail Condition"
+field_type = "TEXT"
+field_length = 60
+field_is_nullable = "NULLABLE"
+clear_field_alias = "FALSE"
+
+# Alter the properties of a non-nullable, short data type field to become a text field
+arcpy.management.AlterField(in_table, field, new_field_name, new_field_alias, field_type, field_length, field_is_nullable, clear_field_alias)
+```
+
+Feel free to ask if you need more details on using the Alter Field tool or any other ArcGIS Pro functionalities.
+**Toolset:** Fields
+
+**Tool:** Alter Fields
+
+**Description:** The Alter Fields tool in ArcGIS Pro is used to modify the properties of multiple fields within a feature class or table. This includes renaming fields or field aliases, and changing field types, especially useful for managing geodatabase tables or feature classes.
+
+**Parameters:**
+- **Input Table:** The input geodatabase table or feature class containing the fields to be altered. *Type:* Table View; Raster Layer; Mosaic Layer.
+- **Field Properties (Optional):** Specifies the properties of the fields to be altered, including:
+  - **Field Name:** The name of the field to be altered. *Type:* Field.
+  - **New Field Name (Optional):** The new name for the field. *Type:* String.
+  - **New Field Alias (Optional):** The new alias for the field. *Type:* String.
+  - **New Field Type (Optional):** Specifies the new field type, applicable if the input table is empty. *Type:* Various (e.g., Short, Long, Float, Double, Text, Date).
+
+**Derived Output:**
+- **Altered Input Table:** The input table with updated field properties. *Type:* Table View.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+in_table = "C:/Data/Garbo.gdb/trails"
+field = "condition_rating"
+new_field_name = "notes"
+new_field_alias = "Comments on Trail Condition"
+field_type = "TEXT"
+field_length = 60
+field_is_nullable = "NULLABLE"
+clear_field_alias = "FALSE"
+
+# Alter the properties of a non-nullable, short data type field to become a text field
+arcpy.management.AlterField(
+    in_table, 
+    field, 
+    new_field_name, 
+    new_field_alias, 
+    field_type, 
+    field_length, 
+    field_is_nullable, 
+    clear_field_alias
+)
+```
+**Toolset:** Fields
+
+**Tool:** Assign Default To Field
+
+**Description:** The "Assign Default To Field" tool is used to set a default value for a specified field in a table or feature class. This default value is automatically applied to the field whenever a new row is added, ensuring consistency and reducing manual data entry errors.
+
+**Parameters:**
+- **in_table:** The input table or feature class that will have a default value added to one of its fields. Type: Mosaic Layer; Raster Layer; Table View.
+- **field_name:** The field to which the default value will be added each time a new row is added to the table or feature class. Type: Field.
+- **default_value (Optional):** The default value to be added to each new table or feature class. The value entered must match the data type of the field. Type: String.
+- **subtype_code [subtype_code,...] (Optional):** The subtypes that can participate in the default value. Type: String.
+- **clear_value (Optional):** Specifies whether the default value for either the field or the subtype will be cleared. To clear the default value, the default_value parameter must be passed in as an empty string. Type: Boolean.
+
+**Derived Output:**
+- **Updated Input Table:** The updated input table. Type: Table View; Raster Layer; Mosaic Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/Montgomery.gdb/Landbase"
+
+# Set local variables
+in_table = "blocks"
+field_name = "Res"
+default_value = 1
+subtype_code = ["0: Non-Residential", "1: Residential"]
+
+# Run AssignDefaultToField
+arcpy.management.AssignDefaultToField(in_table, field_name, default_value, subtype_code)
+```
+
+Feel free to ask more about ArcGIS Pro tools or explore other functionalities within the Fields toolset.
+No information available.
+**Toolset:** Fields
+
+**Tool:** Calculate Field
+
+**Description:**  
+The Calculate Field tool is used to compute values for a specified field within a feature class, feature layer, or raster. It is typically employed to update or populate fields with calculated values based on expressions, which can be simple or complex, using Python, Arcade, SQL, or VBScript.
+
+**Parameters:**
+- **Input Layer:** The input features that will have a field calculated.  
+  *Type:* Table View
+- **Field Name:** The name of the field that will have values calculated. This can be an existing field or a new field.  
+  *Type:* String
+- **Field Type:** Specifies the field type for the calculated field.  
+  *Type:* String (String, Integer, Double, Date)
+- **Expression:** Calculates values in the field. Expressions are written in Arcade and can include operators and multiple fields.  
+  *Type:* String
+- **Track Aware (Optional):** Specifies whether the expression will use a track-aware expression.  
+  *Type:* Boolean
+- **Track Fields:** One or more fields that will be used to identify unique tracks.  
+  *Type:* Field
+- **Data Store (Optional):** Specifies the ArcGIS Data Store where the output will be stored.  
+  *Type:* Spatiotemporal big data store
+
+**Derived Output:**
+- **Output Table:** The updated table with calculated fields.  
+  *Type:* Table View; Raster Layer; Mosaic Layer
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the input parameters
+in_table = "path/to/your/input/table"
+field_name = "NewField"
+expression = "!existing_field! * 2"  # Example expression using Python syntax
+
+# Execute the Calculate Field tool
+arcpy.management.CalculateField(
+    in_table=in_table,
+    field=field_name,
+    expression=expression,
+    expression_type="PYTHON3"
+)
+```
+**Toolset:** Fields
+
+**Tool:** Calculate Fields
+
+**Description:** The Calculate Fields tool is used to perform calculations on multiple fields within a feature class, feature layer, or raster dataset. It allows for batch updating of field values, which is useful for data transformation and analysis tasks.
+
+**Parameters:**
+- **Input Layer:** The input features that will have a field calculated. Type: Record Set.
+- **Output Name:** The name of the output feature service. Type: String.
+- **Field Name:** The name of the field that will have values calculated. This can be an existing field or a new field. Type: String.
+- **Field Type:** Specifies the field type for the calculated field. Type: String (options include String, Integer, Double, Date).
+- **Expression:** Calculates values in the field. Expressions are written in Arcade and can include operators like [+ - * /]. Type: String.
+- **Code Block (Optional):** A block of code for complex expressions. Type: String.
+- **Enforce Domains (Optional):** Specifies whether field domain rules will be enforced. Type: Boolean.
+
+**Derived Output:**
+- **Out Table:** The updated table with calculated fields. Type: Table View; Raster Layer; Mosaic Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data/airport.gdb"
+
+# Define the input layer and field calculations
+input_layer = "parcels"
+field_calculations = [
+    ["xCentroid", "!SHAPE.CENTROID.X!"],
+    ["yCentroid", "!SHAPE.CENTROID.Y!"]
+]
+
+# Execute the CalculateFields tool
+arcpy.management.CalculateFields(input_layer, "PYTHON3", field_calculations)
+```
+**Toolset:** Fields
+
+**Tool:** Delete Field
+
+**Description:** The Delete Field tool is used to remove one or more fields from a table, feature class, feature layer, or raster dataset. It is typically used to clean up datasets by removing unnecessary or redundant fields.
+
+**Parameters:**
+- **Input Table:** The table containing the fields to be deleted. The existing input table will be modified. Type: Mosaic Layer; Raster Layer; Table View.
+- **Fields:** The fields to be deleted or kept from the input table, as specified by the Method parameter. Only nonrequired fields can be deleted. Type: Field.
+- **Method (Optional):** Specifies whether the fields specified by the Fields parameter will be deleted or kept. Options include:
+  - **Delete Fields:** The fields specified by the Fields parameter will be deleted. This is the default.
+  - **Keep Fields:** The fields specified by the Fields parameter will be kept; all other fields will be deleted. Type: String.
+
+**Derived Output:**
+- **Updated Table:** The updated dataset with the specified fields deleted. Type: Table View; Raster Layer; Mosaic Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data"
+
+# Copy the feature class to a new location
+arcpy.management.CopyFeatures("majorrds.shp", "C:/output/majorrds_copy.shp")
+
+# Delete specified fields from the copied feature class
+arcpy.management.DeleteField("C:/output/majorrds_copy.shp", ["STREET_NAM", "LABEL", "CLASS"])
+```
+**Toolset:** Fields
+
+**Tool:** Migrate Text Field
+
+**Description:** The Migrate Text Field tool is designed to convert text fields in an Oracle table from Unicode types to non-Unicode types. This is typically used to optimize storage and compatibility in enterprise geodatabases, particularly when working with Oracle databases.
+
+**Parameters:**
+- **Input Table:** The Oracle dataset from which eligible text fields will be migrated. *Type: Table View.*
+- **Fields:** The Unicode text fields that will be migrated to non-Unicode text fields. *Type: Field.*
+
+**Derived Output:**
+- **Updated Table:** The updated table with text fields converted from Unicode to non-Unicode types. *Type: Table View.*
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Define the input table and fields to be migrated
+in_table = r"C:\path\to\project\Default.gdb\FeatureClass"
+fields = ["Field_text", "Field_text_II"]
+
+# Execute the Migrate Text Field tool
+arcpy.management.MigrateTextField(in_table, fields)
+```
+
+This script demonstrates how to use the `MigrateTextField` function in ArcPy, specifying the input table and the fields to be migrated.
+**Toolset:** Data Engineering
+
+**Tool:** Encode Field
+
+**Description:** The Encode Field tool converts categorical values (such as strings, integers, or dates) into multiple numerical fields, each representing a category. This encoding is useful for data science and statistical workflows, including regression models.
+
+**Parameters:**
+- **in_table**: The input table containing the data to be encoded. Type: Table.
+- **field**: The field in the input table that contains the categorical values to be encoded. Type: Field.
+- **encoding_method**: The method used for encoding the field. Options include "ONEHOT" and "TEMPORAL". Type: String.
+- **time_step_interval**: The interval for temporal encoding, such as '1 Days'. Type: String.
+- **time_step_alignment**: The alignment for temporal encoding, such as "START_TIME". Type: String.
+
+**Derived Output:**
+- **updated_table**: The table that contains the added fields that were encoded. Type: Table View.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+try:
+    # Set the workspace
+    arcpy.env.workspace = r"C:\\Encoded\\MyData.gdb"
+    
+    # Define input parameters
+    in_table = 'San_Francisco_Crimes'
+    field = 'Dates'
+    encoding_method = "TEMPORAL"
+    time_step_interval = '1 Days'
+    time_step_alignment = "START_TIME"
+    
+    # Run Encode Field Tool
+    arcpy.management.EncodeField(in_table, field, encoding_method, None, time_step_interval, time_step_alignment)
+
+except arcpy.ExecuteError:
+    # Print error message if tool execution fails
+    print(arcpy.GetMessages())
+```
+**Toolset:** Data Engineering
+
+**Tool:** Field Statistics To Table
+
+**Description:** The Field Statistics To Table tool creates a table of descriptive statistics for one or more input fields in a table or feature class. It is typically used to summarize data for analysis, providing insights into the distribution and characteristics of the data.
+
+**Parameters:**
+- **Input Table:** The input table containing the fields that will be used to create the statistics table. Type: Table View.
+- **Input Fields:** The fields containing the values that will be used to calculate the statistics. Type: Field.
+- **Output Location:** The location where the output tables will be created. This can be a geodatabase, folder, or feature dataset. Type: Workspace.
+- **Output Tables:** The output tables containing the statistics. The Field Types column specifies the field types that will be included in each output table, and the name of each output table is provided in the Output Name column. Type: Table.
+
+**Derived Output:**
+- **Output Tables for Numeric Data Types:** The table will be saved in the workspace specified in the Output Location parameter. Type: Table.
+- **Output Tables for Text Data Types:** The table will be saved in the workspace specified in the Output Location parameter. Type: Table.
+- **Output Tables for Date Data Types:** The table will be saved in the workspace specified in the Output Location parameter. Type: Table.
+- **Output Tables for All Data Types:** The table will be saved in the workspace specified in the Output Location parameter. Type: Table.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace and input features
+arcpy.env.workspace = r"C:\\Statistics\\MyData.gdb"
+in_table = "County_Data"
+
+# Set the input fields that will be used to calculate statistics
+in_fields = "population_total;unemployment_rate;income;county_name;sample_date"
+
+# Set the output location
+out_location = r"C:\\Statistics\\MyData.gdb"
+
+# Set the output table field type and name
+out_tables = "ALL AllStats_Table;DATE DateStats_Table;NUMERIC NumStats_Table;TEXT TextStats_Table"
+
+# Run the Field Statistics To Table tool
+arcpy.management.FieldStatisticsToTable(in_table, in_fields, out_location, out_tables)
+```
+
+Feel free to ask more about the Data Engineering toolset or explore other tools in ArcGIS Pro.
+**Toolset:** Data Engineering
+
+**Tool:** Reclassify Field
+
+**Description:** The Reclassify Field tool reclassifies values in a numerical or text field into classes based on bounds defined manually or using a reclassification method. It is typically used to categorize data into meaningful classes for analysis.
+
+**Parameters:**
+- **Input Table:** The input table or feature class containing the field to be reclassified. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field to Reclassify:** The field that will be reclassified. The field must be numeric or text. Type: Field.
+- **Reclassification Method (Optional):** Specifies the reclassification method for field values. Options include Defined interval, Equal interval, Geometric interval, Manual interval, and Natural breaks (Jenks). Type: String.
+- **Reclassification Table (Optional):** A table defining how values will be reclassified. Type: String.
+- **Output Field Name (Optional):** The name or prefix of the output field. Type: String.
+
+**Derived Output:**
+- **Updated Table:** The updated table that contains the reclassified fields. Type: Table View.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace and input features
+arcpy.env.workspace = r"C:\\Reclassify\\MyData.gdb"
+in_table = "Demographics"
+field = "Population"
+method = "MANUAL"
+reclass_table = "10000 Village;100000 Town;1000000 City"
+output_field_name = "SettlementType"
+
+# Run the Reclassify Field tool
+try:
+    arcpy.management.ReclassifyField(
+        in_table, 
+        field, 
+        method, 
+        "", 
+        None, 
+        "", 
+        reclass_table, 
+        None, 
+        output_field_name
+    )
+except arcpy.ExecuteError:
+    # If an error occurred when running the tool, print the error message
+    print(arcpy.GetMessages())
+```
+No information available.
+No information available.
+**Toolset:** Raster
+
+**Tool:** Interpolate Points
+
+**Description:**  
+The Interpolate Points tool predicts values at new locations based on measurements from a collection of points. It uses point data with values at each point to return a raster of predicted values. This tool is typically used in scenarios such as predicting pollution levels at unsampled locations or estimating soil nutrient levels for agricultural purposes.
+
+**Parameters:**
+- **Input Point Features:** The input point features you want to interpolate.  
+  *Type:* Feature Set.
+- **Interpolate Field:** The field containing the data values you want to interpolate. The field must be numeric.  
+  *Type:* Field.
+- **Output Name:** The name of the output raster service. The default name is based on the tool name and the input layer name.  
+  *Type:* String.
+- **Optimize For (Optional):** Choose your preference for speed versus accuracy. Options include Speed, Balance (default), and Accuracy.  
+  *Type:* String.
+- **Transform Data to Normal Distribution (Optional):** Choose whether to transform your data to a normal distribution before performing analysis.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **Output Raster:** The raster of predicted values based on the interpolation of the input point features.  
+  *Type:* Raster Dataset.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the environment
+arcpy.env.workspace = "C:/data"
+
+# Define input parameters
+input_features = "points.shp"
+interpolate_field = "value_field"
+output_name = "predicted_raster"
+
+# Execute the Interpolate Points tool
+arcpy.sa.InterpolatePoints(input_features, interpolate_field, output_name, optimize_for="Balance", transform_data=False)
+```
+**Toolset:** Raster
+
+**Tool:** Calculate Density
+
+**Description:** The Calculate Density tool creates a density map from point or line features by distributing known quantities of a phenomenon across the map. Typical use cases include creating crime density maps, calculating hospital densities within a county, and identifying areas at risk of forest fires.
+
+**Parameters:**
+- **Input Features:** The point or line features from which to calculate density. Type: Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. Type: String.
+- **Count Field (Optional):** A field specifying the number of incidents at each location. Type: Field.
+- **Cell Size (Optional):** The value used to create a mesh of points where density values are calculated. Type: Double.
+- **Cell Size Units (Optional):** Units for the cell size value. Type: String.
+- **Radius (Optional):** Distance specifying how far to search to find features when calculating density values. Type: Double.
+- **Radius Units (Optional):** Units for the radius value. Type: String.
+
+**Derived Output:**
+- **Output Raster:** The output raster layer with classified density values. Type: Raster Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inPoints = 'https://MyPortal.esri.com/server/rest/services/Hosted/myPoints/FeatureServer/0'
+outRaster = 'outImgServ'
+inField = 'Population'
+searchDistance = '150000 Meters'
+areaUnit = 'Square Kilometers'
+outCellSize = '10000 Meters'
+inBarriers = 'https://MyPortal.esri.com/server/rest/services/Hosted/myPoints/FeatureServer/1'
+
+# Execute CalculateDensity
+arcpy.ra.CalculateDensity(inPoints, outRaster, inField, searchDistance, areaUnit, outCellSize, inBarriers)
+```
+
+Feel free to ask more about the tool's applications or other ArcGIS Pro functionalities.
+No information available.
+**Toolset:** Raster
+
+**Tool:** Optimal Interpolation
+
+**Description:** Optimal Interpolation statistically assimilates data combined from multiple sources to produce an output raster. It is typically used to merge background data, such as model outputs, with observation data, such as point measurements, to perform interpolation. This method is useful for creating more accurate datasets by combining less accurate but comprehensive background data with more accurate but sparse observation data.
+
+**Parameters:**
+- **Input Background Raster:** The input background raster, typically a gridded raster from model output. Type: Raster Dataset; Raster Layer; Image Service.
+- **Input Observation Data:** The input point features used for interpolation. Type: Feature Layer; Trajectory Layer.
+- **Observation Field:** The field containing observation values for interpolation. Type: String.
+- **Background Error Variance:** The error variance of the background measurements, which can be a single value or a raster. Type: Double or Raster.
+- **Observation Error Variance:** The error variance of the observation measurements, which can be a single value or a field from the observation data. Type: Double or Field.
+- **Background Error Correlation Length:** Determines the influence of an observation point on the output, expressed in the unit of the spatial reference of the input background data. Type: Double.
+
+**Derived Output:**
+- **Output Raster:** The interpolated raster surface. Type: Raster Dataset.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data"
+
+# Define input parameters
+input_background_raster = "background.tif"
+input_observation_data = "observations.shp"
+observation_field = "value"
+background_error_variance = 0.5
+observation_error_variance = 0.2
+background_error_correlation_length = 1000
+
+# Execute Optimal Interpolation
+arcpy.ga.OptimalInterpolation(
+    in_background_raster=input_background_raster,
+    in_observation_data=input_observation_data,
+    observation_field=observation_field,
+    background_error_variance=background_error_variance,
+    observation_error_variance=observation_error_variance,
+    background_error_correlation_length=background_error_correlation_length,
+    out_raster="output_interpolated.tif"
+)
+```
+No information available.
+No information available.
+No information available.
+No information available.
+**Toolset:** Raster
+
+**Tool:** Reclass
+
+**Description:** The Reclass tool in ArcGIS Pro is used to reclassify or change the values in a raster. This is typically done to replace values based on new information, group certain values, reclassify values to a common scale, or set specific values to NoData.
+
+**Parameters:**
+- **Input raster:** The input raster to be reclassified. Type: Raster Layer.
+- **Reclass field:** Field denoting the values that will be reclassified. Type: Field.
+- **Reclassification:** A remap table that defines how the values will be reclassified. The values of the input raster can be classified as ranges of values or as individual values. Type: Table.
+
+**Derived Output:**
+- **Output raster:** The output reclassified raster. The output will always be of integer type. Type: Raster.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+from arcpy import env
+from arcpy.sa import *
+
+# Set environment settings
+env.workspace = "C:/sapyexamples/data"
+
+# Set local variables
+inRaster = "landuse"
+reclassField = "LANDUSE"
+remap = RemapValue([["Brush/transitional", 0], ["Water", 1], ["Barren land", 2]])
+
+# Execute Reclassify
+outReclassify = Reclassify(inRaster, reclassField, remap, "NODATA")
+
+# Save the output
+outReclassify.save("C:/sapyexamples/output/outreclass02")
+```
+
+Feel free to ask if you need more details on using the Reclass tool or any other ArcGIS Pro functionalities.
+**Toolset:** Raster
+
+**Tool:** Interpolate Points
+
+**Description:** The Interpolate Points tool predicts values at new locations based on measurements from a collection of points. It uses point data with values at each point as input and returns a raster of predicted values. Typical use cases include predicting pollution levels, soil nutrient levels, and meteorological variables like temperature and rainfall.
+
+**Parameters:**
+- **Input Point Features:** The input point features you want to interpolate. *Type: Feature Set*.
+- **Interpolate Field:** The field containing the data values you want to interpolate. The field must be numeric. *Type: Field*.
+- **Output Name:** The name of the output raster service. The default name is based on the tool name and the input layer name. *Type: String*.
+- **Optimize For (Optional):** Choose your preference for speed versus accuracy. Options include Speed, Balance, and Accuracy. *Type: String*.
+- **Transform Data to Normal Distribution (Optional):** Choose whether to transform your data to a normal distribution before performing analysis. *Type: Boolean*.
+- **Size of Local Models (Optional):** Choose the number of points in each of the local models. *Type: Long*.
+- **Number of Neighbors (Optional):** The number of neighbors to use when calculating the prediction at a particular cell. *Type: Long*.
+- **Output Cell Size (Optional):** Set the cell size and units of the output raster. *Type: Linear Unit*.
+- **Output Prediction Error (Optional):** Choose whether to output a raster of standard errors of the interpolated predictions. *Type: Boolean*.
+
+**Derived Output:**
+- **Output Raster:** The raster dataset containing the interpolated values. *Type: Raster*.
+- **Output Prediction Error Raster (Optional):** A raster of standard errors for the interpolation predictions. *Type: Raster*.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data"
+
+# Define input parameters
+input_features = "points.shp"
+interpolate_field = "value_field"
+output_name = "predicted_raster"
+optimize_for = "Balance"
+transform_data = False
+size_of_local_models = 50
+number_of_neighbors = 10
+output_cell_size = "100 Meters"
+output_prediction_error = True
+
+# Execute the Interpolate Points tool
+arcpy.geostatistical.InterpolatePoints(
+    input_features=input_features,
+    interpolate_field=interpolate_field,
+    output_name=output_name,
+    optimize_for=optimize_for,
+    transform_data=transform_data,
+    size_of_local_models=size_of_local_models,
+    number_of_neighbors=number_of_neighbors,
+    output_cell_size=output_cell_size,
+    output_prediction_error=output_prediction_error
+)
+```
+**Toolset:** Raster
+
+**Tool:** Interpolate From Spatiotemporal Points
+
+**Description:**  
+The "Interpolate From Spatiotemporal Points" tool is used to interpolate temporal point data into a multidimensional raster. It is typically used to predict values at new locations based on measurements from a collection of points, effectively creating a raster of predicted values from temporal point data.
+
+**Parameters:**
+- **Input Point Features:** The input point features you want to interpolate.  
+  *Type:* Feature Set.
+- **Interpolate Field:** The field containing the data values you want to interpolate. The field must be numeric.  
+  *Type:* Field.
+- **Output Name:** The name of the output raster service. The default name is based on the tool name and the input layer name.  
+  *Type:* String.
+- **Optimize For (Optional):** Choose your preference for speed versus accuracy. Options include Speed, Balance (default), and Accuracy.  
+  *Type:* String.
+- **Transform Data to Normal Distribution (Optional):** Choose whether to transform your data to a normal distribution before performing analysis.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **Output Raster:** The output multidimensional raster dataset.  
+  *Type:* Raster Dataset.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy import ia
+
+# Check out the ArcGIS Image Analyst extension license
+arcpy.CheckOutExtension("ImageAnalyst")
+
+# Set local variables
+in_dataset = "icesat_trajectory"
+out_raster = r"C:\temp\icesat_surface.crf"
+variable_field = "elevation"
+time_field = "Time"
+temporal_aggregation = "Daily"
+cell_size = 5000
+interpolation_method = "Quadratic"
+
+# Execute the tool
+interpolation_output = arcpy.ia.InterpolateFromSpatiotemporalPoints(
+    in_dataset, 
+    out_raster, 
+    variable_field, 
+    time_field, 
+    temporal_aggregation, 
+    cell_size, 
+    interpolation_method
+)
+```
+No information available.
+**Toolset:** Spatial Statistics
+
+**Tool:** Calculate Density
+
+**Description:** The Calculate Density tool creates a density map from point or line features by spreading known quantities of a phenomenon across the map. Typical use cases include creating crime density maps, calculating hospital densities within a county, and identifying areas at high risk of forest fires.
+
+**Parameters:**
+- **Input Features:** The point or line features from which to calculate density. Type: Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. Type: String.
+- **Count Field (Optional):** A field specifying the number of incidents at each location. Type: Field.
+- **Cell Size (Optional):** This value is used to create a mesh of points where density values are calculated. Type: Double.
+- **Cell Size Units (Optional):** The units of the cell size value. Type: String.
+- **Radius (Optional):** A distance specifying how far to search to find point or line features when calculating density values. Type: Double.
+- **Radius Units (Optional):** The units of the radius value. Type: String.
+
+**Derived Output:**
+- **Output Layer:** The output polygon layer with classified density values. Type: Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inputLayer = "C:/data/HealthInfo.gdb/outbreaks"
+outputName = "OutbreakDensity"
+field = "Severity"
+cellSize = 1000  # Example cell size
+cellSizeUnits = "Meters"
+radius = 1800  # Example radius
+radiusUnits = "Meters"
+
+# Run Calculate Density
+arcpy.sfa.CalculateDensity(
+    inputLayer=inputLayer,
+    outputName=outputName,
+    field=field,
+    cellSize=cellSize,
+    cellSizeUnits=cellSizeUnits,
+    radius=radius,
+    radiusUnits=radiusUnits
+)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Find Hot Spots
+
+**Description:** The Find Hot Spots tool identifies statistically significant hot spots and cold spots within a set of features using the Getis-Ord Gi* statistic. It is typically used to analyze spatial patterns in data, such as crime rates or disease outbreaks, to determine areas of high or low activity.
+
+**Parameters:**
+- **Point Layer:** The point feature class for which hot spot analysis will be performed. Type: Feature Set.
+- **Output Name:** The name of the output layer with the z-score and p-value results. Type: String.
+- **Bin Size:** The distance interval that represents the bin size and units into which the Point Layer will be aggregated. The distance interval must be a linear unit. Type: Linear Unit.
+- **Neighborhood Size:** The spatial extent of the analysis neighborhood. This value determines which features are analyzed together to assess local clustering. Type: Linear Unit.
+- **Time Step Interval (Optional):** The interval that will be used for the time step. This parameter is only used if time is enabled for Point Layer. Type: Time Unit.
+- **Time Step Alignment (Optional):** Specifies how time steps will be aligned. This parameter is only available if the input points are time enabled and represent an instant in time. Type: String.
+
+**Derived Output:**
+- **Output Layer:** The output hot spot layer. Type: Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data/Calls311.gdb"
+
+# Enable time on the input features using an .lyrx file
+input_lyrx = r'C:\data\SanFrancisco_311calls.lyrx'
+
+# Convert the .lyrx to features
+SF311CallsInputLayer = arcpy.management.MakeFeatureLayer(input_lyrx, "SF_311Calls_layer")
+
+# Apply symbology from the layer file
+arcpy.management.ApplySymbologyFromLayer(SF311CallsInputLayer, input_lyrx)
+
+# Run the Find Hot Spots tool
+arcpy.sfa.FindHotSpots(
+    analysisLayer=SF311CallsInputLayer,
+    outputName="SF311HotSpots",
+    binSize="500 Meters",
+    neighborhoodSize="1 Kilometers"
+)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Find Point Clusters
+
+**Description:** The Find Point Clusters tool identifies clusters of point features amidst surrounding noise based on their spatial or spatiotemporal distribution. It is typically used to analyze patterns in data such as crime incidents, disease outbreaks, or wildlife sightings, where identifying dense areas of activity is crucial.
+
+**Parameters:**
+- **inputPoints:** The input point layer to be analyzed. Type: Feature Layer.
+- **minimumPoints:** The minimum number of points required to form a cluster. Type: Integer.
+- **searchDistance:** The distance within which points are considered part of a cluster. Type: Linear Unit.
+- **dataStore:** Specifies where the output will be stored. Options include SPATIOTEMPORAL_DATA_STORE or RELATIONAL_DATA_STORE. Type: String.
+- **clusterMethod:** The method used to define clusters. Options include DBSCAN (for defined distance) and HDBSCAN (for self-adjusting). Type: String.
+- **use_time (Optional):** Specifies whether time will be used to discover clusters with DBSCAN. Options are TIME or NO_TIME. Type: Boolean.
+- **search_duration (Optional):** The time duration within which the minimum number of points must be found to form a cluster. Type: Time Unit.
+
+**Derived Output:**
+- **output:** The output point clusters. Type: Feature Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/CountyData.gdb"
+
+# Set local variables
+inputPoints = "rat_sightings"
+minimumPoints = 10
+outputName = "RodentClusters"
+searchDistance = "1 Kilometers"
+clusterMethod = "DBSCAN"
+
+# Execute Find Point Clusters
+arcpy.gapro.FindPointClusters(
+    inputPoints=inputPoints,
+    outputName=outputName,
+    clusterMethod=clusterMethod,
+    minimumPoints=minimumPoints,
+    searchDistance=searchDistance
+)
+```
+No information available.
+**Toolset:** Spatial Statistics
+
+**Tool:** Generalized Linear Regression
+
+**Description:**  
+The Generalized Linear Regression tool is used to model a dependent variable in terms of its relationship to a set of explanatory variables. It supports continuous (OLS), binary (logistic), and count (Poisson) models, making it versatile for various applications such as predicting crime rates, understanding demographic impacts on public transportation usage, and more.
+
+**Parameters:**
+- **Input Features:** The feature class containing the dependent and explanatory variables.  
+  *Type:* Feature Layer.
+- **Dependent Variable:** The numeric field containing the observed values that will be modeled.  
+  *Type:* Field.
+- **Model Type:** Specifies the type of data that will be modeled. Options include Continuous (Gaussian), Binary (Logistic), and Count (Poisson).  
+  *Type:* String.
+- **Explanatory Variable(s):** A list of fields representing independent explanatory variables in the regression model.  
+  *Type:* Field.
+- **Output Features:** The new feature class containing the dependent variable estimates and diagnostics.  
+  *Type:* Feature Class.
+
+**Derived Output:**
+- **Output Features:** The feature class with the dependent variable estimates for each input feature.  
+  *Type:* Feature Class.
+- **Coefficient Table:** An output table containing the coefficients from the model fit.  
+  *Type:* Table.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the current workspace
+arcpy.env.workspace = r"c:\data\project_data.gdb"
+
+# Run Generalized Linear Regression
+arcpy.stats.GeneralizedLinearRegression(
+    in_features="crime_counts",
+    dependent_variable="total_crimes",
+    model_type="COUNT",
+    out_features="out_features",
+    explanatory_variables=["YRBLT", "TOTPOP", "AVGHINC"],
+    explanatory_distance_features="CBD",
+    prediction_locations="prediction_locations",
+    explanatory_variable_matching=[["YRBLT", "YRBLT"], ["TOTPOP", "TOTPOP"], ["AVGHINC", "AVGHINC"]],
+    explanatory_distance_matching=[["CBD", "CBD"]],
+    output_predicted_features="predicted_features"
+)
+```
+
+Feel free to ask if you need more details on any specific aspect of the tool or its applications.
+**Toolset:** Spatial Statistics
+
+**Tool:** Calculate Motion Statistics
+
+**Description:**  
+The Calculate Motion Statistics tool computes motion-related statistics for points in a time-enabled feature class. It is typically used to analyze movement patterns, such as speed, acceleration, and direction, for entities tracked over time.
+
+**Parameters:**
+- **Input Layer:** The time-enabled point features on which motion statistics will be calculated.  
+  *Type:* Feature Layer.
+- **Output Feature Class:** The output feature class or layer containing the points with new fields for each motion statistic that was calculated.  
+  *Type:* Feature Class.
+- **Track Fields:** One or more fields that will be used to identify distinct entities.  
+  *Type:* Field.
+- **Track History Window (Optional):** The number of observations (including the current observation) that will be used for summary statistics. The default value is 3.  
+  *Type:* Long.
+- **Motion Statistics (Optional):** Specifies the group containing the statistics that will be calculated and written to the result.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output:** The output point features with motion statistics.  
+  *Type:* Feature Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = "https://mydomain.com/server/rest/services/DataStoreCatalogs/bigDataFileShares_Hurricanes/BigDataCatalogServer/all"
+out = "Hurricanes_MotionStats"
+trackField = "name"
+
+# Run Calculate Motion Statistics
+arcpy.geoanalytics.CalculateMotionStatistics(
+    inFeatures=inFeatures,
+    out=out,
+    trackFields=trackField,
+    trackHistoryWindow=5,
+    motionStatistics=["SPEED", "ACCELERATION", "BEARING"],
+    distanceMethod="GEODESIC"
+)
+```
+No information available.
+**Toolset:** Spatial Statistics
+
+**Tool:** Find Dwell Locations
+
+**Description:** The Find Dwell Locations tool identifies locations where moving objects have stopped or dwelled using specified time and distance thresholds. It is typically used for analyzing movement data to detect stay points or idle periods, such as tracking vehicles or animals over time.
+
+**Parameters:**
+- **Input Features:** The point tracks in which dwells will be found. The input must be a time-enabled layer with features that represent instants in time. Type: Feature Layer.
+- **Output Dataset:** The output feature class with the resulting dwells. Type: Feature Class.
+- **Track Fields:** One or more fields that will be used to identify unique tracks. Type: Field.
+- **Distance Method:** Specifies how the distances between dwell features will be calculated. Options include Geodesic and Planar. Type: String.
+- **Distance Tolerance:** The maximum distance between points to be considered a single dwell location. Type: Linear Unit.
+- **Time Tolerance:** The minimum time duration to be considered a single dwell location. Both time and distance are considered. Type: Time.
+
+**Derived Output:**
+- **Dwell Location:** Features representing when a track has been stationary given specified time and distance parameters. This is the output result from the tool that represents dwell features as either points, convex hulls, or mean centers. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data/Tracks.gdb"
+
+# Define input parameters
+input_features = "Movement_Tracks"
+output_dataset = "Dwell_Locations"
+track_fields = ["vehicleID"]
+distance_method = "Planar"
+distance_tolerance = "100 Meters"
+time_tolerance = "2 Hours"
+
+# Execute the Find Dwell Locations tool
+arcpy.management.FindDwellLocations(
+    input_features=input_features,
+    output_dataset=output_dataset,
+    track_fields=track_fields,
+    distance_method=distance_method,
+    distance_tolerance=distance_tolerance,
+    time_tolerance=time_tolerance
+)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Find Similar Locations
+
+**Description:** The Find Similar Locations tool identifies candidate features that are most similar or dissimilar to one or more input features based on feature attributes. It is typically used to find locations that share similar characteristics with a reference location, such as identifying stores similar to a top-performing store.
+
+**Parameters:**
+- **referenceStore**: The input feature or location to which similarity is measured. Type: String.
+- **candidateStores**: The features or locations to be compared against the referenceStore. Type: String.
+- **analysisFields**: A list of fields used to determine similarity. Type: List of Strings.
+- **outputName**: The name of the output feature class. Type: String.
+- **dataStore**: Specifies the ArcGIS Data Store where the output will be stored. Options include SPATIOTEMPORAL_DATA_STORE or RELATIONAL_DATA_STORE. Type: String.
+
+**Derived Output:**
+- **output**: Features from the input and all the solution-matching features found. Type: Record Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+referenceStore = "TopPerformer"
+candidateStores = "AllStores"
+analysisFields = ["SickDays", "TotalCustomers", "AvgPurchaseAmount"]
+outputName = "BestStores_10"
+dataStore = "SPATIOTEMPORAL_DATA_STORE"
+
+# Execute Find Similar Locations
+arcpy.geoanalytics.FindSimilarLocations(
+    referenceStore,
+    candidateStores,
+    outputName,
+    analysisFields,
+    "MOST_SIMILAR",
+    "ATTRIBUTE_VALUES",
+    10,
+    None,
+    dataStore
+)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Aggregate Points
+
+**Description:** The Aggregate Points tool aggregates point features into polygon features or bins. It returns a polygon with a count of points and optional statistics at locations where points exist. This tool is typically used to summarize point data within specified boundaries, such as aggregating crime incidents within neighborhood polygons.
+
+**Parameters:**
+- **Point Layer:** The point features to be aggregated into polygons or bins. Type: Feature Layer.
+- **Output Feature Class:** A new feature class with the aggregated polygon results. Type: Feature Class.
+- **Polygon or Bin:** Specifies how the Point Layer will be aggregated. Options include Polygon or Bin. Type: String.
+- **Polygon Layer (Optional):** The polygon features into which the input points will be aggregated. Type: Feature Layer.
+- **Bin Type (Optional):** Specifies the bin shape for aggregation. Options include Square, Hexagon, and H3. Type: String.
+- **Bin Size (Optional):** The distance interval representing the bin size and units for aggregation. Type: Linear Unit.
+- **Time Step Interval (Optional):** Duration of the time step for time-enabled input points. Type: Time Unit.
+- **Time Step Repeat (Optional):** Frequency of the time-step interval occurrence. Type: Time Unit.
+- **Time Step Reference (Optional):** Reference time for aligning time steps. Default is January 1, 1970. Type: Date.
+
+**Derived Output:**
+- **Output:** The aggregated polygon features or bins. Type: Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Set local variables
+in_point_features = "C:/data/cartography.gdb/crime/robberies"
+out_feature_class = "C:/data/cartography.gdb/crime/clustered_robberies"
+aggregation_distance = "100 meters"
+
+# Execute Aggregate Points
+arcpy.cartography.AggregatePoints(in_point_features, out_feature_class, aggregation_distance)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Describe Dataset
+
+**Description:** The Describe Dataset tool summarizes features into calculated field statistics, sample features, and extent boundaries. It is typically used to create a sample of a dataset, preview features, and calculate summary statistics for datasets with time or geometry.
+
+**Parameters:**
+- **input_layer:** The point, line, polygon, or tabular features to be described. Type: Table View.
+- **output:** A new table with the summary information. Type: Table.
+- **sample_features (Optional):** The number of features that will be included in the output sample layer. No sample is returned if you select 0 features or don't provide a number. By default, no sample layer is returned. Type: Long.
+- **sample_layer (Optional):** A new feature class with a sample of the input data. Type: Table; Feature Class.
+- **extent_layer (Optional):** A new feature class with the spatial and temporal extent of the input data. Type: Feature Class.
+
+**Derived Output:**
+- **output:** The output layer containing the summarized statistic calculations. Type: Record Set.
+- **extent_layer:** When the create_extent_layer parameter is selected, the tool will output a layer containing a single polygon representing the extent of your dataset. Type: Feature Set.
+- **sample_layer:** When the sample_features parameter specifies a value greater than zero, the tool will output a layer containing the specified number of sample features from your dataset. Type: Feature Set.
+- **output_json:** This parameter is not used. A JSON string containing all of the summary information calculated in analysis is included in the tool's messages. Type: String.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+input_layer = "WaterSample"
+output = "WSample_summary"
+sample_features = 2500
+sample_layer = "WSample_sample2500"
+
+# Run Describe Dataset
+arcpy.gapro.DescribeDataset(input_layer, output, sample_features, sample_layer)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Join Features
+
+**Description:** The Join Features tool allows you to join features in one layer to features in another layer based on their relative locations. This is called a spatial join. Along with a spatial join, the tool also supports temporal and attribute joins, enabling comprehensive data integration across spatial, temporal, and attribute dimensions.
+
+**Parameters:**
+- **Target Layer:** Contains the target features. The attributes from the target features and the attributes from the joined features will be transferred to the output. Type: Table View.
+- **Join Layer:** Contains the join features. The attributes from the join features will be joined to the attributes of the target features. Type: Table View.
+- **Output Dataset:** The new feature class containing the target layer features with joined features. Type: Feature Class; Table.
+- **Join Operation:** Specifies how joins between the Target Layer values and the Join Layer values will be handled in the output if multiple join features have the same spatial relationship with a single target feature. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class that includes the joined attributes from the join features. Type: Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data"
+
+# Define the parameters
+target_layer = "Tourist_Attractions"
+join_layer = "Rail_Stations"
+output_dataset = "C:/data/Tourist_Attractions_Join"
+
+# Run the Join Features tool
+arcpy.analysis.SpatialJoin(
+    target_features=target_layer,
+    join_features=join_layer,
+    out_feature_class=output_dataset,
+    join_type="KEEP_COMMON"
+)
+
+print("Join Features tool executed successfully.")
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Reconstruct Tracks
+
+**Description:** The Reconstruct Tracks tool creates line or polygon tracks from time-enabled input data, typically used to analyze movement patterns over time, such as tracking hurricanes or vehicle movements.
+
+**Parameters:**
+- **input_layer:** The points or polygons to be reconstructed into tracks. The input must be a time-enabled layer that represents an instant in time. Type: Feature Set.
+- **output_name:** The name of the output feature service. Type: String.
+- **track_fields:** One or more fields that will be used to identify unique tracks. Type: Field.
+- **method:** Specifies the criteria that will be used to reconstruct tracks. Options include GEODESIC and PLANAR. Type: String.
+- **buffer_type:** Specifies how the buffer distance will be defined, using either FIELD or EXPRESSION. Type: String.
+- **buffer_field (Optional):** The field that will be used to buffer the input features. Type: Field.
+- **buffer_expression (Optional):** The expression that will be used to buffer input features, using numeric fields and operators. Type: Calculator Expression.
+
+**Derived Output:**
+- **output:** The output line or polygon tracks. Type: Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer/0"
+outFS = "HurricaneTracks"
+trackIdentifier = "EVENTID"
+bufferExpression = "WINDSPEED * 100"
+statistics = [["PRESSURE", "MEAN"]]
+
+# Run Reconstruct Tracks
+arcpy.geoanalytics.ReconstructTracks(
+    input_layer=inFeatures,
+    output_name=outFS,
+    track_fields=trackIdentifier,
+    method="GEODESIC",
+    buffer_type="EXPRESSION",
+    buffer_expression=bufferExpression,
+    summary_fields=statistics
+)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Summarize Attributes
+
+**Description:** The Summarize Attributes tool calculates summary statistics for fields in a feature class. It is typically used for tabular analysis to summarize data by fields, providing statistics for each unique combination of attribute values.
+
+**Parameters:**
+- **inFeatures**: The input feature class or table to summarize. Type: Feature Layer or Table View.
+- **summaryFields**: The fields by which to summarize the data. Type: Field.
+- **summaryStatistics**: The statistics to calculate for each field, such as COUNT, SUM, etc. Type: Value Table.
+- **dataStore**: (Optional) Specifies the ArcGIS Data Store where the output will be stored. Type: String.
+
+**Derived Output:**
+- **output**: The output table with summarized attributes. Type: Record Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = "https://MyGeoAnalyticsMachine.domain.com/geoanalytics/rest/services/DataStoreCatalogs/bigDataFileShares_Crimes/BigDataCatalogServer/Chicago"
+summaryFields = ["Year", "Beat"]
+summaryStatistics = [["Arrest", "COUNT"], ["District", "COUNT"]]
+outFS = 'SummarizeCrimes'
+dataStore = "SPATIOTEMPORAL_DATA_STORE"
+
+# Execute SummarizeAttributes
+arcpy.geoanalytics.SummarizeAttributes(inFeatures, outFS, summaryFields, summaryStatistics, dataStore)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Summarize Center And Dispersion
+
+**Description:** The Summarize Center And Dispersion tool identifies central features and directional distributions, calculating mean and median locations from the input data. It is typically used to analyze spatial patterns and trends, such as the movement of phenomena over time.
+
+**Parameters:**
+- **Input Layer:** The point, line, or polygon layer to be summarized. Type: Feature Layer.
+- **Output Central Feature:** The output feature class containing the most centrally located feature in the input layer. Type: Feature Class.
+- **Output Mean Center (Optional):** The output point feature class representing the mean centers of the input layer. Type: Feature Class.
+- **Output Median Center (Optional):** The output point feature class representing the median centers of the input layer. Type: Feature Class.
+- **Ellipse Size (Optional):** Specifies the size of output ellipses in standard deviations (1, 2, or 3). Type: String.
+- **Weight Field (Optional):** A numeric field used to weight locations according to their relative importance. Type: Field.
+- **Group By Field (Optional):** The field used to group similar features for analysis. Type: Field.
+
+**Derived Output:**
+- **Output Ellipse:** The output feature class containing ellipses representing directional distributions. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = r"c:\data\MyBigDataConnection.bdc\fire_incidents"
+outMeanCenter = r"c:\data\FireIncidents.gdb\fires_meancenter"
+outEllipse = r"c:\data\FireIncidents.gdb\fires_ellipse"
+
+# Run Summarize Center And Dispersion
+arcpy.gapro.SummarizeCenterAndDispersion(
+    inFeatures, 
+    "", 
+    outMeanCenter, 
+    "", 
+    outEllipse, 
+    "2_STANDARD_DEVIATIONS"
+)
+```
+
+Feel free to ask more about how this tool can be applied in different scenarios or explore other tools within the Spatial Statistics toolset.
+**Toolset:** Spatial Statistics
+
+**Tool:** Summarize Within
+
+**Description:** The Summarize Within tool overlays a polygon layer with another layer to summarize the number of points, length of lines, or area of polygons within each polygon. It calculates attribute field statistics for those features within the polygons, making it useful for tasks such as calculating total acreage of land-use types within watersheds or summarizing the average value of vacant parcels within city boundaries.
+
+**Parameters:**
+- **Input Polygons:** The polygons used to summarize the features or portions of features in the input summary layer. Type: Feature Layer.
+- **Input Summary Features:** The point, line, or polygon features that will be summarized for each polygon in the input polygons. Type: Feature Layer.
+- **Output Feature Class:** The output polygon feature class containing the same geometries and attributes as the input polygons, with additional attributes for the number of points, length of lines, and area of polygons inside each input polygon. Type: Feature Class.
+- **Keep all input polygons (Optional):** Specifies whether all input polygons or only those intersecting or containing at least one input summary feature will be copied to the output feature class. Type: Boolean.
+- **Summary Fields (Optional):** A list of attribute field names from the input summary features, as well as statistical summary types. Type: List.
+
+**Derived Output:**
+- **Output Feature Service:** The output summarized layer. Type: Feature Set.
+- **Output Group Table:** If a group by field was provided, the tool will output a table that contains the calculated statistics for each unique group. Type: Record Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the input parameters
+input_polygons = "Watershed_Boundaries"
+input_summary_features = "Land_Use_Boundaries"
+output_feature_class = "LandUse_Summary"
+
+# Execute the Summarize Within tool
+arcpy.analysis.SummarizeWithin(
+    in_polygons=input_polygons,
+    in_sum_features=input_summary_features,
+    out_feature_class=output_feature_class,
+    keep_all_polygons="KEEP_ALL",
+    summary_fields=[["LandUseType", "SUM"]]
+)
+```
+No information available.
+**Toolset:** Spatial Statistics
+
+**Tool:** Group By Proximity
+
+**Description:** The Group By Proximity tool groups features that are within spatial or spatiotemporal proximity to each other. Typical use cases include identifying connected roads, clusters of crimes occurring close in time and space, or overlapping polygons.
+
+**Parameters:**
+- **Input Features:** The feature class or feature layer for which you want to create groups. Type: Feature Layer.
+- **Unique ID Field:** An integer field containing a different value for every feature in the input feature class. Type: Field.
+- **Output Feature Class:** The new output feature class created containing all features, the analysis fields specified, and a field indicating to which group each feature belongs. Type: Feature Class.
+- **Number of Groups:** The number of groups to create. Type: Long.
+- **Analysis Fields:** A list of fields you want to use to distinguish one group from another. Type: Field.
+- **Spatial Constraints:** Specifies if and how spatial relationships among features should constrain the groups created. Type: String.
+
+**Derived Output:**
+- **Output:** A new feature class with grouped features represented by a new field named `group_id`. Type: Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = "C:/myData/cities.gdb/roads"
+outname = "groupedRoads"
+overlayType = "TOUCHES"
+
+# Run Group By Proximity
+result = arcpy.gapro.GroupByProximity(inFeatures, outname, overlayType)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Snap Tracks
+
+**Description:** The Snap Tracks tool is used to align input track points to lines. It requires time-enabled point data that represents an instant in time and traversable lines with fields indicating the from and to nodes. This tool is typically used in scenarios where you need to match vehicle GPS data to a road network for analysis.
+
+**Parameters:**
+- **Input Point Layer:** The input point layer must be time-enabled observations that represent an instant in time. Type: Feature Set.
+- **Input Line Layer:** The input line layer must contain fields with connectivity information, specified in the Connectivity Field Matching parameter. Type: Feature Set.
+- **Track Identifier:** A field used to identify unique tracks. Type: Field.
+- **Search Distance:** The maximum distance to search for a line to snap to. Type: Linear Unit.
+- **Connectivity Field Matching:** Specifies the fields used to determine connectivity between lines. Type: String.
+- **Direction Value Matching:** Specifies the direction of travel along the lines. Type: String.
+
+**Derived Output:**
+- **Output Dataset:** The name of the output feature service where the snapped tracks are stored. Type: Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+tracksLayer = "https://sampleserver.arcgisonline.com/arcgis/rest/services/DeliveryTrucks/MapServer/0"
+lineLayer = "https://sampleserver.arcgisonline.com/arcgis/rest/services/CityStreets/MapServer/0"
+trackIdentifier = "vehicle_id"
+out = "trucks_snapped_to_streets"
+searchDistance = "30 Feet"
+connectivityFieldMatching = "unique_ID from_node to_node"
+directionValueMatching = "dir_travel F T B #"
+
+# Run Snap Tracks
+arcpy.gapro.SnapTracks(
+    tracksLayer, 
+    lineLayer, 
+    out, 
+    trackIdentifier, 
+    searchDistance, 
+    connectivityFieldMatching, 
+    None, 
+    "GEODESIC", 
+    directionValueMatching, 
+    "MATCHED_FEATURES"
+)
+```
+**Toolset:** Spatial Statistics
+
+**Tool:** Trace Proximity Events
+
+**Description:** The Trace Proximity Events tool identifies events that are near each other in both space and time. It is typically used for analyzing time-enabled point data to understand spatial and temporal proximity, such as tracking disease transmission or movement patterns.
+
+**Parameters:**
+- **Input Points:** The time-enabled point feature class used to trace proximity events. Type: Feature Layer.
+- **Entity ID Field:** The text field representing unique IDs for each entity. Type: Field.
+- **Distance Method:** Specifies the distance type used with the Spatial Search Distance parameter. Options include Planar and Geodesic. Type: String.
+- **Spatial Search Distance (Optional):** The maximum distance between two points to be considered in proximity. Type: Linear Unit.
+- **Temporal Search Distance (Optional):** The maximum duration between two points to be considered in proximity. Type: Time Unit.
+- **Define Entities of Interest Using (Optional):** Specifies the entities of interest, either by IDs or selected features in a specified layer. Type: String.
+- **Entities of Interest IDs:** Entity names and start times for the entities of interest. Type: Value Table.
+- **Entities of Interest Layer:** The layer or table containing the entities of interest. Type: Feature Layer.
+
+**Derived Output:**
+- **Output Proximity Events:** The output feature class containing the trace proximity events. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/path/to/your/workspace"
+
+# Define the input parameters
+input_points = "TimeEnabledPointFeatureClass"
+entity_id_field = "EntityID"
+distance_method = "Planar"
+spatial_search_distance = "100 Meters"
+temporal_search_distance = "1 Days"
+entities_of_interest_ids = [["Entity1", "2023-01-01"], ["Entity2", "2023-01-02"]]
+
+# Run the Trace Proximity Events tool
+arcpy.management.TraceProximityEvents(
+    input_points=input_points,
+    entity_id_field=entity_id_field,
+    distance_method=distance_method,
+    spatial_search_distance=spatial_search_distance,
+    temporal_search_distance=temporal_search_distance,
+    entities_of_interest_ids=entities_of_interest_ids
+)
+```
+**Toolset:** Analyze Patterns
+
+**Tool:** Calculate Density
+
+**Description:** The Calculate Density tool creates a density map from point or line features by spreading known quantities of some phenomenon (represented as attributes of the points or lines) across the map. The result is a layer of areas classified from least dense to most dense. Typical use cases include creating crime density maps, calculating hospital densities, and identifying areas at risk of forest fires.
+
+**Parameters:**
+- **Input Features:** The point or line features from which to calculate density. Type: Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. Type: String.
+- **Count Field (Optional):** A field specifying the number of incidents at each location. Type: Field.
+- **Cell Size (Optional):** This value is used to create a mesh of points where density values are calculated. Type: Double.
+- **Cell Size Units (Optional):** The units of the cell size value. Type: String.
+- **Radius (Optional):** A distance specifying how far to search to find point or line features when calculating density values. Type: Double.
+- **Radius Units (Optional):** The units of the radius value. Type: String.
+- **Area Units:** Specifies the units for the area calculation. Type: String.
+- **Time Step Interval (Optional):** Specifies the duration of the time step. Type: Time Unit.
+- **Time Step Repeat (Optional):** Specifies how often the time-step interval occurs. Type: Time Unit.
+- **Time Step Reference (Optional):** A date that specifies the reference time with which to align the time steps. Type: Date.
+
+**Derived Output:**
+- **Output Layer:** The output polygon layer with classified density values. Type: Feature Set.
+- **Output Raster:** The output raster. Type: Raster Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inputLayer = "https://MyPortal.esri.com/server/rest/services/Hosted/myPoints/FeatureServer/0"
+outputName = "outImgServ"
+field = "Population"
+searchDistance = "150000 Meters"
+areaUnit = "Square Kilometers"
+outCellSize = "10000 Meters"
+inBarriers = "https://MyPortal.esri.com/server/rest/services/Hosted/myPoints/FeatureServer/1"
+
+# Execute CalculateDensity
+arcpy.ra.CalculateDensity(
+    inputLayer, 
+    outputName, 
+    field, 
+    searchDistance, 
+    areaUnit, 
+    outCellSize, 
+    inBarriers
+)
+```
+**Toolset:** Analyze Patterns
+
+**Tool:** Find Hot Spots
+
+**Description:** The Find Hot Spots tool identifies statistically significant spatial clustering of high values (hot spots) or low values (cold spots) using the Getis-Ord Gi* statistic. It is typically used to uncover patterns such as high crime areas, traffic accident hotspots, or regions with high biodiversity.
+
+**Parameters:**
+- **Point Layer:** The point feature class for which hot spot analysis will be performed. Type: Feature Layer.
+- **Output Feature Class:** The output feature class with the z-score and p-value results. Type: Feature Class.
+- **Bin Size:** The distance interval that represents the bin size and units into which the Point Layer will be aggregated. Type: Linear Unit.
+- **Neighborhood Size:** The spatial extent of the analysis neighborhood. This value determines which features are analyzed together to assess local clustering. Type: Linear Unit.
+- **Time Step Interval (Optional):** The interval that will be used for the time step. This parameter is only used if time is enabled for Point Layer. Type: Time Unit.
+- **Time Step Alignment (Optional):** Specifies how time steps will be aligned. Options include End time, Start time, and Reference time. Type: String.
+- **Data Store (Optional):** Specifies the ArcGIS Data Store where the output will be stored. Options include SPATIOTEMPORAL_DATA_STORE and RELATIONAL_DATA_STORE. Type: String.
+
+**Derived Output:**
+- **Output:** The statistically significant hot spots. Type: Feature Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = "https://sampleserver6.arcgisonline.com/arcgis/rest/services/SF311/FeatureServer/0"
+bins = "500 Meters"
+neighborhood = "1 Kilometers"
+timeStep = "1 Months"
+outFS = "HotSpotsOF311Data"
+dataStore = "SPATIOTEMPORAL_DATA_STORE"
+
+# Execute Find Hot Spots
+arcpy.geoanalytics.FindHotSpots(inFeatures, outFS, bins, neighborhood, timeStep, None, None, dataStore)
+```
+**Toolset:** Analyze Patterns
+
+**Tool:** Find Point Clusters
+
+**Description:** The Find Point Clusters tool identifies clusters of point features within surrounding noise based on their spatial or spatiotemporal distribution. It is typically used to detect patterns in data such as crime hotspots, wildlife sightings, or any scenario where point data clustering is relevant.
+
+**Parameters:**
+- **inputPoints:** The point layer to be analyzed. Type: Feature Layer.
+- **minimumPoints:** The minimum number of points required to form a cluster. Type: Integer.
+- **outputName:** The name of the output feature class that will contain the clusters. Type: String.
+- **searchDistance:** The distance within which points are considered part of a cluster. Type: Linear Unit.
+- **clusterMethod:** The method used for clustering, such as DBSCAN or HDBSCAN. Type: String.
+- **use_time (Optional):** Specifies whether time will be used to discover clusters with DBSCAN. Type: Boolean.
+- **search_duration (Optional):** The time duration within which points must be found to form a cluster. Type: Time Unit.
+
+**Derived Output:**
+- **output:** The output point clusters. Type: Feature Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = "C:/data/CountyData.gdb"
+
+# Define local variables
+inputPoints = "rat_sightings"
+minimumPoints = 10
+outputName = "RodentClusters"
+searchDistance = "1 Kilometers"
+clusterMethod = "DBSCAN"
+
+# Execute Find Point Clusters
+arcpy.gapro.FindPointClusters(
+    inputPoints=inputPoints,
+    outputName=outputName,
+    clusterMethod=clusterMethod,
+    minimumPoints=minimumPoints,
+    searchDistance=searchDistance
+)
+```
+
+Feel free to ask if you need more details on any specific parameter or if you have another question related to ArcGIS Pro.
+No information available.
+Error accessing: No response
+**Toolset: Data Enrichment**
+
+**Tool: Calculate Motion Statistics**
+
+**Description:**  
+The Calculate Motion Statistics tool is used to compute motion statistics such as speed, acceleration, and bearing for points in a time-enabled feature class. It is typically used in scenarios where understanding the movement patterns of entities over time is crucial, such as tracking hurricane paths or vehicle movements.
+
+**Parameters:**
+- **Input Layer**: The time-enabled point features on which motion statistics will be calculated. Type: Feature Layer.
+- **Output Name**: The name of the output feature class or layer that will contain the points with new fields for each calculated motion statistic. Type: Feature Class.
+- **Track Fields**: One or more fields that identify distinct entities. Type: Field.
+- **Track History Window (Optional)**: The number of observations (including the current observation) used for summary statistics. Default is 3. Type: Long.
+- **Motion Statistics (Optional)**: Specifies the group of statistics to calculate. If not specified, all statistics are calculated. Type: String.
+
+**Derived Output:**
+- **Output Feature Class**: The output point features with motion statistics. Type: Feature Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data/Weather.gdb"
+
+# Define input layer and parameters
+inputLyrx = r'C:\data\Hurricanes.lyrx'
+trackField = "name"
+out = "Hurricanes_MotionStats"
+
+# Enable time on the input features using an .lyrx file
+hurricanesInputLayer = arcpy.management.MakeFeatureLayer(inputLyrx, "Hurricanes_layer")
+arcpy.management.ApplySymbologyFromLayer(hurricanesInputLayer, inputLyrx)
+
+# Run Calculate Motion Statistics
+arcpy.gapro.CalculateMotionStatistics(
+    hurricanesInputLayer,
+    out,
+    trackField,
+    5,
+    ["SPEED", "ACCELERATION", "BEARING"],
+    "GEODESIC"
+)
+```
+**Toolset:** Find Locations
+
+**Tool:** Detect Incidents
+
+**Description:** The Detect Incidents tool creates a layer that identifies features meeting a specified condition. It is typically used to analyze spatial and attribute data to detect patterns or anomalies, such as identifying areas with extreme weather conditions or high crime rates.
+
+**Parameters:**
+- **inFeatures:** The input features to be analyzed. Type: Feature Layer.
+- **outFS:** The name of the output feature service where detected incidents will be stored. Type: String.
+- **trackIdentifier:** A field used to identify tracks or sequences in the data. Type: Field.
+- **start_condition:** A condition that defines when an incident starts, expressed as a calculation expression. Type: Calculator Expression.
+- **output_mode (Optional):** Specifies the features to be returned. Options include ALL_FEATURES or INCIDENTS. Type: String.
+- **data_store (Optional):** Specifies the ArcGIS Data Store for output storage, either SPATIOTEMPORAL_DATA_STORE or RELATIONAL_DATA_STORE. Type: String.
+- **time_boundary_split (Optional):** Defines a time span to split the input data for analysis. Type: Time Unit.
+- **time_boundary_reference (Optional):** The reference time used to split the input data for analysis. Type: Date.
+
+**Derived Output:**
+- **output:** The output features that meet the specified condition. Type: Record Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer/0"
+outFS = "HurricaneTracks_Incidents"
+trackIdentifier = "STAGE"
+start_condition = "$feature['WINDSPEED'] > 100"
+
+# Execute Detect Incidents
+arcpy.geoanalytics.DetectIncidents(
+    inFeatures=inFeatures,
+    outFS=outFS,
+    trackIdentifier=trackIdentifier,
+    start_condition=start_condition
+)
+```
+**Toolset:** Find Locations
+
+**Tool:** Find Dwell Locations
+
+**Description:** The Find Dwell Locations tool identifies locations where moving objects have stopped or dwelled using specified time and distance thresholds. It is typically used to analyze movement data to detect stay points or idle periods, such as tracking vehicles or animals to understand their behavior patterns.
+
+**Parameters:**
+- **Input Features:** The point tracks in which dwells will be found. The input must be a time-enabled layer with features that represent instants in time. Type: Feature Layer.
+- **Output Dataset:** The name of the output feature service. Type: String.
+- **Track Fields:** One or more fields that will be used to identify unique tracks. Type: Field.
+- **Distance Method:** Specifies how the distances between dwell features will be calculated. Options include Geodesic and Planar. Type: String.
+- **Distance Tolerance:** The maximum distance between points to be considered a single dwell location. Type: Linear Unit.
+- **Time Tolerance:** The minimum time duration to be considered a single dwell location. Both time and distance are considered. Type: Time.
+
+**Derived Output:**
+- **Dwell Location:** Features representing when a track has been stationary given specified time and distance parameters. This output can be represented as points, convex hulls, or mean centers. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data/MovementData.gdb"
+
+# Define the input parameters
+input_features = "TimeEnabledPoints"
+output_dataset = "DwellLocations"
+track_fields = ["TrackID"]
+distance_method = "Planar"
+distance_tolerance = "100 Meters"
+time_tolerance = "2 Hours"
+
+# Run the Find Dwell Locations tool
+arcpy.gapro.FindDwellLocations(
+    input_features=input_features,
+    output_dataset=output_dataset,
+    track_fields=track_fields,
+    distance_method=distance_method,
+    distance_tolerance=distance_tolerance,
+    time_tolerance=time_tolerance
+)
+```
+**Toolset:** Find Locations
+
+**Tool:** Find Similar Locations
+
+**Description:** The Find Similar Locations tool identifies candidate features that are most similar or dissimilar to one or more input features based on feature attributes. It is typically used to find locations that share similar characteristics with a reference location, such as identifying stores similar to a top-performing store.
+
+**Parameters:**
+- **referenceStore:** The input feature or features to which the candidate features will be compared. Type: String.
+- **candidateStores:** The features that will be evaluated for similarity to the reference features. Type: String.
+- **analysisFields:** A list of fields that will be used to determine similarity. Type: List of Strings.
+- **outputName:** The name of the output feature class that will contain the results. Type: String.
+- **dataStore (Optional):** Specifies the ArcGIS Data Store where the output will be stored. Options include SPATIOTEMPORAL_DATA_STORE or RELATIONAL_DATA_STORE. Type: String.
+
+**Derived Output:**
+- **output:** Features from the input and all the solution-matching features found. Type: Record Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set local variables
+referenceStore = "TopPerformer"
+candidateStores = "AllStores"
+analysisFields = ["SickDays", "TotalCustomers", "AvgPurchaseAmount"]
+outputName = "BestStores_10"
+
+# Run Find Similar Locations
+arcpy.gapro.FindSimilarLocations(
+    referenceStore=referenceStore,
+    candidateStores=candidateStores,
+    outputName=outputName,
+    analysisFields=analysisFields,
+    matchMethod="MOST_SIMILAR",
+    context="ATTRIBUTE_VALUES",
+    number_of_results=10
+)
+```
+**Toolset:** Summarize Data
+
+**Tool:** Aggregate Points
+
+**Description:** The Aggregate Points tool aggregates point features into polygon features or bins, returning a polygon with a count of points and optional statistics at locations where points exist. It is typically used to summarize point data within specified boundaries, such as aggregating crime incidents within neighborhood boundaries.
+
+**Parameters:**
+- **in_features:** The input point features that will be assessed for proximity and clustering. Type: Feature Layer.
+- **out_feature_class:** The feature class created to hold the polygons that represent the point clusters. Type: Feature Class.
+- **aggregation_distance:** The distance between points that will be clustered. Type: Linear Unit.
+
+**Derived Output:**
+- **out_table:** A one-to-many relationship table—named the same as the output feature class appended with _Tbl—will be created that links the aggregated polygons to their source point features. Type: Table.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Set local variables
+in_point_features = "C:/data/cartography.gdb/crime/robberies"
+out_feature_class = "C:/data/cartography.gdb/crime/clustered_robberies"
+aggregation_distance = "100 meters"
+
+# Execute Aggregate Points
+arcpy.cartography.AggregatePoints(in_point_features, out_feature_class, aggregation_distance)
+```
+**Toolset:** Summarize Data
+
+**Tool:** Describe Dataset
+
+**Description:** The Describe Dataset tool summarizes features into calculated field statistics, sample features, and extent boundaries. It is typically used to create a sample of your dataset, preview features, and calculate summary statistics for datasets with time or geometry attributes.
+
+**Parameters:**
+- **input_layer:** The point, line, polygon, or tabular features to be described. Type: Table View.
+- **output:** A new table with the summary information. Type: Table.
+- **sample_features (Optional):** The number of features that will be included in the output sample layer. No sample is returned if you select 0 features or don't provide a number. By default, no sample layer is returned. Type: Long.
+- **sample_layer (Optional):** A new feature class with a sample of the input data. Type: Table; Feature Class.
+- **extent_layer (Optional):** A new feature class with the spatial and temporal extent of the input data. Type: Feature Class.
+
+**Derived Output:**
+- **output:** The output layer containing the summarized statistic calculations. Type: Record Set.
+- **extent_layer:** When the create_extent_layer parameter is selected, the tool will output a layer containing a single polygon representing the extent of your dataset. Type: Feature Set.
+- **sample_layer:** When the sample_features parameter specifies a value greater than zero, the tool will output a layer containing the specified number of sample features from your dataset. Type: Feature Set.
+- **output_json:** This parameter is not used. A JSON string containing all of the summary information calculated in analysis is included in the tool's messages. Type: String.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inputDataset = "WaterSample"
+output = "WSample_summary"
+sample = "WSample_sample2500"
+
+# Run Describe Dataset
+arcpy.gapro.DescribeDataset(inputDataset, output, 2500, sample)
+```
+**Toolset:** Summarize Data
+
+**Tool:** Join Features
+
+**Description:** The Join Features tool in ArcGIS Pro allows you to join attributes from one layer to another based on spatial, temporal, or attribute relationships, or a combination of these relationships. It is typically used to integrate data from different sources, such as combining demographic data with geographic boundaries for analysis.
+
+**Parameters:**
+- **Target Layer:** Contains the target features. The attributes from the target features and the attributes from the joined features will be transferred to the output. Type: Table View.
+- **Join Layer:** Contains the join features. The attributes from the join features will be joined to the attributes of the target features. Type: Table View.
+- **Output Dataset:** The new feature class containing the target layer features with joined features. Type: Feature Class; Table.
+- **Join Operation:** Specifies how joins between the Target Layer values and the Join Layer values will be handled in the output if multiple join features have the same spatial relationship with a single target feature. Type: String.
+
+**Derived Output:**
+- **Output Layer or View:** The updated input dataset. Type: Table View; Raster Layer; Mosaic Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/CityData.gdb"
+
+# Define local variables
+target_layer = "Homes"
+join_layer = "FloodBoundary"
+output_dataset = "Homes_Flood_Join"
+join_operation = "JOIN_ONE_TO_ONE"
+
+# Run Join Features
+arcpy.management.JoinFeatures(target_layer, join_layer, output_dataset, join_operation)
+```
+**Toolset:** Summarize Data
+
+**Tool:** Reconstruct Tracks
+
+**Description:** The Reconstruct Tracks tool creates line or polygon tracks from time-enabled input data, typically used to analyze movement patterns or trajectories over time.
+
+**Parameters:**
+- **input_layer:** The points or polygons to be reconstructed into tracks. The input must be a time-enabled layer that represents an instant in time. Type: Feature Set.
+- **output_name:** The name of the output feature service. Type: String.
+- **track_fields:** One or more fields that will be used to identify unique tracks. Type: Field.
+- **method:** Specifies the criteria that will be used to reconstruct tracks. Options include GEODESIC and PLANAR. Type: String.
+- **buffer_type:** Specifies how the buffer distance will be defined. Options include FIELD and EXPRESSION. Type: String.
+- **buffer_field (Optional):** The field that will be used to buffer the input features. Type: Field.
+- **buffer_expression (Optional):** The expression that will be used to buffer input features. Type: Calculator Expression.
+- **time_split (Optional):** A time unit to split tracks. Type: Time Unit.
+- **summary_fields (Optional):** Fields to summarize statistics. Type: Field.
+- **data_store (Optional):** The data store where results will be saved. Type: String.
+- **distance_split (Optional):** A distance to split tracks. Type: Double.
+- **time_boundary_split (Optional):** A time boundary to split tracks. Type: Date.
+- **time_boundary_reference (Optional):** The reference time used to split the input data. Type: Date.
+- **split_expression (Optional):** An expression that splits tracks based on values, geometry, or time values. Type: Calculator Expression.
+- **split_type (Optional):** Specifies how the track segment between two features is created when a track is split. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The output line or polygon tracks. Type: Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer/0"
+outFS = "HurricaneTracks"
+trackIdentifier = "EVENTID"
+bufferExpression = "WINDSPEED * 100"
+statistics = [["PRESSURE", "MEAN"]]
+
+# Run Reconstruct Tracks
+arcpy.geoanalytics.ReconstructTracks(
+    input_layer=inFeatures,
+    output_name=outFS,
+    track_fields=trackIdentifier,
+    method="GEODESIC",
+    buffer_type="EXPRESSION",
+    buffer_expression=bufferExpression,
+    summary_fields=statistics
+)
+```
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Attributes
+
+**Description:**  
+The "Summarize Attributes" tool calculates summary statistics for fields in a feature class. It is primarily used for tabular analysis, allowing users to summarize data by one or more fields or all features, and is applicable to both tabular and spatial data.
+
+**Parameters:**
+- **inFeatures**: The input dataset containing the features to be summarized. Type: *Feature Set*.
+- **summaryFields**: The fields by which to summarize the data. Type: List of Strings.
+- **summaryStatistics**: The statistics to calculate for each field. Type: List of Lists.
+- **outFS**: The name of the output table with summarized attributes. Type: Record Set.
+- **dataStore** (Optional): Specifies the ArcGIS Data Store where the output will be stored. Options include `SPATIOTEMPORAL_DATA_STORE` (default) and `RELATIONAL_DATA_STORE`. Type: String.
+
+Derived Output:
+- **output**: The output table with summarized attributes. Type: Record Set.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+
+# Set local variables
+inFeatures = "https://MyGeoAnalyticsMachine.domain.com/geoanalytics/rest/services/DataStoreCatalogs/bigDataFileShares_Crimes/BigDataCatalogServer/Chicago"
+summaryFields = ["Year", "Beat"]
+summaryStatistics = [["Arrest", "COUNT"], ["District", "COUNT"]]
+outFS = 'SummarizeCrimes'
+dataStore = "SPATIOTEMPORAL_DATA_STORE"
+
+# Execute SummarizeAttributes
+arcpy.geoanalytics.SummarizeAttributes(inFeatures, outFS, summaryFields, summaryStatistics, dataStore)
+```
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Center And Dispersion
+
+**Description:**  
+The Summarize Center And Dispersion tool identifies central features and directional distributions, calculating mean and median locations from the input data. It is typically used to analyze spatial patterns and trends, such as the movement of fire occurrences or the spread of diseases over time.
+
+**Parameters:**
+- **inFeatures:** The input feature class containing the data to be analyzed. Type: Feature Class.
+- **outMeanCenter:** The output feature class for the mean center of the input data. Type: Feature Class.
+- **outEllipse:** The output feature class for the standard deviational ellipse of the input data. Type: Feature Class.
+- **ellipse_size (Optional):** Specifies the size of output ellipses in standard deviations (e.g., 1_STANDARD_DEVIATION, 2_STANDARD_DEVIATIONS, 3_STANDARD_DEVIATIONS). Type: String.
+- **weight_field (Optional):** A numeric field used to weight locations according to their relative importance. Type: Field.
+- **group_by_field (Optional):** The field used to group similar features for analysis. Type: Field.
+
+**Derived Output:**
+- **Mean Center:** The calculated mean center of the input features. Type: Feature Class.
+- **Standard Deviational Ellipse:** The calculated ellipse representing the dispersion of the input features. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = r"c:\data\MyBigDataConnection.bdc\fire_incidents"
+outMeanCenter = r"c:\data\FireIncidents.gdb\fires_meancenter"
+outEllipse = r"c:\data\FireIncidents.gdb\fires_ellipse"
+
+# Run SummarizeCenterAndDispersion
+arcpy.gapro.SummarizeCenterAndDispersion(
+    inFeatures, 
+    "", 
+    outMeanCenter, 
+    "", 
+    outEllipse, 
+    "2_STANDARD_DEVIATIONS"
+)
+```
+No information available.
+**Toolset:** Use Proximity
+
+**Tool:** Create Buffers
+
+**Description:**  
+The Create Buffers tool generates polygons that extend a specified distance from input point, line, or polygon features. It is typically used to identify areas within a certain proximity to features, such as determining zones of influence or areas of impact.
+
+**Parameters:**
+- **Input Layer:** The point, polyline, or polygon features that will be buffered.  
+  *Type:* Feature Layer.
+- **Output Feature Class:** The new feature class of buffered results.  
+  *Type:* Feature Class.
+- **Method:** Specifies the method used to create the buffers. Options include:
+  - **Geodesic:** Buffers are created using a shape-preserving geodesic method.
+  - **Planar:** Euclidean buffers are created if the input features are in a projected coordinate system.  
+  *Type:* String.
+- **Distance:** The buffer distance. This can be specified as a numeric value with units (e.g., "300 Meters").  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Buffers Layer:** The resulting layer containing the buffer polygons.  
+  *Type:* Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = "C:/data/DamageSurvey.gdb"
+
+# Define input and output parameters
+in_features = "DamageAssessment"
+out_feature_class = "DangerousAreas"
+
+# Execute Create Buffers
+arcpy.gapro.CreateBuffers(
+    in_features, 
+    out_feature_class, 
+    "GEODESIC", 
+    "DISTANCE", 
+    None, 
+    "300 Meters", 
+    None, 
+    "ALL", 
+    None, 
+    None, 
+    "SINGLE_PART"
+)
+```
+
+Feel free to ask if you need more details on using this tool or have other questions about ArcGIS Pro.
+**Toolset:** Use Proximity
+
+**Tool:** Group By Proximity
+
+**Description:** The Group By Proximity tool is designed to group features that are within spatial or spatiotemporal proximity to each other. Typical use cases include identifying connected roads, detecting clusters of crime incidents occurring close in time and space, and finding overlapping polygons.
+
+**Parameters:**
+- **inFeatures:** The input feature class containing the features to be grouped. Type: Feature Class.
+- **outname:** The name for the output feature class that will contain the grouped features. Type: String.
+- **overlayType:** Specifies the spatial relationship used to group features, such as TOUCHES. Type: String.
+- **dataStore (Optional):** Specifies the data store where the output will be stored, such as SPATIOTEMPORAL_DATA_STORE. Type: String.
+- **temporal_relationship (Optional):** Specifies the time criteria for grouping features, such as INTERSECTS or NEAR. Type: String.
+- **temporal_near_distance (Optional):** The temporal distance used to group near features when the temporal_relationship is set to NEAR. Type: Time Unit.
+- **attribute_relationship (Optional):** An ArcGIS Arcade expression used to group features by attribute values. Type: String.
+
+**Derived Output:**
+- **output:** A new feature class with grouped features represented by a new field named `group_id`. Type: Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+inFeatures = "C:\\myData\\cities.gdb\\roads"
+outname = "groupedRoads"
+overlayType = "TOUCHES"
+
+# Run Group By Proximity
+result = arcpy.gapro.GroupByProximity(inFeatures, outname, overlayType)
+```
+**Toolset:** Use Proximity
+
+**Tool:** Snap Tracks
+
+**Description:** The Snap Tracks tool is used to align input track points to lines. It requires time-enabled point data that represents an instant in time and traversable lines with fields indicating the from and to nodes for analysis.
+
+**Parameters:**
+- **tracksLayer**: The input time-enabled point feature class that represents track points. Type: Feature Layer.
+- **lineLayer**: The input line feature class to which the track points will be snapped. Type: Feature Layer.
+- **out**: The output feature class where the snapped tracks will be stored. Type: Feature Class.
+- **trackIdentifier**: A field that uniquely identifies each track. Type: Field.
+- **searchDistance**: The maximum distance within which track points will be snapped to the lines. Type: Linear Unit.
+- **connectivityFieldMatching**: Fields used to match connectivity between track points and lines. Type: String.
+- **directionValueMatching**: Fields used to match direction values between track points and lines. Type: String.
+
+**Derived Output:**
+- **output**: The output feature class containing the snapped track points. Type: Feature Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set local variables
+tracksLayer = "https://sampleserver.arcgisonline.com/arcgis/rest/services/DeliveryTrucks/MapServer/0"
+lineLayer = "https://sampleserver.arcgisonline.com/arcgis/rest/services/CityStreets/MapServer/0"
+trackIdentifier = "vehicle_id"
+out = "trucks_snapped_to_streets"
+searchDistance = "30 Feet"
+connectivityFieldMatching = "unique_ID from_node to_node"
+directionValueMatching = "dir_travel F T B #"
+
+# Run Snap Tracks
+arcpy.geoanalytics.SnapTracks(
+    tracksLayer, 
+    lineLayer, 
+    out, 
+    trackIdentifier, 
+    searchDistance, 
+    connectivityFieldMatching, 
+    None, 
+    "GEODESIC", 
+    directionValueMatching, 
+    "MATCHED_FEATURES", 
+    "SPATIOTEMPORAL_DATA_STORE"
+)
+```
+**Toolset:** Use Proximity
+
+**Tool:** Trace Proximity Events
+
+**Description:** Traces events that are near each other in space (location) and time. This tool is typically used for analyzing time-enabled point data to identify spatial and temporal proximity among events.
+
+**Parameters:**
+- **inFeatures**: The input dataset containing time-enabled point data. Type: Feature Class.
+- **entityIDField**: The field that contains unique entity identifiers. Type: Field.
+- **outFile**: The name of the output file that will store the results. Type: String.
+- **spatialDistance**: The spatial search distance to consider for proximity. Type: String.
+- **temporalDistance**: The temporal search distance to consider for proximity. Type: String.
+- **entitiesOfInterest**: A list of entities and their start times to focus the trace. Type: Value Table.
+- **outTracks**: The output layer containing the first trace event and all subsequent features for the specified entity. Type: Feature Class.
+- **max_trace_depth**: The maximum degrees of separation between an entity of interest and an entity farther down the trace. Type: Long.
+- **attribute_match_criteria**: (Optional) Fields used to constrain the proximity event. Type: Field.
+
+**Derived Output:**
+- **outTracks**: An output layer containing the first trace event and all subsequent features for the specified entity. Type: Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set workspace
+arcpy.env.workspace = r"C:/data/TraceData.gdb"
+
+# Define parameters
+inFeatures = r"C:/data/Example.mfc/example_tracks"
+entityIDField = "user_id"
+outFile = "ProximityEvents"
+spatialDistance = "30 Feet"
+temporalDistance = "10 Minutes"
+entitiesOfInterest = [['user1', '3/30/2020 9:00:00 AM'], ['user4', '3/30/2020 9:00:00 AM']]
+outTracks = "out_tracks"
+max_trace_depth = 3
+
+# Run Trace Proximity Events
+arcpy.gapro.TraceProximityEvents(
+    inFeatures, entityIDField, outFile, "PLANAR", spatialDistance, temporalDistance,
+    "ID_START_TIME", entitiesOfInterest, None, outTracks, max_trace_depth
+)
+```
+
+Feel free to ask if you need more details on any specific parameter or usage scenario.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Aggregate Multidimensional Raster
+
+**Description:** The Aggregate Multidimensional Raster tool generates a multidimensional raster dataset by combining existing multidimensional raster variables along a specified dimension. It is typically used in atmospheric, oceanographic, and earth sciences to analyze data captured at multiple times, depths, and heights.
+
+**Parameters:**
+- **Raster:** The input multidimensional raster. Type: Raster Layer.
+- **Variables:** The variable or variables that will be aggregated along the given dimension. Type: String.
+- **Dimension Definition:** Specifies the method to filter the input multidimensional data before performing the aggregation. Options include All, By Values, By Ranges, and By Iteration. Type: String.
+- **Values:** The dimension values to use to filter the input multidimensional data for analysis. Required when Dimension Definition is set to By Values. Type: List.
+- **Ranges:** The minimum and maximum dimension values to use to filter the input multidimensional data for analysis. Type: List.
+
+**Derived Output:**
+- **Raster:** The output aggregated multidimensional raster. Type: Raster Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy.ia import *
+
+# Check out the ArcGIS Image Analyst extension license
+arcpy.CheckOutExtension("ImageAnalyst")
+
+# Define input parameters
+input_raster = "C:/Data/ClimateData_Daily.nc"
+variables = "precipitation"
+dimension_definition = "By Values"
+values = ["January"]
+
+# Execute Aggregate Multidimensional Raster
+output_raster = arcpy.ia.AggregateMultidimensionalRaster(
+    input_raster, variables, dimension_definition, values
+)
+
+# Save the output raster
+output_raster.save("C:/Data/AggregatedClimateData.crf")
+```
+No information available.
+No information available.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Generate Multidimensional Anomaly
+
+**Description:** The Generate Multidimensional Anomaly tool computes the anomaly for each slice in an existing multidimensional raster to generate a new multidimensional raster. This tool is typically used in atmospheric, oceanographic, and earth sciences to analyze variations in data over time, depth, or height.
+
+**Parameters:**
+- **in_multidimensional_raster:** The input multidimensional raster dataset. Type: Raster Layer; Raster Dataset; Mosaic Layer; Mosaic Dataset.
+- **variables (Optional):** The specific variables to analyze within the multidimensional raster. Type: String.
+- **method:** The method used to calculate the anomaly. Options include DIFFERENCE_FROM_MEAN, PERCENT_DIFFERENCE_FROM_MEAN, etc. Type: String.
+- **calculation_interval (Optional):** The time interval over which the mean is calculated. Options include HOURLY, DAILY, WEEKLY, MONTHLY, YEARLY, or EXTERNAL_RASTER. Type: String.
+- **ignore_nodata (Optional):** Specifies whether NoData values are ignored in the analysis. Type: Boolean.
+- **reference_mean_raster (Optional):** A reference raster dataset containing a previously calculated mean for each pixel. Type: Raster Layer; Raster Dataset; Mosaic Layer; Mosaic Dataset.
+
+**Derived Output:**
+- **out_multidimensional_raster:** The output Cloud Raster Format (CRF) multidimensional raster dataset. Type: Raster.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+from arcpy.sa import *
+
+# Set environment settings
+arcpy.env.workspace = "C:/sapyexamples/data"
+
+# Check out the ArcGIS Spatial Analyst extension license
+arcpy.CheckOutExtension("Spatial")
+
+# Define input parameters
+inputFile = "C:/sapyexamples/data/climateData.crf"
+variable = "oceantemp"
+averageMethod = "PERCENT_DIFFERENCE_FROM_MEAN"
+averageInterval = "YEARLY"
+ignoreNoData = "DATA"
+
+# Execute GenerateMultidimensionalAnomaly
+outYearlyAnomaly = GenerateMultidimensionalAnomaly(
+    in_multidimensional_raster=inputFile,
+    variables=variable,
+    method=averageMethod,
+    calculation_interval=averageInterval,
+    ignore_nodata=ignoreNoData
+)
+
+# Save the output
+outYearlyAnomaly.save("C:/sapyexamples/output/TempAnomaly.crf")
+```
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Generate Trend Raster
+
+**Description:** The Generate Trend Raster tool estimates the trend for each pixel along a dimension for one or more variables in a multidimensional raster. It is typically used to analyze temporal or spatial patterns in scientific data, such as climate or environmental changes.
+
+**Parameters:**
+- **raster:** The input multidimensional raster. Type: Raster.
+- **dimension_name:** The name of the dimension along which a trend will be extracted for the variable or variables selected in the analysis. Type: String.
+- **regression_type:** Specifies the type of line to be used to fit to the pixel values along a dimension. Options include LINEAR, HARMONIC, POLYNOMIAL, and MANN-KENDALL. Type: String.
+- **cycle_length:** The length of the cycle for harmonic regression. Type: Integer.
+- **cycle_unit:** The unit of the cycle length, such as YEARS. Type: String.
+- **harmonic_frequency:** The frequency of the harmonic cycle. Type: Integer.
+- **polynomial_order:** The order of the polynomial for polynomial regression. Type: Integer.
+- **ignore_nodata:** Specifies whether to ignore NoData values in the analysis. Type: Boolean.
+- **rmse:** Indicates whether to calculate the root mean square error. Type: Boolean.
+- **r2:** Indicates whether to calculate the coefficient of determination. Type: Boolean.
+- **slope_p_value:** Indicates whether to calculate the p-value for the slope. Type: Boolean.
+- **seasonal_period:** The length of the seasonal period. Type: Integer.
+
+**Derived Output:**
+- **trend_raster:** The output raster that contains the estimated trend for each pixel. Type: Raster.
+
+**Example ArcPy code:**
+```python
+# Import system modules
+import arcpy
+from arcpy.ia import *
+
+# Check out the ArcGIS Image Analyst extension license
+arcpy.CheckOutExtension("ImageAnalyst")
+
+# Set the local variables
+in_multidimensional_raster = "C:/data/ndvi_time_series.crf"
+dimension_name = "StdTime"
+regression_type = "HARMONIC"
+cycle_length = 1
+cycle_unit = "YEARS"
+harmonic_frequency = 1
+polynomial_order = None
+ignore_nodata = True
+rmse = True
+r2 = False
+slope_p_value = False
+seasonal_period = None
+
+# Apply GenerateTrendRaster function
+trend_raster = arcpy.ia.GenerateTrend(in_multidimensional_raster, dimension_name, regression_type, cycle_length, cycle_unit, harmonic_frequency, polynomial_order, ignore_nodata, rmse, r2, slope_p_value, seasonal_period)
+
+# Save the output
+trend_raster.save("C:/output/trend_raster.crf")
+```
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Interpolate From Spatiotemporal Points
+
+**Description:** This tool interpolates temporal point data into a multidimensional raster, predicting values at new locations based on measurements from a collection of points. It is typically used for spatial analysis where temporal data needs to be transformed into a continuous surface for further analysis.
+
+**Parameters:**
+- **Input Point Features:** The input point features you want to interpolate. *Type: Feature Set*.
+- **Interpolate Field:** The field containing the data values you want to interpolate. The field must be numeric. *Type: Field*.
+- **Output Name:** The name of the output raster service. The default name is based on the tool name and the input layer name. *Type: String*.
+- **Optimize For (Optional):** Choose your preference for speed versus accuracy. Options include Speed, Balance, and Accuracy. *Type: String*.
+- **Transform Data to Normal Distribution (Optional):** Choose whether to transform your data to a normal distribution before performing analysis. *Type: Boolean*.
+
+**Derived Output:**
+- **out_raster:** The output multidimensional raster dataset. *Type: Raster Dataset*.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy import ia
+
+# Check out the ArcGIS Image Analyst extension license
+arcpy.CheckOutExtension("ImageAnalyst")
+
+# Set local variables
+in_dataset = "icesat_trajectory"
+out_raster = r"C:\temp\icesat_surface.crf"
+variable_field = "elevation"
+time_field = "Time"
+temporal_aggregation = "Daily"
+cell_size = 5000
+interpolation_method = "Quadratic"
+
+# Execute the tool
+interpolation_output = arcpy.ia.InterpolateFromSpatiotemporalPoints(
+    in_dataset, out_raster, variable_field, time_field, temporal_aggregation, cell_size, interpolation_method
+)
+```
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Multidimensional Principal Components
+
+**Description:** The Multidimensional Principal Components tool reduces the number of components in a multidimensional raster dataset to account for the variance, allowing for easier identification of spatial and temporal patterns. It is typically used in atmospheric, oceanographic, and earth sciences to analyze time series or multidimensional raster data.
+
+**Parameters:**
+- **Input Multidimensional Raster:** The input raster dataset to be analyzed. Type: Raster Layer.
+- **Mode:** Specifies the mode of analysis, such as "DIMENSION_REDUCTION" or "SPATIAL_REDUCTION". Type: String.
+- **Dimension:** The dimension along which the analysis is performed, such as time or depth. Type: String.
+- **Output Principal Components Raster:** The output raster dataset containing the principal components. Type: Raster Layer.
+- **Output Loadings Table:** The output table storing the loadings of each component. Type: Table.
+- **Output Eigenvalues Table:** The output table containing the eigenvalues of each component. Type: Table.
+- **Variable:** The specific variable to be analyzed within the raster. Type: String.
+- **Number of Principal Components:** The number of principal components to compute. Type: Long.
+
+**Derived Output:**
+- **Output Principal Components Raster:** The resulting raster dataset with principal components. Type: Raster Layer.
+- **Output Loadings Table:** A table with the loadings for each component. Type: Table.
+- **Output Eigenvalues Table:** A table with eigenvalues for each component. Type: Table.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy.ia import *
+
+# Check out the ArcGIS Image Analyst extension license
+arcpy.CheckOutExtension("ImageAnalyst")
+
+# Define input parameters
+inputFile = r"c:\data\ndviData.crf"
+mode = "DIMENSION_REDUCTION"
+dimension = "StdTime"
+out_pc = r"c:\data\ndviData_pc.tif"
+out_loadings = r"c:\data\ndviData_loadings.csv"
+out_eigenvalues = r"c:\data\ndviData_pc.csv"
+variable = "ndvi"
+pc_number = 4
+
+# Execute the Multidimensional Principal Components tool
+arcpy.ia.MultidimensionalPrincipalComponents(
+    inputFile, mode, dimension, out_pc, out_loadings, out_eigenvalues, variable, pc_number
+)
+```
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Multidimensional Raster Correlation
+
+**Description:** The Multidimensional Raster Correlation tool analyzes correlations between two variables in one or two multidimensional rasters. It is typically used to understand relationships between different environmental or scientific variables captured over time or other dimensions.
+
+**Parameters:**
+- **raster1**: The first input multidimensional raster dataset. Type: Raster Dataset.
+- **raster2**: The second input multidimensional raster dataset. Type: Raster Dataset.
+- **dimension1**: The dimension along which the correlation is calculated for the first raster. Type: String.
+- **variable1**: The variable from the first raster to be used in the correlation analysis. Type: String.
+- **dimension2**: The dimension along which the correlation is calculated for the second raster. Type: String.
+- **variable2**: The variable from the second raster to be used in the correlation analysis. Type: String.
+- **correlation_method**: The method used to calculate the correlation (e.g., PEARSON). Type: String.
+- **lag**: The lag value for cross-correlation analysis. Type: Integer.
+- **calculate_cross_correlation**: Specifies whether cross-correlation will be computed at lags. Type: Boolean.
+- **calculate_pvalue**: Specifies whether the p-value will be computed at lags. Type: Boolean.
+- **out_max_correlation_raster**: The output raster with maximum correlation values and the lags at which they occur. Type: Raster Dataset.
+
+**Derived Output:**
+- **out_raster**: The output raster dataset. When the lag parameter value is not 0, a cross-correlation at each lag will be calculated and stored as bands in the output. Type: Raster Dataset.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy.ia import *
+
+# Check out the ArcGIS Image Analyst extension license
+arcpy.CheckOutExtension("ImageAnalyst")
+
+# Define input parameters
+raster1 = r"E:\data\soil2022.crf"
+raster2 = r"E:\data\weather2022.crf"
+dimension1 = "StdTime"
+variable1 = "soilm"
+dimension2 = "StdTime"
+variable2 = "temperature"
+correlation_method = "PEARSON"
+lag = 3
+calculate_cross_correlation = "ALL_CROSS_CORRELATION"
+calculate_pvalue = "CALCULATE_P_VALUE"
+out_max_correlation_raster = r"E:\data\max_correlation.crf"
+
+# Execute the tool
+output = arcpy.ia.MultidimensionalRasterCorrelation(
+    raster1, raster2, dimension1, variable1, dimension2, variable2,
+    correlation_method, lag, calculate_cross_correlation, calculate_pvalue,
+    out_max_correlation_raster
+)
+
+# Save the output
+output.save(r"E:\data\cross_correlation_raster.crf")
+```
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Predict Using Trend Raster
+
+**Description:** The Predict Using Trend Raster tool computes a forecasted multidimensional raster using the output trend raster from the Generate Trend Raster tool. It is typically used to predict future values of a variable across time or other dimensions based on historical trends.
+
+**Parameters:**
+- **Input Trend Raster:** The input multidimensional trend raster from the Generate Trend function. Type: Raster.
+- **Variables:** The variables in the input trend raster to be used for prediction. Type: String.
+- **Dimension Definition:** Specifies the method used to provide prediction dimension values. Options include BY_VALUE or BY_INTERVAL. Type: String.
+- **Start:** The start date, height, or depth of the dimension interval to be used in the prediction. Type: String.
+- **End:** The end date, height, or depth of the dimension interval to be used in the prediction. Type: String.
+- **Interval Value:** The number of steps between two dimension values to be included in the prediction. Type: Double.
+- **Interval Unit:** Specifies the unit that will be used for the interval value, such as HOURS, DAYS, WEEKS, MONTHS, or YEARS. Type: String.
+
+**Derived Output:**
+- **Output Multidimensional Raster:** The output Cloud Raster Format (CRF) multidimensional raster dataset. Type: Raster.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy.ia import *
+
+# Check out the ArcGIS Image Analyst extension license
+arcpy.CheckOutExtension("ImageAnalyst")
+
+# Define input parameters
+in_raster = "C:/Data/LinearTrendCoefficients.crf"
+variables = "temp;precip"
+dimension_definition = "BY_INTERVAL"
+start = "2050-01-01T00:00:00"
+end = "2100-01-01T00:00:00"
+interval_value = 1
+interval_unit = "YEARS"
+
+# Execute the Predict Using Trend Raster tool
+predictOutput = arcpy.ia.PredictUsingTrend(
+    in_raster, dimension_definition, None, start, end, interval_value, interval_unit
+)
+
+# Save the output
+predictOutput.save("C:/Data/Predicted_Temp_Precip.crf")
+```
+
+Feel free to ask if you need more details on using this tool or have other questions about ArcGIS Pro.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Summarize Categorical Raster
+
+**Description:** The Summarize Categorical Raster tool generates a table containing the pixel count for each class in each slice of an input categorical raster. It is typically used to analyze land cover or risk categories over time within specified areas of interest.
+
+**Parameters:**
+- **in_raster:** The input multidimensional raster of integer type. *Type:* Raster Dataset; Raster Layer; Mosaic Dataset; Mosaic Layer; Image Service; String.
+- **out_table:** The output summary table. *Type:* Geodatabase, database, text, Microsoft Excel, and CSV tables are supported.
+- **dimension (Optional):** The input dimension to use for the summary. If there is more than one dimension and no value is specified, all slices will be summarized using all combinations of dimension values. *Type:* String.
+- **aoi (Optional):** The polygon feature layer containing the area or areas of interest to use when calculating the pixel count per category. If no area of interest is specified, the entire raster dataset will be included in the analysis. *Type:* Feature Layer.
+- **aoi_id_field (Optional):** The field in the polygon feature layer that defines each area of interest. Text and integer fields are supported. *Type:* Field.
+
+**Derived Output:**
+- **output:** The summarized number of points, length of the lines, or area of the polygons within each polygon. *Type:* Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy.ia import *
+
+# Check out the ArcGIS Image Analyst extension license
+arcpy.CheckOutExtension("ImageAnalyst")
+
+# Define input parameters
+inputRaster = "C:/Data/YearlyFireRisk.crf"
+outputTable = "C:/Data/FireRiskSummary.csv"
+dimension = "StdTime"
+aoi = "C:/Data/MyData.gdb/SanBernardinoMountainRange"
+aoi_id_field = "WATERSHEDS"
+
+# Execute the Summarize Categorical Raster tool
+arcpy.ia.SummarizeCategoricalRaster(inputRaster, outputTable, dimension, aoi, aoi_id_field)
+```
+**Toolset: Overlay**
+
+**Tool: Apportion Polygon**
+
+**Description:**  
+The Apportion Polygon tool summarizes the attributes of an input polygon layer based on the spatial overlay of a target polygon layer. It assigns the summarized attributes to the target polygons, which have summed numeric attributes derived from the input polygons that each target overlaps. This process is typically used for estimating attributes like population based on the percentage of overlap between features.
+
+**Parameters:**
+- **Input Polygons**: The polygon features that will be apportioned. Type: Feature Layer.
+- **Target Polygons**: The polygon features that will receive the apportioned attributes. Type: Feature Layer.
+- **Apportion Fields**: The fields from the input polygons to be apportioned to the target polygons. Type: Value Table.
+- **Estimation Features (Optional)**: Features used to estimate the proportion of attributes transferred, instead of using area. Type: Feature Layer.
+- **Maintain Target Geometry**: Determines whether to include the target geometry or the intersection of input and target geometries in the output. Type: Boolean.
+
+**Derived Output:**
+- **Output Feature Class**: The resulting feature class with apportioned attributes. Type: Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the input parameters
+input_polygons = "InputPolygonLayer"
+target_polygons = "TargetPolygonLayer"
+apportion_fields = [["Population", "SUM"], ["Area", "MEAN"]]
+output_feature_class = "ApportionedOutput"
+
+# Run the Apportion Polygon tool
+arcpy.analysis.ApportionPolygon(
+    in_features=input_polygons,
+    target_features=target_polygons,
+    apportion_fields=apportion_fields,
+    out_feature_class=output_feature_class
+)
+```
+**Toolset:** Overlay
+
+**Tool:** Count Overlapping Features
+
+**Description:** The "Count Overlapping Features" tool generates planarized overlapping features from the input features and writes the count of overlapping features to the output features. It is typically used to analyze spatial relationships where multiple features overlap, such as determining the number of overlapping service areas or land parcels.
+
+**Parameters:**
+- **in_features**: The input feature classes or layers. These can be point, multipoint, line, or polygon features. If multiple inputs are provided, they must all be the same geometry type. Type: Feature Layer.
+- **out_feature_class**: The output feature class containing the overlap count. Type: Feature Class.
+- **min_overlap_count** (Optional): Limits the output to only locations that meet or exceed the specified number of overlaps. The default value is 1. Type: Long.
+- **out_overlap_table** (Optional): The output table containing records for each individual overlapping geometry. Type: Table.
+
+**Derived Output:**
+- **out_feature_class**: The output feature class containing the overlap count. Type: Feature Class.
+- **out_overlap_table**: The output table containing records for each individual overlapping geometry. Type: Table.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = r"C:\data\data.gdb"
+
+# Define input feature classes
+provider_a = 'Provider_A_ServiceArea'
+provider_b = 'Provider_B_ServiceArea'
+provider_c = 'Provider_C_ServiceArea'
+in_fcs = [provider_a, provider_b, provider_c]
+
+# Define output feature class and table
+out_fc = 'CellularProviders_Count'
+out_tbl = 'CellularProviders_Count_Tbl'
+
+# Execute Count Overlapping Features
+arcpy.analysis.CountOverlappingFeatures(in_fcs, out_fc, 3, out_tbl)
+```
+**Toolset:** Overlay
+
+**Tool:** Erase
+
+**Description:** The Erase tool creates a feature class by overlaying the input features with the erase features. It removes portions of the input features that overlap with the erase features, resulting in a new feature class containing only those parts of the input features that fall outside the erase features. This tool is typically used to exclude certain areas from analysis, such as removing developed areas from proposed development sites.
+
+**Parameters:**
+- **Input Features:** The point, line, or polygon features that will be overlaid with the erase features. Type: Feature Layer.
+- **Erase Features:** The features that will be used to erase coincident features in the input. Type: Feature Layer.
+- **Output Feature Class:** The feature class that will contain only those input features that do not overlap the erase features. Type: Feature Class.
+
+**Derived Output:**
+- **Updated Input Features:** The updated input features after the erase operation. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/Habitat_Analysis.gdb"
+
+# Define local variables
+suitableVeg = "C:/output/Output.gdb/suitable_vegetation"
+roadsBuffer = "C:/output/Output.gdb/buffer_output"
+eraseOutput = "C:/output/Output.gdb/suitable_vegetation_minus_roads"
+
+# Execute Erase
+arcpy.analysis.Erase(suitableVeg, roadsBuffer, eraseOutput)
+```
+**Toolset: Overlay**
+
+**Tool: Identity**
+
+**Description:**  
+The Identity tool performs a geometric intersection of the input features and identity features. It outputs features or portions of features from the input and identity features that overlap. This tool is typically used to determine which features from the input layer overlap with features from the identity layer, allowing for spatial analysis and data enrichment.
+
+**Parameters:**
+- **in_features**: The input features that will be overlaid with the identity features.  
+  *Type: Feature Layer.*
+
+- **identity_features**: The features that will be overlaid with the input features.  
+  *Type: Feature Layer.*
+
+- **out_feature_class**: The name of the output feature class that will contain the overlaid features.  
+  *Type: Feature Class.*
+
+**Derived Output:**
+- **output**: The features that are the result of the overlay. The type of feature (point, line, or polygon) depends on the input parameter settings.  
+  *Type: Feature Set.*
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data/data.gdb"
+
+# Set local parameters
+inFeatures = "wells"
+idFeatures = "counties"
+outFeatures = "wells_w_county_info"
+
+# Process: Use the Identity function
+arcpy.analysis.Identity(in_features=inFeatures, identity_features=idFeatures, out_feature_class=outFeatures)
+```
+**Toolset:** Overlay
+
+**Tool:** Intersect
+
+**Description:**  
+The Intersect tool computes the geometric intersection of multiple feature classes or layers. It identifies and writes the features or portions of features that are common to all inputs to the output feature class. This tool is typically used to find overlapping areas or features between different datasets.
+
+**Parameters:**
+- **Input Features:** The point, line, or polygon features that will be intersected. Type: Feature Set.
+- **Output Feature Class:** The name of the output feature class that will contain the intersected features. Type: String.
+- **Output Type (Optional):** Specifies the type of intersection geometry that will be created (e.g., POINT, LINE, POLYGON). Type: String.
+- **Join Attributes (Optional):** Specifies which attributes from the input features will be transferred to the output feature class. Options include ALL, NO_FID, ONLY_FID. Type: String.
+- **Cluster Tolerance (Optional):** The minimum distance separating all feature coordinates. Type: Linear Unit.
+
+**Derived Output:**
+- **Output Feature Class:** The feature class that contains the intersected features. Type: Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define input feature classes
+input_features = ["roads.shp", "streams.shp"]
+
+# Define output feature class
+output_feature_class = "C:/data/intersected_features.shp"
+
+# Run Intersect tool
+arcpy.analysis.Intersect(input_features, output_feature_class, "ALL", "", "POINT")
+```
+**Toolset:** Overlay
+
+**Tool:** Remove Overlap (multiple)
+
+**Description:** The Remove Overlap (multiple) tool is used to eliminate overlapping areas between multiple polygon layers, creating distinct trade area layers. It is typically used in spatial analysis to ensure clear delineation between overlapping geographic areas, such as trade areas or zones.
+
+**Parameters:**
+- **in_features:** The input features containing the overlapping polygons. *Type: Value Table*.
+- **out_feature_class:** The feature class containing the new polygon features. *Type: Feature Class*.
+- **method (Optional):** Specifies how the overlap between polygons will be removed. Options include:
+  - **CENTER_LINE:** Creates a border that evenly distributes the overlapping area between polygons. This is the default method.
+  - **THIESSEN:** Uses straight lines to divide the area of intersection, creating nonoverlapping trade areas.
+  - **GRID:** Creates a grid of parallel lines to define a natural division between polygons. *Type: String*.
+- **join_attributes (Optional):** Specifies the attributes of the input layers that will be transferred to the output. Options include:
+  - **ALL:** All attributes from the input features will be transferred to the output feature class.
+  - **NO_FID:** All attributes except the FID field will be transferred.
+  - **ONLY_FID:** Only the FID field will be transferred. *Type: String*.
+
+**Derived Output:**
+- **out_feature_class:** The feature class containing the new polygon features with overlap removed. *Type: Feature Class*.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = r"C:\Temp\MyProject.gdb"
+
+# Define input and output parameters
+in_features = "Ring_Trade_Areas"
+out_feature_class = "Ring_Trade_Areas_RemoveOverlapMultiple"
+method = "THIESSEN"
+join_attributes = "ALL"
+
+# Execute the Remove Overlap (multiple) tool
+arcpy.analysis.RemoveOverlapMultiple(in_features, out_feature_class, method, join_attributes)
+```
+**Toolset:** Overlay
+
+**Tool:** Spatial Join
+
+**Description:**  
+The Spatial Join tool in ArcGIS Pro joins the attributes of two layers based on the spatial location of the features in the layers. It is typically used to find the nearest feature, determine what is inside a polygon, or identify intersecting features.
+
+**Parameters:**
+- **Target Features**: The feature layer to which you want to join data. Type: Feature Layer.
+- **Join Features**: The feature layer whose attributes will be joined to the target features. Type: Feature Layer.
+- **Output Feature Class**: The name and location of the output feature class. Type: Feature Class.
+- **Join Operation**: Specifies how joins between the target and join features are handled. Options include "JOIN_ONE_TO_ONE" or "JOIN_ONE_TO_MANY". Type: String.
+- **Match Option**: The spatial relationship that will determine whether features are joined to each other. Options include "INTERSECT", "CONTAINS", "WITHIN", "CLOSEST", etc. Type: String.
+- **Field Map**: Specifies which fields from the join features will be appended to the target features. Type: Field Map.
+
+**Derived Output:**
+- **Output Feature Class**: A new feature class containing the shape and attributes from the target layer and the matching attributes from the join layer. Type: Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data"
+
+# Define the parameters
+target_features = "Tourist_Attractions.shp"
+join_features = "Rail_Stations.shp"
+output_feature_class = "C:/data/Tourist_Attractions_Join.shp"
+join_operation = "JOIN_ONE_TO_ONE"
+match_option = "CLOSEST"
+
+# Run the Spatial Join tool
+arcpy.analysis.SpatialJoin(
+    target_features,
+    join_features,
+    output_feature_class,
+    join_type=join_operation,
+    match_option=match_option
+)
+```
+**Toolset:** Overlay
+
+**Tool:** Symmetrical Difference
+
+**Description:** The Symmetrical Difference tool creates a new feature class by overlaying two feature classes and retaining only the features or portions of features that do not overlap. This tool is typically used to identify areas that are unique to each input feature class.
+
+**Parameters:**
+- **Input Layer:** The point, line, or polygon features that will be overlaid with the overlay layer. Type: Feature Layer.
+- **Overlay Layer:** The features that will be overlaid with the input layer features. Type: Feature Layer.
+- **Output Feature Class:** A new feature class with overlaid features. Type: Feature Class.
+- **Cluster Tolerance (Optional):** The minimum distance separating all feature coordinates (nodes and vertices) as well as the distance a coordinate can move in x or y (or both). Type: Linear Unit.
+
+**Derived Output:**
+- **Output Feature Class:** The overlay of multiple layers into a single layer. Type: Feature Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Set local variables
+inFeatures = "climate.shp"
+updateFeatures = "elevlt250.shp"
+outFeatureClass = "C:/output/symdiff.shp"
+clusterTolerance = 0.001
+
+# Run Symmetrical Difference
+arcpy.analysis.SymDiff(inFeatures, updateFeatures, outFeatureClass, "ALL", clusterTolerance)
+```
+**Toolset:** Overlay
+
+**Tool:** Union
+
+**Description:**  
+The Union tool computes a geometric union of input polygon feature classes or layers. It combines all features and their attributes into a single output feature class, representing the union of all inputs. This tool is typically used to analyze spatial relationships and create comprehensive datasets from multiple overlapping sources.
+
+**Parameters:**
+- **Input Features:** The polygon feature classes or layers to be combined.  
+  *Type:* Feature Layer.
+- **Output Feature Class:** The name of the new feature class that will contain the unioned features.  
+  *Type:* Feature Class.
+- **Join Attributes:** Specifies which attributes from the input features will be transferred to the output feature class. Options include ALL, NO_FID, and ONLY_FID.  
+  *Type:* String.
+- **Cluster Tolerance (Optional):** The minimum distance separating all feature coordinates.  
+  *Type:* Linear Unit.
+- **Gaps (Optional):** Specifies whether a feature will be created for areas in the output that are completely enclosed by polygons.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **Output Feature Class:** Contains polygons representing the geometric union of all input features, along with their attributes.  
+  *Type:* Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data/data.gdb"
+
+# Define input feature classes
+inFeatures = ["well_buff50", "stream_buff200", "waterbody_buff500"]
+
+# Define output feature class
+outFeatures = "water_buffers"
+
+# Run Union tool
+arcpy.analysis.Union(inFeatures, outFeatures, "NO_FID", 0.0003)
+```
+No information available.
+**Toolset:** Math
+
+**Tool:** Divide
+
+**Description:**  
+The Divide tool in ArcGIS Pro performs division operations on raster data. It divides the values of one input raster or constant by another, producing an output raster where each cell value is the quotient of the division. This tool is typically used for spatial analysis tasks that require cell-by-cell division of raster datasets.
+
+**Parameters:**
+- **Input raster or constant value 1:** The input whose values will be divided by the second input. A number can be used as an input for this parameter, provided a raster is specified for the other parameter. Type: Raster Layer; Constant.
+- **Input raster or constant value 2:** The input whose values the first input are to be divided by. A number can be used as an input for this parameter, provided a raster is specified for the other parameter. Type: Raster Layer; Constant.
+
+**Derived Output:**
+- **Output raster:** The output raster. The cell values are the quotient of the first input raster (dividend) divided by the second input (divisor). Type: Raster Dataset.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy import env
+from arcpy.sa import *
+
+# Set environment settings
+env.workspace = "C:/sapyexamples/data"
+
+# Set local variables
+inRaster01 = "elevation"
+inRaster02 = "landuse"
+
+# Execute Divide
+outDivide = Divide(inRaster01, inRaster02)
+
+# Save the output
+outDivide.save("C:/sapyexamples/output/outdivide")
+```
+**Toolset:** Math
+
+**Tool:** Float
+
+**Description:** The Float tool converts each cell value of a raster into a floating-point representation. It is typically used when precise decimal representation of raster data is required, such as in scientific analysis or when preparing data for further mathematical operations.
+
+**Parameters:**
+- **Input raster or constant value:** The input raster to be converted to floating point. If a number is used as input, the cell size and extent must be set in the environment. **Type:** Raster Layer; Constant.
+
+**Derived Output:**
+- **Output raster:** The output raster where the cell values are the floating-point representation of the input values. **Type:** Raster Dataset.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+from arcpy import env
+from arcpy.sa import *
+
+# Set environment settings
+env.workspace = "C:/sapyexamples/data"
+
+# Set local variables
+inRaster = "landuse"
+
+# Execute Float
+outFloat = Float(inRaster)
+
+# Save the output
+outFloat.save("C:/sapyexamples/output/outfloat")
+```
+**Toolset:** Math
+
+**Tool:** Int
+
+**Description:**  
+The Int tool converts each cell value of a raster to an integer by truncation. It is typically used when there is a need to convert floating-point raster values to integer values, which is useful for storing categorical data as it uses significantly less disk space.
+
+**Parameters:**
+- **in_raster_or_constant**: The input raster to be converted to an integer. If a number is used as input for this parameter, the cell size and extent must first be set in the environment.  
+  **Type:** Raster Layer; Constant
+
+**Derived Output:**
+- **out_raster**: The output raster where the cell values are the input values converted to integers by truncation. Type: Raster Dataset.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+from arcpy import env
+from arcpy.sa import *
+
+# Set environment settings
+env.workspace = "C:/sapyexamples/data"
+
+# Set local variables
+inRaster = "gwhead"
+
+# Execute Int
+outInt = Int(inRaster)
+
+# Save the output
+outInt.save("C:/sapyexamples/output/outint")
+```
+**Toolset:** Math
+
+**Tool:** Minus
+
+**Description:** The Minus tool subtracts the value of the second input raster from the value of the first input raster on a cell-by-cell basis. It is typically used in scenarios where you need to analyze the difference between two raster datasets, such as comparing elevation changes or density differences over time.
+
+**Parameters:**
+- **in_raster_or_constant1:** The input from which to subtract the values in the second input. If the first input is a raster and the second is a scalar, an output raster is created with each input raster value being subtracted by the scalar value. **Type:** Raster Layer | Constant.
+- **in_raster_or_constant2:** The input values to subtract from the values in the first input. If the first input is a scalar and the second is a raster, an output raster is created with each input raster value being subtracted from the scalar value. **Type:** Raster Layer | Constant.
+
+**Derived Output:**
+- **out_raster:** The output raster. The cell values are the result of subtracting the second input from the first. **Type:** Raster Dataset.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+from arcpy import env
+from arcpy.sa import *
+
+# Set environment settings
+env.workspace = "C:/sapyexamples/data"
+
+# Set local variables
+inRaster1 = "degs"
+inRaster2 = "negs"
+
+# Execute Minus
+outMinus = Minus(inRaster1, inRaster2)
+
+# Save the output
+outMinus.save("C:/sapyexamples/output/outminus.tif")
+```
+**Toolset:** Math
+
+**Tool:** Plus
+
+**Description:** The Plus tool adds the values of two rasters on a cell-by-cell basis. It is typically used in spatial analysis to combine raster datasets by summing their values, which can be useful in scenarios such as calculating total cost surfaces or aggregating environmental data.
+
+**Parameters:**
+- **in_raster_or_constant1**: The first input raster or constant value to be added. Type: Raster Layer | Constant.
+- **in_raster_or_constant2**: The second input raster or constant value to be added. A number can be used as an input for this parameter, provided a raster is specified for the other parameter. Type: Raster Layer | Constant.
+
+**Derived Output:**
+- **out_raster**: The output raster. The cell values are the sum of the first input added to the second. Type: Raster Dataset.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+from arcpy import env
+from arcpy.sa import *
+
+# Set environment settings
+env.workspace = "C:/sapyexamples/data"
+
+# Set local variables
+inRaster1 = "cost"
+inRaster2 = "degs"
+
+# Execute Plus
+outPlus = Plus(inRaster1, inRaster2)
+
+# Save the output
+outPlus.save("C:/sapyexamples/output/outplus")
+```
+**Toolset:** Math
+
+**Tool:** Times
+
+**Description:**  
+The Times tool multiplies the values of two rasters on a cell-by-cell basis. It is typically used for operations such as converting elevation values from one unit to another, like feet to meters, by multiplying the raster values by a constant.
+
+**Parameters:**  
+- **in_raster_or_constant1:** The first input raster or constant value. This parameter specifies the raster whose values will be multiplied. Type: *Raster Layer; Constant*.
+- **in_raster_or_constant2:** The second input containing the values by which the first input will be multiplied. A number can be used as an input for this parameter, provided a raster is specified for the other parameter. Type: *Raster Layer; Constant*.
+
+**Derived Output:**  
+- **out_raster:** The output raster. The cell values are the product of the first input multiplied by the second. Type: *Raster Dataset*.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+from arcpy import env
+from arcpy.sa import *
+
+# Set environment settings
+env.workspace = "C:/sapyexamples/data"
+
+# Set local variables
+inRaster = "elevation"
+inConstant = 0.3048
+
+# Execute Times
+outTimes = Times(inRaster, inConstant)
+
+# Save the output
+outTimes.save("C:/sapyexamples/output/timesout")
+```
+**Toolset:** Statistics
+
+**Tool:** Enrich
+
+**Description:** The Enrich tool in ArcGIS Pro adds demographic and landscape facts to your data by appending new attribute fields to the input features. It is typically used to enhance geographic data with additional context, such as population statistics or consumer behavior, which can be sourced from ArcGIS Online or a locally installed Business Analyst dataset. This tool is useful for site selection, market analysis, and understanding the demographic characteristics of specific areas.
+
+**Parameters:**
+- **Input Features:** The features to be enriched. Type: Feature Layer.
+- **Output Feature Class:** A new layer containing both the input attributes and user-selected attributes. Type: Feature Class.
+- **Variables:** The variables to be summarized and added to the output feature class. Type: String.
+- **Define areas to enrich (Optional):** Specifies the area that will be enriched. Options include Straight Line, Driving Time, etc. Type: String.
+- **Distance or time (Optional):** The distance or size of an area to enrich, such as a 1-mile buffer or 5-minute walk time. Type: Double.
+- **Unit (Optional):** The units associated with the distance or time parameter, such as Miles, Kilometers, Minutes, etc. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The enriched feature class with additional attributes. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the environment for Business Analyst data source
+arcpy.env.baDataSource = "ONLINE;US;"
+
+# Use the Enrich tool to add demographic data to the input features
+arcpy.analysis.Enrich(
+    in_features="City",
+    out_feature_class=r"C:\temp\Data.gdb\City_Enrich",
+    variables="populationtotals.totpop_cy"
+)
+```
+
+Feel free to ask if you need more details on using the Enrich tool or any other ArcGIS Pro functionalities.
+**Toolset:** Statistics
+
+**Tool:** Frequency
+
+**Description:**  
+The Frequency tool reads a table and a set of fields to create a new table containing unique field values and the number of occurrences of each unique field value. It is typically used to summarize data by counting occurrences of specific attribute combinations.
+
+**Parameters:**
+- **Input Table:** The table containing the field(s) that will be used to calculate frequency statistics.  
+  *Type:* Table View; Raster Layer.
+- **Output Table:** The output table that will store the frequency statistics.  
+  *Type:* Table.
+- **Frequency Field(s):** The field(s) used to calculate frequency statistics. Each unique combination of field values will be included as a new row in the output table.  
+  *Type:* Field.
+- **Summary Field(s) (Optional):** The attribute field(s) to sum and add to the output table. Values will be summed for each unique combination of frequency fields. Null values are excluded from this calculation.  
+  *Type:* Field.
+
+**Derived Output:**
+- **Output Table:** The table containing frequency statistics for each unique combination of specified fields.  
+  *Type:* Table.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/Portland.gdb/Taxlots"
+
+# Set local variables
+inTable = "taxlots"
+outTable = "C:/output/output.gdb/tax_frequency"
+frequencyFields = ["YEARBUILT", "COUNTY"]
+summaryFields = ["LANDVAL", "BLDGVAL", "TOTALVAL"]
+
+# Execute Frequency
+arcpy.analysis.Frequency(inTable, outTable, frequencyFields, summaryFields)
+```
+**Toolset:** Statistics
+
+**Tool:** Summary Statistics
+
+**Description:** The Summary Statistics tool calculates summary statistics for fields in a table. It is typically used to summarize data by calculating statistics such as sum, mean, minimum, maximum, and more for specified fields.
+
+**Parameters:**
+- **Input Layer:** The point, polyline, or polygon layer to be summarized. Type: Table View.
+- **Output Table:** A new table with the summarized attributes. Type: Table.
+- **Fields:** A field or fields used to summarize similar features. For example, fields with values like 'commercial' and 'residential' can be summarized separately. Type: Field.
+- **Summary Fields (Optional):** The statistics that will be calculated on specified fields. Type: Value Table.
+
+**Derived Output:**
+- **Output Table:** The summarized number of points, length of the lines, or area of the polygons within each polygon. Type: Feature Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Set local variables
+input_layer = "C:/data/input.shp"
+output_table = "C:/output/output.gdb/summary_stats"
+fields = ["PropertyType"]
+summary_fields = [["Area", "SUM"], ["Population", "MEAN"]]
+
+# Run Summary Statistics
+arcpy.analysis.Statistics(input_layer, output_table, summary_fields, fields)
+```
+**Toolset:** Statistics
+
+**Tool:** Summarize Nearby
+
+**Description:** The Summarize Nearby tool identifies features within a specified distance from features in the input layer and calculates statistics for these nearby features. It is typically used to assess accessibility or impact, such as calculating the population within a certain drive time from a location.
+
+**Parameters:**
+- **Input Nearby Layer:** Point, line, or polygon features from which distances will be measured to features in the input summary layer. Type: Feature Set.
+- **Input Summary Features:** Point, line, or polygon features that will be summarized for each feature in the input nearby layer. Type: Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. Type: String.
+- **Distance Measurement:** Defines the type of distance measurement, such as straight-line or travel time/distance using various modes of transportation. Type: String.
+- **Distances:** A list of double values specifying multiple distances for buffering. Type: List of Double (Optional).
+
+**Derived Output:**
+- **Output Feature Service:** The output summarized layer. Type: Feature Set.
+- **Output Group Table:** If a group by field is provided, the tool outputs a table with calculated statistics for each unique group. Type: Record Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+sumNearbyLayer = "InputNearbyLayer"
+summaryLayer = "InputSummaryFeatures"
+outputName = "SummarizedOutput"
+nearType = "STRAIGHTLINE"
+distances = [5, 10]  # Example distances in kilometers
+
+# Execute SummarizeNearby
+arcpy.sfa.SummarizeNearby(
+    sumNearbyLayer=sumNearbyLayer,
+    summaryLayer=summaryLayer,
+    outputName=outputName,
+    nearType=nearType,
+    distances=distances
+)
+```
+**Toolset:** Statistics
+
+**Tool:** Summarize Within
+
+**Description:** The Summarize Within tool overlays a polygon layer with another layer to summarize the number of points, length of lines, or area of polygons within each polygon. It calculates attribute field statistics for those features within the polygons. Typical use cases include calculating total acreage of land-use types within watershed boundaries or summarizing the average value of vacant parcels within city boundaries.
+
+**Parameters:**
+- **Input Polygons:** The polygons used to summarize features in the input summary layer. Type: Feature Layer.
+- **Input Summary Features:** The point, line, or polygon features summarized for each polygon in the input polygons. Type: Feature Layer.
+- **Output Feature Class:** The output polygon feature class containing geometries and attributes of the input polygons, with additional attributes for summarized statistics. Type: Feature Class.
+- **Keep all input polygons (Optional):** Specifies whether all input polygons or only those intersecting or containing at least one input summary feature will be copied to the output feature class. Type: Boolean.
+- **Summary Fields (Optional):** A list of attribute field names from the input summary features, along with statistical summary types. Type: List.
+
+**Derived Output:**
+- **Output Feature Service:** The output summarized layer. Type: Feature Set.
+- **Output Group Table:** If a group by field was provided, the tool outputs a table with calculated statistics for each unique group. Type: Record Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+input_polygons = "WatershedBoundaries"
+input_summary_features = "LandUseBoundaries"
+output_feature_class = "LandUseSummary"
+
+# Execute Summarize Within
+arcpy.analysis.SummarizeWithin(
+    in_polygons=input_polygons,
+    in_summary_features=input_summary_features,
+    out_feature_class=output_feature_class,
+    keep_all=True,
+    summary_fields=[["LandUseType", "SUM"]]
+)
+```
+**Toolset:** Statistics
+
+**Tool:** Tabulate Intersection
+
+**Description:** The Tabulate Intersection tool computes the intersection between two feature classes and cross tabulates the area, length, or count of the intersecting features. It is typically used to analyze spatial relationships between different datasets, such as determining how much of one land use type overlaps with another.
+
+**Parameters:**
+- **zoneFC**: The input feature class representing zones. Type: Polygon Feature Class.
+- **zoneFld**: The field in the zone feature class used for tabulation. Type: Field (String).
+- **classFC**: The input feature class representing classes. Type: Polygon Feature Class.
+- **outTab**: The output table where results will be stored. Type: Table.
+- **classFld**: The field in the class feature class used for tabulation. Type: Field (String).
+- **sum_Fields**: Optional fields to sum during tabulation. Type: String.
+- **xy_tol**: The XY tolerance for intersection calculations. Type: Double.
+- **outUnits**: The units for the output measurements. Type: String.
+
+**Derived Output:**
+- **outTab**: The table containing the tabulated intersection results. Type: Table.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/path/to/your/workspace"
+
+# Define input parameters
+zoneFC = "zones.shp"
+zoneFld = "ZoneID"
+classFC = "classes.shp"
+outTab = "intersection_results.dbf"
+classFld = "ClassID"
+sum_Fields = ""
+xy_tol = ""
+outUnits = "SQUARE_METERS"
+
+# Execute Tabulate Intersection
+arcpy.analysis.TabulateIntersection(zoneFC, zoneFld, classFC, outTab, classFld, sum_Fields, xy_tol, outUnits)
+```
+**Toolset:** Triangulated Surface
+
+**Tool:** Locate Outliers
+
+**Description:** The Locate Outliers tool identifies anomalous elevation measurements from terrain, TIN, or LAS datasets that exceed a defined range of elevation values or have slope characteristics that are inconsistent with the surrounding surface. It is typically used to find and flag suspicious measurement points that may be in error, allowing analysts to verify and potentially correct these points.
+
+**Parameters:**
+- **in_surface:** The terrain, TIN, or LAS dataset that will be analyzed. Type: LAS Dataset Layer; Terrain Layer; TIN Layer.
+- **out_feature_class:** The feature class that will be produced. Type: Feature Class.
+- **apply_hard_limit (Optional):** Specifies use of absolute z minimum and maximum to find outliers. Type: Boolean.
+- **absolute_z_min (Optional):** If hard limits are applied, any point with an elevation below this value will be considered an outlier. Default is 0. Type: Double.
+- **absolute_z_max (Optional):** If hard limits are applied, any point with an elevation above this value will be considered an outlier. Default is 0. Type: Double.
+- **apply_comparison_filter (Optional):** Specifies use of comparison parameters (Z Tolerance, Slope Tolerance, Exceed Tolerance Ratio) in assessing points. Type: Boolean.
+- **z_tolerance (Optional):** Compares z-values of neighboring points if the comparison filter is applied. Default is 0. Type: Double.
+- **slope_tolerance (Optional):** The threshold of slope variance between consecutive points used to identify outlier points. Default is 150. Type: Double.
+- **exceed_tolerance_ratio (Optional):** Defines the criteria for determining each outlier point based on the ratio of points in its natural neighborhood that must exceed the specified comparison filters. Default is 0.5. Type: Double.
+- **outlier_cap (Optional):** The maximum number of outlier points that can be written to the output. Default is 2,500. Type: Long.
+
+**Derived Output:**
+- **out_feature_class:** The feature class containing the identified outliers. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+in_surface = "C:/data/terrain.tif"
+out_feature_class = "C:/data/outliers.shp"
+apply_hard_limit = "APPLY_HARD_LIMIT"
+absolute_z_min = -15
+absolute_z_max = 680
+apply_comparison_filter = "APPLY_COMPARISON_FILTER"
+z_tolerance = 0
+slope_tolerance = 150
+exceed_tolerance_ratio = 0.5
+outlier_cap = 2500
+
+# Execute Locate Outliers
+arcpy.ddd.LocateOutliers(
+    in_surface,
+    out_feature_class,
+    apply_hard_limit,
+    absolute_z_min,
+    absolute_z_max,
+    apply_comparison_filter,
+    z_tolerance,
+    slope_tolerance,
+    exceed_tolerance_ratio,
+    outlier_cap
+)
+```
+
+Feel free to ask if you need more details on any specific parameter or usage scenario.
+**Toolset:** Triangulated Surface
+
+**Tool:** Surface Aspect
+
+**Description:** The Surface Aspect tool creates polygon features that represent aspect measurements derived from a TIN, terrain, or LAS dataset surface. It is typically used to identify the compass direction that the downhill slope faces, which can be useful for applications such as determining solar illumination or identifying slopes for ski runs.
+
+**Parameters:**
+- **Input Surface:** The input TIN, terrain, or LAS dataset from which aspect measurements will be derived. Type: *Feature Layer*.
+- **Output Feature Class:** The output polygon feature class that will store the aspect measurements. Type: *Feature Class*.
+
+**Derived Output:**
+- **Output Feature Class:** Contains polygon features representing the aspect measurements. Type: *Feature Layer*.
+
+**Example ArcPy code:**
+```python
+# Import system modules
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define input and output variables
+input_surface = "sample.gdb/featuredataset/terrain"
+output_feature_class = "terrain_aspect.shp"
+
+# Execute SurfaceAspect
+arcpy.ddd.SurfaceAspect(input_surface, output_feature_class)
+```
+**Toolset:** Triangulated Surface
+
+**Tool:** Surface Contour
+
+**Description:** The Surface Contour tool generates contour lines from a terrain, TIN, or LAS dataset surface. These contours are typically used for visualizing elevation changes across a surface, aiding in terrain analysis and cartographic representation.
+
+**Parameters:**
+- **Input Surface:** The TIN, terrain, or LAS dataset surface to be processed. *Type: LAS Dataset Layer; Terrain Layer; TIN Layer.*
+- **Output Feature Class:** The feature class that will be produced containing the contour lines. *Type: Feature Class.*
+- **Contour Interval:** The interval between the contours, determining the spacing of contour lines. *Type: Double.*
+- **Base Contour (Optional):** Defines the starting Z value from which the contour interval is added or subtracted to delineate contours. *Type: Double.*
+- **Contour Field (Optional):** The field that stores the contour value associated with each line in the output feature class. *Type: String.*
+- **Contour Field Precision (Optional):** Specifies the precision of the contour field, indicating the number of decimal places. *Type: Long.*
+- **Index Interval (Optional):** Adds an integer field to the attribute table to differentiate index contours from regular contours. *Type: Long.*
+
+**Derived Output:**
+- **Output Feature Class:** Contains the generated contour lines with attributes for contour heights. *Type: Feature Class.*
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Set local variables
+inSurface = "sample.gdb/featuredataset/terrain"
+outContour = arcpy.CreateUniqueName("contour.shp")
+contourInterval = 10
+
+# Execute SurfaceContour
+arcpy.ddd.SurfaceContour(inSurface, outContour, contourInterval)
+```
+No information available.
+**Toolset:** Terrain Dataset
+
+**Tool:** Add Feature Class To Terrain
+
+**Description:** The "Add Feature Class To Terrain" tool is used to add one or more feature classes to an existing terrain dataset. This tool is typically used to enhance the terrain dataset by incorporating additional spatial data, such as mass points or breaklines, which contribute to the terrain's surface representation.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset to which feature classes will be added. The terrain must already have one or more pyramid levels created.  
+  *Type:* Terrain Layer.
+- **Input Feature Class:** Identifies the features being added to the terrain. Each feature must reside in the same feature dataset as the terrain and have its role defined through properties such as:
+  - *Input Features:* Name of the feature class being added.
+  - *Height Field:* Field containing the feature's height information. Numeric fields or z-enabled geometry fields can be used.
+  - *Type:* Defines how the features contribute to the terrain (e.g., mass points, breaklines).
+  - *Group:* Defines the group of each contributing feature.  
+  *Type:* String.
+
+**Derived Output:**
+- **Derived Output Terrain:** The updated terrain dataset after the feature class has been added.  
+  *Type:* Terrain Layer.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = "C:/data"
+
+# Define the terrain dataset and feature class to be added
+terrain = "sample.gdb/featuredataset/terrain"
+feature_class = ["terrain.gdb/terrainFDS/points2", "SHAPE", "masspoints", 2, 0, 10, "true", "false", "points_embed", "<None>", "false"]
+
+# Execute the AddFeatureClassToTerrain tool
+arcpy.ddd.AddFeatureClassToTerrain(terrain, feature_class)
+
+# Optionally, build the terrain to update it
+arcpy.ddd.BuildTerrain(terrain, "NO_UPDATE_EXTENT")
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Add Terrain Pyramid Level
+
+**Description:** The Add Terrain Pyramid Level tool is used to add one or more pyramid levels to an existing terrain dataset. This tool is typically used to define the z-tolerance or window size and reference scale for each pyramid level, which helps in managing the level of detail and performance of terrain datasets.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset that will be processed.  
+  *Type:* Terrain Layer.
+- **Pyramid Type (Optional):** The pyramid type used by the terrain dataset. This parameter is not used in ArcGIS 9.3 and beyond.  
+  *Type:* String.
+- **Pyramid Levels Definition:** The z-tolerance or window size and its associated reference scale for each pyramid level being added to the terrain. Each pyramid level is entered as a space-delimited pair of the pyramid level resolution and reference scale (e.g., "20 24000" for a window size of 20 and reference scale of 1:24000).  
+  *Type:* String.
+
+**Derived Output:**
+- **Updated Input Terrain:** The updated terrain dataset after adding the pyramid levels.  
+  *Type:* Terrain Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define the input terrain dataset
+inTerrain = "sample.gdb/featuredataset/terrain"
+
+# Define the pyramid levels to be added
+pyramid_levels = ["2.5 10000", "5 25000"]
+
+# Execute AddTerrainPyramidLevel
+arcpy.ddd.AddTerrainPyramidLevel(inTerrain, "", pyramid_levels)
+
+print("Pyramid levels added successfully.")
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Append Terrain Points
+
+**Description:**  
+The Append Terrain Points tool appends points to a point feature referenced by a terrain dataset. This tool is typically used to add new measurements to an existing terrain dataset, which may require rebuilding the terrain to ensure its integrity and functionality.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset that will be processed.  
+  *Type:* Terrain Layer.
+- **Input Terrain Data Source:** The feature class that contributes to the terrain dataset into which the points or multipoints will be added.  
+  *Type:* String.
+- **Input Points:** The feature class of points or multipoints to add as an additional data source for the terrain dataset.  
+  *Type:* Feature Layer.
+- **Area of Interest (Optional):** Specify a polygon feature class or extent values to define the area where point features will be added. This parameter is empty by default, which results in all the points from the input feature class being loaded to the terrain feature.  
+  *Type:* Extent; Feature Layer.
+
+**Derived Output:**
+- **Updated Input Terrain:** The updated terrain.  
+  *Type:* Terrain Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define local variables
+in_terrain = "sample.gdb/featuredataset/terrain"
+terrain_feature_class = "existing_points"
+in_point_features = "new_points.shp"
+
+# Execute AppendTerrainPoints
+arcpy.ddd.AppendTerrainPoints(in_terrain, terrain_feature_class, in_point_features)
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Build Terrain
+
+**Description:** The Build Terrain tool is used to perform tasks necessary for analyzing and displaying a terrain dataset. It is typically used after initially defining the features that participate in a terrain, making modifications to these features, or altering the terrain pyramid definition. This tool is essential for ensuring the terrain dataset is functional and up-to-date.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset that will be processed.  
+  *Type:* Terrain Layer.
+- **Update Extent (Optional):** Recalculates the data extent of a window-size-based terrain dataset when the data area has been reduced through editing. It is not needed if the data extent has increased or if the terrain dataset is z-tolerance based.  
+  *Type:* String.
+
+**Derived Output:**
+- **Updated Input Terrain:** The updated terrain.  
+  *Type:* Terrain Layer.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = 'C:/data'
+
+# Define the input terrain dataset
+in_terrain = 'test.gdb/featuredataset/terrain'
+
+# Execute the Build Terrain tool
+arcpy.ddd.BuildTerrain(in_terrain, "NO_UPDATE_EXTENT")
+
+# Print messages
+print(arcpy.GetMessages())
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Change Terrain Reference Scale
+
+**Description:** This tool modifies the reference scale associated with a terrain pyramid level. It is typically used to optimize draw speed performance or adjust the display scale range of data points in a terrain pyramid.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset that will be processed. Type: Terrain Layer.
+- **Old Reference Scale:** The reference scale of an existing pyramid level. Type: Long.
+- **New Reference Scale:** The new reference scale for the pyramid level. Type: Long.
+
+**Derived Output:**
+- **Updated Input Terrain:** The updated terrain. Type: Terrain Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define variables
+inTerrain = "terrain.gdb/terrainFDS/terrain1"
+old_refscale = 1000
+new_refscale = 2000
+
+# Execute ChangeTerrainReferenceScale
+arcpy.ddd.ChangeTerrainReferenceScale(inTerrain, old_refscale, new_refscale)
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Change Terrain Resolution Bounds
+
+**Description:** The Change Terrain Resolution Bounds tool modifies the pyramid levels at which a feature class is enforced within a terrain dataset. This is typically used to optimize display performance or adjust the resolution range for specific terrain features.
+
+**Parameters:**
+- **in_terrain:** The terrain dataset that will be processed. Type: Terrain Layer.
+- **feature_class:** The feature class referenced by the terrain that will have its pyramid-level resolutions modified. Type: String.
+- **lower_pyramid_resolution (Optional):** The new lower pyramid-level resolution for the chosen feature class. Type: Double.
+- **upper_pyramid_resolution (Optional):** The new upper pyramid-level resolution for the chosen feature class. Type: Double.
+- **overview (Optional):** Specifies whether the feature class will contribute to the overview of the terrain dataset. Type: Boolean.
+
+**Derived Output:**
+- **derived_out_terrain:** The updated terrain. Type: Terrain Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define input parameters
+in_terrain = "sample.gdb/featuredataset/terrain"
+feature_class = "breaklines"
+lower_pyramid_resolution = 2.5
+upper_pyramid_resolution = 7.5
+
+# Execute ChangeTerrainResolutionBounds
+arcpy.ddd.ChangeTerrainResolutionBounds(
+    in_terrain,
+    feature_class,
+    lower_pyramid_resolution,
+    upper_pyramid_resolution
+)
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Create Terrain
+
+**Description:** The Create Terrain tool is used to create a terrain dataset from features extracted from a TIN. It is particularly useful when the source data used in the TIN is unavailable, and the data stored in the TIN is too large. The terrain's scalability allows for improved display performance and faster analysis.
+
+**Parameters:**
+- **TIN:** The TIN used to create the terrain. Type: TIN Layer.
+- **gdbLocation:** The folder that will store the terrain geodatabase (GDB). Type: String.
+- **gdbName:** The name of the terrain GDB. Type: String.
+- **fdName:** The name of the feature dataset. Type: String.
+- **terrainName:** The name of the terrain. Type: String.
+
+**Derived Output:**
+- **derived_out_terrain:** The new terrain dataset. Type: Terrain Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set local variables
+tin = arcpy.GetParameterAsText(0)  # TIN used to create terrain
+gdbLocation = arcpy.GetParameterAsText(1)  # Folder that will store terrain GDB
+gdbName = arcpy.GetParameterAsText(2)  # Name of terrain GDB
+fdName = arcpy.GetParameterAsText(3)  # Name of feature dataset
+terrainName = arcpy.GetParameterAsText(4)  # Name of terrain
+
+try:
+    # Create the file GDB that will store the feature dataset
+    arcpy.management.CreateFileGDB(gdbLocation, gdbName)
+    gdb = '{0}/{1}'.format(gdbLocation, gdbName)
+    
+    # Obtain spatial reference from TIN
+    SR = arcpy.Describe(tin).spatialReference
+    
+    # Create the feature dataset that will store the terrain
+    arcpy.management.CreateFeatureDataset(gdb, fdName, SR)
+    fd = '{0}/{1}'.format(gdb, fdName)
+    
+    # Export TIN elements to feature classes for terrain
+    arcpy.AddMessage("Exporting TIN footprint to define terrain boundary...")
+    boundary = "{0}/boundary".format(fd)
+    arcpy.ddd.TinDomain(tin, boundary, 'POLYGON')
+    
+    arcpy.AddMessage("Exporting TIN breaklines...")
+    breaklines = "{0}/breaklines".format(fd)
+    arcpy.ddd.TinLine(tin, breaklines, "Code")
+    
+    arcpy.AddMessage("Exporting TIN nodes...")
+    masspoints = "{0}/masspoints".format(fd)
+    arcpy.ddd.TinNode(tin, masspoints)
+    
+    arcpy.AddMessage("Creating terrain dataset...")
+    terrain = "terrain_from_tin"
+    arcpy.ddd.CreateTerrain(fd, terrainName, 10, 50000, "", "WINDOWSIZE", "ZMEAN", "NONE", 1)
+    
+    arcpy.AddMessage("Adding terrain pyramid levels...")
+    terrain = "{0}/{1}".format(fd, terrainName)
+    pyramids = ["20 5000", "25 10000", "35 25000", "50 50000"]
+    arcpy.ddd.AddTerrainPyramidLevel(terrain, "", pyramids)
+    
+    arcpy.AddMessage("Adding features to terrain...")
+    inFeatures = "{0} Shape softclip 1 0 10 true false boundary_embed <None> "\
+                 "false; {1} Shape masspoints 1 0 50 true false points_embed "\
+                 "<None> false; {2} Shape softline 1 0 25 false false lines_embed "\
+                 "<None> false".format(boundary, masspoints, breaklines)
+    arcpy.ddd.AddFeatureClassToTerrain(terrain, inFeatures)
+    
+    arcpy.AddMessage("Building terrain...")
+    arcpy.ddd.BuildTerrain(terrain, "NO_UPDATE_EXTENT")
+    arcpy.GetMessages()
+except arcpy.ExecuteError:
+    print(arcpy.GetMessages())
+except Exception as err:
+    print(err)
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Delete Terrain Points
+
+**Description:**  
+The Delete Terrain Points tool removes points within a specified area of interest from one or more features that participate in a terrain dataset. This is typically used to clean up or refine terrain datasets by removing unnecessary or erroneous data points.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset that will be processed.  
+  **Type:** Terrain Layer.
+- **Input Terrain Data Source:** One or more feature classes from which points will be removed.  
+  **Type:** String.
+- **Area of Interest:** Specifies the area from which points will be removed. A polygon feature class or an extent can be used. If extent values are desired, use an `arcpy.Extent` object.  
+  **Type:** Feature Layer; Extent.
+
+**Derived Output:**
+- **Updated Input Terrain:** The updated terrain after points have been deleted.  
+  **Type:** Terrain Layer.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define local variables
+in_terrain = "sample.gdb/featuredataset/terrain"
+data_source = "mass_pts_embed"
+area_of_interest = arcpy.Extent(1379938, 235633, 1382756, 237681)
+
+# Execute DeleteTerrainPoints
+arcpy.ddd.DeleteTerrainPoints(in_terrain, data_source, area_of_interest)
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Remove Feature Class From Terrain
+
+**Description:** This tool removes the reference to a feature class that is participating in a terrain dataset. It is typically used when a feature class is no longer needed in the terrain dataset, or when updating the dataset's structure.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset that will be processed.  
+  *Type:* Terrain Layer.
+- **Input Feature Class:** The feature class to be removed from the terrain dataset.  
+  *Type:* String.
+
+**Derived Output:**
+- **Updated Input Terrain:** The updated terrain dataset after the feature class has been removed.  
+  *Type:* Terrain Layer.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+# Import system modules
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Set local variables
+inTerrain = "sample.gdb/featuredataset/terrain"
+remFC = "points_1995"
+
+# Execute RemoveFeatureClassFromTerrain
+arcpy.ddd.RemoveFeatureClassFromTerrain(inTerrain, remFC)
+```
+**Toolset: Terrain Dataset**
+
+**Tool: Remove Terrain Pyramid Level**
+
+**Description:**  
+The "Remove Terrain Pyramid Level" tool is used to remove a specific pyramid level from a terrain dataset. This tool is typically used when a particular pyramid level is no longer needed, except for level 0, which represents the full resolution pyramid and cannot be removed. This tool is useful in managing the resolution and performance of terrain datasets, especially in enterprise geodatabases where the input terrain cannot be registered as versioned.
+
+**Parameters:**
+- **Input Terrain**: The terrain dataset that will be processed.  
+  *Type: Terrain Layer*.
+- **Pyramid Level Resolution**: The specific pyramid level to be removed, identified by its resolution. Type: *Double*.
+
+**Derived Output:**  
+- **Updated Input Terrain**: The terrain dataset after the specified pyramid level has been removed. Type: *Terrain Layer*.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Set local variables
+in_terrain = "c:/data/sample.gdb/featuredataset/terrain"
+pyramid_level_resolution = 10
+
+# Execute RemoveTerrainPyramidLevel
+arcpy.ddd.RemoveTerrainPyramidLevel(in_terrain=in_terrain, pyramid_level_resolution=pyramid_level_resolution)
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Replace Terrain Points
+
+**Description:** The Replace Terrain Points tool is used to replace points referenced by a terrain dataset with points from a specified feature class. This tool is typically used when updating or modifying the terrain dataset with new or corrected point data.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset that will be processed. Type: Terrain Layer.
+- **Input Terrain Data Source:** The name of the terrain point feature class that will have some or all of its points replaced. Type: String.
+- **Input Points:** The point or multipoint features that will replace the terrain point features. Type: Feature Layer.
+- **Area of Interest (Optional):** An optional area of interest can be used to define the extent of the area in which the terrain points would be replaced. Type: Feature Layer; Extent.
+
+**Derived Output:**
+- **Updated Input Terrain:** The updated input terrain. Type: Terrain Layer.
+
+**Example ArcPy code:**
+```python
+# Import system modules
+import arcpy
+from arcpy import env
+
+# Set environment settings
+env.workspace = "C:/data"
+
+# Set Local Variables
+InTerrain = "sample.gdb/featuredataset/terrain"
+TerrainFCl = "points_old"
+InPoints = "sample.gdb/featuredataset/terrain/pts_new"
+
+# Execute ReplaceTerrainPoints
+arcpy.ddd.ReplaceTerrainPoints(InTerrain, TerrainFCl, InPoints)
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Terrain To Points
+
+**Description:** Converts a terrain dataset into a new point or multipoint feature class. This tool is typically used to extract point data from a terrain dataset for further analysis or visualization.
+
+**Parameters:**
+- **in_terrain:** The terrain dataset that will be processed. Type: Terrain Layer.
+- **out_feature_class:** The feature class that will be produced. Type: Feature Class.
+- **pyramid_level_resolution (Optional):** The z-tolerance or window-size resolution of the terrain pyramid level that will be used. The default is 0, or full resolution. Type: Double.
+- **source_embedded_feature_class (Optional):** The name of the terrain dataset's embedded points to be exported. If specified, only these points will be written to the output. Otherwise, all points from all data sources in the terrain will be exported. Type: String.
+- **out_geometry_type (Optional):** The geometry of the output feature class. Options are MULTIPOINT (default) or POINT. Type: String.
+
+**Derived Output:**
+- **out_feature_class:** The feature class that will be produced. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Set Local Variables
+terrain = "sample.gdb/featuredataset/terrain"
+outPts = arcpy.CreateUniqueName("terrain_pts", "sample.gdb")
+outGeo = "POINT"
+
+# Execute TerrainToPoints
+arcpy.ddd.TerrainToPoints(terrain, outPts, 6, "<NONE>", outGeo)
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Terrain To Raster
+
+**Description:** The Terrain To Raster tool interpolates a raster using z-values from a terrain dataset. It is typically used to convert terrain datasets into raster formats for analysis and visualization purposes.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset that will be processed. Type: Terrain Layer.
+- **Output Raster:** The location and name of the output raster. Type: Raster Dataset.
+- **Data Type (Optional):** Specifies the type of numeric values stored in the output raster. Options include Floating Point (default) and Integer. Type: String.
+- **Method (Optional):** The interpolation method used to calculate cell values. Options include Linear (default) and Natural Neighbors. Type: String.
+- **Sampling Distance (Optional):** Defines the cell size of the output raster. Options include Observations (default) and Cell Size. Type: String.
+- **Pyramid Level Resolution (Optional):** The z-tolerance or window-size resolution of the terrain pyramid level used. Default is 0, or full resolution. Type: Double.
+- **Sampling Value:** The value corresponding with the Sampling Distance for specifying the output raster's cell size. Type: Double.
+
+**Derived Output:**
+- **Output Raster:** The resulting raster dataset. Type: Raster Dataset.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment setting
+arcpy.env.workspace = "C:/data"
+
+# Set Local Variables
+terrain = "sample.gdb/featuredataset/terrain"
+bitType = "INT"
+method = "LINEAR"
+sampling = "CELLSIZE 10"
+pyrLvl = 2.5
+outRas = arcpy.CreateUniqueName("terrain_level.img")
+
+# Execute TerrainToRaster
+arcpy.ddd.TerrainToRaster(terrain, outRas, bitType, method, sampling, pyrLvl)
+```
+**Toolset:** Terrain Dataset
+
+**Tool:** Terrain To TIN
+
+**Description:** Converts a terrain dataset into a triangulated irregular network (TIN) dataset. This tool is typically used to create a TIN for detailed surface analysis and visualization, especially when working with large terrain datasets that need to be represented in a more manageable form.
+
+**Parameters:**
+- **Input Terrain:** The terrain dataset that will be processed.  
+  *Type:* Terrain Layer.
+- **Output TIN:** The TIN dataset that will be generated.  
+  *Type:* TIN.
+- **Pyramid Level Resolution (Optional):** The z-tolerance or window-size resolution of the terrain pyramid level that will be used. The default is 0, or full resolution.  
+  *Type:* Double.
+- **Maximum Number of Nodes (Optional):** The maximum number of nodes permitted in the output TIN. The tool will return an error if the analysis extent and pyramid level would produce a TIN that exceeds this size. The default is 5 million.  
+  *Type:* Long.
+- **Clip to Extent (Optional):** Specifies whether the resulting TIN will be clipped against the analysis extent.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **Output TIN:** The TIN dataset that will be generated.  
+  *Type:* TIN.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+from arcpy import env
+
+# Set environment settings
+env.workspace = "C:/data"
+
+# Set Local Variables
+inTerrain = "sample.gdb/featuredataset/terrain"
+pyrRes = 6
+maxNodes = 5000000
+clipExtent = False
+
+# Ensure output name is unique
+outTIN = arcpy.CreateUniqueName("tin")
+
+# Execute TerrainToTin
+arcpy.ddd.TerrainToTin(inTerrain, outTIN, pyrRes, maxNodes, clipExtent)
+```
+**Toolset:** TIN Dataset
+
+**Tool:** Create TIN
+
+**Description:** The Create TIN tool in ArcGIS Pro is used to create a triangulated irregular network (TIN) dataset from input features such as points, lines, and polygons. This tool is typically used for surface modeling, allowing users to represent terrain or other surfaces in a 3D format.
+
+**Parameters:**
+- **Output TIN:** The TIN dataset that will be generated. Type: TIN.
+- **Coordinate System (Optional):** The spatial reference of the output TIN. It is recommended to use a projected coordinate system for accurate results. Type: Coordinate System.
+- **Input Feature Class (Optional):** The input features and their related properties that define how they will be added to the TIN. Type: Input Features.
+  - **Height Field:** The source of elevation for the input features. Type: Numeric Field.
+  - **Type:** The input feature's role in defining the TIN surface, such as mass points or breaklines. Type: String.
+
+**Derived Output:**
+- **Output TIN:** The TIN dataset that is created. Type: TIN.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define local variables
+out_tin = "C:/output/myTIN"
+coordinate_system = arcpy.SpatialReference(4326)  # WGS 84
+input_features = "C:/data/elevation_points.shp"
+
+# Execute CreateTin
+arcpy.ddd.CreateTin(out_tin, coordinate_system, 
+                    [[input_features, "Shape.Z", "masspoints"]], "Delaunay")
+```
+**Toolset:** TIN Dataset
+
+**Tool:** Copy TIN
+
+**Description:**  
+The Copy TIN tool creates a duplicate of a triangulated irregular network (TIN) dataset. It is typically used to maintain an archival copy of a TIN dataset before making modifications or to ensure compatibility with older versions of ArcGIS.
+
+**Parameters:**
+- **Input TIN:** The TIN that will be copied.  
+  *Type:* TIN Layer.
+- **Output TIN:** The TIN dataset that will be generated.  
+  *Type:* TIN.
+- **Version (Optional):** The version of the output TIN. Options include:
+  - **Current:** Supports constrained Delaunay triangulation and enhanced spatial reference information. Not backward compatible with versions prior to 10.0.
+  - **Pre 10.0:** Backward compatible with versions prior to 10.0, supporting only conforming Delaunay triangulation.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output TIN:** The TIN dataset that will be generated.  
+  *Type:* TIN.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define local variables
+input_tin = "elevation"
+output_tin = "elevation_copy"
+version = "CURRENT"  # Optional parameter
+
+# Execute CopyTin
+arcpy.ddd.CopyTin(input_tin, output_tin, version)
+```
+**Toolset:** TIN Dataset
+
+**Tool:** Decimate TIN Nodes
+
+**Description:**  
+The Decimate TIN Nodes tool creates a triangulated irregular network (TIN) dataset using a subset of nodes from a source TIN. This tool is typically used to thin oversampled data, which can improve the drawing experience and performance.
+
+**Parameters:**
+- **Input TIN:** The TIN dataset that will be processed.  
+  *Type: TIN Layer.*
+- **Output TIN:** The TIN dataset that will be generated.  
+  *Type: TIN.*
+- **Decimation Method:** Specifies the thinning method used for selecting a subset of nodes from the input TIN. Options include:
+  - **Z Tolerance:** Maintains vertical accuracy within a specified Z tolerance.
+  - **Count:** Limits the number of nodes to a specified maximum.  
+  *Type: String.*
+- **Copy Breaklines (Optional):** Indicates whether breaklines from the input TIN are copied over to the output.  
+  *Type: Boolean.*
+- **Z Tolerance (Optional):** The maximum deviation from the source TIN's Z-value allowed in the output TIN.  
+  *Type: Double.*
+- **Maximum Number of Nodes (Optional):** The maximum number of nodes that can be stored in the output TIN.  
+  *Type: Long.*
+
+**Derived Output:**
+- **Output TIN:** The TIN dataset that is generated as a result of the decimation process.  
+  *Type: TIN.*
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy import env
+
+# Set environment settings
+env.workspace = "C:/data"
+
+# Set Local Variables
+inTin = "elevation"
+outTin = arcpy.CreateUniqueName("simple_elev")
+method = "COUNT 5000"
+copyBrk = "BREAKLINES"
+
+# Execute DecimateTinNodes
+arcpy.ddd.DecimateTinNodes(inTin, outTin, method, copyBrk)
+```
+**Toolset:** TIN Dataset
+
+**Tool:** Delineate TIN Data Area
+
+**Description:** The Delineate TIN Data Area tool redefines the interpolation zone of a triangulated irregular network (TIN) by eliminating long connections between points. It is typically used to improve the accuracy of TIN surfaces by removing invalid connections that exceed a specified edge length.
+
+**Parameters:**
+- **Input TIN:** The TIN dataset to be processed. Type: TIN Layer.
+- **Maximum Edge Length:** Specifies the maximum allowable length for triangle edges. Connections longer than this value are removed. Type: Double.
+- **Method (Optional):** Determines how the tool classifies TIN triangles by edge length. Options include "PERIMETER_ONLY" and "ALL". Type: String.
+
+**Derived Output:**
+- **Derived TIN:** The updated TIN with redefined interpolation zones. Type: TIN Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define local variables
+input_tin = "elevation"
+max_edge_length = 10
+method = "PERIMETER_ONLY"
+
+# Execute DelineateTinDataArea
+arcpy.ddd.DelineateTinDataArea(input_tin, max_edge_length, method)
+```
+**Toolset:** TIN Dataset
+
+**Tool:** Edit TIN
+
+**Description:** The Edit TIN tool is used to modify the surface of an existing triangulated irregular network (TIN) by loading data from one or more input features. This tool is typically used to update TIN surfaces with new elevation data or features such as roads or excavation sites.
+
+**Parameters:**
+- **Input TIN:** The TIN dataset that will be processed. Type: TIN Layer.
+- **Surface Feature Definition:** The input features and their related properties that define how they will be added to the TIN. Type: Input Features.
+  - **Height Field:** The field from the input's attribute table that provides the elevation for its features. Type: Field.
+  - **Tag Field:** A numeric attribute assigned to the TIN's data elements using values from an integer field in the input feature's attribute table. Type: Field.
+  - **Type:** The input feature's role in defining the TIN surface, such as mass points or breaklines. Type: String.
+
+**Derived Output:**
+- **Derived Output TIN:** The updated TIN. Type: TIN Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data/LAS"
+
+# Set Local Variables
+copyTin = "elev_copy"
+inFCs = [["Clip_Polygon.shp", "<None>", "<None>", "hardclip", False], 
+         ["new_points.shp", "Shape", "<None>", "masspoints", True]]
+
+# Execute EditTin
+arcpy.ddd.EditTin(copyTin, inFCs, "Delaunay")
+```
+**Toolset:** TIN Dataset
+
+**Tool:** LandXML To TIN
+
+**Description:** This tool imports one or more triangulated irregular network (TIN) surfaces from a LandXML file to output Esri TINs. It is typically used to convert TIN data stored in LandXML format into a format that can be utilized within ArcGIS Pro for further analysis and visualization.
+
+**Parameters:**
+- **Input:** The input LandXML file.  
+  *Type:* File.
+- **Output TIN Folder:** The folder where the output TINs will be created.  
+  *Type:* Folder.
+- **Output TIN Base Name:** The basename of the resulting TIN. When several TINs are exported from the LandXML file, this name is used as a prefix.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output TIN:** The Esri TIN dataset created from the LandXML file.  
+  *Type:* TIN Layer.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define local variables
+input_landxml = "surfaces.xml"
+output_folder = "TINs"
+output_base_name = "TIN_"
+
+# Execute LandXMLToTin
+arcpy.ddd.LandXMLToTin(input_landxml, output_folder, output_base_name, "1;2")
+```
+**Toolset:** TIN Dataset
+
+**Tool:** TIN Domain
+
+**Description:** The TIN Domain tool creates a line or polygon feature class representing the interpolation zone of a triangulated irregular network (TIN) dataset. It is typically used to generate a convex hull around a set of points, which can be useful for defining the boundary of a TIN surface.
+
+**Parameters:**
+- **Input TIN:** The TIN dataset that will be processed. Type: TIN Layer.
+- **Output Feature Class:** The feature class that will be produced. Type: Feature Class.
+- **Output Feature Class Type:** The geometry of the output feature class. Options are LINE for a z-enabled line feature class or POLYGON for a z-enabled polygon feature class. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The feature class that represents the interpolation zone of the TIN. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = 'C:/data'
+
+# Define the input TIN and output feature class
+in_tin = 'tin'
+out_feature_class = 'tin_domain.shp'
+
+# Execute the TinDomain tool
+arcpy.ddd.TinDomain(in_tin, out_feature_class, out_geometry_type='POLYGON')
+```
+**Toolset:** TIN Dataset
+
+**Tool:** TIN Edge
+
+**Description:** The TIN Edge tool creates 3D line features using the triangle edges of a triangulated irregular network (TIN) dataset. It is typically used to extract specific types of triangle edges, such as regular, soft, or hard edges, from a TIN for further analysis or visualization.
+
+**Parameters:**
+- **Input TIN:** The TIN dataset that will be processed. Type: TIN Layer.
+- **Output Feature Class:** The feature class that will be produced. Type: Feature Class.
+- **Edge Type (Optional):** The triangle edge that will be exported. Options include:
+  - **DATA:** Edges representing the interpolation zone (default).
+  - **SOFT:** Edges representing gradual breaks in slope.
+  - **HARD:** Edges representing distinct breaks in slope.
+  - **ENFORCED:** Edges not introduced by the TIN's triangulation.
+  - **REGULAR:** Edges created by the TIN's triangulation.
+  - **OUTSIDE:** Edges excluded from the interpolation zone.
+  - **ALL:** All edges, including those excluded from the interpolation zone. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The feature class containing the extracted edges. Type: Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = 'C:/data'
+
+# Define the input TIN and output feature class
+input_tin = 'tin'
+output_feature_class = 'tin_edge.shp'
+
+# Execute the TIN Edge tool
+arcpy.ddd.TinEdge(input_tin, output_feature_class, edge_type='ENFORCED')
+```
+**Toolset:** TIN Dataset
+
+**Tool:** TIN Line
+
+**Description:** The TIN Line tool exports breaklines from a triangulated irregular network (TIN) dataset to a 3D line feature class. It is typically used to represent linear features such as roads, streams, or other linear discontinuities in a surface model.
+
+**Parameters:**
+- **Input TIN:** The TIN dataset that will be processed.  
+  *Type:* TIN Layer.
+- **Output Feature Class:** The feature class that will be produced.  
+  *Type:* Feature Class.
+- **Code Field (Optional):** The name of the field in the output feature class that defines the breakline type. The default field name is "Code".  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Feature Class:** The feature class that will be produced, containing the exported breaklines.  
+  *Type:* Feature Class.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = 'C:/data'
+
+# Define the input TIN and output feature class
+input_tin = 'tin'
+output_feature_class = 'tin_line.shp'
+
+# Execute the TIN Line tool
+arcpy.ddd.TinLine(input_tin, output_feature_class, code_field='BreakType')
+```
+**Toolset:** TIN Dataset
+
+**Tool:** TIN Node
+
+**Description:** The TIN Node tool exports the nodes of a triangulated irregular network (TIN) dataset to a point feature class. This is typically used to convert TIN nodes into a format that can be easily analyzed or visualized as point data.
+
+**Parameters:**
+- **Input TIN:** The TIN dataset that will be processed. Type: TIN Layer.
+- **Output Feature Class:** The feature class that will be produced. Type: Feature Class.
+- **Spot Field (Optional):** The name of the elevation attribute field of the output feature class. If a name is given, the feature class will be 2D; otherwise, it will be 3D. No name is provided by default, which results in the creation of 3D point features. Type: String.
+- **Tag Value Field (Optional):** The name of the field storing the tag attribute in the output feature class. By default, no tag value field is created. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The feature class that will be produced, containing the exported nodes. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace environment
+arcpy.env.workspace = 'C:/data'
+
+# Define the input TIN and output feature class
+input_tin = 'tin'
+output_feature_class = 'elevation_node.shp'
+
+# Execute the TIN Node tool
+arcpy.ddd.TinNode(input_tin, output_feature_class, spot_field='Elevation')
+```
+**Toolset:** TIN Dataset
+
+**Tool:** TIN Polygon Tag
+
+**Description:** The TIN Polygon Tag tool creates polygon features using tag values in a triangulated irregular network (TIN) dataset. It is typically used to assign integer values to triangles within a TIN, which can represent user-defined criteria such as landcover codes. These tag values are stored as attributes in the output feature class.
+
+**Parameters:**
+- **in_tin:** The TIN dataset that will be processed. Type: TIN Layer.
+- **out_feature_class:** The feature class that will be produced. Type: Feature Class.
+- **tag_field (Optional):** The name of the field storing the tag attribute in the output feature class. The default field name is Tag_Value. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The feature class containing the polygons with tag values. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define the tag field
+TagField = "LanduseCode"
+
+# Create list of TINs
+TINList = arcpy.ListDatasets("*", "Tin")
+
+# Verify the presence of TINs in the list
+if TINList:
+    # Iterate through the list of TINs
+    for dataset in TINList:
+        # Define the name of the output file
+        Output = dataset + "_polytag.shp"
+        
+        # Execute TinPolygonTag
+        arcpy.ddd.TinPolygonTag(dataset, Output, tag_field=TagField)
+        print("Finished processing:", dataset)
+else:
+    print("No TIN files reside in", arcpy.env.workspace)
+```
+**Toolset:** TIN Dataset
+
+**Tool:** TIN to Raster
+
+**Description:** The TIN to Raster tool interpolates a raster using z-values from an input TIN. It is typically used to convert TIN surfaces into raster format for further analysis or visualization, with applications in terrain modeling and surface analysis.
+
+**Parameters:**
+- **Input TIN:** The TIN dataset that will be processed.  
+  *Type:* TIN Layer.
+- **Output Raster:** The location and name of the output raster.  
+  *Type:* Raster Dataset.
+- **Method (Optional):** The interpolation method used to create the raster. Options include Linear and Natural Neighbors.  
+  *Type:* String.
+- **Output Data Type (Optional):** Specifies the type of numeric values stored in the output raster, such as Integer or Floating Point.  
+  *Type:* String.
+- **Sampling Distance (Optional):** The distance used to determine the cell size of the output raster.  
+  *Type:* Double.
+- **Z Factor (Optional):** A factor to convert the z-units of the output raster.  
+  *Type:* Double.
+
+**Derived Output:**
+- **Output Raster:** The raster dataset generated from the TIN.  
+  *Type:* Raster Dataset.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define local variables
+input_tin = "sample_tin"
+output_raster = "output_raster.tif"
+method = "LINEAR"
+data_type = "FLOAT"
+sampling_distance = "CELLSIZE 10"
+z_factor = 1
+
+# Execute TIN to Raster
+arcpy.ddd.TinRaster(input_tin, output_raster, data_type, method, sampling_distance, z_factor)
+```
+**Toolset:** TIN Dataset
+
+**Tool:** TIN Triangle
+
+**Description:** The TIN Triangle tool exports triangle faces from a TIN dataset to polygon features. It provides slope, aspect, and optional attributes such as hillshade and tag values for each triangle. This tool is typically used for analyzing and visualizing terrain surfaces in 3D.
+
+**Parameters:**
+- **in_tin:** The TIN dataset that will be processed. Type: TIN Layer.
+- **out_feature_class:** The feature class that will be produced. Type: Feature Class.
+- **units (Optional):** The units of measure to be used in calculating slope. Options are PERCENT (default) or DEGREE. Type: String.
+- **z_factor (Optional):** The factor by which z-values will be multiplied, typically used to convert z linear units to match x,y linear units. Default is 1. Type: Double.
+- **hillshade (Optional):** Specifies the azimuth and altitude angles of the light source for hillshade effect. Type: String.
+- **tag_field (Optional):** The field name in the output feature that will store the triangle tag value. Type: String.
+
+**Derived Output:**
+- **out_feature_class:** The feature class containing the exported triangle faces with attributes. Type: Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define input TIN and output feature class
+in_tin = "tin"
+out_feature_class = "tin_triangle.shp"
+
+# Execute TinTriangle tool
+arcpy.ddd.TinTriangle(
+    in_tin=in_tin,
+    out_feature_class=out_feature_class,
+    units="DEGREE",
+    z_factor=1,
+    hillshade="HILLSHADE 310,45",
+    tag_field="tag"
+)
+```

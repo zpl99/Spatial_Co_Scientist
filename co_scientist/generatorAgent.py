@@ -43,7 +43,6 @@ class GeneratorAgent():
         txt_path = os.path.join(save_dir, f"{fname_base}.txt")
         with open(txt_path, "w", encoding="utf-8") as f:
             f.write(clean_output)
-        # 写json（每一节单独为一项，便于后续处理）
         print(f"Assistant output saved to:\n  {txt_path}")
 
     def literature_review(self, task):
@@ -147,8 +146,9 @@ class GeneratorAgent():
                                                                                      top_p=0.95)
 
 
-        final_hypothesis = self.refine_hypothesis(assistant_output, round_idx=0)
-        print(final_hypothesis)
+        final_hypothesis = assistant_output
+        # final_hypothesis = self.refine_hypothesis(assistant_output, round_idx=0)
+        # print(final_hypothesis)
         self.save_formatted_output(final_hypothesis,"./")
 
         self.history.append(

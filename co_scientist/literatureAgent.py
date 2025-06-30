@@ -7,6 +7,7 @@ from prompt import prompt_manager
 from tools import paper_search
 SYSTEM_PROMPT = """You are a scientific literature assistant. Your job is to search, summarize, and analyze relevant research papers for a given scientific objective, and provide a chronologically ordered list (from most recent to oldest) of literature and reasoning. 
 Your summary should focus on key findings, methods, relevance, and analytical insights, formatted for domain experts."""
+
 p_manager = prompt_manager.PromptManager(
     "/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/prompt")
 

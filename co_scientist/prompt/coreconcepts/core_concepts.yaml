@@ -1,0 +1,68 @@
+name: core_concepts
+description: This provides definitions and examples of the ten core concepts of spatial information, following Kuhn (2012). Use this as an authoritative context for spatial reasoning, analysis, or when interpreting geographic questions.
+template: |
+  This provides definitions and examples of the ten core concepts of spatial information, following Kuhn (2012). Use this as an authoritative context for spatial reasoning, analysis, or when interpreting geographic questions. If a user asks about, or you are asked to reason about, space or spatial data, ground your answers and logic in these concepts and their relationships.
+
+  The Ten Core Concepts
+  1. Location
+  - Definition: Where something is in space; the absolute or relative position.
+  - Example:
+    - “What is the latitude and longitude of Paris?”
+    - “Where is the hospital located?”
+  2. Neighbourhood
+  - Definition: The spatial proximity, adjacency, or relational context among entities (“what is near what”).
+  - Example:
+    - “Which parks are within 1 km of the river?”
+    - “Are these restaurants clustered together?”
+  3. Field
+  - Definition: A continuous phenomenon where every location in space has a value (e.g., elevation, temperature).
+  - Example:
+    - “Show the rainfall at each location in the state.”
+    - “What is the noise level at every address?”
+  4. Object
+  - Definition: Discrete, bounded entities that exist in space (e.g., buildings, lakes, cities).
+  - Example:
+    - “List all bridges in London.”
+    - “Where are the schools in this district?”
+  5. Network
+  - Definition: A set of interconnected objects forming paths, flows, or relationships (e.g., roads, rivers).
+  - Example:
+    - “Analyze the road network between cities.”
+    - “Which stations are connected by this subway line?”
+  6. Event
+  - Definition: Occurrences or changes in space and time, representing dynamics or transitions.
+  - Example:
+    - “Where did wildfires occur in 2022?”
+    - “Map the expansion of urban areas over time.”
+  7. Granularity
+  - Definition: The scale, resolution, or level of detail (spatial, temporal, or thematic) of data or analysis.
+  - Example:
+    - “Is the data available at the city, district, or block level?”
+    - “Land use classification at 30m spatial granularity.”
+  8. Accuracy
+  - Definition: The degree to which spatial information matches reality; includes uncertainty and precision.
+  - Example:
+    - “What is the positional accuracy of these GPS points?”
+    - “How reliable are these mapped boundaries?”
+  9. Meaning
+  - Definition: The interpretation, semantics, or context of spatial information.
+  - Example:
+    - “What does ‘urban fringe’ mean here?”
+    - “Is ‘park’ defined as all green space or only public areas?”
+  10. Value
+  - Definition: The utility, significance, or importance of spatial information for society, economy, or decisions.
+  - Example:
+    - “Why is high-accuracy flood mapping valuable?”
+    - “How does land ownership data impact property value?”
+
+  How to Apply
+  - Always identify which core concepts are relevant when reasoning about spatial questions.
+  - Decompose complex queries by mapping each subtask to the most relevant core concept(s).
+  - Clarify and relate spatial reasoning steps using these concepts (e.g., “First, identify objects; then analyze their neighbourhoods; finally, evaluate fields or networks.”)
+  - Explicitly consider granularity, accuracy, and meaning when interpreting or summarizing spatial data or results.
+  - Discuss value when explaining the significance or usefulness of spatial information.
+
+  Reference
+  Kuhn, W. (2012). Core concepts of spatial information for transdisciplinary research. International Journal of Geographical Information Science, 26(12), 2267–2276.
+
+  End of spatial core concepts reference. When reasoning about spatial tasks or queries, always ground your responses in these concepts.

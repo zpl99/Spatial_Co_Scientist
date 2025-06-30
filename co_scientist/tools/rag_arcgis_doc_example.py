@@ -323,29 +323,7 @@ if __name__ == "__main__":
         while True:
             prompt = input("> ")
             if not prompt.strip():
-                prompt ='''please provide detailed descriptions of Arcgis pro tool: Join Features. Please provide:
-    - Tool name
-    - Tool description
-    - Hyperparameters (each parameter: Name, Description, Type, [Allowed values/range, if known])
-    - A sample ArcPy script using this tool with relevant parameters
-
-Response format:
-Tool Name : Description.
-      Hyperparameters:
-        - param1: description. Type: <type>. [Allowed values/range: ...]
-        - param2: description. Type: <type>. [Allowed values/range: ...]
-        ...
-
-      Example ArcPy code:
-      ```python
-      import arcpy
-      arcpy.<ToolName>_<ToolboxAlias>(
-          param1=value1,
-          param2=value2,
-          ...
-      )
-      ......
-      '''
+                prompt ='''Can you provide the Python parameters (hyperparameters) required for the 'Add Field' tool, so I can use it correctly in an arcpy script?  '''
             context = {"kind": "DocAIAssistantRequest", "filters": {}}
             answer = chat_with_skill(
                 client=client, skill_id="doc_ai_assistant", message=prompt, auth_token=token, context=context
