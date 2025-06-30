@@ -484,25 +484,15 @@ if __name__ == "__main__":
     # If the tool or parameters are not found, or there is no relevant information, respond only with:  `No information available.`
     # """
     prompt_3_template = """
-        Context:
-
         You are provided with the following ArcGIS Pro tool information:
-
         Toolset name: {toolset_name}
-
         Tool name: {tool_name}
-
-        Spatial core concept: {core_name}: {core_desc}
-
         Task:
-
         For the specified tool, provide the following details in a structured format:
 
-        1. Description:
-        A detailed summary explaining what the tool does and its typical use cases. Give some examples of how it can be used in spatial analysis or GIS workflows.
+        1. Description: A detailed summary explaining what the tool does and its typical use cases. Give some examples of how it can be used in spatial analysis or GIS workflows.
 
-        2. Parameters:
-        List all input parameters. For each parameter, include:
+        2. Parameters: List all input parameters. For each parameter, include:
             -Name
             -Description
             -Data type
@@ -529,47 +519,49 @@ if __name__ == "__main__":
     
         If the tool or parameters are not found, or there is no relevant information, respond only with:  `No information available.`
         """
-    try:
-        token = get_token(tier)
-        base_url, _ = get_urls_for_tier(tier)
-        client = Client(base_url=base_url, timeout=60.0)
-        skill_json = get_skill_ids(client, auth_token=token)
-        for core in core_concepts:
-            if core["name"] in ["Location","Neighbourhood", "Field","Object"]:
-                continue
-            # prompt = input("> ")
-            print(core)
-            context = {"kind": "DocAIAssistantRequest", "filters": {}}
-            prompt = prompt_1_template.format(core_name=core["name"], core_desc=core["description"])
+    token = get_token(tier)
+    base_url, _ = get_urls_for_tier(tier)
+    client = Client(base_url=base_url, timeout=60.0)
+    skill_json = get_skill_ids(client, auth_token=token)
+    for core in core_concepts:
+        # prompt = input("> ")
+        toolset_name_list = []
+        context = {"kind": "DocAIAssistantRequest", "filters": {}}
+        prompt = prompt_1_template.format(core_name=core["name"], core_desc=core["description"])
+        for i in range(2):
             answer = chat_with_skill(
                 client=client, skill_id="doc_ai_assistant", message=prompt, auth_token=token, context=context
             )
             response_text = extract_response(answer, "doc_ai_assistant")
             toolset_names = extract_toolset_names(response_text)
-            # toolset_names = llm_supervisor(str(toolset_names)) or toolset_names
-            print(f"core concept {core} has {toolset_names}" )
+            toolset_name_list.append(toolset_names)
+        # Deduplicate toolset names across multiple responses
+        toolset_names = list(set([item for sublist in toolset_name_list for item in sublist]))
+        # toolset_names = llm_supervisor(str(toolset_names)) or toolset_names
+        print(f"core concept {core} has {toolset_names}")
 
-            for toolset in toolset_names:
-                prompt_2 = prompt_2_template.format(toolset=toolset, name=core["name"], desc=core["description"])
-
+        for toolset in toolset_names:
+            tool_name_list = []
+            prompt_2 = prompt_2_template.format(toolset=toolset, name=core["name"], desc=core["description"])
+            for i in range(2):
                 answer = chat_with_skill(
                     client=client, skill_id="doc_ai_assistant", message=prompt_2, auth_token=token, context=context
                 )
                 response_text = extract_response(answer, "doc_ai_assistant")
-                all_tools =extract_tools(response_text)
-                # all_tools = llm_supervisor(str(all_tools)) or all_tools
-                print(f"core concept {core} has {toolset_names}, which contains {all_tools}")
-                for tool in all_tools:
-                    print("processing tool:", tool)
-                    prompt_3 = prompt_3_template.format(toolset_name = toolset, tool_name=tool.strip(), core_name=core["name"], core_desc=core["description"])
-                    answer = chat_with_skill(
-                        client=client, skill_id="doc_ai_assistant", message=prompt_3, auth_token=token, context=context
-                    )
-                    response_text = extract_response(answer, "doc_ai_assistant")
-                    with open(f"{core['name']}.txt", "a") as f:
-                        f.write(response_text + "\n")
-                        print("file saved:", f"{core['name']}.txt")
+                all_tools = extract_tools(response_text)
+                tool_name_list.append(all_tools)
+            # Deduplicate tool names across multiple responses
+            all_tools = list(set([item for sublist in tool_name_list for item in sublist]))
+            # all_tools = llm_supervisor(str(all_tools)) or all_tools
+            print(f"core concept {core} has {toolset_names}, which contains {all_tools}")
+            for tool in all_tools:
+                print("processing tool:", tool)
+                prompt_3 = prompt_3_template.format(toolset_name=toolset, tool_name=tool.strip())
+                answer = chat_with_skill(
+                    client=client, skill_id="doc_ai_assistant", message=prompt_3, auth_token=token, context=context
+                )
+                response_text = extract_response(answer, "doc_ai_assistant")
+                with open(f"{core['name']}_new.txt", "a") as f:
+                    f.write(response_text + "\n")
+                    print("file saved:", f"{core['name']}.txt")
 
-    except Exception as e:
-        print(f"Error: {e}")
-        print("Make sure .env file is properly configured with the required endpoints and credentials.")

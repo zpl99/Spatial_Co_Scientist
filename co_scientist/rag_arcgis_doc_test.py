@@ -482,6 +482,63 @@ if __name__ == "__main__":
     ...
     If the tool or parameters are not found, or there is no relevant information, respond only with:  `No information available.`
     """
+    # prompt_3_template="""
+    # Context:
+    #
+    # You are provided with the following ArcGIS Pro tool information:
+    #
+    # Toolset name: {toolset_name}
+    #
+    # Tool name: {tool_name}
+    #
+    # Task:
+    #
+    # For the specified tool, provide the following details in a structured format:
+    #
+    # 1. Description:
+    # A concise summary (1–2 sentences) explaining what the tool does and its typical use cases.
+    #
+    # 2. Parameters:
+    # List all input parameters. For each parameter, include:
+    #     -Name
+    #     -Description
+    #     -Data type
+    #
+    # 3. Derived Outputs:
+    # List all derived or output parameters with their name, description, and data type.
+    #
+    # 4. Example ArcPy code:
+    # Provide a minimal working ArcPy script using the tool and its key parameters.
+    # The script should include all necessary imports and setup for execution.
+    #
+    # Response format:
+    #
+    # Toolset: <Toolset Name>
+    #
+    # Tool: <Tool Name>
+    #
+    # Description: <Concise description>
+    #
+    # Parameters:
+    # - <param1>: <explanation> Type: <Data Type>.
+    # - <param2>: <explanation> Type: <Data Type>.
+    # ...
+    #
+    # Derived Output:
+    # - <out_param1>: <explanation> Type: <Data Type>.
+    # - <out_param2>: <explanation> Type: <Data Type>.
+    # ...
+    # Example ArcPy code (include all the necessary imports and context to successfully run the code):
+    # ```python
+    # import arcpy
+    # arcpy.<toolbox_alias>.<tool_function>(
+    #     <param1>=<value1>,
+    #     <param2>=<value2>,
+    #     ...
+    # )
+    # ...
+    # If the tool or parameters are not found, or there is no relevant information, respond only with:  `No information available.`
+    # """
     # prompt_3_template = """
     #     Context:
     #
@@ -534,28 +591,34 @@ if __name__ == "__main__":
         client = Client(base_url=base_url, timeout=60.0)
         skill_json = get_skill_ids(client, auth_token=token)
         for core in core_concepts:
-            if core["name"] in ["Location", "Neighbourhood"]:
-                continue
             # prompt = input("> ")
-            print(core)
+            toolset_name_list = []
             context = {"kind": "DocAIAssistantRequest", "filters": {}}
             prompt = prompt_1_template.format(core_name=core["name"], core_desc=core["description"])
-            answer = chat_with_skill(
-                client=client, skill_id="doc_ai_assistant", message=prompt, auth_token=token, context=context
-            )
-            response_text = extract_response(answer, "doc_ai_assistant")
-            toolset_names = extract_toolset_names(response_text)
+            for i in range(2):
+                answer = chat_with_skill(
+                    client=client, skill_id="doc_ai_assistant", message=prompt, auth_token=token, context=context
+                )
+                response_text = extract_response(answer, "doc_ai_assistant")
+                toolset_names = extract_toolset_names(response_text)
+                toolset_name_list.append(toolset_names)
+            # Deduplicate toolset names across multiple responses
+            toolset_names = list(set([item for sublist in toolset_name_list for item in sublist]))
             # toolset_names = llm_supervisor(str(toolset_names)) or toolset_names
             print(f"core concept {core} has {toolset_names}")
 
             for toolset in toolset_names:
+                tool_name_list = []
                 prompt_2 = prompt_2_template.format(toolset=toolset, name=core["name"], desc=core["description"])
-
-                answer = chat_with_skill(
-                    client=client, skill_id="doc_ai_assistant", message=prompt_2, auth_token=token, context=context
-                )
-                response_text = extract_response(answer, "doc_ai_assistant")
-                all_tools = extract_tools(response_text)
+                for i in range(2):
+                    answer = chat_with_skill(
+                        client=client, skill_id="doc_ai_assistant", message=prompt_2, auth_token=token, context=context
+                    )
+                    response_text = extract_response(answer, "doc_ai_assistant")
+                    all_tools = extract_tools(response_text)
+                    tool_name_list.append(all_tools)
+                # Deduplicate tool names across multiple responses
+                all_tools = list(set([item for sublist in tool_name_list for item in sublist]))
                 # all_tools = llm_supervisor(str(all_tools)) or all_tools
                 print(f"core concept {core} has {toolset_names}, which contains {all_tools}")
                 for tool in all_tools:

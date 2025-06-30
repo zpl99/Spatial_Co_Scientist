@@ -4193,3 +4193,780 @@ arcpy.ddd.TinTriangle(
     tag_field="tag"
 )
 ```
+**Toolset:** Data Management
+
+**Tool:** Calculate Field
+
+**Description:** The Calculate Field tool is used to compute values for a specified field in a feature class, feature layer, or raster. It allows users to perform batch updates on field values using expressions, which can be simple or complex, involving mathematical calculations.
+
+**Parameters:**
+- **Input Table:** The table containing the fields that will be updated with the new calculation. Data Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name (Existing or New):** The field that will be updated with the new calculation. If the field does not exist, it will be added. Data Type: Field.
+- **Expression Type:** Specifies the type of expression that will be used (Python, Arcade, SQL, VBScript). Data Type: String.
+- **Expression:** The simple calculation expression used to create a value that will populate the selected rows. Data Type: SQL Expression.
+
+**Derived Output:**
+- No derived outputs are specified for this tool as it updates existing fields.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Define the input table
+input_table = "Buildings_Flooded"
+
+# Define the field name
+field_name = "DamageCosts"
+
+# Define the expression type
+expression_type = "ARCADE"
+
+# Define the expression
+expression = "if ($feature.FloodDepth > 1) { return $feature.CostCalculation } else { return 0 }"
+
+# Execute Calculate Field
+arcpy.management.CalculateField(input_table, field_name, expression, expression_type)
+```
+**Toolset:** Data Management
+
+**Tool:** Calculate Field
+
+**Description:** The Calculate Field tool is used to compute the values of a field for a feature class, feature layer, or raster. It allows for batch updates on field values, enabling both simple and complex calculations using expressions in Python, Arcade, SQL, or VBScript.
+
+**Parameters:**
+- **Input Table:** The table containing the fields that will be updated with new calculations. **Type:** Table View; Raster Layer; Mosaic Layer.
+- **Field Name (Existing or New):** The field that will be updated with the new calculation. If the field does not exist, it will be added. **Type:** Field.
+- **Expression:** The simple calculation expression used to populate the selected rows. **Type:** SQL Expression.
+- **Expression Type (Optional):** Specifies the type of expression to be used (Python, Arcade, SQL, VBScript). **Type:** String.
+
+**Derived Output:**
+- The tool does not produce a separate derived output; it updates the input table directly.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data"
+
+# Define the input table
+input_table = "Buildings_Flooded"
+
+# Define the field name
+field_name = "DamageCosts"
+
+# Define the expression
+expression = "!FloodDepth! > 1 ? !CostCalculation! : 0"
+
+# Run the Calculate Field tool
+arcpy.management.CalculateField(
+    in_table=input_table,
+    field=field_name,
+    expression=expression,
+    expression_type="PYTHON3"
+)
+```
+**Toolset:** Data Management
+
+**Tool:** Clip Layer
+
+**Description:** The Clip Layer tool in ArcGIS Pro is used to extract features from an input layer that overlap with features in a clip layer. This tool is typically used to create a new dataset that contains only the features of interest within a specified boundary.
+
+**Parameters:**
+- **Input Layer:** The dataset containing the point, line, or polygon features to be clipped. **Type:** Feature Layer.
+- **Clip Layer:** The dataset containing the polygon features used to clip the input features. **Type:** Feature Layer.
+- **Output Feature Class:** The output feature class with clipped features. **Type:** Feature Class.
+
+**Derived Output:**
+- **Output Feature Class:** The clipped output. **Type:** Feature Set.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the input parameters
+in_features = "path/to/input/layer"
+clip_features = "path/to/clip/layer"
+out_feature_class = "path/to/output/layer"
+
+# Execute the Clip tool
+arcpy.analysis.Clip(in_features, clip_features, out_feature_class)
+```
+**Toolset:** Data Management
+
+**Tool:** Dissolve Boundaries
+
+**Description:** The Dissolve Boundaries tool finds polygons that overlap or share a common boundary and merges them together to form a single polygon. This tool simplifies data by removing unnecessary boundaries and creating a cleaner dataset.
+
+**Parameters:**
+- **Input Layer**: The layer containing polygon features that will be dissolved or combined. **Type:** Feature Set.
+- **Output Name**: The name of the output layer to create on your portal. **Type:** String.
+- **Dissolve Fields (Optional)**: One or more fields from the input layer that control which polygons are merged. If not supplied, polygons that share a common border or overlap will be dissolved into one polygon. **Type:** Field.
+- **Summary Fields (Optional)**: A list of field names and statistical summary types to calculate for all points within each polygon. **Type:** Field.
+
+**Derived Output:**
+- **Output Feature Class**: The resulting feature class with dissolved boundaries. **Type:** Feature Class.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the input and output parameters
+input_layer = "path/to/input/layer"
+output_name = "path/to/output/layer"
+dissolve_fields = ["Field1", "Field2"]  # Optional
+
+# Run the Dissolve Boundaries tool
+arcpy.management.Dissolve(input_layer, output_name, dissolve_fields)
+```
+**Toolset:** Data Management
+
+**Tool:** Overlay Layers
+
+**Description:** The Overlay Layers tool overlays the geometries from multiple layers into a single layer. It can be used to combine, erase, modify, or update spatial features. All attributes of the features involved in the overlay are carried through to the result.
+
+**Parameters:**
+- **Input Layer:** The point, line, or polygon features that will be overlaid with the overlay layer. **Type:** Feature Set.
+- **Overlay Layer:** The features that will be overlaid with the input layer features. **Type:** Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. **Type:** String.
+- **Overlay Type:** Specifies the type of overlay to be performed. Options include Intersect, Erase, Union, Identity, and Symmetrical Difference. **Type:** String.
+
+**Derived Output:**
+- **Output Feature Layer:** The overlay of multiple layers into a single layer. **Type:** Feature Set.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the input parameters
+input_layer = "path/to/input/layer"
+overlay_layer = "path/to/overlay/layer"
+output_name = "output_layer_name"
+overlay_type = "Intersect"  # Options: Intersect, Erase, Union, Identity, Symmetrical Difference
+
+# Execute the Overlay Layers tool
+arcpy.analysis.OverlayLayers(input_layer, overlay_layer, output_name, overlay_type)
+```
+**Toolset:** Projections and Transformations
+
+**Tool: Create Custom Geographic Transformation**
+
+**Description:**
+The Create Custom Geographic Transformation tool is used to create a transformation definition for converting data between two geographic coordinate systems or datums. This transformation can then be applied to any tool that requires a geographic transformation parameter, facilitating the conversion of spatial data between different geographic coordinate systems or datums.
+
+**Parameters:**
+- **Transformation Name**: The name of the transformation to be created. Type: *String*.
+- **Source Coordinate System**: The geographic coordinate system of the input data. Type: *SpatialReference*.
+- **Target Coordinate System**: The geographic coordinate system to which the data will be transformed. Type: *SpatialReference*.
+- **Transformation Path**: A valid transformation path between the source and target coordinate systems. Type: *String*.
+
+**Derived Output:**
+- **Transformation Definition**: The output is a transformation that can be used as a parameter in any tool requiring a geographic transformation. Type: *Transformation*.
+
+**Example ArcPy code:**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "c:/data"
+
+# Define the source and target coordinate systems
+source_cs = arcpy.SpatialReference("WGS 1984")
+target_cs = arcpy.SpatialReference("NAD 1983")
+
+# Create a custom geographic transformation
+transformation_name = "WGS84_to_NAD_1983_Custom"
+transformation_path = "WGS_1984_To_NAD_1983_1"
+
+# Create the custom geographic transformation
+arcpy.CreateCustomGeographicTransformation_management(
+    transformation_name=transformation_name,
+    source_coordinate_system=source_cs,
+    target_coordinate_system=target_cs,
+    transformation_path=transformation_path
+)
+```
+Toolset: Projections and Transformations
+
+Tool: Create Custom Vertical Transformation
+
+Description: Creates a transformation definition for converting data between two vertical coordinate systems or datums. The output of this tool can be used as a transformation object for any tool with a parameter that requires a vertical transformation.
+
+Parameters:
+- Vertical Transformation Name: The name of the custom transformation definition. Data Type: String.
+- Source Vertical Coordinate System: The starting vertical coordinate system. Data Type: String.
+- Target Vertical Coordinate System: The final vertical coordinate system. Data Type: String.
+- Interpolation Geographic Coordinate System (Optional): The interpolation geographic coordinate system. Data Type: Coordinate System.
+- Vertical Transformation Method (Optional): The vertical transformation method that will be used. Data Type: String.
+
+Derived Output:
+No information available.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.CreateCustomVerticalTransformation_management(
+    Vertical_Transformation_Name="MyVerticalTransformation",
+    Source_Vertical_Coordinate_System="StartingSystem",
+    Target_Vertical_Coordinate_System="FinalSystem",
+    Interpolation_Geographic_Coordinate_System="InterpolationSystem",
+    Vertical_Transformation_Method="TransformationMethod"
+)
+```
+Toolset: Projections and Transformations
+
+Tool: Define Projection
+
+Description: The Define Projection tool overwrites the coordinate system information stored with a dataset. It is intended for datasets with an unknown or incorrect coordinate system defined.
+
+Parameters:
+- Input Dataset: Specifies the dataset to define the projection. Type: Dataset.
+- Coordinate System: Specifies the coordinate system to assign to the dataset. Type: Coordinate System.
+
+Derived Output:
+- No derived outputs.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.DefineProjection_management("C:/data/input.gdb/featureclass", "PROJCS['NAD_1983_UTM_Zone_11N',GEOGCS['GCS_North_American_1983',DATUM['D_North_American_1983',SPHEROID['GRS_1980',6378137.0,298.257222101]],PRIMEM['Greenwich',0.0],UNIT['Degree',0.0174532925199433]],PROJECTION['Transverse_Mercator'],PARAMETER['False_Easting',500000.0],PARAMETER['False_Northing',0.0],PARAMETER['Central_Meridian',-117.0],PARAMETER['Scale_Factor',0.9996],PARAMETER['Latitude_Of_Origin',0.0],UNIT['Meter',1.0]]")
+```
+**Toolset:** Projections and Transformations
+
+**Tool:** Project
+
+**Description:** The Project tool transforms spatial data from one coordinate system to another. It is typically used when data needs to be aligned with a specific coordinate system for analysis or mapping purposes.
+
+**Parameters:**
+- **Input Dataset or Feature Class:** The dataset or feature class to be projected. Type: Feature Layer.
+- **Output Dataset or Feature Class:** The location and name for the projected output. Type: Feature Layer.
+- **Output Coordinate System:** The coordinate system to which the data will be projected. Type: Coordinate System.
+- **Geographic Transformation (optional):** The transformation method to be used if the input and output coordinate systems have different datums. Type: String.
+
+**Derived Output:**
+- **Output Dataset or Feature Class:** The projected dataset or feature class. Type: Feature Layer.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Set local variables
+in_dataset = "input.shp"
+out_dataset = "output.shp"
+out_coordinate_system = arcpy.SpatialReference("NAD 1983 StatePlane Oregon North FIPS 3601 (Meters)")
+
+# Execute Project
+arcpy.management.Project(in_dataset, out_dataset, out_coordinate_system)
+```
+Toolset: Raster
+
+Tool: Interpolate From Point Cloud
+
+Description: Interpolation predicts values for cells in a raster from a limited number of sample data points. It can be used to predict unknown values for any geographic point data, such as elevation, rainfall, chemical concentrations, and noise levels.
+
+Parameters:
+- Input point features: The input point features containing the z-values to be interpolated into a surface raster. Data Type: Feature Layer
+- Z value field: The field that holds a height or magnitude value for each point. This can be a numeric field or the Shape field if the input point features contain z-values. Data Type: Field
+- Output cell size (Optional): The cell size of the output raster that will be created. Data Type: Analysis Cell Size
+
+Derived Output:
+- Output raster: The output interpolated surface raster. It is always a floating-point raster. Data Type: Raster Dataset
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.ia.InterpolateFromPointCloud_3d(
+    in_point_features="input_points.shp",
+    z_field="elevation",
+    out_raster="output_raster.tif",
+    cell_size=10
+)
+```
+Toolset: Raster
+
+Tool: Copy Raster
+
+Description: Saves a copy of a raster dataset or converts a mosaic dataset into a single raster dataset.
+
+Parameters:
+- Input Raster: The raster dataset or mosaic dataset to be copied. Data Type: Raster Dataset; Mosaic Dataset; Mosaic Layer; Raster Layer; File; Image Service
+- Output Raster Dataset: The name and format for the raster dataset being created. Data Type: .avif, .bil, .bip, .bmp, .bsq, .crf, .dat, .img, .gif, .jpg, .jxl, .jp2, .mrf, .nc, .png, .tif, .webp, .zarr
+
+Derived Output:
+No derived outputs available.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.CopyRaster_management(
+    in_raster="path_to_input_raster",
+    out_rasterdataset="output_raster_name_and_format",
+)
+```
+Toolset: Raster
+
+Tool: Interpolate From Spatiotemporal Points
+
+Description: Interpolates temporal point data into a multidimensional raster. Optimal Interpolation statistically assimilates data combined from multiple sources to produce an output raster. The tool can merge background data, such as model outputs, with observation data, such as point measurements, for interpolation.
+
+Parameters:
+- Input point features: The input point features containing the z-values to be interpolated into a surface raster. Data Type: Feature Layer.
+- Z value field: The field that holds a height or magnitude value for each point. Data Type: Field.
+- Output raster: The output interpolated surface raster. It is always a floating-point raster. Data Type: Raster Dataset.
+- Output cell size (Optional): The cell size of the output raster that will be created. Data Type: Double.
+- Analysis Cell Size: Parameter influencing the character of the surface interpolation. Data Type: Double.
+
+Derived Output:
+- No derived outputs available.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.ia.InterpolateFromSpatiotemporalPoints(
+    Input_point_features=<value>,
+    Z_value_field=<value>,
+    Output_raster=<value>,
+    Output_cell_size=<value>,
+    Analysis_Cell_Size=<value>
+)
+```
+**Toolset:** Raster
+
+**Tool:** Optimal Interpolation
+
+**Description:** Optimal Interpolation statistically assimilates data combined from multiple sources to produce an output raster. It merges background data, like model outputs, with observation data, such as point measurements, to perform interpolation, resulting in more accurate datasets for analysis.
+
+**Parameters:**
+- **Background Dataset:** The input gridded raster dataset representing the background data. Type: Raster Dataset.
+- **Observation Dataset:** The input feature or trajectory dataset representing observation data, typically in the form of points. Type: Feature Layer.
+- **Background Error Variance:** A global constant estimated from the background data, representing its error variance. Type: Double.
+- **Observation Error Variance:** A global constant estimated from the observation data, representing its error variance. Type: Double.
+- **Background Error Correlation:** The correlation of errors in the background data. Type: Double.
+- **Observation Error Correlation:** The correlation of errors in the observation data. Type: Double.
+
+**Derived Output:**
+- **Output Raster:** The output interpolated surface raster. It is always a floating-point raster. Type: Raster Dataset.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+from arcpy.sa import *
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+arcpy.env.overwriteOutput = True
+
+# Set local variables
+background_dataset = "path/to/background_raster.tif"
+observation_dataset = "path/to/observation/points.shp"
+background_error_variance = 0.5
+observation_error_variance = 0.3
+
+# Check out the ArcGIS Spatial Analyst extension license
+arcpy.CheckOutExtension("Spatial")
+
+# Execute Optimal Interpolation
+out_raster = OptimalInterpolation(
+    background_dataset=background_dataset,
+    observation_dataset=observation_dataset,
+    background_error_variance=background_error_variance,
+    observation_error_variance=observation_error_variance
+)
+
+# Save the output
+out_raster.save("C:/output/optimal_interpolation.tif")
+```
+### Toolset: Raster
+
+### Tool: Raster Calculator
+
+**Description:**
+The Raster Calculator tool allows you to create and run map algebra expressions to perform spatial analysis and output a raster dataset. It is typically used for implementing single-line algebraic expressions and integrating map algebra into workflows using ModelBuilder.
+
+**Parameters:**
+- **rasters**: The list of input rasters. Type: Raster.
+- **input_names**: The user-defined variable names for the rasters. Type: String.
+- **expression**: The algebraic expression to perform spatial analysis on the input raster. Type: String.
+- **extent_type**: The spatial extent used to create the output raster. Options include FirstOf, IntersectionOf, UnionOf, LastOf. Type: String.
+- **cellsize_type**: The cell size used to create the output raster. Options include FirstOf, MinOf, MaxOf, MeanOf, LastOf. Type: String.
+
+**Derived Output:**
+- **Output raster**: The output raster resulting from the map algebra expression. Type: Raster Dataset.
+
+**Example ArcPy code:**
+```python
+# Import system modules
+import arcpy
+from arcpy.sa import *
+
+# Check out the ArcGIS Spatial Analyst extension license
+arcpy.CheckOutExtension("Spatial")
+
+# Set the analysis environments
+arcpy.env.workspace = "C:/arcpyExamples/data"
+
+# Set local variables
+in_raster1 = "raster1.tif"
+in_raster2 = "raster2.tif"
+
+# Execute RasterCalculator
+out_rc_multi_raster = RasterCalculator([in_raster1, in_raster2], ["x", "y"], "x*y")
+
+# Save the output
+out_rc_multi_raster.save("C:/arcpyExamples/raster_rc_multi.tif")
+```
+Toolset: Raster
+
+Tool: Math
+
+Description: The Math tool in the Raster toolset performs various mathematical operations on rasters, including arithmetic operations between rasters or between a raster and a scalar. It returns a raster object with the applied operation.
+
+Parameters:
+- Raster: The first input raster dataset.
+- Raster2: The second input raster dataset.
+- Operation: The type of arithmetic operation to be performed (Plus, Minus, Multiply, Divide, Power).
+
+Derived Output:
+No derived outputs available for this tool.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.ia.Math(
+    Raster="input_raster1.tif",
+    Raster2="input_raster2.tif",
+    Operation="Plus"
+)
+```
+Toolset: Raster
+
+Tool: Reclass
+
+Description: The Reclass tool within the Raster toolset provides various methods to reclassify or change input cell values to alternative values. It is commonly used to replace values based on new information, group certain values, reclassify values to a common scale, or set specific values to NoData or vice versa.
+
+Parameters:
+- Input raster: The input raster to be reclassified. Data Type: Raster Layer
+- Reclass field: Field denoting the values that will be reclassified. Data Type: Field
+- Reclassification: A remap table that defines how the values will be reclassified. Data Type: Table View
+
+Derived Output:
+- Output raster: The output reclassified raster. The output will always be of integer type. Data Type: Raster Dataset
+
+Example ArcPy code:
+```python
+import arcpy
+from arcpy.sa import *
+arcpy.env.workspace = "C:/sapyexamples/data"
+inRaster = "negs"
+myRemapVal = RemapValue([[-3,9],[0,1],[3,-4],[4,5],[5,6],[6,4],[7,-7]])
+outReclassRV = Reclassify(inRaster, "VALUE", myRemapVal, "")
+outReclassRV.save("C:/sapyexamples/output/reclassrevar2")
+```
+Toolset: Raster
+
+Tool: Surface
+
+Description: With the Surface tools, you can quantify and visualize a terrain landform represented by a digital elevation model. These tools allow you to derive patterns such as contours, slope angle, steepest downslope direction (Aspect), shaded relief (Hillshade), and visibility from a raster elevation surface.
+
+Parameters:
+- Input Surface Raster: The input raster representing a continuous surface. Data Type: Raster Layer
+- Output Raster Name: The name of the output raster service. Data Type: String
+- Parameter Type: Specifies the output surface parameter type that will be computed. Options include Slope, Aspect, Mean Curvature, Tangential (normal contour) Curvature, and more. Data Type: String
+
+Derived Output:
+- Output Raster: The output raster. Data Type: Raster Layer
+
+Example ArcPy code:
+```python
+import arcpy
+arcpy.Surface.SurfaceParameters(
+    Input_Surface_Raster=<value>,
+    Output_Raster_Name=<value>,
+    Parameter_Type=<value>
+)
+```
+**Toolset:** Raster
+
+**Tool:** Extraction
+
+**Description:** The Extraction toolset in ArcGIS Pro allows users to extract a subset of pixels from a raster by the pixels' attributes or their spatial location.
+
+**Parameters:**
+- **Input raster:** The input raster from which cells will be extracted. **Type:** Raster Layer.
+- **Input raster or feature mask data:** The input mask data defining the cell locations to extract. It can be a raster or a feature dataset. **Type:** Raster Layer; Feature Layer.
+- **Extraction Area (Optional):** Specifies whether cells inside or outside the locations defined by the input mask will be selected and written to the output raster. **Type:** String.
+- **Analysis Extent (Optional):** The extent that defines the area to be extracted. **Type:** Extent.
+
+**Derived Output:**
+- **Output raster:** The output raster containing the cell values extracted from the input raster. **Type:** Raster.
+
+**Example ArcPy code (include all the necessary imports and context to successfully run the code):**
+```python
+import arcpy
+
+# Set the workspace
+arcpy.env.workspace = "C:/data"
+
+# Define the input raster and mask
+input_raster = "elevation.tif"
+mask_data = "study_area.shp"
+
+# Define the output raster
+output_raster = "extracted_area.tif"
+
+# Execute Extract by Mask
+arcpy.sa.ExtractByMask(input_raster, mask_data).save(output_raster)
+```
+Toolset: Raster
+
+Tool: Generalization
+
+Description: The Generalization toolset contains tools that simplify and refine features for display at smaller scales. These tools are used to clean up small erroneous data in a raster or generalize the data to remove unnecessary detail for a more general analysis.
+
+Parameters:
+- Input raster: The input raster for which the identified zones are to be shrunk. Data Type: Raster Layer.
+- Number of cells: The number of cells by which to shrink each specified zone. Data Type: Long.
+- Zone values: The list of zone values to shrink. Data Type: Long.
+- Shrink method (Optional): The method to use to shrink the selected zones. Options are Morphological and Distance. Data Type: String.
+
+Derived Output:
+- Output raster: The output generalized raster where the specified zones of the input raster will be shrunk by the specified number of cells. Data Type: Raster.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.sa.Shrink(
+    in_raster="input_raster",
+    number_of_cells=5,
+    zone_values=[1, 2, 3],
+    shrink_method="Morphological"
+)
+```
+Toolset: Raster
+
+Tool: Hydrology
+
+Description: The Hydrology tools model the flow of water across a surface, allowing users to create stream networks, determine drainage basins, and simulate flood events.
+
+Parameters:
+- Input Flow Direction Raster: The input raster showing the direction of flow out of each cell. Data Type: Raster Layer; Image Service; String.
+- Input Pour Point: The input pour point locations. Data Type: Raster Layer; Feature Layer; Image Service; Feature Service; String.
+- Output Name: The name of the output watershed raster service. Data Type: String.
+- Pour Point Field (Optional): Field used to assign values to the pour point locations. Data Type: String.
+
+Derived Output:
+- Output Raster: The resulting watershed raster. Data Type: Raster Layer
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.sa.Watershed(in_flow_direction_raster, in_pour_point, out_name, pour_point_field)
+```
+Toolset: Raster
+
+Tool: Interpolation
+
+Description: The Interpolation toolset in the Raster toolset creates a continuous surface from sampled point values, allowing you to predict values for all locations in an output raster dataset. This is particularly useful for creating elevation, pollution, or noise surfaces from sample points.
+
+Parameters:
+- Input point features: The input point features containing the z-values to be interpolated into a surface raster. Data Type: Feature Layer.
+- Z value field: The field that holds a height or magnitude value for each point. Data Type: Field.
+- Output raster: The output interpolated surface raster. It is always a floating-point raster. Data Type: Raster Dataset.
+- Output cell size (Optional): The cell size of the output raster that will be created. Data Type: Double.
+- Analysis Cell Size (Optional): The exponent of distance that controls the significance of surrounding points on the interpolated value. Data Type: Double.
+- Search radius (Optional): Defines which of the input points will be used to interpolate the value for each cell in the output raster. Data Type: Double.
+
+Derived Output:
+- No derived outputs available.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.ia.InterpolateShape_3d(
+    in_features="input_point_features",
+    z_field="height_field",
+    out_raster="output_raster",
+    cell_size=10,
+    power=2,
+    search_radius=100
+)
+```
+Toolset: Raster
+
+Tool: Local
+
+Description: The local tools in the Raster toolset perform calculations where the output value at each cell location is based on the values from all input rasters at that location. These tools allow you to combine input rasters, calculate statistics, or evaluate criteria for each cell on the output raster.
+
+Parameters:
+- Input Raster: The input raster dataset. Type: Raster Layer.
+- Comparison Value: A value used for comparison in some cases. Type: Double.
+
+Derived Output:
+- Output Raster: The resulting raster dataset. Type: Raster Layer.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.sa.<tool_function>(
+    in_raster="input_raster.tif",
+    comparison_value=5.0
+)
+```
+**Toolset:** Raster
+
+**Tool:** Map Algebra
+
+**Description:** Map algebra is a way to perform spatial analysis by creating expressions in an algebraic language. With the Raster Calculator tool, you can create and run map algebra expressions that output a raster dataset.
+
+**Parameters:**
+- **Map Algebra Expression:** The map algebra expression that will be run. Create the expression by specifying the inputs, values, operators, and tools to use. Type: *String*.
+
+**Derived Output:**
+- **Output Raster:** The output raster resulting from the map algebra expression. Type: *Raster Dataset*.
+
+**Example ArcPy code:**
+```python
+import arcpy
+from arcpy.sa import *
+
+# Set environment settings
+arcpy.env.workspace = "C:/data"
+
+# Check out the ArcGIS Spatial Analyst extension license
+arcpy.CheckOutExtension("Spatial")
+
+# Execute Map Algebra expression
+outRas = Slope("elevation.tif", "PERCENT_RISE", 3)
+
+# Save the output
+outRas.save("C:/output/slope_output.tif")
+```
+Toolset: Multidimensional Analysis
+
+Tool: Aggregate Multidimensional Raster
+
+Description: Creates a raster layer from a multidimensional raster dataset or a multidimensional raster layer by slicing data along defined variables and dimensions. This tool filters and extracts a subset of variables from a multidimensional raster.
+
+Parameters:
+- Input Multidimensional Raster: The input multidimensional raster dataset. Data Type: Raster Dataset; Raster Layer; Mosaic Dataset; Mosaic Layer; Image Service; File.
+- Output Multidimensional Raster: The output multidimensional raster dataset. Data Type: Raster Dataset.
+- Variables: The variables to include in the output multidimensional raster. Data Type: String.
+- Dimension Definition: Specifies the method to slice the dimension. Options include All, By Ranges, By Iteration, By Values. Data Type: String.
+- Range: The range or list of ranges for the specified dimension. Data Type: Value Table.
+
+Derived Output:
+- No derived outputs available.
+
+Example ArcPy code:
+```python
+import arcpy
+arcpy.ia.AggregateMultidimensionalRaster(
+    in_multidimensional_raster="input_multidimensional_raster",
+    out_multidimensional_raster="output_multidimensional_raster",
+    variables="variable_name",
+    dimension_definition="definition_type",
+    range="range_values"
+)
+```
+Toolset: Fields
+
+Tool: Add Field
+
+Description: The Add Field tool adds a new field to a table, feature class, feature layer, or raster with an attribute table. It is used to specify field settings such as field type and maximum data size.
+
+Parameters:
+- Field Name: Name of the field to be added. Type: String.
+- Field Type: Type of data the field will store. Type: Field Type.
+- Field Length: Maximum number of characters for the field. Type: Integer.
+- Field Alias: Alternate name for the field. Type: String.
+- Is Nullable: Indicates if the field can contain null values. Type: Boolean.
+- Precision: Number of decimal places for numeric fields. Type: Integer.
+- Scale: Number of significant digits for numeric fields. Type: Integer.
+
+Derived Output:
+- Output Table: The table with the newly added field. Type: Table.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.management.AddField(
+    in_table="C:/data.gdb/roads",
+    field_name="Surface",
+    field_type="TEXT",
+    field_length=50,
+    field_alias="Road Surface Type",
+    is_nullable="NULLABLE",
+    field_domain=""
+)
+```
+Toolset: Fields
+
+Tool: Add Field
+
+Description: Adds a new field to a table, feature class, or raster.
+
+Parameters:
+- Input Table: Specifies the table or feature class to which the new field will be added. Type: Table or Feature Class.
+- Field Name: Specifies the name of the new field. Type: String.
+- Field Type: Specifies the data type of the new field. Type: Field Type.
+
+Derived Output:
+- Output Table: The table or feature class with the newly added field. Type: Table or Feature Class.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.AddField_management(
+    in_table="path_to_table",
+    field_name="NewField",
+    field_type="TEXT",
+)
+```
+Toolset: Fields
+
+Tool: Alter Field
+
+Description: The Alter Field tool allows you to rename fields or field aliases for a geodatabase table or feature class.
+
+Parameters:
+- Field: Specifies the field to be altered. Type: Field
+- New Field Name: Specifies the new name for the field. Type: String
+
+Derived Output:
+- None
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.AlterField_management("input_table", "field_to_alter", "new_field_name")
+```
+Toolset: Fields
+
+Tool: Alter Fields
+
+Description: Alters the field properties of multiple fields in a feature class or table.
+
+Parameters:
+- in_table: The input feature class or table. Type: Table View.
+- field: The field to be altered. Type: Field.
+- new_field_name: The new name for the field. Type: String.
+- new_field_alias: The new alias for the field. Type: String.
+- field_type: The new field type. Type: String.
+- field_length: The new field length. Type: Long.
+- field_is_nullable: Specifies if the field can contain null values. Type: Boolean.
+- clear_field_alias: Indicates whether to clear the field alias. Type: String.
+
+Derived Output:
+- out_table: The updated feature class or table. Type: Table.
+
+Example ArcPy code (include all the necessary imports and context to successfully run the code):
+```python
+import arcpy
+arcpy.AlterField_management(in_table="myFeatureClass", field="OldField", new_field_name="NewField", new_field_alias="New Field Alias", field_type="TEXT", field_length=50, field_is_nullable="NULLABLE", clear_field_alias="DO_NOT_CLEAR")
+```
