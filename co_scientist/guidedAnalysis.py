@@ -29,7 +29,6 @@ class GuidedAnalysisAgent:
         self.max_turns = max_turns
 
     def start_session(self, initial_user_input):
-        # 对话历史，每个元素: {'role': ..., 'content': ...}
         history = [
             {'role': 'system', 'content': self.system_prompt},
             {'role': 'user', 'content': initial_user_input}
@@ -52,29 +51,49 @@ class GuidedAnalysisAgent:
 
     def react_decision(self, agent_thought):
         """
-        Parse the agent's 'Thought/Action/Input' and call the corresponding tool.
-        Supported actions: literature_review, expert_query, arcgis_doc, finish
+        Parse the agent's 'Thought/Action/Input' and call the corresponding tool, or decide to ask user.
+        Supported actions: literature_search, expert_knowledge_interact, arcgis_document_retrieval, ask_user, finish
+        Returns: (action, observation, ask_user_flag)
         """
-        # Example action format: Action: literature_review; Input: spatial clustering in retail banking
-        match = re.search(r"Action\s*:\s*(\w+)\s*;?\s*Input\s*:\s*(.+)", agent_thought, re.I)
-        if not match:
-            return None, None
+        json_block = None
+        match_json = re.search(r'Action\s*:\s*(\{.*\})', agent_thought, re.DOTALL)
+        if match_json:
+            try:
+                json_block = json.loads(match_json.group(1))
+            except Exception as e:
+                print(f"[react_decision] JSON parse failed: {e}")
+                json_block = None
 
-        action, input_query = match.group(1).strip().lower(), match.group(2).strip()
-        print(action)
+        if json_block:
+            action = json_block.get("action")
+            input_query = json_block.get("input")
+        else:
+            match = re.search(r"Action\s*:\s*(\w+)\s*;?\s*Input\s*:\s*(.+)", agent_thought, re.I)
+            if not match:
+                return None, None, False
+            action, input_query = match.group(1).strip().lower(), match.group(2).strip()
+
+        ask_user_flag = False
+        observation = None
+
         if action == "literature_search":
-            task = {"goal": input_query, "keywords": input_query}
+            if isinstance(input_query, dict):
+                task = input_query
+            else:
+                task = {"goal": input_query, "keywords": input_query}
             observation = self.literature_review(task)
         elif action == "expert_knowledge_interact":
             observation = self.expert_interact(input_query)
         elif action == "arcgis_document_retrieval":
             observation = self.arcgis_doc_interact(input_query)
+        elif action == "ask_user":
+            ask_user_flag = True
         elif action == "finish":
             observation = "[Analysis complete.]"
         else:
             observation = "[Unknown action]"
 
-        return action, observation
+        return action, observation, ask_user_flag
 
     def expert_interact(self, query):
         """
@@ -97,7 +116,7 @@ class GuidedAnalysisAgent:
         doc_information = ask_doc_ai(query)
         return doc_information
     def next_turn(self, history):
-        # 使用LLM生成下一轮的clarifying question或行动建议
+
         response, _, _ = self.llm_engine.respond(history, temperature=0.2, top_p=0.95)
         return response
 
@@ -106,20 +125,39 @@ class GuidedAnalysisAgent:
         for turn in range(self.max_turns):
             agent_reply = self.next_turn(history)
             print(f"\n[Agent]: {agent_reply.strip()}\n")
-            action, observation = self.react_decision(agent_reply)
-            if action and observation is not None:
+
+            action, observation, ask_user_flag = self.react_decision(agent_reply)
+
+            while action and not ask_user_flag and action != "finish":
                 obs_msg = f"Observation: {observation}"
                 print(f"\n[Tool]: {obs_msg}\n")
                 history.append({'role': 'assistant', 'content': agent_reply})
                 history.append({'role': 'system', 'content': obs_msg})
-                if action == "finish":
+
+                agent_reply = self.next_turn(history)
+                print(f"\n[Agent]: {agent_reply.strip()}\n")
+                action, observation, ask_user_flag = self.react_decision(agent_reply)
+
+            if ask_user_flag:
+                history.append({'role': 'assistant', 'content': agent_reply})
+                user_input = input("[User]: ")
+                history.append({'role': 'user', 'content': user_input})
+                if self._should_terminate(agent_reply, user_input, turn):
                     break
                 continue
-            user_input = input("[User]: ")
-            history.append({'role': 'assistant', 'content': agent_reply})
-            history.append({'role': 'user', 'content': user_input})
-            if self._should_terminate(agent_reply, user_input, turn):
+
+            if action == "finish":
+                history.append({'role': 'assistant', 'content': agent_reply})
+                print("[Agent]: Analysis finished.")
                 break
+
+            if not action:
+                history.append({'role': 'assistant', 'content': agent_reply})
+                user_input = input("[User]: ")
+                history.append({'role': 'user', 'content': user_input})
+                if self._should_terminate(agent_reply, user_input, turn):
+                    break
+
         return history
 
     def _should_terminate(self, agent_reply, user_input, turn):

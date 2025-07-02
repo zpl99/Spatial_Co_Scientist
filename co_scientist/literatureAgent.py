@@ -125,7 +125,7 @@ class LiteratureAgent:
     def solve_task(self, task):
 
         goal = task.get("goal") or task.get("task_inst")
-        keywords = task.get("keywords", "spatial clustering")
+        keywords = task.get("keywords", "")
         output, cost = self.articles_with_reasoning(goal, keywords)
         return {"articles_with_reasoning": output, "cost": cost, "history": self.history}
 
