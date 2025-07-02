@@ -1,0 +1,145 @@
+from sqlalchemy.dialects.postgresql import JSONB
+
+from engine.base_engine import LLMEngine
+
+from litellm import model_cost
+from litellm.utils import trim_messages
+from pathlib import Path
+from shutil import copyfile, rmtree
+
+import os
+import re
+import subprocess
+from literatureAgent import LiteratureAgent
+import json
+from prompt import prompt_manager
+from nano_graphrag import GraphRAG, QueryParam
+from expert_interact_agent import expert_interact_workflow
+from tools.rag_arcgis_doc_tool import ask_doc_ai
+
+manager = prompt_manager.PromptManager(
+    "/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/prompt")
+
+graph_func = GraphRAG(working_dir="/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/rag_database",using_azure_openai=True)
+
+class GuidedAnalysisAgent:
+    def __init__(self, llm_engine, max_turns=6):
+        self.llm_engine = llm_engine
+        self.system_prompt = manager.render_prompt(agent = "guidedanalysis", prompt_name="system_prompt", variables={})
+        self.max_turns = max_turns
+
+    def start_session(self, initial_user_input):
+        # 对话历史，每个元素: {'role': ..., 'content': ...}
+        history = [
+            {'role': 'system', 'content': self.system_prompt},
+            {'role': 'user', 'content': initial_user_input}
+        ]
+        return history
+
+    def literature_review(self, task: dict):
+        """perform literature review based on the task description
+        :param
+            task (dict): A dictionary containing the task description. should follow the format:
+                  task = {
+        "goal": ,
+        "keywords": ,
+        }
+        :return
+            literature review results dict : {"articles_with_reasoning": output, "cost": cost, "history": self.history}
+        """
+        literature_agent = LiteratureAgent(self.llm_engine.llm_engine_name)
+        return literature_agent.solve_task(task)
+
+    def react_decision(self, agent_thought):
+        """
+        Parse the agent's 'Thought/Action/Input' and call the corresponding tool.
+        Supported actions: literature_review, expert_query, arcgis_doc, finish
+        """
+        # Example action format: Action: literature_review; Input: spatial clustering in retail banking
+        match = re.search(r"Action\s*:\s*(\w+)\s*;?\s*Input\s*:\s*(.+)", agent_thought, re.I)
+        if not match:
+            return None, None
+
+        action, input_query = match.group(1).strip().lower(), match.group(2).strip()
+        print(action)
+        if action == "literature_search":
+            task = {"goal": input_query, "keywords": input_query}
+            observation = self.literature_review(task)
+        elif action == "expert_knowledge_interact":
+            observation = self.expert_interact(input_query)
+        elif action == "arcgis_document_retrieval":
+            observation = self.arcgis_doc_interact(input_query)
+        elif action == "finish":
+            observation = "[Analysis complete.]"
+        else:
+            observation = "[Unknown action]"
+
+        return action, observation
+
+    def expert_interact(self, query):
+        """
+        Interact with experts to gather domain-specific knowledge or context.
+        :param query (str): The query string to ask experts.
+        :return: expert_contex (str): The context retrieved from expert interaction.
+        """
+        expert_contex = graph_func.query(query,
+            param=QueryParam(mode="local", only_need_context=False)
+        )
+
+        return expert_contex
+
+    def arcgis_doc_interact(self,query):
+        """
+        Interact with ArcGIS documentation to retrieve relevant information.
+        :param query: The query string to ask ArcGIS documentation.
+        :return: string containing the relevant information from ArcGIS documentation.
+        """
+        doc_information = ask_doc_ai(query)
+        return doc_information
+    def next_turn(self, history):
+        # 使用LLM生成下一轮的clarifying question或行动建议
+        response, _, _ = self.llm_engine.respond(history, temperature=0.2, top_p=0.95)
+        return response
+
+    def run_guided_analysis(self, initial_user_input):
+        history = self.start_session(initial_user_input)
+        for turn in range(self.max_turns):
+            agent_reply = self.next_turn(history)
+            print(f"\n[Agent]: {agent_reply.strip()}\n")
+            action, observation = self.react_decision(agent_reply)
+            if action and observation is not None:
+                obs_msg = f"Observation: {observation}"
+                print(f"\n[Tool]: {obs_msg}\n")
+                history.append({'role': 'assistant', 'content': agent_reply})
+                history.append({'role': 'system', 'content': obs_msg})
+                if action == "finish":
+                    break
+                continue
+            user_input = input("[User]: ")
+            history.append({'role': 'assistant', 'content': agent_reply})
+            history.append({'role': 'user', 'content': user_input})
+            if self._should_terminate(agent_reply, user_input, turn):
+                break
+        return history
+
+    def _should_terminate(self, agent_reply, user_input, turn):
+        if "enough" in user_input.lower() or "ready to proceed" in agent_reply.lower():
+            return True
+        if turn >= self.max_turns - 1:
+            print("\n[Agent]: Maximum turns reached. Ending session.")
+            return True
+        return False
+
+
+
+# 用法示例
+if __name__ == "__main__":
+
+    llm_engine = LLMEngine("gpt-4.1")
+    agent = GuidedAnalysisAgent(llm_engine, max_turns=10)
+    user_input = input("Describe your spatial analysis need (e.g., 'I want to find retail clusters'), enter enough to stop this session: ")
+    history = agent.run_guided_analysis(user_input)
+
+    print("\n==== Conversation History ====")
+    for turn in history:
+        print(f"{turn['role']}: {turn['content']}")
