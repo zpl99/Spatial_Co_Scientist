@@ -1,6 +1,51 @@
 import streamlit as st
 from guidedAnalysis import GuidedAnalysisAgent, LLMEngine
 
+def get_user_visible_message(agent_reply, action, ask_user_flag, observation=None):
+    """
+    Generate a user-friendly message for display based on the current agent action.
+    See detailed docstring in previous reply for behavior.
+    """
+    if ask_user_flag:
+        # If the agent wants a clarification, display the question directly.
+        return agent_reply.strip()
+
+    if action == "finish":
+        # If analysis is done, display closing statement.
+        return agent_reply.strip()
+
+    if action == "literature_search":
+        tip = "🔍 Reviewing relevant academic literature for your request."
+        if observation:
+            if isinstance(observation, dict) and "articles_with_reasoning" in observation:
+                summary = observation["articles_with_reasoning"]
+                if len(summary) > 500:
+                    summary = summary[:500] + "..."
+                tip += "\n\n**Summary:**\n" + summary
+            elif isinstance(observation, str):
+                tip += "\n\n**Summary:**\n" + (observation[:500] + "..." if len(observation) > 500 else observation)
+        return tip
+
+    if action == "expert_knowledge_interact":
+        tip = "🧑‍🔬 Consulting domain expert knowledge."
+        if observation:
+            if isinstance(observation, str) and len(observation) > 0:
+                summary = observation[:500] + ("..." if len(observation) > 500 else "")
+                tip += "\n\n**Expert insight:**\n" + summary
+        return tip
+
+    if action == "arcgis_document_retrieval":
+        tip = "📖 Looking up ArcGIS Pro documentation."
+        if observation:
+            summary = observation[:500] + ("..." if len(observation) > 500 else "")
+            tip += "\n\n**Documentation result:**\n" + summary
+        return tip
+
+    if action == "unknown action" or action is None:
+        return "The system has received your input and is processing the next step..."
+
+    return None
+
 if 'history' not in st.session_state:
     st.session_state.history = []
 if 'awaiting_user' not in st.session_state:
@@ -49,13 +94,23 @@ else:
                     break
 
         # Show chat
-        for turn in st.session_state.history:
+        for i, turn in enumerate(st.session_state.history):
             if turn['role'] == 'user':
                 st.markdown(f"**You:** {turn['content']}")
             elif turn['role'] == 'assistant':
-                st.markdown(f"<span style='color:blue'>**Agent:** {turn['content']}</span>", unsafe_allow_html=True)
-            elif turn['role'] == 'system':
-                st.markdown(f"<span style='color:green'>*{turn['content']}*</span>", unsafe_allow_html=True)
+                # Try to extract relevant message for user
+                # Peek ahead for the related observation/system turn
+                action, observation, ask_user_flag = None, None, False
+                # Try to find a paired observation
+                if i + 1 < len(st.session_state.history) and st.session_state.history[i + 1]['role'] == 'system':
+                    observation = st.session_state.history[i + 1]['content'].replace("Observation: ", "", 1)
+                # Use react_decision to recover action and ask_user_flag for this turn
+                agent = st.session_state.agent
+                action, _, ask_user_flag = agent.react_decision(turn['content'])
+                user_msg = get_user_visible_message(turn['content'], action, ask_user_flag, observation)
+                if user_msg:
+                    st.markdown(f"<span style='color:blue'>**Agent:** {user_msg}</span>", unsafe_allow_html=True)
+            # Optionally, skip 'system' turns completely (since their content is embedded above)
 
         # User input
         if st.session_state.awaiting_user:
