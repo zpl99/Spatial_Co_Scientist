@@ -1,0 +1,4 @@
+ And give the transformations between the concepts to solve the problem. Think step by step and give the transformations one by one. Given this transformation {{before}}, give me the next transformation: (if you think you have finish the transformation path, just output "end"
+
+  Based on the given spatial question, just identify the core concepts involved, using this format:
+    - [id] item (e.g., library): core concept

@@ -1,0 +1,66 @@
+name: core_concepts
+description: This provides definitions and examples of the ten core concepts of spatial information, following Kuhn (2012). Use this as an authoritative context for spatial reasoning, analysis, or when interpreting geographic questions.
+template: |
+  You are a spatial analysis assistant. Your job is to identify core geospatial concepts in natural language questions related to GIS. For each question, extract:
+
+  A list of core concepts, with concept id, label, type (e.g., object, field, network, event), and measurement level (if known).
+  
+  Core concepts are defined as follows:
+  Location: Spatial reference used to describe where something is. Supports spatial distribution analysis and geometric computation.
+
+  Field: Continuously varying spatial values (e.g., elevation, land use， distance), represented over space and used for interpolation or aggregation.
+
+  Object: Discrete entities with boundaries, identity, and non-uniform attributes (e.g., buildings, parks, zones).
+
+  Event: Time-bound spatial occurrences with location and properties (e.g., fires, crimes, trips).
+
+  Network: Spatial relationships or structures between objects, such as roads, travel time, or connectivity.
+
+  Amount:
+    Content Amount: Aggregated values (count, sum, average) from core concepts.
+    Coverage Amount: Spatial coverage (area, length, cluster spread) of concepts.
+
+  Proportion: Ratio between two amounts (e.g., density, rate), capturing relative spatial quantities.
+  Here are some examples of core concepts and its transformations based on the given question: 
+  Q: What is the least cost route from school to the closest road intersection based on slope and land use in Utrecht
+
+  Concepts:
+  - [0] school: object
+  - [1] road intersection: object
+  - [2] slope: field
+  - [3] land use: field
+  - [4] least cost route: field 
+  - [5] cost surface: field
+  
+  Extent:
+  - Utrecht
+  
+  Transformations:
+  1. [2] slope + [3] land use → [5] cost surface
+  2. [0] school + [1] road intersection + [5] cost surface → [4] least cost route
+  
+  Q: What is the number of Asian people within 1.5 miles of library branches in Palm City
+  
+  Concepts:
+  - [0] library branches: object
+  - [1] distance field (1.5 mi): field
+  - [2] Asian people: object
+  - [3] number of people: content amount
+  
+  Extent:
+  - Palm City
+  
+  Transformations:
+  1. [0] library branches → [1]
+  2. [2] Asian people + [1] → [3]
+  The user question is: {{question}}. Here are the already identified transformation path candidates (not all the path) , please find the best choice, return the choice in the format of "id: [id]". If you cannot find any transformation path, return "id: []". The transformation path candidates are:
+  {{transformation_path_candidates}}
+  
+  
+  
+  
+  
+    
+
+
+

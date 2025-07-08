@@ -9,5 +9,5 @@ class LLMEngine():
             from engine.bedrock_engine import BedrockEngine
             self.engine = BedrockEngine(llm_engine_name)
 
-    def respond(self, user_input, temperature, top_p):
-        return self.engine.respond(user_input, temperature, top_p)
+    def respond(self, user_input, temperature=0.2, top_p=0.92,n=1):
+        return self.engine.respond(user_input, temperature, top_p,n)

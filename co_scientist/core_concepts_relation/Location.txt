@@ -1,0 +1,908 @@
+Toolset: Find Locations
+
+Tool: Detect Incidents
+
+Description: The Detect Incidents tool creates a layer that detects features meeting specific conditions. For example, it can identify areas where certain incidents occur based on predefined criteria. This tool is valuable for spatial analysis, such as identifying crime hotspots, environmental hazards, or disease outbreaks.
+
+Parameters:
+- Input Features: Specifies the features to analyze. Type: Feature Layer.
+- Condition: Defines the condition for detecting incidents. Type: SQL Expression.
+- Output Layer: Name for the resulting incident detection layer. Type: Feature Layer.
+
+Derived Output:
+- Detected Incidents: Layer containing features that meet the specified condition. Type: Feature Layer.
+**Toolset:** Find Locations
+
+**Tool:** Find Similar Locations
+
+**Description:**
+The "Find Similar Locations" tool identifies candidate features that are most similar or dissimilar to one or more input features based on feature attributes. It is commonly used in spatial analysis to compare locations and determine which ones share similar characteristics. For instance, it can find neighborhoods similar to a target neighborhood based on demographic attributes or identify stores similar to a high-performing store based on sales data and other attributes.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+No information available.
+Toolset: Find Locations
+
+Tool: Find Locations
+
+Description: The Find Locations toolset contains tools that identify areas meeting specific criteria based on attribute and spatial queries. These areas can be selected from existing features or new features created when requirements are met. For example, it can be used to find parcels that are vacant or areas within a certain distance of a river.
+
+Parameters:
+- Detect Incidents: Creates a layer that detects features meeting a given condition. Type: Feature Layer.
+- Find Dwell Locations: Finds locations where moving objects have stopped using time and distance thresholds. Type: Feature Layer.
+- Find Similar Locations: Identifies candidate features similar or dissimilar to input features based on attributes. Type: Feature Layer.
+
+Derived Output:
+- Detected Incidents: Layer containing features that meet the specified condition. Type: Feature Layer.
+- Dwell Locations: Layer showing locations where moving objects have stopped. Type: Feature Layer.
+- Similar Locations: Layer with candidate features similar or dissimilar to input features. Type: Feature Layer.
+**Toolset:** Use Proximity
+
+**Tool:** Create Buffers
+
+**Description:**
+The "Create Buffers" tool in ArcGIS Pro generates polygons that extend a specified distance from input features, which can be points, lines, or polygons. This tool is essential in spatial analysis for understanding proximity relationships, such as determining what is near a particular feature. Typical use cases include:
+- **Environmental Analysis:** Identifying areas within a certain distance from a river to assess potential flood zones.
+- **Urban Planning:** Creating zones around schools to analyze accessibility or noise impact.
+- **Emergency Management:** Determining areas within a certain radius of a fire station for emergency response planning.
+
+**Parameters:**
+- **Input Features:** The features around which buffers will be created. Type: Feature Layer.
+- **Output Feature Class:** The name and location of the output buffer feature class. Type: Feature Class.
+- **Distance [Field]:** The distance to buffer the input features. This can be a constant value or a field from the input features. Type: Linear Unit or Field.
+- **Dissolve Type:** Specifies whether the output buffers should be dissolved into a single feature or kept separate. Type: String.
+- **Method:** The method used to create the buffer, such as planar or geodesic. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class containing the buffer polygons. Type: Feature Class.
+**Toolset:** Use Proximity
+
+**Tool: Snap Tracks**
+
+**Description:**
+The **Snap Tracks** tool aligns input track points to existing line features. This tool is particularly useful in spatial analysis and GIS workflows involving time-enabled point data. The input data must include features representing an instant in time, and the tool requires traversable lines with fields indicating the 'from' and 'to' nodes for analysis. It is typically used to align track points, such as GPS data, to a known network of lines like roads or paths to correct inaccuracies in recorded positions. For example, it can align GPS data from vehicles to the nearest road network for traffic pattern analysis or route optimization. Another use case is in wildlife tracking, aligning animal movement data points to known paths for understanding movement patterns and habitat use.
+
+**Parameters:**
+- **Input Track Features**: Time-enabled point data representing an instant in time. Type: *Feature Layer*.
+- **Input Line Features**: Traversable lines with 'from' and 'to' nodes fields for analysis. Type: *Feature Layer*.
+
+**Derived Output:**
+- **Snapped Track Features**: Output feature class with track points snapped to the nearest line. Type: Feature Class.
+Toolset: Use Proximity
+
+Tool: Group By Proximity
+
+Description: The Group By Proximity tool is part of the Use Proximity toolset, designed to answer the spatial analysis question "What is near what?" This tool groups features that are within spatial or spatiotemporal proximity to each other. It helps in understanding spatial relations and locations. For example, it can be used to identify and group houses within a certain distance from schools for analyzing school accessibility in a city.
+
+Parameters:
+- Input Features: Specifies the features to be grouped based on proximity. Type: Feature Layer.
+- Grouping Method: Defines the method for grouping features (spatial or spatiotemporal). Type: String.
+- Search Distance: Sets the distance within which features are considered near each other. Type: Linear unit.
+
+Derived Output:
+- Grouped Features: Features grouped based on proximity. Type: Feature Layer.
+Toolset: Use Proximity
+
+Tool: Trace Proximity Events
+
+Description: The Trace Proximity Events tool traces events that are near each other in space (location) and time. It works with time-enabled point data that includes features representing an instant in time. This tool is essential for understanding spatial relations and locations, allowing users to analyze events that occur close to each other both spatially and temporally. For example, it can be used to track the movement of vehicles in a city to identify instances where multiple vehicles are close to each other at the same time, indicating potential traffic congestion.
+
+Parameters:
+- Input Points: The point features to be analyzed for proximity. Type: Feature Layer.
+- Search Distance: The maximum distance to search for nearby events. Type: Linear Unit.
+
+Derived Output:
+- Proximity Events: The events that are near each other in space and time based on the specified parameters. Type: Feature Layer.
+No information available.
+Toolset: Find Locations
+
+Tool: Find Similar Locations
+
+Description: The Find Similar Locations tool identifies candidate features that are most similar or dissimilar to one or more input features based on feature attributes. For example, you can determine which constituencies are most similar to a specific Target Risk feature. This tool helps in spatial analysis by finding similarities or dissimilarities between features based on attribute values.
+
+Parameters:
+- Input Features to Match: Specifies the layer to match against. Type: Feature Layer.
+- Candidate Features: Specifies the layer containing candidate features to compare against the input features. Type: Feature Layer.
+- Output Features: Specifies the name for the output layer that will contain the results. Type: String.
+- Number Of Results: Specifies the number of results to be returned. Type: Long.
+
+Derived Output:
+- Transmission_Risk: Contains the identified candidate features that are most similar or dissimilar to the input features based on attribute values. Type: Feature Layer.
+Toolset: Find Locations
+
+Tool: Find Dwell Locations
+
+Description: The Find Dwell Locations tool is used to find locations where moving objects have stopped or dwelled based on specified time and distance thresholds. This tool is valuable for analyzing spatial patterns in GIS workflows. For example, it can be used to identify areas where vehicles have made extended stops, indicating potential areas of interest for further investigation or monitoring.
+
+Parameters:
+- Time Threshold: Specifies the minimum time threshold for an object to be considered as dwelled. Type: Double.
+- Distance Threshold: Specifies the minimum distance threshold for an object to be considered as dwelled. Type: Linear unit.
+
+Derived Output:
+- Dwell Locations: Output feature class containing the locations where objects have dwelled. Type: Feature Class.
+Toolset: Find Locations
+
+Tool: Find Locations
+
+Description: The Find Locations toolset contains tools that are used to identify areas that meet specified criteria. These criteria can be based on attribute queries (e.g., parcels that are vacant) and spatial queries (e.g., within 1 kilometer of a river). The areas identified can be selected from existing features, such as land parcels, or new features can be created when all requirements are met. This toolset is designed for large datasets and allows for the visualization, regression, and prediction of spatial patterns in feature data.
+
+Parameters:
+- Input Features: Specifies the features to be analyzed. Type: Feature Layer.
+- Search Distance: Specifies the distance within which to search for features that meet the criteria. Type: Linear Unit.
+
+Derived Output:
+- Output Features: The features that meet the specified criteria. Type: Feature Layer.
+**Toolset:** Location Referencing
+
+**Tool:** Create LRS
+
+**Description:**
+The Create LRS tool in ArcGIS Pro is designed to establish a Linear Referencing System (LRS) within a geodatabase. This tool is particularly useful for organizations that need to manage data related to linear features, such as roads or pipelines, by storing data based on relative positions along these features. The tool supports multiple linear referencing methods, event location management, and time-aware LRS capabilities. Typical use cases include transportation departments managing road networks, utility companies tracking pipeline locations, and any organization needing to analyze spatial data along linear paths. Examples of spatial analysis using this tool include calculating distances along a route, managing events like road closures, and integrating time-based data for historical analysis.
+
+**Parameters:**
+- **Input Location:** The geodatabase where the LRS will be created. Type: *Geodatabase*.
+- **LRS Name:** The name of the new LRS. Type: *String*.
+- **Centerline Feature Class Name:** The name for the centerline feature class. Type: *String*.
+- **Calibration Point Feature Class Name:** The name for the calibration point feature class. Type: *String*.
+- **Redline Feature Class Name:** The name for the redline feature class. Type: *String*.
+- **Centerline Sequence Table Name:** The name for the centerline sequence table. Type: *String*.
+
+**Derived Output:**
+- **Centerline Feature Class:** Stores the linear features. Type: *Feature Class*.
+- **Calibration Point Feature Class:** Stores calibration points for linear referencing. Type: *Feature Class*.
+- **Redline Feature Class:** Stores redline features for linear referencing. Type: *Feature Class*.
+- **Centerline Sequence Table:** Manages the sequence of centerlines. Type: *Table*.
+**Toolset:** LRS
+
+**Tool:** Modify LRS
+
+**Description:**
+The Modify LRS tool in ArcGIS Pro is used to modify an existing Linear Referencing System (LRS) within a specified workspace. This tool allows users to change which centerline, calibration point, or redline feature class is registered with the LRS. It also enables users to change configurations, such as enabling conflict prevention. The tool is versatile and can be applied to a feature class or table with or without geometry or records. Typical use cases include updating the LRS to reflect changes in the physical network, such as road realignments or new construction, and ensuring data integrity by managing unique route and centerline IDs.
+
+**Parameters:**
+- **Input Workspace:** The workspace containing the LRS to be modified. Type: Workspace.
+- **Current LRS Name:** The name of the LRS to modify. Type: String.
+
+**Derived Output:**
+- **Modified LRS:** The updated LRS with changes applied. Type: LRS Dataset.
+**Toolset:** LRS Toolset
+
+**Tool:** Create LRS From Existing Dataset
+
+**Description:**
+The "Create LRS From Existing Dataset" tool is designed to create a linear referencing system (LRS) within a specified workspace using existing datasets. This tool is particularly useful for organizations that need to manage and analyze linear features such as roads, pipelines, or railways. By utilizing existing centerline, calibration point, and redline feature classes, this tool allows users to establish an LRS without the need to create new datasets from scratch. Typical use cases include integrating existing spatial data into a comprehensive LRS for transportation networks, utility management, or any application requiring precise linear referencing.
+
+**Parameters:**
+- **LRS Name**: The name of the new LRS to be created. Type: String.
+- **Centerline - Feature Class**: The feature class in an existing dataset to use as the centerline feature class. Type: Feature Class.
+- **Centerline - Centerline ID Field**: The field used as the centerline ID, which must match the field type in the centerline sequence table. Type: Field.
+- **Centerline Sequence - Table**: The table to use as the centerline sequence table. Type: Table.
+- **Centerline Sequence - Centerline ID Field**: The field used as the centerline ID in the sequence table. Type: Field.
+
+**Derived Output:**
+No specific derived outputs are mentioned in the available information.
+Toolset: Projections and Transformations
+
+Tool: Create Custom Vertical Transformation
+
+Description: The Create Custom Vertical Transformation tool allows users to define a transformation for converting data between two vertical coordinate systems or datums. This custom transformation can be used as a transformation object for any tool requiring a vertical transformation. It is essential for ensuring accurate alignment of data in vertical coordinate systems.
+
+Parameters:
+- Geographic Transformation Name: The name of the custom transformation definition. Data Type: String
+- Input Geographic Coordinate System: The starting geographic coordinate system. It must be a geographic coordinate system. Data Type: Coordinate System
+- Output Geographic Coordinate System: The final geographic coordinate system. It must be a geographic coordinate system. Data Type: Coordinate System
+- Custom Geographic Transformation: The custom transformation method to be used. Data Type: String
+- Extent (Optional): The geographic area where the transformation is applicable. Data Type: Current Display Extent
+
+Derived Output:
+- Description: The vertical coordinate system of the input for the specified parameter is unknown and a valid transformation could not be found. Generated pathway features may be misaligned. Learn more about datum transformations in ArcGIS Pro. Solution: Project the input for the specified parameter to a known vertical coordinate system and run the tool again. Data Type: String
+Toolset: Projections and Transformations
+
+Tool: Define Projection
+
+Description:
+The Define Projection tool is used to assign a known coordinate system to a dataset that currently has an unknown or incorrect coordinate system. This tool is essential for ensuring that spatial data aligns correctly with other datasets in a GIS environment. It is important to note that the Define Projection tool does not alter the geometry of the dataset; it only updates the metadata to reflect the correct coordinate system. This tool is typically used when a dataset is imported without a defined spatial reference, which can lead to inaccuracies and misalignment in spatial analysis and mapping. For example, if you receive a dataset with an undefined coordinate system, you can use the Define Projection tool to assign the correct spatial reference, ensuring that the data aligns properly with other spatial datasets in your project.
+
+Parameters:
+- **Input Dataset or Feature Class**: The feature class, feature layer, feature dataset, scene layer, scene layer package, or OGC Geopackage to be projected. Type: Feature Layer; Feature Dataset; Scene Layer; Scene Layer Package; File.
+- **Coordinate System**: The coordinate system to be defined for the input data. Type: Coordinate System.
+
+Derived Output:
+- **Output Dataset or Feature Class**: The dataset with the updated coordinate system information. Type: Feature Class; Feature Dataset; File.
+Toolset: Projections and Transformations
+
+Tool: Create Spatial Reference
+
+Description: Creates a spatial reference for use in ModelBuilder. This tool is essential for defining a spatial reference when creating a geodatabase feature dataset or a stand-alone feature class. It includes a coordinate system for x-, y-, and z-values, as well as tolerance and resolution values for x-, y-, z-, and m-values. It is particularly useful for datasets with unknown or incorrect coordinate systems defined. For example, you can use this tool to ensure accurate spatial analysis by defining the correct coordinate system for your data.
+
+Parameters:
+- Output Coordinate System: Specifies the coordinate system to be assigned to the spatial reference. Type: Spatial Reference.
+- XY Resolution: Sets the x,y resolution for the spatial reference. Type: Linear Unit.
+- XY Tolerance: Sets the x,y tolerance for the spatial reference. Type: Linear Unit.
+- Z Resolution: Sets the z resolution for the spatial reference. Type: Linear Unit.
+- Z Tolerance: Sets the z tolerance for the spatial reference. Type: Linear Unit.
+- M Resolution: Sets the m resolution for the spatial reference. Type: Linear Unit.
+- M Tolerance: Sets the m tolerance for the spatial reference. Type: Linear Unit.
+
+Derived Output:
+- Spatial Reference: The created spatial reference object that can be used in subsequent geoprocessing tasks. Type: Spatial Reference.
+**Toolset:** Projections and Transformations
+
+**Tool:** Create Custom Geographic Transformation
+
+**Description:**
+The "Create Custom Geographic Transformation" tool in ArcGIS Pro is designed to create a transformation definition for converting data between two geographic coordinate systems or datums. This tool is essential for ensuring that spatial data aligns correctly when different geographic coordinate systems are used. It is particularly useful in workflows where data from different sources needs to be integrated or analyzed together, such as in environmental studies, urban planning, or any GIS project involving multiple datasets with varying coordinate systems. For example, if you have datasets in WGS 1984 and NAD 1983, this tool allows you to create a custom transformation to ensure accurate spatial alignment.
+
+**Parameters:**
+- **Geographic Transformation Name:** The name of the custom transformation definition. Type: String.
+- **Input Geographic Coordinate System:** The starting geographic coordinate system. Must be a geographic coordinate system; a projected coordinate system is invalid. Type: Coordinate System.
+- **Output Geographic Coordinate System:** The final geographic coordinate system. Must be a geographic coordinate system; a projected coordinate system is invalid. Type: Coordinate System.
+- **Custom Geographic Transformation:** The custom transformation method that will be used. Type: String.
+- **Extent (Optional):** The geographic area where the transformation is applicable. Type: String.
+
+**Derived Output:**
+- **Custom Geographic Transformation:** The output is a transformation method that can be used in other tools requiring a geographic transformation. Type: String.
+Toolset: Projections and Transformations
+
+Tool: Convert Coordinate Notation
+
+Description: Converts coordinate notations contained in one or two fields from one notation format to another. This tool is useful for converting coordinates between different systems, essential for managing spatial relations across various reference systems. For example, it can be used to convert latitude and longitude coordinates in degrees, minutes, and seconds to decimal degrees, or vice versa. Another use case is converting Military Grid Reference System (MGRS) coordinates to Universal Transverse Mercator (UTM) coordinates.
+
+Parameters:
+- Input Coordinate Notation: Specifies the coordinate notation format to be converted. Type: String.
+- Output Coordinate Notation: Specifies the desired output coordinate notation format. Type: String.
+
+Derived Output:
+No information available.
+**Toolset:** Projections and Transformations
+
+**Tool:** Project
+
+**Description:**
+The Project tool in ArcGIS Pro is used to transform spatial data from one coordinate system to another. This is essential for ensuring that spatial data aligns correctly when combining datasets from different sources or when preparing data for analysis that requires a specific coordinate system. Typical use cases include converting data to a common coordinate system for spatial analysis, preparing data for mapping applications, or ensuring data compatibility with other datasets. For example, you might use the Project tool to convert a dataset from a geographic coordinate system like WGS 1984 to a projected coordinate system like NAD 1983 StatePlane Oregon North FIPS 3601 (Meters) for detailed local analysis.
+
+**Parameters:**
+- **Input Dataset or Feature Class:** The feature class, feature layer, feature dataset, scene layer, scene layer package, or OGC Geopackage to be projected. **Type:** Feature Layer; Feature Dataset; Scene Layer; Building Scene Layer; File.
+- **Output Dataset or Feature Class:** The output dataset to which the results will be written. **Type:** Feature Class; Feature Dataset; File.
+- **Output Coordinate System:** The coordinate system to which the input data will be projected. **Type:** Coordinate System.
+- **Geographic Transformation (Optional):** This method can be used to convert data between two geographic coordinate systems or datums. This optional parameter may be required if the input and output coordinate systems have different datums. **Type:** String.
+- **Input Coordinate System (Optional):** The coordinate system of the input feature class or dataset. This parameter becomes active when the input dataset does not have a defined coordinate system. **Type:** Coordinate System.
+
+**Derived Output:**
+- **Output Dataset or Feature Class:** The projected dataset. **Type:** Feature Class; Feature Dataset; File.
+**Toolset:** Find Locations
+
+**Tool:** Find Similar Locations
+
+**Description:**
+The "Find Similar Locations" tool identifies candidate features that are most similar or dissimilar to one or more input features based on feature attributes. It is commonly used in spatial analysis to compare locations and determine which ones share similar characteristics. For instance, it can find retail locations similar to a top-performing store based on sales data, demographics, and other relevant attributes. Another use case is in environmental studies to identify areas with ecological characteristics similar to a known habitat.
+
+**Parameters:**
+- Input Text or File Path: The text to be scanned for locations, dates, and custom attributes. Data Type: String
+- Output Feature Class: The feature class containing point features representing the found locations. Data Type: Feature Class
+- Input Template (Optional): The template file determining settings for the tool parameters. Data Type: *.lxttmpl file
+
+**Derived Output:**
+No information available.
+Toolset: Use Proximity
+
+Tool: Trace Proximity Events
+
+Description: Traces events that are near each other in space (location) and time. The time-enabled point data must include features that represent an instant in time. This tool helps answer spatial analysis questions about spatial relationships and locations. It allows you to visualize, understand, and interact with big data through patterns, trends, and anomalies. For example, you can use it to analyze events occurring close to each other both in space and time, such as tracking the movement of vehicles in a city over a specific time period.
+
+Parameters:
+- Input Features: The features to be traced. Type: Feature Layer.
+- Time Field: The field that contains the time information for the events. Type: Field.
+- Distance Field: The field that specifies the proximity distance for events to be considered near each other. Type: Field.
+
+Derived Output:
+- Trace Results: The events that are traced based on the specified proximity in space and time. Type: Feature Layer.
+Toolset: Use Proximity
+
+Tool: Group By Proximity
+
+Description: The Group By Proximity tool groups features that are within spatial or spatiotemporal proximity to each other. This tool helps answer the spatial analysis question, "What is near what?" One example of its use is grouping wildlife sightings within a certain distance to analyze species interactions.
+
+Parameters:
+- Input Features: The features to be grouped based on proximity. Type: Feature Layer.
+- Grouping Method: Specifies the method used to group features. Type: String.
+
+Derived Output:
+- Grouped Features: Features grouped based on proximity. Type: Feature Layer.
+**Toolset:** Use Proximity
+
+**Tool:** Create Buffers
+
+**Description:**
+The "Create Buffers" tool in ArcGIS Pro generates polygons that extend a specified distance from input features, which can be points, lines, or polygons. This tool is commonly used in spatial analysis to determine proximity relationships, such as identifying areas within a certain distance from a feature of interest. For example, it can be used to create a buffer zone around fire stations to analyze which areas fall within a 1-kilometer radius, or to generate buffers around roads to study deforestation patterns within a certain distance. Buffers are essential in GIS workflows for tasks like environmental impact assessments, urban planning, and resource management.
+
+**Parameters:**
+- **Input Features:** The feature class or layer to be buffered. Type: Feature Class.
+- **Output Feature Class:** The name and location of the output feature class. Type: Feature Class.
+- **Distance:** The buffer distance, which can be specified as a numeric value with units (e.g., "1000 METERS"). Type: String.
+- **Dissolve Type (Optional):** Determines how buffer features are dissolved. Options include "None" or "Dissolve all output features into a single feature." Type: String.
+- **Method (Optional):** The method used to create the buffer, such as "Geodesic" for shape-preserving buffers. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class containing the buffer polygons. Type: Feature Class.
+Toolset: Use Proximity
+
+Tool: Snap Tracks
+
+Description: Snaps input track points to lines. The time-enabled point data must include features that represent an instant in time. Traversable lines with fields indicating the from and to nodes are required for analysis. This tool is useful for aligning track points to existing line features accurately. For example, in transportation analysis, Snap Tracks can be used to match GPS track points to road network lines for route optimization.
+
+Parameters:
+- Input Track Points: The points to be snapped to lines. Type: Feature Layer.
+- Input Line Features: The lines to which the points will be snapped. Type: Feature Layer.
+
+Derived Output:
+- Snapped Tracks: The output feature layer containing the snapped track points. Type: Feature Layer.
+**Toolset**: Use Proximity
+
+**Tool: Find Dwell Locations**
+
+**Description:**
+The **Find Dwell Locations** tool is designed to identify locations where moving objects have stopped or dwelled for a specified period, using given time and distance thresholds. This tool is particularly useful in spatial analysis and GIS workflows for tracking the movement of objects and identifying areas of interest where these objects have paused. For example, it can be used in urban planning to analyze traffic patterns by identifying where vehicles tend to stop frequently, or in wildlife studies to track animal movements and identify resting or feeding areas.
+
+**Parameters:**
+- **Time Field**: The time field from the input data that will be used to determine the duration of the dwell. Type: *Date*.
+- **Distance Threshold**: The distance within which a moving object must remain to be considered dwelling. Type: *Linear Unit*.
+- **Time Threshold**: The minimum duration of time that a moving object must remain within a specified distance to be considered dwelling. Type: *Time*.
+
+**Derived Output:**
+- **Dwell Locations**: A feature class containing the locations where moving objects have stopped or dwelled. Type: Feature Class.
+Toolset: LRS Event
+
+Tool: Configure External Event Behaviors With LRS
+
+Description:
+The "Configure External Event Behaviors With LRS" tool configures external events within a Linear Referencing System (LRS) without the need for a connection to an external event system. This tool is valuable for integrating event data managed externally into an LRS for spatial analysis and management. It is commonly used in scenarios such as managing transportation networks where external event data like road closures or maintenance activities are tracked externally but need to be incorporated into the LRS for accurate mapping and analysis.
+
+Parameters:
+- No information available.
+
+Derived Output:
+- No information available.
+Toolset: Location Referencing
+
+Tool: Create LRS From Existing Dataset
+
+Description: The Create LRS From Existing Dataset tool is used to create a linear referencing system (LRS) in a specified workspace using existing datasets. This tool is essential when existing centerline, calibration point, and redline feature classes are not yet registered with an LRS and must be in a common feature dataset. It is crucial to ensure that the feature dataset name can differ from the LRS name. One typical use case is in the Address Data Management ArcGIS Pro project, where calibration point and redline feature classes are created within the Address feature dataset. Another example is creating a centerline sequence table in the same geodatabase. This tool is part of the Location Referencing toolbox and requires an LRS dataset to run.
+
+Parameters:
+- LRS Name: The name of the new LRS. Type: String.
+- Centerline - Feature Class: The feature class in an existing dataset to use as the centerline feature class. Type: Feature Layer.
+- Centerline - Centerline ID Field: The field representing the centerline ID. Type: Field.
+
+Derived Output:
+- LRS Dataset: The controller dataset in a feature dataset containing all feature classes participating in the LRS. Type: Feature Dataset.
+Toolset: LRS Network
+
+Tool: Modify Network Calibration Rules
+
+Description: The Modify Network Calibration Rules tool allows you to modify the network calibration rules for an LRS Network. This tool is essential for adjusting calibration rules related to linear referencing systems. For example, you can use this tool to update calibration rules for specific linear features, ensuring accurate location referencing along linear networks. 
+
+Parameters:
+- LRS Network Feature Class: The input LRS Network feature class. Type: Feature Layer
+- Calibration Rule (Optional): Specifies the method for defining calibration gap measures. Options include As Is, Adding Euclidean Distance, Stepping Increment. Type: String
+- Calibration Offset (Optional): The value for the Calibration Rule parameter's Adding Increment or Stepping Increment method. Must be a numeric value. Type: Double
+- Update route measures in cartographic realignment (Optional): Specifies whether to recalibrate route measures based on length changes in cartographic realignment. Options include As is, Enable, Disable. Type: String
+
+Derived Output:
+No derived outputs available.
+**Toolset:** LRS Network Toolset
+
+**Tool:** Create LRS Network From Existing Dataset
+
+**Description:**
+The "Create LRS Network From Existing Dataset" tool is used to create an LRS Network in an LRS using an existing polyline feature class. This tool does not alter the input feature class but registers it as the LRS Network feature class. It is essential for managing linear referencing systems, enabling users to integrate pre-existing datasets into an LRS for route management, event location management, and time-aware LRS functionalities. For instance, it can be applied in transportation planning for road network management or in utility management for pipeline system tracking.
+
+**Parameters:**
+- **LRS Network Feature Class**: The input feature class to be used as the LRS Network. This feature class must reside in a feature dataset containing an LRS in the geodatabase. Type: Polyline Feature Class.
+- **LRS Name**: The name of the LRS to which the network will be registered. Type: String.
+- **Route ID Field**: The field in the LRS Network feature class to map as the route ID field. Must be a string or GUID field type. Type: String/GUID.
+- **From Date Field**: The date field in the LRS Network feature class mapped as the From date field. Type: Date.
+- **To Date Field**: The date field in the LRS Network feature class mapped as the To date field. Type: Date.
+
+**Derived Output:**
+- **LRS Network**: The created LRS Network registered in the geodatabase. Type: LRS Network Feature Class.
+**Toolset:** Provides tools for the configuration and management of linear referencing systems, which are crucial for understanding location as a relation along linear features.
+
+**Tool:** Create LRS Network
+
+**Description:**
+The "Create LRS Network" tool is used to create a Linear Referencing System (LRS) Network within ArcGIS Pro. This tool is essential for managing linear referencing systems, which are crucial for understanding location as a relation along linear features. The tool combines centerline features with route definitions and attributes to form an LRS Network. Calibration points are used to apply measures to routes within the network. This tool is typically used in workflows that involve creating new LRS Networks, creating networks from existing datasets, or modifying existing networks. For example, it can be used in transportation planning to manage road networks or in utility management to track pipeline systems.
+
+**Parameters:**
+- **Input Location:** The geodatabase where the LRS Network will be created. Type: Geodatabase.
+- **LRS Name:** The name of the LRS to which the network will be registered. Type: String.
+
+**Derived Output:**
+- **LRS Network Feature Class:** The feature class created as part of the LRS Network. Type: Feature Class.
+**Toolset:** Configuration
+
+**Tool:** Configure Utility Network Feature Class
+
+**Description:**
+The "Configure Utility Network Feature Class" tool is designed to configure a Utility Network pipeline feature class for use with a linear referencing system (LRS). This tool is essential for integrating utility network data with linear referencing, which is crucial for managing and analyzing linear features such as pipelines. Typical use cases include associating centerline and pipeline feature classes as part of a utility network and LRS, allowing for enhanced spatial analysis and management of utility networks. For example, this tool can be used to ensure that pipeline data is accurately referenced along a linear path, facilitating tasks such as route analysis, event management, and network tracing.
+
+**Parameters:**
+- **Input Feature Class**: The feature class to be configured. Type: Feature Class.
+- **LRS Network**: The LRS network to associate with the feature class. Type: LRS Network.
+- **Centerline Feature Class**: The centerline feature class to be used. Type: Feature Class.
+- **Pipeline Feature Class**: The pipeline feature class to be configured. Type: Feature Class.
+
+**Derived Output:**
+- **Configured Feature Class**: The feature class configured for use with LRS. Type: Feature Class.
+**Toolset:** LRS Network
+
+**Tool:** Modify LRS Network
+
+**Description:**
+The "Modify LRS Network" tool is used to adjust the configuration of an LRS (Linear Referencing System) Network within ArcGIS Pro. This tool allows users to remap fields in an LRS Network feature class, such as route ID, route name, date, and measure fields. It is particularly useful in scenarios where the underlying data structure of a network needs to be updated or corrected without recreating the entire network. Typical use cases include updating route identifiers, adjusting date fields for temporal analysis, and modifying measure fields for accurate linear referencing. For example, a transportation department might use this tool to update road network data to reflect new road segments or changes in road names.
+
+**Parameters:**
+- **LRS Network Feature Class**: The feature class representing the LRS Network to be modified. Type: Feature Class.
+- **RouteID Field**: The field used to store route identifiers. Type: Field.
+- **RouteName Field**: The field used to store route names. Type: Field.
+- **From Date Field**: The field used to store the start date of the route. Type: Field.
+- **Line ID Field**: (Optional) The field used to store line identifiers if the network supports lines. Type: Field.
+- **Line Name Field**: (Optional) The field used to store line names if the network supports lines. Type: Field.
+- **Line Order Field**: (Optional) The field used to store the order of lines if the network supports lines. Type: Field.
+
+**Derived Output:**
+- **Modified LRS Network**: The updated LRS Network feature class with remapped fields. Type: Feature Class.
+Toolset: Location Referencing
+
+Tool: Remove LRS Entity
+
+Description: Removes a linear referencing system (LRS) entity from an input geodatabase workspace. This tool is used when the required feature classes for the LRS are missing or need to be removed. For example, if LRS feature classes have been renamed or deleted, running the Remove LRS Entity tool can clean up the LRS by removing the missing feature class entities. It ensures data integrity and prepares the LRS for further modifications or updates.
+
+Parameters:
+- Input Workspace: Specifies the geodatabase workspace containing the LRS entity to be removed. Type: Workspace
+
+Derived Output:
+- No derived outputs generated by this tool.
+**Toolset:** Linear Referencing System (LRS)
+
+**Tool:** Create LRS
+
+**Description:**
+The Create LRS tool in ArcGIS Pro is designed to establish a linear referencing system (LRS) within a geodatabase. This tool is essential for managing and analyzing data related to linear features such as roads, pipelines, and railways. The LRS provides capabilities for multiple linear referencing methods, event location management, and time-aware data handling. Typical use cases include transportation network management, utility infrastructure monitoring, and any scenario where spatial data is organized along linear paths. For example, a transportation department might use the LRS to manage road maintenance schedules or track traffic incidents along highways.
+
+**Parameters:**
+- **Input Location:** The geodatabase where the LRS will be created. Type: Geodatabase.
+- **LRS Name:** The name of the new LRS. Type: String.
+- **Centerline Feature Class Name:** The name for the centerline feature class. Type: String.
+- **Calibration Point Feature Class Name:** The name for the calibration point feature class. Type: String.
+- **Redline Feature Class Name:** The name for the redline feature class. Type: String.
+- **Centerline Sequence Table Name:** The name for the centerline sequence table. Type: String.
+
+**Derived Output:**
+- **Centerline Feature Class:** A feature class representing the centerline of the LRS. Type: Feature Class.
+- **Calibration Point Feature Class:** A feature class for calibration points used in the LRS. Type: Feature Class.
+- **Redline Feature Class:** A feature class for redlines, which are used to manage changes in the LRS. Type: Feature Class.
+- **Centerline Sequence Table:** A table that maintains the sequence of centerlines. Type: Table.
+**Toolset:** LRS
+
+**Tool:** Modify LRS
+
+**Description:**
+The "Modify LRS" tool in ArcGIS Pro is designed to modify an existing Linear Referencing System (LRS) within a specified workspace. This tool allows users to change which centerline, calibration point, or redline feature class is registered with the LRS. It also enables configuration changes such as enabling conflict prevention. The tool is versatile, allowing modifications on feature classes or tables with or without geometry or records. Typical use cases include updating the LRS to reflect changes in the underlying data structure or to incorporate new data management rules. For example, a transportation department might use this tool to update road network data to ensure accurate route and event management.
+
+**Parameters:**
+- **Input Workspace:** The workspace containing the LRS to be modified. Type: Workspace.
+- **Current LRS Name:** The name of the LRS to modify. Type: String.
+- **Centerline, Centerline Sequence, Calibration Point, Redline Sections:** These are populated based on the selected LRS. Type: Feature Class.
+
+**Derived Output:**
+- **Modified LRS:** The updated LRS configuration. Type: LRS Dataset.
+Toolset: Linear Referencing
+
+Tool: Modify Route ID Padding
+
+Description: The Modify Route ID Padding tool adjusts the padding, null, and length properties for fields within a multifield route ID. This tool is essential for managing linear referencing systems. For example, it can be used to update route IDs for road networks, pipelines, or utility lines. By modifying the padding properties, users can ensure consistency and accuracy in route identification, which is crucial for spatial analysis and maintaining data integrity in GIS workflows.
+
+Parameters:
+- Input Route Feature Class: Specifies the route feature class to be modified. Type: Feature Class.
+- Route ID Field: Identifies the field containing the route IDs to be adjusted. Type: Field.
+- Padding Character: Defines the character used for padding in the route ID. Type: String.
+- Padding Length: Specifies the length of the padding to be added to the route ID. Type: Integer.
+
+Derived Output:
+- Updated Route Feature Class: The modified route feature class with adjusted route IDs. Type: Feature Class.
+**Toolset:** LRS Network
+
+**Tool:** Configure Route Dominance Rules
+
+**Description:**
+The "Configure Route Dominance Rules" tool is designed to establish a set of rules that determine the dominant route in a network where multiple routes are concurrent. This is particularly useful in linear referencing systems (LRS) where routes may share the same centerline but have different measures. The tool supports both numeric and alphanumeric order types to specify the dominance criteria. Typical use cases include managing road networks where multiple routes overlap, such as highways with concurrent sections. For example, in a scenario where several routes share the same roadway, this tool can help identify which route should be considered dominant based on predefined criteria like functional class or route number.
+
+**Parameters:**
+- **Order Type**: Specifies the type of ordering to use when evaluating strings. Options are Numeric or Alphanumeric. Type: String.
+- **Source Table Name**: The source event table or feature class used in the configured rule. Type: Table or Feature Class.
+- **Fields**: The attribute field from the source table used to determine route dominance. Multiple fields can be configured. Type: Field.
+- **Order Method**: The method to specify ordering in route dominance, either Lesser or Greater values. Type: String.
+- **Prioritized Exceptions**: A comma-separated list of user-provided exceptions. Values derived from multiple fields must match the concatenated order defined using Fields. Type: String.
+
+**Derived Output:**
+No specific derived outputs are mentioned in the available information.
+Toolset: Configuration
+
+Tool: Configure Address Feature Classes
+
+Description: Configures the Address Range and Site Address Point feature classes from the Address Data Management solution for use with a linear referencing system (LRS) and the ArcGIS Roads and Highways extension. This tool is crucial for integrating address data with linear referencing systems, enabling better spatial analysis and GIS workflows. For example, by running this tool with properly configured parameters, you can ensure that the Road Name field is set up correctly in the Address feature class, enhancing geocoding accuracy and location-based analysis.
+
+Parameters:
+- Address Range Road Name Field: Specifies the field in the Address Range feature class that contains road names. Type: Field.
+- Site Address Road Name Field: Specifies the field in the Site Address Point feature class that contains road names. Type: Field.
+
+Derived Output:
+- Output Feature Class: The output geocoded feature class. Type: Feature Class.
+Toolset: LRS Network
+
+Tool: Configure Lookup Table
+
+Description: Configures a lookup table for one or more fields used in a multifield route ID. This tool is part of the LRS Network toolset, which allows you to create and modify LRS Networks. 
+
+Parameters:
+- Input Table: The table that contains addresses or places to geocode in CSV, XLS, or XLSX format or in a file geodatabase table. Data Type: Table View; Raster Layer
+- Output Location: The destination where the output table will be written. Data Type: Workspace
+- Output Name: The name of the output table. Data Type: String
+- Expression (Optional): An SQL expression that will be used to select a subset of records. Data Type: SQL Expression
+- Field Map (Optional): Specifies the fields that will be transferred to the output dataset with their respective properties and source fields. Data Type: Field Mappings
+- Config Keyword (Optional): Specifies the default storage parameters for geodatabases in a relational database management system (RDBMS). Data Type: String
+
+Derived Output:
+- No derived outputs available.
+Toolset: Summarize Data
+
+Tool: Describe Dataset
+
+Description: The Describe Dataset tool summarizes features into calculated field statistics, sample features, and extent boundaries. It helps in understanding the spatial distribution and relationships of data. For example, it can be used to calculate field statistics like mean, median, and standard deviation for a set of features, identify sample features for further analysis, and determine the overall extent of the dataset.
+
+Parameters:
+- Input Features: Specifies the features to be summarized. Type: Feature Layer.
+- Output Feature Class: The output feature class containing the summarized information. Type: Feature Class.
+
+Derived Output:
+- Calculated Field Statistics: Provides statistics such as mean, median, and standard deviation for specified fields. Type: Table.
+- Sample Features: Identifies a subset of features for detailed analysis. Type: Feature Layer.
+- Extent Boundaries: Represents the overall extent of the dataset. Type: Feature Class.
+No information available.
+Toolset: Summarize Data
+
+Tool: Reconstruct Tracks
+
+Description: The Reconstruct Tracks tool creates line or polygon tracks from time-enabled input data. This tool is useful for reconstructing movement patterns, such as tracking the paths of vehicles or wildlife over time. For example, it can be used to analyze the migration routes of birds based on GPS tracking data or to visualize the movement of ships in a certain region. By reconstructing tracks, users can gain insights into spatial patterns and relationships within the data.
+
+Parameters:
+- Input Features: Specifies the input features containing the time-enabled data to reconstruct tracks. Type: Feature Layer.
+- Output Feature Class: Specifies the output feature class that will contain the reconstructed tracks. Type: Feature Class.
+
+Derived Output:
+- Reconstructed Tracks: Contains the line or polygon tracks generated from the input time-enabled data. Type: Feature Class.
+**Toolset:** Summarize Data
+
+**Tool:** Join Features
+
+**Description:**
+The Join Features tool allows you to join attributes from one layer to another based on spatial, temporal, or attribute relationships. This tool is valuable in spatial analysis and GIS workflows for understanding spatial distribution and relationships of data. For instance, it can be used to determine the number of homes within a flood boundary by joining a homes layer to a flood boundary layer using the "Within" spatial relationship operator. The Join Features tool is part of the Summarize Data toolset, which calculates total counts, lengths, areas, and basic descriptive statistics of features.
+
+**Parameters:**
+- **Target Features**: Contains the target features to which attributes will be joined. Data Type: Feature Layer.
+- **Join Features**: Contains the features whose attributes will be joined to the target features. Data Type: Feature Layer.
+- **Output Feature Class**: A new feature class that includes attributes from both the target and join features. Data Type: Feature Class.
+- **Join Operation (Optional)**: Specifies how joins between the target and join features will be handled if multiple join features have the same spatial relationship with a single target feature. Options include "Join one to one" and "Join one to many". Data Type: String.
+
+**Derived Output:**
+- **Output Feature Class**: A new feature class containing the attributes of the target and join features. By default, all attributes of the target features and the attributes of the joined features will be written to the output. However, the set of attributes to be transferred can be defined by the field map parameter. Data Type: Feature Class.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Within
+
+**Description:**
+The "Summarize Within" tool overlays a polygon layer with another layer to summarize the number of points, length of lines, or area of polygons within each polygon. It also calculates attribute field statistics for features within the polygons. This tool is commonly used in spatial analysis to understand the distribution and relationships of data within specified boundaries. For example, it can determine the area of specific land use types within administrative boundaries or count incidents within city districts.
+
+**Parameters:**
+- **Input Polygons:** The polygon features defining the areas for which the summary will be calculated. Type: Feature Layer.
+- **Input Summary Features:** Features (points, lines, or polygons) to be summarized within the input polygons. Type: Feature Layer.
+- **Output Feature Class:** Name of the output feature class containing the summary results. Type: Feature Class.
+- **Summary Fields:** Optional fields for which statistics will be calculated. Type: Field.
+- **Group Field:** Optional field used to group the summary results. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the summarized data, including counts, lengths, areas, and calculated statistics. Type: Feature Class.
+**Toolset:** Summarize Data
+
+**Tool:** Aggregate Points
+
+**Description:**
+The "Aggregate Points" tool aggregates point features into polygon features or bins. This tool is useful for summarizing point data within specified areas, such as polygons or bins, and calculating statistics for those points. It helps in analyzing the distribution of events like crime incidents within city districts or summarizing customer locations within sales territories. By aggregating points, users can gain insights into spatial patterns and relationships, such as identifying areas with high concentrations of points or calculating average attribute values within each area.
+
+**Parameters:**
+- **Input Point Features:** The point features to be aggregated. Type: Feature Layer.
+- **Aggregation Polygon Features:** The polygon features defining the areas for aggregation. Type: Feature Layer.
+- **Output Feature Class:** The resulting feature class containing the aggregated results. Type: Feature Class.
+- **Summary Fields:** Fields for which statistics will be calculated. Type: Field.
+- **Bin Size:** The size of the bins if aggregating into bins instead of polygons. Type: Linear Unit.
+- **Bin Type:** The type of binning method used, such as square or hexagon. Type: String.
+
+**Derived Output:**
+- **Aggregated Feature Class:** The resulting feature class containing aggregated data with calculated statistics. Type: Feature Class.
+Toolset: Summarize Data
+
+Tool: Summarize Attributes
+
+Description: Calculates summary statistics for fields in a feature class. This tool can be used to understand the spatial distribution and relationships of data. For example, it can help in analyzing the distribution of population density across different regions or determining the average length of rivers in a watershed.
+
+Parameters:
+- Input Features: Specifies the feature class for which summary statistics will be calculated. Type: Feature Layer.
+- Field(s): Specifies the field(s) for which statistics will be calculated. Type: Field.
+- Case Field: Specifies a field that defines the case for the summary statistics. Type: Field.
+
+Derived Output:
+- Output Table: A table containing the calculated summary statistics. Type: Table.
+**Toolset:** Location Referencing
+
+**Tool:** Create LRS From Existing Dataset
+
+**Description:**
+The "Create LRS From Existing Dataset" tool in ArcGIS Pro is designed to establish a linear referencing system (LRS) using existing datasets. This tool is particularly useful for integrating existing spatial data, such as centerlines, calibration points, and redlines, into a cohesive LRS framework. It is commonly used for managing transportation networks, utility lines, or any infrastructure requiring precise spatial referencing. For example, a city might utilize this tool to integrate road centerline data with calibration points to create a comprehensive LRS for improved route management and analysis.
+
+**Parameters:**
+- **LRS Name**: The name of the new LRS to be created. Type: String.
+- **Centerline - Feature Class**: The feature class in an existing dataset to use as the centerline feature class. Type: Feature Class.
+- **Centerline - Centerline ID Field**: The field in the centerline feature class that serves as the ID. Type: Field.
+- **Centerline Sequence - Table**: The table to use as the centerline sequence. Type: Table.
+- **Centerline Sequence - Centerline ID Field**: The field in the centerline sequence table that matches the centerline ID. Type: Field.
+
+**Derived Output:**
+- **LRS Dataset**: The resulting LRS dataset that includes the registered centerline, calibration point, and redline feature classes. Type: Feature Dataset.
+Toolset: Location Referencing
+
+Tool: Configuration
+
+Description: The Configuration toolset provides tools for creating and modifying an LRS, LRS Networks, and LRS events, as well as configuring a utility network for use with an LRS. For example, the tool "Configure Address Feature Classes" configures the Address Range and Site Address Point feature classes for use with a linear referencing system (LRS) and the ArcGIS Roads and Highways extension.
+
+Parameters:
+- Append Events: Appends event records from a table, layer, or feature class to an existing LRS event feature class. Type: Feature Layer.
+- Append Routes: Appends routes from an input polyline into an LRS Network. Type: Polyline.
+- Apply Event Behaviors: Updates the event locations for all event feature classes registered with the input network based on the route edit performed. Type: Network Dataset.
+- Calculate Intersecting Route Measures: Creates a table of all the routes and measures at each intersection location. Type: Table.
+- Calculate Route Concurrencies: Calculates and reports concurrent route sections in an LRS Network. Type: Network Dataset.
+- Delete Routes: Deletes routes and associated data elements from the LRS Network. Type: Network Dataset.
+- Derive Event Measures: Populates and updates the DerivedRouteID field and measure values on point and line events with those fields configured and enabled. Type: Feature Layer.
+- Generate Calibration Points: Generates calibration points for any route shape provided. Type: Polyline.
+- Generate Events: Regenerates shapes for event features registered with an LRS Network. Type: Network Dataset.
+- Generate Intersections: Generates new intersections and updates existing intersections. Type: Network Dataset.
+- Generate LRS Data Product: Transforms LRS data to create a length, route log, or feature count data product for selected routes in an LRS Network. Type: Network Dataset.
+
+Derived Output:
+- No derived outputs available.
+**Toolset:** Location Referencing System (LRS)
+
+**Tool:** Create LRS
+
+**Description:**
+The Create LRS tool in ArcGIS Pro is designed to establish a linear referencing system (LRS) within a geodatabase. This tool is essential for managing spatial data that requires linear referencing, such as transportation networks, pipelines, or any infrastructure that benefits from understanding spatial relations along linear paths. The tool creates a minimum schema that includes centerline, calibration point, and redline feature classes, as well as a centerline sequence table. These components are crucial for defining the spatial and temporal aspects of linear features, allowing for efficient event location management and support for multiple linear referencing methods. Typical use cases include creating a new LRS for a road network to manage road events or integrating existing datasets into a unified LRS framework.
+
+**Parameters:**
+- **Input Location:** The geodatabase where the LRS will be created. Type: *Geodatabase Path*.
+- **LRS Name:** The name of the new LRS. Type: *String*.
+- **Centerline Feature Class Name:** The name for the centerline feature class. Type: *String*.
+- **Calibration Point Feature Class Name:** The name for the calibration point feature class. Type: *String*.
+- **Redline Feature Class Name:** The name for the redline feature class. Type: *String*.
+- **Centerline Sequence Table Name:** The name for the centerline sequence table. Type: *String*.
+
+**Derived Output:**
+- **Centerline Feature Class:** A feature class representing the centerline of the LRS. Type: *Feature Class*.
+- **Calibration Point Feature Class:** A feature class for calibration points used in the LRS. Type: *Feature Class*.
+- **Redline Feature Class:** A feature class for redline features in the LRS. Type: *Feature Class*.
+- **Centerline Sequence Table:** A table for managing the sequence of centerlines. Type: *Table*.
+**Toolset:** LRS
+
+**Tool:** Modify LRS
+
+**Description:**
+The "Modify LRS" tool in ArcGIS Pro is designed to modify an existing Linear Referencing System (LRS) within a specified workspace. This tool allows users to change the configuration of the LRS, such as updating which centerline, calibration point, or redline feature class is registered with the LRS. It also enables the modification of configurations like enabling conflict prevention. The tool is versatile and can be applied to feature classes or tables with or without geometry or records. Typical use cases include updating the LRS to reflect changes in spatial data, ensuring data integrity by managing unique route and centerline IDs, and configuring the LRS to prevent conflicts in spatial data management.
+
+**Parameters:**
+- **Input Workspace:** The workspace containing the LRS to be modified. Type: Workspace.
+- **Current LRS Name:** The name of the LRS to modify. Type: String.
+
+**Derived Output:**
+- **Modified LRS:** The updated LRS configuration. Type: LRS Dataset.
+Toolset: Projections and Transformations
+
+Tool: Projections and Transformations
+
+Description: The Projections and Transformations toolset in ArcGIS Pro contains tools for converting geographic data between coordinate systems. These tools are essential when working with GIS data that needs to be transformed or projected to align with other datasets. For example, you can use the Batch Project tool to change the coordinate system of multiple input feature classes or datasets to a common coordinate system. Another tool, Convert Coordinate Notation, allows you to convert coordinate notations from one format to another. Additionally, the Create Custom Geographic Transformation tool enables you to define a custom transformation for converting data between different geographic coordinate systems or datums. These tools are crucial for ensuring the accurate alignment of spatial data in various GIS workflows.
+
+Parameters:
+- Batch Project: Changes the coordinate system of input feature classes or datasets to a common coordinate system. Type: Feature Class or Dataset.
+- Convert Coordinate Notation: Converts coordinate notations from one format to another. Type: Field.
+- Create Custom Geographic Transformation: Creates a custom transformation for converting data between different geographic coordinate systems or datums. Type: Transformation Definition.
+- Create Custom Vertical Transformation: Creates a custom transformation for converting data between different vertical coordinate systems or datums. Type: Transformation Definition.
+- Create Spatial Reference: Creates a spatial reference for use in ModelBuilder. Type: Spatial Reference.
+- Define Projection: Overwrites the coordinate system information stored with a dataset. Type: Dataset.
+- Project: Projects spatial data from one coordinate system to another. Type: Dataset.
+
+Derived Output:
+- N/A
+**Toolset:** Find Locations
+
+**Tool:** Detect Incidents
+
+**Description:**
+The "Detect Incidents" tool creates a layer that identifies features meeting a specified condition. This tool is commonly used in spatial analysis to detect occurrences or incidents that match certain criteria within a dataset. For example, it can identify areas where environmental conditions exceed a threshold, such as regions with high pollution levels or areas experiencing extreme weather conditions. It is also useful in urban planning to identify zones meeting specific zoning regulations or in public health to detect areas with high incidence rates of a disease.
+
+**Parameters:**
+- **Input Layer:** Specifies the input layer containing features to be analyzed. Type: Feature Layer.
+- **Condition:** Defines the condition that features must meet to be detected. Type: SQL Expression.
+- **Output Layer:** Specifies the name for the output layer containing the detected features. Type: Feature Layer.
+
+**Derived Output:**
+- **Output Layer:** Creates a new layer that contains the features meeting the specified condition. Type: Feature Layer.
+Toolset: Find Locations
+
+Tool: Find Similar Locations
+
+Description:
+The "Find Similar Locations" tool identifies candidate features that are most similar or dissimilar to one or more input features based on feature attributes. This tool is typically used in spatial analysis to compare different geographic areas or features to a target feature, allowing users to find areas that share similar characteristics. For example, it can be used to identify neighborhoods similar to a high-crime area based on demographic and socio-economic attributes or find retail locations similar to a top-performing store.
+
+Parameters:
+- **Input Features to Match:** The features that you want to compare other features against. Type: Feature Layer.
+- **Candidate Features:** The features that will be compared to the input features. Type: Feature Layer.
+- **Output Features:** The resulting feature class that will contain the most similar or dissimilar features. Type: Feature Class.
+- **Number Of Results:** Specifies how many of the most similar or dissimilar features to return. Type: Integer.
+- **Collapse Output to Points:** Determines whether the output features will be collapsed to points or retain their original geometry. Type: Boolean.
+
+Derived Output:
+- **Output Feature Class:** Contains the features that are most similar or dissimilar to the input features. Type: Feature Class.
+Toolset: Find Locations
+
+Tool: Find Dwell Locations
+
+Description: Finds locations where moving objects have stopped, or dwelled, using given time and distance thresholds. This tool is designed for large datasets and is optimal for larger datasets with hundreds of thousands or millions of records. It uses distributed processing to complete analytics on GeoAnalytics Server. The tool is integrated and runs in ArcGIS Pro in the same way as other desktop geoprocessing tools.
+
+Parameters:
+- Time Threshold: Specifies the time threshold for identifying dwell locations. Type: Double.
+- Distance Threshold: Specifies the distance threshold for identifying dwell locations. Type: Linear Unit.
+
+Derived Output:
+- Dwell Locations: A layer containing the locations where moving objects have dwelled. Type: Feature Layer.
+Toolset: Find Locations
+
+Tool: Find Locations
+
+Description: The Find Locations toolset contains tools that are used to identify areas meeting specified criteria based on attribute and spatial queries. For example, these tools can be used to find parcels that are vacant or areas within a certain distance of a river. The identified areas can either be selected from existing features like land parcels or new features can be created based on the criteria met. These tools are designed for large datasets and utilize distributed processing for analytics on GeoAnalytics Server.
+
+Parameters:
+- Input File: The input file that will be scanned for locations (coordinates or custom locations), dates, and custom attributes; or a folder in which all files in the folder will be scanned for locations. Data Type: File
+- Output Feature Class: The feature class containing point features representing the locations found. Data Type: Feature Class
+- Input Template (Optional): The template file that determines the settings to use for each tool parameter. Data Type: Template File
+
+Derived Output:
+- None available.
+Toolset: Data Enrichment
+
+Tool: Calculate Motion Statistics
+
+Description: The Calculate Motion Statistics tool calculates motion statistics for points in a time-enabled feature class. This tool is part of the Data Enrichment toolset, which adds attributes to existing features for visualization, regression, and prediction. By enriching data with contextual information, users can better understand spatial relations. An example of using Calculate Motion Statistics is analyzing the movement patterns of wildlife based on tracking data.
+
+Parameters:
+- elevation_unit: Specifies the unit of measurement for elevation. Options include NAUTICAL_MILES_INT, MILES_INT, YARDS_INT, FEET_INT. Type: String.
+- distance_unit: Specifies the unit of measurement for distance. Options include NAUTICAL_MILES_INT, MILES_INT, YARDS_INT, FEET_INT. Type: String.
+
+Derived Output:
+No derived outputs available.
+Toolset: Projections and Transformations
+
+Tool: Create Custom Vertical Transformation
+
+Description: The Create Custom Vertical Transformation tool allows users to define a transformation for converting data between two vertical coordinate systems or datums. This tool's output can be utilized as a transformation object for any tool requiring a vertical transformation. It is essential for managing spatial relations and ensuring accurate vertical coordinate system conversions. For example, it can be used to convert elevation data between different vertical datums, ensuring consistency in 3D spatial analysis workflows.
+
+Parameters:
+- Geographic Transformation Name: The name of the custom transformation definition. Type: String.
+- Input Geographic Coordinate System: The starting geographic coordinate system. Must be a geographic coordinate system. Type: Coordinate System.
+- Output Geographic Coordinate System: The final geographic coordinate system. Must be a geographic coordinate system. Type: Coordinate System.
+- Custom Geographic Transformation: The custom transformation method to be used. Choose from a list of methods available. Type: String.
+- Extent (Optional): The geographic area where the transformation is applicable. Type: Current Display Extent.
+
+Derived Output:
+- No derived outputs available.
+Toolset: Projections and Transformations
+
+Tool: Define Projection
+
+Description: The Define Projection tool overwrites the coordinate system information stored with a dataset. It is specifically intended for datasets with unknown or incorrect coordinate systems defined. This tool does not modify the geometry of the input data or project it into a new coordinate system. To change the coordinate system of a dataset, the Project tool should be used, which creates a new version of the data.
+
+Parameters:
+- Input Dataset or Feature Class: The feature class, feature layer, feature dataset, scene layer, scene layer package, or OGC Geopackage to be projected. Type: Feature Layer; Feature Dataset; Scene Layer; Building Scene Layer
+- Output Dataset or Feature Class: The output dataset to which the results will be written. Type: Feature Class; Feature Dataset; File Output
+- Output Coordinate System: The coordinate system to which the input data will be projected. Type: Coordinate System
+- Geographic Transformation (Optional): This optional parameter may be required if the input and output coordinate systems have different datums. Type: String
+- Input Coordinate System (Optional): The coordinate system of the input feature class or dataset. Type: String
+
+Derived Output:
+No derived outputs available.
+Toolset: Projections and Transformations
+
+Tool: Create Spatial Reference
+
+Description: Creates a spatial reference for use in ModelBuilder. This tool is used to define a spatial reference when creating a geodatabase feature dataset or a stand-alone feature class. The spatial reference includes a coordinate system for x-, y-, and z-values as well as tolerance and resolution values for x-, y-, z-, and m-values. It is important to note that for data sources with an unknown coordinate system, you cannot add data until a projection has been defined. The Define Projection tool can be used to modify the coordinate system of the dataset. When using the Create Spatial Reference tool, you must know the correct coordinate system of the dataset. This tool does not modify the geometry of the input data or project it into a new coordinate system; for that purpose, the Project tool should be used.
+
+Parameters:
+- Output Spatial Reference: Specifies the output spatial reference. Type: Spatial Reference.
+
+Derived Output:
+- None.
+**Toolset:** Projections and Transformations
+
+**Tool:** Create Custom Geographic Transformation
+
+**Description:**
+The "Create Custom Geographic Transformation" tool is designed to create a transformation definition for converting data between two geographic coordinate systems or datums. This tool is essential for ensuring that spatial data aligns correctly when different geographic coordinate systems are used. It is typically used in workflows where data from different sources needs to be integrated or analyzed together, such as combining datasets from different regions or updating datasets to a new datum. For example, it can be used to transform data from the WGS 1984 coordinate system to the NAD 1983 system, ensuring that all data layers align properly on a map.
+
+**Parameters:**
+- **Geographic Transformation Name:** The name of the custom transformation definition. Type: String.
+- **Input Geographic Coordinate System:** The starting geographic coordinate system. Must be a geographic coordinate system; a projected coordinate system is invalid. Type: Coordinate System.
+- **Output Geographic Coordinate System:** The final geographic coordinate system. Must be a geographic coordinate system; a projected coordinate system is invalid. Type: Coordinate System.
+- **Custom Geographic Transformation:** The custom transformation method that will be used. Type: String.
+- **Extent (Optional):** The geographic area where the transformation is applicable. Type: Current Display Extent or Draw Extent.
+
+**Derived Output:**
+- **Custom Geographic Transformation:** The transformation object that can be used in other tools requiring a geographic transformation. Type: Transformation Object.
+**Toolset:** Projections and Transformations
+
+**Tool:** Convert Coordinate Notation
+
+**Description:**
+The Convert Coordinate Notation tool converts coordinate notations contained in one or two fields from one notation format to another. This tool is essential for GIS workflows where data from different sources may use varying coordinate systems. For example, it can convert coordinates from a degree-minute-second format to decimal degrees for seamless integration with other datasets, ensuring spatial data compatibility across different systems and applications.
+
+**Parameters:**
+- **Input Table:** The table containing the coordinates to be converted. Type: Table.
+- **Input Coordinate Format:** The format of the input coordinates (e.g., DD, DMS). Type: String.
+- **Output Coordinate Format:** The desired format for the output coordinates. Type: String.
+- **Input X Field:** The field containing the X coordinate values. Type: Field.
+- **Input Y Field:** The field containing the Y coordinate values. Type: Field.
+- **Output X Field:** The field to store the converted X coordinate values. Type: Field.
+- **Output Y Field:** The field to store the converted Y coordinate values. Type: Field.
+
+**Derived Output:**
+- **Output Table:** The table containing the converted coordinates. Type: Table.
+Toolset: Projections and Transformations
+
+Tool: Project
+
+Description:
+The Project tool in ArcGIS Pro is used to transform spatial data from one coordinate system to another. This is crucial for ensuring that spatial data aligns correctly when combining datasets from different sources. Typical use cases include preparing data for spatial analysis, ensuring data compatibility in GIS workflows, and converting datasets to a common coordinate system for visualization or analysis. For example, you might use the Project tool to convert a dataset from a geographic coordinate system like WGS 1984 to a projected coordinate system like NAD 1983 StatePlane Oregon North FIPS 3601 (Meters) for detailed local analysis.
+
+Parameters:
+- **Input Dataset or Feature Class:** The feature class, feature layer, feature dataset, scene layer, scene layer package, or OGC Geopackage to be projected. **Type:** Feature Layer; Feature Dataset; Scene Layer; Building Scene Layer; File.
+- **Output Dataset or Feature Class:** The output dataset to which the results will be written. **Type:** Feature Class; Feature Dataset; File.
+- **Output Coordinate System:** The coordinate system to which the input data will be projected. **Type:** Coordinate System.
+- **Geographic Transformation (Optional):** This method can be used to convert data between two geographic coordinate systems or datums. This optional parameter may be required if the input and output coordinate systems have different datums. **Type:** String.
+- **Input Coordinate System (Optional):** The coordinate system of the input feature class or dataset. This parameter becomes active when the input dataset does not have a defined coordinate system. **Type:** Coordinate System.
+
+Derived Output:
+- **Output Dataset or Feature Class:** The projected dataset. **Type:** Feature Class; Feature Dataset; File.
+Toolset: Use Proximity
+
+Tool: Create Buffers
+
+Description: Creates buffers around input features to a specified distance. This tool is used to determine the proximity of features within one or more feature classes or between two feature classes. It can be applied to answer spatial analysis questions such as "What is near what?" Examples of its use include creating buffer polygons around point, line, or polygon features to visualize spatial patterns, identify areas within a certain distance of a specific feature, or calculate distances between features.
+
+Parameters:
+- Input Features: Specifies the features for which buffers will be created. Type: Feature Layer.
+- Output Feature Class: The feature class that will contain the buffer polygons. Type: Feature Class.
+- Distance: The distance around input features to create the buffer. Type: Linear Unit.
+
+Derived Output:
+- Buffer Feature Class: The output feature class containing the created buffer polygons. Type: Feature Class.
+No information available.
+No information available.

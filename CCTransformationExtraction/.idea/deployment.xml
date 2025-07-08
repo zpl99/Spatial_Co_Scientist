@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="zl22853@172.16.68.6:22 password (10)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/zl22853/code/CCTransformationExtraction" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="zl22853@172.16.68.6:22 password (9)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/zl22853/code/CCTransformationExtraction" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

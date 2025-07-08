@@ -50,7 +50,7 @@ class ExperimentDesignAgent:
         )
         user_input = [{"role": "user", "content": prompt}]
         output, *_ = self.llm_engine.respond(user_input, temperature=0.2, top_p=0.92)
-        return output  # YAML格式或解析后为Python dict/list
+        return output
     def solve_task(self, hypothesis, goal, literature="", expert=""):
         core_concepts_output = self.core_concept_identify(hypothesis, goal)
         sys_msg = self.set_experiment_prompt(hypothesis, goal, literature, expert)

@@ -1,0 +1,1322 @@
+Toolset: Data Engineering
+
+Tool: Reclassify Field
+
+Description: The Reclassify Field tool reclassifies values in a numerical or text field into classes based on manually defined bounds or using a reclassification method. It is commonly used to replace values based on new information, group certain values, reclassify values to a common scale, or set specific values to NoData. For example, in spatial analysis, it can be used to reclassify land use types or change values within a specific range. The tool provides manual, equal interval, defined interval, quantile, natural breaks (Jenks), and standard deviation classification methods for reclassifying data.
+
+Parameters:
+- Input Table: The input table or feature class containing the field to be reclassified. Data Type: Table View; Raster Layer; Mosaic Layer
+- Field to Reclassify: The numeric or text field that will be reclassified.
+- Reclassification Method (Optional): Specifies the method for reclassifying field values. Options include Defined interval, Equal interval, Geometric interval, Manual interval, Natural breaks (Jenks), Quantile, Standard deviation, and Unique values.
+
+Derived Output:
+No information available.
+Toolset: Data Engineering
+
+Tool: Reclassify Field
+
+Description: Reclassify Field tool reclassifies values in a numerical or text field into classes based on manually defined bounds or using a reclassification method. This tool is part of the Data Engineering toolset, which contains tools for preparing fields for analysis workflows by transforming, standardizing, encoding, and reclassifying values. Reclassify Field ensures datasets are clean, consistent, and ready for modeling or analysis workflows. For example, it can be used to categorize elevation values into different terrain types for terrain analysis in GIS workflows.
+
+Parameters:
+- Input Table: The input table or feature class containing the field that will be reclassified. Data Type: Table View; Raster Layer; Mosaic Layer
+- Field to Reclassify: The field that will be reclassified. The field must be numeric or text.
+- Field Reclassification Method (Optional): Specifies the reclassification method to be used for field values. Options include Defined interval, Equal interval, Geometric interval, Manual interval, Natural breaks (Jenks), Quantile, Standard deviation, and Unique values.
+
+Derived Output:
+- No derived outputs specified in the documentation.
+Toolset: Data Engineering
+
+Tool: Standardize Field
+
+Description: Standardize Field tool standardizes values in fields by converting them to values that follow a specified scale. Standardization methods include z-score, minimum-maximum, absolute maximum, and robust standardization. This tool is useful for ensuring consistency and comparability of data across different fields. For example, in spatial analysis, Standardize Field can be used to normalize different measurement scales (like population density and income) to facilitate meaningful comparisons and analyses.
+
+Parameters:
+- Input Field: Specifies the field whose values will be standardized. Type: Field
+- Standardization Method: Specifies the method used for standardization (e.g., z-score, minimum-maximum). Type: String
+- Output Field Name: Specifies the name of the output field containing the standardized values. Type: String
+
+Derived Output:
+- Standardized Field: The field containing the standardized values after applying the specified standardization method. Type: Field
+Toolset: Data Engineering
+
+Tool: Reclassify Field
+
+Description: Reclassify Field tool reclassifies values in a numerical or text field into classes based on manually defined bounds or using a reclassification method. This tool enables you to quickly and easily reclassify your data using remap or reclassification tables. For example, you can map individual values, ranges of values, strings, or NoData to another value or NoData. Reclassify Field allows you to dynamically create reclassification tables for analysis and optionally save a table for later use. 
+
+Parameters:
+- Input Field: Specifies the field containing the values to be reclassified. Type: Field
+- Reclassification Method: Specifies the method to reclassify values (manual or using a reclassification table). Type: String
+- Output Field: Specifies the field where the reclassified values will be stored. Type: Field
+
+Derived Output:
+- Reclassified Field: Contains the reclassified values based on the specified reclassification method. Type: Field
+Toolset: Data Engineering
+
+Tool: Reclassify Field
+
+Description: Reclassify Field tool reclassifies values in a numerical or text field into classes based on bounds defined manually or using a reclassification method. This tool ensures datasets are clean, consistent, and ready for modeling or analysis workflows. For example, it can be used to categorize elevation values into different terrain types like lowlands, hills, and mountains, facilitating terrain analysis in GIS workflows.
+
+Parameters:
+- Input Field: Specifies the field containing the values to be reclassified. Type: Field
+- Reclassification Method: Defines the method to reclassify values (manual bounds or predefined method). Type: String
+- Output Field: Specifies the field where the reclassified values will be stored. Type: Field
+
+Derived Output:
+- Reclassified Field: Contains the reclassified values based on the specified bounds or method. Type: Field
+Toolset: Fields
+
+Tool: Batch Update Fields
+
+Description: Batch Update Fields tool transforms fields in a table or feature class based on schema defined in the definition table and creates a new table or feature class. This tool is useful for updating multiple fields at once based on a predefined schema. For example, it can be used to standardize field types, rename fields, or apply default values across a dataset. In a GIS workflow, Batch Update Fields can streamline data preparation tasks before analysis, ensuring consistency and accuracy in attribute data.
+
+Parameters:
+- Input Table: The input geodatabase table or feature class that contains the fields to be updated. Type: Table View; Raster Layer; Mosaic Layer.
+- Field Name: The name of the field that will be altered. Type: String.
+- Field Properties: The input table fields and their properties that will be altered. Includes Field Name, New Field Name, New Field Alias, and New Field Type. Type: Field Properties.
+- Output Table: The output table or feature class containing the updated fields. Type: Table.
+
+Derived Output:
+- Updated Table: The table or feature class with the transformed fields based on the schema defined in the definition table. Type: Table.
+Toolset: Fields
+
+Tool: Calculate Fields (multiple)
+
+Description: The Calculate Fields (multiple) tool calculates the values of two or more fields for a feature class, feature layer, or raster. It allows for multiple updates to a single row, enhancing performance by eliminating the need to run the Calculate Field tool multiple times. While the Calculate Field tool supports both existing and new fields as input, the multiple version requires an existing field as input. Therefore, if a new field is needed, the Add Field tool must be run first before using the Calculate Fields (multiple) tool.
+
+Parameters:
+- Input Layer: The input features for which fields will be calculated. Data Type: Feature Class; Table
+- Field to Calculate: Specifies whether values will be calculated for a newly created field or an existing field. Data Type: String
+- New Field Name (Optional): The name of the new field where values will be calculated. Data Type: String
+- Existing Field (Optional): The existing field for which values will be calculated. Data Type: Field
+- Field Type (Optional): Specifies the field type for the calculated field. Data Type: String
+- Expression: The expression used to calculate values in the field. Data Type: String
+- Track Aware (Optional): Specifies whether the expression will use a track-aware expression. Data Type: Boolean
+
+Derived Output:
+- Output Dataset: A new dataset with the calculated fields. Data Type: Feature Class; Table
+**Toolset:** Fields
+
+**Tool:** Add Field
+
+**Description:**
+The "Add Field" tool in ArcGIS Pro is used to add a new field to a table, feature class, or feature layer. This tool is essential for modifying the schema of a dataset by introducing new attributes that can store additional information. Typical use cases include preparing datasets for further analysis by adding fields that will hold calculated values, classifications, or other derived data. For example, in spatial analysis, you might add a field to store the results of a spatial calculation or to categorize features based on certain criteria.
+
+**Parameters:**
+- **Input Table:** The input geodatabase table or feature class where the specified field will be added. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name:** The name of the field that will be added to the input table. Type: String.
+- **Field Type:** Specifies the field type of the new field. Options include:
+  - Short (16-bit integer)
+  - Long (32-bit integer)
+  - Big integer (64-bit integer)
+  - Float (32-bit floating point)
+  - Double (64-bit floating point)
+  - String
+  - Date
+  - Blob
+  - Raster
+  - GUID
+  - XML
+
+**Derived Output:**
+- No information available.
+**Toolset:** Fields
+
+**Tool:** Delete Field
+
+**Description:**
+The Delete Field tool is used to remove one or more fields from a table, feature class, feature layer, or raster dataset. This tool is typically used in data management workflows where unnecessary or redundant fields need to be removed to streamline datasets, reduce storage requirements, or prepare data for analysis. For example, in spatial analysis, you might delete fields that are not required for a specific analysis to simplify the dataset and improve processing efficiency.
+
+**Parameters:**
+- **Input Table:** The input geodatabase table, feature class, or raster dataset from which fields will be deleted. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field(s) to Delete:** The field or fields that will be removed from the input dataset. Type: Field.
+
+**Derived Output:**
+- No derived outputs are specified for this tool.
+**Toolset:** Fields
+
+**Tool:** Alter Field
+
+**Description:**
+The Alter Field tool in ArcGIS Pro allows you to modify the properties of fields within a geodatabase table or feature class. It is commonly used to rename fields or change field aliases, ensuring data clarity and consistency in analysis workflows. For instance, in spatial analysis, you might utilize the Alter Field tool to update field names to adhere to new data standards or make them more user-friendly. This tool is valuable for dataset preparation before sharing or publishing to ensure descriptive field names align with data usage.
+
+**Parameters:**
+- **Input Table:** The geodatabase table or feature class containing the field to be altered. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name:** The name of the field to be altered. If the field is required, only the alias can be changed. Type: Field.
+- **New Field Name (Optional):** The new name for the field. Type: String.
+- **New Field Alias (Optional):** The new alias for the field. Type: String.
+- **New Field Type (Optional):** Specifies the new field type, applicable only if the input table is empty. Type: Short, Long, Big Integer, Float.
+- **New Field Length (Optional):** The new length for the field, applicable to Text or Blob types. Type: Long.
+- **New Field IsNullable (Optional):** Specifies if the field can contain null values, applicable in a geodatabase. Type: Boolean.
+
+**Derived Output:**
+No derived outputs are specified for the Alter Field tool.
+**Toolset:** Fields
+
+**Tool:** Assign Default To Field
+
+**Description:**
+The "Assign Default To Field" tool creates a default value for a specified field within a table or feature class. This default value is automatically applied whenever a new row is added to the table or feature class. It helps maintain data consistency by ensuring certain fields are populated with a standard value unless otherwise specified. For example, in a spatial analysis workflow, this tool can automatically assign a default land use type to new parcels added to a land records database or set a default status for new entries in a project management feature class.
+
+**Parameters:**
+- **Input Table**: The input table or feature class where the default value will be added. Type: Mosaic Layer; Raster Layer; Table View.
+- **Field Name**: The field to which the default value will be added for each new row. Type: Field.
+- **Default Value (Optional)**: The value to be added to each new table or feature class. Must match the field's data type. Type: String.
+- **Subtype (Optional)**: The subtypes that can participate in the default value. Type: String.
+- **Clear Value (Optional)**: Specifies whether the default value for the field or subtype will be cleared. Checked—The default value will be cleared (set to null). Unchecked—The default value will not be cleared. Type: Boolean.
+
+**Derived Output:**
+- **Updated Input Table**: The updated input table with the default value applied. Type: Table View; Raster
+Toolset: Fields
+
+Tool: Alter Fields
+
+Description:
+The "Alter Fields" tool in ArcGIS Pro is designed to modify the properties of multiple fields within a feature class or table. This tool is typically used in scenarios where there is a need to update field names, aliases, types, or other properties to better align with data management requirements or schema changes. For example, in spatial analysis workflows, you might use "Alter Fields" to rename fields for clarity or to change field types to accommodate new data formats. This tool is essential for maintaining data integrity and ensuring that datasets are structured correctly for analysis.
+
+Parameters:
+- Input Table: The input geodatabase table or feature class that contains the field that will be altered. Type: Table View; Raster Layer; Mosaic Layer.
+- Field Name: The name of the field that will be altered. If the field is a required field, only the field alias will be altered. Type: Field.
+- New Field Name (Optional): The new name for the field. Type: String.
+- New Field Alias (Optional): The new field alias for the field. Type: String.
+- New Field Type (Optional): Specifies the new field type for the field. This parameter is only applicable if the input table is empty (does not contain records). Type: Short, Long, Big Integer, Float.
+
+Derived Output:
+No derived output parameters are specified for the "Alter Fields" tool.
+Toolset: Fields
+
+Tool: Add Field
+
+Description: The Add Field tool adds a new field to a table or the table of a feature class or feature layer, as well as to rasters with attribute tables. This tool is commonly used to create, modify, and delete fields in various datasets. For example, in spatial analysis, you can use the Add Field tool to add a field to a feature class representing population density, allowing you to store and analyze population data within the dataset.
+
+Parameters:
+- Input Table: The input table where the field will be added. Data Type: Table View; Raster Layer; Mosaic Layer
+- Field Name: The name of the field to be added. Data Type: String
+- Field Type: Specifies the type of the new field. Data Type options include Short, Long, Big integer, Float, and Double.
+
+Derived Output:
+- None available.
+**Toolset:** Fields
+
+**Tool:** Calculate Field
+
+**Description:**
+The Calculate Field tool calculates the values of a field for a feature class, feature layer, or raster. It is used to update or populate fields with calculated values based on existing data. Typical use cases include:
+- Performing mathematical operations on numeric fields to derive new insights.
+- Updating string fields with concatenated values or formatted text.
+- Calculating date fields to adjust or derive new temporal data.
+- Preparing data for export to CAD by populating key named fields.
+
+**Parameters:**
+- **Input Layer:** The input features that will have a field calculated. Type: Table View.
+- **Field to Calculate:** Specifies whether values will be calculated for a newly created field or an existing field. Type: String.
+- **New Field Name (Optional):** The new field that will have values calculated. Type: String.
+- **Existing Field (Optional):** The existing field that will have values calculated. Type: Field.
+- **Field Type (Optional):** Specifies the field type for the calculated field. Type: String (String, Integer, Double, Date).
+- **Expression:** Calculates values in the field using Arcade expressions. Type: String.
+- **Track Aware (Optional):** Specifies whether the expression will use a track-aware expression. Type: Boolean.
+
+**Derived Output:**
+- **Output Dataset:** A new dataset with calculated fields. Type: Feature Class; Table.
+Toolset: Fields
+
+Tool: Migrate Text Field
+
+Description: Migrates text fields in an Oracle table from Unicode to non-Unicode types. 
+
+Parameters:
+- Input Table: The input geodatabase table or feature class that contains the field that will be altered. Data Type: Table View; Raster Layer; Mosaic Layer
+- Field Name: The name of the field that will be altered. If the field is a required field, only the field alias will be altered. Data Type: String
+- New Field Name (Optional): The new name for the field. Data Type: String
+- New Field Alias (Optional): The new field alias for the field. Data Type: String
+- New Field Type (Optional): Specifies the new field type for the field. Data Type: Short (16-bit integer), Long (32-bit integer), Big integer (64-bit integer), Float (32-bit floating point)
+
+Derived Output:
+No information available.
+**Toolset:** Fields
+
+**Tool:** Calculate Field
+
+**Description:**
+The Calculate Field tool calculates the values of a field for a feature class, feature layer, or raster. It allows users to perform simple or complex calculations on field values, updating or populating fields based on expressions. This tool is commonly used in GIS workflows for tasks such as updating fields with calculated values, preparing data for analysis, and transforming data values. Examples of use cases include:
+- **Spatial Analysis:** Calculating distances, areas, or other spatial metrics.
+- **Data Preparation:** Populating fields with default values or derived metrics before further analysis.
+- **Data Transformation:** Applying mathematical operations to transform data values.
+
+Examples of use include:
+- Calculating the cost of damage in flood analysis by using depth measurements.
+- Updating fields with calculated geometry attributes like area or length.
+
+**Parameters:**
+- **Input Table:** The table containing the fields to be updated. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name (Existing or New):** The field to be updated or added. Type: Field.
+- **Expression Type:** Specifies the type of expression used (Python, Arcade, SQL, VBScript). Type: String.
+- **Expression:** The calculation expression to populate the field. Type: String.
+
+**Derived Output:**
+- **Output Dataset:** A new dataset with calculated fields. Type: Feature Class; Table.
+**Toolset:** Spatial Analyst
+
+**Tool:** Space Time Kernel Density
+
+**Description:**
+The Space Time Kernel Density tool expands kernel density calculations to include dimensions like time and elevation. It analyzes the density of events over space, time, and elevation, offering a comprehensive understanding of spatial and temporal distributions. This tool is beneficial for various fields such as crime analysis, disease mapping, transportation planning, and environmental monitoring. By incorporating elevation and time, it provides a nuanced analysis of event patterns, making it versatile for complex phenomena analysis. Use cases include demographic studies, concentration research, and service needs assessment.
+
+**Parameters:**
+- **Input Features:** The point features to be analyzed. Type: Feature Layer.
+- **Output Raster:** The output raster containing density values. Type: Raster Dataset.
+- **Kernel Type:** The type of kernel function to use. Type: String.
+- **Search Radius (Bandwidth):** The distance to search for input features. Type: Linear Unit.
+- **Time Unit:** The unit of time for analysis. Type: Time Unit.
+- **Elevation:** The elevation value for analysis. Type: Double.
+
+**Derived Output:**
+- **Density Raster:** Represents the density of input features over space and time. Type: Raster Dataset.
+**Toolset:** Spatial Analysis and Modeling
+
+**Tool:** Point Density
+
+**Description:**
+The Point Density tool calculates the density of point features around each output raster cell. It defines a neighborhood around each raster cell center, totals the number of points within the neighborhood, and divides this by the area of the neighborhood. This tool is particularly useful for analyzing spatial patterns and distributions, such as the density of houses, wildlife observations, or crime reports. The tool can also use a population field to weight points differently, allowing for more nuanced analysis. For example, a single address might represent multiple housing units, or certain crimes might be weighted more heavily in crime density analysis.
+
+**Parameters:**
+- **Input Point Features**: The point features for which density will be calculated. Type: Feature Layer.
+- **Output Raster**: The raster dataset that will contain the calculated density values. Type: Raster Dataset.
+- **Population Field**: An optional field used to weight the points. If not specified, each point is counted once. Type: Field.
+- **Cell Size**: The size of the cells in the output raster. Type: Linear Unit.
+- **Search Radius**: The radius of the neighborhood around each cell used to calculate density. Type: Linear Unit.
+
+**Derived Output:**
+- **Output Density Raster**: The raster dataset that contains the calculated density values. Type: Raster Dataset.
+**Toolset:** Density
+
+**Tool:** Kernel Density
+
+**Description:**
+The Kernel Density tool calculates the density of features in a neighborhood around those features. It can be applied to both point and line features. This tool is typically used in spatial analysis to understand the distribution of phenomena such as housing density, crime occurrences, or wildlife habitat influence. For example, it can be used to analyze the density of housing for community planning or to explore how roads influence wildlife habitats. The tool uses a kernel function to fit a smoothly tapered surface to each point or polyline, allowing for a weighted analysis based on feature attributes.
+
+**Parameters:**
+- **Input Point Features:** The input point features for which density will be calculated. Type: Feature Layer.
+- **Population Field:** The field denoting population values for each feature, which can be integer or floating point. Type: Field.
+- **Elevation Field (Optional):** The field denoting elevation values for each feature, supporting 3D kernel density with time. Type: Field.
+- **Elevation Field Unit (Optional):** Specifies the unit of measure for the elevation field value, with options like meters, feet, etc. Type: String.
+
+**Derived Output:**
+- **Output Raster:** A raster image representing a grid across the extent of the area of analysis, with density values calculated for each grid cell. Type: Raster.
+**Toolset:** Density
+
+**Tool:** Calculate Kernel Density
+
+**Description:**
+The Calculate Kernel Density tool is used to determine the density of features in a neighborhood around those features. It can be applied to both point and line features. This tool is particularly useful for analyzing the density of housing, occurrences of crime, or exploring the influence of roads or utility lines on wildlife habitats. The tool uses a kernel function to fit a smoothly tapered surface to each point or polyline, allowing for a nuanced understanding of spatial patterns. For example, in community planning, it can help identify areas with high crime density or housing density, aiding in resource allocation and policy-making.
+
+**Parameters:**
+- **Input point or polyline features:** The features for which density will be calculated. Type: Feature Layer.
+- **Population field:** Allows weighting of features, such as representing multiple observations at a single point. Type: Field.
+- **Output raster:** The raster dataset that will store the density values. Type: Raster Dataset.
+- **Area units:** Specifies the units for the output density values. Type: String.
+- **Search radius:** Determines the distance to search for sample locations. Type: Double.
+
+**Derived Output:**
+- **Output raster:** A raster image representing density values across the area of analysis. Type: Raster Dataset.
+**Toolset:** Density
+
+**Tool:** Line Density
+
+**Description:**
+The Line Density tool calculates the density of linear features in the neighborhood of each output raster cell. It draws a circle around each raster cell center using a specified search radius. The length of the portion of each line falling within the circle is multiplied by its Population field value. These values are summed and divided by the circle's area to determine the density, expressed in units of length per unit of area. This tool is useful for analyzing the density of roads affecting wildlife habitat or utility lines in a town. It allows the use of a population field to weight certain roads or lines differently.
+
+**Parameters:**
+- **Input Polyline Features:** The input polyline features for density calculation. Type: *Feature Layer*.
+- **Population Field:** A field used to weight the length of lines. If set to NONE, the actual length of the line is used. Type: *Field*.
+- **Output Raster:** The raster dataset containing calculated density values. Type: *Raster Dataset*.
+- **Cell Size:** The cell size for the output raster. Type: *Linear Unit*.
+- **Search Radius:** The radius of the circle used to calculate density around each raster cell. Type: *Linear Unit*.
+
+**Derived Output:**
+- **Output Raster:** The raster dataset containing the calculated line density values. Type: *Raster Dataset*.
+**Toolset:** Fields
+
+**Tool:** Delete Field
+
+**Description:**
+The Delete Field tool is designed to remove one or more fields from a table, feature class, feature layer, or raster dataset. This tool is typically used in data management workflows where unnecessary fields need to be removed to streamline datasets or prepare them for specific analyses. For example, in spatial analysis, you might use this tool to delete fields that are not required for a particular model or analysis, thereby reducing the complexity and size of the dataset. Another use case is cleaning up datasets after importing or merging data from various sources, ensuring only relevant fields are retained.
+
+**Parameters:**
+- **Input Table:** The table containing the fields to be deleted. The existing input table will be modified. Type: Table View; Raster Layer; Mosaic Layer.
+- **Fields:** The fields to be deleted or kept from the input table, as specified by the Method parameter. Only nonrequired fields can be deleted. Type: Field.
+- **Method (Optional):** Specifies whether the fields specified by the Fields parameter will be deleted or kept. Options include:
+  - **Delete Fields:** The fields specified by the Fields parameter will be deleted. This is the default.
+  - **Keep Fields:** The fields specified by the Fields parameter will be kept; all other fields will be deleted. Type: String.
+
+**Derived Output:**
+- **Update Input Table:** The updated dataset after the fields have been deleted. Type: Table View; Raster Layer; Mosaic Layer.
+**Toolset:** Summarize Attributes
+
+**Tool:** Summarize Within
+
+**Description:**
+The "Summarize Within" tool overlays a polygon layer with another layer to summarize the number of points, length of the lines, or area of the polygons within each polygon. It calculates attribute field statistics for those features within the polygons. This tool is typically used in spatial analysis to understand how features are distributed within specified areas. For example, it can be used to calculate how much area of the polygons in one layer lies within the polygons of another layer, or to determine the number of points (such as schools or hospitals) within a given administrative boundary.
+
+**Parameters:**
+- **Input Polygons:** The polygon features that will be used to summarize the input summary features. Type: Feature Layer.
+- **Input Summary Features:** The features that will be summarized within the input polygons. Type: Feature Layer.
+- **Output Feature Class:** The name of the output feature class that will store the results. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the summarized statistics and features within the input polygons. Type: Feature Class.
+**Toolset:** Summarize Attributes
+
+**Tool:** Summarize Attributes
+
+**Description:**
+The Summarize Attributes tool calculates summary statistics for fields in a feature class. It is typically used in spatial analysis to derive statistical insights from geographic data. For example, it can be used to calculate the average population density within different administrative boundaries or to find the total sales figures for retail locations within a city. This tool is essential for GIS workflows that require aggregation of data to understand patterns, trends, and anomalies.
+
+**Parameters:**
+- **Input Layer:** The point, polyline, or polygon layer to be summarized. Type: Table View.
+- **Fields:** A field or fields used to summarize similar features. Type: Field.
+- **Summary Fields (Optional):** The statistics that will be calculated on specified fields. Type: Value Table.
+- **Time step interval (Optional):** Specifies the duration of the time step for time-enabled data. Type: Time Unit.
+- **Time step repeat (Optional):** Specifies how often the time-step interval occurs. Type: Time Unit.
+- **Time step reference (Optional):** A date that specifies the reference time. Type: Date.
+
+**Derived Output:**
+- **Output Table:** A new table with the summarized attributes. Type: Table.
+Toolset: Summarize Attributes
+
+Tool: Summarize Center And Dispersion
+
+Description: The Summarize Center And Dispersion tool finds central features and directional distributions, calculating mean and median locations from the input data. This tool is useful for spatial analysis to determine central tendencies and dispersion patterns within a dataset. For example, it can be used to identify the central point of a cluster of features or to analyze the directional spread of incidents in a region.
+
+Parameters:
+- Input Features: Specifies the input feature class containing the features for which central and dispersion statistics will be calculated. Type: Feature Layer.
+- Output Feature Class: Specifies the output feature class that will contain the central and dispersion statistics. Type: Feature Class.
+
+Derived Output:
+- Mean Center: Represents the mean center location calculated from the input features. Type: Point Feature.
+- Median Center: Represents the median center location calculated from the input features. Type: Point Feature.
+**Toolset:** Find Locations
+
+**Tool:** Find Similar Locations
+
+**Description:**
+The "Find Similar Locations" tool identifies candidate features that are most similar or dissimilar to one or more input features based on feature attributes. It is commonly used in spatial analysis workflows to compare different geographic locations based on specified criteria. For instance, it can find neighborhoods similar to a target neighborhood based on demographic attributes or identify stores similar to a high-performing store based on sales data.
+
+**Parameters:**
+- **Input Features:** The features to be compared. Type: Feature Layer.
+- **Target Features:** The features to which similarity is measured. Type: Feature Layer.
+- **Attributes to Compare:** The attributes used for comparison. Type: Field.
+- **Number of Results:** Specifies how many similar locations to find. Type: Integer.
+
+**Derived Output:**
+- **Output Similar Locations:** A feature layer containing the locations identified as similar. Type: Feature Layer.
+Toolset: Use Proximity
+
+Tool: Trace Proximity Events
+
+Description: Traces events that are near each other in space (location) and time. The time-enabled point data must include features that represent an instant in time. This tool is essential for analyzing spatial distributions and relationships, particularly in field-based spatial information workflows. An example of its use is tracing the movement of wildlife to identify patterns of interaction over time.
+
+Parameters:
+- Input Features: Specifies the point features to be traced. Type: Feature Layer.
+- Search Distance: Specifies the maximum distance between events to be considered as near each other. Type: Linear Unit.
+
+Derived Output:
+- Output Features: Contains the traced events that are near each other in space and time. Type: Feature Layer.
+**Toolset:** Analyze Patterns
+
+**Tool:** Forest-based Classification and Regression
+
+**Description:**
+The Forest-based Classification and Regression tool in ArcGIS Pro creates models and generates predictions using an adaptation of the random forest algorithm. This supervised machine learning method is suitable for both classification (categorical variables) and regression (continuous variables). It is commonly used in spatial analysis and GIS workflows for tasks like species distribution modeling, predicting aboveground biomass, and other environmental and ecological modeling scenarios. The tool trains a model based on known values from a training dataset and then predicts unknown values. It can handle large datasets and produce raster prediction layers.
+
+**Parameters:**
+- **Training Data:** The dataset with known values used for model training. Type: Feature Layer.
+- **Explanatory Variables:** Fields in the training data attribute table explaining the target variable. Type: Field.
+- **Target Variable:** The variable to predict. Type: Field.
+- **Number of Trees:** The quantity of trees to grow in the forest. Type: Integer.
+- **Maximum Tree Depth:** The maximum depth of each tree. Type: Integer.
+
+**Derived Output:**
+- **Prediction Raster:** A raster layer with predicted values based on the trained model. Type: Raster Layer.
+- **Model Characteristics:** Summary of the model's hyperparameters and performance metrics. Type: Text.
+Toolset: Data Enrichment
+
+Tool: Calculate Motion Statistics
+
+Description: Calculates motion statistics for points in a time-enabled feature class. This tool is used for adding attributes to existing features for visualization, regression, and prediction in spatial analysis workflows.
+
+Parameters:
+- elevation_unit: Specifies the unit of measurement for elevation. Type: String.
+- distance_unit: Specifies the unit of measurement for distance. Type: String.
+
+Derived Output:
+- No derived outputs available.
+Toolset: Find Locations
+
+Tool: Find Dwell Locations
+
+Description: Finds locations where moving objects have stopped, or dwelled, using given time and distance thresholds. This tool is designed for large datasets and is optimal for larger datasets with hundreds of thousands or millions of records. It uses distributed processing to complete analytics on GeoAnalytics Server. The tool is integrated and runs in ArcGIS Pro in the same way as other desktop geoprocessing tools. 
+
+Parameters:
+- Time Threshold: Specifies the time threshold for identifying dwell locations. Type: Double.
+- Distance Threshold: Specifies the distance threshold for identifying dwell locations. Type: Linear unit.
+
+Derived Output:
+- Dwell Locations: Output feature class containing the locations where moving objects have dwelled. Type: Feature Class.
+**Toolset:** Analyze Patterns
+
+**Tool:** Generalized Linear Regression
+
+**Description:**
+The Generalized Linear Regression (GLR) tool in ArcGIS Pro creates a model of the variable or process you are trying to understand or predict. It allows for the examination and quantification of relationships among features. This tool is versatile, supporting the creation of models for continuous (Ordinary Least Squares), binary (Logistic), and count (Poisson) data types. It is commonly used in spatial analysis to predict occurrences, understand relationships among features, and examine causal factors. Some typical use cases include:
+- Analyzing demographic factors contributing to public transportation usage.
+- Investigating relationships between vandalism and burglary.
+- Predicting 911 call volumes.
+- Forecasting demand for emergency response resources.
+- Studying variables affecting low birth rates.
+
+**Parameters:**
+- **Input Features:** The feature class containing the dependent variable and explanatory variables. Type: Feature Layer.
+- **Dependent Variable:** The field representing the variable you want to predict or understand. Type: Field.
+- **Explanatory Variables:** One or more fields representing the variables that explain the dependent variable. Type: Field.
+- **Explanatory Distance Features:** Optional features used to calculate distance attributes. Type: Feature Layer.
+- **Prediction Locations:** Features for which predictions are made. Type: Feature Layer.
+
+**Derived Output:**
+- **GLR Model Summary:** Provides a summary of the regression model and statistical outputs. Type: Message.
+- **Predicted Values:** The predicted values for the dependent variable at the prediction locations. Type: Feature Layer.
+**Toolset:** Analyze Patterns
+
+**Tool:** Find Hot Spots
+
+**Description:**
+The Find Hot Spots tool identifies statistically significant spatial clustering of high values (hot spots) or low values (cold spots) using the Getis-Ord Gi* statistic. This tool is typically used in spatial analysis to uncover areas with high or low concentrations of a particular phenomenon, such as crime densities, traffic accident fatalities, unemployment rates, or biodiversity. For example, it can be used to analyze crime data to identify neighborhoods with unusually high crime rates or to study environmental data to find regions with significant biodiversity.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+**Toolset:** Summarize Data
+
+**Tool:** Describe Dataset
+
+**Description:**
+The "Describe Dataset" tool is part of the Summarize Data toolset in ArcGIS Pro. This tool is designed to summarize features into calculated field statistics, sample features, and extent boundaries. It is used to provide statistical summaries of dataset attributes, select representative features for further analysis, and define the spatial limits of the data. For example, it can be utilized to identify point-in-polygon relationships, find nearby features within a specified distance, or determine features within polygon boundaries.
+
+**Parameters:**
+- **Input Dataset:** Specifies the dataset to be described. Type: Dataset.
+- **Field Statistics:** Determines the statistical summaries to be calculated for the dataset. Type: String.
+- **Sample Size:** Specifies the number of features to be sampled. Type: Integer.
+
+**Derived Output:**
+- **Calculated Field Statistics:** Provides statistical summaries of the dataset's attributes. Type: Various statistical data types.
+- **Sample Features:** A subset of features selected based on specified criteria. Type: Feature Class.
+- **Extent Boundaries:** Defines the spatial limits of the dataset. Type: Polygon.
+**Toolset:** Analyze Patterns
+
+**Tool:** Find Point Clusters
+
+**Description:**
+The "Find Point Clusters" tool is designed to identify clusters of point features within a dataset, distinguishing them from surrounding noise. This tool is particularly useful in spatial analysis for detecting areas of high point density, which can indicate significant spatial phenomena or patterns. Typical use cases include identifying hotspots of activity, such as crime incidents, disease outbreaks, or customer locations. By analyzing the spatial or spatiotemporal distribution of points, users can gain insights into the underlying structure of their data, facilitating better decision-making and resource allocation.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+Toolset: Use Proximity
+
+Tool: Group By Proximity
+
+Description: Groups features that are within spatial or spatiotemporal proximity to each other. This tool is designed for analyzing spatial distributions and relationships, essential for field-based spatial information. For example, Group By Proximity can be used to identify clusters of crime incidents in a city or to group wildlife sightings based on their proximity to water sources.
+
+Parameters:
+- Input Features: The features to be grouped. Type: Feature Layer.
+- Group Field: The field used to group features. Type: Field.
+
+Derived Output:
+- Grouped Features: Features grouped based on proximity. Type: Feature Layer.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Center And Dispersion
+
+**Description:**
+The "Summarize Center And Dispersion" tool is designed to find central features and directional distributions within spatial data. It calculates mean and median locations from the input data, which is essential for understanding spatial distributions and relationships. This tool is typically used in spatial analysis to identify central tendencies and dispersion patterns in geographic data. For example, it can be used to determine the central point of a cluster of incidents or to analyze the spread of a phenomenon across a region.
+
+**Parameters:**
+- **Input Features**: The features for which the central and dispersion measures will be calculated. Type: Feature Layer.
+- **Output Feature Class**: The feature class that will store the results of the analysis. Type: Feature Class.
+- **Summary Type**: Specifies the type of summary statistics to calculate (e.g., mean, median). Type: String.
+
+**Derived Output:**
+- **Central Feature**: The feature identified as the central point of the input data. Type: Feature.
+- **Mean Center**: The calculated mean center of the input features. Type: Point.
+- **Median Center**: The calculated median center of the input features. Type: Point.
+- **Standard Distance**: A measure of dispersion around the mean center. Type: Double.
+**Toolset:** Joins and Relates
+
+**Tool:** Join Features
+
+**Description:**
+The Join Features tool in ArcGIS Pro allows you to join features in one layer to features in another layer based on their relative locations. This is called a spatial join. Along with a spatial join, the Join Features tool also allows you to apply a temporal join and an attribute join. In defining the spatial join, there are a number of spatial relationships you can use to select the point, polyline, or polygon features in one layer that exhibit the relationship of interest with the features in another layer. For example, to find the number of homes that were affected by a recent flood, you could join the homes layer to the flood boundary using the Within spatial relationship operator. This tool is essential for spatial analysis workflows where understanding the relationships between different datasets is crucial.
+
+**Parameters:**
+- **Target Layer:** Contains the target features. The attributes from the target features and the attributes from the joined features will be transferred to the output. Data Type: Record Set.
+- **Join Layer:** Contains the join features. The attributes from the join features will be joined to the attributes of the target features. Data Type: Record Set.
+- **Output Name:** The name of the output feature service. Data Type: String.
+- **Join Operation:** Specifies how joins between the Target Layer values and the Join Layer values will be handled in the output if multiple join features have the same spatial relationship with a single target feature. Data Type: String.
+- **Keep All Input Records:** Specifies whether only target features with a spatial relationship with a join feature will be preserved or all target features will be preserved, even without a spatial relationship with the join features. Data Type: Boolean.
+- **Field Map:** The fields that will be temporarily joined to the target dataset. Data Type: String.
+
+**Derived Output:**
+- **Output Dataset:** The new feature class containing the target layer features with joined features. Data Type: Feature Class.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Within
+
+**Description:**
+The "Summarize Within" tool overlays a polygon layer with another layer to summarize the number of points, length of the lines, or area of the polygons within each polygon. It calculates attribute field statistics for those features within the polygons. This tool is typically used in spatial analysis to determine how much of a feature lies within another feature. For example, it can be used to calculate how much area of a specific land use type falls within administrative boundaries or to count the number of incidents within a city district.
+
+**Parameters:**
+- **Input Polygons**: The polygon features that will be used to summarize the input summary features. Type: Feature Layer.
+- **Input Summary Features**: The features that will be summarized within the input polygons. Type: Feature Layer.
+- **Output Feature Class**: The name of the output feature class that will contain the summarized data. Type: Feature Class.
+- **Summary Fields**: Optional fields to calculate statistics for the input summary features. Type: Field.
+- **Group Field**: Optional field to group the summary features before summarizing. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class**: Contains the summarized data with the same shapes as the input polygons but with additional statistics in the attribute table. Type: Feature Class.
+Toolset: Summarize Data
+
+Tool: Reconstruct Tracks
+
+Description: Creates line or polygon tracks from time-enabled input data. This tool is used to reconstruct tracks based on time-enabled data, allowing for the visualization and analysis of movement patterns over time. For example, it can be used to track the migration paths of animals, monitor vehicle routes, or analyze the movement of vessels in a water body.
+
+Parameters:
+- Input Features: The input features containing the time-enabled data to reconstruct tracks. Type: Feature Layer.
+- Output Feature Class: The output feature class that will contain the reconstructed tracks. Type: Feature Class.
+
+Derived Output:
+- Reconstructed Tracks: The line or polygon features representing the reconstructed tracks. Type: Feature Class.
+Toolset: Find Locations
+
+Tool: Detect Incidents
+
+Description: The Detect Incidents tool creates a layer that detects features meeting specific conditions. For example, it can identify areas where certain incidents occur based on predefined criteria. This tool is valuable for analyzing spatial distributions and relationships, essential for field-based spatial information. 
+
+Parameters:
+- Input Features: Specifies the features to be analyzed. Type: Feature Layer.
+- Condition: Defines the condition that features must meet to be detected. Type: SQL Expression.
+
+Derived Output:
+- Incidents Layer: Represents the features that meet the specified condition. Type: Feature Layer.
+**Toolset:** Analyze Patterns
+
+**Tool:** Calculate Density
+
+**Description:**
+The Calculate Density tool creates a density map from point or line features by spreading known quantities of a phenomenon across the map. It results in a layer of areas classified from least dense to most dense. This tool is commonly used to visualize phenomena like population density, crime rates, or wildlife sightings distribution. For instance, it can help identify areas with high population density or analyze wildlife sightings across a region.
+
+**Parameters:**
+- **Input Features:** The point or line features from which to calculate density. Type: Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. Type: String.
+- **Count Field (Optional):** A field specifying the number of incidents at each location. If not specified, each location is assumed to represent a single count. Type: Field.
+- **Cell Size (Optional):** This value is used to create a mesh of points where density values are calculated. Type: Double.
+- **Cell Size Units (Optional):** The units of the cell size value. Type: String.
+- **Radius (Optional):** A distance specifying how far to search to find point or line features when calculating density values. Type: Double.
+
+**Derived Output:**
+- **Output Density Layer:** A layer of areas classified from least dense to most dense. Type: Raster.
+**Toolset:** Summarize Data
+
+**Tool:** Aggregate Points
+
+**Description:**
+The "Aggregate Points" tool aggregates point features into polygon features or bins. It returns a polygon with a count of points and optional statistics at locations where points exist. This tool is useful for summarizing point data into larger units. Examples of its use include aggregating census data into different levels of census boundaries, symbolizing weather stations by the total highest temperature recorded, analyzing disease outbreak distribution over time, and calculating traffic volume along freeways during rush hour.
+
+**Parameters:**
+- **Input Features**: The point features to be aggregated. Type: Feature Layer.
+- **Polygon Features**: The polygon features containing the aggregated points. Type: Feature Layer.
+- **Output Feature Class**: The output feature class containing the aggregated results. Type: String.
+- **Aggregation Method**: The method used to aggregate the points, such as sum, mean, or count. Type: String.
+- **Statistics Fields**: Optional fields for which statistics will be calculated. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class**: The resulting polygon features with aggregated point data. Type: Feature Class.
+Toolset: Summarize Data
+
+Tool: Summarize Attributes
+
+Description: The Summarize Attributes tool calculates summary statistics for fields in a feature class. It helps in understanding the distribution and relationships of spatial data. For example, it can be used to calculate the total count, length, area, and basic descriptive statistics of features and their attributes within specific areas. This tool is essential for spatial analysis workflows in GIS, allowing users to gain insights into their data through patterns, trends, and anomalies.
+
+Parameters:
+- Input Features: Specifies the input feature class for which summary statistics will be calculated. Type: Feature Layer.
+- Field(s): Specifies the field or fields for which statistics will be calculated. Type: Field.
+- Case Field: Specifies a field that will be used to group the input features. Type: Field.
+- Statistics Field(s): Specifies the statistics to be calculated for the input field(s). Type: Field.
+
+Derived Output:
+- Output Table: Contains the summary statistics calculated by the tool. Type: Table.
+**Toolset:** Use Proximity
+
+**Tool:** Create Buffers
+
+**Description:**
+The Create Buffers tool generates polygons that cover a given distance from a point, line, or polygon feature. This tool is essential for spatial analysis tasks that require understanding proximity relationships, such as determining areas within a certain distance from a feature. Typical use cases include:
+- Identifying regions within a specified distance from critical infrastructure, such as fire stations or schools.
+- Creating zones for environmental impact assessments.
+- Planning service areas for utilities or emergency response.
+
+**Parameters:**
+- **Input Features**: The features from which buffers will be created. Type: Feature Layer.
+- **Output Feature Class**: The name of the feature class to be created. Type: String.
+- **Buffer Distance**: The distance to buffer the input features. Type: Linear Unit.
+- **Dissolve Type**: Specifies how overlapping buffers are handled. Type: String.
+- **Method**: The method used to create buffers, such as planar or geodesic. Type: String.
+
+**Derived Output:**
+- **Output Feature Class**: The resulting buffered polygons. Type: Feature Class.
+**Toolset:** Use Proximity
+
+**Tool:** Snap Tracks
+
+**Description:**
+The Snap Tracks tool is designed to snap input track points to lines. This tool is particularly useful for time-enabled point data that includes features representing an instant in time. It requires traversable lines with fields indicating the from and to nodes for analysis. Typical use cases include aligning GPS data to road networks or other linear features, which can be essential in transportation analysis, wildlife tracking, or any scenario where movement data needs to be accurately mapped to existing linear features.
+
+**Parameters:**
+- **distance_split**: Specifies the distance at which tracks are split. Type: *Double*.
+- **time_boundary_reference**: Defines the reference time boundary for splitting tracks. Type: *Date*.
+- **time_boundary_split**: Indicates the time boundary at which tracks are split. Type: *Date*.
+- **time_split**: Specifies the time interval for splitting tracks. Type: *Double*.
+
+**Derived Output:**
+No specific derived outputs are listed in the available information.
+**Toolset:** Fields
+
+**Tool:** Calculate Fields (multiple)
+
+**Description:**
+The Calculate Fields (multiple) tool in ArcGIS Pro calculates the values of two or more fields for a feature class, feature layer, or raster. It is beneficial in GIS workflows where multiple fields require simultaneous updates, enhancing efficiency by reducing the need for multiple executions of the "Calculate Field" tool. This tool supports advanced calculations using Python, Arcade, SQL, or VBScript expressions, enabling complex data manipulation and analysis. Use cases include updating attribute data based on spatial analysis results, preparing data for further geoprocessing tasks, or standardizing field values across datasets.
+
+**Parameters:**
+- **Input Layer:** The features that will have fields calculated. Type: Table View.
+- **Field to Calculate:** Specifies whether values will be calculated for a newly created field or an existing field. Type: String.
+- **New Field Name (Optional):** The new field that will have values calculated. Type: String.
+- **Existing Field (Optional):** The existing field that will have values calculated. Type: Field.
+- **Field Type (Optional):** Specifies the field type for the calculated field. Type: String.
+- **Expression:** Calculates values in the field using Arcade expressions. Type: String.
+- **Track Aware (Optional):** Specifies whether the expression will use a track-aware expression. Type: Boolean.
+
+**Derived Output:**
+- **Output Dataset:** A new dataset with calculated fields. Type: Feature Class; Table.
+
+Feel free to explore more about effectively using this tool or other related functionalities.
+**Toolset:** Data Engineering
+
+**Tool:** Standardize Field
+
+**Description:**
+The Standardize Field tool is designed to convert values in fields to a specified scale, ensuring consistency across datasets. This tool is particularly useful in data preparation workflows where standardization is necessary for analysis, modeling, or comparison. Typical use cases include:
+- *Normalizing data for statistical analysis* to ensure that different datasets can be compared on the same scale.
+- *Preparing data for machine learning models* where standardized inputs are required.
+- *Spatial analysis* where consistent data scales are needed to compare geographic features.
+
+**Parameters:**
+- **Input Table:** The table containing the field with the values that will be standardized. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field to Standardize:** The fields containing the values that will be standardized. For each field, an output field name can be specified. Type: Value Table.
+- **Standardization Method (Optional):** Specifies the method used to standardize the values. Options include Z-Score, Minimum-maximum, Absolute maximum, and Robust standardization. Type: String.
+
+**Derived Output:**
+- **Standardized Field:** The output field containing the standardized values. Type: Field.
+**Toolset:** Calculate Field
+
+**Tool:** Calculate Geometry Attributes
+
+**Description:**
+The Calculate Geometry Attributes tool is designed to add information to a feature's attribute fields that represent the spatial or geometric characteristics and location of each feature. This includes attributes such as length, area, and x-, y-, z-coordinates, and m-values. Typical use cases involve spatial analysis where understanding the geometric properties of features is crucial. For example, calculating the area of land parcels for zoning purposes, determining the length of rivers for environmental studies, or extracting coordinates for mapping and navigation applications.
+
+**Parameters:**
+- **Input Features:** The feature class or layer whose geometry attributes will be calculated. Type: Feature Layer.
+- **Geometry Properties:** Specifies the geometric properties to calculate, such as area, length, or coordinates. Type: String.
+- **Area Unit:** The unit of measurement for area calculations, such as square miles or acres. Type: String.
+- **Length Unit:** The unit of measurement for length calculations, such as miles or feet. Type: String.
+- **Coordinate Format:** Specifies the format for coordinate values, such as decimal degrees or degrees-minutes-seconds. Type: String.
+
+**Derived Output:**
+- **Updated Features:** The input features with updated geometry attributes. Type: Feature Layer.
+**Toolset:** Calculate Field
+
+**Tool:** Transform Field
+
+**Description:**
+The Transform Field tool is designed to transform continuous values in one or more fields by applying mathematical functions to each value, thereby changing the shape of the distribution. This tool is particularly useful in data engineering workflows where normalization or transformation of data is required to prepare datasets for analysis. Typical use cases include:
+- *Log transformation* to stabilize variance and make the data more normally distributed.
+- *Square root transformation* to reduce skewness.
+- *Box-Cox transformation* for normalizing data.
+- *Multiplicative inverse* for inverting values.
+- *Square and exponential transformations* for specific analytical needs.
+
+**Parameters:**
+- **Input Table:** The input table or feature class containing the fields to be transformed. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field to Transform:** The fields containing the values to be transformed. Type: Value Table.
+- **Transformation Method (Optional):** Specifies the method used to transform the values. Options include log, square root, Box-Cox, multiplicative inverse, square, exponential, and inverse Box-Cox. Type: String.
+
+**Derived Output:**
+- **Transformed Fields:** The tool creates new fields with transformed values based on the specified transformation method. These fields are added to the input table. Type: Same as input field type.
+Toolset: Calculate Field
+
+Tool: Calculate Rates
+
+Description:
+The "Calculate Rates" tool is designed to compute crude or smoothed rates for a given dataset. It offers several methods for rate calculation, including the global empirical Bayes rate method, which smooths rates towards a global reference rate, and local methods such as the local empirical Bayes, locally weighted average, and locally weighted median rate methods, which use local neighbors to spatially smooth rates. This tool is particularly useful in spatial analysis for calculating rates such as disease incidence or other event rates in relation to population data. For example, it can be used to calculate the rate of disease occurrences per population in different regions, which can help in identifying areas with higher or lower than expected rates of disease occurrence, aiding in public health planning and resource allocation.
+
+Parameters:
+- Input Table or Features: The table or features containing count fields and population fields to calculate rates.
+  - Type: Table View
+- Rate Fields: The count and population fields that will be used to calculate rates.
+  - Type: Value Table
+- Append Fields to Input (Optional): Specifies whether fields will be appended to the input dataset or saved to an output table or feature class.
+  - Type: Boolean
+- Rate Method (Optional): Specifies the method that will be used to calculate rates. Options include Crude Rate, Global Empirical Bayes, Local Empirical Bayes, Locally Weighted Average, and Locally Weighted Median.
+  - Type: String
+
+Derived Output:
+- Output Table or Features (Optional): The output table or feature class containing the rates and additional fields to help evaluate the rates.
+  - Type: Feature Class; Table
+### Toolset: Calculate Field
+
+### Tool: Calculate Field
+
+#### Description:
+The **Calculate Field** tool is designed to compute values for a field within a feature class, feature layer, or raster. This tool is particularly useful for populating fields in GIS feature layers, especially before exporting to CAD formats, where controlling output properties is crucial. It supports both simple and advanced calculations, allowing users to perform operations using Python code blocks or straightforward expressions. Typical use cases include:
+- **Batch updating records**: Efficiently update multiple records in a table.
+- **Spatial analysis**: Calculate geometric properties like area or length.
+- **Data preparation**: Modify or add fields to prepare datasets for further analysis.
+
+#### Parameters:
+- **Input Layer**: The input features that will have a field calculated. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field to Calculate**: Specifies whether values will be calculated for a newly created field or an existing field. Type: String.
+- **New Field Name (Optional)**: The new field that will have values calculated. Type: String.
+- **Existing Field (Optional)**: The existing field that will have values calculated. Type: Field.
+- **Field Type (Optional)**: Specifies the field type for the calculated field. Type: String.
+- **Expression**: Calculates values in the field using Arcade expressions. Type: String.
+- **Track Aware (Optional)**: Specifies whether the expression will use a track-aware expression. Type: Boolean.
+
+#### Derived Output:
+- **Output Dataset**: A new dataset with calculated fields. Type: Feature Class; Table.
+
+If you have further questions or need clarification, feel free to ask!
+**Toolset:** Calculate Field
+
+**Tool:** Calculate Field
+
+**Description:**
+The Calculate Field tool in ArcGIS Pro is designed to compute values for a specified field within a feature class, feature layer, or raster. This tool is particularly useful for updating or populating fields with calculated values based on expressions. It supports both simple and complex calculations, allowing users to perform operations using Python code blocks or simple expressions directly in the tool's interface. Typical use cases include:
+- Populating fields with calculated values before exporting to CAD.
+- Performing batch updates on field values across multiple records.
+- Using Python or SQL expressions to automate data processing tasks.
+
+**Parameters:**
+- **Input Table:** The table containing the fields to be updated. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name (Existing or New):** The field to be updated or added. Type: Field.
+- **Expression Type:** Specifies the type of expression used (Python, Arcade, SQL, VBScript). Type: String.
+- **Expression:** The calculation expression used to populate the field values. Type: SQL Expression.
+
+**Derived Output:**
+- **Output Dataset:** A new dataset with calculated fields. Type: Feature Class; Table.
+Toolset: Data Engineering
+
+Tool: Standardize Field
+
+Description: Standardizes values in fields by converting them to values that follow a specified scale. Standardization methods include z-score, minimum-maximum, absolute maximum, and robust standardization. This tool is part of the Data Engineering toolset, which contains tools for preparing fields for analysis workflows, such as transforming, standardizing, encoding, and reclassifying values. These tools ensure datasets are clean, consistent, and ready for modeling or analysis workflows.
+
+Parameters:
+- in_table: The input table containing the fields to be standardized. Type: Table.
+- field: The field in the input table to be standardized. Type: Field.
+- method: The method used for standardization, such as z-score, minimum-maximum, absolute maximum, or robust standardization. Type: String.
+- out_table: The output table with standardized values. Type: Table.
+
+Derived Output:
+- out_table: The output table with standardized values. Type: Table.
+Toolset: Fields
+
+Tool: Batch Update Fields
+
+Description: Batch Update Fields transforms fields in a table or feature class based on schema defined in the definition table and creates a new table or feature class. This tool is useful for updating multiple fields at once based on a predefined schema. For example, it can be used to standardize field names, data types, or lengths across multiple datasets in a GIS workflow.
+
+Parameters:
+- Input Table: Specifies the table or feature class to be updated. Type: Table or Feature Class.
+- Definition Table: Specifies the schema that defines how the fields in the input table will be transformed. Type: Table.
+- Output Table: Specifies the name and location of the new table or feature class that will result from the field updates. Type: Table or Feature Class.
+
+Derived Output:
+- Updated Table: The table or feature class with the transformed fields based on the schema defined in the definition table. Type: Table or Feature Class.
+Toolset: Fields
+
+Tool: Calculate Fields (multiple)
+
+Description: Calculate Fields (multiple) tool calculates the values of two or more fields for a feature class, feature layer, or raster. This tool allows you to perform multiple updates to a single row, providing a performance gain compared to running the Calculate Field tool multiple times. It is beneficial when you need to make calculations on multiple fields simultaneously. However, it is important to note that you still need to run the Add Field tool first if you want to use a new field with the Calculate Fields (multiple) tool.
+
+Parameters:
+- enforce_domains: Specifies whether to enforce domains. Type: Double.
+- field_type: Specifies the field type. Type: String.
+- expression_type: Specifies the expression type. Type: String.
+
+Derived Output:
+- out_features: Represents the output features after the calculations. Type: GPFeatureLayer.
+Toolset: Fields
+
+Tool: Add Field
+
+Description: The Add Field tool adds a new field to a table or the table of a feature class or feature layer, as well as to rasters with attribute tables. This tool is used to modify attribute tables by adding specified fields and writing values to those fields. When the field already exists in the attribute table, its values are overwritten. 
+
+Parameters:
+- Input Table: The input table where the specified field will be added. Data Type: Table View; Raster Layer; Mosaic Layer
+- Field Name: The name of the field that will be added to the input table. Data Type: String
+- Field Type: Specifies the field type of the new field. Data Type options include Short, Long, Big integer, Float, Double, and more.
+
+Derived Output:
+No derived outputs available.
+Toolset: Fields
+
+Tool: Add Field
+
+Description:
+The Add Field tool in ArcGIS Pro is used to add a new field to a table or the table of a feature class or feature layer, as well as to rasters with attribute tables. This tool is essential for data management and preparation in GIS workflows, allowing users to expand the schema of their datasets by introducing new attributes. Typical use cases include preparing datasets for analysis by adding fields that will store calculated values, such as population density or land use type, or adding fields to store results from spatial analysis operations. For example, in a spatial analysis workflow, you might add a field to store the results of a buffer analysis or to categorize features based on a specific attribute.
+
+Parameters:
+- **Input Table**: The input geodatabase table or feature class that contains the field that will be altered. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name**: The name of the field that will be added. Type: String.
+- **Field Type**: Specifies the data type of the new field. Options include Short (16-bit integer), Long (32-bit integer), Big Integer (64-bit integer), Float (32-bit floating point), and Double (64-bit floating point).
+- **Field Alias**: An alternate name for the field, used to describe cryptic field names. This is applicable to geodatabases. Type: String.
+- **Field Length**: The maximum number of characters for text fields. Default is 255. Type: Integer.
+- **Default Value**: The default value for the field. Type: Varies based on field type.
+- **Field Domain**: The geodatabase domain assigned to the field. Type: Domain.
+
+Derived Output:
+- **None**: The tool modifies the input table by adding the specified field and does not create a new output table.
+**Toolset:** Fields
+
+**Tool:** Add Field
+
+**Description:**
+The Add Field tool in ArcGIS Pro adds a new field to a table or feature class. This tool is commonly used in GIS workflows to enhance data tables by introducing new attributes that can be used for further analysis or data management. For example, in spatial analysis, you might add a field to store calculated values such as population density or land use type. In data management, you might add fields to track metadata or status information.
+
+**Parameters:**
+- **Input Table:** The table or feature class where the new field will be added. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name:** The name of the new field to be added. Type: String.
+- **Field Type:** Specifies the type of the new field. Options include Short (16-bit integer), Long (32-bit integer), Big Integer (64-bit integer), Float (32-bit floating point), Double (64-bit floating point). Type: String.
+- **Field Alias (Optional):** An alternate name for the field, used to describe cryptic field names. Type: String.
+- **Field Length (Optional):** The maximum number of characters for text fields. Default is 255. Type: Integer.
+- **Default Value (Optional):** The default value for the field. Type: String.
+- **Field Domain (Optional):** The geodatabase domain assigned to the field. Type: String.
+
+**Derived Output:**
+- **Modified Input Table:** The input table with the new field added. Type: Same as input.
+**Toolset:** Fields
+
+**Tool:** Add Field
+
+**Description:**
+The Add Field tool in ArcGIS Pro adds a new field to a table or the table of a feature class, as well as to rasters with attribute tables. This tool is essential for modifying the schema of datasets by introducing new attributes that can store additional data.
+
+**Parameters:**
+- **Input Table:** The input table where the specified field will be added. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name:** The name of the field that will be added. Type: String.
+- **Field Type:** Specifies the field type of the new field. Options include Short, Long, Big Integer, Float, Double, etc. Type: String.
+
+**Derived Output:**
+- No derived outputs are specified for this tool.
+Toolset: Fields
+
+Tool: Delete Field
+
+Description: Deletes one or more fields from a table, feature class, feature layer, or raster dataset. An unexpected error during the Delete Field tool process may occur due to various reasons such as the file being in use by another program, being a read-only data source, or having read-only permissions. If attempting to delete all fields from a dBASE file (or shapefile) that contains no fields, an error will result. To resolve this, check for file locks, read-only status, or try using different output files. Closing the application and rerunning the tool can also help troubleshoot the error.
+
+Parameters:
+- Input: Specifies the field(s) to be deleted. Type: Field
+- Output: Result after deleting the specified field(s). Type: Feature Class, Feature Layer, Table, Raster Dataset
+
+Derived Output:
+- None available.
+Toolset: Fields
+
+Tool: Alter Field
+
+Description: The Alter Field tool allows you to rename fields or field aliases for a geodatabase table or feature class. It provides the capability to modify the properties of existing fields. For example, you can change the name of a field or its alias to better reflect the data it represents. This tool is useful for maintaining data integrity and clarity within your geodatabase. An example of using the Alter Field tool is renaming a field from "Length" to "Distance" in a feature class containing road network data.
+
+Parameters:
+- Field Name: Specifies the name of the field to be altered. Type: Field
+- New Field Name: Specifies the new name for the field. Type: String
+- Field Alias: Specifies the alias for the field. Type: String
+- Data Type: Specifies the data type for the field. Type: String
+
+Derived Output:
+- Altered Field: Represents the field with the updated properties after the alteration process. Type: Field
+Toolset: Fields
+
+Tool: Assign Default To Field
+
+Description: Assign Default To Field tool creates a default value for a specified field. When a new row is added to the table or feature class, the specified field will be set to this default value. This tool is commonly used in ModelBuilder to update descriptions, allowing subsequent processes to visualize pending data changes before execution. For example, when used in ModelBuilder, the Add Field tool updates its output data variable to include the new field, enabling downstream tools like Calculate Field to recognize and utilize the intended field name for required parameters.
+
+Parameters:
+- Default Value: Specifies the default value to assign to the field. Type: Any valid value type supported by the field.
+- Field: Specifies the field to which the default value will be assigned. Type: Field.
+
+Derived Output:
+- Output: No derived outputs are generated by the Assign Default To Field tool.
+Toolset: Fields
+
+Tool: Alter Fields
+
+Description: The Fields toolset includes tools for creating, modifying, and deleting fields. A field represents a column in a table, storing values for a single attribute. Field settings like field type and data size can be specified. The Alter Fields tool allows renaming fields or field aliases in a geodatabase table or feature class.
+
+Parameters:
+- Name: is_restrictive, Description: New parameter added, Data Type: Not specified
+
+Derived Output:
+- No derived outputs available.
+**Toolset:** Fields
+
+**Tool:** Add Fields (multiple)
+
+**Description:**
+The "Add Fields (multiple)" tool in ArcGIS Pro is designed to add multiple new fields to a table, feature class, or raster. This tool is particularly useful in GIS workflows where there is a need to expand the schema of datasets by adding several attributes at once. Typical use cases include preparing datasets for complex spatial analysis, where additional attributes are required for calculations or classifications. For example, in a spatial analysis workflow, you might use this tool to add fields for storing calculated values such as population density or land use categories, which can then be used in further analysis or visualization.
+
+**Parameters:**
+- **Input Table:** The table or feature class to which fields will be added. Type: Table or Feature Class.
+- **Field Name:** The name of the new field(s) to be added. Type: String.
+- **Field Type:** The data type of the new field(s), such as Integer, String, or Date. Type: String.
+- **Field Length:** The length of the field, applicable for text fields. Type: Integer.
+- **Field Alias:** An alternate name for the field, used for display purposes. Type: String.
+- **Field Is Nullable:** Specifies whether the field can contain null values. Type: Boolean.
+
+**Derived Output:**
+- **Updated Table:** The input table with the new fields added. Type: Table or Feature Class.
+Toolset: Fields
+
+Tool: Add Field
+
+Description: Adds a new field to a table or the table of a feature class or feature layer, as well as to rasters with attribute tables. This tool is part of the Fields toolset, which contains tools for creating, modifying, and deleting fields. A field is a column in a table; each field contains the values for a single attribute. Field settings can be specified, such as the field type and the maximum size of the data that can be stored in it.
+
+Parameters:
+- Field Name: Specifies the name of the new field. Type: String.
+- Field Type: Specifies the data type of the new field (e.g., Text, Integer, Double). Type: String.
+- Field Length: Specifies the length of the field for certain data types like Text. Type: Integer.
+- Is Nullable: Specifies whether the field can contain null values. Type: Boolean.
+- Default Value: Specifies a default value for the field. Type: Varies based on the data type.
+
+Derived Output:
+- New Field: Represents the newly added field in the table or feature class. Type: Field.
+Toolset: Data Engineering
+
+Tool: Transform Field
+
+Description: Transforms continuous values in one or more fields by applying mathematical functions to each value and changing the shape of the distribution. The transformation methods in the tool include log, square root, Box-Cox, multiplicative inverse, square, exponential, and inverse Box-Cox. This tool is commonly used in GIS workflows to standardize data distributions, normalize values, or prepare data for statistical analysis. For example, Transform Field can be used to convert skewed data distributions into normal distributions for more accurate spatial analysis or to apply logarithmic transformations to handle exponential growth patterns in environmental data.
+
+Parameters:
+- Input Fields: Specifies the field(s) to be transformed. Type: Field(s)
+- Transformation Method: Selects the mathematical function to apply to the values. Type: String
+- Output Fields: Defines the name and data type of the transformed field(s). Type: Field(s)
+
+Derived Output:
+- Transformed Fields: Contains the transformed values after applying the selected mathematical function. Type: Field(s)
+**Toolset:** Fields
+
+**Tool:** Calculate Field
+
+**Description:**
+The Calculate Field tool calculates the values of a field for a feature class, feature layer, or raster. It is used to update attribute values efficiently by applying mathematical calculations or expressions across multiple records. This tool is commonly used in spatial analysis workflows to update fields with values derived from spatial operations or to standardize data values within a dataset. For example, Calculate Field can be used to update a field with distance values calculated from spatial operations or to apply a formula to standardize data values across a dataset.
+
+**Parameters:**
+- **Input Table**: The table or feature class containing the field to be calculated. Type: GPTableView.
+- **Field Name**: The name of the field to be calculated. Type: Field.
+- **Expression Type**: The type of expression used for calculation, such as Python 3, Arcade, or SQL. Type: String.
+- **Expression**: The calculation expression applied to the field values. Type: String.
+
+**Derived Output:**
+- **Output Table**: The same as the input table, with updated field values. Type: GPTableView.
+Toolset: Data Management
+
+Tool: Migrate Text Field
+
+Description: Migrates eligible text fields in an Oracle table from Unicode to non-Unicode types. This tool is designed to facilitate the conversion of text fields within Oracle tables to non-Unicode types.
+
+Parameters:
+- Field Type: Specifies the type of field to be migrated. Type: String.
+
+Derived Output:
+- No derived outputs available.
+**Toolset:** Fields
+
+**Tool:** Calculate Field
+
+**Description:**
+The Calculate Field tool calculates the values of a field for a feature class, feature layer, or raster. It allows users to update or populate fields with calculated values based on expressions. This tool supports various expression types such as Python, Arcade, SQL, and VBScript, enabling both simple and complex calculations. Typical use cases include:
+- Updating attribute values based on spatial analysis results.
+- Populating fields with calculated values for further analysis or reporting.
+- Performing batch updates on selected records using expressions.
+
+**Parameters:**
+- **Input Table:** The table containing the fields to be updated. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name (Existing or New):** The field to be updated or added for the new calculation. Type: Field.
+- **Expression Type:** Specifies the type of expression used (Python, Arcade, SQL, VBScript). Type: String.
+- **Expression:** The calculation expression used to populate the selected rows. Type: SQL Expression.
+
+**Derived Output:**
+- **Updated Table:** The input table with updated field values. Type: Same as input (Table View; Raster Layer; Mosaic Layer).
+Toolset: Data Engineering
+
+Tool: Transform Field
+
+Description: Transforms continuous values in one or more fields by applying mathematical functions to each value and changing the shape of the distribution. The transformation methods in the tool include log, square root, Box-Cox, multiplicative inverse, square, exponential, and inverse Box-Cox. This tool is designed to ensure datasets are clean, consistent, and ready for modeling or analysis workflows. For example, the Transform Field tool can be used in spatial analysis to normalize skewed data distributions, such as transforming population data to a logarithmic scale for more accurate analysis.
+
+Parameters:
+- Input Table: The input table or feature class containing the fields to be transformed. Type: Table View; Raster Layer; Mosaic Layer.
+- Field to Transform: The fields containing the values to be transformed. For each field, an output field name can be specified. Type: Value Table.
+- Transformation Method (Optional): Specifies the method used to transform the values in the specified fields. Options include Multiplicative Inverse, Square Root, Log, Box-Cox, Inverse Box-Cox, Square (inverse square root), and Exponential. Type: String.
+
+Derived Output:
+- Transformed Fields: The newly transformed fields added to the input table. Type: Table View; Raster Layer; Mosaic Layer.
+**Toolset:** Data Engineering
+
+**Tool:** Reclassify Field
+
+**Description:**
+The Reclassify Field tool is designed to reclassify values in a numerical or text field into classes based on bounds defined manually or using a reclassification method. This tool is particularly useful in spatial analysis workflows where data needs to be categorized into different classes for further analysis or visualization. For example, in a land cover analysis, different types of land cover can be reclassified into categories such as forest, urban, or water bodies based on their characteristics. This reclassification helps in understanding patterns and making decisions based on the categorized data.
+
+**Parameters:**
+- **Input Field**: The field containing values to be reclassified. Type: Numerical or Text.
+- **Reclassification Method**: The method used to define the bounds for reclassification. Type: String.
+- **Reclassification Table**: A table defining the mapping of original values to new classes. Type: Table.
+
+**Derived Output:**
+- **Reclassified Field**: The field containing the reclassified values. Type: Numerical or Text.
+Toolset: Data Engineering
+
+Tool: Encode Field
+
+Description: Converts categorical values (string, integer, or date) into multiple numerical fields, each representing a category. The encoded numerical fields can be used in most data science and statistical workflows including regression models.
+
+Parameters:
+- Input Field: Specifies the field containing categorical values to be encoded. Type: Field
+- Output Fields Prefix: Specifies the prefix for the output numerical fields. Type: String
+
+Derived Output:
+- Encoded Fields: Numerical fields representing each category after encoding. Type: Field
+Toolset: Data Engineering
+
+Tool: Standardize Field
+
+Description: Standardize Field tool standardizes values in fields by converting them to values that follow a specified scale. Standardization methods include z-score, minimum-maximum, absolute maximum, and robust standardization. This tool ensures that datasets are prepared for modeling or analysis workflows by making values comparable across different fields.
+
+Parameters:
+- Input Field: Specifies the field containing values to be standardized. Type: Field
+- Standardization Method: Specifies the method to use for standardization (z-score, minimum-maximum, absolute maximum, robust standardization). Type: String
+- Output Field Name: Specifies the name for the standardized output field. Type: String
+
+Derived Output:
+- Standardized Field: The standardized field containing values that follow the specified scale. Type: Field
+**Toolset:** Data Engineering
+
+**Tool:** Encode Field
+
+**Description:**
+The Encode Field tool converts categorical values (string, integer, or date) into multiple numerical fields, each representing a category. This transformation is beneficial in data science and statistical workflows, like regression models, requiring numerical data for analysis. For instance, in spatial analysis, it can encode land use categories into numerical values for predictive modeling or prepare demographic data for clustering analysis.
+
+**Parameters:**
+- *No information available.*
+
+**Derived Output:**
+- *No information available.*
+**Toolset:** Data Engineering
+
+**Tool:** Transform Field
+
+**Description:**
+The Transform Field tool is designed to modify continuous values in one or more fields by applying mathematical functions to each value, thereby altering the distribution's shape. This tool is particularly useful in spatial analysis and GIS workflows where data normalization or transformation is required to meet the assumptions of statistical models or improve data visualization. Typical use cases include:
+- *Log transformation* to stabilize variance and make data more normally distributed.
+- *Square root transformation* to reduce skewness.
+- *Box-Cox transformation* for data that requires a more complex transformation to achieve normality.
+- *Multiplicative inverse* to invert values for specific analytical needs.
+- *Square and exponential transformations* to adjust the scale of data.
+- *Inverse Box-Cox transformation* for reversing the Box-Cox transformation.
+
+**Parameters:**
+- **Input Field(s):** The fields containing continuous values to be transformed. Type: *Field*.
+- **Transformation Method:** The mathematical function to apply, such as log, square root, Box-Cox, etc. Type: *String*.
+
+**Derived Output:**
+- **Transformed Field(s):** The fields containing the transformed values. Type: *Field*.
+**Toolset:** Data Engineering
+
+**Tool:** Transform Field
+
+**Description:**
+The Transform Field tool is designed to modify continuous values in one or more fields by applying mathematical functions to each value, thereby altering the shape of the distribution. This tool is particularly useful in spatial analysis and GIS workflows where data normalization or transformation is required to meet specific analytical needs. Typical use cases include preparing data for regression analysis, improving the interpretability of data distributions, or adjusting data to meet assumptions of statistical tests. Examples of transformations include:
+- **Log Transformation:** Useful for reducing skewness in data.
+- **Square Root Transformation:** Often applied to stabilize variance.
+- **Box-Cox Transformation:** A flexible method for normalizing data.
+- **Multiplicative Inverse:** Useful for certain types of data scaling.
+- **Square and Exponential Transformations:** Applied for specific modeling requirements.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+Toolset: Calculate Geometry Attributes
+
+Tool: Calculate Geometry Attributes
+
+Description: Adds information to a feature's attribute fields representing the spatial or geometric characteristics and location of each feature, such as length or area and x-, y-, z-coordinates, and m-values. This tool is commonly used in spatial analysis and GIS workflows to enhance attribute data with geometric properties. For example, it can be utilized to calculate the area of land parcels, determine the length of road segments, or extract x, y coordinates for mapping purposes.
+
+Parameters:
+- area_unit: Specifies the unit for area calculations. Type: String.
+- length_unit: Specifies the unit for length calculations. Type: String.
+- coordinate_format: Specifies the format for coordinate values. Type: String.
+
+Derived Output:
+- No derived outputs available.
+Toolset: Fields
+
+Tool: Alter Field
+
+Description: The Alter Field tool allows you to rename fields or field aliases for a geodatabase table or feature class. It is used to alter the properties of the input field. For example, it can be used to change the field length or data type of a field. 
+
+Parameters:
+- Field: Specifies the field to be altered. Type: Field
+- New Field Name: Specifies the new name for the field. Type: String
+- New Field Alias: Specifies the new alias for the field. Type: String
+- Field Type: Specifies the new data type for the field. Type: String
+- Field Length: Specifies the new length for the field. Type: Integer
+
+Derived Output:
+- Altered Field: Indicates the field that has been successfully altered. Type: Field
+Toolset: Fields
+
+Tool: Alter Field
+
+Description: The Alter Field tool allows you to rename fields or field aliases for a geodatabase table or feature class. It is used to modify field properties in a table or feature class. For example, you can use Alter Field to change the name of a field from "Field_A" to "Field_B" or to update the alias of a field. This tool is commonly used in GIS workflows when there is a need to adjust field names or properties to better suit data analysis requirements.
+
+Parameters:
+- Field Name: Specifies the name of the field to be altered. Type: Field
+- New Field Name: Specifies the new name for the field. Type: String
+- Field Alias: Specifies the alias for the field. Type: String
+- Data Type: Specifies the data type for the field. Type: String
+
+Derived Output:
+- No derived outputs generated by the Alter Field tool.
+Toolset: Fields
+
+Tool: Delete Field
+
+Description: Deletes one or more fields from a table, feature class, feature layer, or raster dataset. This tool is useful for removing unnecessary fields and optimizing datasets. For example, in a GIS workflow, you may use the Delete Field tool to eliminate redundant attributes that are no longer needed for analysis, thereby streamlining data management processes.
+
+Parameters:
+- in_features: Specifies the input feature layer or table from which fields will be deleted. Type: GPFeatureLayer
+- field_name: Specifies the name of the field to be deleted. Type: Field
+
+Derived Output:
+- out_features: The output feature layer or table after the specified field(s) have been removed. Type: GPFeatureLayer
+**Toolset:** Fields
+
+**Tool:** Delete Field
+
+**Description:**
+The Delete Field tool in ArcGIS Pro is designed to remove one or more fields from a table, feature class, feature layer, or raster dataset. This tool is typically used in data management workflows where unnecessary or redundant fields need to be removed to streamline datasets and improve performance. For example, in spatial analysis, you might use this tool to delete fields that are not required for analysis, thereby reducing the size of the dataset and improving processing speed. Another use case is in preparing data for export, where only specific fields are needed, and others can be removed to meet the requirements of the target system.
+
+**Parameters:**
+- **Input Table:** The dataset from which fields will be deleted. Type: Table View.
+- **Fields:** The fields to be deleted from the input table. Type: Field.
+
+**Derived Output:**
+- **Updated Table:** The input table with specified fields removed. Type: Table View.
+Toolset: Fields
+
+Tool: Migrate Text Field
+
+Description: Migrates text fields in an Oracle table from Unicode to non-Unicode types. This tool is designed for this specific migration task in Oracle tables.
+
+Parameters:
+- No information available.
+
+Derived Output:
+- No information available.
+**Toolset:** Fields
+
+**Tool:** Calculate Field
+
+**Description:**
+The Calculate Field tool is designed to compute values for a specified field within a feature class, feature layer, or raster dataset. This tool is commonly used in GIS workflows to update or populate fields with calculated values based on expressions. Typical use cases include:
+- Updating attribute values based on spatial analysis results.
+- Populating fields with derived values from other fields using mathematical operations.
+- Preparing data for further analysis by ensuring fields contain accurate and updated information.
+
+For example, in spatial analysis, you might use the Calculate Field tool to update a field with the results of a proximity analysis, such as calculating the distance to the nearest feature. Another example is using the tool to convert text-based data into numerical values for statistical analysis.
+
+**Parameters:**
+- **Input Table:** The table containing the fields that will be updated with the new calculations. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name (Existing or New):** The field that will be updated with the new calculation. If a field with the specified name does not exist, it will be added. Type: Field.
+- **Expression Type:** Specifies the type of expression used for calculations. Options include Python, Arcade, SQL, and VBScript. Type: String.
+- **Expression:** The calculation expression used to create a value that will populate the selected rows. Type: SQL Expression.
+
+**Derived Output:**
+- **Updated Table:** The input table with updated field values. Type: Same as input.
+**Toolset:** Calculate Field
+
+**Tool:** Calculate Field
+
+**Description:**
+The Calculate Field tool in ArcGIS Pro is designed to compute values for a specified field within a feature class, feature layer, or raster. This tool is particularly useful for updating or populating fields with calculated values based on expressions. It supports both simple and complex calculations, allowing users to perform operations using Python, SQL, Arcade, or VBScript expressions. Typical use cases include:
+- Populating fields with calculated values before exporting to CAD.
+- Performing batch updates on field values across multiple records.
+- Calculating geometric properties such as area or length.
+- Using Python code blocks for advanced calculations involving loops and branching.
+
+**Parameters:**
+- **Input Table:** The table containing the fields to be updated. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name (Existing or New):** Specifies the field to be updated or added. Type: Field.
+- **Expression Type:** Specifies the type of expression used (Python, Arcade, SQL, VBScript). Type: String.
+- **Field Expression:** The calculation expression used to populate the field. Type: String.
+
+**Derived Output:**
+- **Output Dataset:** A new dataset with calculated fields. Type: Feature Class; Table.
+**Toolset:** Fields
+
+**Tool:** Alter Fields
+
+**Description:**
+The "Alter Fields" tool in ArcGIS Pro allows users to modify the properties of multiple fields within a feature class or table. This tool is commonly used in GIS workflows to enhance data management by updating field names, aliases, types, lengths, and nullability. For instance, in spatial analysis, this tool can be utilized to rename fields for clarity, change field types to accommodate new data formats, or adjust field lengths to ensure data integrity. The Alter Fields tool is essential for maintaining well-organized and efficient data structures in geodatabases.
+
+**Parameters:**
+- **Input Table:** The geodatabase table or feature class containing the fields to be altered. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Properties (Optional):** Specifies the fields and their properties to be altered. 
+  - **Field Name:** The name of the field to be altered.
+  - **New Field Name (optional):** The new name for the field.
+  - **New Field Alias (optional):** The new alias for the field.
+  - **New Field Type (optional):** Specifies the new field type, applicable only if the table is empty.
+  - **New Field Length (optional):** The new length of the field, applicable to Text or Blob types.
+  - **New Field IsNullable (optional):** Specifies if the field can contain null values.
+
+**Derived Output:**
+- No specific derived outputs are listed for this tool.
+**Toolset:** Fields
+
+**Tool:** Alter Field
+
+**Description:**
+The "Alter Field" tool in ArcGIS Pro allows users to rename fields or field aliases within a geodatabase table or feature class. This tool is commonly used in GIS workflows to update the schema of a dataset without affecting the data itself. Use cases include standardizing field names for consistency across datasets, enhancing data presentation by updating field aliases, and adjusting field properties to meet new data requirements. For spatial analysis, this tool can be used to align field names with new data standards or make field aliases more descriptive for end-users.
+
+**Parameters:**
+- **Input Table:** The geodatabase table or feature class containing the field to be altered. **Type:** Table View; Raster Layer; Mosaic Layer.
+- **Field Properties (Optional):** Input table fields and their properties to be altered. **Type:** Various (depends on the specific property being altered).
+  - **Field Name:** Name of the field to be altered. If the field is required, only the alias can be changed.
+  - **New Field Name (optional):** New name for the field.
+  - **New Field Alias (optional):** New alias for the field.
+  - **New Field Type (optional):** Specifies the new field type, relevant only if the input table is empty.
+  - **New Field Length (optional):** New length of the field, applicable to Text or Blob types, and only if the table is empty.
+  - **New Field IsNullable (optional):** Indicates if the field can contain null values, applicable only for geodatabase fields.
+
+**Derived Output:**
+- No specific derived outputs are listed for this tool. The tool primarily updates the schema of the input dataset without generating new datasets or outputs.

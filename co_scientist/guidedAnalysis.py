@@ -155,6 +155,7 @@ class GuidedAnalysisAgent:
         elif action == "finish":
             observation = "[Analysis complete.]"
         else:
+            print(action)
             observation = "[Unknown action]"
 
         return action, observation, ask_user_flag
@@ -237,7 +238,7 @@ class GuidedAnalysisAgent:
 if __name__ == "__main__":
 
     llm_engine = LLMEngine("gpt-4.1")
-    agent = GuidedAnalysisAgent(llm_engine, max_turns=10)
+    agent = GuidedAnalysisAgent(llm_engine, max_turns=50)
     user_input = input("Describe your spatial analysis need (e.g., 'I want to find retail clusters'), enter enough to stop this session: ")
     history = agent.run_guided_analysis(user_input)
 

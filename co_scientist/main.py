@@ -1,6 +1,6 @@
 import streamlit as st
 from guidedAnalysis import GuidedAnalysisAgent, LLMEngine
-
+import re
 def get_user_visible_message(agent_reply, action, ask_user_flag, observation=None):
     """
     Generate a user-friendly message for display based on the current agent action.
@@ -8,6 +8,22 @@ def get_user_visible_message(agent_reply, action, ask_user_flag, observation=Non
     """
     if ask_user_flag:
         # If the agent wants a clarification, display the question directly.
+        # Extract Thought and Ask User parts
+        thought_match = re.search(r'Thought:(.*?)(?:\n\n|$)', agent_reply, re.DOTALL)
+        action_match = re.search(r'Action: ask_user; Input:\s*"(.*)"', agent_reply)
+
+        thought = thought_match.group(1).strip() if thought_match else ""
+        ask_user = action_match.group(1).strip() if action_match else ""
+
+        # Display with colors in Streamlit
+        # if thought:
+        #     st.markdown(
+        #         f"<span style='color:#2563eb; font-weight:bold'>System Thought (debug only):</span> <span style='color:#1e40af'>{thought}</span>",
+        #         unsafe_allow_html=True)
+        if ask_user:
+            st.markdown(
+                f"<span style='color:#059669; font-weight:bold'>Ask User:</span> <span style='color:#047857'>{ask_user}</span>",
+                unsafe_allow_html=True)
         return agent_reply.strip()
 
     if action == "finish":
@@ -19,29 +35,33 @@ def get_user_visible_message(agent_reply, action, ask_user_flag, observation=Non
         if observation:
             if isinstance(observation, dict) and "articles_with_reasoning" in observation:
                 summary = observation["articles_with_reasoning"]
-                if len(summary) > 500:
-                    summary = summary[:500] + "..."
+                if len(summary) > 3000:
+                    summary = summary[:3000] + "..."
                 tip += "\n\n**Summary:**\n" + summary
             elif isinstance(observation, str):
-                tip += "\n\n**Summary:**\n" + (observation[:500] + "..." if len(observation) > 500 else observation)
+                tip += "\n\n**Summary:**\n" + (observation[:3000] + "..." if len(observation) > 3000 else observation)
+        st.markdown(f"<span style='color:green'>{tip}</span>", unsafe_allow_html=True)
         return tip
 
     if action == "expert_knowledge_interact":
         tip = "🧑‍🔬 Consulting domain expert knowledge."
         if observation:
             if isinstance(observation, str) and len(observation) > 0:
-                summary = observation[:500] + ("..." if len(observation) > 500 else "")
+                summary = observation[:10000] + ("..." if len(observation) > 10000 else "")
                 tip += "\n\n**Expert insight:**\n" + summary
+        st.markdown(f"<span style='color:green'>{tip}</span>", unsafe_allow_html=True)
         return tip
 
     if action == "arcgis_document_retrieval":
         tip = "📖 Looking up ArcGIS Pro documentation."
         if observation:
-            summary = observation[:500] + ("..." if len(observation) > 500 else "")
+            summary = observation[:10000] + ("..." if len(observation) > 10000 else "")
             tip += "\n\n**Documentation result:**\n" + summary
+        st.markdown(f"<span style='color:green'>{tip}</span>", unsafe_allow_html=True)
         return tip
 
     if action == "unknown action" or action is None:
+        st.markdown(f"<span style='color:red'>The system has received your input and is processing the next step...</span>", unsafe_allow_html=True)
         return "The system has received your input and is processing the next step..."
 
     return None
@@ -108,8 +128,8 @@ else:
                 agent = st.session_state.agent
                 action, _, ask_user_flag = agent.react_decision(turn['content'])
                 user_msg = get_user_visible_message(turn['content'], action, ask_user_flag, observation)
-                if user_msg:
-                    st.markdown(f"<span style='color:blue'>**Agent:** {user_msg}</span>", unsafe_allow_html=True)
+                # if user_msg:
+                #     st.markdown(f"<span style='color:blue'>**Agent:** <br>{user_msg}</span>", unsafe_allow_html=True)
             # Optionally, skip 'system' turns completely (since their content is embedded above)
 
         # User input

@@ -1,0 +1,134 @@
+What is the slope in Utrecht
+What is the Euclidean distance to recreational sites in Utrecht
+What is the Euclidean distance to schools in Utrecht
+What is the least cost route from school to the closest road intersection based on slope and land use in Utrecht
+What is the interpolated surface of ozone concentration in California
+What is the shortest network-based path through the Palace of Fine Arts, Ferry Building and de Young Meseum in San Francisco
+What are the four fire stations with shortest network-based paths to 1202 Twin Peaks Blvd in San Francisco
+What are the four fire stations within 3 minutes of travel time from a fire in San Francisco
+What areas are within 3 minutes, 5 minutes, and 10 minutes from six warehouses in Paris
+What is the number of stores for each warehouse service area in Paris
+What is the delivery cost from warehouse to stores within 10 minute driving time in Paris
+What is the fastest delivery route through 21 stores in Paris
+What are the fastest routes for three 15000-pound capacity trucks to meet the delivery demands of 25 grocery stores in Utrecht
+What are the fastest routes for three vans to transport customers from their homes to hospitals between 8 am to 10 am in Utrecht
+What are the three locations for new stores that maximize attendance in Utrecht
+What are the three locations for new stores that maximize market share in Utrecht
+Which fire station is the closest to each school in Utrecht
+What are the two fire stations closest to each school in Utrecht
+What is the number of people between 15 and 19 years old within 1.5 miles of library branches in Palm city
+What is the number of asian people within 1.5 miles of library branches in Palm city
+What are the median household income within 1.5 miles of library branches in Palm city
+What areas are within four minutes of a fire station at 5 pm on Friday in Utrecht
+What are the areas within a four-minute drive of each fire station at 2 a.m. on Tuesday in Utrecht
+What areas are within 6 minute, 8 minute, 10 minute and 12 minute of driving time from fire stations in Utrecht
+How many streetlights for each district in San Diego
+What is the total length of bike routes for each district in San Diego
+Which districts have more than 165 streetlights and less than 250 streetlights in San Diego
+Which districts have bicycle routes more than 2.3 miles and less than 3.9 miles in San Diego
+What liquor stores are within 1000 foot of schools, libraries, and parks in El Cajon
+What liquor stores are within 1000 foot of schools in El Cajon
+What liquor stores are within 1000 foot of libraries in El Cajon
+What liquor stores are within 1000 foot of parks in El Cajon
+What areas are inside 1000 foot of schools in El Cajon
+Which college district has the fewest households with an annual income less than 30000 dollars in the United States of America
+Which wind farm proposals are not intersect with the wild lands in Scotland
+What areas are visible from the wild lands in Scotland
+Which wind farm proposals are nearest to the roads in Scotland
+What areas are within a quarter mile of a store or restaurant, light rail stop, and planned commercial district in Gresham
+What areas are within a quarter mile of a store in Gresham
+What areas are within a quarter mile of a restaurant in Gresham
+What areas are within a quarter mile of light rail stop in Gresham
+What areas are within a quarter mile of planned commercial district in Gresham
+Which gas stations are in Gresham
+What is the area of currently mixed use zones in Gresham
+What is the number of tornadoes for each state in the United States of America from 1950 to 2011
+Which county has the highest Fujita damage scale in the United States of America from 1950 to 2011
+What are the mean directions of tornadoes for each county in the United States of America from 1950 to 2011
+What are the risk index of new homelessness for each census tract in Los Angeles
+Which census tracts have more than 200 unemployed people over 16 years old in Los Angeles
+Where is the hot spot of homeless population density for each 20000 feet distance band in Los Angeles
+Which vacant lots are larger than 20 acres, within 1 mile of a freeway, and outside the flood zone in Hillsboro
+Which vacant lots are larger than 20 acres in Hillsboro
+Which vacant lots are within 1 mile of a freeway in Hillsboro
+Which vacant lots are outside the flood zone in Hillsboro
+What is the average cost per acre for each potential sites in Hillsboro
+Where are the private lands in Crook county, Deschutes county, and Jefferson county
+What is the Euclidean distance to the rivers in Crook, Deschutes, and Jefferson county
+Which airports are within 50 mile of Crook, Deschutes and Jefferson county
+What areas are within 60 minutes of airports in Crook, Deschutes, and Jefferson county
+Which peaks are greater than or equal to 2000 meters and within 40 miles of the countries borders in Crook, Deschutes, and Jefferson county
+What areas are visible from peaks in Crook, Deschutes, and Jefferson county
+What is the average euclidean distance to rivers for each standard deviational ellipses of golf courses in Crook, Deschutes, and Jefferson county
+Which parcels have an average slope of less than 10 percent in Poway
+Which parcels are within 1500 feet of the major road in Poway
+Which census blocks are within a four-minute travel time from fire stations in Poway
+What is the percentage of census blocks within 4 minute travel time from fire stations in Poway
+What is the total population within a four-minute travel time from fire stations in Poway
+What is the total property values within a four-minute travel time from fire stations in Poway
+What is the total miles of streets within four minutes of fire stations in Poway
+What is the cluster for the people over 55 years old in USA in 2019
+What is the hot spot of house vacancy rate in USA in 2019
+What is the ratio of population over 55 years old in a zip code area to the total population over 55 years old in USA in 2019
+At which locations is the number of traffic accidents increasing in Florida between 2010 and 2015
+At which range of time of the day is the number of car accidents highest between 2010 and 2015 in Florida
+Where do the car accidents between 3:00 and 5:00 pm occur in Florida between 2010 and 2015
+Where are hot spots of violent crime incidents in Florida in 2019
+At which locations has the number of violent crime incident increased in Florida in 2019
+Where do hot spots of crime incidents overlap with hot spots of unemployment in Florida in 2019
+Which residential properties are within 1 km of a school in Swellendam
+Which residential properties are larger than 100 square meters in Swellendam
+Which residential properties are within 50 meters of a main road in Swellendam
+Which residential properties are within 500 meters of a restaurant in Swellendam
+What areas are within 1000 meters of roads in Assam in India
+What areas are outside 5 km of water bodies in Assam in India
+Where are not protected region in Assam in India
+What is the average rating of street pavement for each borough in New York City
+What is the population density in California
+Which bars are within half a kilometre of a metro station in Melbourne
+Which pubs are within half a kilometre of a metro station in Melbourne
+What is the kernel density of crime in Surrey in UK
+Which mental health facilities are closest to each address in Washington DC
+What areas are within 15 minutes walking distance of a metro rail station in Kochi in India
+What is the average monthly rainfall for each zip code area in the Seattle
+What are the vegetation areas larger than 6000 square meters in the Cape Peninsula
+What areas have an aspect larger than 45 degree and smaller than 135 degrees in the Cape Peninsula
+What areas have slope larger than 15 percent and smaller than 60 percent in the Cape Peninsula
+What areas have an annual rainfall of more than 1000 millimeters in the Cape Peninsula
+What areas are outside 250 meters of human settlement in the Cape Peninsula
+Which city is closest to each major earthquake in the world
+What is the number of maritime piracy incidents for each hexagonal grid in the world
+Where are the clusters of fatal car accidents with at least three incidents inside 300 meter search distance in the United State
+What is the literacy rate for each country in Africa
+What are the countries where literacy rates are rising or falling in Africa between 1990 and 2015
+Which countries are with low literacy rates and high adolescent birth rates in Africa
+What was the cesium 137 concentration near the Chernobyl nuclear power plant in 1992
+What was the spatial autocorrelation of the cesium 137 concentration near the Chernobyl nuclear power plant in 1992
+What was the spatial trend of the cesium 137 concentration near the Chernobyl nuclear power plant in 1992
+Which ZIP3 areas do have the highest per household online loan application rates in the US
+Which ZIP3 areas do have the highest average loan interest rates in the US
+What is the hot spots and cold spots for average loan interest rates in the US
+What areas are within two miles of urban landuse in Loudoun County in US
+What areas are within one mile of main roads in Loudoun County in US
+What areas are outside 20 minute driving time from the current main hospital in Loudoun County in US
+What are the housing districts outside 15 minutes driving time from COVID testing sites in Connecticut
+Where are the street crashes in Ottawa in 2018
+Where is the cluster of street crashes in Ottawa in 2018
+What is the number of street crashes for each ward in Ottawa in 2018
+Where are sinks in the terrain in Stowe in Vermont
+What is the area of the watershed upstream in Stowe in Vermont
+What is the flow velocity field in the watershed upstream in Stowe, Vermont
+What is the number of check ins for each hexagon grid in the San Francisco Bay Area
+What is the spatial autocorrelation of the amount of checkins for each location in the San Francisco Bay area
+What is the trend of the amount of check-ins for each grid cell in the San Francisco Bay area
+What is the mean annual PM2.5 concentration in Italy, Great Britain and Norway
+Where are the emerging hot spots of PM2.5 concentration on the globe
+What is the number of traffic accidents clustered together in Pasadena, California
+What is the kernel density of traffic accidents in Pasadena, California
+Which school neighborhoods do have the largest number of traffic accidents in Pasadena in California
+Where are the hot spots of traffic accidents in Pasadena in California
+What areas have a wind speed of at least 5.6 meters per second in Colorado
+What areas are within 10 miles of current transmission lines with a voltage greater than 400 in Colorado
+What is the driving time from the windfarm company headquarters to the windfarm areas in Colorado
+What is the difference between breast cancer mortality rates of black women and white women for each county in the US
+What is the breast cancer mortality rate ratio between black women and white women for each county in the US
