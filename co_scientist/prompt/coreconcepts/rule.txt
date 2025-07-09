@@ -1,0 +1,132 @@
+Rule 1: Proximity and Buffering
+This is one of the most common operations, used to answer questions about what is "nearby" or "within a certain range."
+
+Generating a Distance Field from an Object (Object → distField):
+
+Rule: When you need to calculate the distance to an object or define an area of a specific range around it, the first step is almost always to transform the object into a distField. This distField represents the distance from every point in space to the source object.
+
+Trigger Words: "distance to", "within X miles of", "near", "buffer".
+
+Example:
+
+Question: "What is the Euclidean distance to recreational sites in Utrecht"
+
+Path: [object] recreational sites → [distField] euclidean distance
+
+Filtering with a Distance Field (object + distField → object_u):
+
+Rule: A distField is rarely the final goal. It is typically used as a spatial filter to select other objects that fall within its boundaries.
+
+Example:
+
+Question: "Which liquor stores are within 1000 feet of schools in El Cajon"
+
+Path:
+
+[object] schools → [distField] (Generate the buffer zone)
+
+[object] liquor stores + [distField] → [object_u] liquor stores (Use the buffer to filter the stores)
+
+Rule 2: Network Analysis
+Network analysis handles all questions related to paths, connectivity, and travel time.
+
+Prerequisites for Network Analysis:
+
+Rule: The generation of any network-type concept (e.g., driving time, shortest path, service area) requires a base network dataset as an input. In your examples, this is typically [network/object] road data. If not explicitly mentioned in the question, the model must infer its necessity.
+
+Rule: Network analysis must connect at least two or more points (which can be an object, placename, or event).
+
+Routing:
+
+Rule: To calculate a network path between two or more points, you must have all origin, destination, and stop-over points, plus the base network data, as inputs.
+
+Example:
+
+Question: "What is the driving time from the windfarm company headquarters to the windfarm areas in Colorado"
+
+Path: [object] windfarm company headquarters + [object] windfarm areas + [network/object] road data → [network] driving time
+
+Service Area Analysis:
+
+Rule: When a question involves an area reachable from a point within a specific time or cost, the transformation path is typically: [object] origin + [network/object] road data → [serviceObj] service area.
+
+Rule: The resulting serviceObj is usually not the final answer. It is often transformed into a location ("what areas...") or used to filter other objects ("houses inside the service area").
+
+Example:
+
+Question: "What areas are within a four-minute drive of each fire station..."
+
+Path:
+
+[object] fire station + [network/object] road data → [serviceObj]
+
+[serviceObj] → [location]
+
+Rule 3: Aggregation and Statistics
+This class of analysis is used to calculate counts, lengths, areas, densities, and other metrics.
+
+Calculating Amounts:
+
+Rule: To generate a conamount (content amount, e.g., count) or a covamount (coverage amount, e.g., area/length), you typically need two inputs: (1) the target to be measured (object, event) and (2) a spatial unit or boundary (object like a district, or a grid).
+
+Trigger Words: "number of", "how many", "total length", "total area".
+
+Example:
+
+Question: "How many streetlights for each district in San Diego"
+
+Path: [object] streetlights + [object] district → [conamount]
+
+Calculating Proportions or Density:
+
+Rule: A proportion (e.g., density, rate, ratio) is a derived concept. It is always calculated by dividing two amount concepts. Therefore, to generate a proportion, you must first reason how to generate the two requisite amounts for the numerator and denominator.
+
+Example:
+
+Question: "What is the percentage of census blocks within 4 minute travel time from fire stations..."
+
+Path (Simplified Logic):
+
+(Network Analysis) ... → [object_u] selected census blocks
+
+[object_u] selected census blocks → [amount] area_of_selected_blocks (Numerator)
+
+[object] all census blocks → [amount] total_area_of_all_blocks (Denominator)
+
+[amount] + [amount] → [proportion] percentage
+
+Rule 4: Pattern and Distribution Analysis
+This analysis focuses on the characteristics of a spatial distribution, such as clusters, hotspots, etc.
+
+Generating Patterns from Discrete Points:
+
+Rule: Concepts like cluster, hot spot, and kernel density are typically generated from a set of discrete objects or events.
+
+Example:
+
+Question: "What is the kernel density of crime in Surrey in UK"
+
+Path: [event] crime → [field] kernel density
+
+Question: "Where are the clusters of fatal car accidents..."
+
+Path: [event] fatal car accidents → [covamount] clusters
+
+Generating Patterns from Continuous Fields:
+
+Rule: Concepts like spatial autocorrelation or spatial trend are generated from a continuous field concept.
+
+Example:
+
+Question: "What was the spatial autocorrelation of the cesium 137 concentration..."
+
+Path: [field] cesium 137 concentration → [correlation] spatial autocorrelation
+
+Rule 5: General Principles
+Deconstruct into Atomic Operations: Complex transformations can be broken down. For instance, "find the one in A closest to B" can be deconstructed into (1) calculate the distance for every point in A to B, and (2) find the minimum distance. The path would be [object] A + [object] B → [object_u] A.
+
+Infer Implicit Concepts: As stated in Rule 2, network analysis must have road data. Similarly, visibility analysis requires terrain data (DEM or terrain), even if not explicitly stated in the question.
+
+Common Endpoints: _u or location: The final output of many reasoning paths is either a filtered version of an original concept (denoted with _u, e.g., object_u) or a generic location, representing the final geographic area that satisfies all conditions.
+
+Many-to-One Transformations: Many geospatial tools (like overlay, routing) take multiple input layers to produce a single output layer. Therefore, transformation paths of the form A + B + C → D are very common and logical.

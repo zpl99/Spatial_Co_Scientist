@@ -85,26 +85,45 @@ class ExperimentDesignAgent:
         user_input = [{"role": "user", "content": prompt}]
         output, *_ = self.llm_engine.respond(user_input, temperature=0.2, top_p=0.92,)
         return output
-    def get_votes(self,path):
-        return
+
+    def get_votes(self,x,core_concepts,path):
+        with open("/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/prompt/coreconcepts/rule.txt","r") as f:
+            rule = f.readlines()
+        vote_prompt =  manager.render_prompt(agent="coreconcepts",prompt_name="vote",variables={"question":x,"core_concepts":core_concepts,"rule":rule,"transformation_path_candidates":path})
+        user_input = [{"role": "user", "content": vote_prompt}]
+        result = self.llm_engine.respond(user_input, n=1)[0]
+        return result
+
     def get_values(self):
         return
+    def merge(self,x,candidate):
+        merge_prompt =  manager.render_prompt(agent="coreconcepts",prompt_name="merge",variables={"question":x,"candidates":candidate})
+        user_input = [{"role": "user", "content": merge_prompt}]
+        result = self.llm_engine.respond(user_input, n=1)[0]
+
+        return result
     def get_answer_id(self, response):
         match = re.search(r'Option id:\s*(\d+)', response)
         if match:
             return int(match.group(1))
         else:
-            raise ValueError("No option id found in the response.")
+            print("No option id found in the response.")
+            print(response)
+            return 0
 
-    def cot_solve_task(self, x):
+    def cot_solve_task(self, x,existing_path=None):
 
         system_format = manager.render_prompt(
             agent="coreconcepts",
             prompt_name="core_concepts",
             variables={"question": x}
         )
-        user_input = [{"role": "user",
-                       "content": system_format + '''Identify the relevant core concepts and transformation steps needed to solve it. Think step by step and use transformation path to help you solve the problem. Then, select the correct answer option based on your reasoning. Only output your transformation path. And the selected option's id using the format: Option id: id. Do not include any other explanation. If there is no answer, just output "Option id: 0".'''}]
+        if existing_path:
+            user_input = [{"role": "user",
+                           "content": system_format + f'''Existing identified path {existing_path}. Think step by step and use transformation path to help you solve the problem. Then, select the correct answer option based on your reasoning. Output the selected option's id using the format: Option id: id and your reasoning process based on the transformation path using this format : Reasoning: your reasoning. Do not include any other explanation. If there is no answer, just output "Option id: 0".'''}]
+        else:
+            user_input = [{"role": "user",
+                           "content": system_format + '''Identify the relevant core concepts and transformation steps needed to solve it. Think step by step and use transformation path to help you solve the problem. Then, select the correct answer option based on your reasoning. Only output your transformation path. And the selected option's id using the format: Option id: id. Do not include any other explanation. If there is no answer, just output "Option id: 0".'''}]
 
         result = self.llm_engine.respond(user_input, n=1)[0]
         id = self.get_answer_id(result)
@@ -112,9 +131,8 @@ class ExperimentDesignAgent:
 
     def cot_plain_solve_task(self, x):
 
-
         user_input = [{"role": "user",
-                       "content": x + ''' Think step by step. Only output your reasoning process and your choice of the option's id, in the format of "Option id: id". If you think there is no answer, just output "Option id: 0" to indicate no answer.'''}]
+                       "content": x + '''Think step by step. Only output your reasoning process and your choice of the option's id, in the format of "Option id: id". If you think there is no answer, just output "Option id: 0" to indicate no answer.'''}]
 
         result = self.llm_engine.respond(user_input, n=1)[0]
         id = self.get_answer_id(result)
@@ -131,6 +149,35 @@ class ExperimentDesignAgent:
                 'target': target
             }
         )
+
+    def solve_task_one_path(self,x,step):
+        ys = []
+        best_list = []
+        system_format = manager.render_prompt(
+            agent="coreconcepts",
+            prompt_name="core_concepts",
+            variables={"question":x}
+        )
+
+        user_input = [{"role": "user", "content": system_format+'''Based on the given question, just identify the core concepts involved and also the target core concept (for getting the result), output only: - [id] item (e.g., library): core concept... - [id] target item: core concept'''}]
+        # core concepts identification
+
+        core_concepts_result = self.llm_engine.respond(user_input, n=3)[0]
+        for i in core_concepts_result:
+            system_format = manager.render_prompt(
+                agent="coreconcepts",
+                prompt_name="core_concepts_transformation_path",
+                variables={"question":x,
+                           "concepts":i}
+            )
+            user_input = [{"role": "user", "content": system_format}]
+            y = self.llm_engine.respond(user_input, n=3)[0]
+            ys.extend(y)
+            best = self.get_votes(x,i,ys)
+            best_list.append(best)
+        final_result = self.merge(x,best_list)
+
+        return self.cot_solve_task(x,final_result)
     def solve_task(self,x,step):
         ys = []
         infos = []
@@ -147,21 +194,21 @@ class ExperimentDesignAgent:
         core_concepts_result = self.llm_engine.respond(user_input, n=2)[0]
         core_concepts_result = set(core_concepts_result)
         target_concept = 'target item: network'
-        for i in core_concepts_result:
 
+        for i in core_concepts_result:
             existed_path = []
             # path = set(path[0])
             # values = self.get_votes(path)
             finished = False
             while not finished:
                 # generate next transformation step
-                prompt = self.generate_next_transformation_prompt(question=x, concepts=i, current_path=existed_path,target=target_concept)
+                prompt = self.generate_next_transformation_prompt(question=x, concepts=i, current_path=existed_path)
                 user_input = [{"role": "user", "content":prompt}]
                 result = self.llm_engine.respond(user_input, n=1)[0]
                 existed_path.append(result)
                 if "stop" in result.lower():
                     finished = True
-                #
+
 
 
 
@@ -183,10 +230,10 @@ if __name__ == "__main__":
     gt = item["answer"]
     agent = ExperimentDesignAgent("gpt-4o")
 
-    id = agent.solve_task(prompt, step=5)
+    id = agent.solve_task_one_path(prompt, step=5)
     item["prediction"] = id
     result = evaluate_mapeval_classification(mapeval_textual)
-    print(f"cot cc round", result)
+    print(f"tot cc round", result)
 
     # for item in tqdm(mapeval_textual):
     #     prompt = (

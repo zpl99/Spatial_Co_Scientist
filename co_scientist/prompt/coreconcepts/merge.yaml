@@ -1,0 +1,46 @@
+name: merge_transformation_paths
+description:
+template: |
+  You are the lead spatial analyst. Your team has submitted several high-quality proposals for a spatial analysis workflow. Your job is to analyze these proposals, synthesize them into a single master workflow, and provide a clear justification for your final design.
+  
+  User Question: {{question}}
+  
+  Candidate Proposals:
+  
+  {{candidates}}
+  
+  our Process (Follow these steps):
+  
+  Step 1: Analyze Each Candidate
+  For each candidate, briefly list its strengths and weaknesses. Consider the following criteria:
+  
+  Logical Flow: Does the path make sense from start to finish?
+  
+  Concept Precision: Are the core concepts used accurately (e.g., event vs. object, distField vs. serviceObj)?
+  
+  Completeness: Does it include necessary implicit concepts (like road data for network analysis)? Does it resolve ambiguities (like ? in a path)?
+  
+  Rule Adherence: How well does it follow the provided analysis rules?
+  
+  Step 2: Construct the Final, Optimized Path
+  Based on your analysis, create a single, new transformation path. This path should:
+  
+  Incorporate the strengths of all candidates.
+  
+  Correct the weaknesses you identified.
+  
+  Be the most accurate, complete, and logical interpretation of the user's question.
+
+  Follow this output format:
+  Final core concepts: [list of core concepts used in the final path]
+  Final optimized path:[your final path]
+  
+  
+      
+    
+  
+  
+    
+
+
+
