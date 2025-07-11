@@ -268,52 +268,52 @@ if __name__ == "__main__":
     import json
     all_result = {}
 
-    with open("/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/data/mapeval/mapeval_textual.json") as f:
+    # with open("/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/data/mapeval/mapeval_textual.json") as f:
+    #     mapeval_textual = json.load(f)
+    with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
         mapeval_textual = json.load(f)
-    # with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
-    #     mapeval_textual = json.load(f)
-    # for item in tqdm(mapeval_textual):
-    # # item = mapeval_textual[0]
-    #     prompt = (
-    #             "You are a highly intelligent assistant. "
-    #             "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
-    #             "Context:\n" + item["context"] + "\n\n"
-    #                                              "Question:\n" + item["question"] + "\n\n"
-    #                                                                                 "Options:\n"
-    #     )
-    #     for i, option in enumerate(item["options"], start=1):
-    #         prompt += f"{i}. {option}\n"
-    #     gt = item["answer"]
-    #     agent = ExperimentDesignAgent("gpt-4o")
-    #
-    #     id = agent.solve_task_one_path(prompt, use_rule= True)
-    #     item["prediction"] = id
-    # result = evaluate_mapeval_classification(mapeval_textual)
-    # all_result.update({"tot_cc_using_one_path_with_rule":result})
-    #
-    # with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
-    #     mapeval_textual = json.load(f)
-    # for item in tqdm(mapeval_textual):
-    # # item = mapeval_textual[0]
-    #     prompt = (
-    #             "You are a highly intelligent assistant. "
-    #             "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
-    #             "Context:\n" + item["context"] + "\n\n"
-    #                                              "Question:\n" + item["question"] + "\n\n"
-    #                                                                                 "Options:\n"
-    #     )
-    #     for i, option in enumerate(item["options"], start=1):
-    #         prompt += f"{i}. {option}\n"
-    #     gt = item["answer"]
-    #     agent = ExperimentDesignAgent("gpt-4o")
-    #
-    #     id = agent.solve_task_one_path(prompt, use_rule= False)
-    #     item["prediction"] = id
-    # result = evaluate_mapeval_classification(mapeval_textual)
-    # all_result.update({"tot_cc_using_one_path_without_rule":result})
+    for item in tqdm(mapeval_textual):
+    # item = mapeval_textual[0]
+        prompt = (
+                "You are a highly intelligent assistant. "
+                "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
+                "Context:\n" + item["context"] + "\n\n"
+                                                 "Question:\n" + item["question"] + "\n\n"
+                                                                                    "Options:\n"
+        )
+        for i, option in enumerate(item["options"], start=1):
+            prompt += f"{i}. {option}\n"
+        gt = item["answer"]
+        agent = ExperimentDesignAgent("gpt-4o")
 
-    # with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
-    #     mapeval_textual = json.load(f)
+        id = agent.solve_task_one_path(prompt, use_rule= True)
+        item["prediction"] = id
+    result = evaluate_mapeval_classification(mapeval_textual)
+    all_result.update({"tot_cc_using_one_path_with_rule":result})
+
+    with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
+        mapeval_textual = json.load(f)
+    for item in tqdm(mapeval_textual):
+    # item = mapeval_textual[0]
+        prompt = (
+                "You are a highly intelligent assistant. "
+                "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
+                "Context:\n" + item["context"] + "\n\n"
+                                                 "Question:\n" + item["question"] + "\n\n"
+                                                                                    "Options:\n"
+        )
+        for i, option in enumerate(item["options"], start=1):
+            prompt += f"{i}. {option}\n"
+        gt = item["answer"]
+        agent = ExperimentDesignAgent("gpt-4o")
+
+        id = agent.solve_task_one_path(prompt, use_rule= False)
+        item["prediction"] = id
+    result = evaluate_mapeval_classification(mapeval_textual)
+    all_result.update({"tot_cc_using_one_path_without_rule":result})
+
+    with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
+        mapeval_textual = json.load(f)
     for item in tqdm(mapeval_textual):
     # item = mapeval_textual[0]
         prompt = (

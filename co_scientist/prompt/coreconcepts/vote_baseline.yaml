@@ -4,7 +4,6 @@ template: |
   As a spatial analysis expert, evaluate the candidate reasoning paths and answer for the question below and select the best one.
   Question: {{question}}
   
-  
   Candidate reasoning and answer:
   {{transformation_path_candidates}}
   
@@ -13,5 +12,5 @@ template: |
   Best reasoning steps: 
   Reasoning: The reasoning for the choice, referencing the analysis rules and how the path aligns with the question's concepts.
   Then, output the final answer of the question:
-  Output id: output id
+  Option id: output id
   If you can not answer, just output: Option id: 0

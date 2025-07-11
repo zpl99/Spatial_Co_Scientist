@@ -25,7 +25,7 @@ template: |
   Best Path: Path
   Reasoning: The reasoning for the choice, referencing the analysis rules and how the path aligns with the question's concepts.
   Then, output the final answer of the question:
-  Output id: output id
+  Option id: option id
   
     
     
