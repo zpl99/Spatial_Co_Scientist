@@ -188,23 +188,23 @@ if __name__ == "__main__":
     # result = evaluate_mapeval_classification(mapeval_textual)
     # print(f"cot cc round", result)
 
-    for item in tqdm(mapeval_textual):
-        prompt = (
-                "You are a highly intelligent assistant. "
-                "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
-                "Context:\n" + item["context"] + "\n\n"
-                                                 "Question:\n" + item["question"] + "\n\n"
-                                                                                    "Options:\n"
-        )
-        for i, option in enumerate(item["options"], start=1):
-            prompt += f"{i}. {option}\n"
-        gt = item["answer"]
-        agent = ExperimentDesignAgent("gpt-4o")
-
-        id = agent.cot_solve_task(prompt)
-        item["prediction"] = id
-    result = evaluate_mapeval_classification(mapeval_textual)
-    print(f"cot cc round", result)
+    # for item in tqdm(mapeval_textual):
+    #     prompt = (
+    #             "You are a highly intelligent assistant. "
+    #             "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
+    #             "Context:\n" + item["context"] + "\n\n"
+    #                                              "Question:\n" + item["question"] + "\n\n"
+    #                                                                                 "Options:\n"
+    #     )
+    #     for i, option in enumerate(item["options"], start=1):
+    #         prompt += f"{i}. {option}\n"
+    #     gt = item["answer"]
+    #     agent = ExperimentDesignAgent("gpt-4o")
+    #
+    #     id = agent.cot_solve_task(prompt)
+    #     item["prediction"] = id
+    # result = evaluate_mapeval_classification(mapeval_textual)
+    # print(f"cot cc round", result)
 
 
 

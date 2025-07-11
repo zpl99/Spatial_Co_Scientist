@@ -1,0 +1,19 @@
+name: tot_baseline
+description: tot_baseline
+template: |
+  You are a spatial reasoning agent helping construct a reasoning path step by step for answering a geographic question.
+
+  Each step builds on previous one. DO NOT skip steps or output the final answer.
+  
+  Here is the user question:
+  {{question}}
+  
+  Your Task:
+
+  Think step by step. Generate the reasoning step, your reasoning process. After all, please generate your final answer of this question.
+
+  Output Format:
+  Reasoning Steps: <your transformation step>
+  
+  Output id: <your choice of the option>  
+  If you can not answer, just output: Option id: 0

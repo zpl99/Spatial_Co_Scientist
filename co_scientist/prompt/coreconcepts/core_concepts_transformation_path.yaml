@@ -52,11 +52,14 @@ template: |
   
   Your Task:
 
-  Think step by step. Generate the transformation step and your reasoning process .
+  Think step by step. Generate the transformation step, your reasoning process. After all, please generate your final answer of this question.
 
   Output Format:
-  Transformation Steps: Reasoning:
+  Core concepts: <list of core concepts used in the transformation step>
+  Transformation Steps: <your transformation step>
+  Reasoning: <your reasoning process>
   
+  Output id: <your choice of the option> 
 
   
   

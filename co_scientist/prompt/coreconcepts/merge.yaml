@@ -34,13 +34,6 @@ template: |
   Follow this output format:
   Final core concepts: [list of core concepts used in the final path]
   Final optimized path:[your final path]
-  
-  
-      
-    
-  
-  
-    
-
-
-
+  You answer using this format:
+  Option id: [your choice] 
+  if you can not answer, just output: Option id: 0

@@ -7,7 +7,7 @@ from tqdm import tqdm
 import itertools
 
 manager = prompt_manager.PromptManager(
-    "/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/prompt")
+    "./prompt")
 
 def evaluate_mapeval_classification(dataset):
     total = 0
@@ -85,17 +85,33 @@ class ExperimentDesignAgent:
         user_input = [{"role": "user", "content": prompt}]
         output, *_ = self.llm_engine.respond(user_input, temperature=0.2, top_p=0.92,)
         return output
+    def get_votes_baseline(self,x,path):
 
-    def get_votes(self,x,core_concepts,path):
-        with open("/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/Spatial_Co_Scientist/co_scientist/prompt/coreconcepts/rule.txt","r") as f:
+        vote_prompt =  manager.render_prompt(agent="coreconcepts",prompt_name="vote_baseline",variables={"question":x,"transformation_path_candidates":path})
+
+        user_input = [{"role": "user", "content": vote_prompt}]
+        result = self.llm_engine.respond(user_input, n=1)[0]
+        return result
+    def get_votes(self,x,core_concepts,path,use_rule=True):
+        with open("./prompt/coreconcepts/rule.txt","r") as f:
             rule = f.readlines()
-        vote_prompt =  manager.render_prompt(agent="coreconcepts",prompt_name="vote",variables={"question":x,"core_concepts":core_concepts,"rule":rule,"transformation_path_candidates":path})
+        if use_rule:
+            vote_prompt =  manager.render_prompt(agent="coreconcepts",prompt_name="vote",variables={"question":x,"core_concepts":core_concepts,"rule":rule,"transformation_path_candidates":path})
+        else:
+            vote_prompt =  manager.render_prompt(agent="coreconcepts",prompt_name="vote",variables={"question":x,"core_concepts":core_concepts,"rule":"None","transformation_path_candidates":path})
+
         user_input = [{"role": "user", "content": vote_prompt}]
         result = self.llm_engine.respond(user_input, n=1)[0]
         return result
 
     def get_values(self):
         return
+    def merge_baseline(self,x,candidate):
+        merge_prompt =  manager.render_prompt(agent="coreconcepts",prompt_name="baseline_merge",variables={"question":x,"candidates":candidate})
+        user_input = [{"role": "user", "content": merge_prompt}]
+        result = self.llm_engine.respond(user_input, n=1)[0]
+        return result
+
     def merge(self,x,candidate):
         merge_prompt =  manager.render_prompt(agent="coreconcepts",prompt_name="merge",variables={"question":x,"candidates":candidate})
         user_input = [{"role": "user", "content": merge_prompt}]
@@ -103,13 +119,17 @@ class ExperimentDesignAgent:
 
         return result
     def get_answer_id(self, response):
-        match = re.search(r'Option id:\s*(\d+)', response)
+        match = re.search(r'\*{0,2}Option id:\*{0,2}\s*(\d+)', response)
         if match:
             return int(match.group(1))
         else:
-            print("No option id found in the response.")
-            print(response)
-            return 0
+            match = re.search(r'Option\s+id[:：]?\s*(\*\*|\[)?(\d+)(\*\*|\])?', response,re.IGNORECASE)
+            if match:
+                return int(match.group(2))
+            else:
+                print("No option id found in the response.")
+                print(response)
+                return 0
 
     def cot_solve_task(self, x,existing_path=None):
 
@@ -132,7 +152,7 @@ class ExperimentDesignAgent:
     def cot_plain_solve_task(self, x):
 
         user_input = [{"role": "user",
-                       "content": x + '''Think step by step. Only output your reasoning process and your choice of the option's id, in the format of "Option id: id". If you think there is no answer, just output "Option id: 0" to indicate no answer.'''}]
+                       "content": x + '''Think step by step. Only output your reasoning process (short version) and your choice of the option's id, in the format of "Option id: id". If you think there is no answer, just output "Option id: 0" to indicate no answer. Here is an example of your output: Option id: 1. Reason: your reason'''}]
 
         result = self.llm_engine.respond(user_input, n=1)[0]
         id = self.get_answer_id(result)
@@ -150,7 +170,7 @@ class ExperimentDesignAgent:
             }
         )
 
-    def solve_task_one_path(self,x,step):
+    def solve_task_tot_baseline(self,x):
         ys = []
         best_list = []
         system_format = manager.render_prompt(
@@ -159,10 +179,42 @@ class ExperimentDesignAgent:
             variables={"question":x}
         )
 
-        user_input = [{"role": "user", "content": system_format+'''Based on the given question, just identify the core concepts involved and also the target core concept (for getting the result), output only: - [id] item (e.g., library): core concept... - [id] target item: core concept'''}]
+        # user_input = [{"role": "user", "content": system_format+'''Based on the given question, just identify the core concepts involved and also the target core concept (for getting the result), output only: - [id] item (e.g., library): core concept... - [id] target item: core concept'''}]
+        # user_input = [{"role": "user", "content": system_format+'''Based on the given question, just identify the core concepts involved, output only: - [id] item (e.g., library): core concept... '''}]
+
         # core concepts identification
 
-        core_concepts_result = self.llm_engine.respond(user_input, n=3)[0]
+        # core_concepts_result = self.llm_engine.respond(user_input, n=2)[0]
+        # for i in core_concepts_result:
+        system_format = manager.render_prompt(
+            agent="coreconcepts",
+            prompt_name="tot_baseline",
+            variables={"question":x}
+        )
+        user_input = [{"role": "user", "content": system_format}]
+        y = self.llm_engine.respond(user_input, n=3)[0]
+        ys.extend(y)
+        best = self.get_votes_baseline(x,ys)
+        # best_list.append(best)
+        # final_result = self.merge_baseline(x, best_list)
+        final_result = self.get_answer_id(best)
+        return final_result
+
+    def solve_task_one_path(self,x,use_rule=True):
+        ys = []
+        best_list = []
+        system_format = manager.render_prompt(
+            agent="coreconcepts",
+            prompt_name="core_concepts",
+            variables={"question":x}
+        )
+
+        # user_input = [{"role": "user", "content": system_format+'''Based on the given question, just identify the core concepts involved and also the target core concept (for getting the result), output only: - [id] item (e.g., library): core concept... - [id] target item: core concept'''}]
+        user_input = [{"role": "user", "content": system_format+'''Based on the given question, just identify the core concepts involved, output only: - [id] item (e.g., library): core concept... '''}]
+
+        # core concepts identification
+
+        core_concepts_result = self.llm_engine.respond(user_input, n=2)[0]
         for i in core_concepts_result:
             system_format = manager.render_prompt(
                 agent="coreconcepts",
@@ -173,11 +225,11 @@ class ExperimentDesignAgent:
             user_input = [{"role": "user", "content": system_format}]
             y = self.llm_engine.respond(user_input, n=3)[0]
             ys.extend(y)
-            best = self.get_votes(x,i,ys)
+            best = self.get_votes(x,i,ys,use_rule=use_rule)
             best_list.append(best)
-        final_result = self.merge(x,best_list)
-
-        return self.cot_solve_task(x,final_result)
+        final_result = self.merge(x, best_list)
+        final_result = self.get_answer_id(final_result)
+        return final_result
     def solve_task(self,x,step):
         ys = []
         infos = []
@@ -214,26 +266,75 @@ class ExperimentDesignAgent:
 
 if __name__ == "__main__":
     import json
+    all_result = {}
+
     with open("/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/data/mapeval/mapeval_textual.json") as f:
         mapeval_textual = json.load(f)
+    # with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
+    #     mapeval_textual = json.load(f)
+    # for item in tqdm(mapeval_textual):
+    # # item = mapeval_textual[0]
+    #     prompt = (
+    #             "You are a highly intelligent assistant. "
+    #             "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
+    #             "Context:\n" + item["context"] + "\n\n"
+    #                                              "Question:\n" + item["question"] + "\n\n"
+    #                                                                                 "Options:\n"
+    #     )
+    #     for i, option in enumerate(item["options"], start=1):
+    #         prompt += f"{i}. {option}\n"
+    #     gt = item["answer"]
+    #     agent = ExperimentDesignAgent("gpt-4o")
+    #
+    #     id = agent.solve_task_one_path(prompt, use_rule= True)
+    #     item["prediction"] = id
+    # result = evaluate_mapeval_classification(mapeval_textual)
+    # all_result.update({"tot_cc_using_one_path_with_rule":result})
+    #
+    # with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
+    #     mapeval_textual = json.load(f)
+    # for item in tqdm(mapeval_textual):
+    # # item = mapeval_textual[0]
+    #     prompt = (
+    #             "You are a highly intelligent assistant. "
+    #             "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
+    #             "Context:\n" + item["context"] + "\n\n"
+    #                                              "Question:\n" + item["question"] + "\n\n"
+    #                                                                                 "Options:\n"
+    #     )
+    #     for i, option in enumerate(item["options"], start=1):
+    #         prompt += f"{i}. {option}\n"
+    #     gt = item["answer"]
+    #     agent = ExperimentDesignAgent("gpt-4o")
+    #
+    #     id = agent.solve_task_one_path(prompt, use_rule= False)
+    #     item["prediction"] = id
+    # result = evaluate_mapeval_classification(mapeval_textual)
+    # all_result.update({"tot_cc_using_one_path_without_rule":result})
 
-    item = mapeval_textual[0]
-    prompt = (
-            "You are a highly intelligent assistant. "
-            "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
-            "Context:\n" + item["context"] + "\n\n"
-                                             "Question:\n" + item["question"] + "\n\n"
-                                                                                "Options:\n"
-    )
-    for i, option in enumerate(item["options"], start=1):
-        prompt += f"{i}. {option}\n"
-    gt = item["answer"]
-    agent = ExperimentDesignAgent("gpt-4o")
+    # with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
+    #     mapeval_textual = json.load(f)
+    for item in tqdm(mapeval_textual):
+    # item = mapeval_textual[0]
+        prompt = (
+                "You are a highly intelligent assistant. "
+                "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
+                "Context:\n" + item["context"] + "\n\n"
+                                                 "Question:\n" + item["question"] + "\n\n"
+                                                                                    "Options:\n"
+        )
+        for i, option in enumerate(item["options"], start=1):
+            prompt += f"{i}. {option}\n"
+        gt = item["answer"]
+        agent = ExperimentDesignAgent("gpt-4o")
 
-    id = agent.solve_task_one_path(prompt, step=5)
-    item["prediction"] = id
+        id = agent.solve_task_tot_baseline(prompt)
+        item["prediction"] = id
     result = evaluate_mapeval_classification(mapeval_textual)
-    print(f"tot cc round", result)
+    all_result.update({"tot":result})
+
+    print(all_result)
+
 
     # for item in tqdm(mapeval_textual):
     #     prompt = (
@@ -267,8 +368,12 @@ if __name__ == "__main__":
     #         prompt += f"{i}. {option}\n"
     #     gt = item["answer"]
     #     agent = ExperimentDesignAgent("gpt-4o")
-    #
-    #     id = agent.cot_plain_solve_task(prompt)
-    #     item["prediction"] = id
+    #     try:
+    #         id = agent.cot_plain_solve_task(prompt)
+    #         item["prediction"] = id
+    #     except Exception as e:
+    #         item["prediction"] = 0
+    #         continue
     # result = evaluate_mapeval_classification(mapeval_textual)
     # print(f"cot round", result)
+

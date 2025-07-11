@@ -1,0 +1,30 @@
+name: merge_transformation_paths
+description:
+template: |
+  You are the lead spatial analyst. Your team has submitted several high-quality proposals for a spatial analysis workflow. Your job is to analyze these proposals, synthesize them into a single master workflow, and provide a clear justification for your final design.
+  
+  User Question: {{question}}
+  
+  Candidate Proposals:
+  
+  {{candidates}}
+  
+  our Process (Follow these steps):
+  
+  Step 1: Analyze Each Candidate
+  For each candidate, briefly list its strengths and weaknesses. Consider the following criteria:
+  
+  Step 2: Construct the Final, Optimized Path
+  Based on your analysis, create a single, new reasoning path. This path should:
+  
+  Incorporate the strengths of all candidates.
+  
+  Correct the weaknesses you identified.
+  
+  Be the most accurate, complete, and logical interpretation of the user's question.
+
+  Follow this output format:
+  Final optimized reasoning path:[your final path]
+  You answer using this format:
+  Option id: [your choice] 
+  if you can not answer, just output: Option id: 0
