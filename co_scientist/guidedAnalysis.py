@@ -94,6 +94,7 @@ class GuidedAnalysisAgent:
 
         # 4. Fallback for unknown or unexpected actions.
         if action == "unknown action" or action is None:
+            print(agent_reply)
             return "The system has received your input and is processing the next step..."
 
         # 5. Default: return nothing.
@@ -167,7 +168,7 @@ class GuidedAnalysisAgent:
         :return: expert_contex (str): The context retrieved from expert interaction.
         """
         expert_contex = graph_func.query(query,
-            param=QueryParam(mode="local", only_need_context=False)
+            param=QueryParam(mode="local", only_need_context=False) # TODO: expand it
         )
 
         return expert_contex

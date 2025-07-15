@@ -1,0 +1,96 @@
+[project]
+name = "gen-ai-toolkit"
+description = "Generative AI Toolkit"
+version = "0.2.15"
+requires-python = ">=3.10,<3.13"
+readme = "README.md"
+
+authors = [
+    { name = "mraad", email = "mraad@esri.com" }
+]
+
+dependencies = [
+    "litellm==1.67.1, <2.0; sys_platform == 'win32'",
+    "litellm>=1.69.2, <2.0; sys_platform != 'win32'",
+    "sentence-transformers>=4.1.0, <5.0",
+    "accelerate>=1.6.0, <2.0",
+    "sqlparse>=0.5.3, <1.0",
+    "wordninja>=2.0.0, <3.0",
+    "huggingface-hub>=0.32.2, <1.0",
+    "mcp>=1.9.4, <2.0",
+    "fsspec>=2024.12.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/EsriPS/gen-ai-toolkit"
+"Bug Tracker" = "https://github.com/EsriPS/gen-ai-toolkit/issues"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+package = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = [
+    "chainlit",
+    "doc",
+    "examples",
+    "fastapi",
+    "mcp",
+    "media",
+    "notebooks",
+    "scratch",
+    "toolboxes",
+    "tutorial"
+]
+
+[project.optional-dependencies]
+chromadb = [
+    "chromadb>=1.0.4",
+]
+jupyter = [
+    "black",
+    "faker",
+    "ipywidgets",
+    "isort",
+    "jupyter",
+    "jupyterlab-code-formatter",
+    "jupyterlab>=4.4.1",
+    "jupyterlab_nvdashboard",
+    "loguru",
+    "rich",
+    "jupyprint",
+    "scikit-learn",
+    "seaborn",
+    "shapely",
+]
+arcgis34 = [
+    # Make sure to stay in sync with the version in ArcGIS Pro 34.
+    "pandas==2.0.2",
+    "numpy==1.24.3",
+    "pytz==2022.6",
+    "sympy==1.12",
+    "pydantic>=2.11.3",
+]
+arcgis35 = [
+    # Make sure to stay in sync with the version in ArcGIS Pro 35.
+    "pandas==2.2.3",
+    "numpy==1.26.4",
+    "pytz==2025.1",
+    "sympy==1.12",
+    "pydantic==2.10.6",
+]
+fastapi = [
+    "fastapi>=0.115.9",
+    "fastapi-cli>=0.0.5",
+    "fastapi-mcp>=0.3.4",
+    "mcp>=1.9.0",
+    "geopandas>=1.0.1",
+    "python-multipart",
+    "python-dotenv",
+    "orjson",
+    "numpy<2.0",
+]

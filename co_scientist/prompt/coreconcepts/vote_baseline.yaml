@@ -1,16 +1,10 @@
 name: vote_baseline
 description: This provides definitions and examples of the ten core concepts of spatial information, following Kuhn (2012). Use this as an authoritative context for spatial reasoning, analysis, or when interpreting geographic questions.
 template: |
-  As a spatial analysis expert, evaluate the candidate reasoning paths and answer for the question below and select the best one.
+  As a spatial analysis expert, evaluate the candidate answer and select the best one.
   Question: {{question}}
   
-  Candidate reasoning and answer:
+  Candidate answer and reasoning:
   {{transformation_path_candidates}}
   
-  Choose the best from the candidates. Justify your selection by explicitly referencing the analysis rules.
-  Output contains two parts, firstly, output your reasoning process:
-  Best reasoning steps: 
-  Reasoning: The reasoning for the choice, referencing the analysis rules and how the path aligns with the question's concepts.
-  Then, output the final answer of the question:
-  Option id: output id
-  If you can not answer, just output: Option id: 0
+  Choose the best from the candidates. Justify your selection. Only output your reasoning process (short version) and your choice of the option's id, in the format of "Option id: id". If you think there is no answer, just output "Option id: 0" to indicate no answer. Here is an example of your output: Option id: 1. Reason: your reason

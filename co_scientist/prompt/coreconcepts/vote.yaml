@@ -2,8 +2,6 @@ name: core_concepts
 description: This provides definitions and examples of the ten core concepts of spatial information, following Kuhn (2012). Use this as an authoritative context for spatial reasoning, analysis, or when interpreting geographic questions.
 template: |
   As a spatial analysis expert, evaluate the candidate transformation paths and answer for the question below and select the best one.
-  Question: {{question}}
-  Core Concepts in Question: {{core_concepts}}
   
   Concept Definitions:
   Location: A specific place or area.
@@ -14,25 +12,13 @@ template: |
   Amount: A measured quantity (count, area, length).
   Proportion: A ratio of two amounts (e.g., density).
   
+  Question: {{question}}
+  Core Concepts identified in Question: {{core_concepts}}
+  
   Analysis Rules:
   {{rule}}
   
-  Candidate Paths, reasoning and answer:
+  Candidates:
   {{transformation_path_candidates}}
   
-  Choose the best transformation path its reasoning and answer from the candidates. Justify your selection by explicitly referencing the analysis rules and how the path correctly interprets the question's concepts.
-  Output contains two parts, firstly, output your reasoning process:
-  Best Path: Path
-  Reasoning: The reasoning for the choice, referencing the analysis rules and how the path aligns with the question's concepts.
-  Then, output the final answer of the question:
-  Option id: option id
-  
-    
-    
-  
-  
-  
-    
-
-
-
+  Choose the best reasoning and answer from the candidates. Justify your selection by explicitly referencing the analysis rules.   Think step by step. Only output your reasoning process (short version) and your choice of the option's id, in the format of "Option id: id". If you think there is no answer, just output "Option id: 0" to indicate no answer. Here is an example of your output: Option id: 1. Reason: your reason

@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="ai_agent (2)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.10.16 (sftp://zl22853@172.16.68.6:22/home/zl22853/.conda/envs/llm_agent/bin/python3.10)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="ai_agent (2)" project-jdk-type="Python SDK" />
 </project>

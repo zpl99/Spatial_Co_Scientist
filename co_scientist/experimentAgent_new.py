@@ -118,6 +118,7 @@ class ExperimentDesignAgent:
         result = self.llm_engine.respond(user_input, n=1)[0]
 
         return result
+
     def get_answer_id(self, response):
         match = re.search(r'\*{0,2}Option id:\*{0,2}\s*(\d+)', response)
         if match:
@@ -172,12 +173,6 @@ class ExperimentDesignAgent:
 
     def solve_task_tot_baseline(self,x):
         ys = []
-        best_list = []
-        system_format = manager.render_prompt(
-            agent="coreconcepts",
-            prompt_name="core_concepts",
-            variables={"question":x}
-        )
 
         # user_input = [{"role": "user", "content": system_format+'''Based on the given question, just identify the core concepts involved and also the target core concept (for getting the result), output only: - [id] item (e.g., library): core concept... - [id] target item: core concept'''}]
         # user_input = [{"role": "user", "content": system_format+'''Based on the given question, just identify the core concepts involved, output only: - [id] item (e.g., library): core concept... '''}]
@@ -186,6 +181,7 @@ class ExperimentDesignAgent:
 
         # core_concepts_result = self.llm_engine.respond(user_input, n=2)[0]
         # for i in core_concepts_result:
+
         system_format = manager.render_prompt(
             agent="coreconcepts",
             prompt_name="tot_baseline",
@@ -214,22 +210,24 @@ class ExperimentDesignAgent:
 
         # core concepts identification
 
-        core_concepts_result = self.llm_engine.respond(user_input, n=2)[0]
-        for i in core_concepts_result:
-            system_format = manager.render_prompt(
-                agent="coreconcepts",
-                prompt_name="core_concepts_transformation_path",
-                variables={"question":x,
-                           "concepts":i}
-            )
-            user_input = [{"role": "user", "content": system_format}]
-            y = self.llm_engine.respond(user_input, n=3)[0]
-            ys.extend(y)
-            best = self.get_votes(x,i,ys,use_rule=use_rule)
-            best_list.append(best)
-        final_result = self.merge(x, best_list)
-        final_result = self.get_answer_id(final_result)
+        core_concepts_result = self.llm_engine.respond(user_input, n=1)[0]
+        # for i in core_concepts_result:
+        system_format = manager.render_prompt(
+            agent="coreconcepts",
+            prompt_name="core_concepts_transformation_path",
+            variables={"question":x,
+                       "concepts":core_concepts_result}
+        )
+        user_input = [{"role": "user", "content": system_format}]
+        y = self.llm_engine.respond(user_input, n=3)[0]
+        ys.extend(y)
+        best = self.get_votes(x,i,ys,use_rule=use_rule)
+        # best_list.append(best)
+        # final_result = self.merge(x, best_list)
+        final_result = self.get_answer_id(best)
+
         return final_result
+
     def solve_task(self,x,step):
         ys = []
         infos = []
@@ -281,6 +279,7 @@ if __name__ == "__main__":
                                                  "Question:\n" + item["question"] + "\n\n"
                                                                                     "Options:\n"
         )
+
         for i, option in enumerate(item["options"], start=1):
             prompt += f"{i}. {option}\n"
         gt = item["answer"]
@@ -311,29 +310,28 @@ if __name__ == "__main__":
         item["prediction"] = id
     result = evaluate_mapeval_classification(mapeval_textual)
     all_result.update({"tot_cc_using_one_path_without_rule":result})
-
-    with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
-        mapeval_textual = json.load(f)
-    for item in tqdm(mapeval_textual):
-    # item = mapeval_textual[0]
-        prompt = (
-                "You are a highly intelligent assistant. "
-                "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
-                "Context:\n" + item["context"] + "\n\n"
-                                                 "Question:\n" + item["question"] + "\n\n"
-                                                                                    "Options:\n"
-        )
-        for i, option in enumerate(item["options"], start=1):
-            prompt += f"{i}. {option}\n"
-        gt = item["answer"]
-        agent = ExperimentDesignAgent("gpt-4o")
-
-        id = agent.solve_task_tot_baseline(prompt)
-        item["prediction"] = id
-    result = evaluate_mapeval_classification(mapeval_textual)
-    all_result.update({"tot":result})
-
     print(all_result)
+    # with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
+    #     mapeval_textual = json.load(f)
+    # for item in tqdm(mapeval_textual):
+    #     prompt = (
+    #             "You are a highly intelligent assistant. "
+    #             "Based on the given context, answer the multiple-choice question by selecting the correct option.\n\n"
+    #             "Context:\n" + item["context"] + "\n\n"
+    #                                              "Question:\n" + item["question"] + "\n\n"
+    #                                                                                 "Options:\n"
+    #     )
+    #     for i, option in enumerate(item["options"], start=1):
+    #         prompt += f"{i}. {option}\n"
+    #     gt = item["answer"]
+    #     agent = ExperimentDesignAgent("gpt-4o")
+    #
+    #     id = agent.solve_task_tot_baseline(prompt)
+    #     item["prediction"] = id
+    # result = evaluate_mapeval_classification(mapeval_textual)
+    # all_result.update({"tot":result})
+    #
+    # print(all_result)
 
 
     # for item in tqdm(mapeval_textual):
@@ -348,8 +346,11 @@ if __name__ == "__main__":
     #         prompt += f"{i}. {option}\n"
     #     gt = item["answer"]
     #     agent = ExperimentDesignAgent("gpt-4o")
-    #
-    #     id = agent.cot_solve_task(prompt)
+    #     try:
+    #         id = agent.cot_plain_solve_task(prompt)
+    #     except Exception as e:
+    #         print(e)
+    #         id = 0
     #     item["prediction"] = id
     # result = evaluate_mapeval_classification(mapeval_textual)
     # print(f"cot cc round", result)
