@@ -1,0 +1,249 @@
+{
+  "1": {
+    "report_string": "# Spatial Clustering Ecosystem: The Expert and Stakeholders\n\nThis community focuses on the application of spatial clustering techniques across various domains, driven by entities such as The Expert, Stakeholders, and sectors like universities and the private sector. Key relationships include contributions to ecological clustering, community resilience analysis, traffic accident pattern detection, and collaboration with stakeholders within the National Transportation Safety Analysis. The Expert is central to this network, having extensive experience in academia, the private sector, and institutional research, while stakeholders provide critical input shaping methodologies and practical applications.\n\n## The Expert as the central figure in spatial clustering methodologies.\n\nThe Expert, with over a decade of experience, plays an essential role in this community, applying spatial clustering techniques to solve diverse problems such as ecological modeling and community resilience assessments. The Expert's contributions span academia, where institutional research enhanced their expertise, to the private sector, where applied solutions were developed for ecological, marine, and coastal challenges. Their work highlights the breadth and practical impact of their expertise on sectors requiring robust spatial analysis techniques.\n\n## Stakeholders as influential entities providing input and criteria.\n\nStakeholders hold a key position in shaping spatial clustering applications by providing critical feedback and criteria. Their involvement in projects like the National Transportation Safety Analysis underscores their influence in refining methodologies toward practicality. For instance, stakeholders prefer clustering models like OPTICS due to its interpretability and parameter transparency, which ensures that complex models remain accessible and aligned with real-world needs.\n\n## Spatial clustering's role in ecological and environmental modeling.\n\nSpatial clustering techniques have been effectively used by The Expert to address ecological challenges such as distinguishing between diverse biomes. This methodology has practical benefits for environmental planning and conservation, as it enhances the understanding of spatial distribution patterns in natural ecosystems. The Expert's contributions to this domain are a cornerstone of their professional achievements, demonstrating the utility of spatial clustering in ecological settings.\n\n## Clustering techniques for community resilience analysis.\n\nThe Expert has leveraged clustering techniques to assess differences in vulnerability and adaptive capacities within communities, a process known as community resilience clustering. This application provides insights into how communities respond to external pressures and identifies areas for improvement in adaptive strategies. This type of analysis is crucial for urban planning, disaster management, and policies targeting societal resilience.\n\n## Improving transportation safety through spatial clustering.\n\nThe Expert's use of spatial clustering techniques to detect traffic accident patterns has significantly contributed to enhancing safety and analysis capabilities. Projects like the National Transportation Safety Analysis use clustering to uncover systemic issues in transportation, identifying high-risk areas and potential interventions. Stakeholders provide input to these efforts, ensuring the analysis aligns with on-the-ground realities and safety priorities.\n\n## Collaboration with universities enriches research and development.\n\nThe Expert's involvement with universities underscores their deep academic roots and ongoing research contributions to spatial analysis. This collaboration has likely fueled theoretical advancements, which are then applied to practical projects in the private sector and public interest domains. The cross-pollination of ideas between academia and industry reinforces the robustness of the methodologies developed.\n\n## Private sector's reliance on spatial clustering for operational solutions.\n\nThe private sector has benefited from The Expert's spatial clustering applications in areas such as ecological, marine, and coastal analysis. These solutions address critical operational challenges, highlighting the value of spatial clustering in industries that rely on precise geospatial data interpretation. The collaboration between The Expert and the private sector indicates the commercial viability and demand for advanced clustering techniques.\n\n## Stakeholders' preference for interpretable clustering models.\n\nStakeholders prioritize models like OPTICS for their interpretability and parameter transparency, demonstrating a practical need to balance advanced analytics with usability. This preference has likely influenced how clustering methodologies are refined and deployed in real-world projects, ensuring that outputs are not only accurate but also comprehensible to decision-makers and practitioners.\n\n## National Transportation Safety Analysis as a case study in exploratory clustering.\n\nThe National Transportation Safety Analysis serves as a targeted use case for spatial clustering, where exploratory techniques identify systemic safety issues. Stakeholders contribute feedback to guide the process, showcasing the collaborative nature of this endeavor. This project exemplifies how spatial analysis can uncover actionable insights in high-stakes domains like transportation.",
+    "report_json": {
+      "title": "Spatial Clustering Ecosystem: The Expert and Stakeholders",
+      "summary": "This community focuses on the application of spatial clustering techniques across various domains, driven by entities such as The Expert, Stakeholders, and sectors like universities and the private sector. Key relationships include contributions to ecological clustering, community resilience analysis, traffic accident pattern detection, and collaboration with stakeholders within the National Transportation Safety Analysis. The Expert is central to this network, having extensive experience in academia, the private sector, and institutional research, while stakeholders provide critical input shaping methodologies and practical applications.",
+      "rating": 7.5,
+      "rating_explanation": "The community's high-impact rating is attributed to the significance of spatial clustering in solving complex real-world issues, combined with the multifaceted expertise of individuals and the public-private linkages it fosters.",
+      "findings": [
+        {
+          "summary": "The Expert as the central figure in spatial clustering methodologies.",
+          "explanation": "The Expert, with over a decade of experience, plays an essential role in this community, applying spatial clustering techniques to solve diverse problems such as ecological modeling and community resilience assessments. The Expert's contributions span academia, where institutional research enhanced their expertise, to the private sector, where applied solutions were developed for ecological, marine, and coastal challenges. Their work highlights the breadth and practical impact of their expertise on sectors requiring robust spatial analysis techniques."
+        },
+        {
+          "summary": "Stakeholders as influential entities providing input and criteria.",
+          "explanation": "Stakeholders hold a key position in shaping spatial clustering applications by providing critical feedback and criteria. Their involvement in projects like the National Transportation Safety Analysis underscores their influence in refining methodologies toward practicality. For instance, stakeholders prefer clustering models like OPTICS due to its interpretability and parameter transparency, which ensures that complex models remain accessible and aligned with real-world needs."
+        },
+        {
+          "summary": "Spatial clustering's role in ecological and environmental modeling.",
+          "explanation": "Spatial clustering techniques have been effectively used by The Expert to address ecological challenges such as distinguishing between diverse biomes. This methodology has practical benefits for environmental planning and conservation, as it enhances the understanding of spatial distribution patterns in natural ecosystems. The Expert's contributions to this domain are a cornerstone of their professional achievements, demonstrating the utility of spatial clustering in ecological settings."
+        },
+        {
+          "summary": "Clustering techniques for community resilience analysis.",
+          "explanation": "The Expert has leveraged clustering techniques to assess differences in vulnerability and adaptive capacities within communities, a process known as community resilience clustering. This application provides insights into how communities respond to external pressures and identifies areas for improvement in adaptive strategies. This type of analysis is crucial for urban planning, disaster management, and policies targeting societal resilience."
+        },
+        {
+          "summary": "Improving transportation safety through spatial clustering.",
+          "explanation": "The Expert's use of spatial clustering techniques to detect traffic accident patterns has significantly contributed to enhancing safety and analysis capabilities. Projects like the National Transportation Safety Analysis use clustering to uncover systemic issues in transportation, identifying high-risk areas and potential interventions. Stakeholders provide input to these efforts, ensuring the analysis aligns with on-the-ground realities and safety priorities."
+        },
+        {
+          "summary": "Collaboration with universities enriches research and development.",
+          "explanation": "The Expert's involvement with universities underscores their deep academic roots and ongoing research contributions to spatial analysis. This collaboration has likely fueled theoretical advancements, which are then applied to practical projects in the private sector and public interest domains. The cross-pollination of ideas between academia and industry reinforces the robustness of the methodologies developed."
+        },
+        {
+          "summary": "Private sector's reliance on spatial clustering for operational solutions.",
+          "explanation": "The private sector has benefited from The Expert's spatial clustering applications in areas such as ecological, marine, and coastal analysis. These solutions address critical operational challenges, highlighting the value of spatial clustering in industries that rely on precise geospatial data interpretation. The collaboration between The Expert and the private sector indicates the commercial viability and demand for advanced clustering techniques."
+        },
+        {
+          "summary": "Stakeholders' preference for interpretable clustering models.",
+          "explanation": "Stakeholders prioritize models like OPTICS for their interpretability and parameter transparency, demonstrating a practical need to balance advanced analytics with usability. This preference has likely influenced how clustering methodologies are refined and deployed in real-world projects, ensuring that outputs are not only accurate but also comprehensible to decision-makers and practitioners."
+        },
+        {
+          "summary": "National Transportation Safety Analysis as a case study in exploratory clustering.",
+          "explanation": "The National Transportation Safety Analysis serves as a targeted use case for spatial clustering, where exploratory techniques identify systemic safety issues. Stakeholders contribute feedback to guide the process, showcasing the collaborative nature of this endeavor. This project exemplifies how spatial analysis can uncover actionable insights in high-stakes domains like transportation."
+        }
+      ]
+    },
+    "level": 0,
+    "title": "Cluster 1",
+    "edges": [
+      [
+        "\"ECOLOGICAL CLUSTERING\"",
+        "\"THE EXPERT\""
+      ],
+      [
+        "\"OPTICS\"",
+        "\"STAKEHOLDERS\""
+      ],
+      [
+        "\"THE EXPERT\"",
+        "\"TRAFFIC ACCIDENT PATTERN DETECTION\""
+      ],
+      [
+        "\"COMMUNITY RESILIENCE CLUSTERING\"",
+        "\"THE EXPERT\""
+      ],
+      [
+        "\"PRIVATE SECTOR\"",
+        "\"THE EXPERT\""
+      ],
+      [
+        "\"THE EXPERT\"",
+        "\"UNIVERSITIES\""
+      ],
+      [
+        "\"NATIONAL TRANSPORTATION SAFETY ANALYSIS\"",
+        "\"STAKEHOLDERS\""
+      ]
+    ],
+    "nodes": [
+      "\"UNIVERSITIES\"",
+      "\"THE EXPERT\"",
+      "\"NATIONAL TRANSPORTATION SAFETY ANALYSIS\"",
+      "\"PRIVATE SECTOR\"",
+      "\"STAKEHOLDERS\""
+    ],
+    "chunk_ids": [
+      "chunk-c6236e2b749a509a77a24ebfbabd4a08",
+      "chunk-d08d75eca8f82ab85da41f6e3bb9ce99"
+    ],
+    "occurrence": 0.6666666666666666,
+    "sub_communities": []
+  },
+  "0": {
+    "report_string": "# Ecological Clustering and Spatial Techniques Community\n\nThe community centers around the concept of Ecological Clustering and its application in addressing ecological challenges through spatial clustering methods. Prominent entities like HDBSCAN, OPTICS, and DBSCAN contribute key methodologies, while geographical clustering techniques such as Geographically Contiguous Clusters provide essential frameworks. Strong interconnections between advanced clustering methods, their applications, and insights from experts drive this community, with stakeholders leveraging these tools for interpretability and actionable insights.\n\n## Ecological Clustering as the central entity of the community\n\nEcological Clustering is the core concept binding this community, focusing on grouping geographic regions into meaningful ecological units. This approach addresses challenges such as distinguishing between different biomes (deserts, forests, and coastal areas) and heavily relies on spatial clustering methods. By grounding its methodologies in ecological data, Ecological Clustering aids in environmental modeling and provides actionable insights for addressing ecological challenges.\n\n## HDBSCAN and OPTICS as advanced clustering methods\n\nHDBSCAN and OPTICS are key entities within the community, providing sophisticated hierarchical and density-based clustering capabilities for spatial data. HDBSCAN excels in its hierarchical analysis, while OPTICS offers interpretability and diagnostic transparency, making both indispensable for spatial clustering. The relationship between these tools reflects their complementary strengths for solving complex spatial analysis problems.\n\n## The foundational role of DBSCAN in density-based clustering\n\nDBSCAN is a widely used concept that serves as a precursor to other advanced methods like HDBSCAN. As a density-based clustering technique, DBSCAN allows for analyzing spatial patterns with noise filtering, which has laid the groundwork for further innovations. Its comparison with HDBSCAN highlights the evolution of clustering methodologies in this domain.\n\n## Geographically Contiguous Clusters enable meaningful ecological outputs\n\nGeographically Contiguous Clusters play an important role in ensuring that the outputs of Ecological Clustering are geographically consistent and aligned with ecological features. This spatial constraint increases the meaningfulness of clustering results in environmental analysis, aiding experts and stakeholders in deploying these findings for practical ecological applications.\n\n## Spatial clustering as a cornerstone of ecological problem-solving\n\nThe relationship between Ecological Clustering and Spatial Clustering underscores the pivotal role of spatial analysis techniques in addressing environmental challenges. By employing clustering methodologies like HDBSCAN, OPTICS, and DBSCAN, experts can analyze diverse ecological data, resulting in robust models for decision-making and ecological planning.\n\n## Expert applications in ecological challenges\n\nThe involvement of experts in applying spatial clustering techniques to ecological challenges is a significant aspect of this community. Experts use these methods to distinguish between diverse biomes and regions, leveraging insights provided by tools like HDBSCAN and OPTICS to create meaningful ecological segmentation.\n\n## Stakeholder reliance on OPTICS for interpretability\n\nStakeholders widely use OPTICS for its interpretability and parameter transparency, which are critical for translating clustering outputs into actionable decisions. This reliance highlights the importance of user-friendly and transparent methodologies for broader adoption in practical applications.",
+    "report_json": {
+      "title": "Ecological Clustering and Spatial Techniques Community",
+      "summary": "The community centers around the concept of Ecological Clustering and its application in addressing ecological challenges through spatial clustering methods. Prominent entities like HDBSCAN, OPTICS, and DBSCAN contribute key methodologies, while geographical clustering techniques such as Geographically Contiguous Clusters provide essential frameworks. Strong interconnections between advanced clustering methods, their applications, and insights from experts drive this community, with stakeholders leveraging these tools for interpretability and actionable insights.",
+      "rating": 7.5,
+      "rating_explanation": "The community has moderate to high importance due to its focus on addressing ecological challenges and advancing spatial clustering techniques, which hold critical applications for environmental modeling and stakeholder decision-making.",
+      "findings": [
+        {
+          "summary": "Ecological Clustering as the central entity of the community",
+          "explanation": "Ecological Clustering is the core concept binding this community, focusing on grouping geographic regions into meaningful ecological units. This approach addresses challenges such as distinguishing between different biomes (deserts, forests, and coastal areas) and heavily relies on spatial clustering methods. By grounding its methodologies in ecological data, Ecological Clustering aids in environmental modeling and provides actionable insights for addressing ecological challenges."
+        },
+        {
+          "summary": "HDBSCAN and OPTICS as advanced clustering methods",
+          "explanation": "HDBSCAN and OPTICS are key entities within the community, providing sophisticated hierarchical and density-based clustering capabilities for spatial data. HDBSCAN excels in its hierarchical analysis, while OPTICS offers interpretability and diagnostic transparency, making both indispensable for spatial clustering. The relationship between these tools reflects their complementary strengths for solving complex spatial analysis problems."
+        },
+        {
+          "summary": "The foundational role of DBSCAN in density-based clustering",
+          "explanation": "DBSCAN is a widely used concept that serves as a precursor to other advanced methods like HDBSCAN. As a density-based clustering technique, DBSCAN allows for analyzing spatial patterns with noise filtering, which has laid the groundwork for further innovations. Its comparison with HDBSCAN highlights the evolution of clustering methodologies in this domain."
+        },
+        {
+          "summary": "Geographically Contiguous Clusters enable meaningful ecological outputs",
+          "explanation": "Geographically Contiguous Clusters play an important role in ensuring that the outputs of Ecological Clustering are geographically consistent and aligned with ecological features. This spatial constraint increases the meaningfulness of clustering results in environmental analysis, aiding experts and stakeholders in deploying these findings for practical ecological applications."
+        },
+        {
+          "summary": "Spatial clustering as a cornerstone of ecological problem-solving",
+          "explanation": "The relationship between Ecological Clustering and Spatial Clustering underscores the pivotal role of spatial analysis techniques in addressing environmental challenges. By employing clustering methodologies like HDBSCAN, OPTICS, and DBSCAN, experts can analyze diverse ecological data, resulting in robust models for decision-making and ecological planning."
+        },
+        {
+          "summary": "Expert applications in ecological challenges",
+          "explanation": "The involvement of experts in applying spatial clustering techniques to ecological challenges is a significant aspect of this community. Experts use these methods to distinguish between diverse biomes and regions, leveraging insights provided by tools like HDBSCAN and OPTICS to create meaningful ecological segmentation."
+        },
+        {
+          "summary": "Stakeholder reliance on OPTICS for interpretability",
+          "explanation": "Stakeholders widely use OPTICS for its interpretability and parameter transparency, which are critical for translating clustering outputs into actionable decisions. This reliance highlights the importance of user-friendly and transparent methodologies for broader adoption in practical applications."
+        }
+      ]
+    },
+    "level": 0,
+    "title": "Cluster 0",
+    "edges": [
+      [
+        "\"DBSCAN\"",
+        "\"HDBSCAN\""
+      ],
+      [
+        "\"ECOLOGICAL CLUSTERING\"",
+        "\"THE EXPERT\""
+      ],
+      [
+        "\"HDBSCAN\"",
+        "\"OPTICS\""
+      ],
+      [
+        "\"OPTICS\"",
+        "\"STAKEHOLDERS\""
+      ],
+      [
+        "\"ECOLOGICAL CLUSTERING\"",
+        "\"GEOGRAPHICALLY CONTIGUOUS CLUSTERS\""
+      ],
+      [
+        "\"ECOLOGICAL CLUSTERING\"",
+        "\"SPATIAL CLUSTERING\""
+      ]
+    ],
+    "nodes": [
+      "\"DBSCAN\"",
+      "\"OPTICS\"",
+      "\"GEOGRAPHICALLY CONTIGUOUS CLUSTERS\"",
+      "\"HDBSCAN\"",
+      "\"ECOLOGICAL CLUSTERING\""
+    ],
+    "chunk_ids": [
+      "chunk-1ec99e348c78d7e5246fc32666c03615",
+      "chunk-c6236e2b749a509a77a24ebfbabd4a08",
+      "chunk-d08d75eca8f82ab85da41f6e3bb9ce99"
+    ],
+    "occurrence": 1.0,
+    "sub_communities": []
+  },
+  "2": {
+    "report_string": "# Spatial Clustering and its Applications in Community and Traffic Analysis\n\nThis community revolves around the concept of Spatial Clustering and its diverse applications, including Community Resilience Clustering and Traffic Accident Pattern Detection. Spatial Clustering serves as a foundational technique, enabling meaningful grouping of data for analyzing community vulnerabilities and identifying traffic accident patterns. Key relationships include its utility in ecological modeling and its application by experts to advance safety and resilience studies.\n\n## Spatial Clustering as a foundational technique\n\nSpatial Clustering is a concept used to group data points based on spatial proximity or related attributes. It plays a pivotal role in high-dimensional analysis for applications such as bank site selection and transportation safety. Additionally, it facilitates meaningful data reduction, making it indispensable for various analytical processes, including community-specific studies like ecological and traffic pattern modeling.\n\n## Application in Community Resilience Clustering\n\nCommunity Resilience Clustering is an event that utilizes Spatial Clustering to analyze and assess differences in community vulnerabilities and adaptive capacities. By grouping communities based on meaningful characteristics, this approach offers insights into how communities can strengthen their resilience to challenges. Its application has broadened the understanding of socio-economic and environmental disparities in resilience.\n\n## Traffic Accident Pattern Detection powered by Spatial Clustering\n\nSpatial Clustering is applied in detecting and analyzing patterns in traffic accidents through the Traffic Accident Pattern Detection event. This approach integrates spatial and contextual data to enhance safety by identifying high-risk areas and recurring patterns of collisions. Such insights are critical to improving transportation policy and engineering designs aimed at reducing accidents and fatalities.\n\n## Key role of experts in advancing spatial clustering applications\n\nExperts have contributed significantly to leveraging Spatial Clustering for practical applications. For instance, they have used it in Community Resilience Clustering to identify strengths and weaknesses in adaptive capacities and in Traffic Accident Pattern Detection to enhance safety analysis. Their work underscores the transformative impact of applying clustering methods in real-world scenarios.\n\n## Ecological modeling through Spatial Clustering\n\nSpatial Clustering plays a vital role in ecological modeling by distinguishing ecological regions for better environmental analysis and resource management. The technique identifies patterns in spatial data that inform more effective environmental interventions. This demonstrates its adaptability and cross-disciplinary utility.\n\n## Integration of Spatial Clustering with community-focused applications\n\nSpatial Clustering underpins multiple community-focused applications, bridging the gap between data-driven insights and actionable outcomes. Its integration into Community Resilience Clustering highlights its capability to address socio-economic and environmental vulnerabilities, while Traffic Accident Pattern Detection showcases its role in safeguarding public spaces. This interconnectedness enhances its importance in community studies.\n\n## Impact on public safety and resource allocation\n\nThe application of Spatial Clustering in identifying traffic accident patterns and assessing community resilience has a direct impact on public safety and resource allocation. By uncovering critical patterns and vulnerabilities, it guides policymakers and stakeholders in implementing targeted solutions, enhancing both community safety and adaptive preparedness.",
+    "report_json": {
+      "title": "Spatial Clustering and its Applications in Community and Traffic Analysis",
+      "summary": "This community revolves around the concept of Spatial Clustering and its diverse applications, including Community Resilience Clustering and Traffic Accident Pattern Detection. Spatial Clustering serves as a foundational technique, enabling meaningful grouping of data for analyzing community vulnerabilities and identifying traffic accident patterns. Key relationships include its utility in ecological modeling and its application by experts to advance safety and resilience studies.",
+      "rating": 7.5,
+      "rating_explanation": "This community has a significant impact due to Spatial Clustering's critical role in addressing public safety and community vulnerability assessments.",
+      "findings": [
+        {
+          "summary": "Spatial Clustering as a foundational technique",
+          "explanation": "Spatial Clustering is a concept used to group data points based on spatial proximity or related attributes. It plays a pivotal role in high-dimensional analysis for applications such as bank site selection and transportation safety. Additionally, it facilitates meaningful data reduction, making it indispensable for various analytical processes, including community-specific studies like ecological and traffic pattern modeling."
+        },
+        {
+          "summary": "Application in Community Resilience Clustering",
+          "explanation": "Community Resilience Clustering is an event that utilizes Spatial Clustering to analyze and assess differences in community vulnerabilities and adaptive capacities. By grouping communities based on meaningful characteristics, this approach offers insights into how communities can strengthen their resilience to challenges. Its application has broadened the understanding of socio-economic and environmental disparities in resilience."
+        },
+        {
+          "summary": "Traffic Accident Pattern Detection powered by Spatial Clustering",
+          "explanation": "Spatial Clustering is applied in detecting and analyzing patterns in traffic accidents through the Traffic Accident Pattern Detection event. This approach integrates spatial and contextual data to enhance safety by identifying high-risk areas and recurring patterns of collisions. Such insights are critical to improving transportation policy and engineering designs aimed at reducing accidents and fatalities."
+        },
+        {
+          "summary": "Key role of experts in advancing spatial clustering applications",
+          "explanation": "Experts have contributed significantly to leveraging Spatial Clustering for practical applications. For instance, they have used it in Community Resilience Clustering to identify strengths and weaknesses in adaptive capacities and in Traffic Accident Pattern Detection to enhance safety analysis. Their work underscores the transformative impact of applying clustering methods in real-world scenarios."
+        },
+        {
+          "summary": "Ecological modeling through Spatial Clustering",
+          "explanation": "Spatial Clustering plays a vital role in ecological modeling by distinguishing ecological regions for better environmental analysis and resource management. The technique identifies patterns in spatial data that inform more effective environmental interventions. This demonstrates its adaptability and cross-disciplinary utility."
+        },
+        {
+          "summary": "Integration of Spatial Clustering with community-focused applications",
+          "explanation": "Spatial Clustering underpins multiple community-focused applications, bridging the gap between data-driven insights and actionable outcomes. Its integration into Community Resilience Clustering highlights its capability to address socio-economic and environmental vulnerabilities, while Traffic Accident Pattern Detection showcases its role in safeguarding public spaces. This interconnectedness enhances its importance in community studies."
+        },
+        {
+          "summary": "Impact on public safety and resource allocation",
+          "explanation": "The application of Spatial Clustering in identifying traffic accident patterns and assessing community resilience has a direct impact on public safety and resource allocation. By uncovering critical patterns and vulnerabilities, it guides policymakers and stakeholders in implementing targeted solutions, enhancing both community safety and adaptive preparedness."
+        }
+      ]
+    },
+    "level": 0,
+    "title": "Cluster 2",
+    "edges": [
+      [
+        "\"THE EXPERT\"",
+        "\"TRAFFIC ACCIDENT PATTERN DETECTION\""
+      ],
+      [
+        "\"SPATIAL CLUSTERING\"",
+        "\"TRAFFIC ACCIDENT PATTERN DETECTION\""
+      ],
+      [
+        "\"COMMUNITY RESILIENCE CLUSTERING\"",
+        "\"SPATIAL CLUSTERING\""
+      ],
+      [
+        "\"COMMUNITY RESILIENCE CLUSTERING\"",
+        "\"THE EXPERT\""
+      ],
+      [
+        "\"ECOLOGICAL CLUSTERING\"",
+        "\"SPATIAL CLUSTERING\""
+      ]
+    ],
+    "nodes": [
+      "\"COMMUNITY RESILIENCE CLUSTERING\"",
+      "\"TRAFFIC ACCIDENT PATTERN DETECTION\"",
+      "\"SPATIAL CLUSTERING\""
+    ],
+    "chunk_ids": [
+      "chunk-c6236e2b749a509a77a24ebfbabd4a08",
+      "chunk-d08d75eca8f82ab85da41f6e3bb9ce99"
+    ],
+    "occurrence": 0.6666666666666666,
+    "sub_communities": []
+  }
+}

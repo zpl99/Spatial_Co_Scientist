@@ -1,0 +1,1202 @@
+[
+  {
+    "text": "List nation where v 148 raw va < 11.93967443 that are within 30.1 kilometers of nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v148_rawva < 11.93967443",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "withinDistance",
+      "distance": 30.1,
+      "unit": "kilometers"
+    }
+  },
+  {
+    "text": "Identify all nation with v 039 rac 2 is not 9.622431833 that intersect county where v 045 n umer between 466 and 1851",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v039_rac_2 <> 9.622431833",
+      "layer2": "County",
+      "where2": "v045_numer BETWEEN 466 AND 1851",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify nation that are within nation where v 014 raw va != 20.88185728",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v014_rawva <> 20.88185728",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List all county with v 001 n umer is less than 2178 that are within a distance of 74.7 meters of nation with v 002 raw va not above 16.51 and v 129 raw va below 5.764338123",
+    "meta": {
+      "layer1": "County",
+      "where1": "v001_numer < 2178",
+      "layer2": "Nation",
+      "where2": "v002_rawva < 16.51 and v129_rawva < 5.764338123",
+      "relation": "withinDistance",
+      "distance": 74.7,
+      "unit": "meters"
+    }
+  },
+  {
+    "text": "Find all nation with v 135 rac 1 = 77.28729161 and where v 039 n umer != 256694 that are within county where v 154 de nom = 77859",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v135_rac_1 = 77.28729161 and v039_numer <> 256694",
+      "layer2": "County",
+      "where2": "v154_denom = 77859",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find county that contain county",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find county with v 135 race ranging from 132.7517542 to 176.71629 that contain nation with v 132 de nom ranging from 308745538 to 308745538 and where v 062 n umer is less than 857380",
+    "meta": {
+      "layer1": "County",
+      "where1": "v135_race_ BETWEEN 132.7517542 AND 176.71629",
+      "layer2": "Nation",
+      "where2": "v132_denom BETWEEN 308745538 AND 308745538 and v062_numer < 857380",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate nation that intersect nation with v 063 rac 2 is smaller than 51811.0 and v 128 rac 1 ranging from 89.15325574 to 89.15325574",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v063_rac_2 < 51811.0 and v128_rac_1 BETWEEN 89.15325574 AND 89.15325574",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List all nation with v 149 de nom ranging from 17025696 to 17025696 that contain nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v149_denom BETWEEN 17025696 AND 17025696",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate nation where v 039 n umer not above 256694 or v 024 raw va excludes 16.8 that are within nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v039_numer < 256694 or v024_rawva <> 16.8",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate all county where v 161 raw va <> 21.2266551 and where v 128 race < 138.1088298 that intersect nation with v 014 de nom exceeding 72198032",
+    "meta": {
+      "layer1": "County",
+      "where1": "v161_rawva <> 21.2266551 and v128_race_ < 138.1088298",
+      "layer2": "Nation",
+      "where2": "v014_denom > 72198032",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify all nation where v 122 raw va ranging from 5.19 to 5.19 and where v 168 de nom larger than 220622076 that are within a distance of 7.2 meters of nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v122_rawva BETWEEN 5.19 AND 5.19 and v168_denom > 220622076",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "withinDistance",
+      "distance": 7.2,
+      "unit": "meters"
+    }
+  },
+  {
+    "text": "List all county where v 063 rac 1 is 26731 that are within 6.0 kilometers of county with v 015 de nom = 653539 and v 136 raw va != 11.33",
+    "meta": {
+      "layer1": "County",
+      "where1": "v063_rac_1 = 26731",
+      "layer2": "County",
+      "where2": "v015_denom = 653539 and v136_rawva <> 11.33",
+      "relation": "withinDistance",
+      "distance": 6.0,
+      "unit": "kilometers"
+    }
+  },
+  {
+    "text": "Show all county with v 159 rac 2 is 2.114966844 that intersect county",
+    "meta": {
+      "layer1": "County",
+      "where1": "v159_rac_2 = 2.114966844",
+      "layer2": "County",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List nation where v 042 raw va is smaller than 4.062791864 and v 037 raw va larger than 8.16 that are inside nation where v 058 n umer is above 0 or v 062 other = 382.840191",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v042_rawva < 4.062791864 and v037_rawva > 8.16",
+      "layer2": "Nation",
+      "where2": "v058_numer > 0 or v062_other = 382.840191",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List nation that are in nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find nation where v 062 n umer excludes 857380 or v 054 raw va is greater than 12.54 that are in the range of 76.1 kilometers of nation where v 138 race from 26.44270821 to 26.44270821",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v062_numer <> 857380 or v054_rawva > 12.54",
+      "layer2": "Nation",
+      "where2": "v138_race_ BETWEEN 26.44270821 AND 26.44270821",
+      "relation": "withinDistance",
+      "distance": 76.1,
+      "unit": "kilometers"
+    }
+  },
+  {
+    "text": "List county that are within a distance of 14.3 meters of county",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "",
+      "relation": "withinDistance",
+      "distance": 14.3,
+      "unit": "meters"
+    }
+  },
+  {
+    "text": "Identify nation where v 067 race below 72.42 that are within a distance of 68.6 kilometers of county where v 005 race < 3590.0 or v 062 de nom <> 40367",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v067_race_ < 72.42",
+      "layer2": "County",
+      "where2": "v005_race_ < 3590.0 or v062_denom <> 40367",
+      "relation": "withinDistance",
+      "distance": 68.6,
+      "unit": "kilometers"
+    }
+  },
+  {
+    "text": "Locate county that contain county with v 056 n umer excludes 188",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v056_numer <> 188",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate nation with v 004 raw va from 75.8125578 to 75.8125578 that contain nation with v 155 rac 2 > 36.0 or v 161 rac 1 is different from 6.71228831",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v004_rawva BETWEEN 75.8125578 AND 75.8125578",
+      "layer2": "Nation",
+      "where2": "v155_rac_2 > 36.0 or v161_rac_1 <> 6.71228831",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate all nation that intersect nation with v 070 raw va is not 22.7 and v 080 n umer is less than 806937",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v070_rawva <> 22.7 and v080_numer < 806937",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate all nation with v 161 raw va is smaller than 13.77677793 that intersect nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v161_rawva < 13.77677793",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate county where v 063 rac 3 ranging from 61872 to 104250 that contain county where v 168 n umer = 15396 or where v 044 n umer between 88559 and 107023",
+    "meta": {
+      "layer1": "County",
+      "where1": "v063_rac_3 BETWEEN 61872 AND 104250",
+      "layer2": "County",
+      "where2": "v168_numer = 15396 or v044_numer BETWEEN 88559 AND 107023",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify all nation that are in the range of 26.0 feet of nation with v 127 n umer is 3854074",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v127_numer = 3854074",
+      "relation": "withinDistance",
+      "distance": 26.0,
+      "unit": "feet"
+    }
+  },
+  {
+    "text": "List nation that are within nation where v 138 n umer between 208234 and 208234 or where v 128 de nom is not 293736155",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v138_numer BETWEEN 208234 AND 208234 or v128_denom <> 293736155",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show all nation that are inside nation with v 159 raw va is smaller than 3.053420931",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v159_rawva < 3.053420931",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate nation that intersect nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all nation with v 056 n umer < 60572237 that contain nation with v 063 rac 2 is above 51811.0",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v056_numer < 60572237",
+      "layer2": "Nation",
+      "where2": "v063_rac_2 > 51811.0",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all nation with v 039 rac 2 between 9.622431833 and 9.622431833 or v 126 raw va not below 60.11 that contain county",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v039_rac_2 BETWEEN 9.622431833 AND 9.622431833 or v126_rawva > 60.11",
+      "layer2": "County",
+      "where2": "",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify county with v 088 de nom between 2148 and 55869 that intersect county where v 147 race 1 below 85.16497644 and v 140 n umer < 84",
+    "meta": {
+      "layer1": "County",
+      "where1": "v088_denom BETWEEN 2148 AND 55869",
+      "layer2": "County",
+      "where2": "v147_race1 < 85.16497644 and v140_numer < 84",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List county that intersect nation",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show nation where v 015 race not below 9.85144891 that contain nation where v 039 rac 2 not below 9.622431833 or where v 055 raw va below 1.28",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v015_race_ > 9.85144891",
+      "layer2": "Nation",
+      "where2": "v039_rac_2 > 9.622431833 or v055_rawva < 1.28",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List all nation that contain nation with v 065 n umer larger than 24757334",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v065_numer > 24757334",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all county with v 143 raw va exceeding 32.78 or where v 063 raw va is greater than 47797 that contain nation",
+    "meta": {
+      "layer1": "County",
+      "where1": "v143_rawva > 32.78 or v063_rawva > 47797",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify all county that contain county",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List nation that intersect county with v 136 n umer is below 1180",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v136_numer < 1180",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify nation that are in nation with v 050 race is less than 29.0 or where v 011 n umer excludes 72159365",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v050_race_ < 29.0 or v011_numer <> 72159365",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify all county that are within 3.3 miles of county where v 085 n umer is smaller than 3642",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v085_numer < 3642",
+      "relation": "withinDistance",
+      "distance": 3.3,
+      "unit": "miles"
+    }
+  },
+  {
+    "text": "Locate nation where v 136 other ranging from 14.4 to 14.4 or where v 127 de nom is 915437195 that are within county where v 148 rac 1 < 45.51134752",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v136_other BETWEEN 14.4 AND 14.4 or v127_denom = 915437195",
+      "layer2": "County",
+      "where2": "v148_rac_1 < 45.51134752",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify county that intersect county",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify nation where v 147 rac 1 is greater than 75.54555655 or v 128 rac 2 is different from 40.86229534 that intersect county with geoid terminating with 01039 and v 050 race excludes 16.0",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v147_rac_1 > 75.54555655 or v128_rac_2 <> 40.86229534",
+      "layer2": "County",
+      "where2": "GEOID LIKE '%01039' and v050_race_ <> 16.0",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify county where v 062 other between 998.4305556 and 4998.625 that are in nation where v 039 n umer above 256694 and v 144 raw va is different from 11.42",
+    "meta": {
+      "layer1": "County",
+      "where1": "v062_other BETWEEN 998.4305556 AND 4998.625",
+      "layer2": "Nation",
+      "where2": "v039_numer > 256694 and v144_rawva <> 11.42",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify all county with v 080 raw va not below 0.13 and where factors so excludes 9 that contain nation",
+    "meta": {
+      "layer1": "County",
+      "where1": "v080_rawva > 0.13 and Factors_So <> 9",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify nation where v 161 rac 3 is not 17.45296494 that intersect county where v 161 race 1 is different from 0.0 and v 043 raw va <> 492.3091419",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v161_rac_3 <> 17.45296494",
+      "layer2": "County",
+      "where2": "v161_race1 <> 0.0 and v043_rawva <> 492.3091419",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show all nation that intersect nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show county where v 141 raw va above 25.50498957 and v 021 n umer is 97 that are within 12.1 kilometers of county where v 127 rac 2 excludes 123.1159272 and where v 161 rac 3 = 25.38755482",
+    "meta": {
+      "layer1": "County",
+      "where1": "v141_rawva > 25.50498957 and v021_numer = 97",
+      "layer2": "County",
+      "where2": "v127_rac_2 <> 123.1159272 and v161_rac_3 = 25.38755482",
+      "relation": "withinDistance",
+      "distance": 12.1,
+      "unit": "kilometers"
+    }
+  },
+  {
+    "text": "List nation that contain nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find county with v 134 raw va = 17.44 and v 140 de nom from 10627 to 24881 that are within 42.1 feet of nation where v 044 n umer <> 126609",
+    "meta": {
+      "layer1": "County",
+      "where1": "v134_rawva = 17.44 and v140_denom BETWEEN 10627 AND 24881",
+      "layer2": "Nation",
+      "where2": "v044_numer <> 126609",
+      "relation": "withinDistance",
+      "distance": 42.1,
+      "unit": "feet"
+    }
+  },
+  {
+    "text": "Identify all county that are within county",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all nation where v 004 raw va ranging from 75.8125578 to 75.8125578 and where v 125 raw va <> 7.2 that are within a distance of 25.1 miles of county",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v004_rawva BETWEEN 75.8125578 AND 75.8125578 and v125_rawva <> 7.2",
+      "layer2": "County",
+      "where2": "",
+      "relation": "withinDistance",
+      "distance": 25.1,
+      "unit": "miles"
+    }
+  },
+  {
+    "text": "List nation with v 153 raw va != 63.99 that intersect nation where v 161 other is different from 14.26498908",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v153_rawva <> 63.99",
+      "layer2": "Nation",
+      "where2": "v161_other <> 14.26498908",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show county that are within a distance of 96.6 meters of county with v 069 n umer is different from 7954 and v 138 race 1 is below 0.0",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v069_numer <> 7954 and v138_race1 < 0.0",
+      "relation": "withinDistance",
+      "distance": 96.6,
+      "unit": "meters"
+    }
+  },
+  {
+    "text": "Find nation where v 136 n umer exceeding 20845775 or v 138 rac 2 above 11.03345863 that contain county with v 127 raw va != 605.7743107 or where v 128 n umer is below 39",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v136_numer > 20845775 or v138_rac_2 > 11.03345863",
+      "layer2": "County",
+      "where2": "v127_rawva <> 605.7743107 or v128_numer < 39",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify all nation where v 129 race from 7.259280043 to 7.259280043 or where v 002 raw va not exceeding 16.51 that intersect county",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v129_race_ BETWEEN 7.259280043 AND 7.259280043 or v002_rawva < 16.51",
+      "layer2": "County",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show county where v 161 other < 23.63544197 that are within nation",
+    "meta": {
+      "layer1": "County",
+      "where1": "v161_other < 23.63544197",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List nation with v 014 rac 1 < 30.50747344 or where v 127 race below 490.1084173 that are in the range of 31.3 meters of nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v014_rac_1 < 30.50747344 or v127_race_ < 490.1084173",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "withinDistance",
+      "distance": 31.3,
+      "unit": "meters"
+    }
+  },
+  {
+    "text": "Show all county with v 159 raw va = 2.534611282 and v 039 race is different from 78.8259004 that contain nation with v 037 rac 1 = 13.53",
+    "meta": {
+      "layer1": "County",
+      "where1": "v159_rawva = 2.534611282 and v039_race_ <> 78.8259004",
+      "layer2": "Nation",
+      "where2": "v037_rac_1 = 13.53",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all county that are within county where v 060 raw va not below 18.7",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v060_rawva > 18.7",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show all nation with v 149 n umer is 1124551 and where v 135 rac 3 from 84.04140738 to 84.04140738 that intersect county with v 147 rac 3 is smaller than 76.72990702",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v149_numer = 1124551 and v135_rac_3 BETWEEN 84.04140738 AND 84.04140738",
+      "layer2": "County",
+      "where2": "v147_rac_3 < 76.72990702",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify all nation with v 128 de nom is 293736155 that contain county with v 148 race is less than 67.1828012",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v128_denom = 293736155",
+      "layer2": "County",
+      "where2": "v148_race_ < 67.1828012",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List county that contain nation where v 148 rac 3 > 11.98093122 and v 050 rac 3 is 44.0",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v148_rac_3 > 11.98093122 and v050_rac_3 = 44.0",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify nation with v 042 raw va is greater than 4.062791864 and where v 039 rac 3 from 11.91299109 to 11.91299109 that intersect nation where v 015 n umer = 124897 or v 138 n umer is 208234",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v042_rawva > 4.062791864 and v039_rac_3 BETWEEN 11.91299109 AND 11.91299109",
+      "layer2": "Nation",
+      "where2": "v015_numer = 124897 or v138_numer = 208234",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all county where v 015 rac 2 ranging from 9.571973262 to 9.571973262 that are within county with v 147 raw va is 73.65541147",
+    "meta": {
+      "layer1": "County",
+      "where1": "v015_rac_2 BETWEEN 9.571973262 AND 9.571973262",
+      "layer2": "County",
+      "where2": "v147_rawva = 73.65541147",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all county that are in county with v 005 rac 2 is 1147.0 and where v 039 race 1 from 4.513891501 to 4.513891501",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v005_rac_2 = 1147.0 and v039_race1 BETWEEN 4.513891501 AND 4.513891501",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List county where v 037 rac 3 is not 8.99 that intersect nation",
+    "meta": {
+      "layer1": "County",
+      "where1": "v037_rac_3 <> 8.99",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate all nation where v 127 rac 3 is smaller than 343.3238954 and v 148 rac 1 = 23.12399134 that are in the range of 17.6 meters of county where v 131 n umer above 33",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v127_rac_3 < 343.3238954 and v148_rac_1 = 23.12399134",
+      "layer2": "County",
+      "where2": "v131_numer > 33",
+      "relation": "withinDistance",
+      "distance": 17.6,
+      "unit": "meters"
+    }
+  },
+  {
+    "text": "Show nation where v 136 other is 14.4 that intersect county",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v136_other = 14.4",
+      "layer2": "County",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find county where v 083 de nom excludes 134421 that intersect nation where v 045 de nom <> 325719178",
+    "meta": {
+      "layer1": "County",
+      "where1": "v083_denom <> 134421",
+      "layer2": "Nation",
+      "where2": "v045_denom <> 325719178",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show county with v 001 rac 4 is above 2 or where v 015 rac 1 excludes 27.49760771 that are within 83.6 meters of nation with v 024 rac 2 = 26.63 or where v 132 raw va is below 84.17",
+    "meta": {
+      "layer1": "County",
+      "where1": "v001_rac_4 > 2 or v015_rac_1 <> 27.49760771",
+      "layer2": "Nation",
+      "where2": "v024_rac_2 = 26.63 or v132_rawva < 84.17",
+      "relation": "withinDistance",
+      "distance": 83.6,
+      "unit": "meters"
+    }
+  },
+  {
+    "text": "Identify all county that are in nation where v 024 raw va <> 16.8",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v024_rawva <> 16.8",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show nation with v 039 race 1 is less than 4.600899499 that are within a distance of 93.4 feet of county where v 001 rac 8 from 2 to 2",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v039_race1 < 4.600899499",
+      "layer2": "County",
+      "where2": "v001_rac_8 BETWEEN 2 AND 2",
+      "relation": "withinDistance",
+      "distance": 93.4,
+      "unit": "feet"
+    }
+  },
+  {
+    "text": "Locate county where v 050 raw va not below 34.0 or where v 052 raw va is not 20.59 that contain nation with v 044 de nom is above 25766",
+    "meta": {
+      "layer1": "County",
+      "where1": "v050_rawva > 34.0 or v052_rawva <> 20.59",
+      "layer2": "Nation",
+      "where2": "v044_denom > 25766",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List all county that intersect county",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all county with v 137 de nom is above 172581 that intersect county",
+    "meta": {
+      "layer1": "County",
+      "where1": "v137_denom > 172581",
+      "layer2": "County",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List all nation where v 138 rac 2 is 11.03345863 or v 037 race 1 > 8.39 that are within a distance of 3.7 meters of county",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v138_rac_2 = 11.03345863 or v037_race1 > 8.39",
+      "layer2": "County",
+      "where2": "",
+      "relation": "withinDistance",
+      "distance": 3.7,
+      "unit": "meters"
+    }
+  },
+  {
+    "text": "Find all county that intersect nation with v 140 raw va is different from 9.291114225",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v140_rawva <> 9.291114225",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate all county that contain county",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate all county with v 126 raw va is greater than 45.51 that contain nation with v 037 rac 1 is 13.53",
+    "meta": {
+      "layer1": "County",
+      "where1": "v126_rawva > 45.51",
+      "layer2": "Nation",
+      "where2": "v037_rac_1 = 13.53",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show all county that contain nation with v 127 rac 1 is 495.6300037",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v127_rac_1 = 495.6300037",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show nation with v 138 rac 2 larger than 11.03345863 that intersect nation",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v138_rac_2 > 11.03345863",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all county with v 005 rac 2 exceeding 0.0 that are in the range of 11.0 kilometers of nation where v 154 de nom is above 117012341",
+    "meta": {
+      "layer1": "County",
+      "where1": "v005_rac_2 > 0.0",
+      "layer2": "Nation",
+      "where2": "v154_denom > 117012341",
+      "relation": "withinDistance",
+      "distance": 11.0,
+      "unit": "kilometers"
+    }
+  },
+  {
+    "text": "Find all county where v 069 raw va larger than 40.13 and where v 059 n umer != 73 that are inside county where v 155 rac 3 excludes 46.0 or where v 024 rac 1 is smaller than 51.21",
+    "meta": {
+      "layer1": "County",
+      "where1": "v069_rawva > 40.13 and v059_numer <> 73",
+      "layer2": "County",
+      "where2": "v155_rac_3 <> 46.0 or v024_rac_1 < 51.21",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate nation that are within county where v 159 race is 0.0",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v159_race_ = 0.0",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Identify all nation with v 081 n umer != 19504862 that are within 39.2 feet of county",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v081_numer <> 19504862",
+      "layer2": "County",
+      "where2": "",
+      "relation": "withinDistance",
+      "distance": 39.2,
+      "unit": "feet"
+    }
+  },
+  {
+    "text": "Show all county that are inside nation with v 124 raw va below 0.0 or v 155 race != 40.0",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v124_rawva < 0.0 or v155_race_ <> 40.0",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find county where v 134 n umer = 18 and v 014 race 1 ranging from 18.51851852 to 34.51824135 that contain nation",
+    "meta": {
+      "layer1": "County",
+      "where1": "v134_numer = 18 and v014_race1 BETWEEN 18.51851852 AND 34.51824135",
+      "layer2": "Nation",
+      "where2": "",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show nation where v 127 rac 1 < 495.6300037 or v 126 raw va is smaller than 60.11 that intersect county",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v127_rac_1 < 495.6300037 or v126_rawva < 60.11",
+      "layer2": "County",
+      "where2": "",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all county that intersect county with v 153 raw va is 71.53 or v 160 rac 2 is not 2.401372441",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v153_rawva = 71.53 or v160_rac_2 <> 2.401372441",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List all nation with v 061 raw va between 372.8 and 372.8 that are in nation where v 069 de nom <> 86009246 or v 039 race 1 from 4.600899499 to 4.600899499",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "v061_rawva BETWEEN 372.8 AND 372.8",
+      "layer2": "Nation",
+      "where2": "v069_denom <> 86009246 or v039_race1 BETWEEN 4.600899499 AND 4.600899499",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find all county where v 139 raw va = 1060.0 that are within county with v 138 rac 3 is smaller than 36.62931137",
+    "meta": {
+      "layer1": "County",
+      "where1": "v139_rawva = 1060.0",
+      "layer2": "County",
+      "where2": "v138_rac_3 < 36.62931137",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Show all nation that intersect county with v 003 raw va is 12.89 and where v 143 raw va != 37.84",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v003_rawva = 12.89 and v143_rawva <> 37.84",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate all nation that contain nation where v 015 de nom is below 2260658363.0",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v015_denom < 2260658363.0",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List all nation that contain nation with v 085 de nom = 268046715",
+    "meta": {
+      "layer1": "Nation",
+      "where1": "",
+      "layer2": "Nation",
+      "where2": "v085_denom = 268046715",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List county that intersect county where v 135 race 1 below 21.48902407 and v 148 race is 71.23634637",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v135_race1 < 21.48902407 and v148_race_ = 71.23634637",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find county that contain county where v 037 rac 2 = 8.26 or where v 067 race between 30.77 and 68.11",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v037_rac_2 = 8.26 or v067_race_ BETWEEN 30.77 AND 68.11",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Find county with v 003 n umer is 7782 that contain county with v 138 rac 3 != 23.88230799",
+    "meta": {
+      "layer1": "County",
+      "where1": "v003_numer = 7782",
+      "layer2": "County",
+      "where2": "v138_rac_3 <> 23.88230799",
+      "relation": "contains",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "Locate county that are within county with v 037 raw va not exceeding 10.33 and v 001 race 1 from 0 to 2",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v037_rawva < 10.33 and v001_race1 BETWEEN 0 AND 2",
+      "relation": "within",
+      "distance": 0.0,
+      "unit": ""
+    }
+  },
+  {
+    "text": "List all county that are within a distance of 18.0 miles of county with v 128 race 1 is not 62.5 or where v 147 race 1 between 85.52411046 and 89.47353833",
+    "meta": {
+      "layer1": "County",
+      "where1": "",
+      "layer2": "County",
+      "where2": "v128_race1 <> 62.5 or v147_race1 BETWEEN 85.52411046 AND 89.47353833",
+      "relation": "withinDistance",
+      "distance": 18.0,
+      "unit": "miles"
+    }
+  },
+  {
+    "text": "Show county where v 085 raw va < 18.74 that intersect nation with v 005 rac 1 exceeding 6551.0",
+    "meta": {
+      "layer1": "County",
+      "where1": "v085_rawva < 18.74",
+      "layer2": "Nation",
+      "where2": "v005_rac_1 > 6551.0",
+      "relation": "intersects",
+      "distance": 0.0,
+      "unit": ""
+    }
+  }
+]

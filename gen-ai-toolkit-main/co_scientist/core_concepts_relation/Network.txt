@@ -1,0 +1,1345 @@
+**Toolset:** Network Dataset Toolset
+
+**Tool:** Create Network Dataset
+
+**Description:**
+The "Create Network Dataset" tool is used to create a network dataset in an existing feature dataset. This network dataset is essential for performing network analysis on the data in the feature dataset. The tool is particularly useful in scenarios where detailed travel attributes such as costs, restrictions, and travel modes need to be defined and analyzed. For example, in a spatial analysis workflow, this tool can be used to model a city's road network to provide routing and driving directions for tourists visiting public attractions.
+
+**Parameters:**
+- **Target Feature Dataset**: The feature dataset where the network dataset will be created. Type: Feature Dataset.
+- **Network Dataset Name**: The name for the new network dataset. Type: String.
+- **Source Feature Classes**: The feature classes that will participate in the network dataset. Type: Feature Class.
+
+**Derived Output:**
+- **Network Dataset**: The created network dataset that can be used for network analysis. Type: Network Dataset.
+**Toolset:** Network Dataset Toolset
+
+**Tool:** Make Network Dataset Layer
+
+**Description:**
+The "Make Network Dataset Layer" tool creates a network dataset layer from an existing network dataset. This layer is temporary and can be used in various geoprocessing tools requiring a network dataset layer as input. It is commonly used in spatial analysis and GIS workflows involving network datasets, such as transportation network analysis, route optimization, and connectivity analysis. For instance, it can model transportation networks for tasks like finding the shortest path, calculating travel times, or generating driving directions.
+
+**Parameters:**
+- **Input Network Dataset**: The network dataset used to create the new layer. **Type:** Network Dataset Layer.
+- **Output Layer**: The name of the network dataset layer to be generated. This layer is temporary and must be saved using the Save To Layer File tool to persist after the session ends. **Type:** Network Dataset Layer.
+
+**Derived Output:**
+- **Output Layer**: The network dataset layer created, suitable for use as input in other geoprocessing tools. **Type:** Network Dataset Layer.
+Toolset: Network Dataset Toolset
+
+Tool: Create Template From Network Dataset
+
+Description: Creates a file containing the schema of an existing network dataset. This template file can then be used to create a new network dataset with the same schema. This tool is useful for maintaining network datasets and can be applied in spatial analysis workflows. For example, it allows users to efficiently recreate network datasets with predefined schemas for different geographic areas or network types.
+
+Parameters:
+- Network Dataset Template: The template file (.xml) created by the Create Template From Network Dataset tool containing the schema of the output network dataset to be created. Type: File
+- Output Feature Dataset: The feature dataset containing the feature classes that will take part in the network dataset being created. The network will be created in this dataset using the name specified in the network dataset template. Type: Feature Dataset
+
+Derived Output:
+- Output Network: A new network dataset with the schema contained in the template file. Type: Network Dataset
+**Toolset:** Network Dataset Toolset
+
+**Tool:** Create Network Dataset From Template
+
+**Description:**
+The "Create Network Dataset From Template" tool is designed to create a new network dataset with the schema contained in the input template file (.xml). This tool efficiently creates network datasets based on predefined schemas, eliminating the need for manual parameter setup. It is commonly used in setting up transportation networks for routing and analysis, especially in scenarios requiring specific attributes and connectivity rules. For instance, it can be applied in urban planning for modeling street networks or in logistics for optimizing delivery routes.
+
+**Parameters:**
+- **Network Dataset Template**: The XML file containing the schema for the network dataset. Type: XML File.
+- **Output Feature Dataset**: The feature dataset where the network dataset will be created. Type: Feature Dataset.
+
+**Derived Output:**
+- **Network Dataset**: The newly created network dataset based on the template. Type: Network Dataset.
+**Toolset:** Network Dataset Toolset
+
+**Tool:** Dissolve Network
+
+**Description:**
+The Dissolve Network tool creates a network dataset that minimizes the number of line features required to correctly model the input network dataset. This results in a more efficient output network dataset, reducing the time needed for analyses, result visualization, and generating driving directions. By merging logically connected line features with similar attributes, such as the same street name, hierarchy, and restrictions, the tool optimizes network traversal. For instance, if street data is fragmented at intersections, Dissolve Network merges these features, streamlining the network and enhancing efficiency in spatial analysis workflows.
+
+**Parameters:**
+- No specific parameter details are provided in the documentation.
+
+**Derived Output:**
+- **Output Network Dataset:** A new network dataset with fewer line features, enhancing analysis efficiency. Type: Network Dataset.
+- **Source Feature Classes:** New feature classes representing the merged line features. Type: Feature Class.
+**Toolset:** Turn Feature Class Toolset
+
+**Tool:** Turn Table To Turn Feature Class
+
+**Description:**
+The "Turn Table To Turn Feature Class" tool converts an ArcView turn table or an ArcInfo Workstation coverage turn table into an ArcGIS turn feature class. This conversion is crucial for integrating turn data into a network dataset, ensuring accurate network analysis and routing. Use cases include updating transportation networks with turn restrictions or modeling complex intersections in urban planning. For instance, a city planner might utilize this tool to incorporate new traffic regulations into a city's GIS database, enabling routing algorithms to consider these changes.
+
+**Parameters:**
+- **Input Turn Table:** The .dbf file or INFO turn table from which the new turn feature class will be created. **Type:** Table View.
+- **Reference Line Features:** The line feature class to which the input turn table refers, serving as a source in a network dataset. **Type:** Feature Class.
+- **Output Turn Feature Class Name:** The name of the new turn feature class to create. **Type:** String.
+- **Reference Nodes Table (Optional):** The nodes.dbf table in the .nws folder containing the original ArcView GIS network in which the input turn table participated. This parameter is ignored if the input turn table is an INFO table. **Type:** dBASE Table.
+- **Maximum Edges (Optional):** The maximum number of edges per turn in the new turn feature class, with a default of 5 and a maximum of 50. **Type:** Long.
+- **Configuration Keyword (Optional):** Specifies the configuration keyword determining the storage parameters of the output turn feature class. **Type:** String.
+
+**Derived Output:**
+- **Output Turn Feature Class:** The resulting turn feature class created from the input turn table. **Type:** Feature Class.
+Toolset: Turn Feature Class Toolset
+
+Tool: Increase Maximum Edges
+
+Description: The Increase Maximum Edges tool is used to increase the maximum number of edges per turn in a turn feature class. This tool is essential for adjusting the maximum number of edges allowed in a turn feature class, with a default value of 5 and a maximum value of 50. It is particularly useful when working with complex network datasets that require a higher number of edges per turn.
+
+Parameters:
+- Input Feature Class: Specifies the turn feature class where the maximum number of edges needs to be increased. Type: Feature Class.
+- Configuration Keyword (Optional): Specifies the configuration keyword that determines the storage parameters of the output turn feature class. This parameter is used only if the output turn feature class is created in a workgroup or enterprise geodatabase. Type: String.
+
+Derived Output:
+- Output Turn Feature Class: The newly created turn feature class with the increased maximum number of edges. Type: Feature Class.
+Toolset: Turn Feature Class Toolset
+
+Tool: Populate Alternate ID Fields
+
+Description: The Populate Alternate ID Fields tool creates and populates additional fields on turn feature classes that reference the edges in the network by alternate IDs. These alternate IDs help maintain the integrity of turn features if the edge sources are edited in a way that changes their ObjectID values. This tool is essential for ensuring the accuracy and consistency of turn data when working with network datasets.
+
+Parameters:
+- Input Turn Feature Class: Specifies the turn feature class to which the alternate ID fields will be added and populated. Type: Feature Class.
+- Alternate ID Field Name: Specifies the name of the field that will store the alternate IDs referencing the edges in the network. Type: Field.
+
+Derived Output:
+- Updated Turn Feature Class: The tool updates the input turn feature class with the populated alternate ID fields. Type: Feature Class.
+**Toolset:** Turn Feature Class Toolset
+
+**Tool:** Create Turn Feature Class
+
+**Description:**
+The "Create Turn Feature Class" tool creates a turn feature class to store turn features that model turning movements in a network dataset. This tool is essential for spatial analysis and GIS workflows involving network datasets, especially in transportation and logistics. By modeling turns, users can incorporate realistic travel paths and constraints into their network analyses, such as routing and navigation. For instance, this tool can be used to model traffic flow in urban planning, optimize delivery routes considering turn restrictions, or simulate emergency response scenarios where turn delays are critical.
+
+**Parameters:**
+- **Input Turn Table**: The .dbf file or INFO turn table from which the new turn feature class will be created. **Type:** Table View.
+- **Reference Line Features**: The line feature class to which the input turn table refers. This feature class must be a source in a network dataset. **Type:** Feature Class.
+- **Output Turn Feature Class Name**: The name of the new turn feature class to create. **Type:** String.
+- **Reference Nodes Table (Optional)**: The nodes.dbf table in the .nws folder containing the original ArcView GIS network in which the input turn table participated. This parameter is ignored if the input turn table is an INFO table. **Type:** dBASE Table.
+- **Maximum Edges (Optional)**: The maximum number of edges per turn in the new turn feature class. The default value is 5, and the maximum value is 50. **Type:** Long.
+- **Configuration Keyword (Optional)**: Specifies the configuration keyword that determines the storage parameters of the output turn feature class. **Type:** String.
+
+**Derived Output:**
+- **Output Turn Feature Class**: The newly created turn feature class that models the turning movements. **Type:** Feature Class.
+**Toolset:** Turn Feature Class Toolset
+
+**Tool:** Update By Alternate ID Fields
+
+**Description:**
+The "Update By Alternate ID Fields" tool is designed to update all edge references in turn feature classes using an alternate ID field. This tool is particularly useful when edits to the edge source feature classes result in changes to ObjectID values. It ensures that turn features accurately represent the network's turning movements by using alternate IDs to identify corresponding edge features for each turn. For example, this tool is valuable when the underlying network dataset is modified, and turn features need to be realigned with updated network edges.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+Toolset: Turn Feature Class Toolset
+
+Tool: Update By Geometry
+
+Description: Updates all the edge references in the turn feature class using the geometry of the turn features. This tool is useful when the IDs listed for the turn can no longer find the edges participating in the turn due to edits to the underlying edges. It is recommended to use this tool after making edits to the edge source feature classes that alter ObjectID values. 
+
+Parameters:
+- Input Turn Feature Class: Specifies the turn feature class to be updated. Type: Feature Class.
+- Geometry Update Method: Specifies the method to update the turn feature class geometry. Type: String.
+
+Derived Output:
+- Updated Turn Feature Class: The turn feature class with all edge references updated based on the geometry of the turn features. Type: Feature Class.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Import Trace Configurations
+
+**Description:** The Import Trace Configurations tool allows you to import named trace configurations from a .json file to a utility network. This tool is essential for sharing trace configurations across multiple utility networks, enabling the reuse of complex trace setups without manual recreation. Typical use cases include transferring configurations between projects or environments, ensuring consistency in trace operations across an organization, and simplifying the setup process for new utility networks. For example, a utility company might use this tool to import standard trace configurations into newly established networks to maintain operational consistency.
+
+**Parameters:**
+- **Input Utility Network:** Specify the utility network where the trace configurations will be imported. **Type:** Utility Network.
+- **Input File (.json):** The .json file containing the named trace configurations to be imported. **Type:** File.
+
+**Derived Output:**
+- **Imported Trace Configurations:** The named trace configurations successfully imported into the utility network. **Type:** Trace Configuration.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Delete Trace Configuration
+
+**Description:**
+The Delete Trace Configuration tool allows users to delete one or more named trace configurations from a trace network. This tool is crucial for managing trace configurations, especially when network updates or field conditions change, necessitating the removal of outdated configurations. It is particularly useful when a trace configuration needs modification due to network updates or changing field conditions. By deleting an existing configuration, users can add, share, and overwrite existing web maps with new configurations. However, caution is advised as deleting a named trace configuration will permanently remove it from the network and break any connections with web maps where it is referenced.
+
+**Parameters:**
+- **Input Trace Network**: Specifies the trace network from which the trace configurations will be deleted. **Type:** Trace Network.
+- **Trace Configuration Name**: Specifies one or more named trace configurations to be deleted. **Type:** String.
+
+**Derived Output:**
+- No derived outputs are specified for this tool.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Export Trace Configurations
+
+**Description:**
+The Export Trace Configurations tool allows you to export one or more named trace configurations from a trace network to a JSON file for sharing across multiple trace networks. This functionality is crucial for sharing configurations across different networks, facilitating consistency and efficiency in network management. Typical use cases include:
+- **Sharing Configurations:** Distribute trace configurations across different departments or teams within an organization.
+- **Backup and Restore:** Maintain backups of trace configurations for disaster recovery or auditing purposes.
+- **Cross-Network Consistency:** Ensure consistent trace operations across different networks by using the same configuration.
+
+**Parameters:**
+- **Input Trace Network:** Specifies the trace network containing the named trace configurations to export.
+  - **Type:** Utility Network; Utility Network Layer.
+- **Trace Configuration:** Selects one or more named trace configurations to export.
+  - **Type:** String.
+- **Output File (.json):** Specifies the output JSON file where the configurations will be saved.
+  - **Type:** File.
+
+**Derived Output:**
+- **Output JSON File:** The JSON file containing the exported trace configurations.
+  - **Type:** File.
+
+This tool is available in both the Trace Network and Utility Network toolboxes, ensuring flexibility in its application across different network types. It is particularly useful in enterprise environments where network configurations need to be standardized and shared efficiently.
+**Toolset: Trace Configuration Toolset**
+
+**Tool: Add Trace Configuration**
+
+**Description:** The **Add Trace Configuration** tool creates a named trace configuration within a utility network. Named trace configurations are essential for defining and storing complex trace operations that can be reused and shared across an organization. These configurations simplify the user experience by allowing users to perform traces without needing to understand all the underlying configuration details. They can be consumed in ArcGIS Pro using the Trace geoprocessing tool or the Named Configurations tab in the Trace pane. Typical use cases include network analysis for utility management, such as identifying the impact of network changes or planning maintenance activities.
+
+**Parameters:**
+- **Input Utility Network**: Specify the utility network to which the trace configuration will be added. Type: *Utility Network*.
+- **Trace Configuration Name**: Provide a name for the named trace configuration. Type: *String*.
+- **Description**: Optionally, provide a description for the named trace configuration. Type: *String*.
+- **Tags**: Optionally, provide user tags to identify the named trace configuration. Type: *String*.
+
+**Derived Output:**
+- **Trace Configuration**: A new named trace configuration is added to the Input Utility Network. Type: *Trace Configuration*.
+Toolset: **Analysis Toolset**
+
+Tool: Solve Location Allocation
+
+Description: Identifies the best location or locations from a set of input locations by assigning demand points to input facilities in a way that allocates the most demand to facilities and minimizes overall travel. It optimizes the allocation of demand points to facilities to reduce travel time or distance. For example, it can be used to determine the best locations for new facilities based on existing demand points or to optimize the distribution of resources to minimize travel distances.
+
+Parameters:
+- Input Facilities: Specifies the locations where services or resources can be provided. Type: Feature Layer.
+- Demand Points: Represents the locations with demand for services or resources. Type: Feature Layer.
+- Output Lines: Stores the travel time or distance along the street network from each demand point to its assigned facility. Type: Feature Class.
+
+Derived Output:
+- Allocation Lines: Represents the optimized allocation of demand points to facilities, minimizing overall travel. Type: Feature Class.
+Toolset: Analysis Toolset
+
+Tool: Generate Service Areas
+
+Description:
+The "Generate Service Areas" tool is used to perform network-based analyses to determine the area that can be reached from one or more facilities within a specified time or distance. This tool is typically used in spatial analysis and GIS workflows to identify the area that can be accessed within a certain travel time or distance from a given location. For example, it can be used to determine the area that can be reached within a 10-minute drive from a hospital, which is crucial for emergency response planning. It can also be used in urban planning to identify areas that are underserved by public transportation or to plan the optimal location for new services such as retail stores or public facilities.
+
+Parameters:
+- **Network**: Specifies the network dataset layer, a network dataset catalog path, or a URL to a network analysis service. The choice of network affects the available travel modes. Type: *String*.
+- **Travel Mode**: A choice list that updates automatically to include available travel modes associated with the Network value. Type: *String*.
+- **Cutoffs**: Allows entry of one or more numerical values to define the maximum travel distance or time. Type: *Double*.
+- **Cutoff Units**: Specifies the units for the cutoff values. Type: *String*.
+- **Time Of Day**: An optional parameter to specify the date and time for the analysis. Type: *Date*.
+
+Derived Output:
+- **Service Area Polygons**: The output will contain polygon features that represent the area reachable within the specified cutoffs. Type: *Feature Class*.
+- **Service Area Lines**: Optionally, the output can include line features representing the roads reachable before the cutoffs are exceeded. Type: *Feature Class*.
+Toolset: Analysis Toolset
+
+Tool: Find Closest Facilities
+
+Description: Finds one or more facilities closest to an incident based on travel time or distance. It outputs the best routes, driving directions between incidents and chosen facilities, and a copy of the chosen facilities. This tool is commonly used to find the closest hospital to an accident, the closest police cars to a crime scene, or the closest store to a customer's address.
+
+Parameters:
+- Facilities: Input locations serving as starting or ending points in the analysis. Type: Feature Set
+- Incidents: Input locations serving as starting or ending points in the analysis. Type: Feature Set
+
+Derived Outputs:
+- Closest Facilities: Provides access to the output facilities from the analysis. Type: Feature Set
+- Network Analysis Layer: The layer with configured properties for further analysis or debugging. Type: Feature Set
+- Route Data: A .zip file containing all information for a specific route. Type: File
+- Incidents: Provides access to the locations used as starting or ending points. Type: Feature Set
+- Facilities: The facilities used in the analysis. Type: Feature Set
+- Result File: A .zip file containing analysis results. Type: File
+- Network Analysis Layer Package: Includes a network analysis layer with data and settings used in the analysis. Type: File
+- Direction Points: Provides turn-by-turn directions for calculated routes. Type: Feature Set
+**Toolset:** Analysis Toolset
+
+**Tool:** Generate Origin Destination Cost Matrix
+
+**Description:**
+The "Generate Origin Destination Cost Matrix" tool creates an origin-destination (OD) cost matrix from multiple origins to multiple destinations. This matrix includes the travel time and travel distance from each origin to each destination. It also ranks the destinations each origin connects to based on the minimum time or distance required to travel. This tool is valuable for analyzing connectivity and accessibility between locations. For example, it can be used in healthcare to assess travel times from patients to hospitals, aiding in identifying patients with limited access to medical facilities. It is also applicable in logistics for optimizing delivery routes and in urban planning to evaluate public service accessibility.
+
+**Parameters:**
+- No detailed input parameters provided in the available information.
+
+**Derived Output:**
+- **OD Cost Matrix:** Contains travel times and distances from each origin to each destination. Type: Table.
+**Toolset:** Analysis Toolset
+
+**Tool:** Solve Vehicle Routing Problem
+
+**Description:**
+The Solve Vehicle Routing Problem tool optimizes routes for a fleet of vehicles servicing a set of orders. It is used in scenarios where multiple vehicles need to deliver goods or services efficiently. Examples include logistics and delivery services like furniture delivery, waste collection, or health department inspection scheduling. The tool aims to minimize operating costs while ensuring all orders are serviced. It handles complex routing scenarios such as matching vehicle capacities with order quantities, scheduling driver breaks, and grouping orders for the same route.
+
+**Parameters:**
+- **Orders:** Locations to be serviced. Type: Feature Layer.
+- **Depots:** Starting and ending locations for vehicles. Type: Feature Layer.
+- **Routes:** Paths vehicles will take. Type: Feature Layer.
+- **Breaks:** Scheduled breaks for drivers. Type: Feature Layer.
+- **Route Zones:** Areas affecting routes. Type: Feature Layer.
+- **Depot Visits:** Depot visit requirements. Type: Feature Layer.
+- **Point Barriers:** Locations vehicles cannot cross. Type: Feature Layer.
+- **Line Barriers:** Lines vehicles cannot cross. Type: Feature Layer.
+- **Polygon Barriers:** Areas vehicles cannot enter. Type: Feature Layer.
+- **Route Specialties:** Special route requirements. Type: Table.
+- **Order Specialties:** Special order requirements. Type: Table.
+- **Order Pairs:** Orders that must be serviced together. Type: Table.
+- **Route Renewals:** When routes can be renewed. Type: Table.
+
+**Derived Output:**
+- **Routes:** Drivers, vehicles, and paths. Type: Feature Class.
+- **Stops:** Locations where vehicles stop. Type: Feature Class.
+- **UnassignedStops:** Orders not assigned to a route. Type: Feature Class.
+- **Directions:** Driving directions for routes. Type: Feature Class.
+Toolset: Analysis Toolset
+
+Tool: Find Routes
+
+Description: Find Routes tool determines the shortest paths to visit the input stops and returns the driving directions, information about the visited stops, and the route paths, including travel time and distance. It is commonly used to find optimal routes for various purposes, such as delivery services, transportation planning, or field service management. For example, it can be used to plan the most efficient route for a delivery driver to visit multiple locations in a city, ensuring minimal time and distance traveled.
+
+Parameters:
+- Network: Specifies the network dataset layer, catalog path, or URL to a network analysis service. Type: Network Dataset
+- Cutoffs: Allows entering multiple numerical values. Type: Numeric
+- Cutoff Units: Provides a list of choices based on the selected Travel Mode value. Type: String
+- Time Of Day: Optional parameter for specifying the start time for the route. Type: Date and Time
+
+Derived Output:
+- output_result_file: Access the results from the analysis as a .zip file containing output files. Type: File
+**Toolset:** Migration Toolset
+
+**Tool:** Apply Error Resolutions
+
+**Description:**
+The Apply Error Resolutions tool is part of the Migration Toolset in ArcGIS Pro, specifically designed for utility networks. This tool automates the resolution of common error types identified in a utility network. It utilizes an Error Resolutions table as input, which can be generated by the Analyze Network Data tool or created manually. The table includes an ErrorAction field that specifies the type of edits needed to resolve errors in the utility network. This tool is crucial for maintaining the integrity of utility networks by ensuring that errors are systematically addressed, thus supporting efficient editing and tracing workflows. Typical use cases include resolving topological inconsistencies such as self-intersecting lines or invalid connectivity in utility networks.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network to be modified. Type: Utility Network.
+- **Resolution Table**: The Error Resolutions table containing error actions to be applied. Type: Table.
+- **Use the selected records**: Determines if only selected records in the resolution table are evaluated. Type: Boolean.
+- **Output Location**: Optional parameter to specify the path for output logs. Type: Folder.
+
+**Derived Output:**
+- No specific derived outputs are mentioned in the available information.
+**Toolset:** Migration Toolset
+
+**Tool:** Analyze Network Data
+
+**Description:**
+The Analyze Network Data tool is part of the Migration Toolset in the Utility Network toolbox. It evaluates a utility network dataset to identify common topological inconsistencies like self-intersecting lines, stacked points, and invalid connectivity. The tool generates a mobile geodatabase output containing feature classes and tables describing error types found in the data. These outputs help understand error scenarios and define corrective actions. This tool is crucial for ensuring data quality and network integrity in utility management and infrastructure planning workflows. For instance, it can be used to validate a newly migrated utility network dataset before operational deployment.
+
+**Parameters:**
+- **Input Utility Network:** The utility network dataset to be analyzed. Type: Utility Network.
+
+**Derived Output:**
+- **Error Feature Classes and Tables:** Generated in a mobile geodatabase, describing error types in the utility network. Type: Mobile Geodatabase.
+- **Error Resolutions Table:** A table editable to define actions for resolving identified errors. Type: Table.
+Toolset: Migration Toolset
+
+Tool: Migrate To Utility Network
+
+Description: The Migrate To Utility Network tool creates a utility network in a mobile geodatabase using provided data, schema, and mapping parameters to support basic editing and tracing workflows. This tool is ideal for organizations seeking a straightforward path to create a generic utility network that inherits their existing schema and workflows. For example, it can be used to gradually enhance network capabilities over time.
+
+Parameters:
+- Service Territory Feature Class: Represents the geographical extent covered by the domain network. Type: Polygon Feature Class.
+- Output Folder: Path and folder for the mobile geodatabase containing the utility network dataset. Type: Folder.
+- Utility Network Version: Specifies the version of the utility network to be created. Options include Current (default) and versions 7 and later. Type: Integer.
+
+Derived Output:
+- Mobile Geodatabase: Contains the utility network dataset. Type: Geodatabase.
+**Toolset:** Migration Toolset
+
+**Tool:** Apply Error Resolutions
+
+**Description:**
+The Apply Error Resolutions tool is part of the Migration Toolset in the Utility Network toolbox. It is designed to automate the resolution of common error types identified in a utility network. This tool uses an Error Resolutions table as input, which can be generated by the Analyze Network Data tool or created manually. The table includes an ErrorAction field that specifies the type of edits needed to resolve errors in the utility network. This tool is crucial for maintaining the integrity of utility networks by addressing issues such as topological inconsistencies, invalid connectivity, and other common errors. Typical use cases include preparing a utility network for analysis, ensuring data quality before performing tracing operations, and automating the correction of known error types to streamline network management workflows.
+
+**Parameters:**
+- **Input Utility Network**: The utility network to be modified. Type: Utility Network.
+- **Resolution Table**: The Error Resolutions table containing error actions. Type: Table.
+- **Use the selected records**: Option to apply actions only to selected records in the resolution table. Type: Boolean.
+- **Output Location**: Path to a folder for output logs and results. Type: Folder (Optional).
+
+**Derived Output:**
+- No specific derived outputs are mentioned in the available information.
+**Toolset:** Migration Toolset
+
+**Tool:** Analyze Network Data
+
+**Description:**
+The Analyze Network Data tool is part of the Migration Toolset in ArcGIS Pro's Utility Network toolbox. It evaluates a utility network dataset to identify common topological inconsistencies like self-intersecting lines, stacked points, and invalid connectivity. The tool generates a mobile geodatabase output containing feature classes and tables describing the error types found in the data. These outputs help understand error scenarios and define corrective actions. This tool is crucial for ensuring data quality and network integrity in utility management and infrastructure planning workflows. For instance, it can be used to validate a newly migrated utility network dataset before operational deployment.
+
+**Parameters:**
+- **Input Utility Network**: The utility network dataset to be analyzed. Type: Utility Network.
+
+**Derived Output:**
+- **Error Feature Classes and Tables**: Contains details of the errors found in the network. Type: Mobile Geodatabase.
+- **Error Resolutions Table**: A table editable to define actions for resolving errors. Type: Table.
+**Toolset:** Migration Toolset
+
+**Tool:** Migrate To Utility Network
+
+**Description:**
+The "Migrate To Utility Network" tool creates a utility network within a mobile geodatabase using existing data, schema, and mapping parameters. It is designed to support basic editing and tracing workflows. This tool is beneficial for organizations transitioning from a geometric network or other feature classes into a utility network while maintaining their current schema. It is ideal for those with modest requirements who want to gradually enhance their network capabilities over time. Examples of typical use cases include:
+- Migrating spatial data into a utility network to utilize network management capabilities.
+- Supporting basic editing and tracing workflows within a utility network environment.
+- Simplifying the mapping of existing data to utility network classes using the Utility Network Migration Wizard.
+
+**Parameters:**
+- **Service Territory Feature Class**: Represents the geographical extent covered by the domain network. It restricts edits to ensure features are not created outside of the network area. Type: *Polygon Feature Class*.
+- **Output Folder**: Specifies the output path and folder for the mobile geodatabase containing the utility network dataset. Type: *Folder*.
+- **Utility Network Version**: Specifies the version of the utility network to be created. Options include "Current" for the latest version compatible with the current ArcGIS Pro version, or specific versions like "7". Type: *String*.
+
+**Derived Output:**
+- **Mobile Geodatabase**: Contains the utility network dataset created by the tool. Type: *Geodatabase*.
+**Toolset: Administration Toolset**
+
+**Tool: Enable Cluster Keys**
+
+**Description:**
+The "Enable Cluster Keys" tool creates a `CLUSTERKEY` attribute field on classes in utility network versions 4 through 7. This attribute field helps in grouping features and nonspatial objects within the network topology. By organizing and optimizing network data, it enhances spatial analysis and GIS workflows. For example, in spatial analysis, cluster keys can improve the performance of operations like tracing by grouping nonspatial objects more closely with their associated spatial features.
+
+**Parameters:**
+- **Input Utility Network**: The utility network for which the `CLUSTERKEY` attribute field is created.
+  - **Type**: Utility Network
+
+**Derived Output:**
+- **CLUSTERKEY Attribute Field**: A field added to all utility network classes to facilitate grouping of features and nonspatial objects in the network topology.
+  - **Type**: Integer
+**Toolset:** Administration Toolset
+
+**Tool:** Add Terminal Configuration
+
+**Description:**
+The "Add Terminal Configuration" tool is used to add a terminal configuration to an existing utility network. Terminals are logical connection points on a device feature or junction object, crucial for defining start and endpoints of subnetwork traces and establishing paths within a feature for commodity travel. This tool is typically used in utility network management to configure how commodities like electricity or water flow through network devices. For example, it can be used to set up configurations for electrical substations or water distribution nodes, ensuring that the flow of resources is correctly managed and traced.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network for which to create the terminal configuration. Type: Utility Network.
+- **Name**: Specifies a name for the terminal configuration, limited to 32 characters. Type: String.
+- **Directionality**: Determines the flow direction through terminals. Options include:
+  - **Directional**: Specifies distinct upstream and downstream terminals.
+  - **Bidirectional**: Allows flow in either direction. Type: String.
+- **Terminals**: Names each terminal in the configuration, with a minimum of two and a maximum of eight terminals. Each name is limited to 32 characters and cannot contain commas or hyphens. Type: String.
+
+**Derived Output:**
+No specific derived outputs are listed for this tool.
+Toolset: Administration Toolset
+
+Tool: Add Domain Network
+
+Description: Adds a domain network to a utility network. A domain network can be added at any time after creating the utility network. For example, you can use the Add Domain Network tool to create a traditional domain network or a telecom domain network. This tool is essential for configuring and managing utility networks efficiently.
+
+Parameters:
+- Domain Network Name: Specifies the name of the domain network to be added. Type: String.
+- Utility Network: Specifies the utility network to which the domain network will be added. Type: Utility Network.
+
+Derived Output:
+- Domain Network: The newly added domain network. Type: Domain Network.
+**Toolset:** Administration Toolset
+
+**Tool:** Export Rules
+
+**Description:**
+The Export Rules tool in ArcGIS Pro allows users to export utility network rules to a CSV file. This tool is commonly used in utility network management to extract and document network configurations. It facilitates tasks such as sharing network configurations, conducting audits, or migrating rules between different environments. For instance, a utility company could utilize this tool to export the rules of their electrical network for regulatory compliance or system upgrades.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network from which rules will be exported. **Type:** Database connection.
+- **Rule Type**: Enables users to choose the type of rule to export, including specific rule types or all rules. **Type:** Drop-down list.
+- **Output File**: Specifies the name and location for the exported rules CSV file. **Type:** File path.
+
+**Derived Output:**
+- **Exported Rules CSV**: A CSV file containing the exported rules from the specified utility network. **Type:** CSV file.
+**Toolset:** Administration Toolset
+
+**Tool:** Verify Network Topology
+
+**Description:**
+The "Verify Network Topology" tool is designed to check the consistency of the network topology within a utility network. It performs a verification process on the network topology system tables and logs any inconsistencies found into an output log file. This tool is particularly useful in identifying potential issues that may affect the ability to validate the network topology. Typical use cases include pre-validation checks to ensure the network topology is consistent and free of errors that could hinder further analysis or operations. For example, in spatial analysis workflows, this tool can be used to ensure that the network topology is correctly configured before running complex network traces or analyses.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- **Output Log File**: This file contains a log of any inconsistencies discovered during the verification process. Type: File.
+**Toolset:** Administration Toolset
+
+**Tool:** Create Utility Network
+
+**Description:**
+The Create Utility Network tool is used to create a utility network in a specified geodatabase feature dataset. This tool is essential for creating a utility network dataset, which includes the structure network classes shared across all domain networks. These classes are crucial for modeling structural features that support or contain other features. The tool is typically used in scenarios where organizations need to manage complex network systems such as water, gas, electric, telecom, sewer, and stormwater networks. It supports workflows like network inspection after events, customer access analysis, and tracing network features upstream or downstream. For example, in an electric network, it can help determine the number of customers affected by a subnetwork outage.
+
+**Parameters:**
+- **Input Feature Dataset**: The existing feature dataset where the utility network will be created. Type: Feature Dataset.
+- **Service Territory Feature Class**: An m- and z-enabled polygon feature class that defines the network extent. Type: Feature Class.
+
+**Derived Output:**
+- **Utility Network Dataset**: The created utility network dataset. Type: Utility Network.
+- **Structure Network Feature Classes**: Feature classes that are part of the structure network. Type: Feature Class.
+**Toolset:** Administration Toolset
+
+**Tool:** Set Association Role
+
+**Description:**
+The Set Association Role tool is used to assign association roles to network feature classes or tables at the asset type level within a utility network. This tool is crucial for defining how features participate in a utility network by assigning roles such as Container or Structure. These roles determine whether features can act as containers for other features or as structures to which other features can be attached. For example, a utility pole might be assigned a Structure role, allowing other features like transformers to be attached to it. Similarly, a substation might be assigned a Container role, allowing it to contain other features like circuit breakers. This tool is essential in spatial analysis and GIS workflows for managing complex utility networks and ensuring proper feature associations.
+
+**Parameters:**
+- **Input Utility Network:** The utility network that contains the asset type with an association role to set. **Type:** Utility Network; Utility Network Layer.
+- **Domain Network:** The domain network that contains the asset type with an association role to set. **Type:** String.
+- **Input Table:** The utility network feature class or table where the association role will be set. **Type:** String.
+- **Asset Group:** The asset group that contains the asset type. **Type:** String.
+- **Asset Type:** The asset type that the association role will be set for. **Type:** String.
+- **Role Type:** Specifies the type of association role that will be assigned to the asset type. Options include Container, Structure, or None. **Type:** String.
+- **Deletion Semantics:** Specifies the deletion semantics for network features, defining how content or attachment network features will be managed when the container or structure is deleted. **Type:** String.
+
+**Derived Output:**
+No specific derived outputs are listed for this tool.
+**Toolset:** Administration Toolset
+
+**Tool:** Delete Rule
+
+**Description:**
+The Delete Rule tool in ArcGIS Pro is used to permanently remove rules from a utility network. This tool is essential for managing and maintaining the integrity of utility networks by allowing users to delete rules that are no longer needed or applicable. Typical use cases include cleaning up outdated rules, modifying network configurations, and ensuring that the network topology reflects current operational requirements. For example, if a utility network has undergone changes in its physical infrastructure, such as the removal of certain connections or components, the Delete Rule tool can be used to update the network rules accordingly. This helps prevent errors in the network topology when it is re-enabled, as features relying on deleted rules will be marked with errors.
+
+**Parameters:**
+- **Input Utility Network**: The utility network from which the rule will be removed. **Type:** Utility Network.
+- **Rule Type**: The specific type of rule to delete, such as junction-junction connectivity, junction-edge connectivity, containment, structural attachment, or edge-junction-edge connectivity. **Type:** String.
+- **Rules**: A specific rule to remove or an option to delete all rules of the selected type. **Type:** String.
+
+**Derived Output:**
+- No specific derived outputs are listed for this tool.
+**Toolset:** Administration Toolset
+
+**Tool:** Export Subnetwork Controllers
+
+**Description:**
+The Export Subnetwork Controllers tool is designed to export information about subnetwork controllers from a utility network into a CSV file. This tool is typically used in scenarios where there is a need to transfer subnetwork controller data between different utility networks or for external analysis. For example, utility companies might use this tool to export subnetwork controller data for integration with asset management systems or for conducting detailed network analysis outside of ArcGIS Pro. The exported CSV file contains detailed information about each subnetwork controller, which can be imported back into another utility network, provided the referenced device features exist.
+
+**Parameters:**
+- **Utility Network**: Specifies the utility network from which subnetwork controllers will be exported. **Type:** Utility Network.
+- **Output CSV File**: Specifies the name and location for the CSV file that will be created. **Type:** File.
+
+**Derived Output:**
+- **CSV File**: Contains the exported subnetwork controller information. **Type:** CSV File.
+Toolset: Administration Toolset
+
+Tool: Add Tier Group
+
+Description: When adding a tier for hierarchical domain networks, the Tier Group Name parameter is required. The Tier Group Name parameter must reference an existing tier group that was created at the domain network level. To add a tier group to the domain network and reference it using the Add Tier tool, follow these steps: Define a tier by specifying a unique tier name within the entire utility network. Ensure the network topology is disabled and that the network feature classes and tables are empty. The Add Tier tool creates a subnetwork name field with a nonnullable property to the underlying network feature classes and tables.
+
+Parameters:
+- Input Utility Network: Specifies a utility network. Type: Utility Network.
+- Domain Network: Specifies the domain network. Type: Domain Network.
+- Tier Group Name: Specifies the name of the tier group to reference. Type: String.
+- Name: Specifies a unique tier name within the utility network. Type: String.
+
+Derived Output:
+- Subnetwork Name Field: A field created by the Add Tier tool in the network feature classes and tables. Type: Field.
+**Toolset:** Administration Toolset
+
+**Tool:** Delete Terminal Configuration
+
+**Description:**
+The Delete Terminal Configuration tool is used to delete a terminal configuration from a utility network. This tool is essential for utility network management, especially when a terminal configuration needs to be removed or reconfigured. Common use cases include cleaning up unused configurations or preparing the network for a new setup. It is crucial to ensure that the terminal configuration is not assigned to any asset type before deletion. This tool is particularly useful in scenarios where network topology needs to be disabled for specific network configuration tasks.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network from which the terminal configuration will be deleted. Type: Utility Network.
+
+**Derived Output:**
+- No derived outputs are specified for this tool.
+**Toolset:** Administration Toolset
+
+**Tool:** Set Subnetwork Definition
+
+**Description:**
+The "Set Subnetwork Definition" tool configures the properties of a domain network tier's subnetwork within a utility network. It defines how subnetworks operate, especially in terms of propagation during analytic events. This tool is crucial for ensuring consistent and efficient network operations in utility network management. For example, it can be used to set up trace configurations that are automatically applied during subnetwork traces, ensuring consistency across network analyses and operations.
+
+**Parameters:**
+- **Include Containers**: Specifies whether containers will be included in the subnetwork. Type: Boolean.
+- **Include Content**: Specifies whether the content of containers will be included. Type: Boolean.
+- **Include Structures**: Specifies whether structures will be included. Type: Boolean.
+- **Include Barrier Features**: Specifies whether barriers will be included. Type: Boolean.
+- **Validate Locatability**: Specifies whether an error will be returned if unlocatable junction or edge objects are encountered. Type: Boolean.
+
+**Derived Output:**
+- **Subnetwork Properties**: The properties defined for the tier, which can be viewed in the utility network's layer properties under the Network Properties tab. Type: Properties.
+**Toolset:** Administration Toolset
+
+**Tool:** Calculate Cluster Keys
+
+**Description:**
+The Calculate Cluster Keys tool populates the CLUSTERKEY attribute field on all utility network classes with an integer value. This facilitates grouping features and objects in the network topology, enhancing analytical operations' efficiency, especially with nonspatial junction and edge objects. It is useful for operations like tracing. The tool is typically used after a data load operation with a disabled network topology to cluster spatial features and nonspatial objects efficiently. It can be intermittently used as the network expands to incorporate cluster key values on new features.
+
+**Parameters:**
+- **Input Utility Network:** The utility network where the cluster keys will be added. **Type:** Utility Network; Utility Network Layer.
+- **Overwrite (Optional):** Specifies whether existing cluster key values will be overwritten with new values. **Type:** Boolean.
+- **Extent (Optional):** The geographical extent used to generate the cluster keys. **Type:** Various options including Current Display Extent, Draw Extent, Extent of a Layer, etc.
+
+**Derived Output:**
+No specific derived outputs are listed for this tool.
+**Toolset:** Administration Toolset
+
+**Tool:** Export Associations
+
+**Description:**
+The Export Associations tool in ArcGIS Pro allows users to export a collection of associations from a utility network into a CSV file. This tool enables the export of specific types of associations, such as containment, connectivity, and structural attachments, into separate CSV files. It is valuable for scenarios where users need to analyze or share network association data outside of the ArcGIS environment. For instance, a utility company might use this tool to export connectivity associations to review how different network components are interconnected or to export containment associations to understand which components are housed within others. The tool is essential for utility network management tasks, facilitating detailed analysis and reporting of network structures.
+
+**Parameters:**
+- **Input Utility Network:** The utility network from which to export associations. **Type:** Database connection.
+- **Association Type:** The type of association to export. Options include:
+  - All
+  - Junction-junction connectivity
+  - Containment
+  - Attachment
+  - Junction-edge connectivity (from side of edge)
+  - Junction-edge connectivity (midspan)
+  - Junction-edge connectivity (to side of edge)
+  **Type:** String (dropdown selection).
+- **Output File:** The location and name for the generated CSV file. **Type:** File path.
+
+**Derived Output:**
+- **CSV File:** The exported file containing the selected associations. **Type:** CSV file.
+**Toolset:** Administration Toolset
+
+**Tool:** Rebuild Network Topology
+
+**Description:**
+The Rebuild Network Topology tool is designed to rebuild the network topology within a specified extent of a utility network. This tool is particularly useful for addressing errors that are identified during a validate network topology or trace operation. It is typically used when network analysis does not yield expected results due to inconsistencies in the network topology. By focusing on a specific extent rather than the entire network, it allows for targeted corrections, which can be more efficient and less resource-intensive. This tool is essential in maintaining the integrity of the network topology, ensuring that dirty areas are cleaned and that the network reflects the actual data on the map. Use cases include scenarios where network validation fails or when tracing operations produce unexpected results.
+
+**Parameters:**
+- **Input Utility Network**: The utility network for which the topology is to be rebuilt. **Type:** Utility Network.
+- **Extent**: The geographic extent within which the network topology will be rebuilt. **Type:** Extent.
+
+**Derived Output:**
+- **Rebuilt Network Topology**: The updated network topology for the specified extent. **Type:** Network Topology.
+**Toolset:** Administration Toolset
+
+**Tool:** Import Subnetwork Controllers
+
+**Description:**
+The "Import Subnetwork Controllers" tool is used to import subnetwork controllers into a utility network from a CSV file. This tool is essential for managing subnetworks within a utility network, which are topological subparts within a tier where all connected features are defined by the same subnetwork controllers. Typical use cases include updating the utility network with new subnetwork controllers or modifying existing ones to reflect changes in the network infrastructure. For example, in a water distribution network, this tool can be used to import new valve controllers that define different pressure zones.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network from a single-user or enterprise deployment where the subnetwork controllers will be imported. **Type:** Utility Network.
+- **Input File**: Specifies the name and location of the CSV file containing the subnetwork controllers. The CSV must be formatted correctly and include all required columns. **Type:** File.
+
+**Derived Output:**
+- **Subnetworks Table**: The imported subnetwork controllers are written to the subnetworks table and marked as dirty. **Type:** Table.
+**Toolset:** Administration Toolset
+
+**Tool:** Set Edge Connectivity
+
+**Description:**
+The Set Edge Connectivity tool in ArcGIS Pro is designed to manage how line features connect within a utility network. It allows users to define the connectivity policy for edge features, which can be either endpoint connectivity or midspan connectivity. This tool is crucial for controlling the editor snapping environment behavior, ensuring that features connect appropriately at specified locations. Typical use cases include setting up utility networks where precise connectivity rules are necessary, such as in electrical or water distribution systems. For example, in a water distribution network, you might use this tool to ensure that pipes connect only at endpoints to prevent leaks or misalignments.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network to which the edge connectivity settings will be applied. Type: Utility Network.
+- **Domain Network**: The domain network within the utility network where the edge connectivity will be set. Type: Domain Network.
+- **Input Table**: The feature class or table containing the edge features. Type: Feature Class/Table.
+- **Asset Group**: The asset group within the domain network for which the edge connectivity is being set. Type: Asset Group.
+- **Asset Type**: The specific asset type within the asset group for which the edge connectivity is being set. Type: Asset Type.
+- **Edge Connectivity**: Defines the type of connectivity (e.g., Any vertex, End vertex) that will be used. Type: String.
+
+**Derived Output:**
+- No specific derived outputs are mentioned in the available information.
+**Toolset:** Administration Toolset
+
+**Tool:** Add Network Attribute
+
+**Description:**
+The "Add Network Attribute" tool is used to add a network attribute to a utility network. Network attributes are essential for managing and analyzing utility networks as they are associated with attributes on feature classes and object tables within the network. These attributes are derived from the network feature's attributes and are cached inside the network topology to enhance performance during trace operations or subnetwork management tasks. Typical use cases include defining attributes that influence network analysis, such as flow direction, cost, or capacity, which can be critical in spatial analysis and GIS workflows. For example, a utility company might use network attributes to model the flow of electricity through a grid or to calculate the cost of water distribution across a network.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network to which the network attribute will be added. Type: Utility Network.
+- **Attribute Name**: The name of the network attribute to be added. Type: String.
+- **Attribute Type**: The data type of the network attribute, which determines the options available for defining the attribute. Options include Short (small integer), Long (large integer), Double (double precision), and Date. Type: Data Type.
+- **Nullable**: Option to allow null values for the network attribute. Type: Boolean.
+- **In Line**: Optionally store the network attribute internally in the network topology. Type: Boolean.
+- **Substitution**: Option to define a network attribute to substitute, available only when "In Line" is not checked. Type: Boolean.
+- **Apportionable**: Specifies if the network attribute will be apportioned across multiple edges belonging to the same feature. This behavior is supported only with double network attributes. Type: Boolean.
+
+**Derived Output:**
+- **Network Attribute**: The newly created network attribute that can be assigned to fields in a network feature class using the Set Network Attribute tool. Type: Network Attribute.
+Toolset: Administration Toolset
+
+Tool: Set Network Attribute
+
+Description:
+The **Set Network Attribute** tool assigns a network attribute to a feature class or table at the asset type level within a utility network. This tool is commonly used to assign specific network attributes to features or tables to facilitate tracing operations. For example, in a utility network, you might use this tool to assign a network attribute representing the capacity of a pipeline. This attribute can then be utilized in network analysis to determine resource flow through the network.
+
+Parameters:
+- **Input Utility Network**: The utility network to which the network attribute will be assigned. Type: *Database Connection*.
+- **Network Attribute**: The network attribute to assign to a feature class or table. Type: *Network Attribute*.
+- **Domain Network**: The domain network to which the feature class belongs. Type: *Domain Network*.
+- **Input Feature Class**: The feature class or table to which the network attribute will be assigned. Type: *Feature Class*.
+
+Derived Output:
+- **Output Network Attribute**: The network attribute assigned to the specified field on the network class. Type: *Network Attribute*.
+**Toolset:** Administration Toolset
+
+**Tool:** Add Network Category
+
+**Description:**
+A network category is a tag used to represent a characteristic of an asset in your network. They are created and assigned to network features for specific asset group and asset type combinations. Every utility network model includes a set of system-provided network categories that incorporate semantics in the utility network for subnetwork management, circuit management, and tracing operations. These system-provided network categories cannot be deleted from the utility network; you can decide whether you want to assign them to assets in your network. You can add additional user-defined network categories (for example, protective) to a utility network and assign them to network features at the asset group and asset type levels. User-defined network categories are created using the Add Network Category tool. Use the Set Network Category tool to assign a user-defined or system-provided category to a network feature at the asset group and asset type levels. All features or objects belonging to that asset type will have the assigned network category. The system-provided network categories added to your utility network differ depending on whether you are using a traditional or telecom domain network, and are used by various tools to configure which features are considered, including Update Subnetwork, Export Subnetwork, and more.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network where the new category will be added. **Type:** Utility Network.
+- **Category Name**: Specifies a name for the new category. **Type:** String.
+
+**Derived Output:**
+- **New Network Category**: The newly created network category added to the specified utility network. **Type:** Network Category.
+**Toolset:** Administration Toolset
+
+**Tool:** Disable Network Topology
+
+**Description:**
+The "Disable Network Topology" tool is used to disable the network topology for an existing utility network. This action is essential for performing administrative tasks like managing network rules, creating tiers, or modifying terminal configurations. It is also recommended to disable the network topology when importing large amounts of data to enhance performance. While the network topology is disabled, edits are not tracked by dirty areas, and a single dirty area covering the network is created. Once the network topology is re-enabled, all outstanding edits are validated. This tool is crucial for maintaining the integrity and performance of the utility network during significant configuration changes or data loads.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network for which the topology will be disabled. **Type:** Database connection or service.
+
+**Derived Output:**
+- **Dirty Area**: A single dirty area covering the extent of the utility network is created when the topology is disabled. **Type:** Spatial reference extent.
+No information available.
+Toolset: Administration Toolset
+
+Tool: Add Tier
+
+Description: Tiers are used to organize subnetworks into groups within a domain network. A domain network consists of one or more tiers forming either a hierarchy of tiers or partitioned groups of tiers. The Add Tier tool is used to define a tier within a domain network. To define a tier, the network topology must be disabled, and the name of the tier must be unique within the domain network. The tool creates a subnetwork name field with a nonnullable property to the underlying network feature classes and tables. An important requirement is that the network feature classes and tables must be empty before adding a tier. Tiers play a crucial role in structuring subnetworks and defining subnetwork relationships within a utility network.
+
+Parameters:
+- Input Utility Network: Specifies the utility network to which the tier will be added. Type: Utility Network.
+- Domain Network: Specifies the domain network where the tier will be created. Type: Domain Network.
+- Tier Group Name: Required for hierarchical domain networks, references an existing tier group at the domain network level. Type: String.
+- Name: Specifies a unique name for the tier within the utility network. The name should not exceed 64 characters and must not contain certain special characters. Type: String.
+
+Derived Output:
+- No derived outputs generated by the Add Tier tool.
+Toolset: Administration Toolset
+
+Tool: Add Rule
+
+Description: The Add Rule tool adds a network rule to a utility network. It is part of the Administration toolset, which contains tools for designing and administering utility networks. This tool is essential for establishing a rule base for the utility network before enabling the network topology. For example, you can use this tool to create multiple rules for different asset types and terminals within the utility network.
+
+Parameters:
+- Input Utility Network: Specifies the utility network receiving the rules. Type: Utility Network
+- Rule Type: Specifies the type of rule to import. Choose All to import all rule types from the CSV file. Type: String
+- Input File: Specifies the name and location of the rules in the CSV file format. Type: File
+
+Derived Output:
+- No derived outputs available.
+**Toolset:** Administration Toolset
+
+**Tool:** Set Network Category
+
+**Description:**
+The "Set Network Category" tool is used to assign a network category to a feature class or table at the asset type level within a utility network. Network categories are tags that represent characteristics of assets in the network, crucial for operations like tracing and subnetwork management. This tool allows users to assign or remove network categories from specific asset types, essential for configuring asset management and analysis within the network. For example, in a spatial analysis workflow, this tool can categorize assets for specific tracing operations, ensuring only relevant features are considered during analysis.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network where the network category will be set. **Type:** Utility Network.
+- **Domain Network**: Specifies the domain network within the utility network. **Type:** Domain Network.
+- **Input Table**: Specifies the feature class or table to which the network category will be assigned. **Type:** Feature Class or Table.
+- **Asset Group**: Specifies the asset group for the assignment. **Type:** Asset Group.
+- **Asset Type**: Specifies the asset type for the assignment. **Type:** Asset Type.
+- **Categories**: Specifies the network categories to assign. **Type:** Network Category.
+
+**Derived Output:**
+- No specific derived outputs are mentioned for this tool.
+Toolset: Administration Toolset
+
+Tool: Repair Network Topology
+
+Description: The Repair Network Topology tool is used to review and perform repairs for consistency of a network topology and create an output log file with the issues discovered and repaired. It helps in identifying and fixing inconsistencies in the network topology that impact the ability to validate. For example, it can be used to address errors identified during a validate network topology or trace operation, ensuring the network topology remains accurate and reliable for spatial analysis and GIS workflows.
+
+Parameters:
+- Input Utility Network: Specifies the utility network to be repaired. Type: Utility Network
+- Output Log File: Specifies the location to save the output log file containing the discovered and repaired issues. Type: File
+
+Derived Output:
+- Repaired Network Topology: Contains the repaired network topology data after running the tool. Type: Utility Network
+**Toolset:** Administration Toolset
+
+**Tool:** Set Terminal Configuration
+
+**Description:**
+The "Set Terminal Configuration" tool assigns a terminal configuration to an asset type within a utility network. This tool is crucial for defining how devices or junctions within the network will connect and interact with each other. Terminals represent logical connection points on a device or junction object, establishing paths through which commodities can travel within the network. It is commonly used to enforce specific connectivity rules, such as defining start and endpoints for subnetwork traces or establishing valid paths within a feature. For example, in a water distribution network, terminals can control the flow direction of water through valves or pumps.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network to which the terminal configuration will be applied. **Type:** Utility Network.
+- **Domain Network**: Specifies the domain network within the utility network. **Type:** Domain Network.
+- **Input Table**: Specifies the feature class or table to which the terminal configuration will be assigned. **Type:** Feature Class/Table.
+- **Asset Group**: Specifies the asset group within the feature class or table. **Type:** Asset Group.
+- **Asset Type**: Specifies the asset type within the asset group. **Type:** Asset Type.
+- **Terminal Configuration**: Specifies the terminal configuration to assign to the asset type. **Type:** Terminal Configuration.
+
+**Derived Output:**
+- **Terminal Configuration Assignment**: A terminal configuration is added to an asset type in the device feature class or junction object table. **Type:** Terminal Configuration Assignment.
+No information available.
+Toolset: Administration Toolset
+
+Tool: Import Rules
+
+Description: Import Rules tool allows users to import network rules from a CSV file into a utility network. This tool is essential for adding multiple rules to the utility network by utilizing the existing schema for network feature classes or tables. For example, users can select "All" for asset type and terminal parameters when using the Add Rule tool to create new rules. It is recommended to use a text editor for editing rule CSV files as Excel may apply undesired formatting. After importing rules, enabling the network topology is necessary to validate features against the rules.
+
+Parameters:
+- Input Utility Network: Specifies the utility network receiving the rules. Type: Utility Network
+- Rule Type: Specifies the type of rule to import. Choose "All" to import all rule types from the CSV file. Type: String
+- Input File: Specifies the name and location of the rules in the CSV file. Type: File
+
+Derived Output:
+No derived outputs available.
+**Toolset:** Administration Toolset
+
+**Tool:** Delete Network Category
+
+**Description:**
+A network category is a tag used to represent a characteristic of an asset in your network. The "Delete Network Category" tool is used to remove a network category from a utility network. This tool is essential when a network category is no longer needed or needs to be redefined. Before deleting a network category, ensure it is not assigned to any asset types. This tool helps in maintaining the accuracy and relevance of network data by allowing the removal of unnecessary or outdated categories.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network from which the category will be deleted. **Type:** Utility Network.
+- **Category Name**: The name of the network category to be deleted. **Type:** String.
+
+**Derived Output:**
+- No derived outputs are specified for this tool.
+**Toolset:** Turn Feature Class Toolset
+
+**Tool:** Turn Table To Turn Feature Class
+
+**Description:**
+The "Turn Table To Turn Feature Class" tool converts an ArcView turn table or an ArcInfo Workstation coverage turn table into an ArcGIS turn feature class. This conversion is crucial for integrating turn data into a network dataset, ensuring accurate network analysis and routing. Use cases include updating transportation networks with turn restrictions or modeling complex intersections in urban planning. For instance, a city planner might utilize this tool to incorporate new traffic regulations into a city's GIS database, enabling routing algorithms to consider these changes.
+
+**Parameters:**
+- **Input Turn Table:** The .dbf file or INFO turn table used to create the new turn feature class. **Type:** Table View.
+- **Reference Line Features:** The line feature class referenced by the input turn table. This feature class must be a network dataset source. **Type:** Feature Class.
+- **Output Turn Feature Class Name:** The name of the new turn feature class to be created. **Type:** String.
+- **Reference Nodes Table (Optional):** The nodes.dbf table in the .nws folder from the original ArcView GIS network where the input turn table was used. This parameter is disregarded if the input turn table is an INFO table. **Type:** dBASE Table.
+- **Maximum Edges (Optional):** The maximum number of edges per turn in the new turn feature class, default is 5, maximum is 50. **Type:** Long.
+- **Configuration Keyword (Optional):** Specifies the configuration keyword determining the storage parameters of the output turn feature class. **Type:** String.
+
+**Derived Output:**
+- **Output Turn Feature Class:** The resulting turn feature class created from the input turn table. **Type:** Feature Class.
+Toolset: Turn Feature Class Toolset
+
+Tool: Increase Maximum Edges
+
+Description: The Increase Maximum Edges tool is used to increase the maximum number of edges per turn in a turn feature class. This tool is essential when there is a need to adjust the maximum number of edges allowed in a turn feature class. For example, if a network dataset requires more than the default maximum of 5 edges per turn, this tool can be used to increase the limit up to a maximum of 50 edges per turn.
+
+Parameters:
+- Input Maximum Edges: Specifies the new maximum number of edges per turn. The default value is 5, and the maximum allowed value is 50. Type: Long
+- Configuration Keyword (Optional): Specifies the configuration keyword for storage parameters of the output turn feature class, used in workgroup or enterprise geodatabases. Type: String
+
+Derived Output:
+- Output Turn Feature Class: The newly created turn feature class with the adjusted maximum number of edges. Type: Feature Class
+Toolset: Turn Feature Class Toolset
+
+Tool: Populate Alternate ID Fields
+
+Description: The Populate Alternate ID Fields tool creates and populates additional fields on turn feature classes that reference edges in the network by alternate IDs. These alternate IDs help maintain the integrity of turn features if the edge sources are edited in a way that changes their ObjectID values. This tool is essential for ensuring the accuracy and consistency of turn data within a network dataset.
+
+Parameters:
+- Input Turn Feature Class: Specifies the turn feature class to which the alternate ID fields will be added and populated. Type: Feature Class.
+- Alternate ID Field Name: Specifies the name of the field that will store the alternate IDs referencing the edges in the network. Type: Field.
+
+Derived Output:
+- Updated Turn Feature Class: Represents the turn feature class with the additional fields populated by alternate IDs, ensuring data integrity. Type: Feature Class.
+Toolset: Turn Feature Class Toolset
+
+Tool: Create Turn Feature Class
+
+Description: The Create Turn Feature Class tool creates a turn feature class to store turn features that model turning movements in a network dataset. It is commonly used to represent turning movements in spatial analysis. For example, adding a field to represent the average time to complete turns can be achieved using this tool. When a turn feature is snapped to a feature in the same network dataset, specific fields in the turn feature class are automatically populated. It is essential to build the network after editing turn features to incorporate changes into the network dataset.
+
+Parameters:
+- Input Features: The features used to create the turn feature class. Type: Feature Layer.
+- Output Feature Class: The resulting turn feature class. Type: Feature Class.
+
+Derived Output:
+- Output Feature Class: The newly created turn feature class. Type: Feature Class.
+Toolset: Turn Feature Class Toolset
+
+Tool: Update By Alternate ID Fields
+
+Description: Updates all the edge references in turn feature classes using an alternate ID field to identify the corresponding edge features for each turn. This tool should be used after making edits to the edge source feature classes that alter ObjectID values.
+
+Parameters:
+- Input Table: The table containing the updated edge references. Type: Table.
+- Target Features: The turn feature class to be updated. Type: Feature Class.
+- Location Type: The type of location information in the input table. Type: String.
+- Address Locator: The geocoding service used to locate addresses. Type: Address Locator.
+- Invalid Records Table: A table to store invalid records. Type: Table.
+- Update Existing Target Features: Checkbox to update existing features. Type: Boolean.
+- Input ID Field: The field in the input table containing unique IDs. Type: Field.
+- Target ID Field: The field in the target features containing unique IDs. Type: Field.
+- Input Table Last Modified Date Field: The field in the input table with modification dates. Type: Field.
+- Target Features Last Modified Date Field: The field in the target features with modification dates. Type: Field.
+- Field Matching Type: Method to reconcile field differences. Type: String.
+
+Derived Output:
+- Updated Table: The table with updated edge references. Type: Table.
+Toolset: Turn Feature Class Toolset
+
+Tool: Update By Geometry
+
+Description: Update By Geometry tool updates all the edge references in turn feature classes using the geometry of the turn features. This tool is useful when the IDs listed for the turn can no longer find the edges participating in the turn due to edits to the underlying edges. It helps maintain the integrity of turn features after edits to the edge source feature classes that alter ObjectID values. 
+
+Parameters:
+- Input Turn Feature Class: Specifies the turn feature class to be updated. Type: Feature Layer.
+- Update Field: Specifies the field in the turn feature class that will be updated. Type: Field.
+- Update Type: Specifies how the update will be performed. Type: String.
+
+Derived Output:
+- Updated Turn Feature Class: The updated turn feature class with edge references adjusted based on the geometry of the turn features. Type: Feature Layer.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Import Trace Configurations
+
+**Description:** The Import Trace Configurations tool allows you to import named trace configurations from a .json file to a trace network. This tool is essential for sharing named trace configurations across multiple trace networks, ensuring consistency in tracing operations. It facilitates the transfer of complex trace configurations, streamlines network management, and enhances collaboration by enabling different teams to work with the same configurations. 
+
+**Parameters:**
+- **Input Trace Network:** Specifies the trace network where configurations will be imported. **Type:** Trace Network Service.
+- **Input File (.json):** The .json file containing the named trace configurations to be imported. **Type:** File.
+
+**Derived Output:**
+- **Imported Trace Configurations:** The named trace configurations successfully imported into the specified network. **Type:** Configuration Object.
+
+This tool requires the input trace network to be from a trace network service. When working with an enterprise geodatabase, the input trace network must be from a database connection established as the database trace network owner, the portal trace network owner, or a portal account with the Administrator role. The creator value in the .json file is honored during import to maintain proper access and permissions in enterprise geodatabases.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Delete Trace Configuration
+
+**Description:**
+The Delete Trace Configuration tool is used to delete one or more named trace configurations from a utility network. This action is permanent and breaks any connections with web maps where the configuration is referenced. When network updates or changes require modifications to trace configurations, this tool is essential for managing and updating configurations. For example, if a named trace configuration is no longer needed or needs to be updated to reflect new network conditions, this tool can be used to delete the existing configuration. It is important to note that deleting a named trace configuration is a permanent action and will break any connections with web maps where it is referenced, necessitating the recreation and sharing of the configuration through new web maps.
+
+**Parameters:**
+- **Input Utility Network**: Specifies the utility network from which the named trace configurations will be deleted. **Type:** Utility Network.
+- **Trace Configuration**: Selects one or more named trace configurations to be deleted from the list provided. **Type:** String.
+
+**Derived Output:**
+No derived outputs are specified for this tool.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Export Trace Configurations
+
+**Description:**
+The Export Trace Configurations tool allows you to export one or more named trace configurations from a trace network to a JSON file for sharing across multiple trace networks. This functionality is crucial for sharing configurations across different networks, facilitating consistency and efficiency in network management. Typical use cases include:
+- **Sharing Configurations:** Distribute trace configurations across different departments or teams within an organization.
+- **Backup and Restore:** Maintain backups of trace configurations for disaster recovery or auditing purposes.
+- **Cross-Network Consistency:** Ensure consistent network analyses across different network environments.
+
+**Parameters:**
+- **Input Trace Network:** Specify the trace network from which trace configurations will be exported. Type: Network Dataset.
+- **Trace Configuration:** Select named trace configurations to export. Type: String (List).
+
+**Derived Output:**
+- **Output JSON File:** The exported trace configurations are saved to a JSON file. Type: File (JSON).
+
+This tool is essential for organizations aiming to streamline network management processes by utilizing reusable and shareable trace configurations.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Add Trace Configuration
+
+**Description:**
+The "Add Trace Configuration" tool creates a named trace configuration within a trace network. This tool is crucial for managing complex tracing operations in GIS workflows, especially in utility and trace networks. Named trace configurations enable users to store and reuse complex trace settings, ensuring consistent and efficient tracing operations across an organization. These configurations can be utilized in ArcGIS Pro and shared through web maps, making them accessible for web and field applications. Use cases include utility management for tracking resources like water or electricity flow and network analysis for understanding connectivity and traversability.
+
+**Parameters:**
+- **Input Trace Network**: Specifies the trace network where the named trace configuration will be added. **Type:** Trace Network.
+- **Trace Configuration Name**: The name assigned to the new trace configuration. **Type:** String.
+- **Description**: An optional description for the trace configuration. **Type:** String.
+- **Tags**: Optional user-defined tags to help identify the trace configuration. **Type:** String.
+
+**Derived Output:**
+- **Updated Trace Network**: The trace network with the newly added named trace configuration. **Type:** Trace Network.
+Toolset: Analysis Toolset
+
+Tool: Make OD Cost Matrix Analysis Layer
+
+Description: The Make OD Cost Matrix Analysis Layer tool is used to find and measure the least-cost paths along the network from multiple origins to multiple destinations. It calculates the best path on the street network for each origin-destination pair, storing travel times and distances as attributes of the output lines. For example, this tool can be used to create an OD cost matrix showing travel time from patients to hospitals, helping identify patients with poor access to healthcare facilities.
+
+Parameters:
+- Origins: Input locations functioning as starting points. Type: Feature Set.
+- Destinations: Input locations functioning as ending points. Type: Feature Set.
+- Lines: Connections between origins and destinations with travel time or distance. Type: Feature Set.
+
+Derived Output:
+- OD Cost Matrix Analysis Layer: Stores all inputs, parameters, and results of the OD cost matrix analysis. Type: Network Analysis Layer.
+**Toolset:** Analysis Toolset
+
+**Tool:** Calculate Locations
+
+**Description:**
+The Calculate Locations tool is designed to locate input features on a network and add fields to these features that describe their network locations. This tool is particularly useful for precalculating network locations of inputs that will be used in a Network Analyst workflow, thereby improving the performance of the analysis at solve time. For example, if you have a set of delivery points that you plan to use repeatedly in different routing analyses, you can use this tool to precalculate their network locations, saving processing time in future analyses. However, it is important to note that this tool cannot use a network analysis service URL as the input network, and it is not possible to precalculate network locations for a service directly, such as the ArcGIS Online service.
+
+**Parameters:**
+- **Input Features**: The features to be located on the network. Type: Feature Class.
+- **Network Dataset**: The network dataset to use for calculating locations. Type: Network Dataset.
+- **Search Tolerance**: The distance within which to search for network elements. Type: Linear Unit.
+- **Search Criteria**: The criteria used to search for network elements. Type: String.
+- **Snap to Network**: Determines whether to snap input features to the network. Type: Boolean.
+
+**Derived Output:**
+- **Output Feature Class**: The input features with added network location fields. Type: Feature Class.
+Toolset: Analysis Toolset
+
+Tool: Add Field To Analysis Layer
+
+Description: Adds a field to a sublayer of a network analysis layer. This tool is used to add network analysis objects to specific sublayers such as stops and barriers within the network analysis layer. When the network analysis layer references a network dataset as its network data source, the tool calculates the network locations of the inputs, unless precalculated network location fields are mapped from the inputs.
+
+Parameters:
+- field_type: Specifies the type of field to be added. Type: String.
+- field_name: Specifies the name of the field to be added. Type: String.
+
+Derived Output:
+- output_layer: The updated network analysis layer with the added field. Type: Network Analysis Layer.
+Toolset: Analysis Toolset
+
+Tool: Make Route Analysis Layer
+
+Description: Makes a route network analysis layer and sets its analysis properties. A route network analysis layer is useful for determining the best route between a set of network locations based on a specified network cost. The layer can be created using a local network dataset or a routing service hosted online or in a portal. This tool is valuable for optimizing routes for various purposes, such as delivery services, transportation planning, or field service management.
+
+Parameters:
+- ignore_invalid_locations: Specifies whether to ignore invalid locations during analysis. Type: Boolean.
+- generate_directions_on_solve: Indicates whether to generate directions when solving the analysis. Type: Boolean.
+- time_zone_for_time_fields: Specifies the time zone for time fields used in the analysis. Type: String.
+- out_network_analysis_layer: The output network analysis layer file that stores the analysis settings and results. Type: File.
+
+Derived Output:
+- Output Route Data: Contains the route data in a format suitable for sharing as route layers. Type: File.
+- Output Network Analysis Layer: Stores the analysis settings and inputs used for the analysis. Type: File.
+Toolset: Analysis Toolset
+
+Tool: Make Last Mile Delivery Analysis Layer
+
+Description: Creates a last mile delivery network analysis layer and sets its analysis properties. This tool is useful for optimizing routes for last mile delivery services. It can be used to plan efficient routes for delivering goods or services to customers in urban or suburban areas. For example, a courier company can use this tool to determine the most efficient routes for delivering packages to various locations within a city.
+
+Parameters:
+- Input Features: Specifies the features to be used for the analysis. Type: Feature Layer
+- Time Window: Defines the time window within which deliveries must be made. Type: Time
+- Vehicle Capacity: Sets the maximum capacity of each delivery vehicle. Type: Integer
+
+Derived Output:
+- Optimized Routes: Provides the optimized routes for last mile delivery based on the input features, time window, and vehicle capacity. Type: Feature Layer
+**Toolset:** Analysis Toolset
+
+**Tool:** Add Fleet Routing Routes
+
+**Description:**
+The "Add Fleet Routing Routes" tool is designed to create routes within a vehicle routing problem (VRP) layer, commonly used in logistics and transportation analysis. This tool is particularly useful for scenarios such as last-mile delivery and waste collection. It appends rows to the Routes sublayer of a VRP analysis layer, allowing users to add routes with specific settings and create unique name fields for each route. Typical use cases include optimizing delivery routes for a fleet of vehicles, planning efficient waste collection paths, and managing transportation logistics in urban areas.
+
+**Parameters:**
+- **Routes Sublayer**: The sublayer within the VRP analysis layer where routes will be added. Type: Feature Layer.
+- **Route Name**: A unique name for each route being added. Type: String.
+- **Start Depot**: The starting location for the route. Type: Feature Layer.
+- **End Depot**: The ending location for the route. Type: Feature Layer.
+- **Route Settings**: Specific settings for the route, such as time windows and vehicle capacities. Type: String.
+
+**Derived Output:**
+- **Output Routes**: Provides access to the resulting routes. Type: Feature Set.
+- **Output Route Edges**: Access to the individual network edges along which the routes travel. Type: Feature Set.
+- **Output Directions**: Turn-by-turn directions for each resulting route. Type: Feature Set.
+- **Output Stops**: Attributes of the stops visited by the routes, including those that cannot be reached. Type: Feature Set.
+Toolset: Analysis Toolset
+
+Tool: Add Locations
+
+Description: Adds input features or records to a network analysis layer. The inputs are added to specific sublayers such as stops and barriers. When the network analysis layer references a network dataset as its network data source, the tool calculates the network locations of the inputs, unless precalculated network location fields are mapped from the inputs. This tool is commonly used to precalculate network location fields in the attribute table of the sublayer. By default, the network analysis layer's travel mode and existing barriers are considered when locating inputs. Inputs are not located on edges and junctions that are restricted by the travel mode or by existing barriers. It is recommended to set the travel mode and load barriers before loading other analysis inputs with the Add Locations tool. The tool adds the inputs to the analysis layer without calculating location fields. At solve time, the inputs are sent to the service along with the network analysis layer's analysis and locate settings. The service calculates the location fields, performs the analysis, and returns the result.
+
+Parameters:
+- Input Text or File Path: The text that will be scanned for locations (coordinates or custom locations), dates, and custom attributes; or text defining a file path, whose contents will be scanned for locations. Data Type: String
+- Output Feature Class: The feature class containing point features that represent the locations that were found. Data Type: Feature Class
+- Input Template (Optional): The template file (*.lxttmpl) that determines the setting to use for each tool parameter. Data Type: String
+
+Derived Output:
+- Feature Class: The feature class containing point features that represent the locations that were found. Data Type: Feature Class
+Toolset: Analysis Toolset
+
+Tool: Add Fleet Routing Breaks
+
+Description: The Add Fleet Routing Breaks tool creates breaks in a Vehicle Routing Problem (VRP) layer. At least one break must be specified when running this tool. It is used to specify breaks in routes for vehicles in fleet routing scenarios.
+
+Parameters:
+- Breaks: Specifies the breaks to be added to the routes. Type: Feature Set.
+- Depot Service Time: Specifies the service time at the depot. Type: Double.
+- Waste Capacities: Specifies the waste capacities for the vehicles. Type: Double.
+- Start Time: Specifies the start time for the routes. Type: Date.
+- Route Time Distance Constraints: Specifies constraints related to route time and distance. Type: Feature Set.
+
+Derived Output:
+- Updated VRP Layer: Contains the VRP layer with the added breaks. Type: VRP Layer.
+Toolset: Analysis Toolset
+
+Tool: Delete Network Analysis Layer
+
+Description: The Delete Network Analysis Layer tool is valuable in models where a network analysis layer is created as an intermediate step. If such a model is run repeatedly, unwanted sublayer data may accumulate in the project geodatabase. This tool cleans up the network analysis layer's analysis data in the model workflow.
+
+Parameters:
+- Output Feature Class: Connects to the output feature class that needs to be cleaned up. Type: Feature Class.
+
+Derived Output:
+- None.
+**Toolset:** Analysis Toolset
+
+**Tool:** Copy Network Analysis Layer
+
+**Description:**
+The Copy Network Analysis Layer tool duplicates an existing network analysis layer in ArcGIS Pro. It is useful for experimenting with different analysis settings or input data without modifying the original layer. Users can create a copy to adjust settings or inputs for comparison with the original layer. This tool is beneficial for testing various network analysis scenarios like route optimization, service area analysis, or determining the closest facility.
+
+**Parameters:**
+- **Input Network Analysis Layer**: The network analysis layer to be duplicated. Type: Network Analysis Layer.
+- **Output Network Analysis Layer**: The name of the new network analysis layer to be created. Type: Network Analysis Layer.
+
+**Derived Output:**
+- **Output Network Analysis Layer**: The duplicated network analysis layer with the same settings and data source as the original. Type: Network Analysis Layer.
+Toolset: Analysis Toolset
+
+Tool: Make Closest Facility Analysis Layer
+
+Description: A closest facility analysis layer is useful in determining the closest facility or facilities to an incident based on a specified network cost. This tool has replaced the deprecated Make Closest Facility Layer tool. It helps in optimizing routes using a fleet of vehicles to find the best route or closest facility. For example, it can be used to find the closest hospital to an accident, the closest police cars to a crime scene, or the closest store to a customer's address.
+
+Parameters:
+- Facilities: Input locations used as starting or ending points in closest facility analyses. Type: Feature Set.
+- Incidents: Input locations used as starting or ending points in closest facility analyses. Type: Feature Set.
+- Routes: The resulting route or routes of the analysis. Type: Feature Set.
+- Direction Points: Provides turn-by-turn directions for the routes calculated in the analysis. Type: File Output.
+
+Derived Output:
+- Closest Facilities: Provides access to the output facilities from a closest facility analysis. Type: Feature Set.
+- Network Analysis Layer: The network analysis layer with configured properties for further analysis or debugging. Type: Feature Set.
+- Route Data: A .zip file containing all information for a particular route. Type: File Output.
+- Incidents: Provides access to the locations used as starting or ending points in a closest facility analysis. Type: Feature Set.
+- Facilities: The facilities used in the analysis. Type: Feature Set.
+- Result File: A .zip file containing the analysis results. Type: File Output.
+- Network Analysis Layer Package: A layer package with the data and settings used in the analysis. Type: File Output.
+Toolset: **Analysis Toolset**
+
+Tool: **Solve**
+
+Description: The **Solve** tool in the **Analysis Toolset** is used to solve the network analysis layer problem based on its network locations and properties. It discovers the best path on the street network for each origin-destination pair, storing travel times and distances as attributes of the output lines. The tool is essential for tasks like finding the best route across a city, identifying the closest emergency facility, creating service areas around locations, or optimizing routes for a fleet of vehicles.
+
+Parameters:
+- Orders: Specifies one or more locations that the routes will visit. Data Type: Input/Output
+- Depots: Represents a location where a vehicle departs and returns. Data Type: Input/Output
+- Routes: Defines the routes specifying vehicle and driver characteristics. Data Type: Input/Output
+- Zones: Represents a work territory for a route. Data Type: Input
+- Depot Visits: Records visits to depots when a route starts or ends. Data Type: Output
+- Order Specialties and Route Specialties: Lists specialties required by orders and supported by routes. Data Type: Input
+
+Derived Output:
+- solve_succeeded: Indicates if the analysis was successful. Type: Object
+- output_result_file: Provides access to the results as a .zip file. Type: Output
+Toolset: Analysis Toolset
+
+Tool: Make Waste Collection Analysis Layer
+
+Description:
+The "Make Waste Collection Analysis Layer" tool is designed to create a waste collection network analysis layer and configure its analysis properties. This tool is particularly useful for optimizing routes for a fleet of vehicles tasked with collecting municipal waste. By utilizing a network dataset, the tool helps in planning efficient waste collection routes, thereby reducing travel time and operational costs. Typical use cases include municipal waste management, where the tool can be used to determine the most efficient paths for waste collection trucks, ensuring timely and cost-effective waste disposal.
+
+Parameters:
+- Input Network Dataset: Specifies the network dataset used for waste collection analysis. Type: Network Dataset.
+- Travel Mode: Defines the mode of travel for the waste collection vehicles. Type: String.
+- Time Windows: Specifies the time windows for waste collection activities. Type: Time Window.
+
+Derived Output:
+- Waste Collection Routes: Outputs the optimized waste collection routes based on the analysis. Type: Feature Class.
+Toolset: Analysis Toolset
+
+Tool: Make Location-Allocation Analysis Layer
+
+Description: The Make Location-Allocation Analysis Layer tool is designed to create a location-allocation analysis layer, which helps in optimizing the selection of facilities to efficiently allocate demand. This tool is useful for answering questions like where to place facilities to minimize transportation costs or maximize market share. It offers seven problem types such as Minimize Weighted Impedance, Maximize Coverage, and Maximize Market Share, among others. For example, it can assist in determining the best locations for new stores based on existing sites or optimizing routes for a fleet of vehicles.
+
+Parameters:
+- Facilities: Input locations representing candidate, required, or competitor facilities. Type: Feature Set.
+- Demand Points: Locations representing people or things requiring services from facilities. Type: Feature Set.
+
+Derived Output:
+- Lines: Line features connecting demand points to allocated facilities. Type: Feature Class.
+Toolset: Analysis Toolset
+
+Tool: Share As Route Layers
+
+Description: With ArcGIS Pro 3.4, you can plan routes and share them as route layers. A route layer includes all the information for a particular route, such as stops and travel directions. Route layers can be used in various applications like ArcGIS Navigator for route guidance, Map Viewer Classic for customizing routes, or ArcGIS Pro for route analysis layer creation. Route layers are stored as items in ArcGIS Online or ArcGIS Enterprise portal. For example, to modify a planned route, you can use route layers to share the updated route.
+
+Parameters:
+- Save Route Data: Specifies whether to save and share route data. Type: Boolean.
+- Save Output Network Analysis Layer: Specifies whether to save the network analysis layer file. Type: Boolean.
+
+Derived Output:
+- Output Route Data: Contains the route data for sharing. Type: File.
+- Output Network Analysis Layer: Stores analysis settings and inputs. Type: File.
+Toolset: Network Analyst
+
+Tool: Copy Traversed Source Features
+
+Description: The Copy Traversed Source Features tool creates two feature classes and a table containing information about the edges, junctions, and turns traversed while solving a network analysis layer. It is essential for scenarios where detailed traversal information is needed for analysis.
+
+Parameters:
+- Input Network Analysis Layer: Specifies the network analysis layer to copy traversed features from. Type: Layer
+- Output Edges: The output feature class that contains information about the traversed edges. Type: Feature Class
+- Output Junctions: The output feature class that contains information about the traversed junctions. Type: Feature Class
+- Output Turns: The output table that contains information about the traversed turns. Type: Table
+
+Derived Output:
+- Output Edges: Contains information about the traversed edges. Type: Feature Class
+- Output Junctions: Contains information about the traversed junctions. Type: Feature Class
+- Output Turns: Contains information about the traversed turns. Type: Table
+**Toolset:** Analysis Toolset
+
+**Tool:** Directions
+
+**Description:**
+The Directions tool in ArcGIS Pro generates travel directions between specified input points based on a given travel mode. It is typically used in network-based analyses to provide turn-by-turn instructions for navigating a route. This tool is valuable for scenarios such as planning delivery routes, emergency response routing, or any situation requiring precise navigation instructions. For example, it can generate directions for a delivery truck to follow a specific route through a city or provide emergency services with the fastest route to an incident location.
+
+**Parameters:**
+- **Input Network Analysis Layer**: The network analysis layer for which directions will be generated. Directions can be generated only for route, closest facility, and vehicle routing problem network analysis layers. Type: Network Analyst Layer.
+- **Output File Type**: Specifies the format for the output directions file. Options include XML, Text, and HTML. Type: String.
+- **Output Directions File**: The full path to the directions file that will be written. Type: File.
+- **Travel Mode (Optional)**: The mode of transportation that will be modeled in the analysis. Type: String.
+- **Directions Language (Optional)**: The language in which driving directions will be generated. Type: String.
+- **Directions Distance Units (Optional)**: Specifies the units for travel distance in the driving directions. Options include Miles, Kilometers, Meters, Feet, Yards, and Nautical Miles. Type: String.
+- **Directions Style Name (Optional)**: Specifies the formatting style for the directions. Type: String.
+
+**Derived Output:**
+- **Directions Feature Class**: A line feature class representing turn-by-turn instructions to help drivers follow their assigned routes. Type: Feature Class.
+No information available.
+**Toolset:** Analysis Toolset
+
+**Tool:** Make Vehicle Routing Problem Analysis Layer
+
+**Description:**
+The "Make Vehicle Routing Problem Analysis Layer" tool creates a vehicle routing problem (VRP) network analysis layer, essential for optimizing routes for a fleet of vehicles. This layer is used in scenarios like delivery services, waste collection, or logistics operations requiring efficient route planning. Users can set analysis properties and utilize either a local network dataset or an online service. Once created, the VRP layer appears as a composite layer in the Contents window, containing multiple network analysis classes and tables storing inputs, parameters, and results for the VRP.
+
+**Parameters:**
+- **Network Dataset:** The network dataset for analysis. Type: Network Dataset.
+- **Orders:** Feature class with orders to be serviced. Type: Feature Layer.
+- **Depots:** Feature class with depots where vehicles start and end routes. Type: Feature Layer.
+- **Routes:** Feature class defining vehicle routes. Type: Feature Layer.
+- **Breaks:** Feature class specifying breaks for routes. Type: Feature Layer.
+- **Route Zones:** Feature class defining zones for routes. Type: Feature Layer.
+- **Depot Visits:** Feature class for depot visits. Type: Feature Layer.
+- **Point Barriers:** Feature class for point barriers. Type: Feature Layer.
+- **Line Barriers:** Feature class for line barriers. Type: Feature Layer.
+- **Polygon Barriers:** Feature class for polygon barriers. Type: Feature Layer.
+- **Route Specialties:** Table for route specialties. Type: Table.
+- **Order Specialties:** Table for order specialties. Type: Table.
+- **Order Pairs:** Table for order pairs. Type: Table.
+- **Route Renewals:** Table for route renewals. Type: Table.
+
+**Derived Output:**
+- **Vehicle Routing Problem Layer:** Composite layer with network analysis classes and tables. Type: Composite Layer.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Import Trace Configurations
+
+**Description:**
+The Import Trace Configurations tool allows you to import named trace configurations from a .json file to a trace network. This tool is essential for sharing named trace configurations across multiple trace networks, ensuring consistency and efficiency in network management. Typical use cases include:
+- **Network Management:** Standardizing tracing operations across different trace networks.
+- **Collaboration:** Sharing complex trace setups between various departments or organizations.
+- **Backup and Restore:** Restoring trace configurations from backups in case of data loss or corruption.
+
+**Parameters:**
+- **Input Trace Network:** Specify the trace network where the configurations will be imported. Type: Network Service.
+- **Input File (.json):** The .json file containing the named trace configurations to be imported. Type: File.
+
+**Derived Output:**
+- **Imported Trace Configurations:** The named trace configurations successfully imported into the specified network. Type: Configuration Object.
+
+This tool requires the input trace network to be from a trace network service. When working with an enterprise geodatabase, the input trace network must be from a trace network service, and the user must have appropriate permissions.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Delete Trace Configuration
+
+**Description:**
+The Delete Trace Configuration tool is designed to remove one or more named trace configurations from a trace network. This tool is essential for managing trace configurations, especially when updates or changes in the network necessitate the removal of outdated configurations. Typical use cases include scenarios where a trace configuration needs to be modified due to network updates or changing field conditions. By deleting the existing configuration, users can create and share new configurations that reflect the current state of the network. However, it is important to note that deleting a named trace configuration will permanently remove it from the trace network and break any connections with web maps where it is referenced. This action requires careful consideration, especially in enterprise environments where trace configurations are shared across multiple users and applications.
+
+**Parameters:**
+- **Input Trace Network**: Specifies the trace network from which the named trace configurations will be deleted. **Type:** Trace Network.
+- **Trace Configuration**: Selects one or more named trace configurations to be deleted from the list provided. **Type:** String.
+
+**Derived Output:**
+No derived outputs are specified for this tool.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Export Trace Configurations
+
+**Description:**
+The Export Trace Configurations tool allows you to export one or more named trace configurations from a trace network to a JSON file for sharing across multiple trace networks. This functionality is crucial for sharing configurations across different networks, ensuring consistency and efficiency in network management. Typical use cases include:
+- **Sharing Configurations:** Distribute trace configurations across various departments or teams within an organization.
+- **Backup and Restore:** Maintain backups of trace configurations for disaster recovery or version control.
+- **Cross-Network Consistency:** Ensure consistent trace operations across different networks by using the same configuration.
+
+**Parameters:**
+- **Input Trace Network:** Specify the trace network from which the trace configurations will be exported. **Type:** Network Dataset.
+- **Trace Configuration:** Select one or more named trace configurations to export. **Type:** String (List).
+
+**Derived Output:**
+- **Output JSON File:** The exported trace configurations are saved in a JSON file format, suitable for sharing or importing into other networks. **Type:** File (JSON).
+Toolset: Trace Configuration Toolset
+
+Tool: Add Trace Configuration
+
+Description: The Add Trace Configuration tool creates a named trace configuration in a trace network. This tool allows users to specify a trace network, provide a name and optional description for the named trace configuration, and add user tags to identify it. Named trace configurations created with this tool can be consumed in ArcGIS Pro using the Trace geoprocessing tool or through the Named Configurations tab in the Trace pane. These configurations are essential for storing and reusing complex traces in a trace network, simplifying the user experience associated with tracing.
+
+Parameters:
+- Input Trace Network: Specify a trace network. Type: Trace Network
+- Trace Configuration Name: Specify a name for the named trace configuration. Type: String
+- Description: Optionally, provide a description for the named trace configuration. Type: String
+- Tags: Optionally, provide user tags to identify the named trace configuration. Type: String
+
+Derived Output:
+- Updated Trace Network: The updated trace network after adding the named trace configuration. Type: Trace Network
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Import Trace Configurations
+
+**Description:**
+The Import Trace Configurations tool allows you to import named trace configurations from a JSON file to a utility network. This tool is particularly useful for sharing named trace configurations across multiple utility networks. Some typical use cases include:
+- **Sharing Configurations:** Distributing standardized trace configurations across different utility networks within an organization.
+- **Network Management:** Streamlining the process of updating or modifying network configurations by importing pre-defined settings.
+- **Collaboration:** Enhancing collaboration by enabling different teams to work with the same trace configurations, ensuring consistency in network analysis and operations.
+
+**Parameters:**
+- **Input Utility Network:** Specifies the utility network where the trace configurations will be imported. **Type:** Utility Network.
+- **Input File (.json):** The JSON file containing the named trace configurations to be imported. **Type:** File.
+
+**Derived Output:**
+- **Imported Trace Configurations:** The trace configurations that have been successfully imported into the utility network. **Type:** Trace Configuration.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Delete Trace Configuration
+
+**Description:**
+The Delete Trace Configuration tool is used to delete one or more named trace configurations from a trace network. This tool is crucial for managing trace configurations, especially when modifications are needed due to network updates or field condition changes. A common use case involves deleting a trace configuration to accommodate network updates or changing field conditions. When a trace configuration is deleted, any dependencies in web maps where the configuration was referenced are broken. This tool is essential for maintaining the integrity and relevance of trace configurations within a trace network.
+
+**Parameters:**
+- **Input Trace Network**: Specifies the trace network from which the named trace configurations will be deleted. **Type:** Trace Network.
+- **Trace Configuration**: Selects one or more named trace configurations to be deleted from the provided list. **Type:** String.
+
+**Derived Output:**
+- No derived outputs are specified for this tool.
+Toolset: Trace Configuration Toolset
+
+Tool: Export Trace Configurations
+
+Description: The Export Trace Configurations tool allows you to export one or more named trace configurations from a trace network to a .json file for sharing across multiple trace networks. This tool is used to share trace configurations and can be found in the Trace Configuration toolset of the Trace Network toolbox. An example of its use is exporting named trace configurations from a trace network to a .json file for sharing and reuse.
+
+Parameters:
+- Input Trace Network: The trace network containing the named trace configuration or configurations to export. Type: Utility Network; Utility Network Layer.
+- Trace Configuration: The named trace configuration or configurations to export. Type: String.
+- Output File (.json): The output .json file. Type: File.
+
+Derived Output:
+- No information available.
+**Toolset:** Trace Configuration Toolset
+
+**Tool:** Add Trace Configuration
+
+**Description:** The "Add Trace Configuration" tool creates a named trace configuration in a utility network. It is essential for managing complex tracing operations by allowing users to store and reuse trace configurations. Typical use cases include setting up configurations for tracing utility networks to analyze connectivity or traversability, which can be reused across different projects or shared within an organization. For example, a utility company might use this tool to create a trace configuration that identifies all connected water valves in a network, ensuring efficient maintenance operations.
+
+**Parameters:**
+- **Input Utility Network**: Specify the utility network where the trace configuration will be added. **Type:** Utility Network.
+- **Trace Configuration Name**: Provide a name for the new trace configuration. **Type:** String.
+- **Description**: Optionally, provide a description for the named trace configuration. **Type**: String.
+- **Tags**: Optionally, provide user tags to identify the named trace configuration. **Type:** String.
+
+**Derived Output:**
+- **Trace Configuration**: The newly created named trace configuration in the utility network. **Type:** Trace Configuration.

@@ -1,0 +1,49 @@
+name: refine_goal
+description: Use LLM to refine the keywords for literature search
+template: |
+    # Role and Objective
+    You are an advanced research assistant and expert in academic information retrieval, with deep knowledge in GIS and Remote Sensing domains. Your main job is to analyze research goals and translate them into highly effective search queries for the Semantic Scholar API.
+    
+    # Instructions
+    - Carefully read the user-provided research goal, which describes a specific scientific focus or research direction in GIS, Remote Sensing, or related fields.
+    - From the research goal, extract all major research aspects, methods, application areas, and subtopics. Think broadly about terminology: include commonly used English phrases, synonyms, abbreviations, and any relevant technical jargon that would maximize coverage in academic search engines.
+    - Construct a **single query string** suitable for the Semantic Scholar API `query` parameter. This string should combine all extracted key phrases and keywords, following these strict formatting rules:
+        1. Any phrase of two or more words should be wrapped in double quotation marks (`"..."`).
+        2. Single keywords or abbreviations do not need quotes.
+        3. Separate all items using the pipe (`|`) character to indicate a logical OR, unless two terms must both appear, in which case use the plus sign (`+`) for AND.
+        4. The query string should maximize recall for relevant papers, balancing between precision and coverage.
+        5. Only include terms that are clearly relevant—avoid vague or generic words.
+        6. If appropriate, include both the formal phrase and its common abbreviation or synonym (e.g., "large language model" and LLM).
+        7. Do not include explanations, formatting, bullet points, or any text other than the final query string.
+    - Ensure that the query string is clear, comprehensive, and can be directly pasted into the Semantic Scholar API as the value of the `query` field for bulk or relevance search.
+    
+    # Reasoning Steps
+    1. Read the research goal and identify all meaningful concepts, technologies, methods, and application areas mentioned or implied.
+    2. For each concept or term, consider possible alternate phrasings, abbreviations, or field-specific jargon.
+    3. Filter out redundant or excessively broad/generic terms that would dilute search quality.
+    4. Combine all selected terms according to the formatting instructions above.
+    5. Double-check that the query string is optimized for retrieval—each term should be likely to appear in relevant paper titles or abstracts.
+    
+    # Output Format
+    - Output only a single line containing the final query string, with no leading/trailing spaces or extra text.
+    - Do not include explanations, headers, or any content other than the query string itself.
+    
+    # Example
+    ## Goal:
+    Recent advances in large language models for automated geospatial analysis and land cover classification
+    
+    ## Output:
+    "large language model" | LLM | "geospatial analysis" | "land cover classification" | geoAI | "machine learning"
+    
+    ---
+    
+    ## Now, for the following research goal, generate a Semantic Scholar query string that follows the above rules:
+    
+    Goal: {{goal}}
+    
+    Here are the user's input for the keywords (if applicable):
+    
+    {{keywords}}
+    
+    Semantic Scholar query:
+

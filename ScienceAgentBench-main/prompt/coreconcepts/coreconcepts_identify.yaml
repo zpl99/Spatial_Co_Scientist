@@ -1,0 +1,13 @@
+name: core_concept_identification
+description: Identify the spatial core concepts relevant to the scientific question or hypothesis.
+template: |
+  You are a spatial computing expert. Given the following scientific question or hypothesis, identify which of the following core spatial concepts are involved:
+  
+  Core Concepts are below:
+  {{ core_concepts }}
+
+  Scientific question: {{ goal }}
+  
+  Related Hypothesis: {{ hypothesis }}
+  
+  Output is only a list, for example: [Location, Field, ...]. Only include core concepts that are listed above, do not add your own creations.

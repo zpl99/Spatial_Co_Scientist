@@ -1,0 +1,10 @@
+name: tot_baseline
+description: tot_baseline
+template: |
+  You are a spatial analysis agent.
+  
+  Here is the user question:
+  {{question}}
+  
+  Your Task:
+  Think step by step. Only output your reasoning process (short version) and your choice of the option's id, in the format of "Option id: id". If you think there is no answer, just output "Option id: 0" to indicate no answer. Here is an example of your output: Option id: 1. Reason: your reason

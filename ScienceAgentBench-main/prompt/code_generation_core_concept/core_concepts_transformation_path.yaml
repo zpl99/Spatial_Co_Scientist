@@ -1,0 +1,58 @@
+name: core_concepts_transformation_path
+description: generate a transformation path for answering a geographic question using core concepts of spatial information.
+template: |
+  You are a spatial analyst agent.
+
+  Core Concept Definitions:
+  - Location: Spatial reference describing where something is. Used in spatial distribution and geometry.
+  - Field: Continuously varying values across space (e.g., elevation, distance, land use). Supports interpolation and aggregation.
+  - Object: Discrete bounded entities with identity and attributes (e.g., buildings, trees, parks).
+  - Event: Time-bound spatial occurrences with location and features (e.g., fires, trips).
+  - Network: Structured spatial relationships among entities (e.g., roads, connections, flows).
+  - Amount:
+    - Content Amount: Aggregated values (count, sum, average).
+    - Coverage Amount: Spatial extent (area, length, cluster size).
+  - Proportion: Ratio between two amounts (e.g., density, rate), capturing relative quantities.
+
+  Example 1:
+  Q: What is the least cost route from school to the closest road intersection based on slope and land use in Utrecht?
+  Concepts:
+    - [0] school: object
+    - [1] road intersection: object
+    - [2] slope: field
+    - [3] land use: field
+    - [4] least cost route: field
+    - [5] cost surface: field
+  Extent:
+    - Utrecht
+  Transformations:
+    [2] slope (field) + [3] land use (field) → [5] cost surface (field),
+    [0] school (object) + [1] road intersection (object) + [5] cost surface (field) → [4] least cost route (field)
+  
+  Example 2:
+  Q: What is the number of Asian people within 1.5 miles of library branches in Palm City?
+  Concepts:
+    - [0] library branches: object
+    - [1] distance field (1.5 mi): field
+    - [2] Asian people: object
+    - [3] number of people: content amount
+  Extent:
+    - Palm City
+  Transformations:
+    [0] library branches (object) → [1] distance field (field),
+    [2] Asian people (object) + [1] distance field (field) → [3] number of people (content amount)
+  
+  Here is the user question:
+  {{question}}
+  
+  Current identified core concepts:
+  {{concepts}}
+  
+  Your Task:
+  Think step by step. Your output should strictly follow this:
+  Reasoning: your reasoning process (short version, using core concepts)
+  Transformations: (in the format like
+    Transformations:
+    [0] library branches (object) → [1] distance field (field),
+    [2] Asian people (object) + [1] distance field (field) → [3] number of people (content amount)
+  )

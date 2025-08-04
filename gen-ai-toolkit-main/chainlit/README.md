@@ -32,7 +32,7 @@ LAYERS_JSON=s3://my-bucket/path/to/NorthSea.json
 ## Run the application
 
 ```bash
-chainlit run main.py --host 0.0.0.0 --port 8080
+chainlit run co_scientist.py --host 0.0.0.0 --port 8080
 ```
 
 Note: You can add `-w` to watch for file changes.

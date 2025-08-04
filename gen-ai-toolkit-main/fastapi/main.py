@@ -1,5 +1,5 @@
 #
-# fastapi run main.py --app app
+# fastapi run co_scientist.py --app app
 #
 # pkill -f fastapi
 #

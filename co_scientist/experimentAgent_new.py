@@ -76,7 +76,6 @@ class ExperimentDesignAgent:
     def get_samples(self,x,y,n_generate_sample,prompt_sample,stop=None):
         return
     def core_concept_identify(self, problem):
-        core_concepts = manager.render_prompt(agent="coreconcepts",prompt_name="core_concepts",variables={})
         prompt = manager.render_prompt(
             agent="coreconcepts",
             prompt_name="coreconcepts_identify",
@@ -228,7 +227,7 @@ class ExperimentDesignAgent:
 
         return final_result
 
-    def solve_task(self,x,step):
+    def solve_task(self,x):
         ys = []
         infos = []
 
@@ -266,10 +265,10 @@ if __name__ == "__main__":
     import json
     all_result = {}
 
-    # with open("/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/博士学习/6-Job/ESRI/data/mapeval/mapeval_textual.json") as f:
-    #     mapeval_textual = json.load(f)
-    with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
+    with open("/Users/zepingliu/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/PhD/6-Job/ESRI/data/mapeval/mapeval_textual.json") as f:
         mapeval_textual = json.load(f)
+    # with open("/home/zl22853/code/co_scientist/data/mapeval/mapeval_textual.json") as f:
+    #     mapeval_textual = json.load(f)
     for item in tqdm(mapeval_textual):
     # item = mapeval_textual[0]
         prompt = (
@@ -285,7 +284,8 @@ if __name__ == "__main__":
         gt = item["answer"]
         agent = ExperimentDesignAgent("gpt-4o")
 
-        id = agent.solve_task_one_path(prompt, use_rule= True)
+        # id = agent.solve_task_one_path(prompt, use_rule= True)
+        id = agent.solve_task(prompt)
         item["prediction"] = id
     result = evaluate_mapeval_classification(mapeval_textual)
     all_result.update({"tot_cc_using_one_path_with_rule":result})

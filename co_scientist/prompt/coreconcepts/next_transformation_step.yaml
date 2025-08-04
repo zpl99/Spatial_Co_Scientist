@@ -83,6 +83,5 @@ template: |
   5. Use unique output IDs for new concepts (no reuse).
   6. Do NOT answer the question. Do NOT jump or skip steps.
   7. Your goal is to derive {{target}}. Once this concept is generated in any step, immediately respond with only: STOP
-  8. Your maximize transformation step is 3 (step id)
   ---
   Now, output the next transformation step using exactly one of the formats above.

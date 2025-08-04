@@ -1,0 +1,2051 @@
+**Toolset:** Fields
+
+**Tool:** Add Field
+
+**Description:**  
+The Add Field tool in ArcGIS Pro is designed to add a new field to a table or the table of a feature class or feature layer, as well as to rasters with attribute tables. This tool is essential for modifying the schema of the input data by introducing new attributes that can be used for further analysis or data management tasks. Typical use cases include adding fields to store calculated values, integrating new data attributes into existing datasets, or preparing data for complex spatial analysis workflows. For example, in spatial analysis, you might add a field to store temperature data across different geographic locations or to include a unique identifier for each feature in a dataset.
+
+**Parameters:**
+- **Input Table:** The table, feature class, or raster where the new field will be added.  
+  *Type:* Table View; Raster Layer; Mosaic Layer.
+  
+- **Field Name:** The name of the field that will be added to the input table.  
+  *Type:* String.
+  
+- **Field Type:** Specifies the type of the new field, such as text, integer, float, etc.  
+  *Type:* String.
+  
+- **Field Alias (Optional):** An alternate name for the field, used to describe cryptic field names. Applicable only to geodatabases.  
+  *Type:* String.
+  
+- **Field Length (Optional):** The maximum number of allowable characters for each record of the field. Applicable only to text fields. Default is 255.  
+  *Type:* Integer.
+  
+- **Default Value (Optional):** The default value for the field.  
+  *Type:* String.
+  
+- **Field Domain (Optional):** The geodatabase domain that will be assigned to the field.  
+  *Type:* String.
+
+**Derived Output:**  
+The Add Field tool does not create a new output table; it modifies the schema of the input table by adding the specified field. Therefore, there are no derived outputs in terms of new datasets or tables.
+**Toolset:** Fields
+
+**Tool:** Add Fields
+
+**Description:**  
+The Add Fields tool in ArcGIS Pro is designed to add multiple new fields to a table, feature class, or raster. This tool is particularly useful in GIS workflows where additional attributes need to be incorporated into existing datasets for further analysis or data management. Typical use cases include enhancing datasets with new data columns for spatial analysis, preparing data for export to other formats, or standardizing data structures across multiple datasets. For example, you might use this tool to add fields that store calculated values, such as population density or land use categories, which can then be used in subsequent spatial analysis operations.
+
+**Parameters:**
+- **Input Table:** The table, feature class, or shapefile to which the fields will be added.  
+  *Type:* Table View
+- **Field Properties:** Specifies the properties of the fields to be added, including field name, type, alias, length, default value, and domain.  
+  *Type:* Field Name, Field Type, {Field Alias}, {Field Length}, {Default Value}, {Field Domain}
+
+**Derived Output:**
+- **Modified Input Table:** The input table with the newly added fields.  
+  *Type:* Same as input (Table View)
+
+The tool modifies the input data directly, meaning that the fields are added to the existing table without creating a new output table. This is important to note for workflows that require maintaining the integrity of the original dataset while enhancing its attribute structure.
+**Toolset:** Fields
+
+**Tool:** Alter Field
+
+**Description:**  
+The Alter Field tool in ArcGIS Pro is designed to modify the properties of fields within a geodatabase table or feature class. This tool primarily allows users to rename fields or change field aliases. It is particularly useful in scenarios where field names need to be standardized or made more descriptive for better understanding and usability in GIS workflows. For example, a field named "temp" could be renamed to "Temperature_Celsius" to provide clarity. This tool is also used to modify field aliases, which are alternative names that can be displayed in place of the actual field names in user interfaces. However, if the field is a required field, only the field alias can be altered. This tool is essential for maintaining data consistency and clarity, especially in large datasets where field names might be cryptic or non-descriptive.
+
+**Parameters:**
+- **Input Table:** The geodatabase table or feature class containing the field to be altered.  
+  *Type:* Table View; Raster Layer; Mosaic Layer.
+- **Field Name:** The name of the field to be altered. If the field is required, only the alias can be changed.  
+  *Type:* Field.
+- **New Field Name (Optional):** The new name for the field.  
+  *Type:* String.
+- **New Field Alias (Optional):** The new alias for the field.  
+  *Type:* String.
+- **New Field Type (Optional):** Specifies the new field type, applicable only if the input table is empty.  
+  *Type:* Short (16-bit integer).
+
+**Derived Output:**
+- No specific derived outputs are listed for this tool. The tool modifies the input data directly by altering the field properties.
+**Toolset:** Fields
+
+**Tool:** Alter Fields
+
+**Description:**  
+The Alter Fields tool in ArcGIS Pro is designed to modify the properties of multiple fields within a feature class or table. This tool is particularly useful for renaming fields or field aliases in a geodatabase table or feature class. It allows users to adjust field properties, which can be essential for maintaining data consistency and clarity in GIS workflows. For example, you might use this tool to update field names to more descriptive aliases or to change field types when preparing data for analysis. This tool is crucial in scenarios where data schemas need to be updated without altering the underlying data structure significantly.
+
+**Parameters:**
+- **Input Table:** The geodatabase table or feature class containing the fields to be altered.  
+  *Type:* Table View; Raster Layer; Mosaic Layer.
+  
+- **Field Name:** The name of the field to be altered. If the field is required, only the alias can be changed.  
+  *Type:* Field.
+  
+- **New Field Name (Optional):** The new name for the field.  
+  *Type:* String.
+  
+- **New Field Alias (Optional):** The new alias for the field.  
+  *Type:* String.
+  
+- **New Field Type (Optional):** Specifies the new field type, applicable only if the input table is empty.  
+  *Type:* Short (16-bit integer).
+
+**Derived Output:**
+- **None specified.** The tool modifies the input data directly, and no separate output is generated.
+
+If you have further questions or need additional details about using the Alter Fields tool, feel free to ask!
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Fields
+
+**Tool:** Calculate Fields
+
+**Description:**  
+The Calculate Fields tool in ArcGIS Pro is designed to compute and update the values of one or more fields for a feature class, feature layer, or raster. This tool is particularly useful in spatial analysis and GIS workflows where batch updates to field values are required. It allows users to perform both simple and complex calculations using expressions written in Arcade, Python, or SQL. Typical use cases include updating attribute values based on spatial criteria, performing mathematical operations on numeric fields, or transforming text fields. For example, you might use this tool to calculate the total area of polygons in a feature class or to update a field with the results of a complex mathematical expression.
+
+**Parameters:**
+- **Input Layer:** The input features that will have a field calculated.  
+  *Type:* Record Set.
+  
+- **Field Name:** The name of the field that will have values calculated. This can be an existing field or a new field.  
+  *Type:* String.
+  
+- **Field Type:** Specifies the field type for the calculated field. Options include String, Integer, Double, and Date.  
+  *Type:* String.
+  
+- **Expression:** Calculates values in the field. Expressions are written in Arcade and can include operators like [+ - * /].  
+  *Type:* String.
+  
+- **Track Aware (Optional):** Specifies whether the expression will use a track-aware expression.  
+  *Type:* Boolean.
+  
+- **Track Fields:** One or more fields that will be used to identify unique tracks.  
+  *Type:* Field.
+  
+- **Data Store (Optional):** Specifies the ArcGIS Data Store where the output will be stored.  
+  *Type:* Spatiotemporal big data store.
+
+**Derived Output:**
+- **Output Dataset:** A new dataset with calculated fields.  
+  *Type:* Feature Class; Table.
+
+The Calculate Fields tool is a powerful feature in ArcGIS Pro that facilitates the automation of data updates and transformations, enhancing the efficiency of data management and analysis tasks.
+**Toolset:** Fields
+
+**Tool:** Delete Field
+
+**Description:**  
+The Delete Field tool in ArcGIS Pro is designed to remove one or more fields from a table, feature class, feature layer, or raster dataset. This tool is particularly useful in data management workflows where unnecessary or redundant fields need to be eliminated to streamline datasets. For example, after performing data transformations or calculations, you might want to delete temporary fields that are no longer needed. Another use case is cleaning up datasets by removing fields that are not required for analysis or reporting, thereby reducing the complexity and size of the data.
+
+**Parameters:**
+- **Input Table:** The table containing the fields to be deleted. This parameter accepts data types such as Mosaic Layer, Raster Layer, and Table View. The existing input table will be modified.
+- **Fields:** Specifies the fields to be deleted or kept from the input table, as determined by the Method parameter. Only nonrequired fields can be deleted. Type: Field.
+- **Method (Optional):** Determines whether the fields specified by the Fields parameter will be deleted or kept. Options include:
+  - **Delete Fields:** The fields specified by the Fields parameter will be deleted. This is the default setting.
+  - **Keep Fields:** The fields specified by the Fields parameter will be kept, and all other fields will be deleted. Type: String.
+
+**Derived Output:**
+- **Update Input Table:** The updated dataset after the fields have been deleted. This output can be of type Table View, Raster Layer, or Mosaic Layer.
+
+If you have further questions or need additional details, feel free to ask!
+**Toolset: Fields**
+
+**Tool: Migrate Text Field**
+
+**Description:**  
+The "Migrate Text Field" tool is designed to convert text fields in an Oracle table from Unicode to non-Unicode types. This is particularly useful in scenarios where database storage optimization is required, or when compatibility with systems that do not support Unicode is necessary. The tool specifically converts NVARCHAR2 fields to VARCHAR2, NCLOB fields to CLOB, and NCHAR fields to VARCHAR2. This conversion can be crucial in maintaining data integrity and performance in enterprise geodatabases, especially when dealing with large datasets or legacy systems that require non-Unicode text formats.
+
+**Parameters:**
+- **Input Table:**  
+  - **Description:** The Oracle dataset from which eligible text fields will be migrated.  
+  - **Data Type:** Table View.
+
+- **Fields:**  
+  - **Description:** The Unicode text fields that will be migrated to non-Unicode text fields.  
+  - **Data Type:** Field.
+
+**Derived Output:**
+- **Updated Table:**  
+  - **Description:** The updated table with text fields converted from Unicode to non-Unicode types.  
+  - **Data Type:** Table View.
+
+This tool is essential for database administrators and GIS professionals who need to ensure that their Oracle databases are optimized for performance and compatibility. It is particularly relevant in environments where non-Unicode text fields are a requirement due to system constraints or data storage policies.
+**Toolset: Data Engineering**
+
+**Tool: Encode Field**
+
+**Description:**  
+The Encode Field tool in ArcGIS Pro is designed to convert categorical values, such as strings, integers, or dates, into multiple numerical fields. Each numerical field represents a category, making the data suitable for use in data science and statistical workflows, including regression models. This tool is particularly useful in preparing datasets for analysis by transforming categorical data into a format that can be easily interpreted by various analytical models. For example, if you have a dataset of crime incidents with a 'Category' field, you can use the Encode Field tool to convert each crime category into a separate numerical field, facilitating more sophisticated analysis and modeling.
+
+**Parameters:**
+- **in_table**: The input table containing the field to be encoded. Type: Table.
+- **field**: The field in the input table that contains the categorical values to be encoded. Type: Field.
+- **encoding_method**: The method used for encoding the field. Options include "ONEHOT" for one-hot encoding and "TEMPORAL" for temporal encoding. Type: String.
+- **time_step_interval**: The interval for time steps when using temporal encoding. Type: String.
+- **time_step_alignment**: The alignment for time steps, such as "START_TIME" or "END_TIME". Type: String.
+
+**Derived Output:**
+- **updated_table**: The table that contains the added fields that were encoded. Type: Table View.
+
+The Encode Field tool is a powerful feature for transforming categorical data into a numerical format, which is essential for many types of data analysis and modeling. It supports various encoding methods, allowing users to tailor the encoding process to their specific needs.
+**Toolset:** Data Engineering
+
+**Tool:** Field Statistics To Table
+
+**Description:**  
+The "Field Statistics To Table" tool in ArcGIS Pro is designed to create a table of descriptive statistics for one or more input fields in a table or feature class. This tool is particularly useful in spatial analysis and GIS workflows where understanding the distribution and characteristics of data fields is crucial. Typical use cases include assessing data quality by identifying fields with missing values, understanding the distribution of values through metrics like mean and standard deviation, and preparing data for further analysis by exporting these statistics into a standalone table. For example, a user might use this tool to calculate the average and standard deviation of population data across different counties, or to summarize income data for various regions.
+
+**Parameters:**
+- **Input Table:** The input table containing the fields that will be used to create the statistics table.  
+  *Type:* Table View
+- **Input Fields:** The fields containing the values that will be used to calculate the statistics.  
+  *Type:* Field
+- **Output Location:** The location where the output tables will be created. This can be a geodatabase, folder, or feature dataset.  
+  *Type:* Workspace
+- **Output Tables:** The output tables containing the statistics. The Field Types column specifies the field types that will be included in each output table, and the name of each output table is provided in the Output Name column.  
+  *Type:* Table
+
+**Derived Output:**
+- **Output Tables for Numeric Data Types:** A table summarizing numeric fields of the input (Short, Long, Big Integer, Float, and Double types) will be created.  
+  *Type:* Table
+- **Output Tables for Text Data Types:** A table summarizing text fields of the input (Text type) will be created.  
+  *Type:* Table
+- **Output Tables for Date Data Types:** A table summarizing date fields of the input (Date, Date Only, Time Only, and Timestamp Offset types) will be created.  
+  *Type:* Table
+- **Output Tables for All Data Types:** A table summarizing all numeric, text, and date fields of the input will be created.  
+  *Type:* Table
+
+The tool does not support statistics for fields of data type big integer, date only, time only, and timestamp offset. It is recommended to have different output tables for each data type to ensure compatibility and ease of use in subsequent analyses.
+**Toolset: Data Engineering**
+
+**Tool: Reclassify Field**
+
+**Description:**  
+The "Reclassify Field" tool in ArcGIS Pro is designed to reclassify values in a numerical or text field into classes. This reclassification can be based on manually defined bounds or by using a specific reclassification method. The tool is part of the Data Engineering toolset, which is used to prepare fields for analysis workflows by transforming, standardizing, encoding, and reclassifying values. Typical use cases for the Reclassify Field tool include transforming raw data into a more meaningful format for analysis, such as categorizing population data into classes like "Village," "Town," and "City" based on population size. This tool is particularly useful in spatial analysis and GIS workflows where data needs to be standardized or categorized for further analysis or visualization.
+
+**Parameters:**
+- **Input Table**: The table containing the field to be reclassified. Type: Table View.
+- **Field to Reclassify**: The field that will be reclassified. It must be a numeric or text field. Type: Field.
+- **Reclassification Method (Optional)**: Specifies the method for reclassifying field values. Options include:
+  - Defined interval: Classes with the same class range over the span of the values.
+  - Equal interval: Classes with equal class ranges divided into a specified number of classes (default).
+  - Geometric interval: Classes with geometrically increasing or decreasing class ranges.
+  - Manual interval: Manually specified class breaks and reclassed values.
+  - Natural breaks (Jenks): Classes based on natural groupings in the data.
+  - Quantile: Classes with an equal number of values.
+  - Standard deviation: Classes based on standard deviations from the mean.
+  Type: String.
+- **Reclassification Table**: A remap table that defines how the values will be reclassified. Type: Table.
+- **Output Field Name (Optional)**: The name or prefix of the output field. If the field to reclassify is numerical, two fields are created with this name. Type: String.
+- **Number of Classes (Optional)**: The target number of classes in the reclassified field. Maximum is 256. Type: Long.
+- **Interval Size (Optional)**: Specifies the class interval size for the reclassified field. Type: Double.
+- **Number of Standard Deviations (Optional)**: Specifies the number of standard deviations for the reclassified field. Type: Double.
+
+**Derived Output:**
+- **Updated Table**: The updated table that contains the reclassified fields. Type: Table View.
+**Toolset:** Data Engineering
+
+**Tool:** Standardize Field
+
+**Description:**  
+The Standardize Field tool in ArcGIS Pro is designed to standardize values in fields by converting them to a specified scale. This is particularly useful in preparing data for analysis by ensuring consistency across datasets. The tool supports various standardization methods, including z-score, minimum-maximum, absolute maximum, and robust standardization. For example, in spatial analysis, this tool can be used to standardize demographic data such as voter turnout rates across different regions, allowing for more accurate comparisons and analyses.
+
+**Parameters:**
+- **Input Table:** The table containing the field with the values that will be standardized.  
+  *Type:* Table View; Raster Layer; Mosaic Layer.
+  
+- **Field to Standardize:** The fields containing the values that will be standardized. For each field, an output field name can be specified. If no output field name is provided, the tool will create an output field name using the field name and selected method.  
+  *Type:* Value Table.
+  
+- **Standardization Method (Optional):** Specifies the method that will be used to standardize the values contained in the specified fields. Options include:
+  - Z-Score: Standard score, which is the number of standard deviations above or below the mean.
+  - Minimum-maximum: Converts values to a scale between specified minimum and maximum values.
+  - Absolute maximum: Divides each value by the maximum absolute value in the column.
+  - Robust standardization: Uses median and interquartile range instead of mean and standard deviation.  
+  *Type:* String.
+  
+- **Minimum Value (Optional):** The value used by the Minimum-maximum method to specify the minimum value in the scale of the provided output values.  
+  *Type:* Double.
+  
+- **Maximum Value (Optional):** The value used by the Minimum-maximum method to specify the maximum value in the scale of the provided output values.  
+  *Type:* Double.
+
+**Derived Output:**
+- **Updated Input Table:** The table that contains the new standardized fields.  
+  *Type:* Table View.
+**Toolset:** Data Engineering
+
+**Tool:** Transform Field
+
+**Description:**  
+The Transform Field tool in ArcGIS Pro is designed to transform continuous values in one or more fields by applying mathematical functions to each value, thereby altering the shape of the distribution. This tool is particularly useful in preparing data for analysis by ensuring that the data distribution meets the assumptions of various statistical models. Typical use cases include transforming skewed data to approximate normality, which is often a prerequisite for many statistical analyses. For example, transforming income data using a logarithmic function can help stabilize variance and make the data more suitable for linear regression models.
+
+**Parameters:**
+- **Input Table:** The input table or feature class containing the fields to be transformed. The newly transformed fields are added to the input table.  
+  *Type:* Table View; Raster Layer; Mosaic Layer.
+  
+- **Field to Transform:** The fields containing the values to be transformed. For each field, an output field name can be specified. If no output field name is provided, the tool creates an output field name using the field name and transformation method.  
+  *Type:* Field.
+
+- **Transformation Method:** The mathematical function to apply to the field values. Options include log, square root, Box-Cox, multiplicative inverse, square, exponential, and inverse Box-Cox.  
+  *Type:* String.
+
+- **Power (Optional):** For the Box-Cox transformation, this parameter specifies the power to which the data will be raised. If no value is provided, an optimal value will be determined using maximum likelihood estimation (MLE).  
+  *Type:* Double.
+
+- **Shift (Optional):** The value that will be used to shift the data (a constant value is added). No shift is applied if 0 is specified.  
+  *Type:* Double.
+
+**Derived Output:**
+- **Updated Table:** The updated table containing the transformed fields.  
+  *Type:* Table View.
+
+The Transform Field tool is a powerful component of the Data Engineering toolset, enabling users to prepare their datasets for more robust and accurate analysis by transforming data distributions to meet analytical requirements.
+**Toolset:** Raster
+
+**Tool:** Copy Raster
+
+**Description:**  
+The Copy Raster tool in ArcGIS Pro is designed to save a copy of a raster dataset or convert a mosaic dataset into a single raster dataset. This tool is particularly useful in workflows where you need to duplicate raster data for backup, further analysis, or conversion purposes. Typical use cases include creating a standalone copy of a raster for editing without affecting the original, converting a mosaic dataset into a single raster for simplified management, or preparing raster data for export to different formats. For example, you might use the Copy Raster tool to duplicate a digital elevation model (DEM) for terrain analysis or to convert a complex mosaic dataset into a single raster for easier sharing and distribution.
+
+**Parameters:**
+- **Input Data:** The data that will be copied.  
+  *Type:* Data Element.
+  
+- **Output Data:** The location and name of the output data.  
+  *Type:* Data Element.
+  
+- **Data type (Optional):** Specifies the type of the data on disk that will be copied. This is necessary in cases of name conflicts between different data types.  
+  *Type:* String (e.g., FeatureClass, FeatureDataset, MosaicDataset).
+
+- **Associated Data (Optional):** Controls the associated output data's name and config keyword when the input has associated data.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Raster Dataset:** The resulting raster dataset after the copy operation.  
+  *Type:* Raster Dataset.
+
+The tool does not support copying a network dataset back into the same geodatabase and does not support the MRF image format. It is also important to note that when copying a mosaic dataset, the images referenced by the mosaic dataset are not copied.
+**Toolset:** Raster
+
+**Tool:** Create Random Raster
+
+**Description:**  
+The Create Random Raster tool generates a raster dataset filled with random floating-point values ranging from 0.0 to 1.0. This tool is particularly useful in spatial analysis and GIS workflows where modeling randomness or simulating phenomena is required. For example, it can be used to analyze the random distribution of wildlife sightings within a study area or to model uncertainty in environmental data. The tool is part of the Raster Creation tools available with the Spatial Analyst license and is designed to create new rasters based on statistical distributions.
+
+**Parameters:**
+- **Output Location:**  
+  *Description:* The folder or geodatabase where the output raster dataset will be stored.  
+  *Type:* Workspace.
+
+- **Raster Dataset Name with Extension:**  
+  *Description:* The name and format of the raster dataset being created. For file-based rasters, use extensions like .tif for TIFF, .img for ERDAS IMAGINE, or .crf for CRF raster.  
+  *Type:* String.
+
+- **Distribution (Optional):**  
+  *Description:* Specifies the random value distribution method to use. Options include Uniform, Integer, Normal, Exponential, Poisson, Gamma, and Binomial distributions, each with specific parameters.  
+  *Type:* String.
+
+- **Output Cell Size:**  
+  *Description:* Defines the cell size of the output raster. It can be specified numerically or derived from an existing raster dataset.  
+  *Type:* Double or Raster Dataset.
+
+- **Output Extent:**  
+  *Description:* Defines the spatial extent of the output raster. It can be set explicitly or derived from the environment settings.  
+  *Type:* Extent.
+
+**Derived Output:**
+- **Output Raster:**  
+  *Description:* The resulting raster dataset containing random floating-point values.  
+  *Type:* Raster.
+
+The tool uses the ACM algorithm 599 random number generator, and the output raster is always floating point with up to 7 digits of precision. The tool allows for the specification of a seed value to ensure different random outputs in repeated runs.
+**Toolset:** Raster
+
+**Tool:** Create Raster Dataset
+
+**Description:**  
+The "Create Raster Dataset" tool in ArcGIS Pro is designed to create an empty raster dataset. This tool is essential for setting up a location to store raster data, which can later be populated with raster datasets through processes like mosaicking or loading. The tool supports various output formats, including BIL, BIP, BMP, BSQ, CRF, DAT, Esri Grid, GIF, IMG, JPEG, JPEG 2000, PNG, and TIFF. It is particularly useful in workflows where you need to prepare a storage structure for raster data before performing further analysis or visualization. For example, you might use this tool to create a dataset that will later be filled with satellite imagery for environmental monitoring or urban planning.
+
+**Parameters:**
+- **Output Raster Dataset:** The name and location for the new raster dataset. Type: Raster Dataset.
+- **Raster Format:** Specifies the format of the output raster dataset. Type: String.
+- **Spatial Reference:** The spatial reference for the output raster dataset. Type: String.
+- **Cell Size (Optional):** The cell size for the output raster. This can be a numeric value or derived from an existing raster. Type: Double.
+- **Build Raster Attribute Table (Optional):** Specifies whether to build a raster attribute table for integer output rasters. Type: Boolean.
+
+**Derived Output:**
+- **Output Raster Dataset:** The created raster dataset. Type: Raster Dataset.
+
+If you have further questions or need additional details about using this tool in your specific workflows, feel free to ask!
+No information available.
+**Toolset:** Raster
+
+**Tool:** Generate Raster From Raster Function
+
+**Description:**  
+The "Generate Raster From Raster Function" tool in ArcGIS Pro is designed to create a raster dataset from an input raster function or a function chain. This tool is particularly useful for raster processing tasks that require multiple threads, thereby enhancing processing speed. The tool supports various output raster formats, including TIFF, GRID, ERDAS IMAGINE, CRF (Cloud Raster Format), and MRF (Meta Raster Format). Typical use cases include applying complex raster functions to generate new raster datasets for analysis, such as calculating indices like NDVI or performing terrain analysis using functions like Hillshade.
+
+**Parameters:**
+- **Input Raster Function:**  
+  Explanation: The name of a raster function, a raster function JSON object, or a function chain in .rft.xml format.  
+  Type: File; String.
+
+- **Output Raster Dataset:**  
+  Explanation: The output raster dataset that will be generated.  
+  Type: Raster Dataset.
+
+- **Raster Function Arguments (Optional):**  
+  Explanation: Parameters associated with the function chain, such as data source, azimuth, and altitude for functions like Hillshade.  
+  Type: Value Table.
+
+- **Raster Properties (Optional):**  
+  Explanation: Key properties of the output raster dataset, such as sensor or wavelength.  
+  Type: Value Table.
+
+- **Format (Optional):**  
+  Explanation: The format of the output raster. The default format is derived from the file extension specified in the Output Raster Dataset. Options include TIFF, Cloud Optimized GeoTIFF, ERDAS IMAGINE, Esri Grid, CRF, and MRF.  
+  Type: String.
+
+- **Process as Multidimensional (Optional):**  
+  Explanation: Specifies whether the input mosaic dataset will be processed as a multidimensional raster dataset. Options include processing only the current slice or all slices.  
+  Type: Boolean.
+
+**Derived Output:**
+- **Output Raster Dataset:**  
+  Explanation: The generated raster dataset based on the input raster function and specified parameters.  
+  Type: Raster Dataset.
+**Toolset:** Raster
+
+**Tool:** Mosaic
+
+**Description:**  
+The Mosaic tool in ArcGIS Pro is designed to merge multiple raster datasets into a single, cohesive raster dataset. This tool is particularly useful in scenarios where you need to combine various raster images, such as satellite imagery or aerial photographs, into a seamless image for analysis or presentation. Typical use cases include creating a comprehensive view of a geographic area from multiple overlapping images, managing large collections of imagery, and preparing data for further spatial analysis. For example, you might use the Mosaic tool to combine daily satellite images to monitor changes in vegetation over time or to create a single image from multiple aerial photos for urban planning.
+
+**Parameters:**
+- **Input Rasters:** The raster datasets you want to merge together. The inputs must have the same number of bands and the same bit depth.  
+  *Type:* Mosaic Dataset; Raster Dataset; Raster Layer.
+  
+- **Output Location:** The folder or geodatabase where the resulting raster will be stored.  
+  *Type:* Workspace.
+  
+- **Raster Dataset Name with Extension:** The name of the dataset you are creating. When storing the raster dataset in a file format, specify the file extension (e.g., .tif for TIFF).  
+  *Type:* String.
+
+**Derived Output:**
+- **out_mosaic_dataset:** The updated mosaic dataset that results from the merging process.  
+  *Type:* Mosaic Layer.
+
+The Mosaic tool also offers additional parameters when combining datasets into an existing raster, such as options to ignore background and NoData values. It is crucial to set the pixel type to match your existing input raster datasets to avoid incorrect outputs. The tool supports various output formats, including BIL, BIP, BMP, BSQ, DAT, Esri Grid, GIF, IMG, JPEG, JPEG 2000, PNG, and TIFF. When working with color maps, it is important to choose the correct Mosaic Colormap Mode to ensure the output is as expected.
+**Toolset: Raster**
+
+**Tool: Mosaic To New Raster**
+
+**Description:**  
+The "Mosaic To New Raster" tool in ArcGIS Pro is designed to merge multiple raster datasets into a single new raster dataset. This tool is particularly useful in scenarios where you need to combine several raster images, such as satellite imagery or aerial photographs, into one cohesive image for analysis or presentation. Typical use cases include creating a seamless image from multiple overlapping images, integrating data from different sources for comprehensive spatial analysis, and preparing data for further geoprocessing tasks. For example, you might use this tool to combine multiple satellite images of a region to analyze land cover changes over time or to create a base map for a geographic information system (GIS) project.
+
+**Parameters:**
+- **Input Rasters:** The raster datasets you want to merge. These inputs must have the same number of bands and bit depth.  
+  *Type:* Mosaic Dataset; Raster Dataset; Raster Layer.
+  
+- **Output Location:** The folder or geodatabase where the new raster dataset will be stored.  
+  *Type:* Workspace.
+  
+- **Raster Dataset Name with Extension:** The name of the new raster dataset, including the file extension (e.g., .tif for TIFF format).  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Raster Dataset:** The newly created raster dataset that results from the merging process.  
+  *Type:* Raster Dataset.
+
+If you have further questions or need additional details about using this tool, feel free to ask!
+We are unable to answer this question. Please rephrase your query.
+**Toolset: Standard Feature Analysis**
+
+**Tool: Find Hot Spots**
+
+**Description:**  
+The "Find Hot Spots" tool in ArcGIS Pro is designed to identify statistically significant spatial clusters of high values (hot spots) and low values (cold spots) using the Getis-Ord Gi* statistic. This tool is particularly useful in spatial analysis for uncovering patterns such as high crime areas, regions with high biodiversity, or zones with elevated pollution levels. The tool outputs a map layer where hot spots are marked in red and cold spots in blue, with the intensity of the color indicating the strength of the clustering. For example, in urban planning, this tool can be used to identify areas with high traffic accident rates, aiding in resource allocation and policy-making.
+
+**Parameters:**
+- **Point Layer:** The point feature class for which hot spot analysis will be performed.  
+  *Type: Feature Set.*
+
+- **Output Name:** The name of the output layer with the z-score and p-value results.  
+  *Type: String.*
+
+- **Bin Size:** The distance interval that represents the bin size and units into which the Point Layer will be aggregated. Must be a linear unit.  
+  *Type: Linear Unit.*
+
+- **Neighborhood Size:** The spatial extent of the analysis neighborhood, determining which features are analyzed together to assess local clustering.  
+  *Type: Linear Unit.*
+
+- **Time Step Interval (Optional):** The interval used for the time step, applicable if time is enabled for the Point Layer.  
+  *Type: Time Unit.*
+
+- **Time Step Alignment (Optional):** Specifies how time steps will be aligned, available if the input points are time-enabled and represent an instant in time. Options include End time, Start time, and Reference time.  
+  *Type: String.*
+
+**Derived Output:**
+- **Output Feature Class:** The output feature class with the z-score and p-value results.  
+  *Type: Feature Class.*
+
+If you have further questions or need additional details, feel free to ask!
+**Toolset:** Spatial Statistics
+
+**Tool:** Find Point Clusters
+
+**Description:**  
+The Find Point Clusters tool identifies clusters of point features within surrounding noise based on their spatial or spatiotemporal distribution. This tool is particularly useful in scenarios where you need to discern patterns in point data, such as identifying areas of high activity or concentration. For example, it can be used to analyze wildlife movement patterns, detect crime hotspots, or study the spread of diseases. The tool employs density-based clustering algorithms, such as DBSCAN and HDBSCAN, to find clusters of points that are in close proximity, allowing for clusters with varying densities based on cluster probability or stability.
+
+**Parameters:**
+- **Input Point Layer:** The point feature class containing the point clusters.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** A new feature class with the resulting point clusters.  
+  *Type:* Feature Class.
+  
+- **Clustering Method:** Specifies the method used to define clusters. Options include:
+  - **Defined distance (DBSCAN):** Uses a specified search distance to separate dense clusters from sparser noise.
+  - **Self-adjusting (HDBSCAN):** Uses varying distances to separate clusters of varying densities from sparser noise.  
+  *Type:* String.
+  
+- **Search Distance:** The distance used to find clusters in DBSCAN.  
+  *Type:* Double.
+  
+- **Search Duration:** The time duration used to find spatiotemporal clusters in DBSCAN.  
+  *Type:* Double.
+  
+- **Minimum Features per Cluster:** Specifies the minimum number of features required to form a cluster.  
+  *Type:* Long.
+
+**Derived Output:**
+- **Output Layer:** The output feature class with a new integer field, `CLUSTER_ID`, indicating the cluster each point belongs to.  
+  *Type:* Feature Class.
+
+If you have further questions or need clarification on any aspect of the tool, feel free to ask!
+**Toolset:** Spatial Statistics
+
+**Tool:** Forest-based Classification and Regression
+
+**Description:**  
+The Forest-based Classification and Regression tool in ArcGIS Pro is designed to create models and generate predictions using an adaptation of the random forest algorithm. This tool is a supervised machine learning method that can handle both classification (categorical variables) and regression (continuous variables) tasks. It is particularly useful in spatial analysis and GIS workflows for predicting outcomes based on a set of explanatory variables. Typical use cases include environmental modeling, such as predicting land cover types or estimating continuous variables like temperature or pollution levels. The tool leverages fields from the attribute table of the training features as explanatory variables and can validate model performance based on the training data. It is capable of making predictions to new features, providing a robust method for spatial data analysis.
+
+**Parameters:**
+- **Input Features:** The layer containing the dependent and independent variables.  
+  *Type:* Record Set.
+- **Dependent Variable:** The numeric field containing the observed values to be modeled.  
+  *Type:* Field.
+- **Model Type:** Specifies the type of data that will be modeled (e.g., continuous, binary, count).  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Trained Features:** Contains all of the Input Training Features used in the model created as well as all of the explanatory variables.  
+  *Type:* Feature Class.
+- **Output Model File:** The file containing the trained model for future predictions.  
+  *Type:* File.
+
+If you have further questions or need additional details, feel free to ask!
+**Toolset: Spatial Statistics**
+
+**Tool: Generalized Linear Regression**
+
+**Description:**  
+The Generalized Linear Regression (GLR) tool in ArcGIS Pro is designed to model a dependent variable based on its relationship with a set of explanatory variables. It supports three types of regression models: Continuous (Ordinary Least Squares - OLS), Binary (Logistic), and Count (Poisson). This tool is versatile and can be used for various applications, such as predicting demographic characteristics that influence public transportation usage, analyzing the relationship between vandalism and burglary, forecasting 911 call volumes, and assessing factors affecting low birth rates. The tool is particularly useful in social sciences for evaluating relationships between multiple feature attributes, allowing users to understand, predict, or examine causes of spatial phenomena.
+
+**Parameters:**
+- **Input Features:** The feature class containing the dependent and explanatory variables.  
+  *Type: Feature Layer.*
+
+- **Dependent Variable:** The numeric field containing the observed values to be modeled.  
+  *Type: Field.*
+
+- **Model Type:** Specifies the type of data to be modeled. Options include:
+  - Continuous (Gaussian) for continuous data.
+  - Binary (Logistic) for binary data (presence/absence).
+  - Count (Poisson) for discrete event counts.  
+  *Type: String.*
+
+- **Explanatory Variable(s):** A list of fields representing independent explanatory variables in the regression model.  
+  *Type: Field.*
+
+- **Output Features:** The new feature class containing the dependent variable estimates and residuals.  
+  *Type: Feature Class.*
+
+**Derived Output:**
+- **Output Features:** This output includes the dependent variable estimates and residuals, which are automatically added to the map with a rendering scheme applied to model residuals.  
+  *Type: Feature Class.*
+
+The tool also provides diagnostics and model summary results, which are accessible in the messages window and through charts created below the output feature class. These diagnostics help ensure the model is properly specified and provide insights into the model's performance.
+**Toolset:** Analyze Patterns
+
+**Tool:** Calculate Density
+
+**Description:**  
+The Calculate Density tool creates a density map from point or line features by spreading known quantities of a phenomenon across the map. This results in a layer of areas classified from least dense to most dense. It is typically used in spatial analysis to identify areas with varying levels of a particular attribute, such as population density, crime rates, or accessibility to services. For example, it can be used to create crime density maps to help police departments allocate resources effectively, calculate hospital densities within a county to plan new hospital locations, or identify areas at high risk of forest fires based on historical data.
+
+**Parameters:**
+- **Input Features:** The point or line features from which to calculate density.  
+  *Type:* Feature Set.
+  
+- **Output Name:** The name of the output layer to create on your portal.  
+  *Type:* String.
+  
+- **Count Field (Optional):** A field specifying the number of incidents at each location. If not specified, each location is assumed to represent a single count.  
+  *Type:* Field.
+  
+- **Cell Size (Optional):** This value is used to create a mesh of points where density values are calculated.  
+  *Type:* Double.
+  
+- **Cell Size Units (Optional):** The units of the cell size value.  
+  *Type:* String.
+  
+- **Radius (Optional):** A distance specifying how far to search to find point or line features when calculating density values.  
+  *Type:* Double.
+  
+- **Radius Units (Optional):** The units of the radius value.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Layer:** The output polygon layer with classified density values.  
+  *Type:* Feature Set.
+
+The tool is designed to work with big datasets and allows users to gain insights into their data through patterns, trends, and anomalies. It is integrated into ArcGIS Pro and runs similarly to other desktop geoprocessing tools.
+**Toolset:** Analyze Patterns
+
+**Tool:** Find Hot Spots
+
+**Description:**  
+The Find Hot Spots tool identifies statistically significant spatial clustering of high values (hot spots) or low values (cold spots) using the Getis-Ord Gi* statistic. This tool is typically used in spatial analysis to uncover areas with unusually high or low values, which can be critical for resource allocation, policy-making, and understanding spatial phenomena. Examples of use cases include identifying areas with high crime rates, traffic accident fatalities, unemployment, or biodiversity. The tool can be applied to various datasets, such as home values, crime densities, or environmental data, to visualize and understand spatial patterns.
+
+**Parameters:**
+- **Input Features:** The point or polygon feature layer for which hot spots will be calculated.  
+  *Type:* Feature Set.
+- **Output Name:** The name of the output layer to create on your portal.  
+  *Type:* String.
+- **Analysis Field (Optional):** A numeric field to be evaluated, such as counts, rates, averages, or indices.  
+  *Type:* Field.
+- **Divide By Field (Optional):** A field used to normalize the analysis field, such as dividing the number of incidents by population.  
+  *Type:* Field.
+- **Bin Size:** The distance interval representing the bin size and units into which the Point Layer will be aggregated.  
+  *Type:* Linear Unit.
+- **Neighborhood Size:** The spatial extent of the analysis neighborhood, determining which features are analyzed together.  
+  *Type:* Linear Unit.
+- **Time Step Interval (Optional):** The interval used for the time step, applicable if time is enabled for Point Layer.  
+  *Type:* Time Unit.
+- **Time Step Alignment (Optional):** Specifies how time steps will be aligned, such as start time, end time, or reference time.  
+  *Type:* String.
+- **Data Store (Optional):** Specifies the ArcGIS Data Store where the output will be stored, either SPATIOTEMPORAL_DATA_STORE or RELATIONAL_DATA_STORE.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output:** The statistically significant hot spots.  
+  *Type:* Feature Set.
+
+Feel free to ask more about how this tool can be integrated into your workflows or explore other tools within the Analyze Patterns toolset.
+**Toolset:** Analyze Patterns
+
+**Tool:** Find Point Clusters
+
+**Description:**  
+The "Find Point Clusters" tool is designed to identify clusters of point features amidst surrounding noise based on their spatial or spatiotemporal distribution. This tool is particularly useful in spatial analysis for detecting natural groupings of data points, such as identifying areas of high activity or density within a dataset. For example, it can be used to find clusters of wildlife sightings, crime incidents, or disease outbreaks. The tool supports different clustering methods, including DBSCAN, HDBSCAN, and OPTICS, each offering unique ways to define and identify clusters based on distance and density parameters.
+
+**Parameters:**
+- **inputPoints:** The point features to be analyzed for clustering. Type: Feature Layer.
+- **outputName:** The name of the output feature class that will store the results. Type: String.
+- **minimumPoints:** The minimum number of points required to form a cluster. Type: Integer.
+- **searchDistance:** The distance within which points are considered to be part of the same cluster. Type: Linear Unit.
+- **dataStore:** The data store where the output will be saved. Type: String.
+- **clusterMethod:** The method used for clustering, such as DBSCAN, HDBSCAN, or OPTICS. Type: String.
+
+**Derived Output:**
+- **output:** The output point clusters, which include a feature set with cluster identifiers and other relevant attributes. Type: Feature Set.
+
+If you have further questions or need additional details, feel free to ask!
+**Toolset:** Analyze Patterns
+
+**Tool:** Forest-based Classification and Regression
+
+**Description:**  
+The Forest-based Classification and Regression tool in ArcGIS Pro is designed to create models and generate predictions using an adaptation of the random forest algorithm. This is a supervised machine learning method that can handle both classification (categorical variables) and regression (continuous variables). The tool is particularly useful for spatial analysis and GIS workflows where predictions need to be made based on a set of explanatory variables. These variables are typically fields in the attribute table of the training features. The tool is versatile and can be applied in various scenarios, such as predicting land cover types, estimating property values, or assessing environmental factors. It is especially effective for large datasets, providing robust predictions by aggregating the results of multiple decision trees to mitigate overfitting.
+
+**Parameters:**
+- **Input Features:** The layer containing the dependent and independent variables.  
+  *Type:* Record Set.
+- **Dependent Variable:** The numeric field containing the observed values to be modeled.  
+  *Type:* Field.
+- **Model Type:** Specifies the type of data that will be modeled. Options include Continuous (Gaussian), Binary (Logistic), and Count (Poisson).  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Trained Features:** Contains all of the Input Training Features used in the model, as well as predictions for all features used for training. This output helps assess the model's performance.  
+  *Type:* Feature Class.
+- **Tool Summary Messages:** Provides messages to help understand the model's performance, including information about model characteristics, variable importance, and validation diagnostics.  
+  *Type:* Text.
+
+The tool operates in two modes: "Train" to evaluate model performance and "Train and Predict" to generate predictions. It is optimized for large datasets and requires a thorough understanding of the data and problem context for effective use.
+**Toolset:** Analyze Patterns
+
+**Tool:** Generalized Linear Regression
+
+**Description:**  
+The Generalized Linear Regression (GLR) tool in ArcGIS Pro is designed to model a dependent variable based on its relationship with a set of explanatory variables. It supports three types of regression models: Continuous (Ordinary Least Squares - OLS), Binary (Logistic), and Count (Poisson). This tool is versatile and can be used for various applications such as predicting demographic characteristics that influence public transportation usage, examining relationships between vandalism and burglary, forecasting 911 call volumes, and assessing factors affecting low birth rates. The tool allows users to evaluate different models and explanatory variables to find the best fit before applying the model to new datasets. It generates output features and diagnostics, which are automatically added to the map with a rendering scheme applied to model residuals. The tool is particularly useful in social sciences for understanding relationships, predicting occurrences, and analyzing causes.
+
+**Parameters:**
+- **Input Features:** The feature class containing the dependent and explanatory variables.  
+  *Type:* Feature Layer.
+  
+- **Dependent Variable:** The numeric field containing the observed values to be modeled.  
+  *Type:* Field.
+  
+- **Model Type:** Specifies the type of data to be modeled. Options include Continuous (Gaussian), Binary (Logistic), and Count (Poisson).  
+  *Type:* String.
+  
+- **Explanatory Variable(s):** A list of fields representing independent explanatory variables in the regression model.  
+  *Type:* Field.
+
+**Derived Output:**
+- **Output Features:** The new feature class containing the dependent variable estimates and residuals.  
+  *Type:* Feature Class.
+
+The tool also provides diagnostics and charts that are written to the messages window, helping users to interpret the results and ensure the model is properly specified. It is important to use the correct model type for accurate regression analysis results.
+**Toolset:** Data Enrichment
+
+**Tool:** Calculate Motion Statistics
+
+**Description:**  
+The Calculate Motion Statistics tool is designed to compute motion statistics for points within a time-enabled feature class. This tool is particularly useful in spatial analysis workflows where understanding movement patterns is crucial, such as tracking wildlife, monitoring vehicle movements, or analyzing pedestrian flow. By enriching time-enabled points with movement data, users can gain insights into the dynamics of tracked entities. Typical use cases include calculating the speed, acceleration, and bearing of moving objects, which can be applied in fields like transportation planning, environmental studies, and security monitoring.
+
+**Parameters:**
+- **Input Layer:** The time-enabled point features on which motion statistics will be calculated.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** The output feature class or layer containing the points with new fields for each motion statistic that was calculated.  
+  *Type:* Feature Class.
+  
+- **Track Fields:** One or more fields used to identify distinct entities, known as tracks.  
+  *Type:* Field.
+  
+- **Track History Window (Optional):** The number of observations (including the current observation) used for summary statistics. Default is 3.  
+  *Type:* Long.
+  
+- **Motion Statistics (Optional):** Specifies the group of statistics to be calculated and written to the result. If unspecified, all statistics from all groups will be calculated.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output:** The output point features with motion statistics.  
+  *Type:* Feature Set.
+
+The tool calculates various statistics such as distance, speed, acceleration, duration, elevation, slope, and idle status, providing a comprehensive view of motion dynamics. These statistics are calculated for each point in a track, allowing for detailed analysis of movement patterns over time.
+**Toolset:** Find Locations
+
+**Tool:** Detect Incidents
+
+**Description:**  
+The "Detect Incidents" tool is designed to create a layer that identifies features meeting a specified condition. This tool is particularly useful in scenarios where you need to detect occurrences of specific events or conditions within a dataset. For example, it can be used to identify hurricane tracks where wind speeds exceed a certain threshold, or to detect areas where pollution levels surpass safe limits. This tool is integral in spatial analysis workflows that require the identification of incidents based on predefined criteria, allowing for targeted analysis and decision-making.
+
+**Parameters:**
+- **inFeatures**: The input features to be analyzed. Type: Feature Layer.
+- **outFS**: The output feature service where detected incidents will be stored. Type: Feature Layer.
+- **trackIdentifier**: A field used to identify unique tracks or paths within the data. Type: String.
+- **start_condition**: The condition that must be met for an incident to be detected. Type: String (Expression).
+
+**Derived Output:**
+- **output**: The output features that meet the given condition. Type: Record Set.
+
+The tool is part of the GeoAnalytics Desktop tools, which leverage parallel processing to handle large datasets efficiently. It requires ArcGIS GeoAnalytics Server for execution and is optimal for analyzing big data to uncover patterns, trends, and anomalies.
+**Toolset:** Find Locations
+
+**Tool:** Find Dwell Locations
+
+**Description:**  
+The Find Dwell Locations tool is designed to identify locations where moving objects have stopped or dwelled, using specified time and distance thresholds. This tool is particularly useful in spatial analysis for tracking movement patterns and identifying areas of interest where objects remain stationary for a period. Typical use cases include monitoring vehicle fleets, animal tracking, and maritime vessel movements. For example, a city might use this tool to analyze the dwell locations of snow plow trucks to optimize routes or identify areas needing more attention. Similarly, wildlife researchers can track animal movements to identify habitats or areas of frequent activity.
+
+**Parameters:**
+- **Input Features:** The point tracks in which dwells will be found. The input must be a time-enabled layer with features that represent instants in time.  
+  *Type:* Feature Layer.
+  
+- **Track Fields:** One or more fields that will be used to identify unique tracks.  
+  *Type:* Field.
+  
+- **Distance Method:** Specifies how the distances between dwell features will be calculated. Options include Geodesic and Planar.  
+  *Type:* String.
+  
+- **Distance Tolerance:** The maximum distance between points to be considered a single dwell location.  
+  *Type:* Linear Unit.
+  
+- **Time Tolerance:** The minimum time duration to be considered a single dwell location. Both time and distance are considered.  
+  *Type:* Time Unit.
+
+**Derived Output:**
+- **Output Dataset:** The output feature class with the resulting dwells.  
+  *Type:* Feature Class.
+
+The tool is powered by ArcGIS GeoAnalytics Server, which allows for distributed processing and is optimal for large datasets. It is recommended to use local data to improve performance and avoid potential failures due to network speeds or data size.
+**Toolset:** Find Locations
+
+**Tool:** Find Similar Locations
+
+**Description:**  
+The "Find Similar Locations" tool is designed to identify candidate features that are most similar or dissimilar to one or more input features based on their attributes. This tool is particularly useful in spatial analysis and GIS workflows where you need to compare and rank features according to their similarity to a reference feature. Typical use cases include market analysis to find stores similar to a top-performing store, environmental studies to identify areas with similar ecological characteristics, or urban planning to locate neighborhoods with similar demographic profiles.
+
+**Parameters:**
+- **Input Layer:** The reference layer containing the features to be matched. The tool searches for other features similar to these features. When more than one feature is provided, matching is based on attribute averages.  
+  *Type:* Record Set.
+  
+- **Search Layer:** The candidate layer containing features that are potential matches. The tool searches for features most similar (or dissimilar) to the Input Layer among these candidates.  
+  *Type:* Record Set.
+  
+- **Output Name:** The name of the output feature class. This feature class contains a record for each of the Input Layer parameters and their most similar matches.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Features:** This includes fields such as `simindex` and `cosimindex`, which quantify how similar each solution match is to the target feature. The `simindex` represents the sum of squared value differences, while the `cosimindex` represents cosine similarity. These fields are included based on the selected Match Method parameter value.  
+  *Type:* Feature Class.
+
+The tool is integrated into ArcGIS Pro and can be run using the GeoAnalytics Server for enhanced performance, especially when dealing with large datasets. It is recommended to use local data to improve performance and reduce processing time.
+**Toolset:** Summarize Data
+
+**Tool:** Aggregate Points
+
+**Description:**  
+The Aggregate Points tool is designed to aggregate point features into polygon features or bins. This tool is particularly useful for spatial analysis where you need to determine the number of points within a given area and calculate statistics for those points. For example, if you have a dataset of coffee shop locations with sales data, you can use this tool to find out the total sales within each neighborhood polygon, or calculate the average sales per shop. The tool can also be used to analyze patterns such as the distribution of disease outbreaks or traffic incidents by aggregating points into hexagonal or square bins.
+
+**Parameters:**
+- **Input Layer:** The point features to be aggregated.  
+  *Type:* Feature Layer.
+- **Output Name:** The name of the output feature service.  
+  *Type:* String.
+- **Polygon or Bin:** Specifies whether the points will be aggregated into existing polygons or into generated bins.  
+  *Type:* String.
+- **Bin Type (Optional):** The shape of the bins, either square or hexagon, if bins are used.  
+  *Type:* String.
+- **Bin Size (Optional):** The size of the bins if bins are used.  
+  *Type:* Linear Unit.
+- **Fields (Optional):** Fields used to calculate statistics for the points within each polygon or bin.  
+  *Type:* Field.
+- **Summary Fields (Optional):** The statistics to be calculated on specified fields, such as sum, mean, minimum, maximum, etc.  
+  *Type:* Value Table.
+
+**Derived Output:**
+- **Output Layer:** The resulting polygon or bin feature class containing aggregated point data and calculated statistics.  
+  *Type:* Feature Set.
+
+If you have further questions or need clarification on using the Aggregate Points tool, feel free to ask!
+**Toolset:** Summarize Data
+
+**Tool:** Describe Dataset
+
+**Description:**  
+The Describe Dataset tool in ArcGIS Pro is designed to summarize features into calculated field statistics, sample features, and extent boundaries. It is particularly useful for verifying the registration of time and geometry with big data file shares, understanding attribute values through summarized field statistics, and visualizing big data with a sample layer. This tool allows users to draw a sample instead of a full dataset, facilitating workflows that require sampling before scaling up for larger processing tasks. Additionally, it helps determine the geographical extent of a dataset. Typical use cases include creating a sample of a dataset for previewing, calculating summary statistics, and understanding the spatial and temporal extents of data.
+
+**Parameters:**
+- **Input Layer:** The point, line, polygon, or tabular features to be described.  
+  *Type:* Table View.
+- **Output:** A new table with the summary information.  
+  *Type:* Table.
+- **Sample Features (Optional):** The number of features to include in the output sample layer. If set to 0 or not provided, no sample is returned.  
+  *Type:* Long.
+- **Sample Layer (Optional):** A new feature class with a sample of the input data.  
+  *Type:* Table; Feature Class.
+- **Extent Layer (Optional):** A new feature class with the spatial and temporal extent of the input data.  
+  *Type:* Feature Class.
+
+**Derived Output:**
+- **Output Table:** Contains summary statistics for each field in the input layer, including geometry and time properties if applicable.  
+  *Type:* Table.
+- **Sample Layer (Optional):** A feature class with a sample of the input data, if specified.  
+  *Type:* Feature Class.
+- **Extent Layer (Optional):** A feature class with the spatial and temporal extent of the input data, if specified.  
+  *Type:* Feature Class.
+
+The Describe Dataset tool is a powerful component of the Summarize Data toolset, enabling users to efficiently manage and analyze large datasets by providing essential summaries and samples. If you have further questions or need assistance with another tool, feel free to ask.
+**Toolset:** Summarize Data
+
+**Tool:** Join Features
+
+**Description:**  
+The Join Features tool in ArcGIS Pro is designed to join attributes from one layer to another based on spatial, temporal, or attribute relationships. This tool is versatile and can be used for spatial analysis by combining data from different sources to enrich the target dataset with additional information. Typical use cases include analyzing the impact of environmental changes by joining weather data to geographic locations, or assessing infrastructure needs by joining demographic data to urban areas. For example, you can use this tool to determine the number of homes affected by a flood by joining a homes layer to a flood boundary using spatial relationships.
+
+**Parameters:**
+- **Target Layer:** Contains the target features. The attributes from the target features and the attributes from the joined features will be transferred to the output. Type: Table View.
+- **Join Layer:** Contains the join features. The attributes from the join features will be joined to the attributes of the target features. Type: Table View.
+- **Output Dataset:** The new feature class containing the target layer features with joined features. Type: Feature Class; Table.
+- **Join Operation:** Specifies how joins between the Target Layer values and the Join Layer values will be handled in the output if multiple join features have the same spatial relationship with a single target feature. Type: String.
+- **Join Field:** Joins the contents of a table to another table based on a common attribute field. Type: Field.
+
+**Derived Output:**
+- **Updated Input Table:** The updated input dataset with joined attributes. Type: Table View; Raster Layer; Mosaic Layer.
+
+If you have further questions or need clarification on any aspect of the Join Features tool, feel free to ask.
+**Toolset:** Summarize Data
+
+**Tool:** Reconstruct Tracks
+
+**Description:**  
+The "Reconstruct Tracks" tool in ArcGIS Pro is designed to create line or polygon tracks from time-enabled input data. This tool is particularly useful in scenarios where you need to analyze movement patterns or trajectories over time. For example, it can be used to track the movement of wildlife, vehicles, or weather patterns by reconstructing their paths based on time-stamped location data. The tool is part of the Summarize Data toolset, which focuses on calculating statistics and summarizing spatial data.
+
+**Parameters:**
+- **Input Layer:** The points or polygons to be reconstructed into tracks. The input must be a time-enabled layer that represents an instant in time.  
+  *Type:* Feature Set.
+  
+- **Output Name:** The name of the output feature service.  
+  *Type:* String.
+  
+- **Track Fields:** One or more fields that will be used to identify unique tracks.  
+  *Type:* Field.
+  
+- **Method:** Specifies the criteria that will be used to reconstruct tracks. Options include:
+  - **GEODESIC:** Tracks will cross the date line when appropriate if the spatial reference can be panned.
+  - **PLANAR:** Tracks will not cross the date line.  
+  *Type:* String.
+  
+- **Buffer Type:** Specifies how the buffer distance will be defined. Options include:
+  - **FIELD:** A single field will be used to define the buffer distance.
+  - **EXPRESSION:** An equation using fields and mathematical operators will be used to define the buffer distance.  
+  *Type:* String.
+  
+- **Buffer Field (Optional):** The field that will be used to buffer the input features.  
+  *Type:* Field.
+  
+- **Buffer Expression (Optional):** The expression that will be used to buffer input features.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Feature Class:** The output line or polygon tracks.  
+  *Type:* Feature Set.
+
+The tool is powered by ArcGIS GeoAnalytics Server, which allows for distributed processing and is optimized for handling large datasets. It is important to ensure that data is local to the server to avoid performance issues.
+**Toolset: Summarize Data**
+
+**Tool: Summarize Attributes**
+
+**Description:**  
+The "Summarize Attributes" tool is designed to calculate summary statistics for fields within a feature class. It is a tabular analysis tool, meaning it focuses on analyzing data in table format rather than spatial data directly. This tool can be applied to both tabular layers and layers with geometry, such as points, lines, or polygons. Users can choose to summarize one or more fields or all features. When summarizing by fields, the tool calculates statistics for each unique combination of attribute values, creating an output table with fields that contain the results of the statistical operations. These statistics include sum, max, min, range, standard deviation, count, variance, and any (for non-null values). The tool can be used in various GIS workflows, such as analyzing demographic data, calculating average property values within city boundaries, or summarizing crime types within neighborhood boundaries. Additionally, if the input data is time-enabled, time stepping can be applied to analyze each time step independently.
+
+**Parameters:**
+- **Input Layer:** The point, polyline, or polygon layer to be summarized. Type: *Record Set*.
+- **Output Name:** The name of the output feature service. Type: *String*.
+- **Fields:** A field or fields used to summarize similar features. For example, if you choose a single field called `PropertyType` with values of commercial and residential, all fields with the value `residential` will be summarized together, and all fields with the value `commercial` will be summarized together. Type: Field.
+- **Summary Fields (Optional):** The statistics that will be calculated on specified fields. Type: Value Table.
+- **Data Store (Optional):** Specifies the ArcGIS Data Store where the output will be stored. Options include:
+  - **Spatiotemporal big data store:** Output will be stored in a spatiotemporal big data store. This is the default.
+  - **Relational data store:** Output will be stored in a relational data store. Type: String.
+- **Time step interval (Optional):** A value that specifies the duration of the time step. This parameter is only available if the input points are time-enabled. Type: Time.
+
+**Derived Output:**
+- **Output Name:** The name of the output feature service. Type: String.
+- **Output Table:** A new table with the summarized attributes. Type: Table.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Center And Dispersion
+
+**Description:**  
+The "Summarize Center And Dispersion" tool is designed to find central features and directional distributions, and to calculate mean and median locations from the input data. This tool is particularly useful in spatial analysis for understanding the central tendency, dispersion, and directional trends of geographic features. For example, it can be used to calculate the directionality and movement of fire occurrences over time, which is crucial for analyzing patterns in environmental studies or disaster management. The tool can generate a mean center and a standard deviational ellipse, which helps in visualizing the spread and orientation of the data points.
+
+**Parameters:**
+- **Input Layer:** The point, line, or polygon layer to be summarized.  
+  *Type: Feature Set.*
+
+- **Output Name:** The name of the output feature service.  
+  *Type: String.*
+
+- **Generate Types:** Specifies the summary types to be generated. Options include Central Feature, Mean Center, Median Center, and Ellipse.  
+  *Type: String.*
+
+- **Ellipse Size (Optional):** Specifies the size of output ellipses in standard deviations. Options are 1_STANDARD_DEVIATION, 2_STANDARD_DEVIATIONS, and 3_STANDARD_DEVIATIONS.  
+  *Type: String.*
+
+- **Weight Field (Optional):** A numeric field used to weight locations according to their relative importance.  
+  *Type: Field.*
+
+- **Group By Field (Optional):** The field used to group similar features.  
+  *Type: Field.*
+
+**Derived Output:**
+- **Output Central Feature:** The output feature class that will contain the most centrally located feature in the input layer.  
+  *Type: Feature Class.*
+
+- **Output Mean Center (Optional):** The output point feature class that represents the mean center of the input layer.  
+  *Type: Feature Class.*
+
+- **Output Median Center (Optional):** The output point feature class that represents the median center of the input layer.  
+  *Type: Feature Class.*
+
+- **Output Ellipse (Optional):** Specifies the size of output ellipses in standard deviations.  
+  *Type: String.*
+
+The tool is powered by ArcGIS GeoAnalytics Server, which allows for distributed processing and is designed to handle large datasets efficiently. It is important to ensure that data is local to the GeoAnalytics Server to optimize performance. The tool is available with an ArcGIS Pro Advanced license and requires an active ArcGIS Enterprise portal with GeoAnalytics Server configured for the Feature Analysis - GeoAnalytics Tools setting.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Use Proximity
+
+**Tool:** Snap Tracks
+
+**Description:**  
+The Snap Tracks tool is designed to align input track points to lines within a spatial analysis framework. This tool is particularly useful for scenarios where time-enabled point data, representing an instant in time, needs to be matched to traversable lines. These lines must include fields indicating the from and to nodes for effective analysis. Typical use cases include tracking vehicle movements, such as snow plow trucks, where each vehicle records its location at regular intervals. By snapping these track points to a road network, users can analyze movement patterns, optimize routes, or assess connectivity within a transportation network.
+
+**Parameters:**
+- **Input Point Layer:** The time-enabled point feature class used for analysis. Type: Feature Layer.
+- **Input Line Layer:** The line feature class containing connectivity information. Type: Feature Layer.
+- **Track Identifier:** A field used to identify unique tracks. Type: Field.
+- **Search Distance:** The maximum distance within which track points can snap to lines. Type: Linear Unit.
+- **Connectivity Field Matching:** Specifies fields for matching connectivity between nodes. Type: String.
+- **Direction Value Matching:** Specifies fields for matching direction values. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** The feature class containing snapped track points. Type: Feature Class.
+
+The Snap Tracks tool is part of the Use Proximity toolset, which focuses on spatial analysis questions such as "What is near what?" It leverages distributed processing capabilities, making it suitable for handling large datasets efficiently.
+**Toolset:** Use Proximity
+
+**Tool:** Trace Proximity Events
+
+**Description:**  
+The "Trace Proximity Events" tool is designed to trace events that are near each other in both space (location) and time. This tool is particularly useful in spatial analysis workflows where understanding the proximity of events is crucial. Typical use cases include analyzing the spread of diseases, tracking wildlife movements, or monitoring environmental changes. For example, in epidemiology, it can be used to trace the proximity of disease outbreaks to identify potential transmission vectors. In wildlife studies, it can help trace animal movements to understand habitat usage patterns.
+
+**Parameters:**
+- **Input Points:** The time-enabled point feature class used to trace proximity events.  
+  *Type:* Feature Layer.
+  
+- **Entity ID Field:** A text field representing unique IDs for each entity.  
+  *Type:* Field.
+  
+- **Distance Method:** Specifies the distance type used with the Spatial Search Distance parameter. Options include:
+  - *Planar* — Uses planar distance between features (default).
+  - *Geodesic* — Uses geodesic distance, accounting for the Earth's curvature.  
+  *Type:* String.
+  
+- **Spatial Search Distance (Optional):** The maximum distance between two points to be considered in proximity.  
+  *Type:* Linear Unit.
+  
+- **Temporal Search Distance (Optional):** The maximum duration between two points to be considered in proximity.  
+  *Type:* Time Unit.
+  
+- **Define Entities of Interest Using (Optional):** Specifies the entities of interest. Options include:
+  - *Entities of Interest IDs* — Uses entity names and times.
+  - *Selected features in a specified entity of interest layer* — Uses selected features from a specified layer.  
+  *Type:* String.
+  
+- **Entities of Interest IDs:** Entity names and start times for the entities of interest. Supported only when Entities of Interest IDs is specified.  
+  *Type:* Value Table.
+
+**Derived Output:**
+- **Output Proximity Events:** The output feature class containing the trace proximity events.  
+  *Type:* Feature Class.
+
+If you have further questions or need clarification on any aspect of this tool, feel free to ask.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Aggregate Multidimensional Raster
+
+**Description:**  
+The Aggregate Multidimensional Raster tool is designed to generate a new multidimensional raster dataset by combining existing multidimensional raster variables along a specified dimension. This tool is particularly useful in scientific fields such as atmospheric, oceanographic, and earth sciences, where data is often collected over multiple times, depths, and heights. For example, it can be used to aggregate daily sea surface temperature data into monthly averages, creating a multidimensional raster with 12 time slices, each representing the aggregate of a month across several years. This tool supports various formats, including netCDF, HDF, GRIB, and Esri's Cloud Raster Format (CRF).
+
+**Parameters:**
+- **Input Multidimensional Raster:** The input multidimensional raster dataset.  
+  *Type:* Raster Dataset.
+  
+- **Variables:** The variable or variables that will be aggregated along the given dimension.  
+  *Type:* String.
+  
+- **Dimension Definition:** Specifies the method to filter the input multidimensional data before aggregation. Options include:
+  - *All:* Uses the full range for each dimension.
+  - *By Values:* Slices the dimension using a specific value or list of values.
+  - *By Ranges:* Slices the dimension using a range or list of ranges.
+  - *By Iteration:* Slices the dimension over a specified interval size.  
+  *Type:* String.
+  
+- **Values:** The dimension values to use for filtering the input data when the Dimension Definition is set to By Values.  
+  *Type:* String.
+  
+- **Ranges:** The minimum and maximum dimension values for filtering the input data when the Dimension Definition is set to By Ranges.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Multidimensional Raster:** The resulting multidimensional raster dataset, typically in Cloud Raster Format (CRF).  
+  *Type:* Raster Dataset.
+
+The tool is available with both the Spatial Analyst and Image Analyst licenses, and it supports the creation of compressed outputs using LZ77 or LERC compression types, which can be adjusted for accuracy and storage efficiency.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Dimensional Moving Statistics
+
+**Description:**  
+The Dimensional Moving Statistics tool calculates statistics over a moving window on multidimensional data along a specified dimension. This tool is particularly useful in analyzing scientific data captured at multiple times, depths, and heights, commonly used in atmospheric, oceanographic, and earth sciences. It allows for the computation of various statistics such as mean, minimum, maximum, and standard deviation over a predefined window around each dimension value. The tool is beneficial for tasks like analyzing temporal trends in climate data or assessing changes in oceanographic measurements over time.
+
+**Parameters:**
+- **Input Multidimensional Raster:** The input raster must be a multidimensional raster in Cloud Raster Format (.crf file).  
+  *Type:* Raster Dataset; Raster Layer; Mosaic Dataset; Mosaic Layer; Image Service; File.
+  
+- **Dimension (Optional):** Specifies the dimension from which the statistic will be extracted.  
+  *Type:* String.
+  
+- **Backward Window:** Defines the size of the window on the backward side of the dimension.  
+  *Type:* Integer.
+  
+- **Forward Window:** Defines the size of the window on the forward side of the dimension.  
+  *Type:* Integer.
+  
+- **Statistics Type:** Specifies the type of statistics to calculate, such as mean, minimum, maximum, etc.  
+  *Type:* String.
+  
+- **Circular Wrap Value (Optional):** Used for calculating circular mean for cyclic quantities like angles.  
+  *Type:* Double.
+
+**Derived Output:**
+- **Output Multidimensional Raster:** The resulting raster dataset after applying the moving statistics.  
+  *Type:* Raster Dataset; Raster Layer; Mosaic Dataset; Mosaic Layer; Image Service; File.
+
+If you have further questions or need clarification on any aspect of the Dimensional Moving Statistics tool, feel free to ask.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Find Argument Statistics
+
+**Description:**  
+The Find Argument Statistics tool is designed to extract the dimension value or band index at which a specific statistic is reached for each pixel in a multidimensional or multiband raster dataset. This tool is particularly useful in scenarios where you need to determine when or where a particular condition is met across a series of data layers. For example, it can be used to identify the month in which each pixel reached the highest sea surface temperature over a 30-year period or to find the band in which the minimum reflectance value was reached in an eight-band remote sensing image. The tool supports various multidimensional raster datasets, including those in Cloud Raster Format (CRF), multidimensional mosaic datasets, or those generated by netCDF, GRIB, or HDF format files. The output is a multidimensional raster dataset in CRF format, and if the input contains only one dimension, the output will be a single-band raster dataset.
+
+**Parameters:**
+- **Input Multidimensional or Multiband Raster:** The raster dataset to be analyzed.  
+  *Type:* Raster Dataset; Raster Layer; Mosaic Dataset; Mosaic Layer; Image Service; File.
+  
+- **Dimension (Optional):** The dimension from which the statistic will be extracted. This parameter is not required if the input raster is not multidimensional.  
+  *Type:* String.
+  
+- **Dimension Definition (Optional):** Specifies how the statistic will be extracted from the dimension. Options include "All" (default) for extraction across all dimensions, or "Interval Keyword" for extraction according to a specified interval.  
+  *Type:* String.
+  
+- **Keyword Interval (Optional):** The unit of time for which the statistic will be extracted, such as yearly for annual maximum temperature.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Multidimensional Raster:** The resulting raster dataset that includes the dimensions analyzed. If the input raster contains multiple dimensions, the output will include those dimensions not included in the analysis.  
+  *Type:* Multidimensional Raster Dataset.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Generate Multidimensional Anomaly
+
+**Description:**  
+The Generate Multidimensional Anomaly tool is designed to compute anomalies for each slice in an existing multidimensional raster dataset, resulting in a new multidimensional raster. This tool is particularly useful in scientific fields such as atmospheric, oceanographic, and earth sciences, where multidimensional data is prevalent. Anomalies are deviations from a mean or expected value, and identifying these can be crucial for understanding patterns and changes in environmental data. For example, this tool can be used to analyze sea surface temperature data to identify areas with temperatures significantly above or below the average, which is essential for predicting events like coral bleaching.
+
+**Parameters:**
+- **Input Multidimensional Raster:** The raster dataset containing the multidimensional data to be analyzed.  
+  *Type:* Raster Dataset; Mosaic Dataset; Image Service.
+  
+- **Variables:** Specifies the variables within the multidimensional raster to be analyzed for anomalies.  
+  *Type:* String.
+  
+- **Method:** The method used to calculate anomalies, such as PERCENT_DIFFERENCE_FROM_MEAN or Z_SCORE.  
+  *Type:* String.
+  
+- **Calculation Interval:** Defines the temporal interval for mean calculation, such as yearly or monthly.  
+  *Type:* String.
+  
+- **Reference Mean Raster:** An optional raster that provides a reference mean for anomaly calculation.  
+  *Type:* Raster Dataset.
+
+**Derived Output:**
+- **Output Multidimensional Raster:** The resulting raster dataset that contains the computed anomalies for each slice.  
+  *Type:* Raster Dataset.
+
+If you have further questions or need clarification on any aspect of the tool, feel free to ask.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Generate Trend Raster
+
+**Description:**  
+The Generate Trend Raster tool is designed to estimate the trend for each pixel along a specified dimension for one or more variables in a multidimensional raster. This tool is particularly useful in analyzing temporal or spatial patterns in scientific data, such as climate or oceanographic studies. For example, it can be used to identify warming trends in sea surface temperatures over time or to detect seasonal patterns in atmospheric data. The tool supports various types of trend lines, including linear, harmonic, polynomial, and Mann-Kendall, allowing for flexibility in fitting the data to the most appropriate model.
+
+**Parameters:**
+- **raster**: The input multidimensional raster.  
+  *Type: Raster.*
+
+- **dimension_name**: The name of the dimension along which a trend will be extracted for the selected variables.  
+  *Type: String.*
+
+- **regression_type**: Specifies the type of line to fit to the pixel values along a dimension. Options include LINEAR, HARMONIC, POLYNOMIAL, and MANN-KENDALL.  
+  *Type: String.*
+
+- **cycle_length**: (Optional) The length of the cycle for harmonic regression.  
+  *Type: Integer.*
+
+- **cycle_unit**: (Optional) The unit of the cycle length, such as days or months.  
+  *Type: String.*
+
+- **harmonic_frequency**: (Optional) The frequency of the harmonic regression.  
+  *Type: Integer.*
+
+- **polynomial_order**: (Optional) The order of the polynomial for polynomial regression.  
+  *Type: Integer.*
+
+- **ignore_nodata**: (Optional) Specifies whether to ignore NoData values in the analysis.  
+  *Type: Boolean.*
+
+- **rmse**: (Optional) Root Mean Square Error of the trend line.  
+  *Type: Double.*
+
+- **r2**: (Optional) Coefficient of determination for the trend line.  
+  *Type: Double.*
+
+- **slope_p_value**: (Optional) P-value for the slope of the trend line.  
+  *Type: Double.*
+
+- **seasonal_period**: (Optional) The period of the seasonal component for harmonic regression.  
+  *Type: Integer.*
+
+**Derived Output:**
+- **Trend Raster**: The output is a multidimensional raster dataset in Cloud Raster Format (CRF), which is optimized for cloud-based processing and analytics. This output can be used for further analysis or visualization in ArcGIS Pro.  
+  *Type: Raster Dataset.*
+
+Feel free to ask if you need more details on using this tool or its applications in specific scenarios.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Interpolate From Spatiotemporal Points
+
+**Description:**  
+The "Interpolate From Spatiotemporal Points" tool is designed to interpolate temporal point data into a multidimensional raster. This tool is particularly useful in scenarios where you have temporal data points and need to predict values at new locations. It is commonly used in environmental monitoring, meteorology, and agriculture. For example, it can predict air quality levels in areas without sensors, estimate soil nutrient levels for precision agriculture, or forecast temperature variations over time. The tool works by generating local interpolation models that are merged to create the final output raster, using methods like Empirical Bayesian Kriging for interpolation.
+
+**Parameters:**
+- **Input Point Features:** The input point features you want to interpolate.  
+  *Type:* Feature Set.
+  
+- **Interpolate Field:** The field containing the data values you want to interpolate. The field must be numeric.  
+  *Type:* Field.
+  
+- **Output Name:** The name of the output raster service. The default name is based on the tool name and the input layer name.  
+  *Type:* String.
+  
+- **Optimize For (Optional):** Choose your preference for speed versus accuracy. Options include Speed, Balance (default), and Accuracy.  
+  *Type:* String.
+  
+- **Transform Data to Normal Distribution (Optional):** Choose whether to transform your data to a normal distribution before performing analysis.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **Output Raster:** The output multidimensional raster dataset.  
+  *Type:* Raster Dataset.
+
+This tool is part of the ArcGIS Pro suite and requires an Image Analyst license. It is optimized for use with ArcGIS Enterprise portals configured for Raster Analysis, where processing occurs on federated servers.
+**Toolset: Multidimensional Analysis**
+
+**Tool: Multidimensional Principal Components**
+
+**Description:**  
+The Multidimensional Principal Components tool is designed to reduce the number of components that account for the variance in a multidimensional raster dataset. This reduction allows for easier identification of spatial and temporal patterns within the data. The tool is particularly useful in multivariate analysis, such as identifying necessary variables in a dataset or excluding those that do not affect the analysis result. In the context of multispectral and hyperspectral image analysis, the tool computes a set of principal components that capture most of the information, enabling analysis on a reduced number of bands. This is especially beneficial for analyzing image time series data or multidimensional raster data, which often contain multiple variables captured over various dimensions like time, depth, or height. The tool transforms a 3D image data cube into a set of principal components, maximizing variance to identify and extract features and patterns.
+
+**Parameters:**
+- **Input Multidimensional Raster:** The input multidimensional raster, which can be a raster dataset, mosaic dataset, raster layer, mosaic layer, or image service. The tool processes data along one dimension, such as a time series raster or a data cube defined by a non-time dimension [X, Y, Z].
+- **Number of Principal Components (Optional):** Specifies the number of principal components to be created. The number must be greater than zero and less than or equal to the number of input raster bands. The default is the total number of rasters in the input. Type: Long.
+- **Output ASCII Data File (Optional):** Stores principal component parameters, including correlation and covariance matrices, eigenvalues, and eigenvectors. Type: Data File.
+
+**Derived Output:**
+- **Output Multiband Raster:** The output is a multiband raster dataset. If all input bands are integer type, the output raster bands will be integer; otherwise, they will be floating point. Type: Raster.
+
+If you have further questions or need more details, feel free to ask!
+**Toolset: Multidimensional Analysis**
+
+**Tool: Multidimensional Raster Correlation**
+
+**Description:**  
+The Multidimensional Raster Correlation tool is designed to analyze correlations between two variables within one or two multidimensional rasters. This tool is particularly useful in scientific fields such as atmospheric, oceanographic, and earth sciences, where data is often captured across multiple times, depths, and heights. By examining the relationships between variables, users can gain insights into spatial and temporal patterns, which can be critical for understanding complex environmental phenomena. For example, this tool can be used to study the correlation between soil moisture and temperature over time, helping to identify trends or anomalies in climate data.
+
+**Parameters:**
+- **Input Raster 1**: The first multidimensional raster dataset to be analyzed. Type: Raster Dataset.
+- **Input Raster 2**: The second multidimensional raster dataset to be analyzed. Type: Raster Dataset.
+- **Dimension**: The dimension along which the correlation is calculated, such as time or depth. Type: String.
+- **Variable 1**: The specific variable from the first raster to be analyzed. Type: String.
+- **Variable 2**: The specific variable from the second raster to be analyzed. Type: String.
+- **Correlation Type**: The type of correlation to compute, such as Pearson. Type: String.
+- **Lag**: The time lag to apply when computing cross-correlation. Type: Integer.
+- **Cross Correlation**: Option to compute cross-correlation. Type: Boolean.
+- **P-Value**: Option to compute the p-value for the correlation. Type: Boolean.
+
+**Derived Output:**
+- **Output Raster**: The resulting raster dataset that contains the correlation values. When the lag parameter is not zero, cross-correlation at each lag is calculated and stored as bands in the output. Type: Raster Dataset.
+
+If you have further questions or need additional details, feel free to ask!
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Predict Using Trend Raster
+
+**Description:**  
+The "Predict Using Trend Raster" tool in ArcGIS Pro is designed to compute a forecasted multidimensional raster using the output trend raster from the "Generate Trend Raster" tool. This tool is particularly useful for predicting future values based on historical trends captured in multidimensional raster data. It is commonly applied in fields such as atmospheric, oceanographic, and earth sciences, where data is collected over multiple times, depths, and heights. For example, it can be used to predict sea surface temperatures over a specified time interval, providing insights into climate patterns and environmental changes.
+
+**Parameters:**
+- **Input Trend Raster:** The trend raster layer that contains the trend information. Type: Multidimensional Raster.
+- **Variables:** Specifies the variables to be predicted. Type: String.
+- **Dimension Definition:** Determines the values or intervals for prediction. Type: String.
+- **Start:** The start date for the prediction interval. Type: Date.
+- **End:** The end date for the prediction interval. Type: Date.
+- **Value Interval:** The interval value for prediction, such as weekly or monthly. Type: Integer.
+- **Unit:** The unit of the interval, such as days or weeks. Type: String.
+
+**Derived Output:**
+- **Output Multidimensional Raster:** The forecasted multidimensional raster containing predicted values. Type: Multidimensional Raster.
+
+If you have further questions or need clarification on any aspect of this tool, feel free to ask.
+**Toolset:** Multidimensional Analysis
+
+**Tool:** Summarize Categorical Raster
+
+**Description:**  
+The Summarize Categorical Raster tool is designed to generate a table that contains the pixel count for each class within each slice of an input categorical raster. This tool is particularly useful in spatial analysis workflows where understanding the distribution of categorical data across different dimensions is essential. Typical use cases include analyzing land cover changes over time, assessing fire risk classes in specific areas, or evaluating categorical data distributions in environmental studies. For example, it can be used to summarize land cover categories over a 20-year period in a specific geographic area, providing insights into changes and trends.
+
+**Parameters:**
+- **in_raster:**  
+  The input multidimensional raster of integer type.  
+  *Type:* Raster Dataset; Raster Layer; Mosaic Dataset; Mosaic Layer; Image Service; String.
+
+- **out_table:**  
+  The output summary table. Supported formats include Geodatabase, database, text, Microsoft Excel, and CSV tables.  
+  *Type:* Table.
+
+- **dimension (Optional):**  
+  The input dimension to use for the summary. If there is more than one dimension and no value is specified, all slices will be summarized using all combinations of dimension values.  
+  *Type:* String.
+
+- **aoi (Optional):**  
+  The polygon feature layer containing the area or areas of interest to use when calculating the pixel count per category. If no area of interest is specified, the entire raster dataset will be included in the analysis.  
+  *Type:* Feature Layer.
+
+- **aoi_id_field (Optional):**  
+  The field in the polygon feature layer that defines each area of interest. Text and integer fields are supported.  
+  *Type:* Field.
+
+**Derived Output:**
+- **outputTable:**  
+  The output summarized table containing the pixel count for each class in the input categorical raster.  
+  *Type:* Table.
+
+If you have further questions or need clarification on any aspect of this tool, feel free to ask.
+**Toolset: Overlay**
+
+**Tool: Apportion Polygon**
+
+**Description:**  
+The Apportion Polygon tool is designed to summarize the attributes of an input polygon layer based on the spatial overlay of a target polygon layer. It assigns the summarized attributes to the target polygons, resulting in target polygons with summed numeric attributes derived from the input polygons that each target overlaps. This process is known as apportioning or apportionment. A typical use case for this tool is estimating the population of one feature based on the percentage of that feature that overlays another feature with a known population. For example, if you have a polygon representing a city and another representing a district with known population data, the tool can estimate the city's population based on the overlapping area with the district.
+
+**Parameters:**
+- **Input Polygons:** The polygon features with numeric attributes that will be summarized into the target polygon geometries.  
+  *Type: Feature Layer.*
+
+- **Fields to Apportion:** The numeric fields from the input polygons that will be summarized by each target polygon and recorded in the output feature class. The optional statistic types include Sum, Mean, and Median.  
+  *Type: Value Table.*
+
+- **Target Polygons:** The polygon features and their apportioned fields that will be copied to the output feature class.  
+  *Type: Feature Layer.*
+
+- **Apportion Method:** Specifies the method used to apportion the fields from the input polygons to the target polygons. Options include Area and Length.  
+  *Type: String.*
+
+**Derived Output:**
+- **Output Feature Class:** The output feature class containing the attribute and geometries of the target polygons as well as the specified apportion fields from the input polygons.  
+  *Type: Feature Class.*
+
+The tool also supports parallel processing, which can be enabled to improve performance by distributing the workload across multiple cores.
+**Toolset:** Overlay
+
+**Tool:** Count Overlapping Features
+
+**Description:**  
+The "Count Overlapping Features" tool in ArcGIS Pro is designed to generate planarized overlapping features from the input features. It calculates the count of overlapping features and writes this information to the output features. This tool is particularly useful in spatial analysis where understanding the density or frequency of overlapping features is critical. For example, it can be used to analyze overlapping service areas of cellular networks, identify regions with multiple land use designations, or assess areas where multiple environmental protections overlap.
+
+**Parameters:**
+- **Input Features:** The input feature classes or layers. These can be point, multipoint, line, or polygon features. If multiple inputs are provided, they must all be of the same geometry type.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** The output feature class that will contain the overlap count.  
+  *Type:* Feature Class.
+  
+- **Minimum Overlap Count (Optional):** This parameter limits the output to only locations that meet or exceed the specified number of overlaps. The default value is 1.  
+  *Type:* Long.
+
+**Derived Output:**
+- **Output Feature Class:** The output feature class containing the overlap count. It includes fields such as `COUNT_` for the number of overlapping features in the input and `COUNT_FC` for the number of individual feature classes that overlap the feature.  
+  *Type:* Feature Class.
+
+The tool is particularly useful for GIS workflows that require the analysis of spatial relationships and the quantification of feature overlaps. It can be applied in various scenarios, such as urban planning, environmental management, and network analysis.
+We are unable to answer this question. Please rephrase your query.
+**Toolset: Overlay**
+
+**Tool: Identity**
+
+**Description:**  
+The Identity tool in the ArcGIS Pro Overlay toolset is used to overlay the geometries of two feature classes, resulting in a new feature class. This tool is particularly useful in spatial analysis for identifying and combining features or portions of features that overlap between the input and overlay layers. The output will contain the geometry of the input features and the attributes of both the input and overlay features. This is useful in scenarios such as determining which parcels are within a specific administrative boundary or identifying land use types within a particular area. For example, if you have a layer of wells and a layer of counties, using the Identity tool will result in a new layer that contains the wells with the additional information of the counties they are located in.
+
+**Parameters:**
+- **Input Features**: The point, line, or polygon features that will be overlaid with the identity features. Type: *Feature Layer*.
+- **Identity Features**: The features that will be overlaid with the input features. Type: *Feature Layer*.
+- **Output Feature Class**: The name of the output feature class. Type: *Feature Class*.
+- **JoinAttributes**: Specifies which attributes from the Identity Features will be transferred to the output feature class. Options are *ALL*, *NO_FID*, or *ONLY_FID*. Type: *String*.
+- **Cluster Tolerance**: The minimum distance separating all feature coordinates as well as the distance a coordinate can move in X or Y (or both). Type: *Linear Unit*.
+- **Relationship**: Specifies whether additional spatial relationships between the input features and identity features will be written to the output. Type: *Boolean*.
+
+**Derived Output:**
+- **Output Feature Class**: A new feature class with overlaid features. Type: *Feature Class*.
+
+The Identity tool is part of the Overlay toolset in ArcGIS Pro and is used to overlay the geometries from multiple layers into a single layer. It is particularly useful for combining, erasing, modifying, or updating spatial features. The Identity tool specifically retains features or portions of features from the input and overlay layers that overlap, writing them to the output layer. This tool is often used in scenarios such as determining which parcels are within a specific area, like a floodplain, or identifying land use on top of different soil types.
+
+If you have more questions or need further clarification, feel free to ask!
+**Toolset:** Overlay
+
+**Tool:** Intersect
+
+**Description:**  
+The Intersect tool in ArcGIS Pro is designed to compute the geometric intersection of multiple feature classes or layers. It identifies the common areas where features overlap across all input datasets and writes these intersections to a new output feature class. This tool is particularly useful in spatial analysis for tasks such as determining areas of overlap between different geographic datasets, such as land use and soil type, or identifying features within specific boundaries, like roads within counties. The tool can handle various geometry types, including points, lines, and polygons, and the output geometry type will be the same or of lower dimension than the input with the lowest dimension. The tool is capable of processing complex datasets, which may result in a significant increase in the number of output features due to intricate overlaps.
+
+**Parameters:**
+- **Input Layer:** The point, line, or polygon features that will be overlaid with the overlay layer.  
+  *Type:* Feature Set.
+  
+- **Overlay Layer:** The features that will be overlaid with the input layer features.  
+  *Type:* Feature Set.
+  
+- **Output Name:** The name of the output feature service.  
+  *Type:* String.
+  
+- **Overlay Type:** Specifies the type of overlay to be performed.  
+  *Type:* String.  
+  *Options:* Intersect (default), Union, Erase, Identity, Symmetrical Difference.
+  
+- **Include Overlapping Input Layers (Optional):** Specifies whether one or both of the input layers have overlapping features.  
+  *Type:* Boolean.  
+  *Options:* Checked (default), Unchecked.
+  
+- **Snap To Input (Optional):** Specifies if feature vertices in the input layer are allowed to move.  
+  *Type:* Boolean.  
+  *Options:* NO_SNAP (default), SNAP.
+  
+- **Tolerance (Optional):** A double value of the minimum distance separating all feature coordinates.  
+  *Type:* Double.
+
+**Derived Output:**
+- **Output Feature Layer:** The overlay of multiple layers into a single layer.  
+  *Type:* Feature Set.
+
+The Intersect tool is available with Basic, Standard, and Advanced licenses, and it supports various geoprocessing environments to optimize performance and manage large datasets effectively.
+We are unable to answer this question. Please rephrase your query.
+**Toolset: Overlay**
+
+**Tool: Spatial Join**
+
+**Description:**  
+The Spatial Join tool in ArcGIS Pro is used to join attributes from one layer to another based on the spatial relationship between the features in the layers. This tool is particularly useful when the layers do not share a common attribute field. It appends the attributes of one layer to another, similar to joining two tables by matching attribute values in a field. Typical use cases include finding the nearest feature, determining what is inside a polygon, or identifying intersecting features. For example, you can use the Spatial Join tool to determine the closest rail station to each tourist attraction, or to find the number of homes affected by a flood by joining the homes layer to the flood boundary using the "Within" spatial relationship.
+
+**Parameters:**
+- **Target Features:** The layer to which you want to join data. Type: Feature Layer.
+- **Join Features:** The layer whose attributes will be joined to the target features. Type: Feature Layer.
+- **Output Feature Class:** The new feature class that will contain the joined attributes. Type: Feature Class.
+- **Match Option:** Determines the spatial relationship between the features to be joined (e.g., Intersect, Within, Closest). Type: String.
+- **Field Map (Optional):** Specifies which attributes from each input feature class are kept in the output feature class. Type: Field Mappings.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class with joined attributes. Type: Feature Class.
+
+If you have further questions or need additional details, feel free to ask!
+**Toolset:** Overlay
+
+**Tool:** Symmetrical Difference
+
+**Description:**  
+The Symmetrical Difference tool in ArcGIS Pro is used to create a new feature class that contains features or portions of features from the input layer and the overlay layer that do not overlap. This tool is particularly useful in spatial analysis when you need to identify and extract areas that are unique to each dataset, excluding any shared or overlapping areas. For example, it can be used to determine the unique land areas between two different land use datasets, or to find the exclusive regions of two environmental zones.
+
+**Parameters:**
+- **Input Layer:** The point, line, or polygon features that will be overlaid with the overlay layer.  
+  *Type:* Feature Layer.
+- **Overlay Layer:** The features that will be overlaid with the input layer features.  
+  *Type:* Feature Layer.
+- **Output Feature Class:** A new feature class with the non-overlapping features from the input and overlay layers.  
+  *Type:* Feature Class.
+- **Overlay Type:** Specifies the type of overlay to be performed. For Symmetrical Difference, features or portions of features in the input layer and overlay layer that do not overlap will be written to the output layer.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class containing the non-overlapping features from the input and overlay layers.  
+  *Type:* Feature Class.
+
+If you have further questions or need additional details about using the Symmetrical Difference tool in your workflows, feel free to ask!
+**Toolset:** Overlay
+
+**Tool:** Union
+
+**Description:**  
+The Union tool in ArcGIS Pro computes a geometric union of input features, specifically polygon feature classes or layers. This tool is used to overlay multiple feature classes, resulting in a new feature class that contains all features and their attributes from the input layers. The Union tool is particularly useful in spatial analysis workflows where the goal is to combine spatial data from different sources to understand relationships or create new datasets. Typical use cases include environmental impact assessments, land use planning, and resource management. For example, Union can be used to determine areas where different land use types overlap or to combine various environmental datasets to assess cumulative impacts.
+
+**Parameters:**
+- **Input Features:** The polygon feature classes or layers to be combined.  
+  *Type:* Feature Layer.
+- **Output Feature Class:** The feature class where the results will be written.  
+  *Type:* Feature Class.
+- **Attributes to Join (Optional):** Specifies which attributes will be transferred to the output feature class. Options include all attributes, all except feature IDs, or only feature IDs.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Feature Class:** A new feature class containing the geometric union of the input features, along with all attributes from the input feature classes.  
+  *Type:* Feature Class.
+
+The Union tool is a powerful component of the Overlay toolset, enabling comprehensive spatial analysis by merging data from multiple sources into a single, unified dataset.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Projections and Transformations
+
+**Tool:** Create Custom Geographic Transformation
+
+**Description:**  
+The Create Custom Geographic Transformation tool is designed to create a transformation definition for converting data between two geographic coordinate systems or datums. This tool is essential for ensuring spatial data compatibility across different geographic systems, which is crucial in spatial analysis and GIS workflows. Typical use cases include transforming data from one global coordinate system to another, such as converting data from WGS84 to NAD 1927. This tool is particularly useful when working with datasets that require specific transformations not provided by default in ArcGIS Pro, allowing users to define custom transformations that can be applied in various geoprocessing tasks.
+
+**Parameters:**
+- **Transformation Name:** The name of the custom transformation definition.  
+  *Type:* String.
+  
+- **Source Geographic Coordinate System:** The starting geographic coordinate system.  
+  *Type:* Spatial Reference.
+  
+- **Target Geographic Coordinate System:** The final geographic coordinate system.  
+  *Type:* Spatial Reference.
+  
+- **Transformation Method:** The method used for the transformation, such as Geocentric_Translation or Molodensky.  
+  *Type:* String.
+  
+- **Parameters:** Specific parameters required by the chosen transformation method, such as X, Y, and Z axis translations.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Transformation:** The resulting transformation definition that can be used in other geoprocessing tools requiring geographic transformations.  
+  *Type:* Value Table.
+
+If you have further questions or need clarification on any aspect of this tool, feel free to ask.
+**Toolset:** Projections and Transformations
+
+**Tool:** Create Custom Vertical Transformation
+
+**Description:**  
+The Create Custom Vertical Transformation tool is designed to create a transformation definition for converting data between two vertical coordinate systems or datums. This tool is essential for GIS workflows that require accurate vertical data transformation, such as converting between ellipsoidal heights and gravity-related heights or between two gravity-related height systems. It is particularly useful in scenarios where standard transformations do not meet specific project requirements, allowing users to define custom transformations that can be applied in various geoprocessing tasks. Typical use cases include transforming elevation data for hydrological modeling, engineering projects, or any spatial analysis requiring precise vertical alignment.
+
+**Parameters:**
+- **Vertical Transformation Name:** The name of the custom transformation definition.  
+  *Type:* String.
+  
+- **Source Vertical Coordinate System:** The starting vertical coordinate system. Provide a well-known ID (WKID) or use the Select Coordinate System button to select a coordinate system.  
+  *Type:* String.
+  
+- **Target Vertical Coordinate System:** The final vertical coordinate system. Provide a WKID or use the Select Coordinate System button to select a coordinate system.  
+  *Type:* String.
+  
+- **Interpolation Geographic Coordinate System (Optional):** The geographic coordinate system used when interpolating offset values from a file, or latitude and longitude coordinates are required by the method.  
+  *Type:* Coordinate System.
+  
+- **Vertical Transformation Method (Optional):** The method used to transform the data from the input vertical coordinate system to the output vertical coordinate system.  
+  *Type:* String.
+
+**Derived Output:**
+- **out_transformation:** The output transformation object that can be used in other geoprocessing tools requiring a vertical transformation.  
+  *Type:* Value Table.
+
+If you have further questions or need clarification on any aspect of this tool, feel free to ask.
+**Toolset:** Projections and Transformations
+
+**Tool:** Create Spatial Reference
+
+**Description:**  
+The "Create Spatial Reference" tool in ArcGIS Pro is designed to create a spatial reference for use in ModelBuilder. This tool allows users to define a spatial reference with a specific coordinate system, spatial domains, and precision. It is particularly useful in workflows where a consistent spatial reference is required across multiple datasets or processes. The tool can be used to set the XY, Z, and M domains, which define the valid range of coordinate values that can be stored in a feature class. These domains ensure that the data remains within specified bounds, which is crucial for maintaining data integrity in spatial analysis. The tool is flexible, allowing for the modification of spatial domains and precision through various parameters. If no parameters are specified, the spatial reference defaults to "Unknown," and standard defaults are applied to the XY Domain.
+
+**Parameters:**
+- **Spatial Reference (Optional):** The name of the spatial reference to be created.  
+  *Type:* Spatial Reference.
+  
+- **Spatial Reference Template (Optional):** A feature class or layer used as a template to set the spatial reference value.  
+  *Type:* Feature Layer; Raster Dataset.
+  
+- **XY Domain (Optional):** The allowable coordinate range for x,y coordinates.  
+  *Type:* Envelope.
+  
+- **Z Domain (min max) (Optional):** The allowable coordinate range for z-values.  
+  *Type:* String.
+  
+- **M Domain (min max) (Optional):** The allowable coordinate range for m-values.  
+  *Type:* String.
+  
+- **Template XYDomains (Optional):** Feature classes or layers that can be used to define the XY Domain.  
+  *Type:* Feature Layer.
+  
+- **Grow XYDomain By Percentage (Optional):** The percentage by which the XY Domain will be expanded.  
+  *Type:* Double.
+
+**Derived Output:**
+- **Output Spatial Reference:** The output spatial reference that can be used in ModelBuilder as input to tools requiring a spatial reference parameter.  
+  *Type:* Spatial Reference.
+**Toolset:** Projections and Transformations
+
+**Tool:** Define Projection
+
+**Description:**  
+The Define Projection tool is used to overwrite the coordinate system information (map projection and datum) stored with a dataset. This tool is particularly useful for datasets that have an unknown or incorrect coordinate system defined. It does not transform or project the data; instead, it assigns a coordinate system to the dataset. This is essential when working with spatial data that lacks proper spatial reference information, ensuring that the data aligns correctly with other spatial datasets. Typical use cases include preparing datasets for spatial analysis, ensuring data compatibility in GIS workflows, and correcting datasets with missing or incorrect spatial references.
+
+**Parameters:**
+- **Input Dataset or Feature Class:** The dataset or feature class whose projection will be defined.  
+  *Type:* Feature Layer; Geodataset.
+  
+- **Coordinate System:** The coordinate system that will be applied to the input. Valid values include a SpatialReference object, a file with a .prj extension, or a string representation of a coordinate system.  
+  *Type:* Coordinate System.
+
+**Derived Output:**
+- **Update Input Dataset or Feature Class:** The updated input geodataset with the newly defined projection.  
+  *Type:* Geodataset.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Sampling
+
+**Tool:** Create Fishnet
+
+**Description:**  
+The Create Fishnet tool generates a feature class containing a grid of rectangular cells, known as a fishnet. This tool is typically used in spatial analysis to create a structured grid over a specified area, which can be used for various purposes such as sampling, aggregation, or spatial modeling. The fishnet can be created as either polyline or polygon features, depending on the user's needs. For example, it can be used to overlay a study area to analyze spatial patterns or to divide a region into manageable sections for further analysis. The tool allows flexibility in defining the spatial extent, cell size, and orientation, making it adaptable to different GIS workflows.
+
+**Parameters:**
+- **Output Feature Class:** The feature class that will contain the fishnet of rectangular cells.  
+  *Type:* Feature Class.
+  
+- **Fishnet Origin Coordinate:** The starting point of the fishnet.  
+  *Type:* Point.
+  
+- **Y-Axis Coordinate:** The y-axis coordinate used to orient the fishnet, determining its rotation angle.  
+  *Type:* Point.
+  
+- **Cell Size Width:** The width of each cell in the fishnet. If unspecified or set to zero, it will be calculated based on the number of rows.  
+  *Type:* Double.
+  
+- **Cell Size Height:** The height of each cell in the fishnet. If unspecified or set to zero, it will be calculated based on the number of columns.  
+  *Type:* Double.
+  
+- **Number of Rows:** Specifies the number of rows in the fishnet. If set to zero, it will be calculated based on the cell size width.  
+  *Type:* Long.
+  
+- **Number of Columns:** Specifies the number of columns in the fishnet. If set to zero, it will be calculated based on the cell size height.  
+  *Type:* Long.
+
+**Derived Output:**
+- **Label Points Feature Class:** If the Create Label Points parameter is checked, a point feature class will be created with label points at the center of each fishnet cell. This feature class will have the same name as the output fishnet feature class with a suffix of `_label`.  
+  *Type:* Feature Class.
+**Toolset: Sampling**
+
+**Tool: Create Random Points**
+
+**Description:**  
+The **Create Random Points** tool is designed to generate a specified number of random point features within a defined area. These random points can be created within an extent window, inside polygon features, on point features, or along line features. This tool is particularly useful in spatial analysis and GIS workflows for tasks such as creating sampling locations for environmental studies, conducting random surveys, or generating points for spatial modeling and analysis. For example, it can be used to randomly distribute points within a forest area to study biodiversity or to generate random sampling locations for soil testing in agricultural fields.
+
+**Parameters:**
+- **Number of Points**: Specifies the total number of random points to be generated. This can be a fixed number or a numeric field in the constraining feature class that contains values for how many random points to place within each feature. Type: Long.
+- **Constraining Feature Class**: Defines the area in which random points will be generated. This can be a polygon, point, or line feature class. If a constraining feature class with more than one feature is used, and the total number of random points is specified, the Dissolve tool should be used first to ensure the constraining feature class contains a single feature. Type: Feature Class.
+- **Constrain to Extent**: An extent window can be used to define the area for generating random points. Type: Extent.
+
+Derived Output:
+- **Output Point Feature Class**: The output is a point feature class containing the generated random points. Type: Feature Class.
+
+The tool is versatile and can be used in various scenarios where random sampling is required, such as environmental monitoring, resource management, and spatial data analysis.
+**Toolset:** Sampling
+
+**Tool:** Create Spatial Sampling Locations
+
+**Description:**  
+The "Create Spatial Sampling Locations" tool is designed to generate sample locations within a continuous study area using various sampling designs, including simple random, stratified, systematic (gridded), or cluster sampling. This tool is particularly useful in spatial analysis and GIS workflows for tasks such as environmental monitoring, resource management, and spatial data collection. For example, it can be used to create sample points in different land use categories of a raster, or to design a monitoring network by suggesting locations for sample collection based on inclusion probabilities. The tool supports the creation of sample points in a hexagonal tessellation within a polygon study area, or cluster sampling with diamond-shaped polygons.
+
+**Parameters:**
+- **Input Study Area:** The area within which sample locations will be generated. Type: Raster or Feature Class.
+- **Output Features:** The feature class where the generated sample locations will be stored. Type: Feature Class.
+- **Sampling Method:** Specifies the sampling design to be used (e.g., STRAT_ID, SYSTEMATIC, CLUSTER). Type: String.
+- **Strata ID Field (Optional):** Field used to define strata for stratified sampling. Type: Field.
+- **Strata Count Method (Optional):** Method to define the number of samples per stratum (e.g., FIELD, PROP_AREA). Type: String.
+- **Population Field (Optional):** Field used to define the number of samples in each category for stratified sampling. Type: Field.
+- **Bin Shape (Optional):** Shape of the tessellation for systematic sampling (e.g., HEXAGON, DIAMOND). Type: String.
+- **Bin Size (Optional):** Size of the tessellation bins. Type: String.
+- **Number of Samples (Optional):** Total number of samples to be generated. Type: Long.
+- **Output Geometry Type (Optional):** Type of geometry for the output features (e.g., POINT). Type: String.
+
+**Derived Output:**
+- **Sample Locations:** The generated sample locations within the study area. Type: Feature Class.
+**Toolset:** Sampling
+
+**Tool:** Create Spatially Balanced Points
+
+**Description:**  
+The "Create Spatially Balanced Points" tool is designed to generate a set of sample points that are spatially balanced based on inclusion probabilities. This tool is particularly useful for designing monitoring networks by suggesting optimal locations for sample collection. It allows users to define preferences for specific locations using an inclusion probability raster. Typical use cases include environmental monitoring, resource management, and any scenario where a spatially balanced sample design is required to ensure comprehensive coverage of the study area.
+
+**Parameters:**
+- **Inclusion Probability Raster:**  
+  *Description:* A raster dataset where each cell value represents the probability of that location being included in the sample.  
+  *Data Type:* Raster Layer.
+
+- **Number of Points:**  
+  *Description:* The total number of sample points to be generated.  
+  *Data Type:* Long.
+
+- **Output Feature Class:**  
+  *Description:* The feature class that will store the generated sample points.  
+  *Data Type:* Feature Class.
+
+**Derived Output:**
+- **Output Feature Class:**  
+  *Description:* Contains the selected sample locations and their inclusion probabilities.  
+  *Data Type:* Feature Class.
+
+The tool requires the Geostatistical Analyst extension and is particularly effective in scenarios where spatial independence between samples is crucial, maximizing the efficiency of the sampling design. The inclusion probability raster must have values between 0 and 1, with higher values indicating a higher likelihood of inclusion in the sample design. The tool ensures that sample points are located at the centers of raster cells, and a smaller cell size can provide more potential locations for sample points.
+**Toolset:** Sampling
+
+**Tool:** Generate Points Along Lines
+
+**Description:**  
+The "Generate Points Along Lines" tool is designed to create point features along line or polygon features. This tool is particularly useful in spatial analysis and GIS workflows where there is a need to sample or analyze data at regular intervals along a linear feature. Typical use cases include environmental monitoring, where points might represent sampling locations along a river or road, or infrastructure management, where points could indicate inspection sites along a pipeline or power line. The tool allows for flexibility in point placement, either at fixed intervals, by percentage of the feature's length, or using specific field values to determine distances.
+
+**Parameters:**
+- **Input Features:** The line or polygon features along which points will be generated.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** The feature class that will store the generated points.  
+  *Type:* Feature Class.
+  
+- **Point Placement (Optional):** Specifies the method for placing points along the features. Options include:
+  - By Distance: Points are placed at fixed distances.
+  - By Percentage: Points are placed by percentage of the feature's length.
+  - By Distance Field: Points are placed using values from a specified field.  
+  *Type:* String.
+  
+- **Distance (Optional):** The interval at which points will be placed along the feature. This is used when the Point Placement is set to By Distance.  
+  *Type:* Linear Unit.
+  
+- **Percentage (Optional):** The percentage of the feature's length at which points will be placed. This is used when the Point Placement is set to By Percentage.  
+  *Type:* Double.
+  
+- **Distance Field (Optional):** A field containing distances at which points will be placed. This is used when the Point Placement is set to By Distance Field.  
+  *Type:* Field.
+  
+- **Distance Method (Optional):** Specifies the measurement method for creating points. Options include:
+  - PLANAR: Uses 2D Cartesian mathematics.
+  - GEODESIC: Calculates distances on the earth's surface.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Feature Class:** The generated point features along the input lines or polygons.  
+  *Type:* Feature Class.
+
+If you have further questions or need additional details, feel free to ask!
+**Toolset:** Sampling
+
+**Tool:** Generate Rectangles Along Lines
+
+**Description:**  
+The "Generate Rectangles Along Lines" tool creates a series of rectangular polygons that follow a single linear feature or a group of linear features. This tool is particularly useful in spatial analysis and GIS workflows where there is a need to create buffer zones or study areas along linear features such as roads, rivers, or utility lines. For example, it can be used to delineate riparian zones along streams or to define areas of interest along transportation corridors. The tool assigns several attributes to the resulting features, including:
+
+- **ID:** An incremental number assigned to each feature.
+- **GroupId:** An integer assigned to all features in a connecting chain or group of line features. This helps in identifying features that originate from a connected set of line features or from a single line with multiple, unconnected parts.
+- **SeqId:** An incremental number based on the creation order for each feature within a group.
+- **Previous/Next:** References to the previous and next SeqId in each group, except for the first and last records, which may reference neighboring elements outside the group.
+- **Angle:** Values calculated against the default map orientation, where 0 degrees is due North.
+
+**Parameters:**
+- **Input Features:** The line features along which rectangles will be generated. Type: Feature Layer.
+- **Output Feature Class:** The output feature class containing the generated rectangular polygons. Type: Feature Class.
+- **Rectangle Width:** The width of each rectangle. Type: Linear Unit.
+- **Rectangle Length:** The length of each rectangle. Type: Linear Unit.
+- **Orientation:** The angle at which the rectangles will be oriented relative to the input line features. Type: Double.
+
+**Derived Output:**
+- **Output Feature Class:** The feature class containing the generated rectangles with attributes such as ID, GroupId, SeqId, Previous, Next, and Angle. Type: Feature Class.
+
+If you have further questions or need additional details, feel free to ask!
+**Toolset:** Sampling
+
+**Tool:** Generate Tessellation
+
+**Description:**  
+The Generate Tessellation tool in ArcGIS Pro is designed to create a tessellated grid of regular polygon features that cover a specified extent. This tool is particularly useful in spatial analysis and GIS workflows where there is a need to aggregate data or perform spatial sampling. The tessellation can be composed of various shapes, including triangles, squares, diamonds, hexagons, H3 hexagons, or transverse hexagons. Typical use cases include creating a uniform grid for environmental monitoring, urban planning, or any scenario where spatial data needs to be aggregated or analyzed over a regular pattern.
+
+**Parameters:**
+- **Input Extent:** The area within which the tessellation will be generated. Type: Feature Layer.
+- **Geometry Type:** Specifies the shape of the tessellation polygons (e.g., triangles, squares, hexagons). Type: String.
+- **Output Feature Class:** The feature class that will store the tessellated polygons. Type: Feature Class.
+- **Cell Size:** The size of each tessellation cell. Type: Double.
+- **Coordinate System:** The coordinate system for the output tessellation. Type: Spatial Reference.
+
+**Derived Output:**
+- **Tessellated Grid:** The output layer containing the tessellated polygons. Type: Feature Class.
+
+If you have further questions or need additional details about using the Generate Tessellation tool, feel free to ask!
+**Toolset:** Sampling
+
+**Tool:** Generate Transects Along Lines
+
+**Description:**  
+The "Generate Transects Along Lines" tool is designed to create perpendicular transect lines at regular intervals along specified line features. This tool is particularly useful in spatial analysis and GIS workflows where sampling or monitoring along linear features is required. Typical use cases include environmental studies, where transects are used to sample vegetation or soil properties across a landscape, or hydrological studies, where transects might be used to measure water quality across a river. The tool is most effective when the input features have a projected coordinate system suitable for local distance measurements, such as Equidistant or UTM systems. The output transect lines contain an attribute, ORIG_FID, which stores the Object ID of the input feature, allowing for additional attributes to be joined from the input features.
+
+**Parameters:**
+- **Input Features:** The line features along which perpendicular transect lines will be generated.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** The output perpendicular transect lines generated along the input features.  
+  *Type:* Feature Class.
+  
+- **Distance Between Transects:** The interval from the beginning of the feature at which transects will be placed.  
+  *Type:* Linear Unit.
+  
+- **Transect Length:** The length or width of the transect line. Each transect is placed such that half its length falls on one side of the line, and half on the other.  
+  *Type:* Linear Unit.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the generated transect lines with the ORIG_FID attribute.  
+  *Type:* Feature Class.
+**Toolset: Sampling**
+
+**Tool: Subset Features**
+
+**Description:**  
+The "Subset Features" tool in ArcGIS Pro is designed to divide the records of a feature class or table into two distinct subsets. One subset is used as training data, while the other is used as test features to compare and validate the output surface. This tool is particularly useful in spatial analysis workflows where model validation is necessary, such as in predictive modeling or machine learning applications. For example, it can be used to split a dataset of geographic points into training and testing sets to evaluate the accuracy of spatial predictions.
+
+**Parameters:**
+- **Input point features:** The points that will be grouped into subsets.  
+  *Type: Feature Layer.*
+
+- **Output feature class:** The polygons defining the region of each subset. All points within a single polygon feature are considered part of the same subset. The polygon feature class will contain a field named `PointCount` that will store the number of points contained in each polygon subset.  
+  *Type: Feature Class.*
+
+- **Minimum number of points per subset (Optional):** The minimum number of points that can be grouped into a subset. All subset polygons will contain at least this many points.  
+  *Type: Long.*
+
+- **Maximum number of points per subset (Optional):** The maximum number of points that can be grouped into a subset. Each subset will always contain fewer than two times the minimum number of points per subset regardless of the maximum number provided.  
+  *Type: Long.*
+
+- **Treat coincident points as a single point (Optional):** Specifies whether coincident points (points that are at the same location) are treated like a single point or as multiple individual points.  
+  *Type: Boolean.*
+
+**Derived Output:**
+- **Output feature class:** The polygons defining the region of each subset, with a field named `PointCount` indicating the number of points in each subset.  
+  *Type: Feature Class.*
+
+If you have further questions or need additional details, feel free to ask!
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Visibility
+
+**Tool:** Visibility
+
+**Description:**  
+The Visibility tool in ArcGIS Pro is designed to determine the raster surface locations visible to a set of observer features or identify which observer points are visible from each raster surface location. This tool is essential for visibility analysis, which is useful in various scenarios such as determining the visibility of objects from specific locations, assessing the visual impact of structures, or planning surveillance and monitoring activities. For example, it can be used to identify areas visible from observation towers, assess the visibility of water towers from different landscape locations, or determine the view from a road. The tool supports two types of visibility analysis: Frequency, which calculates how many times each pixel location can be seen by the observers, and Observers, which identifies which observers are visible from each raster surface location.
+
+**Parameters:**
+- **Input Observer Features:** The input observer points.  
+  *Type:* Feature Set.
+  
+- **Input Surface:** The input elevation raster surface.  
+  *Type:* Raster Layer; Mosaic Dataset; Mosaic Layer.
+  
+- **Output Visibility:** The output polygon feature class showing visible and nonvisible surface areas.  
+  *Type:* Feature Class.
+  
+- **Radius Of Observer (meters) (Optional):** The radius of the analysis area from the observer.  
+  *Type:* Double.
+  
+- **Observer Height Above Surface (meters) (Optional):** The height added to the surface elevation of the observer. The default is 2.  
+  *Type:* Double.
+
+**Derived Output:**
+- **Output Feature Class:** The updated 3D sight lines.  
+  *Type:* Feature Layer.
+
+The Visibility tool is available with the Spatial Analyst and 3D Analyst licenses, and it can be accelerated using a Graphics Processing Unit (GPU) for enhanced performance. It does not require a z-factor parameter, as it uses the z units of the input spatial reference. The tool performs computations in a true 3D coordinate system, ensuring accurate visibility analysis.
+**Toolset:** Visibility
+
+**Tool:** Construct Sight Lines
+
+**Description:**  
+The Construct Sight Lines tool in ArcGIS Pro is designed to create line features that represent sight lines from one or more observer points to features in a target feature class. This tool is particularly useful in visibility analysis, where determining what can be seen from a specific location is crucial. Typical use cases include urban planning, where planners need to assess the visibility of landmarks or potential obstructions, and defense applications, where line of sight is critical for surveillance and strategic planning. For example, this tool can be used to generate sight lines from a series of observation towers to various points of interest in a city, helping to determine which areas are visible and which are obstructed by buildings or terrain.
+
+**Parameters:**
+- **Sight Lines:** The 3D sight lines whose visibility will be determined.  
+  *Type:* Feature Layer.
+- **Obstructions:** The mesh and surface datasets that provide potential obstructions for sight lines. These can include multipatch features, integrated mesh scene layers, TIN datasets, and raster surfaces.  
+  *Type:* Feature Layer; TIN Layer; Raster Layer; Mosaic Layer; Scene Layer; File.
+- **Visible Field Name (Optional):** The name of the field that will store the visibility results. A value of 0 indicates that the sight line's start and end points are not visible to one another, while a value of 1 indicates visibility. The default field name is VISIBLE.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Feature Class:** The updated 3D sight lines.  
+  *Type:* Feature Layer.
+
+If you have further questions or need additional details, feel free to ask!
+**Toolset: Visibility**
+
+**Tool: Intervisibility**
+
+**Description:**  
+The Intervisibility tool in ArcGIS Pro is designed to determine the visibility of sight lines using potential obstructions defined by any combination of 3D features and surfaces. This tool is particularly useful in spatial analysis and GIS workflows where understanding the line of sight between two points is crucial. For example, it can be used to assess the visibility between observer points and target lines, taking into account obstructions such as buildings or natural terrain features. This is particularly useful in urban planning, military operations, and environmental studies where line-of-sight analysis is critical for decision-making.
+
+**Parameters:**
+- **sight_lines**: The 3D sight lines whose visibility will be determined. Type: Feature Layer.
+- **obstructions**: The mesh and surface datasets that provide potential obstructions for sight lines. These can be defined by any combination of multipatch features, integrated mesh scene layers, TIN datasets, and raster surfaces. Type: Feature Layer; TIN Layer; Raster Layer; Mosaic Layer; Scene Layer; File.
+- **visible_field** (Optional): The name of the field that will store the visibility results. A resulting value of 0 indicates that the sight line's start and end points are not visible to one another, while a value of 1 indicates visibility. The default field name is VISIBLE. Type: String.
+
+Derived Output:
+- **out_feature_class**: The updated 3D sight lines. Type: Feature Layer.
+
+The Intervisibility tool is part of the Visibility toolset available with the 3D Analyst license. It is used in spatial analysis and GIS workflows to assess the visibility between two points, taking into account obstructions such as buildings or terrain. This can be particularly useful in urban planning, military operations, and environmental studies, where understanding the line of sight is crucial. For example, it can be used to determine the visibility between observation points and target locations, considering obstructions like buildings or natural terrain features.
+We are unable to answer this question. Please rephrase your query.
+**Toolset: Visibility**
+
+**Tool: Skyline**
+
+**Description:**  
+The Skyline tool in ArcGIS Pro is designed to generate a 3D polyline that represents the line separating the sky from the surface and surrounding features from one or more observer points. This tool is particularly useful for understanding the shape of the horizon from specific viewpoints, which can include natural surfaces and man-made features like buildings. A typical use case is analyzing the horizon from a specific observer point, such as viewing the horizon from the bottom of a crater to the top. The tool can also create silhouettes, which are useful for generating shadow volumes with the Skyline Barrier tool. The skyline is generated by casting lines of sight from the observer point, covering a specified azimuth range, and checking visibility after each azimuth increment. The result is a 3D line where each vertex represents the farthest visible point along each sampled line of sight.
+
+**Parameters:**
+- **Input Observer Point Features:** The input features containing one or more observer points. Type: Feature Layer.
+- **Input Line Features:** The line features that represent the skyline. Type: Feature Layer.
+- **Base Visibility Angle (Optional):** The baseline vertical angle used to calculate the percentage of visible sky. Zero is the horizon, 90 is straight up, and -90 is straight down. Default is 0. Type: Double.
+- **Additional Fields (Optional):** Specifies whether additional fields will be included in the angles table. Unchecked—Additional fields will not be included (default). Checked—Additional fields will be included. Type: Boolean.
+- **Output Angles Table (Optional):** The table that will be created for outputting the horizontal and vertical angles. Type: Table.
+
+**Derived Output:**
+- **Skyline:** A 3D polyline representation of the line separating the sky from the surface and features surrounding each observer point. Type: 3D Polyline.
+- **Silhouettes (Optional):** Multipatch features representing the facade of observable input features. Type: Multipatch Feature Class.
+
+The Skyline tool is part of a suite of 3D Analyst geoprocessing tools that facilitate comprehensive skyline analysis. It is used to create a 3D horizon line from an observer's point of view, which can be used to understand the physical environment, such as the horizon around a crater. The tool can also generate silhouettes for use in creating shadow volumes with the Skyline Barrier tool. The precision of the skyline is determined by the azimuth increment, with smaller increments providing a more precise representation. The tool is available with a 3D Analyst license.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Visibility
+
+**Tool:** Sun Shadow Volume
+
+**Description:**  
+The Sun Shadow Volume tool is designed to create closed volumes that model shadows cast by features using sunlight for a specified date and time. This tool is particularly useful in urban planning and architectural design, where understanding the impact of shadows on surrounding areas is crucial. For example, it can be used to assess how new buildings will affect sunlight exposure on existing structures or public spaces. The tool generates multipatch feature classes that represent these shadow volumes, providing a visual and analytical representation of shadow impacts in 3D space.
+
+**Parameters:**
+- **Minimum Radius:** The horizontal distance from the center point of the input multipatch to the desired beginning of the shadow volume. Type: Numeric.
+- **Maximum Radius:** The horizontal distance from the center point of the input multipatch to the desired end of the shadow volume. Type: Numeric.
+- **Base Elevation:** This parameter is ignored. Type: Numeric.
+- **Project to Plane:** This parameter is ignored. Type: Boolean.
+
+**Derived Output:**
+- **Output Multipatch Feature Class:** Contains the shadow volumes as closed multipatch features. Type: Feature Class.
+  - **OID:** The FID of the multipatch.
+  - **Shape:** The multipatch shape.
+  - **OBSV_PT_ID:** The FID of the observer point used to create the skyline.
+  - **ORIGFTR_ID:** The FID of the original feature represented by the skyline segment or silhouette.
+  - **SILHOUE_ID:** The FID of the multipatch feature used to create the shadow volume.
+**Toolset:** Triangulated Surface
+
+**Tool:** Locate Outliers
+
+**Description:**  
+The Locate Outliers tool is designed to identify anomalous elevation measurements from terrain, TIN, or LAS datasets. It detects points that exceed a defined range of elevation values or have slope characteristics inconsistent with the surrounding surface. This tool is particularly useful for locating suspicious measurement points that may be erroneous. The identified outliers are written as points to an output feature class, allowing analysts to verify each point individually. Verified blunders can be used as input to the Delete Terrain Points tool. Typical use cases include quality control in elevation data processing, ensuring the accuracy of terrain models, and identifying potential errors in elevation datasets.
+
+**Parameters:**
+- **Input Surface:** The surface dataset (TIN or terrain) to be analyzed. Type: Surface Layer.
+- **Apply Hard Limit:** Option to locate measurements with z-values outside specified minimum and maximum limits. Type: Boolean.
+- **Apply Comparison Filter:** Option to locate measurements that exceed a height difference relative to their neighbors and create local surface patches with slopes exceeding a given threshold. Type: Boolean.
+- **Z Tolerance (Optional):** Compares z-values of neighboring points if the comparison filter is applied. Default is 0. Type: Double.
+- **Slope Tolerance (Optional):** The threshold of slope variance between consecutive points used to identify outlier points. Default is 150%. Type: Double.
+- **Exceed Tolerance Ratio (Optional):** Defines criteria for determining each outlier point based on the ratio of points in its natural neighborhood that must exceed specified comparison filters. Default is 0.5. Type: Double.
+- **Outlier Cap (Optional):** Maximum number of outlier points that can be written to the output. Default is 2,500. Type: Long.
+
+**Derived Output:**
+- **Output Feature Class:** The feature class containing the identified outlier points. Type: Feature Class.
+**Toolset:** Triangulated Surface
+
+**Tool:** Surface Aspect
+
+**Description:**  
+The Surface Aspect tool is used to create polygon features that represent aspect measurements derived from a TIN, terrain, or LAS dataset surface. Aspect is expressed in degrees and represents the horizontal orientation of a surface. This tool is particularly useful in spatial analysis for applications such as identifying areas with specific sun exposure, which can be critical for agricultural planning, solar panel placement, or understanding geomorphological processes. For example, a farmer might use this tool to locate fields with a southerly aspect to maximize sunlight exposure.
+
+**Parameters:**
+- **in_surface:** The TIN, terrain, or LAS dataset surface that will be processed.  
+  *Type:* LAS Dataset Layer; Terrain Layer; TIN Layer.
+  
+- **out_feature_class:** The feature class that will be produced.  
+  *Type:* Feature Class.
+  
+- **class_breaks_table (Optional):** A table containing the classification breaks that will be used to define the aspect ranges in the output feature class.  
+  *Type:* Table.
+  
+- **aspect_field (Optional):** The field containing aspect code values.  
+  *Type:* String.
+  
+- **pyramid_level_resolution (Optional):** The z-tolerance or window-size resolution of the terrain pyramid level that will be used. The default is 0, or full resolution.  
+  *Type:* Double.
+
+**Derived Output:**
+- **out_feature_class:** The output polygon feature class representing aspect measurements.  
+  *Type:* Feature Class.
+**Toolset: Triangulated Surface**
+
+**Tool: Surface Contour**
+
+**Description:**  
+The Surface Contour tool in ArcGIS Pro is designed to create contour lines from a terrain, TIN (Triangulated Irregular Network), or LAS dataset surface. The output is a 2D polyline feature class where contour heights are assigned as attributes. This tool is particularly useful in spatial analysis and GIS workflows for visualizing elevation changes across a surface. It is commonly used in engineering to produce precise contour lines that represent an exact linear interpretation of the surface model. However, these contours are not typically used for aesthetic cartographic outputs due to their lack of smoothness. For smoother contours, it is recommended to convert the terrain dataset to a raster or TIN using the Terrain To Raster or TIN To Raster tools, followed by the Raster Contour tool with the Natural Neighbors interpolant. The tool is available with the 3D Analyst license.
+
+**Parameters:**
+- **Input Surface:** The TIN, terrain, or LAS dataset surface to be processed.  
+  *Type: LAS Dataset Layer; Terrain Layer; TIN Layer.*
+  
+- **Contour Interval:** The interval between the contours.  
+  *Type: Double.*
+
+- **Base Contour (Optional):** Defines the starting Z value from which the contour interval is either added or subtracted to delineate contours.  
+  *Type: Double.*
+
+- **Z Factor (Optional):** Affects results for rasters and TINs, not terrain datasets.  
+  *Type: Double.*
+
+- **Contour Field (Optional):** The field in the output feature class that will store contour values.  
+  *Type: String.*
+
+- **Contour Field Precision (Optional):** Specifies the precision of the contour field. Zero indicates an integer, and numbers 1–9 indicate the number of decimal places.  
+  *Type: Integer.*
+
+- **Index Interval (Optional):** Used to differentiate index contours from regular contours, typically five times larger than the contour interval.  
+  *Type: Double.*
+
+- **Index Interval Field (Optional):** The name of the field used to identify index contours.  
+  *Type: String.*
+
+**Derived Output:**
+- **Output Feature Class:** The feature class that will be produced, containing the contour lines.  
+  *Type: Feature Class.*
+
+If you have further questions or need more details, feel free to ask!
+**Toolset:** Triangulated Surface
+
+**Tool:** Surface Slope
+
+**Description:**  
+The Surface Slope tool in ArcGIS Pro is designed to create polygon features that represent ranges of slope values for triangulated surfaces such as TINs, terrains, or LAS datasets. This tool is particularly useful in spatial analysis for identifying areas with specific slope characteristics, which can be critical for applications such as land development, risk assessment for landslides, and environmental modeling. For example, it can be used to determine areas too steep for construction or to identify regions prone to erosion. The tool is available with the 3D Analyst license.
+
+**Parameters:**
+- **in_surface:** The input surface, which can be a TIN, terrain, or LAS dataset.  
+  *Type:* LAS Dataset Layer; Terrain Layer; TIN Layer.
+  
+- **out_feature_class:** The feature class that will be produced, containing the slope measurements.  
+  *Type:* Feature Class.
+  
+- **units (Optional):** Specifies the units of measure for calculating slope. Options include PERCENT (default) or DEGREE.  
+  *Type:* String.
+  
+- **class_breaks_table (Optional):** A table containing classification breaks used to group the output features.  
+  *Type:* Table.
+  
+- **slope_field (Optional):** The field containing slope values.  
+  *Type:* String.
+  
+- **z_factor (Optional):** The factor by which z-values will be multiplied, typically used to convert z linear units to match x,y linear units. Default is 1.  
+  *Type:* Double.
+  
+- **pyramid_level_resolution (Optional):** The z-tolerance or window-size resolution of the terrain pyramid level used. Default is 0, or full resolution.  
+  *Type:* Double.
+
+**Derived Output:**
+- **out_feature_class:** The output feature class containing polygon features representing slope ranges.  
+  *Type:* Feature Class.
+
+If you have further questions or need clarification on specific aspects of the tool, feel free to ask.

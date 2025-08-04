@@ -1,0 +1,31 @@
+name: reAct_reasoning
+description: to control the agent's reasoning and action steps in a structured manner, ensuring clarity and focus on the scientific objective.
+template: |
+  The Action you can use are here: 
+  (1) literature search:
+  The input is a json object with the following fields:
+      task = {
+        "goal": ,
+        "keywords": ,
+    }
+  please generate this json when you want to search literature, for example:
+    {
+        "goal": "What is the impact of climate change on polar bear populations?",
+        "keywords": "climate change, polar bear, population dynamics"
+    }
+  (2) expert knowledge interact:
+  The input is a search query string, for example:
+    "What are the latest findings on the impact of microplastics on marine ecosystems?"
+  The agent will use this query to search for expert knowledge and provide the relevant information using RAG (Retrieval-Augmented Generation) techniques.
+  (3) arcgis document retrieval:
+  The input is a search query string, for example:
+    "How to perform spatial clustering in ArcGIS Pro?"
+  Then it will return the relevant ArcGIS documentation based on the query.
+  
+  If you want to use the above actions, please use the following format, please return the below information and do not change the format:
+  {
+    "action": "literature_search" or "expert_knowledge_interact" or "arcgis_document_retrieval",
+    "input": <your input>
+  }
+  
+

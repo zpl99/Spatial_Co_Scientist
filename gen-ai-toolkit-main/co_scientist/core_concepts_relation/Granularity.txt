@@ -1,0 +1,563 @@
+Toolset: Data Enrichment
+
+Tool: Calculate Motion Statistics
+
+Description: Calculates motion statistics for points in a time-enabled feature class. This tool is used for adding attributes to existing features for visualization, regression, and prediction. 
+
+Parameters:
+- elevation_unit: Specifies the unit of measurement for elevation. Type: String.
+- distance_unit: Specifies the unit of measurement for distance. Type: String.
+
+Derived Output:
+- No derived outputs available.
+Toolset: Find Locations
+
+Tool: Detect Incidents
+
+Description: The Detect Incidents tool creates a layer that detects features meeting specific conditions. For example, it can identify areas based on attribute queries (e.g., vacant parcels) or spatial queries (e.g., proximity to a river). This tool is useful for spatial analysis to find specific features based on defined criteria.
+
+Parameters:
+- Input Features: Specifies the features to analyze. Type: Feature Layer
+- Condition: Defines the condition for detecting incidents. Type: SQL Expression
+
+Derived Output:
+- Detected Incidents: Features that meet the specified condition. Type: Feature Layer
+Toolset: Find Locations
+
+Tool: Find Similar Locations
+
+Description: Identifies the candidate features that are most similar or dissimilar to one or more input features based on feature attributes. This tool is used to find locations where moving objects have stopped or dwelled, using given time and distance thresholds. For example, it can be used to determine which constituencies are most similar to a specific feature like the worst-case Target Risk feature.
+
+Parameters:
+- Input Features to Match: The layer representing the features to be matched. Type: Feature Layer.
+- Candidate Features: The layer containing candidate features to compare against the input features. Type: Feature Layer.
+- Output Features: The name of the output layer that will contain the results. Type: String.
+- Number Of Results: The number of results to be displayed. Type: Integer.
+
+Derived Output:
+- Transmission_Risk: Represents the output features that match the specified criteria. Type: Feature Layer.
+Toolset: Find Locations
+
+Tool: Find Dwell Locations
+
+Description: Finds locations where moving objects have stopped, or dwelled, using given time and distance thresholds. This tool is designed to identify areas that meet specified criteria based on time and distance parameters. For example, it can be used to analyze vehicle stops in a transportation network or to identify resting places for wildlife in an ecological study.
+
+Parameters:
+- Time Threshold: Specifies the time threshold for defining a dwell location. Type: Double.
+- Distance Threshold: Specifies the distance threshold for defining a dwell location. Type: Linear unit.
+
+Derived Output:
+- Dwell Locations: Output feature class containing the locations where objects have dwelled. Type: Feature Class.
+**Toolset:** Analyze Patterns
+
+**Tool:** Calculate Density
+
+**Description:**
+The Calculate Density tool creates a density map from point or line features by spreading known quantities of a phenomenon across the map. It results in a layer of areas classified from least dense to most dense. This tool is commonly used in spatial analysis to understand feature distribution across a space. For instance, it can analyze population density in urban planning, crime density for resource allocation in law enforcement, or wildlife sightings for conservation efforts.
+
+**Parameters:**
+- **Input Features:** The point or line features from which to calculate density. **Type:** Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. **Type:** String.
+- **Count Field (Optional):** A field specifying the number of incidents at each location. If not specified, each location is assumed to represent a single count. **Type:** Field.
+- **Cell Size (Optional):** This value is used to create a mesh of points where density values are calculated. **Type:** Double.
+- **Cell Size Units (Optional):** The units of the cell size value. **Type:** String.
+- **Radius (Optional):** A distance specifying how far to search to find point or line features when calculating density values. **Type:** Double.
+
+**Derived Output:**
+- **Density Layer:** A layer of areas classified from least dense to most dense. **Type:** Raster Layer.
+**Toolset:** Calculate Density
+
+**Tool:** Interpolate Points
+
+**Description:**
+The "Interpolate Points" tool predicts values at new locations based on measurements from a collection of points. It takes point data with values at each point and returns a raster of predicted values. This tool is useful for spatial analysis, creating continuous surfaces from discrete data points. For example, it can be used to estimate environmental variables like temperature, rainfall, or pollution levels across a geographic area. By utilizing temperature readings from weather stations, this tool can estimate temperatures at locations without measurements, enabling the creation of comprehensive temperature maps.
+
+**Parameters:**
+No information available.
+
+**Derived Output:**
+- **Predicted Values Raster:** The tool generates a raster layer of predicted values, representing the interpolated surface. This raster visually and analytically displays the predicted values across the study area. **Type:** Raster.
+Toolset: Summarize Data
+
+Tool: Describe Dataset
+
+Description: The Describe Dataset tool summarizes features into calculated field statistics, sample features, and extent boundaries. It helps in understanding the characteristics and boundaries of the dataset being analyzed.
+
+Parameters:
+- Input Dataset: Specifies the dataset to be described. Type: Dataset
+
+Derived Output:
+- Field Statistics: Provides statistics on fields within the dataset. Type: Table
+- Sample Features: Generates a sample of features from the dataset. Type: Feature Class
+- Extent Boundaries: Defines the spatial extent of the dataset. Type: Geometry
+Toolset: Summarize Data
+
+Tool: Summarize Center And Dispersion
+
+Description: Finds central features and directional distributions and calculates mean and median locations from the input. This tool overlays a polygon layer with another layer to summarize the number of points, length of the lines, or area of the polygons within each polygon and calculates attribute field statistics for those features within the polygons. It can be used to analyze spatial patterns, identify central locations, and understand the dispersion of features in a dataset.
+
+Parameters:
+- Input Features: Specifies the input point, line, or polygon features for which central features and directional distributions will be calculated. Type: Feature Layer.
+- Output Feature Class: Specifies the output feature class that will contain the central features and directional distributions. Type: Feature Class.
+
+Derived Output:
+- Mean Center: Represents the mean center location of the input features. Type: Point.
+- Median Center: Represents the median center location of the input features. Type: Point.
+Toolset: Summarize Data
+
+Tool: Reconstruct Tracks
+
+Description: Reconstruct Tracks creates line or polygon tracks from time-enabled input data. This tool is part of the Summarize Data toolset, which contains tools that calculate total counts, lengths, areas, and basic descriptive statistics of features and their attributes within areas or near other features. Reconstruct Tracks is useful for reconstructing tracks from temporal data for analysis and visualization purposes.
+
+Parameters:
+- Input Features: Specifies the point, line, or polygon features to be used for reconstructing tracks. Type: Feature Layer.
+- Time Field: Specifies the field containing the time information for each feature. Type: Field.
+
+Derived Output:
+- Output Tracks: The resulting line or polygon tracks reconstructed from the input features based on the time information. Type: Feature Class.
+Toolset: Summarize Data
+
+Tool: Join Features
+
+Description: Joins attributes from one layer to another based on spatial, temporal, or attribute relationships, or a combination of those relationships. The tool creates a new feature class containing the target layer features with joined features. The attributes from the join features are transferred to the output based on the specified join operation.
+
+Parameters:
+- Target Layer: Contains the target features. The attributes from the target features and the attributes from the joined features will be transferred to the output. Data Type: Table View
+- Join Layer: Contains the join features. The attributes from the join features will be joined to the attributes of the target features. Data Type: Table View
+- Output Dataset: The new feature class containing the target layer features with joined features. Data Type: Feature Class; Table
+- Join Operation: Specifies how joins between the Target Layer values and the Join Layer values will be handled in the output if multiple join features have the same spatial relationship with a single target feature. 
+    - Join one to one: The attributes from the multiple join features will be aggregated. This is the default, and only the count statistic is returned.
+    - Join one to many: The output feature class will contain all the joined features. Data Type: String
+
+Derived Output:
+- New feature class containing the target layer features with joined features. Data Type: Feature Class
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Within
+
+**Description:**
+The "Summarize Within" tool overlays a polygon layer with another layer to summarize the number of points, length of the lines, or area of the polygons within each polygon. It calculates attribute field statistics for those features within the polygons. This tool is typically used in spatial analysis to determine how much of a feature is contained within another feature. For example, it can be used to calculate how much area of a park is covered by trees, or how many schools are within a city boundary.
+
+**Parameters:**
+- **Input Polygons**: The polygon features that will be used to summarize the input summary features. Type: Feature Layer.
+- **Input Summary Features**: The features that will be summarized within the input polygons. These can be points, lines, or polygons. Type: Feature Layer.
+- **Output Feature Class**: The feature class that will be created to store the results. Type: Feature Class.
+
+**Derived Output:**
+- **Output Feature Class**: Contains the summarized data, including counts of points, lengths of lines, or areas of polygons within each input polygon. Type: Feature Class.
+**Toolset:** Summarize Data
+
+**Tool:** Aggregate Points
+
+**Description:**
+The Aggregate Points tool aggregates point data into larger spatial units, such as polygons or bins. This process is useful for summarizing data and adjusting the granularity of spatial analysis. The tool calculates the number of points within each polygon or bin and can also compute optional statistics for these points. Typical use cases include aggregating individual census data into different levels of census boundaries, symbolizing weather stations by the highest temperature recorded, analyzing the spread of a disease outbreak across a region, or determining the average traffic volume along freeways during rush hour.
+
+**Parameters:**
+- **Input Features**: The point features to be aggregated. Type: Feature Layer.
+- **Polygon Features**: The polygon features that define the areas for aggregation. Type: Feature Layer.
+- **Output Feature Class**: The name of the output feature class that will store the aggregated results. Type: String.
+- **Statistics Fields**: Optional fields for which statistics will be calculated. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class**: A polygon feature class with a count of points and optional statistics for each polygon. Type: Feature Class.
+Toolset: Summarize Data
+
+Tool: Aggregate Points
+
+Description: Aggregates points into polygon features or bins. A polygon is returned with a count of points as well as optional statistics at all locations where points exist. Aggregating features is a way to summarize them into logical groups using statistical methods. ArcGIS Pro supports visualization of aggregated data for exploration and analysis purposes. You can aggregate multiple features or records for a feature or group of related features. Examples include aggregating census data in different levels of census boundaries, symbolizing weather stations using total highest temperature recorded at each station, tracking disease outbreaks across a region over time, or analyzing traffic volume along freeways during rush hour.
+
+Parameters:
+- Input Point Features: Specifies the layer of point features to be aggregated. Type: Feature Layer.
+- Output Polygon Features: Specifies the layer of polygon features where points will be aggregated. Type: Feature Layer.
+
+Derived Output:
+- Aggregated Polygon Features: Contains the aggregated polygon features with counts of points and optional statistics. Type: Feature Layer.
+**Toolset:** Summarize Attributes
+
+**Tool:** Summarize Within
+
+**Description:**
+The "Summarize Within" tool overlays a polygon layer with another layer to summarize the number of points, length of the lines, or area of the polygons within each polygon. It calculates attribute field statistics for those features within the polygons. This tool is typically used in spatial analysis to understand the distribution and density of features within specified areas. For example, it can be used to calculate how many points (such as trees or buildings) fall within each polygon (such as city boundaries), or to determine the total length of roads within different administrative zones.
+
+**Parameters:**
+- **Input Polygons**: The polygon features that define the areas within which the summary will be calculated. Type: Feature Layer.
+- **Input Summary Features**: The features (points, lines, or polygons) that will be summarized within the input polygons. Type: Feature Layer.
+- **Output Feature Class**: The name of the output feature class that will contain the summarized data. Type: Feature Class.
+- **Summary Fields**: Optional fields for which statistics will be calculated. Type: Field.
+- **Group Field**: Optional field used to group the summary results. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class**: Contains the summarized data with calculated statistics for the input summary features within each input polygon. Type: Feature Class.
+**Toolset:** Summarize Attributes
+
+**Tool:** Summarize Attributes
+
+**Description:**
+The "Summarize Attributes" tool in ArcGIS Pro calculates summary statistics for fields within a feature class. It provides insights into the data by offering statistical summaries like counts, sums, averages, minimums, and maximums of specified fields. This tool is valuable in spatial analysis and GIS workflows for understanding data distribution and characteristics. For instance, it can be used to summarize the total population within different administrative boundaries or calculate the average income level across various regions.
+
+**Parameters:**
+- **Input Layer**: The point, polyline, or polygon layer to be summarized. Type: Table View.
+- **Output Table**: A new table with the summarized attributes. Type: Table.
+- **Fields**: A field or fields used to summarize similar features. For example, summarizing by a field like "PropertyType" can group data into categories such as commercial and residential. Type: Field.
+- **Summary Fields (Optional)**: The statistics that will be calculated on specified fields. Type: Value Table.
+- **Time step interval (Optional)**: Specifies the duration of the time step for time-enabled data. Type: Time Unit.
+- **Time step repeat (Optional)**: Specifies how often the time-step interval occurs for time-enabled data. Type: Time Unit.
+- **Time step reference (Optional)**: A date that specifies the reference time for time-enabled data. Type: Date.
+
+**Derived Output:**
+- **Output Table**: The resulting table containing the summarized statistics. Type: Table.
+Toolset: Summarize Attributes
+
+Tool: Summarize Center And Dispersion
+
+Description: The Summarize Center And Dispersion tool finds central features and directional distributions, calculating mean and median locations from the input data. This tool is useful for analyzing spatial patterns and understanding the central tendencies of features within a dataset. For example, it can be used to identify the central point of a cluster of features, determine the average location of a set of points, or analyze the dispersion of features around a central point.
+
+Parameters:
+- Input Features: Specifies the point features for which the central and dispersion statistics will be calculated. Type: Feature Layer.
+- Output Feature Class: The output feature class containing the central and dispersion statistics. Type: Feature Class.
+
+Derived Output:
+- Mean Center: Represents the mean center location of the input features. Type: Point Feature.
+- Median Center: Represents the median center location of the input features. Type: Point Feature.
+Toolset: Find Point Clusters
+
+Tool: Find Point Clusters
+
+Description: Finds clusters of point features in surrounding noise based on their spatial or spatiotemporal distribution. This tool is available with ArcGIS Enterprise 10.6.1. It is designed to detect clusters of points based on spatial proximity, making it useful for spatial analysis and GIS workflows. For example, it can be used to identify clusters of disease outbreaks, concentrations of wildlife sightings, or hotspots of criminal activities.
+
+Parameters:
+- minimum_points: Specifies the minimum number of points that must be within the search distance for a cluster to be identified. Type: Integer.
+- search_duration: Specifies the time duration over which the tool will search for clusters if the input data is time-enabled. Type: Double.
+- use_time: Determines whether time will be considered when searching for clusters. Type: Boolean.
+
+Derived Output:
+- clusters: Represents the identified clusters of point features. Type: Feature Class.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Within
+
+**Description:**
+The "Summarize Within" tool overlays a polygon layer with another layer to summarize the number of points, length of the lines, or area of the polygons within each polygon. It calculates attribute field statistics for those features within the polygons. This tool is typically used in spatial analysis to determine how much of a feature lies within a specified area. For example, it can be used to calculate how much area of the polygons in one layer lies within the polygons of another layer, such as determining the number of detected ships within a grid cell or summarizing invasive species within a buffer zone.
+
+**Parameters:**
+- **Input Polygons**: The polygon features that define the areas within which the summary will be calculated. Type: Feature Layer.
+- **Input Summary Features**: The features (points, lines, or polygons) that will be summarized within the input polygons. Type: Feature Layer.
+- **Output Feature Class**: The name of the output feature class that will contain the summarized data. Type: Feature Class.
+
+**Derived Output:**
+- **Output Feature Class**: Contains the summarized data with calculated statistics for the features within the input polygons. Type: Feature Class.
+**Toolset:** Use Proximity
+
+**Tool:** Create Buffers
+
+**Description:**
+The "Create Buffers" tool in ArcGIS Pro generates polygons that cover a specified distance from point, line, or polygon features. This tool is commonly used in spatial analysis to determine areas of influence or impact. For example, it can be utilized to create buffers around features like rivers to identify flood risk areas or around roads to assess noise pollution impact.
+
+**Parameters:**
+- **Input Features**: The features around which buffers will be created. Type: Feature Layer.
+- **Output Feature Class**: The name and location of the output buffer feature class. Type: Feature Class.
+- **Distance**: The distance to buffer the input features. Type: Linear Unit.
+- **Dissolve Type**: Specifies whether the output buffers will be dissolved into a single feature or kept separate. Type: String.
+- **Method**: The method used to create the buffer, such as planar or geodesic. Type: String.
+
+**Derived Output:**
+- **Buffer Feature Class**: The resulting feature class containing the buffer polygons. Type: Feature Class.
+**Toolset:** Use Proximity
+
+**Tool:** Create Buffers
+
+**Description:**
+The "Create Buffers" tool in ArcGIS Pro generates polygons that cover a specified distance from point, line, or polygon features. It is commonly used in spatial analysis to determine proximity relationships, such as identifying areas within a certain distance from a feature. For example, it can be used to find all residential areas within 1 kilometer of a river or to create safety zones around hazardous sites.
+
+**Parameters:**
+- **Input Features**: The features around which buffers will be created. Type: Feature Layer.
+- **Output Feature Class**: The name and location of the output feature class that will contain the buffer polygons. Type: Feature Class.
+- **Distance**: The distance to buffer the input features. This can be specified in various units such as meters, kilometers, miles, etc. Type: Linear Unit.
+- **Dissolve Type**: Determines how the output buffer features are dissolved. Options include "None" (no dissolve), "All" (dissolve all into a single feature), or "List" (dissolve based on a list of fields). Type: String.
+- **Method**: The method used to create the buffer. Options include "Planar" (Euclidean) or "Geodesic" (shape-preserving). Type: String.
+
+**Derived Output:**
+- **Buffer Polygons**: The resulting polygons that represent the buffer zones around the input features. Type: Feature Class.
+Toolset: Use Proximity
+
+Tool: Pairwise Buffer
+
+Description: The Pairwise Buffer tool creates polygons covering a specified distance from point, line, or polygon features. For example, you can create buffers around resources points or evictions features to analyze proximity in GIS workflows.
+
+Parameters:
+- Input Features: Specifies the features to buffer. Type: Feature Layer
+- Output Feature Class: Specifies the name for the output buffer features. Type: Feature Class
+- Distance: Sets the buffer distance. Type: Double
+- Linear Unit: Defines the unit of measurement for the buffer distance. Type: Linear Unit
+- Method: Determines the buffer method, such as Geodesic for shape-preserving buffers. Type: String
+- Dissolve Type: Specifies how overlapping buffers are handled. Type: String
+
+Derived Output:
+- Output Feature Class: The resulting buffer polygons. Type: Feature Class
+Toolset: Data Enrichment
+
+Tool: Calculate Motion Statistics
+
+Description: Calculates motion statistics for points in a time-enabled feature class. This tool adds temporal granularity by analyzing movement patterns. It can be used to gain insight into data through patterns, trends, and anomalies in spatial analysis or GIS workflows.
+
+Parameters:
+- elevation_unit: Specifies the unit of measurement for elevation. Type: String.
+- distance_unit: Specifies the unit of measurement for distance. Type: String.
+
+Derived Output:
+No information available.
+Toolset: Analyze Patterns
+
+Tool: Calculate Density
+
+Description: Calculates a magnitude-per-unit area from point features that fall within a neighborhood around each cell. The result is a layer of areas classified from least dense to most dense. This tool helps in understanding the distribution of features across space. It can be used to create density maps for various phenomena such as population density, crime rates, or species distribution. For example, it can analyze the density of tree species in a forest, the density of customers in a retail store catchment area, or the density of traffic accidents in a city.
+
+Parameters:
+- Input Features: The point or line features from which to calculate density. Data Type: Feature Set
+- Output Name: The name of the output layer to create on your portal. Data Type: String
+- Count Field (Optional): A field specifying the number of incidents at each location. Data Type: Field
+- Cell Size (Optional): The value used to create a mesh of points where density values are calculated. Data Type: Double
+- Cell Size Units (Optional): The units of the cell size value. Data Type: String
+- Radius (Optional): A distance specifying how far to search to find point or line features when calculating density values. Data Type: Double
+
+Derived Output:
+- Density Map: A layer showing areas classified by density values. Data Type: Feature Layer
+Toolset: Analyze Patterns
+
+Tool: Interpolate Points
+
+Description: Predicts values at new locations based on measurements from a collection of points. The tool uses point data with values at each point as input and makes areas classified by predicted values. It can be used to interpolate 3D points that have x-, y-, and z-coordinates along with a measured value.
+
+Parameters:
+- Input Point Features: The point data with values at each point. Type: Feature Layer.
+- Output Raster: The raster of predicted values. Type: Raster Dataset.
+
+Derived Output:
+- Predicted Values: Raster dataset containing the predicted values at new locations. Type: Raster Dataset.
+Toolset: Analyze Patterns
+
+Tool: Find Hot Spots
+
+Description: Identifies statistically significant spatial clustering of high values (hot spots) or low values (cold spots), or data counts, in your data. Use this tool to uncover hot and cold spots of high and low home values, crime densities, traffic accident fatalities, unemployment or biodiversity, for example. 
+
+Parameters:
+- Input Features: Specifies the point, line, or polygon features for which hot spots will be identified. Type: Feature Layer.
+- Output Features: The output feature class containing the statistically significant hot and cold spots. Type: Feature Class.
+
+Derived Output:
+- Hot Spot Analysis Result Layer: Contains the statistically significant hot and cold spots. Type: Feature Layer.
+Toolset: Analyze Patterns
+
+Tool: Find Hot Spots
+
+Description: The Find Hot Spots tool identifies statistically significant spatial clusters using the Getis-Ord Gi* statistic. It helps uncover hot spots and cold spots in data, such as high and low home values, crime densities, or biodiversity. For example, it can pinpoint areas with high crime rates for targeted law enforcement actions or areas with low biodiversity for conservation efforts.
+
+Parameters:
+- Input Features: The set of features for which hot spots and cold spots will be identified. Type: Feature Layer.
+- Output Feature Class: The result layer containing statistically significant hot spots and cold spots. Type: Feature Class.
+
+Derived Output:
+- Hot Spot Analysis Result Layer: Contains the identified statistically significant hot spots and cold spots. Type: Feature Class.
+**Toolset:** Analyze Patterns
+
+**Tool:** Find Point Clusters
+
+**Description:**
+The "Find Point Clusters" tool is designed to identify clusters of point features amidst surrounding noise based on their spatial or spatiotemporal distribution. This tool is particularly useful in spatial analysis workflows where understanding the distribution and concentration of points is crucial. Typical use cases include identifying areas of high activity or density, such as crime hotspots, disease outbreak locations, or areas of high customer activity. By pinpointing these clusters, users can make informed decisions, such as deploying resources effectively or investigating underlying causes.
+
+**Parameters:**
+- **Minimum Points:** Specifies the minimum number of points required to form a cluster. Type: Integer.
+- **Search Duration:** Defines the time period over which the clustering analysis is performed. Type: Time.
+- **Use Time:** Indicates whether the temporal aspect should be considered in the clustering process. Type: Boolean.
+
+**Derived Output:**
+- **Cluster Layer:** A layer representing the identified clusters of point features. Type: Feature Layer.
+- **Noise Layer:** A layer representing the points that do not belong to any cluster. Type: Feature Layer.
+Toolset: Use Proximity
+
+Tool: Group By Proximity
+
+Description: The Use Proximity toolset contains tools for answering the spatial analysis question, "What is near what?" These tools are available when you have an active ArcGIS Enterprise portal configured for the Feature Analysis - Standard Tools setting. The Group By Proximity tool specifically groups features that are within spatial or spatiotemporal proximity to each other.
+
+Parameters:
+- Create Buffers: Creates polygons that cover a given distance from a point, line, or polygon feature. Type: Polygon.
+- Group By Proximity: Groups features that are within spatial or spatiotemporal proximity to each other. Type: Feature Layer.
+- Snap Tracks: Snaps input track points to lines. Type: Feature Layer.
+- Trace Proximity Events: Traces events that are near each other in space (location) and time. Type: Feature Layer.
+
+Derived Output:
+- Grouped Features: Features grouped based on spatial or spatiotemporal proximity. Type: Feature Layer.
+Toolset: Analyze Patterns
+
+Tool: Find Hot Spots
+
+Description: Identifies statistically significant spatial clustering of high values (hot spots) or low values (cold spots), or data counts, in your data. Use this tool to uncover hot and cold spots of high and low home values, crime densities, traffic accident fatalities, unemployment or biodiversity, for example. 
+
+Parameters:
+- Input Features: The features for which hot spots and cold spots will be identified. Type: Feature Layer.
+- Output Feature Class: The result feature class containing the statistically significant hot and cold spots. Type: Feature Class.
+
+Derived Output:
+- None available.
+Toolset: Mapping Clusters
+
+Tool: Find Point Clusters
+
+Description: The Mapping Clusters toolset includes tools for cluster analysis to identify statistically significant hot spots, cold spots, spatial outliers, and similar features or zones. These tools help in pinpointing cluster locations, determining potential causes of clustering, and visualizing cluster locations and extent. For example, these tools can be used to assign additional resources to address a cluster of incidents like burglaries or to investigate disease outbreaks based on cluster locations.
+
+Parameters:
+- incident_points: Given incident points or weighted features (points or polygons), the tool evaluates the characteristics of the input feature class to produce optimal results. Type: Feature Layer.
+- time_boundary_reference: Specifies the time boundary reference for the analysis. Type: String.
+- time_boundary_split: Specifies the time boundary split for the analysis. Type: String.
+
+Derived Output:
+- optimized_outlier_analysis: Creates a map of statistically significant hot spots, cold spots, and spatial outliers using the Anselin Local Moran's I statistic. Type: Feature Layer.
+- similarity_search: Identifies candidate features that are most similar or dissimilar to input features based on feature attributes. Type: Feature Layer.
+Toolset: Summarize Data
+
+Tool: Describe Dataset
+
+Description: The Describe Dataset tool summarizes features into calculated field statistics, sample features, and extent boundaries. It is used to provide detailed information about the dataset, including statistical summaries and spatial extents.
+
+Parameters:
+- Input Dataset: Specifies the dataset to be described. Type: Feature Layer or Table.
+- Output Feature Class: The output feature class containing the described dataset information. Type: Feature Class.
+
+Derived Output:
+- Field Statistics: Provides statistics for fields in the input dataset. Type: Table.
+- Sample Features: Contains a sample of features from the input dataset. Type: Feature Class.
+- Extent Boundaries: Represents the spatial extent of the input dataset. Type: Feature Class.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Center And Dispersion
+
+**Description:**
+The "Summarize Center And Dispersion" tool finds central features and directional distributions within a dataset. It calculates mean and median locations from the input data, aiding in understanding spatial patterns and trends. Use cases include identifying the central point of geographic features clusters, analyzing data point spread for directional trends, and assessing feature dispersion across a landscape. For instance, it can be applied in urban planning to locate central amenities or in environmental studies to analyze species spread.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- **Central Features:** Provides the central point of the input data. Type: Feature Class.
+- **Directional Distributions:** Calculates the directional spread of the data. Type: Feature Class.
+- **Mean Location:** Computes the average location of the input features. Type: Feature Class.
+- **Median Location:** Determines the median location of the input features. Type: Feature Class.
+Toolset: Summarize Data
+
+Tool: Aggregate Points
+
+Description: Uses a layer of point features and a layer of polygon features to determine which points fall within each polygon's area. After determining this point-in-polygon spatial relationship, statistics about all points in the polygon are calculated and assigned to the area. This tool aggregates points into polygon features or bins, returning a polygon with a count of points as well as optional statistics at all locations where points exist. It allows for spatial analysis by summarizing features into calculated field statistics, sample features, and extent boundaries. One typical use case is analyzing population distribution by aggregating individual data points into census tracts or administrative boundaries.
+
+Parameters:
+- bin_resolution: Specifies the resolution of the bins. Type: Integer.
+- bin_type: Specifies the type of bin. Type: String.
+
+Derived Output:
+- aggregated_polygon_features: Contains the aggregated polygon features with statistics. Type: Feature Class.
+Toolset: Summarize Data
+
+Tool: Join Features
+
+Description: Joins attributes from one layer to another based on spatial, temporal, or attribute relationships, or a combination of those relationships. This tool allows you to combine information from different layers to enrich your spatial analysis. For example, you can join demographic data to a layer of customer locations to analyze the relationship between customer demographics and spatial distribution.
+
+Parameters:
+- Target Layer: Contains the target features. The attributes from the target features and the attributes from the joined features will be transferred to the output. Data Type: Table View
+- Join Layer: Contains the join features. The attributes from the join features will be joined to the attributes of the target features. Data Type: Table View
+- Output Dataset: The new feature class containing the target layer features with joined features. Data Type: Feature Class; Table
+- Join Operation: Specifies how joins between the Target Layer values and the Join Layer values will be handled in the output if multiple join features have the same spatial relationship with a single target feature. 
+    - Join one to one: The attributes from the multiple join features will be aggregated. This is the default, and only the count statistic is returned.
+    - Join one to many: The output feature class will retain all joined attributes, allowing for multiple join features to be associated with a single target feature. 
+
+Derived Output:
+- No derived outputs available.
+No information available.
+### Toolset: Summarize Data
+
+### Tool: Aggregate Points
+
+#### Description:
+The **Aggregate Points** tool in ArcGIS Pro aggregates point data into polygon features or bins. It returns a polygon with a count of points and optional statistics at all locations where points exist. This tool is useful for summarizing point data into larger spatial units, enabling analysis at different granularities. Examples of typical use cases include:
+- Aggregating individual census data into different levels of census boundaries.
+- Symbolizing weather stations using the total highest temperature recorded at each station.
+- Analyzing the distribution of a disease outbreak across a region over time.
+- Calculating the average volume of traffic along freeways during rush hour.
+
+#### Parameters:
+- **Input Features**: The point features to be aggregated. Type: Feature Layer.
+- **Polygon Features**: The polygon features within which points will be aggregated. Type: Feature Layer.
+- **Output Feature Class**: The name of the output feature class. Type: String.
+- **Aggregate Distance**: The distance within which points will be aggregated. Type: Linear Unit.
+- **Statistics Fields**: Optional fields for which statistics will be calculated. Type: Field.
+
+#### Derived Output:
+- **Output Feature Class**: A polygon feature class with aggregated point data and calculated statistics. Type: Feature Class.
+Toolset: Summarize Data
+
+Tool: Summarize Attributes
+
+Description: Calculates summary statistics for fields in a feature class. This toolset contains tools that calculate total counts, lengths, areas, and basic descriptive statistics of features and their attributes within areas or near other features. It uses distributed processing to complete analytics on your GeoAnalytics Server.
+
+Parameters:
+- Input Features: Specifies the input point, line, or polygon features for which to summarize attributes. Type: Feature Layer.
+- Field(s): Specifies the field or fields on which to calculate statistics. Type: Field.
+- Case Field: Specifies a case field to group statistics. Type: Field.
+- Statistics Type: Specifies the type of statistics to calculate. Type: String.
+
+Derived Output:
+- Output Table: A table containing the summarized attribute statistics. Type: Table.
+Toolset: Find Locations
+
+Tool: Detect Incidents
+
+Description: Creates a layer that detects features that meet a given condition. This tool is used to identify areas based on specific criteria, which can be adjusted for different levels of detail. For example, it can be used to find locations where moving objects have stopped using time and distance thresholds, or to identify candidate features that are most similar or dissimilar to input features based on attributes.
+
+Parameters:
+- Input Table: Specifies the table containing incident records. Type: Table.
+- Target Features: Specifies the features to be updated with incident records. Type: Feature Layer.
+- Location Type: Specifies the type of location information in the input table. Type: String.
+- Address Locator: Specifies the geocoding service to use for address matching. Type: Address Locator.
+
+Derived Output:
+- Updated Features: Contains the new or updated record information from the input table. Type: Feature Layer.
+Toolset: Find Locations
+
+Tool: Find Similar Locations
+
+Description: Identifies the candidate features that are most similar or dissimilar to one or more input features based on feature attributes. This tool is used to find areas that meet specified criteria, which can be based on attribute queries or spatial queries. For example, it can be used to identify areas within a certain distance of a river or parcels that are vacant.
+
+Parameters:
+- Input Features: The features to compare against. Type: Feature Layer.
+- Candidate Features: The features to compare with the input features. Type: Feature Layer.
+- Output Features: The resulting features that are most similar or dissimilar. Type: Feature Layer.
+
+Derived Output:
+- Similarity Index: A value indicating the degree of similarity between features. Type: Double.
+- Dissimilarity Index: A value indicating the degree of dissimilarity between features. Type: Double.
+Toolset: Find Locations
+
+Tool: Find Dwell Locations
+
+Description: Finds locations where moving objects have stopped, or dwelled, using given time and distance thresholds. This tool is designed to identify areas that meet specified criteria based on spatial and attribute queries. For example, it can be used to find locations where vehicles have stopped for a certain duration within a specific distance range. It is commonly used in spatial analysis workflows to analyze patterns of movement and identify significant stopping points in a transportation network.
+
+Parameters:
+- Time Threshold: Specifies the minimum time threshold for a location to be considered a dwell location. Type: Double.
+- Distance Threshold: Specifies the maximum distance within which a location is considered to have dwelled. Type: Double.
+
+Derived Output:
+- Dwell Locations: A feature layer containing the identified dwell locations. Type: Feature Layer.
+**Toolset:** Summarize Center And Dispersion
+
+**Tool:** Summarize Center And Dispersion
+
+**Description:**
+The "Summarize Center And Dispersion" tool finds central features and directional distributions, calculating mean and median locations from the input data. It is commonly used in spatial analysis to understand the central tendency and dispersion of geographic features. For instance, it can identify the central point of a cluster of crime incidents or determine the average location of customer addresses for a retail store. This tool aids in spatial granularity analysis by providing insights into the spatial distribution and central tendencies of data points.
+
+**Parameters:**
+- **Input Features**: The features for which central tendencies and dispersion will be calculated. Type: Feature Layer.
+- **Weight Field**: A field used to weight the calculation of central tendencies. Type: Field.
+- **Case Field**: A field used to group features for separate calculations. Type: Field.
+
+**Derived Output:**
+- **Mean Center**: The calculated mean center of the input features. Type: Feature Class.
+- **Median Center**: The calculated median center of the input features. Type: Feature Class.
+- **Standard Distance**: The calculated standard distance of the input features. Type: Feature Class.

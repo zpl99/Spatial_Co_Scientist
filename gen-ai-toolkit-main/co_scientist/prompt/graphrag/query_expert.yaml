@@ -1,0 +1,13 @@
+name: query_expert
+description: Define the prompt template for graph rag to query
+template: |
+  Summarize the main opinions, key arguments, and practical recommendations, related to the following research objective:
+  
+  {{goal}}
+  
+  Please include diverse perspectives and note any disagreements or controversies if present. Think step by step: 
+  
+  
+  
+  
+

@@ -1,0 +1,88 @@
+name: core_concepts
+description: This provides definitions and examples of the ten core concepts of spatial information, following Kuhn (2012). Use this as an authoritative context for spatial reasoning, analysis, or when interpreting geographic questions.
+template: |
+  You are a spatial reasoning agent helping construct a transformation path step by step for answering a geographic question.
+
+  Each step builds on previous ones, using spatial core concepts and their relations. DO NOT skip steps or output the final answer. You must output only one transformation step at a time.
+
+  Core Concept Definitions:
+  - Location: Spatial reference describing where something is. Used in spatial distribution and geometry.
+  - Field: Continuously varying values across space (e.g., elevation, distance, land use). Supports interpolation and aggregation.
+  - Object: Discrete bounded entities with identity and attributes (e.g., buildings, trees, parks).
+  - Event: Time-bound spatial occurrences with location and features (e.g., fires, trips).
+  - Network: Structured spatial relationships among entities (e.g., roads, connections, flows).
+  - Amount:
+    - Content Amount: Aggregated values (count, sum, average).
+    - Coverage Amount: Spatial extent (area, length, cluster size).
+  - Proportion: Ratio between two amounts (e.g., density, rate), capturing relative quantities.
+
+  Example 1:
+  Q: What is the least cost route from school to the closest road intersection based on slope and land use in Utrecht?
+  Concepts:
+    - [0] school: object
+    - [1] road intersection: object
+    - [2] slope: field
+    - [3] land use: field
+    - [4] least cost route: field
+    - [5] cost surface: field
+  Extent:
+    - Utrecht
+  Transformations:
+    1. [2] + [3] → [5] cost surface
+    2. [0] + [1] + [5] → [4] least cost route
+  
+  Example 2:
+  Q: What is the number of Asian people within 1.5 miles of library branches in Palm City?
+  Concepts:
+    - [0] library branches: object
+    - [1] distance field (1.5 mi): field
+    - [2] Asian people: object
+    - [3] number of people: content amount
+  Extent:
+    - Palm City
+  Transformations:
+    1. [0] → [1]
+    2. [2] + [1] → [3]
+  
+  Here is the user question:
+  {{question}}
+
+  Current identified core concepts:
+  {{concepts}}
+  
+  Transformation path built so far:
+  {% if current_path %}
+  {{current_path}}
+  {% else %}
+  (None)
+  {% endif %}
+  
+  Your Task:
+
+  Think step by step. Generate only the next transformation step based on the current path and available concepts.
+
+  Output Format (choose one):
+
+  Option A–Generate a new concept  
+  step id (1,2,3...): [id] Concept A + [id] Concept B [+ ...] → [new_id] New concept name  
+  Explanation: Describe what is computed or derived. How to build the transformation 
+
+  Option B–Use existing concepts without generating a new one  
+  step id (1,2,3...): [id] Concept A + [id] Concept B [+ ...] → (used together) or [id] Existing concept name
+  Explanation: Describe what is computed or derived. Why and How to build the transformation 
+
+  Option C–Stop generation
+  STOP
+
+  ---
+  Rules (you MUST follow):
+  1. Use valid core concepts with consistent IDs and names.
+  2. You may derive a new concept OR reuse concepts already in the list.
+  3. You MAY use a previously defined concept (even one from the question) as the output of a step — e.g., if the question mentions "least cost route", and you derive how it's computed.
+  4. If multiple concepts are used without a new concept, use `(used together)` as output.
+  5. Use unique output IDs for new concepts (no reuse).
+  6. Do NOT answer the question. Do NOT jump or skip steps.
+  7. Your goal is to derive {{target}}. Once this concept is generated in any step, immediately respond with only: STOP
+  8. Your maximize transformation step is 3 (step id)
+  ---
+  Now, output the next transformation step using exactly one of the formats above.

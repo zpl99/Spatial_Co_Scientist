@@ -1,0 +1,1290 @@
+**Toolset:** Use Proximity
+
+**Tool:** Create Buffers
+
+**Description:**
+The Create Buffers tool generates polygons that extend a specified distance from input features, which can be points, lines, or polygons. This tool is commonly used in spatial analysis to determine proximity relationships, such as identifying areas within a certain distance from a feature. For example, it can be used to find all locations within 1000 meters of a fire station or to create zones around schools for planning purposes.
+
+**Parameters:**
+- **Input Features**: The features from which buffers will be created. Type: Feature Class.
+- **Output Feature Class**: The name and location of the output buffer feature class. Type: Feature Class.
+- **Buffer Distance**: The distance to buffer the input features. Type: Linear Unit.
+- **Dissolve Type**: Specifies whether the output buffers should be dissolved into a single feature or kept separate. Type: String.
+- **Method**: The method used to create buffers, such as planar or geodesic. Type: String.
+
+**Derived Output:**
+- **Buffered Features**: The resulting polygons that represent the buffered area around the input features. Type: Feature Class.
+**Toolset:** Use Proximity
+
+**Tool:** Snap Tracks
+
+**Description:**
+The Snap Tracks tool is designed to snap input track points to lines, facilitating spatial analysis by aligning point data with linear features. This tool is particularly useful in scenarios where time-enabled point data needs to be associated with traversable lines. For example, it can align GPS data from moving vehicles to road networks for traffic analysis or snap wildlife tracking points to migration paths for ecological studies.
+
+**Parameters:**
+- **Input Track Points:** Time-enabled point data representing an instant in time. Type: Feature Layer.
+- **Traversable Lines:** Lines with fields indicating the from and to nodes required for analysis. Type: Feature Layer.
+
+**Derived Output:**
+- **Snapped Tracks:** The output consists of the input track points snapped to the nearest traversable lines. Type: Feature Layer.
+Toolset: Use Proximity
+
+Tool: Group By Proximity
+
+Description: The Group By Proximity tool is part of the Use Proximity toolset, which helps answer the spatial analysis question, "What is near what?" This tool groups features that are within spatial or spatiotemporal proximity to each other. For example, it can be used to identify and group houses that are within a certain distance of schools for urban planning analysis.
+
+Parameters:
+- Input Features: The features to be analyzed for proximity grouping. Type: Feature Layer.
+- Group Field: The field used to group features that are in proximity to each other. Type: Field.
+
+Derived Output:
+- Grouped Features: Features grouped based on proximity. Type: Feature Layer.
+Toolset: Use Proximity
+
+Tool: Trace Proximity Events
+
+Description: The Trace Proximity Events tool traces events near each other in space and time. It requires time-enabled point data with features representing an instant in time. This tool is useful for analyzing events that occur close to each other both spatially and temporally. For example, it can be used to track the movement of wildlife in a conservation area or monitor the proximity of vehicles in a transportation network.
+
+Parameters:
+- Starting Points: Specifies the starting points for the trace. Type: Feature Layer.
+- Barriers: Defines any barriers that should be considered during the trace. Type: Feature Layer.
+- Trace Type: Determines the type of trace to be performed (e.g., Connected, Upstream, Downstream). Type: String.
+- Output Feature Class: Specifies the output feature class to store the trace results. Type: Feature Class.
+
+Derived Output:
+- Trace Results: Contains the traced events that are near each other in space and time. Type: Feature Class.
+Toolset: Manage Data
+
+Tool: Clip Layer
+
+Description: The Clip Layer tool extracts input features from within specified polygons. It is used to clip areas of interest based on selected layers, specified output format, and coordinate system. For example, you can use the Clip Layer tool to extract rural population data at a specific administrative level or to clip raster datasets to a defined extent.
+
+Parameters:
+- Input Layer: The dataset containing the point, line, or polygon features to be clipped. Type: Feature Layer.
+- Clip Layer: The dataset containing the polygon features used to clip the input features. Type: Feature Layer.
+- Output Feature Class: The output feature class with clipped features. Type: Feature Class.
+
+Derived Output:
+- Output Feature Class: The clipped output. Type: Feature Set.
+**Toolset:** Manage Data
+
+**Tool:** Dissolve Boundaries
+
+**Description:**
+The "Dissolve Boundaries" tool finds polygons that intersect or share a common boundary and merges them into a single polygon. It simplifies data by removing unnecessary boundaries between adjacent polygons. For example, it can create a single polygon representing a state by dissolving county boundaries within that state or merge overlapping land parcels into a single property boundary.
+
+**Parameters:**
+- **Input Layer:** The layer containing polygon features that will be dissolved or combined. Type: Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. Type: String.
+- **Dissolve Fields (Optional):** One or more fields from the input layer that control which polygons are merged. Type: Field.
+- **Summary Fields (Optional):** A list of field names and statistical summary types to calculate for all points within each polygon. Supported statistics include Sum, Minimum, and Maximum. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class containing the dissolved polygons. Type: Feature Set.
+Toolset: Manage Data
+
+Tool: Manage Data
+
+Description: The Manage Data toolset contains tools used for the day-to-day management of geographic data. It provides tools for combining and overlaying data as part of spatial analysis. For example, the "Dissolve Boundaries" tool finds polygons that overlap or share a common boundary and merges them into a single polygon. Another tool, "Merge Layers," combines features from two layers into a new layer.
+
+Parameters:
+- Dissolve Boundaries: Finds polygons that overlap or share a common boundary and merges them to form a single polygon. Type: Feature Class.
+- Merge Layers: Combines feature layers to create a single output layer. Type: Feature Class.
+
+Derived Output:
+- N/A
+**Toolset:** Data Enrichment
+
+**Tool:** Data Enrichment
+
+**Description:**
+The Data Enrichment tool is designed to add attributes to existing geographic features, enhancing them for purposes such as visualization, regression, and prediction. This tool is particularly useful in spatial analysis and GIS workflows where additional demographic, economic, or environmental data is needed to enrich the existing dataset. For example, it can be used to add demographic data to a set of retail locations to analyze market potential or to append environmental data to land parcels for conservation planning.
+
+**Parameters:**
+- **Input Features:** The features that will be enriched. **Type:** Feature Layer.
+- **Output Feature Class:** The output layer containing both the input attributes and user-selected attributes. Selected attributes are summarized from underlying demographic boundaries. Only the area inside the input boundary is considered. **Type:** Feature Class.
+- **Variables:** The variables that will be summarized and added to the output feature class. **Type:** String.
+- **Define areas to enrich (Optional):** Specifies the area that will be enriched. The default value is Straight Line. **Type:** String.
+- **Distance or time (Optional):** The distance or size of an area to enrich, for example, a 1-mile buffer or 5-minute walk time. Units correspond to the polygon type. The default value is 1. **Type:** Double.
+- **Unit (Optional):** The units associated with the Distance or time parameter. The default value is Miles. **Type:** String.
+
+**Derived Output:**
+- **Output Feature Class:** The enriched feature class containing both the original and new attributes. **Type:** Feature Class.
+No information available.
+**Toolset:** Manage Data
+
+**Tool:** Overlay Layers
+
+**Description:**
+The Overlay Layers tool overlays geometries from multiple layers into a single layer, allowing for combining, erasing, modifying, or updating spatial features. It ensures that all attributes of the features involved in the overlay are carried through to the result. Typical use cases include:
+- Combining land use data with soil type data for agricultural suitability analysis.
+- Identifying parcels within floodplains for risk assessment.
+- Determining road networks within specific administrative boundaries for infrastructure planning.
+
+**Parameters:**
+- **Input Layer:** The primary layer to be overlaid. Type: Feature Layer.
+- **Overlay Layer:** The secondary layer used for overlaying the input layer. Type: Feature Layer.
+- **Output Layer:** The resulting layer after the overlay operation. Type: Feature Layer.
+
+**Derived Output:**
+- **Resulting Layer:** A new feature class created from the overlay operation, containing combined geometries and attributes. Type: Feature Layer.
+**Toolset:** Manage Data
+
+**Tool:** Calculate Field
+
+**Description:**
+The Calculate Field tool is used to perform calculations on the values of a field for a feature class, feature layer, or raster. This tool is essential for updating field values based on expressions, which can be simple or complex. It is commonly used in GIS workflows to batch update records in a table, perform mathematical operations, or transform data types. For example, it can be used to calculate the damage costs in a flood analysis by applying conditional logic based on flood depth.
+
+**Parameters:**
+- **Input Table:** The table containing the field that will be updated with the new calculation. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name (Existing or New):** The field that will be updated with the new calculation. If a field with the specified name does not exist, it will be added. Type: Field.
+- **Expression Type:** Specifies the type of expression used, such as Python, Arcade, SQL, or VBScript. Type: String.
+- **Field Expression:** The calculation expression used to create a value that will populate the selected rows. Type: SQL Expression.
+
+**Derived Output:**
+- **Output Features:** The output is the same as the input, with updated field values. Type: GPFeatureLayer.
+Toolset: Annotation
+
+Tool: Annotation
+
+Description:
+The Annotation toolset in ArcGIS Pro is designed to automate workflows related to text and labeling on maps. Annotation provides more precise control over text placement compared to labels, allowing for individual text pieces to be edited for position and appearance. This toolset includes various tools such as Annotate Selected Features, Contour Annotation, Convert Labels To Annotation, and others. These tools are used to create feature-linked annotation, convert labels to annotation, and update annotation reference scales, among other tasks. Typical use cases include enhancing map readability by converting dynamic labels to static annotations, creating contour annotations for elevation data, and automating the placement of text based on feature attributes.
+
+Parameters:
+- **Input Map:** The map containing labels to convert to annotation. Type: Map.
+- **Polygon Index Layer:** The polygon layer containing tile features. Type: Table View.
+- **Output Geodatabase:** The workspace for saving output feature classes. Type: Workspace; Feature Dataset.
+- **Output Layer:** The group layer for generated annotation. Type: Group Layer.
+- **Annotation Suffix:** Suffix added to new annotation feature class names. Type: String.
+- **Reference Scale Value (Optional):** Scale value for annotation reference. Type: Double.
+- **Reference Scale Field (Optional):** Field determining annotation reference scale. Type: Field.
+- **Tile ID Field (Optional):** Field uniquely identifying tiled areas. Type: Field.
+
+Derived Output:
+- **Output Annotation Feature Class:** Contains the generated annotation features. Type: Feature Class.
+No information available.
+No information available.
+No information available.
+Toolset: Analyze Patterns
+
+Tool: Calculate Density
+
+Description: The Calculate Density tool creates a density map from point or line features by spreading known quantities of some phenomenon across the map. This tool is useful for visualizing and understanding the distribution of data. For example, it can be used to analyze population density, crime rates, or any other spatial phenomenon where density information is valuable.
+
+Parameters:
+- Input Features: The point or line features from which the density will be calculated. Type: Feature Layer.
+- Population Field: The field that represents the quantity to be spread across the map. Type: Field.
+- Output Cell Size: The cell size at which the density will be calculated. Type: Linear Unit.
+
+Derived Output:
+- Density Map: A layer of areas classified from least dense to most dense. Type: Feature Layer.
+No information available.
+No information available.
+**Toolset:** Find Locations
+
+**Tool:** Find Similar Locations
+
+**Description:**
+The "Find Similar Locations" tool is designed to identify candidate features that are most similar or dissimilar to one or more input features based on feature attributes. This tool is typically used in spatial analysis to compare and rank features according to specified criteria. For example, it can be used to determine which constituencies are most similar to a target risk feature based on demographic attributes, or to find locations that match certain environmental conditions.
+
+**Parameters:**
+- **Input Features to Match:** The features you want to compare against. Type: Feature Layer.
+- **Candidate Features:** The features that will be ranked based on similarity to the input features. Type: Feature Layer.
+- **Output Features:** The resulting feature class that contains the ranked candidate features. Type: Feature Class.
+- **Number Of Results:** Specifies how many of the most similar or dissimilar features to return. Type: Integer.
+- **Collapse Output to Points:** Determines whether the output geometry will be collapsed to points or match the original geometry. Type: Boolean.
+
+**Derived Output:**
+- **Output Features:** The feature class containing the ranked candidate features based on similarity. Type: Feature Class.
+No information available.
+**Toolset:** Annotation Toolset
+
+**Tool:** Convert Labels To Annotation
+
+**Description:**
+The "Convert Labels To Annotation" tool in ArcGIS Pro converts labels to annotation for a single layer or the entire map. This conversion allows for precise placement and editing of text on maps, crucial in cartographic workflows where label placement is critical. It is commonly used to create feature-linked annotation for detailed map production, such as airport signage, ensuring the relationship between features and labels is maintained. This tool is beneficial when labels need to be converted for further customization and refinement, ensuring accurate and consistent text display across different scales and formats.
+
+**Parameters:**
+- **Input Map:** Specifies the map containing the layers with labels to be converted. Type: Map.
+- **Conversion Scale:** Sets the scale at which the annotation will be viewed. Type: Double.
+- **Convert:** Specifies whether to convert labels for all layers or a single layer. Type: String.
+- **Feature Layer:** The specific layer to convert when the "Convert" parameter is set to "Single layer." Type: Feature Layer.
+- **Output Geodatabase:** The geodatabase where the output annotation feature class will be stored. Type: Geodatabase.
+- **Annotation Suffix:** A text string appended to the layer name to create the output annotation name. Type: String.
+
+**Derived Output:**
+- **Annotation Feature Class:** The output feature class containing the converted annotation. Type: Feature Class.
+No information available.
+**Toolset:** Generalization
+
+**Tool:** Collapse Road Detail
+
+**Description:**
+The Collapse Road Detail tool simplifies road networks by identifying and collapsing small configurations of road segments that disrupt the general trend of a road network. It replaces these configurations with a simplified depiction, particularly useful for representing traffic circles or other interruptions as simple intersections at smaller scales. This tool is optimized for road networks and is commonly used to simplify large-scale road collections for smaller scale maps, enhancing map readability and reducing clutter. At medium scales, it may be more suitable to retain these configurations as separate features and potentially exaggerate them.
+
+**Parameters:**
+- **Collapse Distance**: Specifies the maximum diameter across the open area for configurations to be collapsed. Type: *Double*.
+
+**Derived Output:**
+- **Output Feature Class**: Contains all roads from the input collection, with small configurations collapsed according to the specified parameters. Type: *Feature Class*.
+
+The tool also adds a field named CRD_TYPE to the input feature class, indicating the status of each feature after processing. This field can be utilized for quality control and symbology adjustments.
+Toolset: Annotation Toolset
+
+Tool: Annotate Selected Features
+
+Description:
+The "Annotate Selected Features" tool creates annotation for the selected features of a layer. It utilizes the labeling properties defined in the annotation class properties of the specified related annotation feature classes. This tool is commonly used to convert selected feature labels into annotations, allowing for manual adjustments for cartographic purposes. It is particularly beneficial in map production processes where precise control over text placement is crucial, such as in creating detailed maps for publication or presentation.
+
+Parameters:
+- **Input Features**: The features for which annotation will be created. Type: Feature Layer.
+- **Annotation Class**: The annotation class that defines the properties for the annotation. Type: Annotation Feature Class.
+
+Derived Output:
+- **Output Annotation**: The resulting annotation feature class that contains the created annotations. Type: Annotation Feature Class.
+Toolset: Annotation
+
+Tool: Tiled Labels To Annotation
+
+Description: The Tiled Labels To Annotation tool converts labels to annotation for layers in a map based on a polygon index layer. This tool is useful for automating the annotation workflow in GIS projects. For example, it can be used to convert labels to feature-linked annotation for further editing of their placement.
+
+Parameters:
+- Input Map: The map that contains the labels to convert to annotation. Type: Map
+- Polygon Index Layer: The polygon layer that contains tile features. Type: Table View
+- Output Geodatabase: The workspace where the output feature classes will be saved. Type: Workspace; Feature Dataset
+- Output Layer: The group layer that will contain the generated annotation. Type: Group Layer
+- Annotation Suffix: The suffix added to each new annotation feature class. Type: String
+- Reference Scale Value (Optional): The scale value used as a reference for the annotation. Type: Double
+- Reference Scale Field (Optional): The field in the polygon index layer that determines the reference scale of the annotation. Type: Field
+- Tile ID Field (Optional): A field in the polygon index layer that uniquely identifies the tiled area. Type: Field
+
+Derived Output:
+No information available.
+No information available.
+Toolset: Summarize Data
+
+Tool: Calculate Line Caps
+
+Description: The Calculate Line Caps tool is used to create buffer polygons around input features to a specified distance while providing options for different shapes for buffer ends (caps) and corners (joins) when the buffer is generated around the feature. The tool allows users to specify the type of caps for line ends and the shape of corners. Caps can be square, butt, or round, while joins can be mitered, beveled, or rounded.
+
+Parameters:
+- Input Features: The input point, line, or polygon features that will be buffered. Data Type: Feature Layer
+- Output Feature Class: The feature class containing the output buffers. Data Type: Feature Class
+- Distance [value or field]: The distance around the input features that will be buffered. Data Type: Linear Unit; Field
+- Caps Type (Optional): Specifies the type of caps (ends) of the input features that will be buffered. Data Type: String
+- Join Type (Optional): Specifies the shape of the buffer at corners where two segments join. Data Type: String
+
+Derived Output:
+- None available.
+No information available.
+No information available.
+Toolset: Cartographic Refinement
+
+Tool: Create Underpass
+
+Description: Creates bridge parapets and polygon masks at line intersections to indicate underpasses. This tool is commonly used to indicate underpasses in cartographic representations.
+
+Parameters:
+- Input Line Features: The input line features represent the road network where underpasses need to be indicated. Type: Feature Layer.
+- Input Line Features: The input line features represent the railway network where underpasses need to be indicated. Type: Feature Layer.
+
+Derived Output:
+- Underpass Features: The output feature class containing the underpass features indicating the locations of underpasses. Type: Feature Class.
+Toolset: Cartography
+
+Tool: Generate Hachures For Defined Slopes
+
+Description: Creates multipart lines or polygons representing the slope between the lines representing the upper and lower parts of a slope. This tool is commonly used in cartographic workflows to depict terrain features effectively.
+
+Parameters:
+- Input Line Features: The lines representing the upper and lower parts of a slope. Type: Feature Layer.
+- Output Feature Class: The multipart lines or polygons representing the defined slopes. Type: Feature Class.
+
+Derived Output:
+- None.
+**Toolset:** Graphic Conflicts
+
+**Tool:** Resolve Building Conflicts
+
+**Description:**
+The Resolve Building Conflicts tool resolves symbol conflicts among buildings concerning linear barrier features by moving, resizing, or hiding buildings to prevent graphical overlaps and ensure compliance with spacing requirements defined by cartographic specifications. It enhances the visual display of building collections by adjusting their position, orientation, size, and visibility while maintaining the representative pattern and distribution. This tool is particularly useful in spatial analysis and GIS workflows, especially in dense urban areas or complex building layouts.
+
+**Parameters:**
+- **Input Buildings**: The buildings to be assessed and resolved. Type: Point or Polygon Feature Layer.
+- **Barrier Features**: Linear features acting as barriers to buildings. Type: Line Feature Layer.
+- **Minimum Distance**: The minimum distance to maintain between buildings and barriers. Type: Double.
+- **Snap/Orient Action**: Specifies the action to take when buildings are within a specified distance of barriers. Type: String.
+
+**Derived Output:**
+- **Resolved Buildings**: The adjusted building features after conflict resolution. Type: Feature Layer.
+**Toolset:** Cartographic Refinement
+
+**Tool:** Disperse Markers
+
+**Description:**
+The Disperse Markers tool addresses the issue of overlapping or closely positioned point symbols in a map by spreading them apart based on a specified minimum spacing and dispersal pattern. This tool is particularly useful in cartographic workflows where clarity and visual distinction of point features are necessary. For example, in a map displaying densely populated urban areas, the tool can be used to ensure that markers representing different locations do not overlap, thereby improving readability and visual appeal.
+
+**Parameters:**
+- **Input Point Features:** The input point feature layer to be dispersed. Type: Layer.
+- **Minimum Spacing:** The minimum separation distance between individual point symbols in page units. A distance must be specified and must be greater than or equal to zero. Type: Linear Unit.
+- **Dispersal Pattern (Optional):** Specifies the pattern used to place the dispersed point symbols. Options include Expanded, Random, Squares, and Rings. Type: String.
+
+**Derived Output:**
+- No specific derived outputs are listed for this tool.
+**Toolset:** Annotation
+
+**Tool:** Contour Annotation
+
+**Description:**
+The Contour Annotation tool is designed to create annotation for contour features. This tool is typically used in GIS workflows where there is a need to label contour lines on maps, which are lines that connect points of equal value, such as elevation. Contour Annotation automates the process of creating these annotations, ensuring consistency and saving time compared to manual labeling. It is particularly useful in cartographic applications where visual clarity and precision of contour labeling are important. For example, in topographic mapping, contour annotations help in understanding the terrain by providing elevation information directly on the map.
+
+**Parameters:**
+- **Input Features**: The contour line feature class for which the annotation will be created. **Type:** Feature Layer.
+- **Output Geodatabase**: The workspace where the output feature classes will be saved. This can be an existing geodatabase or feature dataset. **Type:** Workspace; Feature Dataset.
+- **Contour Label Field**: The field in the input layer attribute table on which the annotation text will be based. **Type:** Field.
+- **Reference Scale**: The scale that will be used as a reference for the annotation, affecting symbol and text sizes. **Type:** Double.
+- **Output Layer Name**: The group layer that will contain the contour layer, the annotation, and the mask layer. **Type:** Group Layer.
+- **Contour and Label Color**: Specifies the color of the output contour layer and annotation features. **Type:** String.
+- **Contour Type Field (Optional)**: The field in the input layer attribute table containing a value for the type of contour feature. **Type:** Field.
+- **Contour Alignment (Optional)**: Specifies how the annotation will be aligned to contour elevations. **Type:** String.
+
+**Derived Output:**
+- **Output Layer Name**: The group layer that contains the contour layer, the annotation, and the mask layer. **Type:** Group Layer.
+**Toolset:** Overlay
+
+**Tool:** Overlay
+
+**Description:**
+The Overlay tool in ArcGIS Pro is designed to answer spatial questions such as "What's on top of what?" by overlaying multiple feature classes. This tool is used to combine, erase, modify, or update spatial features, resulting in a new feature class. It is particularly useful in spatial analysis for identifying spatial relationships between input features. Typical use cases include determining land use on specific soil types, identifying parcels within floodplains, or finding roads within certain counties. The tool creates new information by joining two sets of features into a single set, allowing for comprehensive spatial analysis.
+
+**Parameters:**
+- **Input Layer:** The point, line, or polygon features that will be overlaid with the overlay layer. **Type:** Feature Set.
+- **Overlay Layer:** The features that will be overlaid with the input layer features. **Type:** Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. **Type:** String.
+- **Overlay Type (Optional):** The type of overlay to be performed, such as Intersect, Union, or Erase. **Type:** String.
+- **Output Type (Optional):** The type of intersection you want to find, valid when the overlay type is Intersect. **Type:** String.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class from the overlay operation, containing the combined spatial features and attributes. **Type:** Feature Class.
+No information available.
+**Toolset:** Generalization
+
+**Tool:** Thin Road Network
+
+**Description:**
+The Thin Road Network tool compiles a simplified collection of roads by identifying segments that can be removed from the display without affecting the general character, density, and overall connectivity of the roads. Features that do not participate in the resulting road collection are identified by an attribute on the input layers that can be used in a definition query or in a selection to create a layer. The tool is useful for creating simplified road networks for display at smaller scales while retaining essential connectivity and character. For example, in a city map, minor roads can be thinned out to emphasize major thoroughfares, enhancing map readability.
+
+**Parameters:**
+- **Input Road Network:** The feature class containing the road network to be thinned. Type: Feature Layer.
+- **Minimum Length:** The minimum length of road segments to retain. Type: Linear Unit.
+- **Invisible Field:** The field used to flag features for removal. Type: Field.
+- **Level:** The level of detail to retain in the thinned network. Type: String.
+
+**Derived Output:**
+- **Thinned Road Network:** The resulting feature class containing the simplified road network. Type: Feature Class.
+**Toolset:** Generalization
+
+**Tool:** Simplify Shared Edges
+
+**Description:**
+The Simplify Shared Edges tool simplifies the edges of input features while maintaining the topological relationship with edges shared with other features. This tool is particularly useful for reducing the complexity of spatial data for display at smaller scales without compromising the essential shape and connectivity of the features. It is commonly used in cartographic generalization to enhance map readability and reduce data storage requirements. For instance, simplifying administrative boundaries or natural features like rivers and coastlines can improve map visualization and interpretation.
+
+**Parameters:**
+- **Input Features:** The lines or polygons to be simplified. Type: Feature Layer.
+- **Simplification Algorithm:** Choose a simplification algorithm suitable for the task. Type: String.
+- **Shared Edge Features (Optional):** Line or polygon features that will be simplified along edges shared with input features. Type: Feature Layer.
+- **Input Barrier Layers (Optional):** Point, line, or polygon features that act as barriers for simplification. Simplified features will not touch or cross these barriers. Type: Feature Layer.
+
+**Derived Output:**
+- **Output Feature Class:** The simplified input features. Type: Feature Layer.
+- **Output Feature Class:** The shared edge features. Type: Feature Layer.
+No information available.
+Toolset: Data Management
+
+Tool: Calculate Field
+
+Description: Calculates the values of a field for a feature class, feature layer, or raster. This tool is useful for populating key named fields in GIS feature layers before using the Export to CAD tool to control the properties of an output CAD drawing.
+
+Parameters:
+- Input Field: Specifies the field for which values will be calculated. Type: Field
+- Expression: Defines the calculation expression. Type: SQL Expression
+
+Derived Output:
+- Updated Field: Contains the calculated values based on the expression. Type: Field
+**Toolset:** Generalization
+
+**Tool: Aggregate Polygons**
+
+**Description:**
+The Aggregate Polygons tool combines polygons within a specified distance into new, larger polygons. It simplifies complex polygonal data by merging adjacent polygons within a certain distance. This tool is useful in scenarios like urban planning, environmental studies, and resource management.
+
+**Parameters:**
+- **Input Features:** The polygon features to be aggregated. Type: *Feature Layer*.
+- **Distance:** The distance to search for neighboring polygons to aggregate. Type: *Linear Unit*.
+- **Aggregation Field (optional):** A field used to group polygons before aggregation. Type: *Field*.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class containing the aggregated polygons. Type: *Feature Class*.
+**Toolset:** Map Series
+
+**Tool:** Strip Map Index Features
+
+**Description:**
+The Strip Map Index Features tool is designed to create a series of rectangular polygons, known as index features, that follow a single linear feature or a group of linear features. These index features are particularly useful in creating a spatial map series, such as a strip map, which is a set of maps that follow a linear feature like a river, road, or pipeline. The tool generates index features that can be used to define pages in a strip map, allowing for the rotation and orientation of the map on the page. Additionally, it helps determine the adjacency of index features, indicating which pages are next to the current page either to the left and right or to the top and bottom. This tool is essential for workflows that require detailed mapping along linear features, providing a structured and organized approach to map series creation.
+
+**Parameters:**
+- **Input Line Features:** The input polyline features defining the path of the strip map index features. **Type:** Feature Layer.
+- **Output Feature Class:** The output feature class of polygon index features. **Type:** Feature Class.
+- **Use Page Unit and Scale (Optional):** Specifies whether index feature size input is in page units. **Type:** Boolean.
+- **Map Scale (Optional):** Map scale must be specified if index feature lengths are to be calculated in page units. **Type:** Long.
+- **Length Along the Line (Optional):** The length of the polygon index feature along the input line feature specified in either map or page units. **Type:** Linear Unit.
+- **Length Perpendicular to the Line (Optional):** The length of the polygon index feature perpendicular to the input line feature specified in either map or page units. **Type:** Linear Unit.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class containing the polygon index features. **Type:** Feature Class.
+Toolset: Cartography
+
+Tool: Intersecting Layers Masks
+
+Description: Creates masking polygons at a specified shape and size at the intersection of two symbolized input layers: the masking layer and the masked layer. This tool is used to enhance cartographic display by obscuring conflicting feature symbology. One common use case is to mask features around annotation to ensure text readability.
+
+Parameters:
+- Masking Layer: The symbolized input layer that will intersect the masked layer to create masking polygons. Data Type: Annotation Layer
+- Masked Layer: The symbolized input layer that will be masked. Data Type: Annotation Layer
+- Output Feature Class: The feature class that will contain the mask features. Data Type: Feature Class
+- Reference Scale: The reference scale used for calculating the masking geometry. Data Type: Double
+- Calculation Coordinate System: The spatial reference of the map in which the masking polygons will be created. Data Type: Spatial Reference
+- Margin: The space surrounding the symbolized input features used to create the mask polygons. Data Type: Linear Unit
+- Mask Kind: Specifies the type of masking geometry to be created. Options include Box, Convex hull, Exact simplified, and Exact. Data Type: String
+
+Derived Output:
+- Output Feature Class: The feature class that contains the mask features. Data Type: Feature Class
+Toolset: Summarize Data
+
+Tool: Aggregate Points
+
+Description: Aggregates points into polygon features or bins. A polygon is returned with a count of points as well as optional statistics at all locations where points exist. This tool is designed for large datasets and provides insights into spatial patterns and distributions.
+
+Parameters:
+- Input Features: The point or line features from which to calculate density. Type: Feature Set
+- Output Name: The name of the output layer to create on your portal. Type: String
+- Count Field (Optional): A field specifying the number of incidents at each location. Type: Field
+- Cell Size (Optional): This value is used to create a mesh of points where density values are calculated. Type: Double
+- Cell Size Units (Optional): The units of the cell size value. Type: String
+- Radius (Optional): A distance specifying how far to search to find point or line features when calculating density values. Type: Double
+
+Derived Output:
+- Aggregated Polygon Features: Polygons with aggregated point counts and optional statistics. Type: Feature Class
+Toolset: Cartographic Refinement
+
+Tool: Set Control Point At Intersect
+
+Description: Creates a control point at vertices shared by one or more line or polygon features. Commonly used to synchronize boundary symbology on adjacent polygons.
+
+Parameters:
+- Input Features: Specifies the line or polygon features where control points will be set. Type: Feature Layer.
+- Output Feature Class: The feature class containing the control points set at the intersect vertices. Type: Feature Class.
+
+Derived Output:
+- Control Points: A table containing the control points set at the intersect vertices. Type: Table.
+**Toolset:** No information available.
+
+**Tool:** Smooth Line
+
+**Description:**
+The Smooth Line tool is used to enhance the aesthetic appearance of line features by removing sharp angles and converting straight edges into smoother curves. This tool is particularly useful in cartographic outputs where visual appeal is important. It can be applied in various GIS workflows, such as:
+- **Cartographic Generalization:** Improving the visual quality of maps by smoothing river lines or road networks.
+- **Data Preparation:** Preparing data for analysis by removing unnecessary detail from line features.
+- **Boundary Adjustment:** Adjusting boundaries in land use planning to create more visually appealing maps.
+
+**Parameters:**
+- **Input Features:** The line features to be smoothed. Type: Feature Layer.
+- **Smoothing Algorithm:** Specifies the smoothing algorithm. Options include:
+  - **Polynomial Approximation with Exponential Kernel (PAEK):** A smoothed line that will not pass through the input line vertices. Type: String.
+  - **Bezier interpolation:** Bezier curves will be fitted between vertices, passing through the vertices of the input lines. Type: String.
+- **Smoothing Tolerance:** A tolerance used by the PAEK algorithm, specifying the length of a moving average. Type: Linear Unit.
+- **Preserve endpoint for closed lines (Optional):** A legacy parameter for compatibility, specifying whether endpoints of closed lines would be preserved. Type: Boolean.
+
+**Derived Output:**
+- **Output Feature Class:** The output feature class to be created, containing the smoothed lines. Type: Feature Class.
+No information available.
+**Toolset:** Generalization
+
+**Tool:** Simplify Polygon
+
+**Description:**
+The Simplify Polygon tool is designed to simplify polygon features by removing extraneous vertices while preserving the essential shape of the polygon. This tool is particularly useful in cartographic generalization processes where the goal is to reduce the complexity of polygon outlines for better visual representation at smaller scales. Typical use cases include simplifying the boundaries of large datasets to improve performance and aesthetics in maps, such as simplifying land use polygons for regional planning maps or reducing the complexity of administrative boundaries for thematic maps.
+
+**Parameters:**
+- **Input Features:** The polygon features to be simplified. Type: Feature Layer.
+- **Simplification Algorithm:** Specifies the polygon simplification algorithm to be used. Options include:
+  - Retain critical points (Douglas-Peucker)
+  - Retain critical bends (Wang-Müller)
+  - Retain weighted effective areas (Zhou-Jones)
+  - Retain effective areas (Visvalingam-Whyatt)
+  Type: String.
+- **Simplification Tolerance:** Determines the degree of simplification. The tolerance is the maximum allowable perpendicular distance between each vertex and the new line created. Type: Linear Unit.
+
+**Derived Output:**
+- **Output Feature Class:** The simplified output polygon feature class. It contains all fields from the input feature class and is topologically correct. Type: Feature Class.
+- **InPoly_FID:** Field containing the input feature IDs. Type: Integer.
+- **SimPgnFlag:** Field indicating topological errors or discrepancies in the input data. Values:
+  - 0: No errors
+  - 1: Topological error present
+  - 2: Features split by partition and smaller than minimum area after simplification
+  Type: Integer.
+No information available.
+**Toolset:** Cartography Tools > Generalization
+
+**Tool:** Smooth Shared Edges
+
+**Description:**
+The Smooth Shared Edges tool is designed to smooth the edges of input features while maintaining topological relationships with shared edges of other features. This tool is particularly useful in cartographic workflows where aesthetic appearance is important, as it removes sharp angles in lines or outlines. It is applied to all input feature edges and only to shared edge feature edges that share an edge with any input feature edges. Shared edge feature edges that do not share an edge with at least one input feature’s edge are not smoothed. Typical use cases include:
+- Enhancing the visual quality of maps by smoothing jagged boundaries.
+- Preparing spatial data for publication where smooth transitions between features are desired.
+
+**Parameters:**
+- **Input Features:** The lines or polygons to be smoothed. Type: Feature Layer.
+- **Smoothing Algorithm:** Specifies the smoothing algorithm. Options include:
+  - **Polynomial Approximation with Exponential Kernel (PAEK):** Calculates a smoothed polygon that will not pass through the input polygon vertices. Type: String.
+  - **Bezier interpolation:** Fits Bezier curves between vertices, resulting in polygons that pass through the vertices of the input polygons. Type: String.
+- **Smoothing Tolerance:** Determines the degree of smoothing. A unit can be specified; if no unit is specified, the unit of the input will be used. This is only used for the PAEK algorithm. Type: Linear Unit.
+- **Shared Edge Features (Optional):** Line or polygon features that will be smoothed along edges shared with input features. Other edges are not smoothed. Type: Feature Layer.
+- **Input Barrier Layers (Optional):** Point, line, or polygon features that act as barriers for smoothing. The smoothed features will not touch or cross barrier features. Type: Feature Layer.
+
+**Derived Output:**
+- **Output Feature Class:** The smoothed features. Type: Feature Layer.
+**Toolset:** Graphic Conflicts
+
+**Tool:** Resolve Road Conflicts
+
+**Description:**
+The Resolve Road Conflicts tool adjusts symbolized road features to prevent graphic overlaps that occur when road data is displayed at a smaller scale than it was created. It assesses the proximity and parallelism of input features, categorizes them based on hierarchy field values, and displaces portions of line segments to resolve overlaps. This ensures a clear and accurate display, making it valuable in cartographic workflows like urban planning or transportation mapping.
+
+**Parameters:**
+- **Input Features:** The input feature layer containing potentially conflicting features. Type: Feature Layer.
+- **Displacement Features:** Polygon features created by Resolve Road Conflicts or Merge Divided Roads tools, dictating the amount of displacement. Type: Feature Layer.
+- **Adjustment Style:** Defines adjustment type for displacing features (Automatic, Solid, Elastic). Type: String.
+
+**Derived Output:**
+- **Displacement Polygon Feature Class:** Optionally stores displacement information for further tools like Propagate Displacement. Type: Feature Class.
+Toolset: Generalization
+
+Tool: Collapse Hydro Polygon
+
+Description: The Collapse Hydro Polygon tool collapses or partially collapses hydro polygons to a centerline based on a collapse width. When the collapse width is set to a value greater than 0, an output polygon feature class is created to contain the portions of the input hydro polygons that are not collapsed. A collapse width value of 0 collapses all input polygons, and no output polygons are created. This tool is optimized for the spatial relationships typically found in a road network. It is important to correctly establish the geometry of the input features for the tool to maintain the relationship of the features.
+
+Parameters:
+- Input Hydro Polygon Features: One or more feature layers containing hydro polygons. Type: Feature Layer
+- Output Line Feature Class: The line feature class containing the centerlines of the collapsed polygons. It contains centerlines of all input polygons including those that are not collapsed. This feature class has a COLLAPSED attribute that specifies whether the centerline feature represents a collapsed polygon. Type: Feature Class
+- Merge Adjacent Input Polygons (Optional): Specifies whether adjacent input polygons will be merged before calculating the centerlines. Checked—Input hydro polygons will be merged before calculating the centerlines. Unchecked—Centerlines will be calculated from input hydro polygons that are not merged. Type: Boolean
+- Connecting Hydro Line Features (Optional): Input hydro line features that connect to the input hydro polygons to be collapsed. Line features will be created to maintain these connections. Type: Feature Layer
+- Collapse Width (Optional): The threshold width of an input hydro polygon to be considered for collapse. All polygons below the specified width will be collapsed. The default value is 0, which will collapse all features. Type: Linear Unit
+- Collapse Width Tolerance (%) (Optional): A percentage tolerance within which features will be analyzed and the surrounding context will be considered when determining whether to collapse a feature. This is to minimize oscillations within the collapse. The default value is 50. Type: Double
+- Output Polygon Feature Class (Optional): The polygon feature class containing the portions of the input hydro polygons that are not collapsed. Type: Feature Class
+
+Derived Output:
+- InPoly Decode ID Table: The table linking the InPoly_ID values to the names of the input hydro polygon features. Type: Table
+- InLine Decode ID Table: The table linking the InLine_ID values to the names of the connecting hydro line features. Type: Table
+No information available.
+Toolset: Cartography
+
+Tool: Map Server Cache Tiling Scheme To Polygons
+
+Description: The Map Server Cache Tiling Scheme To Polygons tool generates polygon features based on the tiling scheme of a map. These polygons can be created for the full extent of the map or only for tiles that intersect the map extent. The tool allows for clipping tiles at the coordinate system horizon to ensure polygons are within the valid area of the map's coordinate system.
+
+Parameters:
+- Input Map: The current map with the extent that will be used. Type: Map
+- Tiling Scheme: A predefined tiling scheme .xml file. Type: File
+- Output Feature Class: The output polygon feature class. Type: Feature Class
+- Generate polygons that intersect the map extent: Specifies whether polygon features will be created for the entire extent of the tiling scheme or only those tiles that intersect the full extent of the map. Type: Boolean
+- Clip tiles at the coordinate system horizon: Specifies whether polygons will be constrained to the valid area of use for the geographic or projected coordinate system of the map. Type: Boolean
+
+Derived Output:
+- No derived outputs available.
+**Toolset:** This toolbox includes tools that integrate spatial relationships directly into their mathematical models.
+
+**Tool:** Merge Divided Roads
+
+**Description:**
+The Merge Divided Roads tool merges road segments that are parallel along a significant distance into a single center line. It is designed to simplify large-scale road collections at smaller scales, where depicting divided highways and boulevards as a single line is appropriate. This tool optimizes road networks by merging lanes of the same road class that trend generally parallel and are within a specified merge distance. It is crucial to establish correct geometry for input features to maintain spatial relationships. Examples of use cases include:
+- Simplifying road networks for cartographic purposes at smaller scales.
+- Preparing road data for further analysis or visualization by reducing the number of features.
+- Integrating with tools like Resolve Road Conflicts to manage symbol conflicts.
+
+**Parameters:**
+- **Merge Field**: Specifies the road class for merging. Type: Field.
+- **Merge Distance**: The maximum distance between parallel road segments to be merged. Type: Double.
+- **Output Displacement Feature Class**: Optional parameter to create a feature class for reestablishing connectivity post-merge. Type: Feature Class.
+- **Road Character Field**: Used to specify features that should not be merged. Type: Field.
+
+**Derived Output:**
+- **Merged Roads**: The output feature class with merged road segments. Type: Feature Class.
+
+This tool directly modifies input feature classes, so it is recommended to create a copy of the features before processing to preserve their original state.
+**Toolset:** Annotation
+
+**Tool:** Convert Labels To Graphics
+
+**Description:**
+The "Convert Labels To Graphics" tool in ArcGIS Pro is designed to convert labels into graphic elements for either a single layer or an entire map. This conversion allows for more flexible manipulation of text elements, as graphic elements can be moved and resized independently of the feature they are associated with. Typical use cases include cartographic design where precise placement and styling of text are required, or when preparing maps for publication where labels need to be adjusted manually for aesthetic purposes. For example, a cartographer might use this tool to convert labels to graphics to ensure that text does not overlap important map features or to customize the appearance of labels for a thematic map.
+
+**Parameters:**
+- **Input Map:** The input map name. Type: Map.
+- **Conversion Scale:** The scale at which to convert labels. If a reference scale is set on the map, the reference scale will be used for symbol sizing and graphics layer creation, but conversion will happen at this scale. Type: Double.
+- **Convert (Optional):** Specifies whether to convert graphics for all layers in the map or for a single layer. Type: String.
+- **Feature Layer (Optional):** The layer with the labels to convert when the Convert parameter is set to Single layer. Type: Feature Layer.
+- **Graphics Layer Suffix (Optional):** The suffix that will be added to each new graphics layer. Type: String.
+- **Extent (Optional):** Specifies the extent that contains the labels to convert to graphics. Options include Current Display Extent, Draw Extent, or Extent of a Layer. Type: Extent.
+
+**Derived Output:**
+- **Graphics Layer:** The resulting graphics layer containing converted labels. Type: Graphics Layer.
+Toolset: Pairwise Overlay
+
+Tool: Pairwise Overlay
+
+Description: The Pairwise Overlay toolset contains tools that provide an alternative to classic overlay tools for improved functionality and performance. For example, the Pairwise Buffer tool creates buffer polygons around input features using a parallel processing approach. Pairwise Clip cuts out a piece of one feature class using features from another class. Pairwise Dissolve aggregates features based on specified attributes. Pairwise Erase computes a pairwise intersection of input and erase features. Pairwise Integrate analyzes coordinate locations of feature vertices. Pairwise Intersect computes a pairwise intersection of input features.
+
+Parameters:
+- Pairwise Buffer: Creates buffer polygons around input features to a specified distance using a parallel processing approach. Type: Feature Class.
+- Pairwise Clip: Cuts out a piece of one feature class using features from another feature class. Type: Feature Class.
+- Pairwise Dissolve: Aggregates features based on specified attributes using a parallel processing approach. Type: Feature Class.
+- Pairwise Erase: Computes a pairwise intersection of input and erase features. Type: Feature Class.
+- Pairwise Integrate: Analyzes the coordinate locations of feature vertices among features in one or more feature classes. Type: Feature Class.
+- Pairwise Intersect: Computes a pairwise intersection of the input features. Type: Feature Class.
+
+Derived Output:
+- Output feature class: Resulting features from the pairwise overlay operation. Type: Feature Class.
+Toolset: Generalization
+
+Tool: Simplify Line
+
+Description: The Simplify Line tool simplifies lines by removing relatively extraneous vertices while preserving essential shape. It is recommended to position endpoints of lines on long, smooth sections for better results. The tool flags topology errors in the input feature class and adds fields like SimLinFlag to indicate topological errors. It also includes fields like InLine_FID to store object IDs and MinSimpTol/MaxSimpTol for tolerance values used.
+
+Parameters:
+- Input Features: The input line features to be simplified. Type: Feature Layer
+- Output Feature Class: The simplified output line feature class. Type: Feature Class
+- Simplification Algorithm: Specifies the line simplification algorithm to be used. Type: String
+- Simplification Tolerance: Determines the degree of simplification. Type: Linear Unit
+- Check for topological errors: Specifies how topological errors will be handled. Type: Boolean
+- Input Barrier Layers: Features that should not be crossed by simplified lines. Type: Feature Layer
+
+Derived Output:
+- Derived Point Output: Represents endpoints of lines simplified to zero-length lines. Type: Feature Class
+
+Source: ArcGIS Pro Documentation
+Toolset: No information available.
+
+Tool: No information available.
+
+Source documentation does not provide specific details for the "Propagate Displacement" tool, including its description, parameters, or derived outputs.
+Toolset: Generalization
+
+Tool: Collapse Dual Lines To Center Lines
+
+Description: The Collapse Dual Lines To Center Lines tool identifies small configurations of road segments that interrupt the general trend of a road network and replaces them with a simplified depiction. It collapses configurations regardless of road class if the diameter across the open area is less than or equal to the Collapse Distance parameter value. This tool is typically used to simplify a relatively large-scale road collection at a smaller scale, where it is appropriate to depict traffic circles or other small interruptions to the network as a simple intersection. For example, it can be used to simplify road networks for cartographic purposes at different scales.
+
+Parameters:
+- Input Features: The input dual-line features, such as road casings, from which centerlines will be derived. Data Type: Feature Layer
+- Output Feature Class: The output feature class that will be created. Data Type: Feature Class
+- Maximum Width: The maximum width of the dual-line features that will be used to derive a centerline. A value must be specified, and it must be greater than zero. Data Type: Linear Unit
+- Minimum Width (Optional): The minimum width of the dual-line features that will be used to derive a centerline. Data Type: Linear Unit
+
+Derived Output:
+- No derived outputs available.
+No information available.
+**Toolset:** Cartographic Refinement toolset
+
+**Tool:** Update Annotation Reference Scale
+
+**Description:**
+The "Update Annotation Reference Scale" tool adjusts the reference scale of an existing annotation or dimension feature class. It is commonly used when the scale of a map changes, ensuring annotations remain visually consistent and readable. For instance, when resizing a map for printing or display, this tool helps maintain the annotations' appearance and legibility. It is essential in cartographic workflows to preserve the visual integrity of annotations across different scales.
+
+**Parameters:**
+- **in_anno_features**: The input annotation feature class to update the reference scale. Type: Dimension Layer.
+- **updated_annotation**: Specifies the new reference scale for the annotation feature class. Type: Dimension Layer.
+
+**Derived Output:**
+- **out_workspace**: The workspace storing the updated annotation feature class. Type: Workspace.
+Toolset: Cartography
+
+Tool: Create Cartographic Partitions
+
+Description: The Create Cartographic Partitions tool is used to generate polygon partitions for the purpose of generalizing large datasets or resolving conflicts. These partitions should be topologically correct, with adjacent edges matching and no overlaps. While holes between partition features are acceptable, multipart polygons or polygons with holes are not supported. Each partition polygon must have a non-zero area, and null or empty partitions will be ignored. The tool is useful for dividing input features into manageable sections for processing, ensuring consistent results across partition boundaries.
+
+Parameters:
+- Partition Features: The polygon feature class used to subdivide large datasets for generalization or conflict resolution processing. Type: FeatureClass.
+
+Derived Output:
+- None available.
+**Toolset:** Generalization
+
+**Tool:** Simplify Building
+
+**Description:**
+The "Simplify Building" tool simplifies the boundary or footprint of building polygons while maintaining their essential shape and size. This tool is typically used in cartographic generalization processes to reduce the complexity of building outlines for display at smaller scales, such as in city planning or geographic information system (GIS) workflows. For example, when creating maps at a scale of 1:50,000, detailed building outlines may be too complex and visually cluttered. The Simplify Building tool helps in reducing this complexity by removing unnecessary vertices, indentations, and extensions, thus making the map more readable and aesthetically pleasing.
+
+**Parameters:**
+- **Input Features:** The building polygons to be simplified. **Type:** Feature Layer.
+- **Output Feature Class:** The output feature class to be created. **Type:** Feature Class.
+- **Simplification Tolerance:** The tolerance for building simplification. A tolerance must be specified, and it must be greater than zero. You can choose a preferred unit; the default is the feature unit. **Type:** Linear Unit.
+- **Minimum Area (Optional):** The minimum area for a simplified building to be retained in feature units. The default value is zero, meaning all buildings are kept. You can specify a preferred unit; the default is the feature unit. **Type:** Areal Unit.
+- **Check for spatial conflicts (Optional):** Specifies whether spatial conflicts—overlapping or touching among buildings—will be identified. A SimBldFlag field is added to the output to store conflict flags. **Type:** Boolean.
+- **Input barrier layers (Optional):** The input layers containing features to act as barriers for simplification. Resulting simplified buildings will not touch or cross barrier features. **Type:** Feature Layer.
+
+**Derived Output:**
+- **Output Feature Class:** The simplified building polygons. **Type:** Feature Class.
+No information available.
+**Toolset:** Masking
+
+**Tool:** Feature Outline Masks
+
+**Description:**
+Masking is a way of making portions of symbolized features invisible to improve the legibility of overlapping symbols or text. Feature geometry is not changed. It is only the symbology that is affected. A common use for masking is to mask features around annotation to ensure the text remains readable. For example, in a hypsometric elevation map such as the one below, contour lines and text conflict. With masking, portions of the black contour lines are made invisible near the contour text to ensure it remains legible. In the first image, the contour lines visually conflict with the annotation. In the second image, outline masks that were generated as a separate layer are added and drawn with a white polygon symbol. In the final image, the mask layer is used to mask the contour lines, and the visibility of the mask layer is off. In this example, a polygon feature layer of small shapes that correspond with the placement of the annotation are used to mask the contour lines, visually breaking the line symbology. (The shapes, in white, were created by the Feature Outline Masks tool.) In the final image, the polygon mask feature layer is in the map but its visibility is off, so you don't see the mask polygons themselves. If there was nothing else in the map other than the extents of multiple pages. One page of output is generated for each feature extent.
+
+**Parameters:**
+- **Input Layer**: The symbolized input layer from which the masks will be created. Type: Annotation Layer.
+- **Output Feature Class**: The feature class that will contain the mask features. Type: Feature Class.
+- **Reference Scale**: The reference scale used for calculating the masking geometry when masks are specified in page units. Typically, this is the map's reference scale. Type: Double.
+- **Coordinate System**: The spatial reference of the map in which the masking polygons will be created. This is not the spatial reference assigned to the output feature class but the map's spatial reference, as symbology positions may change when features are projected. Type: Spatial Reference.
+- **Margin**: The space in page units surrounding the symbolized input features used to create the mask polygons. This margin improves visual appearance and cannot be negative. Type: Linear Unit.
+- **Mask Kind**: Specifies the type of masking geometry to be created. Options include Box, Convex hull (default), Exact simplified, and Exact. Type: String.
+
+**Derived Output:**
+- **Mask Features**: The output feature class containing the mask polygons. Type: Feature Class.
+No information available.
+**Toolset:** Cartography Toolbox
+
+**Tool:** Masking Toolset
+
+**Description:**
+The Masking toolset within the Cartography toolbox is designed to enhance cartographic display by creating masks that obscure conflicting feature symbology. This toolset is typically used in map production workflows to improve the visual clarity of maps by hiding overlapping or conflicting features. For example, masks can be used to ensure that important map elements such as labels or symbols are not obscured by other features, thereby improving the readability and aesthetic quality of the map.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+**Toolset:** Text Analysis
+
+**Tool:** Extract Entities Using Deep Learning
+
+**Description:**
+The "Extract Entities Using Deep Learning" tool runs a trained named entity recognizer model on text files in a folder or a text field in a feature class or table. It extracts entities and locations such as addresses, place or person names, dates, and monetary values into a table. If the extracted entities include an address, the tool can geocode these addresses using a specified locator, producing a feature class as an output. This tool is particularly useful in scenarios such as extracting data from crime reports to display trends or extracting information from social media posts during natural disasters to identify areas needing immediate assistance.
+
+**Parameters:**
+- **Input Text:** The text files or text field in a feature class or table where named entity recognition will be performed. Type: Text Field or Folder.
+- **Model Definition:** The trained entity recognition model to be used. Type: Esri Model Definition JSON file.
+- **Locator (optional):** The locator to be used for geocoding addresses. Type: Locator.
+
+**Derived Output:**
+- **Extracted Entities Table:** A table containing the extracted entities and their attributes. Type: Table.
+- **Geocoded Feature Class (if applicable):** A feature class containing geocoded addresses. Type: Feature Class.
+**Toolset:** Text Analysis
+
+**Tool:** Classify Text Using Deep Learning
+
+**Description:**
+The "Classify Text Using Deep Learning" tool applies a trained text classification model to a text field within a feature class or table. It assigns a class or category label to each record, along with a confidence value for the classification. This tool is useful for categorizing text data based on predefined categories. Examples of use cases include:
+- **Address Classification:** Improving geocoding accuracy by classifying incomplete addresses by country.
+- **Sentiment Analysis:** Identifying sentiments in geolocated tweets, such as vaccine hesitancy, to guide public health campaigns.
+- **Crime Categorization:** Understanding crime trends by classifying crime incident reports.
+
+**Parameters:**
+- **Input Table:** Feature class or table with text to be classified. Type: Feature Class/Table.
+- **Input Model:** Deep learning model file (.emd or .dlpk). Type: File.
+- **Processor Type:** Specifies CPU or GPU processing. Type: String.
+- **GPU ID:** Specifies GPU usage. Type: Integer.
+
+**Derived Output:**
+- **Classified Text Field:** New field in the input table with the assigned class or category label. Type: Field.
+No information available.
+Toolset: Summarize Data
+
+Tool: Describe Dataset
+
+Description: The Describe Dataset tool summarizes features into calculated field statistics, sample features, and extent boundaries. It aids in the semantic analysis of spatial relationships. For example, it can be used to analyze the distribution of tree species in a forest, calculate the average size of buildings in a city, or determine the extent of a river basin. This tool is essential for understanding the characteristics and spatial distribution of features within a dataset.
+
+Parameters:
+- Input Dataset: Specifies the dataset to be described. Type: Feature Layer.
+- Output Statistics Table: The table containing the calculated field statistics. Type: Table.
+- Sample Features: The features sampled for statistical analysis. Type: Feature Layer.
+- Extent Boundary: The boundary extent of the dataset. Type: Feature.
+
+Derived Output:
+- Calculated Field Statistics: Provides statistical information about the input dataset. Type: Table.
+- Sampled Features: Features selected for further analysis. Type: Feature Layer.
+- Extent Boundary: Represents the spatial extent of the dataset. Type: Feature.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Center And Dispersion
+
+**Description:**
+The "Summarize Center And Dispersion" tool finds central features and directional distributions, and calculates mean and median locations from the input data. It is commonly used in spatial analysis to understand the central tendency and spread of geographic features. For instance, it can determine the geographic center of a set of points representing store locations or analyze the dispersion of wildlife sightings to identify distribution patterns.
+
+**Parameters:**
+- **Input Features:** Specifies the features for which central features, directional distributions, mean, and median locations will be calculated. Type: Feature Layer.
+- **Output Feature Class:** The output feature class containing the central features, directional distributions, mean location, and median location. Type: Feature Class.
+
+**Derived Output:**
+- **Central Features:** Identifies the central feature(s) in the dataset. Type: Feature Class.
+- **Directional Distributions:** Calculates the directional distribution of the features. Type: Feature Class.
+- **Mean Location:** Computes the mean center of the input features. Type: Point.
+- **Median Location:** Computes the median center of the input features. Type: Point.
+Toolset: Summarize Data
+
+Tool: Reconstruct Tracks
+
+Description: The Reconstruct Tracks tool creates line or polygon tracks from time-enabled input data. It is used to analyze spatial relationships and can be applied in scenarios such as reconstructing movement paths, tracking changes over time, or visualizing temporal patterns in GIS workflows.
+
+Parameters:
+- split_type: Specifies the type of split to be applied during track reconstruction. Type: String.
+- split_expression: Defines the expression used for splitting tracks. Type: String.
+
+Derived Output:
+- No derived outputs available.
+Toolset: Summarize Data
+
+Tool: Join Features
+
+Description: The Join Features tool allows you to join features in one layer to features in another layer based on their relative locations. This spatial join can also incorporate temporal or attribute relationships. For example, you can join layers based on spatial relationships like containment or intersection. This tool is useful for scenarios such as determining the number of homes affected by a flood by joining home locations to flood boundaries.
+
+Parameters:
+- Target Features: Contains the target features. Data Type: Feature Layer
+- Join Features: Contains the join features. Data Type: Feature Layer
+- Output Feature Class: A new feature class containing the attributes of the target and join features. Data Type: Feature Class
+- Join Operation (Optional): Specifies how joins between the Target Layer values and the Join Layer values will be handled in the output if multiple join features have the same spatial relationship with a single target feature. Data Type: String
+
+Derived Output:
+No derived outputs available.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Within
+
+**Description:**
+The "Summarize Within" tool overlays a polygon layer with another layer to summarize the number of points, length of lines, or area of polygons within each polygon. It calculates attribute field statistics for features within the polygons. This tool is commonly used in spatial analysis to determine how much of a feature lies within another feature. For example, it can calculate the area of a specific land use type within administrative boundaries or count incidents within different zones.
+
+**Parameters:**
+- **Input Polygons**: The polygon features used to summarize the input summary features. Type: Feature Layer.
+- **Input Summary Features**: The features summarized within the input polygons, which can be points, lines, or polygons. Type: Feature Layer.
+- **Output Feature Class**: The name of the output feature class containing the summarized data. Type: Feature Class.
+- **Summary Fields**: Optional fields for which statistics will be calculated. Type: Field.
+- **Group Field**: Optional field used to group the summary features. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class**: Contains the summarized data with calculated statistics for the input summary features within each input polygon. Type: Feature Class.
+**Toolset:** Summarize Data
+
+**Tool:** Aggregate Points
+
+**Description:**
+The "Aggregate Points" tool aggregates point features into polygon features or bins. It determines which points fall within each polygon's area and calculates statistics about all points within each polygon. The tool returns a polygon with a count of points and optional statistics at all locations where points exist. This tool is commonly used in spatial analysis to summarize data points within defined areas, such as aggregating individual census data within different census boundaries or analyzing the distribution of a disease outbreak across a region over time.
+
+**Parameters:**
+- **Input Point Features**: The point features to be aggregated. Type: Feature Layer.
+- **Input Polygon Features**: The polygon features that define the areas for aggregation. Type: Feature Layer.
+- **Output Feature Class**: The location and name of the output feature class. Type: Feature Class.
+- **Summary Fields**: Optional fields to calculate statistics for each polygon. Type: Field.
+- **Bin Type**: The type of binning to use, such as square or hexagon. Type: String.
+- **Bin Size**: The size of the bins used for aggregation. Type: Linear Unit.
+
+**Derived Output:**
+- **Output Feature Class**: The resulting polygon features with aggregated point data. Type: Feature Class.
+
+The "Aggregate Points" tool is particularly useful for visualizing and analyzing large datasets by summarizing data into more manageable and interpretable forms. It supports various use cases, such as environmental monitoring, urban planning, and public health analysis.
+Toolset: Summarize Data
+
+Tool: Summarize Attributes
+
+Description: The Summarize Attributes tool calculates summary statistics for fields in a feature class. It aids in the semantic analysis of spatial relationships by providing basic descriptive statistics of features and their attributes within areas or near other features. For example, it can be used to analyze the distribution of tree species in a forest, calculate average population density in different regions, or determine the total length of roads within specific administrative boundaries.
+
+Parameters:
+- Input Features: Specifies the feature class for which summary statistics will be calculated. Type: Feature Layer.
+- Field(s): Specifies the field or fields for which statistics will be calculated. Type: Field.
+- Case Field: Specifies a field that defines the case for the summary statistics. Type: Field.
+- Statistics Type: Specifies the type of statistics to calculate. Type: String.
+
+Derived Output:
+- Output Table: A table containing the calculated summary statistics. Type: Table.
+Toolset: Data Enrichment
+
+Tool: Calculate Motion Statistics
+
+Description: Calculates motion statistics for points in a time-enabled feature class. This tool aids in understanding the semantic context of spatial data by adding attributes for visualization, regression, and prediction. It uses distributed processing for analytics on GeoAnalytics Server.
+
+Parameters:
+- elevation_unit: Specifies the unit of measurement for elevation. Type: String.
+- distance_unit: Specifies the unit of measurement for distance. Type: String.
+
+Derived Output:
+No information available.
+Toolset: Summarize Data
+
+Tool: Describe Dataset
+
+Description:
+The Describe Dataset tool summarizes features by calculating field statistics, sampling features, and defining extent boundaries. It is commonly used in spatial analysis workflows to gain insights into dataset characteristics. For example, it can help understand attribute distribution, identify statistical measures, or delineate spatial feature extents. Use cases include data preparation, quality validation, and generating summary reports for decision-making.
+
+Parameters:
+- No information available.
+
+Derived Output:
+- **Calculated Field Statistics:** Provides statistical measures of the dataset's attributes. Type: Various statistical data types.
+- **Sample Features:** A subset of features selected based on specified criteria. Type: Feature Class.
+- **Extent Boundaries:** Defines the spatial extent of the dataset. Type: Extent.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Center And Dispersion
+
+**Description:**
+The "Summarize Center And Dispersion" tool finds central features and directional distributions within a dataset. It calculates mean and median locations from the input data, aiding in understanding spatial characteristics like central tendency, dispersion, and directional trends. This tool is commonly used to analyze the geographic center of features, determine data compactness or orientation, and track distribution changes over time. For instance, in urban planning, it can identify the central business district, while in environmental studies, it can track the spread of invasive species.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+**Toolset:** Summarize Data
+
+**Tool:** Reconstruct Tracks
+
+**Description:**
+The "Reconstruct Tracks" tool creates line or polygon tracks from time-enabled input data. It is used in spatial analysis to visualize and analyze movement patterns over time. For example, it can track the movement of vehicles, animals, or people by reconstructing their paths based on time-stamped location data. This tool is valuable in scenarios like wildlife tracking, transportation analysis, or event monitoring.
+
+**Parameters:**
+- No detailed information is available regarding the input parameters for the "Reconstruct Tracks" tool.
+
+**Derived Output:**
+- No specific details are provided about the derived outputs for the "Reconstruct Tracks" tool.
+No information available.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Within
+
+**Description:**
+The "Summarize Within" tool calculates the total counts, lengths, areas, and basic descriptive statistics of features and their attributes within the boundaries of specified polygons. It is commonly used in spatial analysis and GIS workflows to determine the amount of one feature, such as area or count, contained within another feature. For instance, it can calculate the area of polygons within another layer of polygons. A typical use case is to summarize the number of points, like detected ships, within a grid of polygons to analyze spatial distribution and density.
+
+**Parameters:**
+- **Input Polygons**: Features within which the features will be summarized. Type: *Feature Set*.
+- **Input Summary Features**: Point, line, or polygon features to be summarized for each input polygon. Type: *Feature Set*.
+- **Output Name**: Name of the output layer to create on the portal. Type: *String*.
+
+**Derived Output:**
+- **Output Feature Class**: Name of the output feature class containing intersecting geometries and attributes. Type: *Feature Class*.
+Toolset: Summarize Data
+
+Tool: Aggregate Points
+
+Description: Aggregates points into polygon features or bins. A polygon is returned with a count of points as well as optional statistics at all locations where points exist. Aggregating features is a way to summarize them into logical groups using statistical methods. ArcGIS Pro supports visualization of aggregated data for exploration and analysis purposes. Examples of usage include aggregating individual census data in different levels of census boundaries, symbolizing weather stations using total highest temperature recorded at each station, tracking disease outbreaks across a region over time, or analyzing the average volume of traffic along freeways during rush hour.
+
+Parameters:
+- Input Features: Specifies the layer of point features to be aggregated. Type: Feature Layer.
+- Output Feature Class: Specifies the output polygon feature class. Type: Feature Class.
+- Aggregate Distance: Specifies the distance within which points will be aggregated. Type: Linear Unit.
+
+Derived Output:
+- Output Feature Class: The aggregated polygon features. Type: Feature Class.
+Toolset: Summarize Data
+
+Tool: Summarize Attributes
+
+Description: Calculates summary statistics for fields in a feature class. This tool is used to find central features and directional distributions and calculate mean and median locations from the input data. It can be applied in spatial analysis workflows to derive insights into the distribution and characteristics of features within a dataset.
+
+Parameters:
+- Input Features: Specifies the feature class for which summary statistics will be calculated. Type: Feature Layer.
+- Field(s): Specifies the field(s) for which statistics will be calculated. Type: Field.
+
+Derived Output:
+- Output Table: Contains the summary statistics for the specified fields. Type: Table.
+**Toolset:** Use Proximity
+
+**Tool:** Create Buffers
+
+**Description:**
+The Create Buffers tool generates polygons that extend a specified distance from input point, line, or polygon features. This tool is essential for spatial analysis tasks that require understanding proximity, such as determining "What is near what?". Typical use cases include:
+- **Emergency Planning:** Creating buffer zones around fire stations to identify areas within a certain distance for emergency response planning.
+- **Environmental Studies:** Establishing buffer zones around roads to analyze deforestation impacts within a specific range.
+- **Urban Planning:** Designing buffer zones around public facilities to assess accessibility.
+
+**Parameters:**
+- **Input Features:** The feature class to be buffered. Type: Feature Class.
+- **Output Feature Class:** The name of the output feature class. Type: Feature Class.
+- **Distance:** The buffer distance, specified as a numeric value with units (e.g., "1000 METERS"). Type: String.
+- **Dissolve Type:** Specifies how output features are dissolved. Options include "None" or "Dissolve all". Type: String.
+- **Method:** The method used to create buffers, such as "Geodesic". Type: String.
+
+**Derived Output:**
+- **Buffered Features:** The resulting polygon features representing the buffer zones. Type: Feature Class.
+**Toolset:** Use Proximity
+
+**Tool:** Snap Tracks
+
+**Description:**
+The Snap Tracks tool is designed to align input track points to lines. This is particularly useful in scenarios where you have time-enabled point data that represents specific moments in time. The tool requires traversable lines with fields indicating the 'from' and 'to' nodes for effective analysis. Typical use cases include aligning GPS data to road networks or snapping wildlife tracking points to known migration paths. This tool is essential for ensuring that point data accurately reflects the underlying linear features they are associated with, which is crucial for spatial analysis tasks such as route optimization or movement pattern analysis.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+**Toolset:** Use Proximity
+
+**Tool:** Group By Proximity
+
+**Description:**
+The "Group By Proximity" tool is designed to group features that are within spatial or spatiotemporal proximity to each other. This tool is particularly useful in spatial analysis for identifying clusters of features that are close to each other, either in space or time. For example, it can be used to group wildlife sightings that occur within a certain distance and time frame, helping to identify patterns of animal movement or to analyze the spread of phenomena such as disease outbreaks or environmental changes.
+
+**Parameters:**
+- No specific parameters are listed in the provided documentation.
+
+**Derived Output:**
+- No specific derived outputs are listed in the provided documentation.
+Toolset: Use Proximity
+
+Tool: Trace Proximity Events
+
+Description: Traces events that are near each other in space (location) and time. The time-enabled point data must include features that represent an instant in time. This tool is crucial for semantic spatial queries and can be used to analyze events occurring close to each other both spatially and temporally. For example, it can be utilized to track the movement of wildlife in a specific area over time or to analyze the proximity of earthquakes in a region.
+
+Parameters:
+- Starting Points: Specifies the starting points for the trace. Type: Feature Layer.
+- Barriers: Defines any barriers that should be considered during the trace. Type: Feature Layer.
+- Trace Type: Determines the type of trace to be performed. Type: String.
+- Shortest Path Network Attribute Name: Specifies the network attribute used to calculate the shortest path. Type: String.
+
+Derived Output:
+- Traced Features: Features that are traced based on the specified parameters. Type: Feature Layer.
+Toolset: Analyze Patterns
+
+Tool: Find Hot Spots
+
+Description: The Find Hot Spots tool identifies statistically significant hot spots and cold spots using the Getis-Ord Gi* statistic. It helps uncover spatial clustering of high or low values in data, such as home values, crime densities, traffic accidents, or biodiversity. For example, it can reveal hot spots of high crime rates or cold spots of low biodiversity.
+
+Parameters:
+- Input Features: The features for which hot spots will be identified. Type: Feature Layer.
+- Output Feature Class: The result layer containing statistically significant hot spots and cold spots. Type: Feature Class.
+
+Derived Output:
+- Hot Spot Analysis Result: A layer showing statistically significant hot spots and cold spots. Type: Feature Class.
+Toolset: Analyze Patterns
+
+Tool: Find Point Clusters
+
+Description: The Find Point Clusters tool identifies clusters of point features within surrounding noise based on their spatial or spatiotemporal distribution. It aids in understanding spatial patterns by detecting clusters of points that are not randomly distributed. For example, it can be used to identify clusters of disease outbreaks, wildlife sightings, or customer buying patterns in a given area.
+
+Parameters:
+- Input Features: Specifies the point features to analyze for clustering. Type: Feature Layer.
+- Output Features: Specifies the output feature class that will contain the identified clusters. Type: Feature Class.
+- Analysis Fields: Specifies one or more fields to consider when identifying clusters. Type: Field(s).
+
+Derived Output:
+- Clustered Features: Contains the identified clusters of point features. Type: Feature Class.
+**Toolset:** Analyze Patterns
+
+**Tool:** Forest-based Classification and Regression
+
+**Description:**
+The Forest-based Classification and Regression tool in ArcGIS Pro is designed to create models and generate predictions using an adaptation of the random forest algorithm. This tool is a supervised machine learning method that can be used for both classification (categorical variables) and regression (continuous variables). It is particularly useful in spatial analysis workflows where predictions are needed based on explanatory variables found in the attribute table of the training data. Typical use cases include predicting land cover types, estimating environmental variables like temperature or precipitation, and analyzing spatial patterns in large datasets.
+
+**Parameters:**
+- **Explanatory Variables:** Fields in the attribute table that are used to train the model. Type: Field.
+- **Target Variable:** The variable you want to predict. Type: Field.
+- **Number of Trees:** Specifies the number of trees in the forest. Type: Integer.
+- **Maximum Tree Depth:** Limits the depth of each tree. Type: Integer.
+- **Sample Size:** Determines the number of samples used for training. Type: Integer.
+
+**Derived Output:**
+- **Predicted Values:** The output predictions for the target variable. Type: Raster or Table.
+- **Model Characteristics:** Details about the model, including hyperparameters used. Type: Text.
+**Toolset:** Analyze Patterns
+
+**Tool:** Calculate Density
+
+**Description:**
+The Calculate Density tool creates a density map from point or line features by spreading known quantities of some phenomenon (represented as attributes of the points or lines) across the map. The result is a layer of areas classified from least dense to most dense. It is commonly used for analyzing population density, crime rates, or traffic incidents over a geographic area. For instance, it can be utilized to visualize areas with high concentrations of crime or identify regions with dense populations.
+
+**Parameters:**
+- **Input Features:** The point or line features from which to calculate density. Type: Feature Set.
+- **Output Name:** The name of the output layer to create on your portal. Type: String.
+- **Count Field (Optional):** A field specifying the number of incidents at each location. Type: Field.
+- **Cell Size (Optional):** This value is used to create a mesh of points where density values are calculated. Type: Double.
+- **Cell Size Units (Optional):** The units of the cell size value. Type: String.
+- **Radius (Optional):** A distance specifying how far to search to find point or line features when calculating density values. Type: Double.
+
+**Derived Output:**
+- **Density Layer:** A layer of areas classified from least dense to most dense. Type: Raster.
+**Toolset:** Analyze Patterns
+
+**Tool:** Generalized Linear Regression
+
+**Description:**
+Generalized Linear Regression (GLR) creates a model of the variable or process you are trying to understand or predict, allowing you to examine and quantify relationships among features. It is particularly useful for fitting continuous (Ordinary Least Squares), binary (logistic), and count (Poisson) models. GLR helps in understanding and predicting spatial phenomena by quantifying relationships among features. Some typical use cases include:
+- Analyzing demographic characteristics contributing to high public transportation usage.
+- Investigating relationships between vandalism and burglary.
+- Predicting 911 call volumes.
+- Estimating future demand for emergency response resources.
+- Understanding factors affecting low birth rates.
+
+**Parameters:**
+- **Input Features:** A feature class containing the dependent variable and one or more explanatory variables. Type: Feature Layer.
+- **Dependent Variable:** The field representing the variable you are trying to predict or understand. Type: Field.
+- **Explanatory Variables:** One or more fields representing the variables that explain the dependent variable. Type: Field.
+
+**Derived Output:**
+- **Output Features:** A feature class containing the results of the regression analysis, including predicted values and residuals. Type: Feature Layer.
+**Toolset:** Data Enrichment
+
+**Tool:** Calculate Motion Statistics
+
+**Description:**
+The Calculate Motion Statistics tool calculates motion statistics for points in a time-enabled feature class. This tool is useful for analyzing movement patterns of entities over time, such as vehicles or wildlife tracking. It provides insights into speed, direction, and other motion-related attributes, aiding in visualization, regression, and prediction tasks.
+
+**Parameters:**
+- **elevation_unit**: Specifies the unit of measurement for elevation. Type: String.
+- **distance_unit**: Specifies the unit of measurement for distance. Type: String.
+
+**Derived Output:**
+- No specific derived outputs are listed in the available information.
+Toolset: Find Locations
+
+Tool: Detect Incidents
+
+Description: The Find Locations toolset includes tools that are used to identify areas meeting specific criteria based on attribute and spatial queries. These areas can be selected from existing features or new features can be created when all requirements are met. The tools in this toolset are designed for large datasets and provide insights into data patterns, trends, and anomalies. One of the tools in this toolset, Detect Incidents, creates a layer that detects features meeting a given condition. For example, it can be used to identify specific incidents based on predefined criteria.
+
+Parameters:
+- Detect Incidents: Creates a layer that detects features meeting a given condition. Type: Layer.
+- Find Dwell Locations: Finds locations where moving objects have stopped or dwelled using time and distance thresholds. Type: Layer.
+- Find Similar Locations: Identifies candidate features that are most similar or dissimilar to input features based on attributes. Type: Layer.
+
+Derived Output:
+- Detected Incidents Layer: A layer containing features that meet the specified condition. Type: Layer.
+- Dwell Locations Layer: A layer showing locations where moving objects have dwelled. Type: Layer.
+- Similar Locations Layer: A layer indicating candidate features similar or dissimilar to input features. Type: Layer.
+**Toolset:** Find Locations
+
+**Tool:** Find Similar Locations
+
+**Description:**
+The "Find Similar Locations" tool is designed to identify candidate features that are most similar or dissimilar to one or more input features based on feature attributes. This tool is typically used in spatial analysis to compare locations and determine which areas share similar characteristics. For example, it can be used to find neighborhoods with similar demographic profiles or retail locations with similar sales patterns. This tool is valuable in GIS workflows for tasks such as market analysis, site selection, and resource allocation.
+
+**Parameters:**
+- Input Features: Specifies the input features to be used for finding similar locations. Type: Feature Layer.
+- Search Distance: Specifies the distance within which to search for similar locations. Type: Linear Unit.
+
+**Derived Output:**
+- Output Features: Contains the candidate features identified as most similar or dissimilar to the input features based on attribute comparison. Type: Feature Layer.
+Toolset: Find Locations
+
+Tool: Find Dwell Locations
+
+Description: The Find Dwell Locations tool finds locations where moving objects have stopped or dwelled, using given time and distance thresholds. This tool is designed for large datasets and is optimal for analyzing hundreds of thousands or millions of records. It uses distributed processing to complete analytics on GeoAnalytics Server. The tool is integrated and runs in ArcGIS Pro like other desktop geoprocessing tools. An example use case is identifying areas where vehicles have stopped for a specific duration within a certain distance range.
+
+Parameters:
+- Time Threshold: Specifies the time threshold for considering an object as dwelled. Type: Double.
+- Distance Threshold: Specifies the distance threshold within which an object is considered to have dwelled. Type: Double.
+
+Derived Output:
+- Dwell Locations Layer: A layer showing the locations where objects have dwelled based on the specified time and distance thresholds. Type: Feature Layer.
+**Toolset:** Text Analysis
+
+**Tool:** Text Analysis toolset in the GeoAI toolbox
+
+**Description:**
+The Text Analysis toolset in the GeoAI toolbox is designed for natural language processing (NLP) on text data. It includes tools for text classification, entity extraction, and text transformation. These tools are valuable for extracting semantic information from unstructured text like social media posts, reports, or articles, and converting it into structured data for GIS workflows. For instance, you can classify text to determine its location, extract entities like addresses or names, and geocode these addresses to create a feature class. Use cases include sentiment analysis, address standardization, and custom entity extraction.
+
+**Parameters:**
+- **Text Field:** The field containing the text to be processed. Type: String.
+- **Model:** The trained NLP model for processing. Type: Model.
+- **Output Location:** Where the processed data will be stored. Type: Feature Class.
+
+**Derived Output:**
+- **Classified Text:** Text categorized with confidence values. Type: Table.
+- **Extracted Entities:** Entities like addresses or names extracted from text. Type: Feature Class.
+**Toolset:** Text Analysis
+
+**Tool:** Process Text Using AI Model
+
+**Description:**
+The "Process Text Using AI Model" tool is designed to handle various text processing tasks using AI models. It can process text from different sources, such as text fields in feature classes or tables, or text files in a folder. This tool supports a wide range of use cases including text transformation, entity recognition, text classification, text generation, translation, and summarization. It utilizes custom third-party models or deep learning models trained using specific training tools like Train Text Classification Model, Train Text Transformation Model, and Train Entity Recognition Model. Typical use cases in spatial analysis or GIS workflows include transforming text data for better integration with spatial datasets, extracting location-based entities for geocoding, and classifying text data to support thematic mapping.
+
+**Parameters:**
+- **Input Text Source:** Specifies the source of the text data to be processed. Type: Feature Class/Table/Text File.
+- **AI Model:** The AI model to be used for processing the text. Type: Model Package (.dlpk) or Model Definition (.emd).
+- **Processor Type:** Specifies whether to use CPU or GPU for processing. Type: String.
+- **GPU ID:** If using GPU, specifies the ID of the GPU to be used. Type: Integer.
+
+**Derived Output:**
+- **Transformed Text Field:** A field in the input table containing the transformed text. Type: Text Field.
+**Toolset:** GeoAI
+
+**Tool:** Process Text Using AI Model
+
+**Description:**
+The "Process Text Using AI Model" tool in ArcGIS Pro processes text from various sources like text fields in feature classes or tables, or text files in a folder. It supports a variety of use cases such as text transformation, entity recognition, text classification, text generation, translation, and summarization. This tool utilizes custom third-party models or deep learning models trained using tools like Train Text Classification Model, Train Text Transformation Model, and Train Entity Recognition Model. In spatial analysis or GIS workflows, this tool can be used for tasks like:
+- **Text Transformation:** Standardizing street addresses for improved geocoding accuracy.
+- **Entity Recognition:** Extracting addresses, place names, or other entities from unstructured text to create geospatial datasets.
+- **Text Classification:** Categorizing incident reports to identify trends and assist in planning.
+
+**Parameters:**
+- No specific input parameters are detailed in the available information.
+
+**Derived Output:**
+- No specific derived outputs are detailed in the available information.
+Toolset: Text Analysis
+
+Tool: Classify Text Using Deep Learning
+
+Description: Runs a trained text classification model on a text field in a feature class or table and updates each record with an assigned class or category label with each class having a confidence value. This tool is used for tasks such as classifying incomplete addresses to determine the location or country they belong to for accurate geocoding.
+
+Parameters:
+- batch_size: Specifies the batch size for processing the text data. Type: Integer.
+- explain: Indicates whether to provide an explanation for the classification results. Type: Boolean.
+
+Derived Output:
+- No derived outputs available.
+
+Note: The Text Analysis toolset in the GeoAI toolbox provides tools for text processing tasks like text classification, entity extraction, and text translation. The tools use modern machine learning and deep learning techniques integrated with GIS for efficient analysis.
+**Toolset:** Text Analysis
+
+**Tool:** Classify Text Using Deep Learning
+
+**Description:**
+The "Classify Text Using Deep Learning" tool applies a trained text classification model to a text field within a feature class or table. It assigns a class or category label to each record, along with a confidence value for each classification. This tool is useful for categorizing text data based on predefined classes. For example, it can classify incomplete addresses by country for accurate geocoding. It can also categorize geolocated tweets to identify sentiments like vaccine hesitancy or classify crime types from incident reports to understand trends and plan interventions.
+
+**Parameters:**
+- **Input Table:** The feature class or table containing the text to be classified. Type: Feature Class/Table.
+- **Input Model:** The deep learning model used for classification, which can be an Esri model definition JSON file (.emd) or a deep learning model package (.dlpk). Type: File.
+- **Processor Type:** Specifies whether to use CPU or GPU for processing. Type: String.
+- **GPU ID:** If using a GPU, specifies which GPU to use. Type: Integer.
+
+**Derived Output:**
+- **Classified Text Field:** A new field in the input table containing the class or category label assigned to the input text by the model. Type: Field.
+**Toolset:** Text Analysis
+
+**Tool:** Extract Entities Using Deep Learning
+
+**Description:**
+The "Extract Entities Using Deep Learning" tool performs named entity recognition (NER) on text files or text fields within a feature class or table. It uses a trained deep learning model to identify and extract entities like addresses, place names, person names, dates, and monetary values. This tool is valuable in spatial analysis and GIS workflows where structured information extraction from unstructured text is needed. For instance, it can extract location data from crime reports to visualize trends or identify areas requiring assistance during natural disasters by analyzing social media posts.
+
+**Parameters:**
+- **Input Text:** The text files or text field in a feature class or table where entity recognition will be performed. Type: Folder or Text Field.
+- **Model:** The deep learning model used for entity extraction, which can be an Esri model definition JSON file (.emd) or a deep learning model package (.dlpk). Type: Model File.
+- **Locator:** Optional parameter for geocoding extracted addresses to produce a feature class. Type: Locator.
+
+**Derived Output:**
+- **Extracted Entities Table:** A table containing the extracted entities from each text file or text field. Type: Table.
+- **Feature Class:** If addresses are extracted and geocoded, a feature class is produced. Type: Feature Class.
+**Toolset:** Text Analysis
+
+**Tool:** Entity Extraction
+
+**Description:**
+Entity extraction, also known as Named Entity Recognition (NER), is a process that involves identifying and categorizing key information from unstructured text. This tool is part of the Text Analysis toolset in the GeoAI toolbox, which utilizes natural language processing (NLP) techniques to extract entities such as addresses, names, dates, and monetary values from text files or text fields in feature classes or tables. The extracted entities can be geocoded if they contain addresses, producing a feature class as an output. Typical use cases include extracting data from crime reports to identify trends, or analyzing social media posts during natural disasters to pinpoint areas needing immediate assistance.
+
+**Parameters:**
+- **Input Text Field:** The text field from which entities will be extracted. Type: *String*.
+- **Model:** The trained entity recognition model used for extraction. Type: *Deep Learning Model*.
+- **Locator:** The geocoding service used to geocode extracted addresses. Type: *Locator*.
+
+**Derived Output:**
+- **Extracted Entities Table:** A table containing the extracted entities and their categories. Type: *Table*.
+- **Geocoded Feature Class:** A feature class containing geocoded addresses. Type: *Feature Class*.

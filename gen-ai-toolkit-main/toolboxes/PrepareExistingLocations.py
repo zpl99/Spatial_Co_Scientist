@@ -81,7 +81,8 @@ def _desc_to_columns(
 
 
 def _get_layer(layer_, layer_id: int) -> Layer:
-    desc = arcpy.Describe(layer_.longName)
+    # desc = arcpy.Describe(layer_.longName)
+    desc = arcpy.Describe(layer_.dataSource)
     alias = desc.aliasName if hasattr(desc, "aliasName") else layer_.name
     columns = _desc_to_columns(desc)
     return Layer(name=layer_.longName,
@@ -97,17 +98,26 @@ if __name__ == "__main__":
     include_text = arcpy.GetParameterAsText(0)
     exclude_text = arcpy.GetParameterAsText(1)
     layers_json = arcpy.GetParameterAsText(2)
+    if len(layers_json)==0:
+        layers_json = "data_context.json"
     max_method = arcpy.GetParameter(3)
     max_records = arcpy.GetParameter(4)
+    if max_records is None:
+        max_records = 100  # 或者你希望的默认值
     max_values = arcpy.GetParameter(5)
     max_samples = arcpy.GetParameter(6)
+    if max_samples is None:
+        max_samples = 100
 
     include_layers = include_text.split(";") if include_text else []
     exclude_layers = exclude_text.split(";") if exclude_text else []
     include_layers = [_.replace("'", "") for _ in include_layers]
     exclude_layers = [_.replace("'", "") for _ in exclude_layers]
-    curr_proj = arcpy.mp.ArcGISProject("CURRENT")
-    layer_list = curr_proj.activeMap.listLayers()
+    curr_proj = arcpy.mp.ArcGISProject(r"C:\Users\64963\Documents\ArcGIS\Projects\MyProject9\MyProject9.aprx")
+    map_list = curr_proj.listMaps()
+    my_map = curr_proj.listMaps("Map")[0]
+    layer_list = my_map.listLayers()
+    # layer_list = curr_proj.activeMap.listLayers()
     layers = []
     for layer in layer_list:
         if layer.isGroupLayer or layer.isBroken or layer.isBasemapLayer or layer.isRasterLayer:

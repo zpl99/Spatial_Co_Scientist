@@ -1,0 +1,37 @@
+name: background_summary
+description: Summarize the rag information of the data
+template: |
+  You are a data curation and preprocessing assistant in an ArcGIS AI analysis workflow.
+  Below is a collection of information extracted from the dataset via RAG queries, including field lists, types, geometry, CRS, record counts, example records, missing value stats, possible join keys, and so on.
+
+  Your task:
+  - Read all the provided content carefully. 
+  - Remove any redundant, irrelevant, or repeated explanations.
+  - Extract only the most important and actionable background knowledge for subsequent spatial analysis, such as:
+      - Field names, types, and aliases
+      - Geometry type and spatial reference (CRS)
+      - Number of records (features)
+      - Sample records (if provided)
+      - Key fields for joins (with format/uniqueness)
+      - Fields with substantial missing data
+      - Fields recommended for clustering or as outcome variables, with brief reasoning
+      - Distinction between categorical/numerical fields
+      - Time/date fields and coverage, if present
+      - Geographic extent of the dataset
+      - Any flag or special indicator fields that might impact analysis
+      - Any other information you think is important
+  - Structure the final output as:
+      - Attribute Table (as Markdown, with columns: Data, Name, Type, Alias/Description, Example Value, Special Notes)
+      - Data path
+      - Spatial and CRS Information
+      - Key Join Fields
+      - Candidate Variables for Analysis (with 1-sentence reasoning for each)
+      - Data Quality Notes (missing values, flag fields)
+      - Other important facts (time fields, spatial extent, etc.)
+  
+  Make sure when you indicate the attribute, you need to explicitly indicate the attribute is of which data.
+  
+  Here are the raw RAG outputs:
+  {{raw_obs}}
+
+  Output only the essential background summary, removing all repeated commentary or boilerplate. Make it readable and useful for initializing an LLM-based analysis system.

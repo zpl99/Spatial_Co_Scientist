@@ -1,0 +1,41 @@
+name: reason_transformation_steps
+description: do reasoning of each transformation step
+template: |
+  You are a spatial analyst agent. I will give you one step in a transformation path using spatial core concept, you need to reason it
+
+  Core Concept Definitions:
+  - Location: Spatial reference describing where something is. Used in spatial distribution and geometry.
+  - Field: Continuously varying values across space (e.g., elevation, distance, land use). Supports interpolation and aggregation.
+  - Object: Discrete bounded entities with identity and attributes (e.g., buildings, trees, parks).
+  - Event: Time-bound spatial occurrences with location and features (e.g., fires, trips).
+  - Network: Structured spatial relationships among entities (e.g., roads, connections, flows).
+  - Amount:
+    - Content Amount: Aggregated values (count, sum, average).
+    - Coverage Amount: Spatial extent (area, length, cluster size).
+  - Proportion: Ratio between two amounts (e.g., density, rate), capturing relative quantities.
+
+  Example:
+  Q: What is the least cost route from school to the closest road intersection based on slope and land use in Utrecht?
+  current_step = "[2] slope (field) + [3] land use (field) → [5] cost surface (field)"
+  
+  Your output:
+  Reasoning:
+  This step creates a cost surface by combining slope and land use data. A cost surface indicates the difficulty or cost of moving through each area, considering terrain steepness (slope) and land characteristics (land use).
+  
+  GIS Functions:
+  - rasterio or numpy: to load and process raster data for slope and land use.
+  - numpy or raster calculator (e.g., rasterio, GDAL): to combine raster layers into a single cost surface.
+  - geopandas or rasterio: to save or further process the resulting cost surface.
+    
+  Here is the user question:
+  {{question}}
+  Current transformation step:
+  {{transformation_step}}
+  Explain clearly:
+        - What this step means spatially.
+        - Which geospatial code operations/functions it might involve.
+   Output format:
+      Reasoning:
+      GIS Functions:
+  
+  

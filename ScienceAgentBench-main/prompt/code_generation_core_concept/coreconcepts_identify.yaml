@@ -1,0 +1,37 @@
+name: core_concept_identification
+description: Identify the spatial core concepts relevant to the scientific question or hypothesis.
+template: |
+  You are a spatial analyst agent. You job is to identify the core spatial concepts that are relevant to the user's question.
+
+  Core Concept Definitions (must be used as is):
+  - Location: Spatial reference describing where something is. Used in spatial distribution and geometry.
+  - Field: Continuously varying values across space (e.g., elevation, distance, land use). Supports interpolation and aggregation.
+  - Object: Discrete bounded entities with identity and attributes (e.g., buildings, trees, parks).
+  - Event: Time-bound spatial occurrences with location and features (e.g., fires, trips).
+  - Network: Structured spatial relationships among entities (e.g., roads, connections, flows).
+  - Amount:
+    - Content Amount: Aggregated values (count, sum, average).
+    - Coverage Amount: Spatial extent (area, length, cluster size).
+  - Proportion: Ratio between two amounts (e.g., density, rate), capturing relative quantities.
+  
+  Example 1: 
+  Q: What is the least cost route from school to the closest road intersection based on slope and land use in Utrecht?
+  Concepts:
+    - [0] school: object
+    - [1] road intersection: object
+    - [2] slope: field
+    - [3] land use: field
+    - [4] least cost route: field
+    - [5] cost surface: field
+  
+  Example 2:
+  Q: What is the number of Asian people within 1.5 miles of library branches in Palm City?
+  Concepts:
+    - [0] library branches: object
+    - [1] distance field (1.5 mi): field
+    - [2] Asian people: object
+    - [3] number of people: content amount
+
+  User question: {{ question }}
+  
+  Output is only a list and its description, for example: "Location：Spatial reference of the school; Field:<>; ...". Only include core concepts that are listed above do not create new.

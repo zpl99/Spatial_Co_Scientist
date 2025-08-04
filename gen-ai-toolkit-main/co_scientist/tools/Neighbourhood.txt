@@ -1,0 +1,793 @@
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+**Toolset: Use Proximity**
+
+**Tool: Snap Tracks**
+
+**Description:**  
+The Snap Tracks tool is designed to align input track points to a set of lines. This tool is particularly useful in scenarios where time-enabled point data, representing specific instances in time, needs to be snapped to a network of traversable lines. These lines must have fields indicating the 'from' and 'to' nodes, which are essential for the analysis. A practical application of this tool could be in transportation logistics, where GPS data from delivery vehicles is snapped to a street network to analyze routes and optimize delivery paths. For example, a city might use this tool to align the GPS data of snow plow trucks to street networks to analyze their routes and optimize snow removal operations.
+
+**Parameters:**
+- **tracksLayer**: The input layer containing the track points that need to be snapped to the lines. Type: Layer.
+- **lineLayer**: The input layer containing the lines to which the track points will be snapped. Type: Layer.
+- **out**: The output feature class where the snapped tracks will be stored. Type: Feature Class.
+- **trackIdentifier**: A field in the tracksLayer that uniquely identifies each track. Type: Field.
+- **searchDistance**: The maximum distance within which a track point can be snapped to a line. Type: Linear Unit.
+- **connectivityFieldMatching**: Fields indicating the connectivity of the lines, typically including a unique ID, from_node, and to_node. Type: Field.
+- **directionValueMatching**: Fields indicating the direction of travel along the lines, typically including direction of travel, from, to, and a flag. Type: Field.
+
+**Derived Output:**
+- **out**: The output feature class containing the snapped track points aligned to the lines. Type: Feature Class.
+**Toolset:** Use Proximity
+
+**Tool:** Trace Proximity Events
+
+**Description:**  
+The Trace Proximity Events tool is designed to trace events that are near each other in both space (location) and time. This tool is particularly useful in scenarios where understanding the proximity of events is crucial, such as monitoring the spread of diseases or tracking animal movements. For example, an organization might use this tool to determine which employees were near an individual known to have COVID-19 by analyzing device location data. Similarly, an NGO could use it to monitor salmon populations and track the spread of salmon lice between farmed and wild populations. The tool requires time-enabled point data that includes features representing an instant in time.
+
+**Parameters:**
+- **Entity:** An object with periodically recorded positions, such as an animal, person, or vehicle. Type: Feature Layer.
+- **Entities of Interest:** Specific entities used to start a trace, such as a person infected with COVID-19. Type: Feature Layer.
+- **Proximity Event:** The period when two entities are near each other, defined by spatial and temporal proximity. Type: Temporal and Spatial Criteria.
+- **Depth:** The degree of separation between an entity of interest and another entity downstream. Type: Integer.
+
+**Derived Output:**
+- **Trace Event:** The first contact for a specified entity downstream from the entities of interest. Type: Feature Layer.
+
+If you have further questions or need clarification on any aspect of the tool, feel free to ask!
+**Toolset:** Summarize Data
+
+**Tool:** Aggregate Points
+
+**Description:**  
+The Aggregate Points tool in ArcGIS Pro is designed to aggregate point features into polygon features or bins. This tool is particularly useful for summarizing point data within specified boundaries, such as determining which points fall within each polygon's area. Once the spatial relationship is established, the tool calculates statistics for all points within each polygon and assigns these statistics to the area. The most basic statistic is the count of points within the polygon, but additional statistics such as sum, minimum, maximum, and standard deviation can also be calculated. Typical use cases include aggregating census data within different boundary levels, summarizing sales data for retail locations, or analyzing the distribution of incidents like disease outbreaks or traffic accidents over a region.
+
+**Parameters:**
+- **Input Point Features:** The point features to be aggregated. Type: Feature Set.
+- **Aggregation Areas:** The polygon features that define the areas for aggregation. Type: Feature Set.
+- **Keep Boundaries with No Points:** Option to include areas with no points in the result. Type: Boolean.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting polygon features with aggregated statistics. Type: Feature Class.
+
+The Aggregate Points tool is a powerful way to visualize and analyze spatial data by summarizing point features within defined areas, providing insights into patterns and trends.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Nearby
+
+**Description:**  
+The Summarize Nearby tool identifies features within a specified distance from features in the input layer and calculates statistics for these nearby features. Distance can be measured as a straight-line distance or using travel modes such as drive-time or drive-distance. This tool is particularly useful for spatial analysis tasks such as calculating the total population within a certain drive time from a proposed store location or determining the number of freeway access ramps within a specific drive distance to assess store accessibility. The tool supports multiple distance specifications, allowing for the generation of multiple buffered areas around each input feature.
+
+**Parameters:**
+- **Input Layer:** The layer from which distances will be measured. Type: Feature Set.
+- **Nearby Layer:** The layer to summarize. Type: Feature Set.
+- **Distance:** Specifies the distance within which features will be summarized. Type: Double.
+- **Distance Units:** Units for the distance measurement (e.g., kilometers, miles). Type: String.
+- **Travel Mode:** Specifies the travel mode for distance calculation (e.g., driving, walking). Type: String.
+- **Time of Day:** Specifies the time of day for travel mode calculations, considering traffic conditions. Type: DateTime.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class containing summarized statistics for nearby features. Type: Feature Class.
+
+If you have further questions or need clarification on any aspect of the Summarize Nearby tool, feel free to ask.
+**Toolset:** Summarize Data
+
+**Tool:** Summarize Within
+
+**Description:**  
+The Summarize Within tool overlays a polygon layer with another layer to summarize the number of points, length of lines, or area of polygons within each polygon. It calculates attribute field statistics for those features within the polygons. This tool is particularly useful in spatial analysis for aggregating data within defined boundaries. Typical use cases include:
+
+- Calculating total acreage of different land-use types within watershed boundaries.
+- Summarizing the average value of vacant parcels within city boundaries.
+- Calculating the total mileage of roads by road type within county boundaries.
+
+The tool works by stacking two layers—the input polygons and the input summary features—and analyzing the features that fall within the input polygons. It can calculate simple statistics such as sum, mean, minimum, and maximum for the attributes of the input summary features.
+
+**Parameters:**
+- **Summarized Layer:** The point, line, or polygon features that will be summarized by either polygons or bins.  
+  *Type:* Feature Set
+- **Output Name:** The name of the output polygon feature service containing the intersecting geometries and attributes.  
+  *Type:* String
+- **Polygon or Bin:** Specifies whether the Summarized Layer value will be summarized by polygons or bins.  
+  *Type:* String
+- **Bin Type:** Specifies the bin shape that will be generated to summarize features.  
+  *Type:* String
+- **Bin Size (Optional):** The distance interval that represents the bin size and units by which the input features will be summarized.  
+  *Type:* Linear Unit
+- **Summary Polygons (Optional):** The polygons that will be used to summarize the features in the input summarized layer.  
+  *Type:* Feature Set
+- **Add shape summary attributes:** Specifies whether the length of lines or area of polygons within the summary layer (polygon or bin) will be calculated.  
+  *Type:* Boolean
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class containing the summarized data.  
+  *Type:* Feature Class
+
+The Summarize Within tool is a powerful component of spatial analysis workflows, enabling users to derive meaningful statistics and insights from spatial data within defined boundaries.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Spatial Statistics
+
+**Tool: Cluster and Outlier Analysis (Anselin Local Moran's I)**
+
+**Description:**
+The Cluster and Outlier Analysis (Anselin Local Moran's I) tool is designed to identify spatial clusters of features with high or low values and to detect spatial outliers. It calculates a local Moran's I value, a z-score, a pseudo p-value, and a code representing the cluster type for each statistically significant feature. This tool is particularly useful in spatial analysis and GIS workflows for identifying patterns such as concentrations of high or low values and spatial outliers. Typical use cases include identifying areas with significant differences in socio-economic factors, detecting regions with unusual patterns in public health data, or identifying areas with anomalous spending patterns. The tool is applicable in various fields, including economics, resource management, political geography, demographics, and public health.
+
+**Parameters:**
+- **Input Feature Class**: The set of features to be analyzed. Type: Feature Class.
+- **Input Field**: The field containing the numeric values to be analyzed. Type: Field.
+- **Bounding Polygons Defining Where Incidents Are Possible**: Optional parameter to define the area where incidents can occur. Type: Feature Class.
+- **Incident Data Aggregation Method**: Method for aggregating incident data if required. Type: String.
+
+**Derived Output:**
+- **Output Feature Class**: Contains attributes for each feature, including Local Moran's I index, z-score, pseudo p-value, and cluster/outlier type (COType). Type: Feature Class.
+
+The tool's results are statistically significant when the p-value is small enough, indicating that the observed clustering or outlier pattern is unlikely to be due to random chance. The output feature class includes a COType field that categorizes features as high-high (HH) clusters, low-low (LL) clusters, high-low (HL) outliers, or low-high outliers (LH), based on their statistical significance.
+**Toolset:** Spatial Statistics
+
+**Tool:** Optimized Hot Spot Analysis
+
+**Description:**  
+The Optimized Hot Spot Analysis tool in ArcGIS Pro is designed to identify statistically significant spatial clusters of high values (hot spots) and low values (cold spots) using the Getis-Ord Gi* statistic. This tool automatically determines optimal settings for the analysis based on the characteristics of the input data, similar to how a digital camera adjusts settings for optimal image capture. It aggregates incident point data into weighted features and identifies an appropriate scale of analysis. The tool adjusts for multiple testing and spatial dependence using the False Discovery Rate (FDR) correction method. Typical use cases include identifying areas of high crime rates, disease outbreaks, or environmental pollution. The tool is particularly useful in workflows where spatial patterns need to be detected and analyzed for decision-making or resource allocation.
+
+**Parameters:**
+- **Point Layer:** The point feature class for which hot spot analysis will be performed.  
+  *Type:* Feature Set.
+  
+- **Output Name:** The name of the output layer with the z-score and p-value results.  
+  *Type:* String.
+  
+- **Bin Size:** The distance interval representing the bin size and units into which the Point Layer will be aggregated. Must be a linear unit.  
+  *Type:* Linear Unit.
+  
+- **Neighborhood Size:** The spatial extent of the analysis neighborhood, determining which features are analyzed together to assess local clustering.  
+  *Type:* Linear Unit.
+  
+- **Time Step Interval (Optional):** The interval used for the time step, applicable if time is enabled for the Point Layer.  
+  *Type:* Time Unit.
+  
+- **Time Step Alignment (Optional):** Specifies how time steps will be aligned, available if input points are time-enabled and represent an instant in time. Options include End time, Start time, and Reference time.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Feature Class:** The output feature class containing the z-score and p-value results.  
+  *Type:* Feature Class.
+
+If you have further questions or need clarification on any aspect of the Optimized Hot Spot Analysis tool, feel free to ask.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Spatial Statistics
+
+**Tool:** Geographically Weighted Regression (GWR)
+
+**Description:**  
+The Geographically Weighted Regression (GWR) tool is a local form of linear regression used to model spatially varying relationships. It provides a local model of the variable or process you are trying to understand or predict by fitting a regression equation to every feature in the dataset. This tool is particularly useful for datasets with several hundred features and is not suitable for small datasets or multipoint data. GWR constructs separate equations for each feature by incorporating the dependent and explanatory variables of features within the neighborhood of each target feature. The neighborhood's shape and extent are determined by user inputs for parameters such as Neighborhood Type and Neighborhood Selection Method. The tool is designed to handle up to 1000 neighboring features for each local equation. Typical use cases include analyzing spatial patterns in real estate prices, environmental data, or any scenario where relationships vary across space.
+
+**Parameters:**
+- **Input Features:** The dataset containing the features to be analyzed. Type: Feature Layer.
+- **Dependent Variable:** The field representing the phenomena being modeled. Type: Field (Numeric).
+- **Explanatory Variable(s):** One or more fields representing the explanatory variables. Type: Field(s) (Numeric).
+- **Neighborhood Type:** Defines how neighborhoods are conceptualized (e.g., distance band, number of neighbors). Type: String.
+- **Neighborhood Selection Method:** Method for selecting the neighborhood (e.g., fixed distance, manual intervals). Type: String.
+- **Kernel Type:** The type of kernel function used to weight the features. Type: String.
+- **Bandwidth Method:** Method for determining the bandwidth of the kernel. Type: String.
+- **Distance:** The distance parameter for the neighborhood. Type: Double.
+- **Number of Neighbors:** The number of neighbors to include in the analysis. Type: Integer.
+
+**Derived Output:**
+- **Output Features:** A feature class with added fields reporting local diagnostic values. Type: Feature Class.
+- **Summary Report:** A table with the tool execution summary and diagnostic values. Type: Table.
+
+The GWR tool also provides a visual output with a hot/cold rendering scheme applied to model residuals, which helps in identifying areas of over- or under-prediction.
+**Toolset:** Spatial Statistics
+
+**Tool:** Local Bivariate Relationships
+
+**Description:**  
+The Local Bivariate Relationships tool in ArcGIS Pro is designed to analyze two variables for statistically significant relationships using local entropy. It classifies each feature into one of six categories based on the type of relationship between the variables. This tool is particularly useful for visualizing areas where the variables are related and exploring how their relationship changes across the study area. Typical use cases include identifying spatial patterns in continuous data, such as environmental or socio-economic variables, and understanding how these patterns vary locally. For example, it can be used to study the relationship between obesity and diabetes rates across different regions, helping to identify areas with significant correlations.
+
+**Parameters:**
+- **Input Features:** The feature class containing fields representing the Dependent Variable and Explanatory Variable values.  
+  *Type:* Feature Layer.
+- **Dependent Variable:** The numeric field representing the dependent variable in the analysis.  
+  *Type:* Field.
+- **Explanatory Variable:** The numeric field representing the explanatory variable in the analysis.  
+  *Type:* Field.
+- **Output Features:** The name and location of the output feature class.  
+  *Type:* Feature Class.
+- **Number of Neighbors:** The number of neighboring features to consider in the analysis.  
+  *Type:* Long (Optional).
+- **Number of Permutations:** The number of permutations for significance testing.  
+  *Type:* Long (Optional).
+- **Pop-Ups:** Option to create pop-ups for the output features.  
+  *Type:* String.
+- **Confidence Level:** The confidence level for the analysis.  
+  *Type:* Double.
+- **False Discovery Rate (FDR):** Option to apply FDR correction.  
+  *Type:* String.
+- **Scale Factor:** A scaling factor for the analysis.  
+  *Type:* Double.
+
+**Derived Output:**
+- **Output Features:** The feature class with each input feature classified into one of the relationship categories.  
+  *Type:* Feature Class.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Spatial Statistics
+
+**Tool:** Ordinary Least Squares (OLS)
+
+**Description:**  
+The Ordinary Least Squares (OLS) tool in ArcGIS Pro performs global linear regression to generate predictions or model a dependent variable based on its relationships with a set of explanatory variables. This tool is fundamental in spatial analysis as it provides a global model of the variable or process being studied, creating a single regression equation to represent that process. OLS is widely used in various fields, including social sciences, to evaluate relationships between two or more feature attributes. It helps in understanding spatial phenomena, predicting occurrences, and examining causal relationships. For example, OLS can be used to analyze the impact of demographic factors on public transportation usage or to predict crime rates based on socio-economic variables.
+
+**Parameters:**
+- **Input Feature Class:** The dataset containing the features to be analyzed. Type: Feature Class.
+- **Unique ID Field:** A field with unique values for each feature, linking model predictions to features. Type: Field.
+- **Dependent Variable:** The numeric field representing the variable to be modeled or predicted. Type: Field.
+- **Explanatory Variables:** A list of fields representing the explanatory variables in the regression model. Type: Field.
+- **Output Feature Class:** The feature class that will receive the dependent variable estimates and residuals. Type: Feature Class.
+- **Coefficient Output Table (Optional):** A table to store model coefficients, standardized coefficients, standard errors, and probabilities. Type: Table.
+- **Diagnostic Output Table (Optional):** A table to store model summary diagnostics. Type: Table.
+- **Output Report File (Optional):** A PDF file containing model diagnostics, graphs, and notes for interpreting OLS results. Type: File.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the dependent variable estimates and residuals, symbolized using a hot/cold rendering scheme. Type: Feature Class.
+- **Coefficient Output Table (Optional):** Includes coefficients and related statistics for each explanatory variable. Type: Table.
+- **Diagnostic Output Table (Optional):** Provides diagnostics for assessing model performance. Type: Table.
+- **Output Report File (Optional):** A comprehensive report with diagnostics and graphical representations of the OLS results. Type: File.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Spatial Statistics
+
+**Tool:** Spatial Component Utilities (Moran Eigenvectors)
+
+**Description:**  
+The Spatial Component Utilities (Moran Eigenvectors) toolset is designed to create and analyze spatial components known as Moran eigenvectors. These components are used to represent potential spatial patterns among features, such as clusters or trends. The toolset is typically used before running analysis tools in the Spatial Statistics toolbox to create explanatory variables or spatial weights matrix files. These files help define neighborhoods and weights between features, which are crucial for spatial analysis. The toolset includes functionalities such as creating spatial component explanatory variables, decomposing spatial structures, filtering spatial autocorrelation from fields, and comparing neighborhood conceptualizations. For example, the Decompose Spatial Structure tool decomposes a feature class and neighborhood into spatial components that represent spatial patterns like clusters or trends. These components are returned as fields in the output feature class and can be used in prediction or regression models to improve their accuracy by accounting for spatial patterns.
+
+**Parameters:**
+- **in_features:** The input feature class to be decomposed. Type: Feature Class.
+- **out_features:** The output feature class with spatial components included as fields. Type: Feature Class.
+- **append_all_fields:** Specifies whether all fields from the input feature class should be included in the output. Type: String.
+- **min_autocorrelation:** The minimum Moran's I value threshold for including components. Type: Double.
+- **max_components:** The maximum number of spatial components to create. Type: Integer.
+- **neighborhood_type:** Defines the type of neighborhood used, such as contiguity edges or corners. Type: String.
+- **distance_band:** Specifies the distance within which features are considered neighbors. Type: Double.
+- **number_of_neighbors:** The number of neighbors to consider for each feature. Type: Integer.
+- **weights_matrix_file:** The spatial weights matrix file used to define neighbors and weights. Type: File.
+- **local_weighting_scheme:** Specifies the local weighting scheme applied. Type: String.
+- **kernel_bandwidth:** The bandwidth for kernel-based neighborhood types. Type: Double.
+- **out_swm:** The output spatial weights matrix file. Type: File.
+- **id_field:** The unique ID field for the output spatial weights matrix file. Type: Field.
+
+**Derived Output:**
+- **Spatial Components:** Fields representing spatial patterns among features, such as clusters or trends. Type: Fields in Feature Class.
+
+If you have further questions or need clarification on any aspect of the tool, feel free to ask.
+No information available.
+**Toolset:** Spatial Statistics
+
+**Tool:** Create Spatial Component Explanatory Variables
+
+**Description:**  
+The "Create Spatial Component Explanatory Variables" tool is designed to generate a set of spatial component fields that effectively describe the spatial patterns of one or more numeric fields within a feature class. These fields serve as explanatory variables in prediction or regression models, enhancing the model's ability to account for spatial patterns. By including these spatial components as explanatory variables, the tool improves the accuracy of predictions and provides better estimates of the coefficients of the original explanatory variables. This tool is particularly useful in scenarios where spatial patterns significantly influence the variables being modeled, such as in ordinary least-squares regression models.
+
+**Parameters:**
+- **Input Feature Class:** The feature class containing the numeric fields for which spatial components will be created. Type: Feature Class.
+- **Explanatory Variables:** The numeric fields within the feature class that will be used to create spatial components. Type: Field.
+- **Neighborhood Type:** Defines how the spatial relationships between features are conceptualized, such as contiguity or distance-based methods. Type: String.
+- **Weights Matrix File:** A file that specifies the spatial weights between features, used to define neighborhoods and weights. Type: File.
+
+**Derived Output:**
+- **Spatial Component Fields:** A set of fields added to the output feature class representing the spatial patterns of the input fields. Type: Field.
+
+If you have further questions or need clarification on any aspect of this tool, feel free to ask.
+**Toolset:** Spatial Statistics
+
+**Tool:** Decompose Spatial Structure (Moran Eigenvectors)
+
+**Description:**  
+The "Decompose Spatial Structure (Moran Eigenvectors)" tool is designed to decompose a feature class and its neighborhood into a set of spatial components known as Moran eigenvectors. These components represent potential spatial patterns among the features, such as clusters or trends. The tool is typically used to identify and visualize spatial patterns within a dataset, which can be crucial for spatial analysis and GIS workflows. For example, it can be used to create explanatory variables for regression models or to define spatial weights matrices that help in understanding spatial relationships. The tool outputs a feature class with the same features as the input, but with additional fields representing the Moran eigenvectors, which can be mapped to visualize spatial patterns.
+
+**Parameters:**
+- **in_features:** The input feature class to be decomposed.  
+  *Type:* Feature Class.
+- **out_features:** The output feature class that will include the Moran eigenvectors as fields.  
+  *Type:* Feature Class.
+- **append_all_fields:** Option to append all fields from the input feature class to the output.  
+  *Type:* String.
+- **min_autocorrelation:** The minimum Moran's I value for the eigenvectors to be included.  
+  *Type:* Double.
+- **max_components:** The maximum number of Moran eigenvectors to create.  
+  *Type:* Integer.
+- **neighborhood_type:** Defines the type of neighborhood to use, such as contiguity or distance-based.  
+  *Type:* String.
+- **distance_band:** The distance within which features are considered neighbors.  
+  *Type:* Double (optional).
+- **number_of_neighbors:** Specifies the number of nearest neighbors to consider.  
+  *Type:* Integer (optional).
+- **weights_matrix_file:** A file defining the spatial weights matrix.  
+  *Type:* File (optional).
+- **local_weighting_scheme:** Specifies a local weighting scheme to apply.  
+  *Type:* String (optional).
+- **kernel_bandwidth:** The bandwidth for kernel-based neighborhood definitions.  
+  *Type:* Double (optional).
+- **out_swm:** The output spatial weights matrix file.  
+  *Type:* File (optional).
+- **id_field:** A field that uniquely identifies each feature.  
+  *Type:* Field (optional).
+
+**Derived Output:**
+- **out_features:** The output feature class with Moran eigenvectors as additional fields.  
+  *Type:* Feature Class.
+
+If you have further questions or need clarification on any aspect of this tool, feel free to ask!
+**Toolset:** Spatial Statistics
+
+**Tool:** Filter Spatial Autocorrelation From Field
+
+**Description:**  
+The "Filter Spatial Autocorrelation From Field" tool is designed to create a spatially filtered version of an input field. This filtered version maintains the core statistical properties of the original field but removes statistically significant spatial clustering. This is particularly useful in analytical workflows, such as correlation or regression analysis, where spatial independence of values is assumed. By removing spatial autocorrelation, the tool helps isolate the direct relationships between variables, free from spatial effects like trends and clusters. For example, it can be used to estimate the correlation between pollution and asthma rates while factoring out spatial effects, thus isolating the direct correlation between the two variables.
+
+**Parameters:**
+- **Input Field:** The field from which spatial autocorrelation is to be filtered. Type: Field.
+- **Conceptualization of Spatial Relationships:** Defines how spatial relationships are conceptualized, such as inverse distance or fixed distance. Type: String.
+- **Standardization:** Specifies the method for standardizing spatial weights. Type: String.
+
+**Derived Output:**
+- **Filtered Field:** A spatially filtered version of the input field, which can be used in further analysis. Type: Field.
+
+If you have further questions or need clarification on any aspect of this tool, feel free to ask.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Analyze Patterns
+
+**Tool:** Find Hot Spots
+
+**Description:**  
+The "Find Hot Spots" tool is designed to identify statistically significant spatial clusters of high values (hot spots) and low values (cold spots) within a dataset. It utilizes the Getis-Ord Gi* statistic to determine these clusters. This tool is particularly useful in spatial analysis for uncovering patterns such as areas with high crime rates, regions with elevated traffic accident occurrences, or zones with significant biodiversity. By analyzing the spatial distribution of data points, users can gain insights into areas of interest that may require further investigation or intervention.
+
+**Parameters:**
+- **Point Layer:** The point feature class for which hot spot analysis will be performed.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** The output feature class containing the z-score and p-value results.  
+  *Type:* Feature Class.
+  
+- **Bin Size:** The distance interval representing the bin size and units into which the Point Layer will be aggregated. This must be a linear unit.  
+  *Type:* Linear Unit.
+  
+- **Neighborhood Size:** The spatial extent of the analysis neighborhood, determining which features are analyzed together to assess local clustering.  
+  *Type:* Linear Unit.
+  
+- **Time Step Interval (Optional):** The interval used for the time step, applicable if time is enabled for the Point Layer.  
+  *Type:* Time Unit.
+  
+- **Time Step Alignment (Optional):** Specifies how time steps will be aligned, available if the input points are time-enabled and represent an instant in time. Options include End time, Start time, and Reference time.  
+  *Type:* String.
+  
+- **Data Store (Optional):** Specifies the ArcGIS Data Store where the output will be stored. Options include SPATIOTEMPORAL_DATA_STORE (default) and RELATIONAL_DATA_STORE.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output:** The statistically significant hot spots identified in the analysis.  
+  *Type:* Feature Set.
+
+Feel free to ask more about how this tool can be integrated into your specific GIS workflows or any other related queries.
+**Toolset:** Analyze Patterns
+
+**Tool:** Find Point Clusters
+
+**Description:**  
+The "Find Point Clusters" tool is designed to identify clusters of point features amidst surrounding noise based on their spatial or spatiotemporal distribution. This tool is particularly useful in spatial analysis for detecting areas of high activity or concentration within a dataset. For example, it can be used to identify clusters of wildlife sightings, crime incidents, or disease outbreaks. The tool supports two clustering methods: DBSCAN and HDBSCAN. DBSCAN finds clusters based on a specified search distance, while HDBSCAN allows for clusters with varying densities by using a self-adjusting distance. The tool can also incorporate time to find spatiotemporal clusters if the input data is time-enabled.
+
+**Parameters:**
+- **inputPoints**: The point layer to be analyzed. Type: Feature Layer.
+- **outputName**: The name for the output feature class that will contain the clusters. Type: String.
+- **clusterMethod**: The method used for clustering, either "DBSCAN" or "HDBSCAN". Type: String.
+- **minimumPoints**: The minimum number of points required to form a cluster. Type: Integer.
+- **searchDistance**: The distance within which points are considered for clustering. Type: Linear Unit.
+- **use_time (Optional)**: Specifies whether time will be used to discover clusters. Options are "TIME" for spatiotemporal clusters or "NO_TIME" for spatial clusters only. Type: Boolean.
+- **search_duration (Optional)**: The time duration within which points must be found to form a cluster. Type: Time Unit.
+
+**Derived Output:**
+- **output**: The resulting point clusters. Type: Feature Set.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Analyze Patterns
+
+**Tool:** Generalized Linear Regression
+
+**Description:**  
+The Generalized Linear Regression (GLR) tool in ArcGIS Pro is designed to model a dependent variable based on its relationship with one or more explanatory variables. This tool is versatile, supporting continuous (Ordinary Least Squares), binary (Logistic), and count (Poisson) models, making it applicable to a wide range of spatial analysis tasks. Typical use cases include understanding demographic factors influencing public transportation usage, examining relationships between vandalism and burglary, predicting 911 call volumes, forecasting emergency response resource demands, and analyzing variables affecting birth rates. The tool is particularly useful for evaluating relationships between feature attributes, predicting occurrences, and understanding causative factors in spatial contexts.
+
+**Parameters:**
+- **Input Features:**  
+  Explanation: The feature class containing the dependent and explanatory variables.  
+  Type: Feature Layer.
+
+- **Dependent Variable:**  
+  Explanation: The numeric field containing the observed values to be modeled.  
+  Type: Field.
+
+- **Model Type:**  
+  Explanation: Specifies the type of data to be modeled. Options include Continuous (Gaussian), Binary (Logistic), and Count (Poisson).  
+  Type: String.
+
+- **Explanatory Variable(s):**  
+  Explanation: A list of fields representing independent explanatory variables in the regression model.  
+  Type: Field.
+
+- **Output Features:**  
+  Explanation: The new feature class containing the dependent variable estimates.  
+  Type: Feature Class.
+
+**Derived Output:**
+- **Output Predicted Features:**  
+  Explanation: The output feature class with the dependent variable estimates for each input prediction feature value.  
+  Type: Table; Feature Class.
+
+- **Coefficient Table:**  
+  Explanation: An output table containing the coefficients from the model fit.  
+  Type: Table.
+
+The Generalized Linear Regression tool provides comprehensive diagnostics and model summaries, which are accessible through the Geoprocessing pane. It automatically adds output feature layers to the map, applying a rendering scheme to model residuals, facilitating the visualization of spatial patterns.
+**Toolset:** Find Locations
+
+**Tool:** Detect Incidents
+
+**Description:**  
+The "Detect Incidents" tool in ArcGIS Pro is designed to create a layer that identifies features meeting a specified condition. This tool is particularly useful in spatial analysis for detecting events or conditions of interest within a dataset. For example, it can be used to identify locations where a certain threshold is exceeded, such as detecting areas with high pollution levels or identifying traffic incidents based on speed thresholds. The tool is part of the GeoAnalytics Desktop tools, which leverage distributed processing to handle large datasets efficiently, making it suitable for analyzing big data and uncovering patterns, trends, and anomalies.
+
+**Parameters:**
+- **Track:** A sequence of features that are time-enabled with a time type of instant. This parameter is used to define the sequence of events or features to be analyzed.  
+  *Type:* Feature Layer.
+  
+- **Incident:** Features that meet a condition of interest. This parameter specifies the criteria for what constitutes an incident.  
+  *Type:* Condition Expression.
+
+- **Instant:** A single moment in time represented by a start time and no end time. Inputs to Detect Incidents must have a time type of instant.  
+  *Type:* Date/Time.
+
+- **Interval:** A duration of time represented by a start and an end time. This parameter is used to define the time window for analysis.  
+  *Type:* Time Interval.
+
+- **Feature of Interest:** Describes the feature being analyzed. During analysis, all features are analyzed, and incidents are features that meet a specified condition.  
+  *Type:* Feature Layer.
+
+**Derived Output:**
+- **Incident Layer:** A new layer that contains the features identified as incidents based on the specified conditions.  
+  *Type:* Feature Layer.
+
+If you have further questions or need more details about using the "Detect Incidents" tool in your workflows, feel free to ask!
+**Toolset:** Find Locations
+
+**Tool:** Find Dwell Locations
+
+**Description:**  
+The "Find Dwell Locations" tool is designed to identify locations where moving objects have stopped or dwelled, using specified time and distance thresholds. This tool is particularly useful in scenarios where understanding the stationary behavior of tracked objects is crucial. For example, it can be used to analyze the stopping points of delivery vehicles, identify areas where wildlife pauses during migration, or determine idle times for machinery in industrial settings. The tool processes time-enabled point features, which represent instances in time, to detect sequential observations with minimal movement over a defined period. This analysis can help in optimizing routes, understanding animal behavior, or improving operational efficiency.
+
+**Parameters:**
+- **Input Features:** The point tracks in which dwells will be found. The input must be a time-enabled layer with features that represent instants in time.  
+  *Type:* Feature Set.
+  
+- **Output Dataset:** The name of the output feature service.  
+  *Type:* String.
+  
+- **Track Fields:** One or more fields that will be used to identify unique tracks.  
+  *Type:* Field.
+  
+- **Distance Method:** Specifies how the distances between dwell features will be calculated. Options include Geodesic and Planar.  
+  *Type:* String.
+  
+- **Distance Tolerance:** The maximum distance between points to be considered a single dwell location.  
+  *Type:* Linear Unit.
+  
+- **Time Tolerance:** The minimum time duration to be considered a single dwell location. Both time and distance are considered.  
+  *Type:* Time Unit.
+
+**Derived Output:**
+- **Dwell Location Features:** Represents when a track has been stationary given specified time and distance parameters. The output can be in the form of points, convex hulls, or mean centers.  
+  *Type:* Feature Class.
+
+Feel free to ask more about how this tool can be integrated into your specific workflows or any other related queries.
+**Toolset:** Find Locations
+
+**Tool:** Find Similar Locations
+
+**Description:**  
+The Find Similar Locations tool is designed to identify candidate features that are most similar or dissimilar to one or more input features based on their attributes. This tool is particularly useful in spatial analysis and GIS workflows where understanding similarity or dissimilarity between geographic entities is crucial. Typical use cases include identifying areas with similar demographic profiles, comparing environmental conditions across different regions, or assessing risk factors in public health studies. For example, in a retail analysis, the tool can be used to find stores that are most similar to a top-performing store based on sales data attributes.
+
+**Parameters:**
+- **Input Layer:** The reference layer containing features to be matched. Type: Record Set.
+- **Search Layer:** The candidate layer containing features to be compared against the input layer. Type: Record Set.
+- **Output Name:** The name of the output feature class that will contain the results. Type: String.
+- **Attributes of Interest:** The specific attributes used to determine similarity. Type: List of Fields.
+- **Most Or Least Similar:** Specifies whether to find the most similar, least similar, or both. Type: String.
+- **Match Method:** Determines how similarity is calculated, such as using attribute values or profiles. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** Contains records for each input feature with similarity indices. Type: Feature Class.
+- **Simindex:** Quantifies similarity based on attribute values. Type: Double.
+- **Cosimindex:** Quantifies similarity using cosine similarity for attribute profiles. Type: Double.
+- **Labelrank:** Used for display purposes to render analysis results. Type: Integer.
+
+The tool is integrated into ArcGIS Pro and can be used with GeoAnalytics Server for enhanced performance, especially when working with large datasets. It is essential to ensure data is local to the server to optimize processing time.
+**Toolset:** Data Enrichment
+
+**Tool:** Calculate Motion Statistics
+
+**Description:**  
+The Calculate Motion Statistics tool is designed to compute motion statistics for points within a time-enabled feature class. This tool is particularly useful in spatial analysis workflows where understanding the movement patterns of entities over time is crucial. Typical use cases include analyzing the movement of vehicles, animals, or weather phenomena such as hurricanes. By calculating statistics such as speed, acceleration, and bearing, users can gain insights into the dynamics of the tracked entities. For example, this tool can be used to assess the speed variations of delivery trucks over their routes or to study the migration patterns of wildlife.
+
+**Parameters:**
+- **Input Layer:** The time-enabled point features on which motion statistics will be calculated.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** The output feature class or layer containing the points with new fields for each motion statistic that was calculated.  
+  *Type:* Feature Class.
+  
+- **Track Fields:** One or more fields that will be used to identify distinct entities.  
+  *Type:* Field.
+  
+- **Track History Window (Optional):** The number of observations (including the current observation) that will be used for summary statistics. The default value is 3, which means that the summary statistics will be calculated at each point in a track using the current observation and the previous two observations.  
+  *Type:* Long.
+  
+- **Motion Statistics (Optional):** Specifies the group containing the statistics that will be calculated and written to the result. If no value is specified, all statistics from all groups will be calculated.  
+  *Type:* Various statistics such as Distance, Duration, Speed, etc.
+
+- **Data Store (Optional):** Specifies the ArcGIS Data Store where the output will be stored.  
+  *Type:* String (SPATIOTEMPORAL_DATA_STORE or RELATIONAL_DATA_STORE).
+
+**Derived Output:**
+- **Output:** The output point features with motion statistics.  
+  *Type:* Feature Set.
+**Toolset:** Proximity
+
+**Tool:** Create Buffers
+
+**Description:**  
+The "Create Buffers" tool in ArcGIS Pro is designed to generate polygons that extend a specified distance from input features, which can be points, lines, or polygons. This tool is essential for spatial analysis tasks that require understanding the proximity of features to one another. For example, it can be used to determine areas within a certain distance from a road, identify zones around a hazardous site, or create buffer zones for environmental protection. The tool is particularly useful in urban planning, environmental management, and emergency response scenarios where proximity analysis is crucial.
+
+**Parameters:**
+- **Input Layer:** The features (point, line, or polygon) to be buffered.  
+  *Type:* Feature Layer.
+- **Output Feature Class:** The resulting feature class of buffered polygons.  
+  *Type:* Feature Class.
+- **Method:** Specifies the method for creating buffers. Options include:
+  - *Geodesic:* Buffers are created using a shape-preserving geodesic method.
+  - *Planar:* Euclidean buffers are created if the input features are in a projected coordinate system.  
+  *Type:* String.
+- **Distance:** The distance to buffer the input features.  
+  *Type:* Linear Unit.
+- **Dissolve Type:** Determines how buffer results are dissolved. Options include:
+  - *None:* No dissolve is applied.
+  - *All:* All buffers are dissolved into a single feature.
+  - *Fields:* Buffers are dissolved based on specified fields.  
+  *Type:* String.
+- **End Type (Optional):** The shape of the buffer at the ends of line features. Options include:
+  - *Round:* Buffers are rounded at the ends.
+  - *Flat:* Buffers are straight across at the ends.  
+  *Type:* String.
+- **Multipart (Optional):** Specifies whether multipart features will be created. Options include:
+  - *MULTI_PART:* Output multipart features will be created.
+  - *SINGLE_PART:* Individual features will be created for each part.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **Output Buffers Layer:** The resulting layer of buffer polygons.  
+  *Type:* Feature Set.
+
+The "Create Buffers" tool is a powerful component of the Proximity toolset, enabling users to perform detailed spatial analyses by defining areas of influence around geographic features. This capability is crucial for tasks such as impact assessments, resource allocation, and strategic planning.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Proximity
+
+**Tool:** Snap Tracks
+
+**Description:**  
+The Snap Tracks tool is designed to align input track points to lines, which is particularly useful in scenarios where time-enabled point data needs to be associated with linear features. This tool is essential for spatial analysis tasks that involve tracking movement or aligning GPS data with a network of paths or roads. For example, a city might use this tool to snap the GPS locations of snow plow trucks to the street network, ensuring that the recorded positions align with the actual streets. This is crucial for accurate analysis and reporting of vehicle movements. The tool requires time-enabled point data that represents an instant in time and traversable lines with fields indicating the from and to nodes for analysis.
+
+**Parameters:**
+- **tracksLayer**: The input layer containing the track points. Type: Feature Layer.
+- **lineLayer**: The input layer containing the lines to which the tracks will be snapped. Type: Feature Layer.
+- **trackIdentifier**: A field that uniquely identifies each track. Type: Field.
+- **searchDistance**: The maximum distance within which a track point can be snapped to a line. Type: Linear Unit.
+- **connectivityFieldMatching**: Fields used to match connectivity between track points and lines. Type: String.
+- **directionValueMatching**: Fields used to match direction values between track points and lines. Type: String.
+
+**Derived Output:**
+- **output**: The output feature set containing the snapped track points. Type: Feature Set.
+
+If you have further questions or need additional details about using the Snap Tracks tool in your workflows, feel free to ask!
+**Toolset:** Proximity
+
+**Tool:** Trace Proximity Events
+
+**Description:**  
+The Trace Proximity Events tool is designed to trace events that are near each other in both space (location) and time. It is particularly useful for analyzing time-enabled point data that includes features representing an instant in time. Typical use cases include monitoring the proximity of individuals or objects, such as tracking the spread of diseases or interactions between tagged wildlife. For example, a company might use this tool to identify employees who were near a person infected with COVID-19 by analyzing device location data. Similarly, an NGO might track the spread of salmon lice between farmed and wild salmon populations using GPS data, considering both spatial proximity and depth.
+
+**Parameters:**
+- **Input Points:** The time-enabled point feature class used to trace proximity events.  
+  *Type:* Feature Layer.
+  
+- **Entity ID Field:** A text field representing unique IDs for each entity.  
+  *Type:* Field.
+  
+- **Distance Method:** Specifies the distance type used with the Spatial Search Distance parameter. Options include Planar (default) and Geodesic.  
+  *Type:* String.
+  
+- **Spatial Search Distance (Optional):** The maximum distance between two points to be considered in proximity.  
+  *Type:* Linear Unit.
+  
+- **Temporal Search Distance (Optional):** The maximum duration between two points to be considered in proximity.  
+  *Type:* Time Unit.
+  
+- **Define Entities of Interest Using (Optional):** Specifies the entities of interest, either by IDs or selected features in a specified layer.  
+  *Type:* String.
+  
+- **Entities of Interest IDs:** Entity names and start times for the entities of interest.  
+  *Type:* Value Table.
+  
+- **Entities of Interest Layer:** The layer or table containing the entities of interest.  
+  *Type:* Feature Layer.
+
+**Derived Output:**
+- **Output Proximity Events:** The output feature class containing the trace proximity events.  
+  *Type:* Feature Class.
+
+If you have further questions or need clarification, feel free to ask!
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** Overlay
+
+**Tool:** Union
+
+**Description:**  
+The Union tool in ArcGIS Pro computes a geometric union of input polygon feature classes or layers. This tool is used to combine multiple polygon datasets into a single output feature class, where all features and their attributes are preserved. The Union tool is particularly useful in spatial analysis workflows where understanding the overlap and integration of different spatial datasets is necessary. For example, it can be used to determine the combined area of different land use types or to analyze the spatial distribution of environmental factors across multiple regions. The tool ensures that all input features are projected into a common spatial reference, and it handles geometric relationships by cracking and clustering features to maintain spatial integrity.
+
+**Parameters:**
+- **Input Layer:** The polygon features that will be overlaid.  
+  *Type:* Feature Set.
+- **Overlay Layer:** The polygon features that will be combined with the input layer.  
+  *Type:* Feature Set.
+- **Output Name:** The name of the output feature class.  
+  *Type:* String.
+- **Overlay Type:** Specifies the type of overlay to be performed.  
+  *Type:* String. Options include Union, Intersect, Erase, Identity, Symmetrical Difference.
+
+**Derived Output:**
+- **Output Feature Class:** A new feature class containing the union of input features.  
+  *Type:* Feature Class.
+
+If you have further questions or need clarification on specific aspects of the Union tool, feel free to ask!
+**Toolset: Overlay**
+
+**Tool: Update**
+
+**Description:**  
+The Update tool in the Overlay toolset is designed to compute the geometric intersection of input features and update features. It returns the input features and update features that do not overlap, writing them to the output feature class. This tool is particularly useful in scenarios where spatial features need to be modified or updated based on their spatial relationships. For example, it can be used to update land use data by overlaying new zoning information, or to refine environmental impact assessments by incorporating recent survey data.
+
+**Parameters:**
+- **Input Features:** The feature class or layer that serves as the base for the update operation.  
+  *Type:* Feature Layer.
+  
+- **Update Features:** The feature class or layer that provides the new information to be integrated into the input features. The geometry type must match that of the input features.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** The feature class where the results of the update operation are stored.  
+  *Type:* Feature Class.
+  
+- **Attributes to Join (Optional):** Specifies which attributes from the input features will be transferred to the output feature class. Options include transferring all attributes, all except feature IDs, or only feature IDs.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Feature Class:** The resulting feature class containing the updated spatial features. The type of feature (point, line, or polygon) depends on the input parameter settings.  
+  *Type:* Feature Set.
+**Toolset:** GeoAnalytics Desktop
+
+**Tool:** Create Buffers
+
+**Description:**  
+The Create Buffers tool in ArcGIS Pro is designed to generate buffer polygons around input features such as points, lines, or polygons to a specified distance. This tool is particularly useful in spatial analysis for determining proximity relationships, such as identifying areas within a certain distance from a feature. Typical use cases include environmental impact assessments, urban planning, and emergency response analysis. For example, you can use this tool to create a buffer zone around a damaged building to assess potential danger areas or to analyze accessibility to public transportation by creating buffers around bus stations.
+
+**Parameters:**
+- **Input Layer:** The point, polyline, or polygon features that will be buffered.  
+  *Type:* Feature Layer.
+  
+- **Output Feature Class:** The new feature class of buffered results.  
+  *Type:* Feature Class.
+  
+- **Method:** Specifies the method used to create the buffers. Options include:
+  - **Geodesic:** Buffers are created using a shape-preserving geodesic method, regardless of the input coordinate system. This is the default.
+  - **Planar:** Euclidean buffers are created if the input features are in a projected coordinate system.  
+  *Type:* String.
+  
+- **Distance:** The distance to buffer the input features. This can be specified as a numeric value or a field.  
+  *Type:* Linear Unit.
+
+- **Dissolve Type:** Specifies how overlapping buffers are handled. Options include:
+  - **None:** No dissolve is applied; each buffer is a separate feature.
+  - **All:** All buffers are dissolved into a single feature.
+  - **Fields:** Buffers are dissolved based on specified field values.  
+  *Type:* String.
+
+- **Multipart:** Specifies whether multipart features will be created. Options include:
+  - **MULTI_PART:** Output multipart features will be created where appropriate.
+  - **SINGLE_PART:** Individual features will be created for each part instead. This is the default.  
+  *Type:* Boolean.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the buffered polygons with a field named BUFF_DIST, which records the buffer distance used for each feature.  
+  *Type:* Feature Class.
+
+If you have further questions or need clarification on any aspect of the Create Buffers tool, feel free to ask.
+**Toolset:** GeoAnalytics Desktop
+
+**Tool:** Group By Proximity
+
+**Description:**  
+The "Group By Proximity" tool in ArcGIS Pro is designed to group features that are within spatial or spatiotemporal proximity to each other. This tool is particularly useful in spatial analysis workflows where understanding the relationship between nearby features is crucial. For example, it can be used to identify connected road segments, detect clusters of crime incidents occurring close in time and space, or find overlapping polygons. The tool assigns a `group_id` to features, indicating their membership in a group, which can be visualized using unique symbology.
+
+**Parameters:**
+- **Input Layer:** The point, line, or polygon features that will be grouped.  
+  *Type:* Feature Set.
+  
+- **Output Name:** The name of the output feature service with grouped features represented by a new `group_id` field.  
+  *Type:* String.
+  
+- **Spatial Relationship:** Specifies the type of spatial relationship for grouping features. Options include:
+  - **Intersects:** Groups features that overlap.
+  - **Touches:** Groups features with intersecting vertices but no overlap.
+  - **Planar Near:** Groups features within a specified planar distance.
+  - **Geodesic Near:** Groups features within a specified geodesic distance.  
+  *Type:* String.
+  
+- **Spatial Near Distance (Optional):** The distance used for the Planar Near or Geodesic Near spatial relationship.  
+  *Type:* Linear Unit.
+  
+- **Temporal Relationship (Optional):** Specifies the time criteria for grouping features. Options include:
+  - **INTERSECTS:** Groups features with overlapping time.
+  - **NEAR:** Groups features within a time range.
+  - **NONE:** Ignores time for grouping.  
+  *Type:* String.
+  
+- **Temporal Near Distance (Optional):** The temporal distance used when the temporal relationship is set to Near.  
+  *Type:* Time Unit.
+  
+- **Attribute Relationship (Optional):** An ArcGIS Arcade expression for grouping features based on attribute values.  
+  *Type:* String.
+
+**Derived Output:**
+- **Output Feature Service:** The resulting feature service with grouped features, each assigned a `group_id`.  
+  *Type:* Feature Set.
+We are unable to answer this question. Please rephrase your query.
+**Toolset:** GeoAnalytics Desktop
+
+**Tool:** Trace Proximity Events
+
+**Description:**  
+The Trace Proximity Events tool is designed to trace events that are near each other in both space (location) and time. This tool is particularly useful in scenarios where understanding the spatial and temporal proximity of events is crucial, such as tracking disease transmission, analyzing movement patterns, or identifying potential encounters between entities. The tool requires time-enabled point data that includes features representing an instant in time. It can be used to visualize and analyze where entities have traveled, and it supports the creation of complex traces for deeper insights into spatial relationships.
+
+**Parameters:**
+- **Input Points:** The time-enabled point feature class used to trace proximity events.  
+  *Type:* Feature Layer.
+  
+- **Entity ID Field:** A text field representing unique IDs for each entity.  
+  *Type:* Field.
+  
+- **Output Proximity Events:** The output feature class containing the trace proximity events.  
+  *Type:* Feature Class.
+  
+- **Distance Method:** Specifies the distance type used with the Spatial Search Distance parameter. Options include Planar (default) and Geodesic, which accounts for the curvature of the spheroid.  
+  *Type:* String.
+  
+- **Spatial Search Distance (Optional):** The maximum distance between two points to be considered in proximity.  
+  *Type:* Linear Unit.
+  
+- **Temporal Search Distance (Optional):** The maximum time difference between two points to be considered in proximity.  
+  *Type:* Time Unit.
+
+**Derived Output:**
+- **Output Tracks:** A layer containing the first trace event and all subsequent features for an entity, useful for visualizing travel paths.  
+  *Type:* Feature Class.
+
+Feel free to ask more about how this tool can be integrated into your GIS workflows or discuss other GeoAnalytics Desktop tools.

@@ -1,0 +1,2428 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d7" for="edge" attr.name="order" attr.type="long" />
+  <key id="d6" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d5" for="edge" attr.name="description" attr.type="string" />
+  <key id="d4" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d3" for="node" attr.name="clusters" attr.type="string" />
+  <key id="d2" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d1" for="node" attr.name="description" attr.type="string" />
+  <key id="d0" for="node" attr.name="entity_type" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="&quot;LAYERS&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Layers is potentially an event or phenomenon within the context of the text, though specific details are not provided."</data>
+      <data key="d2">chunk-aa292f2aa620cd815bef2503fda49342</data>
+    </node>
+    <node id="&quot;COUNTY&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"County refers to geographical units represented by polygon data in the document, with information such as GEOID, NAME, State, and various statistical attributes."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;STATE&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"State refers to the U.S. states in which the counties are located, providing context such as state names and abbreviations."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d3">[{"level": 0, "cluster": 0}]</data>
+    </node>
+    <node id="&quot;COUNTY HEALTH RANKINGS 2021&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"County Health Rankings 2021 refers to the event or dataset that provides statistical health data and rankings for counties across various states."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d3">[{"level": 0, "cluster": 0}]</data>
+    </node>
+    <node id="&quot;GEOID&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"GEOID refers to unique identification codes for each county, representing geographic units in the dataset."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;NAME&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"NAME refers to the name of the counties, offering descriptive identification within the dataset."&lt;SEP&gt;"Name is a data attribute in the Nation.shp dataset that refers to the name of the geographic entity, such as 'United States.'"</data>
+      <data key="d2">chunk-eba65d28e2bf83c777edfa727c5bec84&lt;SEP&gt;chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;STATE_ABBR&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"state_abbr refers to the two-letter abbreviations for U.S. states, used as shorthand in the dataset."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d3">[{"level": 0, "cluster": 0}]</data>
+    </node>
+    <node id="&quot;COUNTY_RAN&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"county_ran refers to an integer value indicating specific rankings or classifications for counties."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+    </node>
+    <node id="&quot;V001_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v001_rawva represents a double value indicating raw statistical attributes linked to the counties."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;V001_NUMER&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v001_numer indicates an integer value representing specific numerical counts related to county data."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+    </node>
+    <node id="&quot;V001_DENOM&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v001_denom indicates an integer value that serves as the denominator in statistical calculations for counties."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+    </node>
+    <node id="&quot;V001_FLAG&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v001_flag is an integer value used to flag specific data conditions or issues in the dataset."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;V001_RACE_&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v001_race_ refers to a double value representing race-specific statistical attributes for counties."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;V001_RACE1&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v001_race1 indicates an integer value linked to specific race-based classifications in the dataset."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+    </node>
+    <node id="&quot;V036_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v036_rawva is a dataset or measurement metric provided in the text, defined as 'v 036 raw va,' with examples of values such as '4.501498764,' '3.647977757,' and others."&lt;SEP&gt;"v036_rawva refers to a double value representing raw statistical data attributes under category v036."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7&lt;SEP&gt;chunk-e27bc77bed8980624a7bfffbd5813653</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;V002_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v002_rawva represents a double value indicating raw statistical attributes under category v002."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+    </node>
+    <node id="&quot;V042_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v042_rawva is a dataset or measurement metric described as 'v 042 raw va,' with example values like '4.850213518,' '5.590493512,' among others."&lt;SEP&gt;"v042_rawva refers to a double value representing raw statistical attributes under category v042."</data>
+      <data key="d2">chunk-9fe0f1296ba79f6d14efa0a74433a2b7&lt;SEP&gt;chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V037_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v037_rawva is identified as 'v 037 raw va,' which includes a set of values, such as '0.0,' '8.29,' and '14.09,' linked to potentially numeric statistical evaluation."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V037_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v037_numer is labeled as 'v 037 n umer,' a numeric dataset of integers like '0,' '86,' and '106,' suggesting its relevance for computation or categorization."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V037_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v037_denom is shown as 'v 037 de nom,' another set of numeric measurements, exemplified by values such as '4510,' '15931,' and '1911,' possibly linked to ratios."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V037_FLAG&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v037_flag is identified as 'v 037 flag,' a binary integer dataset with values such as '0' and '1,' potentially used as indicators or categorizers."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V037_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v037_race_ is referred to as 'v 037 race,' providing double-precision values such as '0.0,' '8.77,' and '14.39,' potentially related to demographic information."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V037_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v037_race1 is labeled 'v 037 race 1,' comprising numeric double values such as '0.0,' '9.45,' and '6.45,' likely connected to variables or demographics."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V037_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v037_rac_1 is described as 'v 037 rac 1,' marked by double-precision data values like '0.0,' '14.61,' and '13.82,' possibly related to race or classification metrics."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V037_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v037_rac_2 is noted as 'v 037 rac 2,' with examples of values such as '0.0,' '6.1,' '6.43,' potentially linked to subgroup distributions."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V037_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v037_rac_3 is presented as 'v 037 rac 3,' featuring double-precision values, including '0.0,' '7.9,' '8.75,' and others, which may pertain to stratification or categorization."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V009_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v009_rawva is a dataset labeled as 'v 009 raw va,' presenting double-precision values such as '23.1,' '23.14,' and '19.81,' possibly for trend analysis."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V011_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v011_rawva is described as 'v 011 raw va,' consisting of values like '33.0,' '36.1,' and '34.0,' relevant to potentially observational or statistical measures."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V011_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v011_numer is identified as 'v 011 n umer,' a dataset with integer values such as '13489,' '48542,' and '8009,' which might serve as an enumeration basis."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V133_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v133_rawva is presented as 'v 133 raw va,' a dataset with examples like '6.7,' '7.6,' and '6.8,' potentially applicable for evaluative comparisons."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V070_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v070_rawva is noted as 'v 070 raw va,' comprising data values like '19.4,' '24.7,' and '33.3,' likely tracked for consistency or variation."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V070_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v070_numer is described as 'v 070 n umer,' an integer dataset of numbers such as '12525,' '40024,' and '5431,' relevant to ratios or population metrics."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653</data>
+    </node>
+    <node id="&quot;V132_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v132_rawva refers to a variable in the context of data modeling, representing recorded values as examples such as '100.0,' '0.0,' and others."&lt;SEP&gt;"v132_rawva, referred to as 'v 132 raw va,' includes values such as '100.0,' '0.0,' and '69.13,' which may denote percentages or calculated ratios."</data>
+      <data key="d2">chunk-e27bc77bed8980624a7bfffbd5813653&lt;SEP&gt;chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V132_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v132_numer is an integer-based variable associated with 'v132_rawva,' implying numerator values for calculations, such as '37725,' '134354,' etc."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V132_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v132_denom is an integer-based variable representing denominator values linked to numeric ratios, like '54571,' '182265,' etc."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V049_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v049_rawva refers to recorded double-type values like '15.56,' '15.03,' and others that describe a distinct data set."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V134_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v134_rawva is a double-based variable, presenting a data series including values such as '0.0,' '33.33,' '28.57,' and others."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V134_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v134_numer is an integer variable paired with 'v134_rawva,' representing numerator values within a specific dataset."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V134_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v134_denom is an integer variable linked to 'v134_rawva,' representing denominator values within the same dataset."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V045_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v045_rawva is a variable recorded in decimal format with values such as '0.0,' '504.5,' '297.2,' and others, enabling data comparisons."&lt;SEP&gt;"v045_rawva refers to a statistical variable likely associated with a geographical or demographic study. It is defined as a double with values like 539.9."</data>
+      <data key="d2">chunk-14b02a34748ab42bd13e324534bcef7b&lt;SEP&gt;chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V045_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v045_numer is an integer-based numerator variable corresponding to 'v045_rawva,' with example values including '139,' '100,' and others."&lt;SEP&gt;"v045_numer represents a numeric variable in an analysis, potentially tied to a specific region or geography. It is defined as an integer with examples like 1758668."</data>
+      <data key="d2">chunk-14b02a34748ab42bd13e324534bcef7b&lt;SEP&gt;chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V045_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v045_denom is a denominator variable in a dataset, potentially connected to a geographic or analytical context. It is defined as an integer with sample values like 325719178."&lt;SEP&gt;"v045_denom is an integer-based denominator variable tied to 'v045_rawva,' consisting of values such as '55504,' '212628,' and others."</data>
+      <data key="d2">chunk-14b02a34748ab42bd13e324534bcef7b&lt;SEP&gt;chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V014_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v014_rawva is a statistical variable referring to a specific demographic or geographic subset, represented as a double with values such as 20.88185728."&lt;SEP&gt;"v014_rawva represents variable data in double format, with recorded examples as '23.76404065,' '26.00690449,' and others."</data>
+      <data key="d2">chunk-14b02a34748ab42bd13e324534bcef7b&lt;SEP&gt;chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V014_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v014_numer is a part of a numerical dataset, possibly tied to a geographic or demographic category. Defined as an integer with sample values like 1507629."&lt;SEP&gt;"v014_numer is an integer variable representing numerator values corresponding to 'v014_rawva.'"</data>
+      <data key="d2">chunk-14b02a34748ab42bd13e324534bcef7b&lt;SEP&gt;chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V014_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v014_denom is an integer variable representing denominator values tied to 'v014_rawva.'"&lt;SEP&gt;"v014_denom refers to a denominator variable in a geographic or statistical analysis, defined as an integer with values such as 72198032."</data>
+      <data key="d2">chunk-14b02a34748ab42bd13e324534bcef7b&lt;SEP&gt;chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V014_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v014_race_ refers to variable values in double format that represent recorded race statistics."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V014_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v014_race1 refers to another variant of race statistics recorded within the dataset."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V014_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v014_rac_1 is a variable of recorded race data in decimal format."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V014_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v014_rac_2 represents a second version of race-related statistics in the dataset."</data>
+      <data key="d2">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V014_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v014_rac_3 represents a third version of race-related statistics recorded in the dataset."&lt;SEP&gt;"v014_rac_3, also known as 'v 014 rac 3,' is referenced in the text and appears to represent a numerical event or variable with multiple example values listed."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417&lt;SEP&gt;chunk-6d56072195629c0b2b5fee94f4060f89</data>
+    </node>
+    <node id="&quot;V085_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v085_rawva is a variable in a dataset that appears to be tied to a geographic region, described as a double with sample values like 10.43."&lt;SEP&gt;"v085_rawva, also known as 'v 085 raw va,' is described as a variable or event tied to numerical values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417&lt;SEP&gt;chunk-14b02a34748ab42bd13e324534bcef7b</data>
+    </node>
+    <node id="&quot;V085_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v085_numer, also stylized as 'v 085 n numer,' represents an integer-based event or variable with example values provided."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V085_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v085_denom, also stylized as 'v 085 de nom,' is an integer variable or event with example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V004_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v004_rawva represents a numerical variable potentially linked to a geographic unit or study area. Defined as a double with example values of 75.8125578."&lt;SEP&gt;"v004_rawva, also known as 'v 004 raw va,' is described as a double variable or event with several examples."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417&lt;SEP&gt;chunk-14b02a34748ab42bd13e324534bcef7b</data>
+    </node>
+    <node id="&quot;V004_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v004_numer, also stylized as 'v 004 n numer,' represents a numerical event with example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V004_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v004_denom, also stylized as 'v 004 de nom,' is an event or variable tied to integer values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V004_OTHER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v004_other, also stylized as 'v 004 other,' appears as a numerical variable or event with example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V088_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v088_rawva is a variable in a dataset tied to a geographic or demographic context. It is given as a double with examples like 71.19770278."&lt;SEP&gt;"v088_rawva, also known as 'v 088 raw va,' is described as a double variable or event with corresponding numerical examples."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417&lt;SEP&gt;chunk-14b02a34748ab42bd13e324534bcef7b</data>
+    </node>
+    <node id="&quot;V088_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v088_numer, also stylized as 'v 088 n numer,' represents an integer-based variable or event with example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V088_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v088_denom, also stylized as 'v 088 de nom,' is an integer variable or event with provided example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V088_OTHER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v088_other, also stylized as 'v 088 other,' appears as a numerical variable or event with example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V062_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v062_rawva represents a statistical variable possibly linked to a geography or study category, described as a double with values like 261.2055953."&lt;SEP&gt;"v062_rawva, also known as 'v 062 raw va,' is described as a double variable or event with multiple example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417&lt;SEP&gt;chunk-14b02a34748ab42bd13e324534bcef7b</data>
+    </node>
+    <node id="&quot;V062_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v062_numer, also stylized as 'v 062 n numer,' represents an integer-based variable or event with example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V062_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v062_denom, also stylized as 'v 062 de nom,' is an integer-based variable or event with example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V062_OTHER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v062_other, also stylized as 'v 062 other,' is described as a numerical variable or event with example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V005_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v005_rawva appears to be a variable connected to a geography or demographic study. It is represented as a double, with examples like 4236.0."&lt;SEP&gt;"v005_rawva represents raw data points in a numerical format, possibly related to an underlying event or process."&lt;SEP&gt;"v005_rawva, also known as 'v 005 raw va,' represents a numerical variable or event with provided example values."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417&lt;SEP&gt;chunk-f642e3f1444ea7527d106758a7a3a623&lt;SEP&gt;chunk-14b02a34748ab42bd13e324534bcef7b</data>
+    </node>
+    <node id="&quot;V005_RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v005_race, also stylized as 'v 005 race,' appears as a numerical variable or event."</data>
+      <data key="d2">chunk-3e3a4cb1d0d3bb8217773a5ddb4ad417</data>
+    </node>
+    <node id="&quot;V005_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v005_race_ indicates raw race-related numerical data, potentially linked to demographic or statistical analysis."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V005_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v005_race1 is another subset of numerical data linked to race, providing insights into its distribution or characteristics."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V005_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v005_rac_1 refers to a numerical dataset related to a specific racial category or classification within an analytical framework."&lt;SEP&gt;"v005_rac_1 represents numerical values associated with race categories or classifications."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V005_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v005_rac_2 indicates numerical data related to race categories, perhaps focusing on specific demographic subgroups."&lt;SEP&gt;"v005_rac_2 provides numerical insights focused on another dimension of racial classifications for detailed studies."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V005_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v005_rac_3 captures metrics tied to a particular racial subset, aiding in comparative demographic scrutiny."&lt;SEP&gt;"v005_rac_3 is another category of numerical race data, offering additional layers of demographic analysis."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V050_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v050_rawva captures distinct instances of datasets explicitly linked to evolving demographic or race-driven conclusions."&lt;SEP&gt;"v050_rawva denotes a numerical variable in a dataset, potentially related to a geographic region. It is represented as a double with an example value of 42.0."&lt;SEP&gt;"v050_rawva refers to raw numerical data, likely linked to specific unexplained occurrences or patterns."</data>
+      <data key="d2">chunk-14b02a34748ab42bd13e324534bcef7b&lt;SEP&gt;chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V050_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v050_race_ represents race-related numerical information, suggesting use for demographic or statistical modeling."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V050_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v050_race1 is a numerical data subset connected to demographic or racial analyses."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V050_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v050_rac_1 consists of race-related numerical data, supporting statistical studies or demographic research."&lt;SEP&gt;"v050_rac_1 represents numerical data points specifically associated with racial demographics in analysis."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V050_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v050_rac_2 identifies a numerical dataset for further race-related extrapolation or demographic tracking."&lt;SEP&gt;"v050_rac_2 indicates specific numerical observations regarding demographic and racial metrics."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V050_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v050_rac_3 embodies a distinct race-linked dataset that could inform complex analytical trends."&lt;SEP&gt;"v050_rac_3 encapsulates key metrics in understanding race trends or statistical intersections."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V155_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v155_rawva is a variable explicitly tied to a numeric dataset and potentially a geographic study or context, displayed as a double with values like 48.0."&lt;SEP&gt;"v155_rawva refers to raw numerical data points, possibly tied to detecting or interpreting event patterns."</data>
+      <data key="d2">chunk-14b02a34748ab42bd13e324534bcef7b&lt;SEP&gt;chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V155_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v155_race_ signifies numerical values associated with racial metrics, suitable for statistical interpretation."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V155_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v155_race1 represents a subset of race-related raw numerical data, likely employed in systematic analyses."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V155_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v155_rac_1 represents numerical datasets linked to racial categories, aiding targeted demographic studies."</data>
+      <data key="d2">chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V155_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v155_rac_2 encompasses race-linked statistical values suited for demographic and population studies."&lt;SEP&gt;"v155_rac_2 is described as a variable with associated numerical examples, possibly representing a statistical or data event."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4&lt;SEP&gt;chunk-f642e3f1444ea7527d106758a7a3a623</data>
+    </node>
+    <node id="&quot;V155_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v155_rac_3 is another data-related variable with numerical examples, and its purpose may tie into analysis or categorization."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V168_RAWVA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"v168_rawva could represent a geographic coding or statistical measurement related to a specific location or area."&lt;SEP&gt;"v168_rawva is a statistical dataset variable, potentially associated with a geographic context. Defined as a double with sample values of 0.880010824."&lt;SEP&gt;"v168_rawva refers to a double-precision variable and includes data examples that might track a particular measurement or value."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4&lt;SEP&gt;chunk-621f91692f05c9f0c0d93a6010cfb3cd&lt;SEP&gt;chunk-14b02a34748ab42bd13e324534bcef7b</data>
+    </node>
+    <node id="&quot;V168_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v168_numer appears to be an integer variable capturing specific numerical values, potentially related to v168_rawva."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V168_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v168_denom is an integer variable possibly used together with v168_numer to calculate ratios or other derived metrics."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V069_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v069_rawva is a double-precision numerical value represented as a variable, which might inform statistical or analytical studies."&lt;SEP&gt;"v069_rawva is a numerical variable, potentially tied to a geographic region or statistical analysis. Defined as a double with values like 66.13."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4&lt;SEP&gt;chunk-14b02a34748ab42bd13e324534bcef7b</data>
+    </node>
+    <node id="&quot;V069_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v069_numer is an integer variable representing a specific subset of data points related to v069_rawva."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V069_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v069_denom is an integer variable associated with v069_numer, likely used for ratio or percentage calculations."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V023_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v023_rawva is a double-precision variable with numerical examples, suggesting it tracks a specific measure."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V023_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v023_numer represents another integer variable, possibly used for statistical computation alongside v023_rawva."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V023_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v023_denom is the denominator variable associated with v023_numer, used in analytical processes."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V024_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v024_rawva is a double variable with numerical values, representing a data measure or critical variable."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V024_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v024_numer is an integer variable relating to v024_rawva, acting as a numerator for derived calculations."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V024_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v024_denom is an integer variable describing the denominator in calculations involving v024_numer."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V024_RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v024_race is a double variable, potentially reflecting demographic or categorization data."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V024_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v024_race1 is another demographic-related double variable with associated numerical examples."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V024_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v024_rac_1 appears as a data point with numerical examples, reflecting a subset of demographic or categorical information."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V024_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v024_rac_2 represents a data variable associated with demographic or analytical categorizations."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V024_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v024_rac_3 is a double variable associated with v024-related demographic data, representing another informational subset."</data>
+      <data key="d2">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+    </node>
+    <node id="&quot;V 024 RAC 2&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 024 rac 2 is a dataset or variable name composed of double values, potentially representing a statistical or computational resource."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 024 RAC 3&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 024 rac 3 is another dataset or variable name composed of double values, likely used for analytical or research purposes."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 044 RAW VA&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 044 raw va is a numerical dataset that includes double precision values, possibly representing raw financial, geographic, or scientific information."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 044 N UMER&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 044 n umer is a variable containing integer values, possibly used for count or frequency analysis."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 044 DE NOM&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 044 de nom is an integer-based dataset representing denominators, possibly for statistical or mathematical modeling."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 082 RAW VA&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 082 raw va is a dataset of double values, potentially representing some raw or computed metrics."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 082 N UMER&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 082 n umer is a numerical dataset of integer values, likely representing observed counts or processed data."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 082 DE NOM&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 082 de nom is an integer dataset serving as denominators in calculations or metrics."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 140 RAW VA&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 140 raw va is a dataset with double values, likely used for measuring specific values in research."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 140 N UMER&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 140 n umer is a variable containing integer values, used for numerator-based calculations."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 140 DE NOM&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 140 de nom appears to be an integer dataset for denominators in financial, geographical, or statistical models."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 043 RAW VA&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 043 raw va is a dataset representing double precision values, likely connected to raw metrics."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 043 N UMER&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 043 n umer is a dataset of integers, likely to represent counts, measurements, or observations."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 043 DE NOM&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 043 de nom is a dataset focused on denominators in computational or statistical contexts."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 135 RAW VA&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 135 raw va is a double-valued dataset utilized for raw data representation in research or analysis."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 135 N UMER&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 135 n umer is a dataset containing integer values, serving as part of numerator-based calculations."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 135 DE NOM&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 135 de nom is a dataset made of integer values used for denominators in statistical models or computations."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 135 RACE&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 135 race is a dataset with double values, which may pertain to demographic or diversity analysis."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 135 RACE1&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"v 135 race1 is another double-valued dataset, likely used in relation to race or demographic calculations."</data>
+      <data key="d2">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+    </node>
+    <node id="&quot;V 067 RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 067 race represents a group of measurements or performance metrics that are associated with multiple numerical examples and variations."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 067 RACE 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 067 race 1 represents a subset or variation of the v 067 race metrics, involving specific numerical values and examples."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 067 RAC 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 067 rac 1 is another subset or variation of the v 067 race metric, showing distinct patterns and data points."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 067 RAC 2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 067 rac 2 is part of the v 067 race event, representing different numerical patterns or performance indicators."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 067 RAC 3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 067 rac 3 is a variation within the v 067 race data, containing notable numerical examples."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 137 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 137 raw va appears as a numerical dataset or measurement likely tied to a specific performance or set of raw calculations."&lt;SEP&gt;"v 137 raw va represents a numeric dataset related to specific performance or measurements."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 137 DE NOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 137 de nom seems to represent denominators crucial for setting specific ratios or metrics."&lt;SEP&gt;"v 137 de nom seems to represent denominators in a dataset or metric calculations related to v 137 raw va."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 147 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 147 raw va describes a numeric dataset that could signify raw performance or initial baseline values."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 147 RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 147 race embodies a set of metrics or measurements linked to specific performances or outcomes."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 147 RACE 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 147 race 1 is a subset or version of the v 147 race event, comprising specific numerical attributes."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 147 RAC 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 147 rac 1 showcases another metric variation or dataset within the broader v 147 race event."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 147 RAC 2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 147 rac 2 is part of the event metrics related to v 147 race, reflecting further specialized examples."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 147 RAC 3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 147 rac 3 is a variation within the v 147 race data, encompassing unique numerical examples."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 127 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 127 raw va denotes a numerical dataset, which could represent raw metrics or preliminary calculations."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 127 N UMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 127 n umer refers to numerator values, likely within a dataset or performance metric."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 127 DE NOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 127 de nom represents denominator values, potentially indicating a metric calculation within datasets."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V 137 RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v 137 race appears to relate to a variation or derivation within the v 137 event."</data>
+      <data key="d2">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+    </node>
+    <node id="&quot;V127_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v127_denom' is the denominator related to 'v127', forming part of calculations or ratios in the series."&lt;SEP&gt;"v127_denom refers to a variable representing a set of data points with integer values, such as '0', '155765', and '600539'. It may signify a denominator in a computational context."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59&lt;SEP&gt;chunk-ab74203175bf66b00bcb319c291ecab0</data>
+    </node>
+    <node id="&quot;V127_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v127_race_' potentially denotes derived statistical outcomes under the 'v127' category."&lt;SEP&gt;"v127_race_ represents a dataset describing double values, such as '0.0', '593.9446879', and '810.5189381'. It appears to relate to a racing or competitive context."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59&lt;SEP&gt;chunk-ab74203175bf66b00bcb319c291ecab0</data>
+    </node>
+    <node id="&quot;V128_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v128_rawva' contains raw numerical data integral to the 'v128' identifier series."&lt;SEP&gt;"v128_rawva is a variable associated with double values like '0.0', '56.66792595', and '50.95199786'. It may correlate with raw value computations or measurements."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59&lt;SEP&gt;chunk-ab74203175bf66b00bcb319c291ecab0</data>
+    </node>
+    <node id="&quot;V128_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v128_denom' provides the denominator value critical for calculations within the 'v128' series."&lt;SEP&gt;"v128_denom is a variable comprising integer values such as '0', '52940', and '186450'. It likely represents a denominator variable."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59&lt;SEP&gt;chunk-ab74203175bf66b00bcb319c291ecab0</data>
+    </node>
+    <node id="&quot;V129_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v129_rawva' gives raw observations or statistical data categorized under 'v129'."&lt;SEP&gt;"v129_rawva refers to a variable representing raw value data points, with examples like '0.0', '7.341133287', and '5.809914746'. It may signify raw data in an analytical process."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59&lt;SEP&gt;chunk-ab74203175bf66b00bcb319c291ecab0</data>
+    </node>
+    <node id="&quot;RACE COMPUTATIONS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Race computations seem to be an overarching concept represented in the data through variables like 'v127_race_', 'v127_race1', and 'v127_rac_3'. It involves numerical analysis likely tied to performance metrics."</data>
+      <data key="d2">chunk-ab74203175bf66b00bcb319c291ecab0</data>
+    </node>
+    <node id="&quot;NUMERICAL DATASET&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"The dataset represents a collection of values and statistics associated with various variables, seemingly related to metrics, ratios, and racial demographics."&lt;SEP&gt;"The numerical dataset encompasses various variables like 'v127' and 'v128' for analysis, referencing denominators, numerators, and other mathematical properties."</data>
+      <data key="d2">chunk-d6118c1115ca09f626046c2347957bae&lt;SEP&gt;chunk-ab74203175bf66b00bcb319c291ecab0</data>
+    </node>
+    <node id="&quot;V129 NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V129 NUMER refers to a variable categorized as an integer with examples like '0', '28', '23', which could represent counts or identifiers in a dataset."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;V129 RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V129 RACE is a variable categorized as a double, with examples like '0.0', '13.85', representing quantitative data related to an unknown phenomenon."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;V144 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V144 RAW VA refers to a variable categorized as a double, with examples like '15.07', '16.3', which seem to represent continuous values across samples."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;V145 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V145 RAW VA is a variable categorized as a double, with examples like '18.16', '17.82', representing numerical data linked to a dataset."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;V060 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V060 RAW VA refers to a variable categorized as a double, with examples like '10.3', '14.6', representing a measurable factor."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;V060 NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V060 NUMER is categorized as an integer variable, containing values such as '131', '5178', that could represent counts or unique identifiers."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;V061 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V061 RAW VA is a variable categorized as a double with examples like '0.0', '230.2', indicating numerical measurements."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;V061 NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V061 NUMER is listed as an integer variable with examples such as '0', '29', which seem to symbolize counts derived from a dataset."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;V139 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V139 RAW VA is a numerical variable categorized as a double, containing examples such as '1560.0', '1510.0', which seems to indicate measurements."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;V083 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V083 RAW VA refers to a variable categorized as a double, consisting of values such as '11.99', '5.42', that measure an unknown property."</data>
+      <data key="d2">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+    </node>
+    <node id="&quot;NO ENTITIES IDENTIFIED&quot;">
+      <data key="d0">"N/A"</data>
+      <data key="d1">"The given text contains numerical and technical data but does not explicitly reference any identifiable entities of types [organization, person, geo, event]."&lt;SEP&gt;"The provided text appears to consist solely of numerical data and variable descriptions, without clear references to entities such as persons, organizations, geographic locations, or events."&lt;SEP&gt;"The provided text does not appear to contain recognizable entities fitting the specified types: [organization, person, geo, event]."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-7a8d2a6d5815d989caf76fb552a67e2d&lt;SEP&gt;chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V003_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v003_rawva is a reported dataset featuring values such as 14.92, 17.35, and 19.51, which may correspond to calculated metrics within a larger framework."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V003_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v003_numer represents an integer dataset associated with v003_rawva, featuring examples such as 4379, 20981, and 2145."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V003_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v003_denom is an integer dataset that complements v003_rawva and v003_numer, serving as denominators in derived calculations."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V122_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v122_rawva is a double dataset featuring values such as 2.87, 3.09, and 4.42, potentially representing ratios or measurements."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V122_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v122_numer represents an integer dataset associated with the v122_rawva metric, with examples such as 350 and 1362."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V122_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v122_denom is an integer dataset associated with the v122_rawva metric, serving as denominators, with examples including 1812 and 13741."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V131_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v131_rawva is a double dataset featuring diverse values such as 0.0, 41.16, and 120.56, reflecting potential measurement outcomes."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V131_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v131_numer is an integer dataset connected to v131_rawva, representing numerators in a calculation framework."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V131_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v131_denom is an integer dataset complementing the v131_rawva metric, used in ratio-based computations."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V131_OTHER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v131_other is a dataset with distinct double values such as 2429.08 and 1550.23, which could represent derived or secondary metrics."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V021_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v021_rawva is a double dataset including values like 82.5, 90.0, and 92.98, signifying a specific measurement range."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V021_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v021_numer represents an integer dataset tied to the v021_rawva metric, reflecting numerator values for related calculations."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V021_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v021_denom is an integer dataset related to v021_rawva that serves as denominators, contributing to derived statistics."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V149_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v149_rawva is a dataset with values such as 8.37, 6.47, and 17.56, likely representing a unique metric or measurement."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V149_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v149_numer is an integer dataset associated with v149_rawva, reflecting numerator values needed for contextual analysis."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V149_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v149_denom is an integer dataset tied to v149_rawva, serving as a denominator in ratio-based interpretations."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V159_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v159_rawva is a double dataset, including values like 3.12, 2.38, and 2.95, reflecting potentially scaled measurements."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V159_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v159_race_ is a reported metric with consistent values of 0.0 across the dataset, implying a possible baseline or excluded measure."</data>
+      <data key="d2">chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V159_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v159_race1 is a dataset featuring values such as 3.44, 3.54, and 3.03, reflecting a visibly varied measurement scale."&lt;SEP&gt;"v159_race1 is an event representing a dataset of numerical values, potentially used for analytical or comparative purposes."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7&lt;SEP&gt;chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V159_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v159_rac_1 is an associated dataset with values like 2.60 and 2.68, aligning with the v159 metric structure."&lt;SEP&gt;"v159_rac_1 is an event representing a subset of data under v159_race1, containing numerical values that imply specific measurements or outcomes."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7&lt;SEP&gt;chunk-27d750e0fb4ed2ed0ba22009ca4195b2</data>
+    </node>
+    <node id="&quot;V159_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v159_rac_2 is an event representing another subset of data under v159_race1, providing additional numerical measurements for analysis."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V159_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v159_rac_3 is an event representing yet another subset of data under v159_race1, with numerical values indicating distinct analytical outcomes."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V160_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v160_rawva is an event comprising a series of numerical values, potentially representing raw or unprocessed data."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V160_RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v160_race is an event linked to v160_rawva, with instances of data that appear relevant for analysis or comparison."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V160_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v160_race1 is an event under v160_race, representing specific numerical datasets relevant to a defined scope or purpose."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V160_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v160_rac_1 is an event representing a categorized subset of data under v160_race1, showing distinct measurement attributes."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V160_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v160_rac_2 is an event representing another subset of data under v160_race1, with unique numerical characteristics."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V160_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v160_rac_3 is an event representing yet another subset of data under v160_race1, reflecting additional specific outcomes."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V063_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v063_rawva is an event consisting of integer values, potentially representing raw or primary measures."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V063_RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v063_race is an event connected to v063_rawva, containing further integer data for analysis."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V063_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v063_race1 is an event that contains numerical data related to v063_race, offering additional analytical insight."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V063_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v063_rac_1 is an event, a subset of v063_race1, encapsulating specific numerical values."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V063_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v063_rac_2 is an event under v063_race1, containing another subset of integers."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V063_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v063_rac_3 is an event under v063_race1, representing categorized numerical data."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+    </node>
+    <node id="&quot;V065_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v065_rawva is a dataset variable containing measurements such as 'Double' values and is associated with examples like '100.0' and '47.49'."&lt;SEP&gt;"v065_rawva is an event represented by a dataset of numerical values, potentially associated with percentages or averages."</data>
+      <data key="d2">chunk-a9c692a2a60da6a7eaca4f923a2699d7&lt;SEP&gt;chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V065_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v065_numer is a dataset variable associated with numeric values such as '9' and '4319', representing certain calculations."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V065_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v065_denom is part of a dataset and contains denominators like '9094' and '32267' for corresponding computations."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V141_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v141_rawva is a dataset variable related to Double-type measurements, with examples including '0.0' and '24.79123854'."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V142_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v142_rawva is another dataset variable capturing measurements, such as '0.0' and '24.19206212', represented as Double-type values."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V015_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v015_rawva is a dataset variable containing Double-type values such as '0.0' and '5.407103389', related to specific measurements."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V015_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v015_numer is a dataset variable that captures numerator values like '0', '16', and '28', used in calculations."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V015_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v015_denom is a variable that contains denominator values such as '0', '388378', and '1461807', essential for data computations."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V015_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v015_race_ is a dataset variable indicating percentages or proportions, with examples like '0.0' and '21.35121141'."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V015_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v015_race1 is a dataset variable containing Double-type values, such as '0.0' and '9.027783002', concerning race-specific measurements."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V015_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v015_rac_2 is a dataset variable capturing Double values like '0.0' and '8.974394929', representing another subset of race-related data."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V015_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v015_rac_3 is part of the race-related dataset, showcasing values such as '0.0' and '3.396093134', other specific data points."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V161_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v161_rawva is a dataset variable related to Double values, including '0.0' and '18.48352495', representing specific measurements."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V161_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v161_numer is a variable containing numerator data such as '0', '31', and '14', used in calculations."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V161_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v161_denom is a dataset variable with denominator values, including '0', '277737', and '1066156', necessary for computations."</data>
+      <data key="d2">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;V161_OTHER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v161_other is a dataset variable representing other measurements, with values like '0.0' and '19.44285421'."&lt;SEP&gt;"v161_other is a numeric dataset containing examples of values that represent various metrics in the 'v161' series."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea&lt;SEP&gt;chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+    </node>
+    <node id="&quot;DATASET V161&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Dataset v161 is a collection of data containing values and metrics tagged as 'v161' with a range of subcategories such as other, race, and numerical fields for analysis."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;DATASET V148&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Dataset v148 is another dataset labeled with metrics, including raw values, race, numeric data, and subcategories for statistical evaluations."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;DATASET V158&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Dataset v158 is a dataset comprising parameters such as raw values, numerators, denominators, and other numerical entries meant for analytical use."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V161_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v161_race_ represents race-related metrics and data fields within the 'v161' dataset, shown as numerical values."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V161_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v161_race1 is a subset within the 'v161' dataset that provides specific race-related numeric data."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V161_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v161_rac_1 is another subset within the 'v161' group, detailing numerically represented racial metrics."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V161_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v161_rac_2 is a continuation of race-related metrics under the 'v161' dataset, exploring deeper subcategories."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V161_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v161_rac_3 is a subcategory of the 'v161' dataset, contributing richly to the race-based numeric analysis."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V148_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v148_rawva is a series of raw numeric values within the 'v148' dataset for specific analytical applications."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V148_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v148_numer is a numerical subset within the 'v148' dataset, representing integer-based data metrics."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V148_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v148_race_ is a part of the 'v148' dataset, with specific numeric values related to race metrics."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V148_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v148_race1 is a subset of the 'v148' dataset, featuring race-related data in numeric form."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V148_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v148_rac_1 measures a specific race-related aspect within the 'v148' dataset."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V148_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v148_rac_2 proceeds as an additional subcategory of race-related metrics in the 'v148' dataset."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V148_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v148_rac_3 finalizes another subset of race-based numeric values under the 'v148' category."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V158_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v158_rawva is a data field composed of raw numeric values found in the 'v158' dataset."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V158_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v158_denom represents denominators as integers as part of the 'v158' dataset."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V158_OTHER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v158_other features values categorized under 'other' within the 'v158' dataset."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+    </node>
+    <node id="&quot;V158_OTH_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v158_oth_1 contains an additional 'other' subcategory within the 'v158' dataset."&lt;SEP&gt;"v158_oth_1 is a variable representing a dataset with numerical examples such as 0.0, -888.0, and 127.0. It appears to be part of a statistical or data analysis context."</data>
+      <data key="d2">chunk-bf65b71a1f1c7eb501030d184b6423ea&lt;SEP&gt;chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V156_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v156_rawva is a variable representing values like 155.0955235 and 170.8142257, likely indicative of raw numerical data used for calculations or analysis."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V153_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v153_rawva is a variable representing values such as 75.25 and 77.34. It seems to contain processed or measured data utilized in a specific computation."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V153_NUMER&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v153_numer represents integer values such as 15682 and 31254, which are possibly associated with counts or numerical categories."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V153_DENOM&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v153_denom represents integer values like 1187 and 44605, indicating denominators or segments of a calculation."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V154_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v154_rawva is a variable holding values such as 7.8 and 13.51, likely demonstrating raw data."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V154_NUMER&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v154_numer exhibits integer values such as 736 and 4488, possibly related to measurement or data categories."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V154_DENOM&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v154_denom contains integer values such as 20522 and 9965, suggesting a denominator or a measure used in a formula."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V166_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v166_rawva includes numerical examples like 0.805673693 and 0.707273913, possibly representing ratios or percentages."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V051_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v051_rawva is a variable reflecting substantial numerical examples like 55869.0 and 223234.0, which may entail large-scale measurements or dataset values."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7</data>
+    </node>
+    <node id="&quot;V052_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v052_rawva illustrates values such as 23.32 and 22.54, indicating raw or processed value ranges."&lt;SEP&gt;"v052_rawva refers to a numerical value associated with a measurement or variable, with examples such as '22.25'."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7&lt;SEP&gt;chunk-ccf80c08d9c29e8f1f3bea2ee88372dd</data>
+    </node>
+    <node id="&quot;V052_NUMER&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v052_numer has integer recordings including 42904 and 89132, likely measures or counts within a dataset."&lt;SEP&gt;"v052_numer represents an integer value tied to a variable, with examples such as '255200373'."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7&lt;SEP&gt;chunk-ccf80c08d9c29e8f1f3bea2ee88372dd</data>
+    </node>
+    <node id="&quot;V053_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v053_rawva indicates a measurement or variable defined by examples like '16.47'."&lt;SEP&gt;"v053_rawva shows numerical inputs including 19.69 and 20.82, representing values derived from analysis."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7&lt;SEP&gt;chunk-ccf80c08d9c29e8f1f3bea2ee88372dd</data>
+    </node>
+    <node id="&quot;V053_NUMER&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v053_numer holds integer values like 8924 and 6715, possibly totals or specific counts for a dataset."&lt;SEP&gt;"v053_numer refers to an integer value linked to v053, with numbers like '54058263'."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7&lt;SEP&gt;chunk-ccf80c08d9c29e8f1f3bea2ee88372dd</data>
+    </node>
+    <node id="&quot;V054_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v054_rawva depicts raw numerical values such as 0.95 and 69.08, which could be indicators used within an analytical framework."&lt;SEP&gt;"v054_rawva represents a specific numerical variable as demonstrated in values like '12.54'."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7&lt;SEP&gt;chunk-ccf80c08d9c29e8f1f3bea2ee88372dd</data>
+    </node>
+    <node id="&quot;V054_NUMER&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v054_numer contains integers like 410 and 23855, which might relate to measured data or entity counts."&lt;SEP&gt;"v054_numer is an integer representation of v054, such as '41147488'."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7&lt;SEP&gt;chunk-ccf80c08d9c29e8f1f3bea2ee88372dd</data>
+    </node>
+    <node id="&quot;V055_RAWVA&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"v055_rawva is a numerical variable characterized by values such as '1.28'."&lt;SEP&gt;"v055_rawva shows calculated values such as 0.69 and 0.86, which may exhibit probabilities, trends, or ratios."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7&lt;SEP&gt;chunk-ccf80c08d9c29e8f1f3bea2ee88372dd</data>
+    </node>
+    <node id="&quot;V055_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v055_numer contains integer recordings like 370 and 170, which may refer to data collected or computed for a specific variable."&lt;SEP&gt;"v055_numer is an integer tied to v055, represented by values such as '4188092'."&lt;SEP&gt;"v055_numer refers to an event or a count-based metric linked to v055_raw_va, represented by integers such as '370,' '79,' and '65,' providing a measure of frequency or impact."</data>
+      <data key="d2">chunk-59a27bbd7f9d0d1c87c199734be2dde7&lt;SEP&gt;chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;HEALTH_OUT&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Health_Out represents an event characterized by health-related outcomes with integer values, such as '8,' '13,' and '9,' indicating the count of events or metrics linked to health outputs."</data>
+      <data key="d2">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;HEALTH_FAC&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Health_Fac represents an event or factor related to healthcare facilities and their operational outcomes, with integer values such as '15,' '6,' and '7,' indicating activity or metrics associated with facilities."</data>
+      <data key="d2">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;OUTCOMES_L&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Outcomes_L represents an event tracking certain outcomes, potentially longer-term impacts, with values such as '12,' '0,' and '7,' mapped to specific metrics."</data>
+      <data key="d2">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;OUTCOMES_Q&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Outcomes_Q represents an event tracking quick or shorter-term outcomes, with values such as '13,' '9,' and '12,' tied to specific measurable results."</data>
+      <data key="d2">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;FACTORS_HE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Factors_He represents health-related influencing events or metrics, with integer examples such as '3,' '6,' and '10,' highlighting contributory aspects of health impact."</data>
+      <data key="d2">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V055_RAW_VA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"v055_raw_va refers to a geographic or spatially derived metric, represented by values such as '0.69,' '0.56,' and '0.48,' potentially corresponding to location-based data points."</data>
+      <data key="d2">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V081_RAWVA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"v081_rawva is a specific numerical value, such as '5.94', associated with a variable."&lt;SEP&gt;"v081_rawva refers to geographic data or a metric represented by doubles like '0.48,' '1.07,' and '0.21,' possibly tied to specific regional analyses or locations."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;FACTORS_CL&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Factors_Cl refers to event metrics involving clinical parameters or influencing factors, containing values such as '3,' '6,' and '19,' signifying their potential integration into clinical dimensions."</data>
+      <data key="d2">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V081_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v081_numer denotes an integer value such as '19504862', associated with v081."&lt;SEP&gt;"v081_numer is an event metric associated with v081_rawva, represented by integers such as '21,' '374,' and '103,' indicating counts or occurrences tied to location-based data."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V080_RAWVA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"v080_rawva represents a numerical measurement or variable, exemplified by values like '0.25'."&lt;SEP&gt;"v080_rawva represents location-based or geographical metrics, with values such as '0.07,' '0.02,' and '0.04,' potentially used for spatial profiling or regional assessments."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V080_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v080_numer is an event-based count corresponding to v080_rawva, comprising integers such as '4,' '2,' and '0,' reflecting occurrences or instances of specific spatial phenomena."&lt;SEP&gt;"v080_numer is an integer representation such as '806937', associated with v080."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V056_RAWVA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"v056_rawva involves location-specific metrics with values such as '2.99,' '1.71,' and '2.6,' providing data that could be tied to regional trends or geographic influences."&lt;SEP&gt;"v056_rawva reflects a numerical variable or measurement, with values such as '18.45'."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V056_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v056_numer is an integer tied to v056, such as '60572237'."&lt;SEP&gt;"v056_numer refers to a frequency event tied to v056_rawva, with integers such as '128,' '149,' and '1671,' indicating the quantitative impact of the associated geographic data."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V126_RAWVA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"v126_rawva refers to a specific variable or measurement characterized by values like '60.11'."&lt;SEP&gt;"v126_rawva represents geographical attributes or trends, with values like '73.77,' '83.21,' and '45.51,' potentially linked to regional or population-level characteristics."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V126_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v126_numer denotes an integer value associated with v126, such as '197309822'."&lt;SEP&gt;"v126_numer is an event metric tied to v126_rawva, comprising integers such as '41215,' '185747,' and '11235,' signifying large-scale occurrences or counts."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V059_RAWVA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"v059_rawva indicates geographical or spatial-derived metrics, shown through values like '0.0,' '0.65,' and '0.8,' useful for localized or regional analysis."&lt;SEP&gt;"v059_rawva represents a variable or measurement, with values like '4.33'."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V059_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v059_numer is an event-based count tied to v059_rawva, represented by integers such as '0,' '4,' and '30,' reflecting the frequency of spatial phenomena."&lt;SEP&gt;"v059_numer is an integer tied to v059, such as '13193113'."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V057_RAWVA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"v057_rawva is a numerical variable or event represented by values such as '50.75'."&lt;SEP&gt;"v057_rawva refers to location-specific or spatial dynamics described by values such as '51.51,' '50.76,' and '52.79,' useful for understanding geographic trends."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V057_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v057_numer is a frequency metric associated with v057_rawva, comprising integers such as '28777,' '114987,' and '11622,' indicating quantitative data linked to geographic attributes."&lt;SEP&gt;"v057_numer refers to an integer representation tied to v057, such as '166582199'."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V058_RAWVA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"v058_rawva denotes a variable or measurement with values like '19.27'."&lt;SEP&gt;"v058_rawva represents location-derived data or metrics such as '100.0,' '0.0,' and '42.0,' useful for spatial or environmental studies."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;V058_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"v058_numer refers to an event count tied to v058_rawva, comprising integers such as '0,' '22921,' and '77060,' reflecting the magnitude or occurrence of geographic phenomena."&lt;SEP&gt;"v058_numer refers to an integer tied to v058, such as '0'."</data>
+      <data key="d2">chunk-ccf80c08d9c29e8f1f3bea2ee88372dd&lt;SEP&gt;chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+    </node>
+    <node id="&quot;UNITED STATES&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The United States is represented as a nation based on the data layer, with attributes related to various health, demographic, and geographic metrics."</data>
+      <data key="d2">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;NATION.SHP&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Nation.shp is a dataset file representing national-level geographic and health data attributes, such as population, health rankings, and race statistics."</data>
+      <data key="d2">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;COUNTY_HEALTH_RANKINGS_2021&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"County_Health_Rankings_2021 is an event-based dataset related to health metrics across various counties in the United States, providing detailed insights into demographic and regional health factors."</data>
+      <data key="d2">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;PHD PROGRAM AT THE UNIVERSITY OF TEXAS AT AUSTIN&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"The PhD Program at The University of Texas at Austin is an academic program mentioned in the file path, emphasizing scholarly activities and research."</data>
+      <data key="d2">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;FIPSCODE&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Fipscode is a data attribute representing geographic identifiers used to delineate areas within the United States for statistical analysis."</data>
+      <data key="d2">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+    </node>
+    <node id="&quot;HEALTH METRICS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Health Metrics are represented in the dataset, including attributes such as raw values, denominators, flags, and race-specific data."</data>
+      <data key="d2">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;RACE STATISTICS&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Race Statistics are detailed demographics in the dataset, providing insights into diversity and health outcomes by race."</data>
+      <data key="d2">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;DATA ATTRIBUTES&quot;">
+      <data key="d0">"CONCEPT"</data>
+      <data key="d1">"Data Attributes include various fields in the Nation.shp dataset, such as fipscode, raw values, numerical denominators, and race-specific statistics."</data>
+      <data key="d2">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;V067_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v067_numer' is a numerical identifier potentially representing an event or data point associated with an integer value."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V067_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v067_denom' is a numerical identifier potentially representing an event or data point associated with an integer value, usually related to 'v067_numer' as a denominator."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V067_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v067_race_' is a numerical identifier potentially representing a calculated statistical value, possibly derived from associated variables."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V067_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v067_race1' represents a variation or subset of a calculated statistical value under the 'v067' series."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V067_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v067_rac_1' represents another subset or variation of statistical data related to the 'v067' series."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V067_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v067_rac_2' is part of the 'v067' series representing different statistics or interpretations of a dataset."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V067_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v067_rac_3' is a data point under the 'v067' series, likely representing a specific subset or metric."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V137_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v137_rawva' is a raw statistical value under the 'v137' identifier, likely representing a specific measurement or observation."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V137_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v137_denom' serves as the denominator for calculations involving 'v137', indicating its role in reducing raw data."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V147_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v147_rawva' represents raw statistical data that is part of the 'v147' identifier series."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V147_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v147_race_' is part of the 'v147' statistical series, likely representing a composite or derived metric."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V147_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v147_race1' refers to a subset or adjusted value tied to the 'v147' metrics."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V147_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v147_rac_1' is a variation or adjusted metric part of the 'v147' series data."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V147_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v147_rac_2' defines another data subset or specific interpretation under the 'v147' series."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V147_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v147_rac_3' reflects a variation in the 'v147' statistical series data."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V127_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v127_rawva' holds raw data in numeric form and is categorized under the 'v127' identifier series."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V127_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v127_numer' is a specific numerator under the 'v127' identifier series, denoting a part of particular statistical measurements."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V127_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v127_race1' is a variation or specific measure under the 'v127' statistical framework."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V127_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v127_rac_1' represents an additional subset or related metric under the 'v127' series."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V127_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v127_rac_2' holds data that represents another specific aspect or measure in the 'v127' framework."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V127_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v127_rac_3' is another data subset, likely describing specific statistical dimensions under 'v127'."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V128_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v128_numer' is a numerator-based statistic providing a component of ratio or calculation in 'v128'."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V128_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v128_race_' is a calculated or derived value tied to the 'v128' data set."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V128_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v128_race1' likely refers to specific measures or calculations under the 'v128' identifier."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V128_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v128_rac_1' offers further granularity or variation within the 'v128' series statistics."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V128_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v128_rac_2' captures another aspect of statistical data under the 'v128' identifier series."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V128_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v128_rac_3' defines one more derived measure or value tied to 'v128'."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V129_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v129_numer' is the numerator figure within 'v129', influencing related statistical outcomes."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V129_RACE_&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v129_race_' provides an outcome or derived measure tied to 'v129' data's operations."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V129_RACE1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v129_race1' defines a subset or variation within the statistical measures of 'v129'."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V129_RAC_1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v129_rac_1' elaborates on refined or adjusted metrics under 'v129'."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V129_RAC_2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v129_rac_2' categorizes specific interpretations or segments of 'v129' data."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V129_RAC_3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v129_rac_3' frames one more perspective or calculation under the larger 'v129' data umbrella."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V144_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v144_rawva' contains raw numerical data under the 'v144' series."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V145_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v145_rawva' provides raw values crucial to analyses within the 'v145' identifier series."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V060_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v060_rawva' shares basic numerical data categorized under 'v060' identifier."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V060_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v060_numer' depicts numerator-based calculation relevant to the 'v060' numerical framework."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V061_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v061_rawva' is raw data tied to the 'v061' statistical measures and observations."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V061_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v061_numer' provides numerator components under 'v061', influencing specific datasets."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V061_DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v061_denom' details denominator inputs used alongside 'v061_numer' in statistical ratios."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V139_RAWVA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v139_rawva' reports on raw data observable in the 'v139' series numeric structure."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V139_NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"'v139_numer' denotes its contribution to proportions or ratios within the 'v139' framework."</data>
+      <data key="d2">chunk-e183e881af3aaa591ea8965248816d59</data>
+    </node>
+    <node id="&quot;V 063 RAC 2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 063 RAC 2 is referred to as a metric or code likely representing a specific data-related event or category and includes example values such as 51811.0."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 063 RAC 3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 063 RAC 3 is referred to as a metric or code likely representing a specific data-related event or category and includes example values such as 68785.0."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 065 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 065 RAW VA is referred to as a metric or data-related indicator represented with example values such as 52.25."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 065 NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 065 NUMER appears to represent a numerical value captured for an event or category, with example values such as 24757334."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 065 DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 065 DENOM represents the denominator related to a calculation or metric, with examples like 47383482."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 141 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 141 RAW VA is a metric or data point potentially related to an event or category, with example values including 61.49367858."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 142 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 142 RAW VA refers to a metric or indicator with example values such as 46.56722319."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 015 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 015 RAW VA represents a data-related indicator, with examples such as 5.524806492."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 015 NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 015 NUMER is a metric representing a numerator, with examples like 124897."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 015 DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 015 DENOM represents the denominator for a calculation, with example values like 2260658363.0."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 015 RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 015 RACE is a data-related metric or category, with example values such as 9.85144891."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 015 RACE 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 015 RACE 1 is a metric or category listed with values such as 1.683399162."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 015 RAC 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 015 RAC 1 is a specific metric or subset of a data category, with example values such as 21.46199852."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 015 RAC 2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 015 RAC 2 is a data-related indicator or event metric, with example values such as 5.040297799."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 015 RAC 3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 015 RAC 3 is a specific numeric metric or event subset, with values such as 2.607709387."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 161 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 161 RAW VA is a metric or indicator represented with example values like 13.77677793."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 161 NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 161 NUMER represents a numeric value related to an event, with example values including 231902."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 161 DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 161 DENOM is a denominator tied to a data-related metric, with examples like 1625672468."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 161 OTHER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 161 OTHER is a variable metric with values such as 14.26498908."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 161 RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 161 RACE represents a data-related indicator related to race, with example values like 21.57026707."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 161 RACE 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 161 RACE 1 is a sub-category under a broader metric, with values such as 6.823620656."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 161 RAC 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 161 RAC 1 is a numeric metric with values such as 6.71228831."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 161 RAC 2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 161 RAC 2 represents an indicator or data subset, with example values such as 6.890945705."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 161 RAC 3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 161 RAC 3 is another sub-category within a data metric, with examples like 17.45296494."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 148 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 148 RAW VA is a numeric metric linked to an event or dataset, with examples like 11.93967443."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 148 NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 148 NUMER represents a numerator value within an event, with examples like 194100."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 148 RACE&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 148 RACE serves as a category or data subset, with example values such as 14.28756791."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 148 RACE 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 148 RACE 1 represents a sub-metric within a racial data category, with values such as 2.931604381."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 148 RAC 1&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 148 RAC 1 is another data-related subset, with examples like 23.12399134."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 148 RAC 2&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 148 RAC 2 is a data subset metric listed with examples such as 6.490289279."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 148 RAC 3&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 148 RAC 3 is a numeric metric under a dataset category, with values such as 11.98093122."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 158 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 158 RAW VA represents a data metric with examples like 0.0."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 158 DENOM&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 158 DENOM is the denominator for a metric or data point, listed with values such as 0."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 158 OTHER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 158 OTHER serves as another metric, with values like 0.0."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 156 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 156 RAW VA is another data-driven metric with examples like 0.0."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 153 RAW VA&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 153 RAW VA is a data-related indicator represented with values like 63.99."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;V 153 NUMER&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"V 153 NUMER is a numerator value related to a dataset, with examples such as 77274381."</data>
+      <data key="d2">chunk-8a9c7d8899f7131e0a13d33c5dda3578</data>
+    </node>
+    <node id="&quot;EXAMPLES&quot;">
+      <data key="d2">chunk-d6118c1115ca09f626046c2347957bae</data>
+      <data key="d1">"The dataset contains examples of numerical entries to provide context and illustration of its variables."</data>
+      <data key="d0">"UNKNOWN"</data>
+    </node>
+    <edge source="&quot;COUNTY&quot;" target="&quot;STATE&quot;">
+      <data key="d4">10.0</data>
+      <data key="d5">"Counties are subdivisions within states, and each county is associated with a specific state as indicated in the dataset."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;COUNTY&quot;" target="&quot;COUNTY HEALTH RANKINGS 2021&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The County Health Rankings 2021 dataset provides detailed health-related data and statistics for the counties."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;COUNTY&quot;" target="&quot;GEOID&quot;">
+      <data key="d4">10.0</data>
+      <data key="d5">"GEOID is associated with County to uniquely identify each county in the dataset."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;COUNTY&quot;" target="&quot;NAME&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"NAME provides the descriptive identification for each County in the dataset."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;COUNTY&quot;" target="&quot;V001_RACE_&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v001_race_ represents race-specific statistical data linked to County."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;COUNTY&quot;" target="&quot;V001_FLAG&quot;">
+      <data key="d4">6.0</data>
+      <data key="d5">"v001_flag indicates flagged conditions or issues for specific County data."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;COUNTY&quot;" target="&quot;V001_RAWVA&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"v001_rawva provides raw statistical attributes for each County in the dataset."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;COUNTY&quot;" target="&quot;V036_RAWVA&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v036_rawva contains additional raw statistical attributes for each County."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;STATE&quot;" target="&quot;COUNTY HEALTH RANKINGS 2021&quot;">
+      <data key="d4">17.0</data>
+      <data key="d5">"County Health Rankings 2021 references state-level health statistics derived from county data."&lt;SEP&gt;"States are key organizational units within the County Health Rankings 2021 dataset, contextualizing county-level health data."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;STATE&quot;" target="&quot;STATE_ABBR&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"state_abbr is linked to State as shorthand identifiers for each U.S. state."</data>
+      <data key="d6">chunk-9fe0f1296ba79f6d14efa0a74433a2b7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;NAME&quot;" target="&quot;UNITED STATES&quot;">
+      <data key="d4">6.0</data>
+      <data key="d5">"The Name attribute refers to the United States within the dataset, connecting it to broader geographic data."</data>
+      <data key="d6">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V132_RAWVA&quot;" target="&quot;V132_NUMER&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The variable 'v132_rawva' is numerically supported by 'v132_numer,' which provides numerator values for computation."</data>
+      <data key="d6">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V132_RAWVA&quot;" target="&quot;V132_DENOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The variable 'v132_rawva' is complemented by 'v132_denom,' representing denominator values for ratios."</data>
+      <data key="d6">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V134_RAWVA&quot;" target="&quot;V134_NUMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The variable 'v134_rawva' is supported through 'v134_numer,' which provides numerator values."</data>
+      <data key="d6">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V134_RAWVA&quot;" target="&quot;V134_DENOM&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The variable 'v134_rawva' is related to 'v134_denom,' furnishing denominator values."</data>
+      <data key="d6">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V045_RAWVA&quot;" target="&quot;V045_NUMER&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"The variable 'v045_rawva' references numerator values provided by 'v045_numer'."</data>
+      <data key="d6">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V045_RAWVA&quot;" target="&quot;V045_DENOM&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"The variable 'v045_rawva' references denominator values supplied by 'v045_denom'."</data>
+      <data key="d6">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V014_RAWVA&quot;" target="&quot;V014_NUMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The variable 'v014_rawva' uses numerator values from 'v014_numer,' relevant for computations."</data>
+      <data key="d6">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V014_RAWVA&quot;" target="&quot;V014_DENOM&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The variable 'v014_rawva' references denominator values supplied by 'v014_denom,' enabling calculation."</data>
+      <data key="d6">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V014_RACE_&quot;" target="&quot;V014_RACE1&quot;">
+      <data key="d4">6.0</data>
+      <data key="d5">"The variable 'v014_race_' relates to 'v014_race1,' representing another category of race data."</data>
+      <data key="d6">chunk-6d56072195629c0b2b5fee94f4060f89</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V155_RAC_2&quot;" target="&quot;V155_RAC_3&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Both are related data events with similar numerical ranges and contextual descriptions, indicating a shared analytical purpose."</data>
+      <data key="d6">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V168_NUMER&quot;" target="&quot;V168_DENOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"These two variables are numerically paired, likely for use in ratio or percentage calculations."</data>
+      <data key="d6">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V069_NUMER&quot;" target="&quot;V069_DENOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"v069_numer and v069_denom are paired variables that represent parts of a calculation or analytic dataset."</data>
+      <data key="d6">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V023_NUMER&quot;" target="&quot;V023_DENOM&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"These two variables are connected as numerator and denominator in statistical computations."</data>
+      <data key="d6">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V024_NUMER&quot;" target="&quot;V024_DENOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"v024_numer and v024_denom are part of a calculation set, likely determining ratios within their dataset."</data>
+      <data key="d6">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V024_RACE&quot;" target="&quot;V024_RACE1&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v024_race1 appears as a subset or related variable to v024_race, reflecting demographic or categorization data."</data>
+      <data key="d6">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V024_RAC_1&quot;" target="&quot;V024_RAC_2&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"These two variables seem to represent demographic-related subsets of the overall v024 dataset."</data>
+      <data key="d6">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V024_RAC_2&quot;" target="&quot;V024_RAC_3&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"These two variables are linked as subsets of the categorical or demographic data represented by v024-related variables."</data>
+      <data key="d6">chunk-69de65cf9fde8bb919dee12050372cd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 044 RAW VA&quot;" target="&quot;V 044 N UMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The v 044 raw va dataset is likely connected to the v 044 n umer dataset as part of a calculation or numerical model."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 044 N UMER&quot;" target="&quot;V 044 DE NOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The v 044 n umer and v 044 de nom variables are related numerically as parts of ratio or percentage calculations."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 082 RAW VA&quot;" target="&quot;V 082 N UMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The v 082 raw va dataset is linked to the v 082 n umer entries through shared mathematical or analytical processes."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 082 N UMER&quot;" target="&quot;V 082 DE NOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The v 082 n umer and v 082 de nom datasets are connected for use in generating ratios or analytical insights."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 140 RAW VA&quot;" target="&quot;V 140 N UMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The v 140 raw va is related to the v 140 n umer dataset within a computational or research context."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 140 N UMER&quot;" target="&quot;V 140 DE NOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The v 140 n umer and v 140 de nom datasets work together in modeling ratios or other statistical relationships."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 043 RAW VA&quot;" target="&quot;V 043 N UMER&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"The v 043 raw va and v 043 n umer datasets are linked by shared raw data or observations relevant to their purpose."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 043 N UMER&quot;" target="&quot;V 043 DE NOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The v 043 n umer and v 043 de nom datasets are paired for numerical modeling or statistical analysis."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 135 RAW VA&quot;" target="&quot;V 135 N UMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The v 135 raw va dataset interacts with the v 135 n umer dataset in their respective activities or calculations."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 135 N UMER&quot;" target="&quot;V 135 DE NOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The v 135 n umer and v 135 de nom datasets are connected for analytical purposes, focusing on numerators and denominators."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 135 RACE&quot;" target="&quot;V 135 RACE1&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The v 135 race and v 135 race1 datasets are strongly related, likely offering complementary demographic or statistical data."</data>
+      <data key="d6">chunk-cc36eb9bcec4ee636a3bbf9b497b348c</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 067 RACE&quot;" target="&quot;V 067 RACE 1&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v 067 race 1 is a subset or specific variation of the broader v 067 race data."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 067 RACE&quot;" target="&quot;V 067 RAC 1&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v 067 rac 1 is another specialized subset within the v 067 race dataset."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 067 RACE&quot;" target="&quot;V 067 RAC 2&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v 067 rac 2 represents another variation derived from the original v 067 race metrics."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 067 RACE&quot;" target="&quot;V 067 RAC 3&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v 067 rac 3 serves as another variation of the numerical data representing the v 067 race event."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 137 RAW VA&quot;" target="&quot;V 137 DE NOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"v 137 raw va is related to v 137 de nom as they are components of the same metric calculations, with numerators and denominators interconnected."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 147 RACE&quot;" target="&quot;V 147 RACE 1&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v 147 race 1 is a subset or derived version of the v 147 race event."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 147 RACE&quot;" target="&quot;V 147 RAC 1&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v 147 rac 1 represents a variation within the broader v 147 race dataset."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 147 RACE&quot;" target="&quot;V 147 RAC 2&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v 147 rac 2 is another derived subset or variation of the v 147 race performance metrics."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 147 RACE&quot;" target="&quot;V 147 RAC 3&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v 147 rac 3 is a specialized dataset derived from the general v 147 race event."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 127 RAW VA&quot;" target="&quot;V 127 N UMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v 127 raw va connects to v 127 n umer as they likely represent the numerator aspect of the dataset."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V 127 RAW VA&quot;" target="&quot;V 127 DE NOM&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"v 127 raw va is related to v 127 de nom as they form part of the same dataset, with denominators used for calculation."</data>
+      <data key="d6">chunk-f09e5fdd22b4e1ddee72594f42071e1e</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V127_DENOM&quot;" target="&quot;V127_RACE_&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Variables v127_denom and v127_race_ are related since they represent data subsets within the same computational or analytical system."</data>
+      <data key="d6">chunk-ab74203175bf66b00bcb319c291ecab0</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V128_RAWVA&quot;" target="&quot;V128_DENOM&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v128_rawva and v128_denom are connected as they involve raw value data and corresponding denominators for computations."</data>
+      <data key="d6">chunk-ab74203175bf66b00bcb319c291ecab0</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V128_RAWVA&quot;" target="&quot;V129_RAWVA&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Both variables, v129_rawva and v128_rawva, represent raw measurements and are likely counterparts in similar analytical domains."</data>
+      <data key="d6">chunk-ab74203175bf66b00bcb319c291ecab0</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;RACE COMPUTATIONS&quot;" target="&quot;NUMERICAL DATASET&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The overarching concept of numerical datasets ties into specific race computations derived from related variables like 'v127_race_' and 'v128_rawva'."</data>
+      <data key="d6">chunk-ab74203175bf66b00bcb319c291ecab0</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;NUMERICAL DATASET&quot;" target="&quot;EXAMPLES&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"The dataset contains examples of numerical entries to provide context and illustration of its variables."</data>
+      <data key="d6">chunk-d6118c1115ca09f626046c2347957bae</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V129 NUMER&quot;" target="&quot;V129 RACE&quot;">
+      <data key="d4">5.0</data>
+      <data key="d5">"Both V129 NUMER and V129 RACE are components of a dataset and appear to relate to quantifiable phenomena."</data>
+      <data key="d6">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V144 RAW VA&quot;" target="&quot;V145 RAW VA&quot;">
+      <data key="d4">6.0</data>
+      <data key="d5">"The variables V144 RAW VA and V145 RAW VA may indicate related properties within the same dataset."</data>
+      <data key="d6">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V060 RAW VA&quot;" target="&quot;V060 NUMER&quot;">
+      <data key="d4">6.0</data>
+      <data key="d5">"V060 RAW VA and V060 NUMER reference aspects of the same measurement event, one being continuous and the other representing counts."</data>
+      <data key="d6">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V061 RAW VA&quot;" target="&quot;V061 NUMER&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"V061 RAW VA and V061 NUMER correlate as complementary metrics of the same measured property."</data>
+      <data key="d6">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V139 RAW VA&quot;" target="&quot;V083 RAW VA&quot;">
+      <data key="d4">6.0</data>
+      <data key="d5">"V139 RAW VA and V083 RAW VA are both variables that appear to represent related numerical measurements in a shared context."</data>
+      <data key="d6">chunk-f9bd74db3f82130a31482f9ca488e0b1</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V159_RACE1&quot;" target="&quot;V159_RAC_1&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v159_rac_1 is a subset of the dataset represented by v159_race1, indicating a connection through categorization."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V159_RACE1&quot;" target="&quot;V159_RAC_2&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v159_rac_2 is another subset of the dataset represented by v159_race1, connected through shared data scope."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V159_RACE1&quot;" target="&quot;V159_RAC_3&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v159_rac_3 is a further subset of the dataset represented by v159_race1, linked by analytical context."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V160_RAWVA&quot;" target="&quot;V160_RACE&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v160_race is derived from or connected to v160_rawva, as it represents a categorized or processed subset of the data."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V160_RACE&quot;" target="&quot;V160_RACE1&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v160_race1 is a subset within v160_race, representing particular numerical data of interest."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V160_RACE1&quot;" target="&quot;V160_RAC_1&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v160_rac_1 is a categorized subset under v160_race1, forming part of its broader dataset."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V160_RACE1&quot;" target="&quot;V160_RAC_2&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v160_rac_2 forms another subset within v160_race1, connected through shared data attributes."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V160_RACE1&quot;" target="&quot;V160_RAC_3&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v160_rac_3 represents additional data from v160_race1, indicating another categorization."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V063_RAWVA&quot;" target="&quot;V063_RACE&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v063_race is connected to v063_rawva and likely represents a more specified or categorized set of data."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V063_RAWVA&quot;" target="&quot;V065_RAWVA&quot;">
+      <data key="d4">6.0</data>
+      <data key="d5">"v065_rawva and v063_rawva are connected as datasets potentially representing different numerical attributes."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V063_RACE&quot;" target="&quot;V063_RACE1&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v063_race1 is a subset of v063_race, holding additional categorized numerical data."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V063_RACE1&quot;" target="&quot;V063_RAC_1&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v063_rac_1 is a categorized subset under v063_race1, sharing related data characteristics."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V063_RACE1&quot;" target="&quot;V063_RAC_2&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v063_rac_2 is another categorized subset under v063_race1, representing distinct measurements."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V063_RACE1&quot;" target="&quot;V063_RAC_3&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v063_rac_3 comprises additional numeric data from v063_race1, connecting through analytical context."</data>
+      <data key="d6">chunk-a9c692a2a60da6a7eaca4f923a2699d7</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V065_RAWVA&quot;" target="&quot;V065_NUMER&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v065_rawva and v065_numer are closely related in the dataset, representing interconnected values for specific events."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V065_NUMER&quot;" target="&quot;V065_DENOM&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v065_numer and v065_denom are part of a numerator-denominator pair in calculations within the dataset."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V141_RAWVA&quot;" target="&quot;V142_RAWVA&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v141_rawva and v142_rawva are closely associated, representing related measurements in the dataset."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V015_RAWVA&quot;" target="&quot;V015_NUMER&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v015_rawva is closely related to v015_numer, representing intertwined data components within the dataset."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V015_RAWVA&quot;" target="&quot;V015_DENOM&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v015_rawva interacts with v015_denom in calculations that involve denominator values."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V015_RACE_&quot;" target="&quot;V015_RACE1&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v015_race_ and v015_race1 are closely related, representing various race-related measurements within the dataset."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V015_RACE1&quot;" target="&quot;V015_RAC_2&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v015_race1 and v015_rac_2 share a direct relationship in terms of race-based aggregated data."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V015_RACE1&quot;" target="&quot;V015_RAC_3&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v015_race1 and v015_rac_3 are related through their representation of subsets within race analyses."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V161_RAWVA&quot;" target="&quot;V161_NUMER&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v161_rawva and v161_numer are interconnected as part of the raw value and numerator data relationship in the set."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V161_RAWVA&quot;" target="&quot;V161_DENOM&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v161_rawva correlates with v161_denom, representing numerator-denominator pairing in computations."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V161_RAWVA&quot;" target="&quot;V161_OTHER&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"v161_other is linked to v161_rawva as part of the broader dataset that includes additional calculated measurements."</data>
+      <data key="d6">chunk-955a18191d7c51bff7c8741b82fbadd4</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;DATASET V161&quot;" target="&quot;DATASET V148&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Datasets v161 and v148 are similar in structure, containing numerical and categorical data points, which could be related in their shared analysis objectives."</data>
+      <data key="d6">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;DATASET V161&quot;" target="&quot;DATASET V158&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Datasets v161 and v158 both contain numerical fields and categories, suggesting a potential overlap or complementarity in their data models."</data>
+      <data key="d6">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;DATASET V148&quot;" target="&quot;DATASET V158&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Datasets v148 and v158 share common data features and categories, showing potential for comparative or integrated analysis."</data>
+      <data key="d6">chunk-bf65b71a1f1c7eb501030d184b6423ea</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V055_NUMER&quot;" target="&quot;V055_RAW_VA&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v055_raw_va describes geographic metrics, while v055_numer quantifies the frequency or impact of the associated geographic data."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;HEALTH_OUT&quot;" target="&quot;HEALTH_FAC&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"Health_Out is directly influenced by Health_Fac, as healthcare facilities' performance often contributes to or drives health outcomes."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;HEALTH_OUT&quot;" target="&quot;FACTORS_HE&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"Factors_He contributes to the Health_Out metrics by influencing health-related events and outcomes measures."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;OUTCOMES_L&quot;" target="&quot;OUTCOMES_Q&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Outcomes_L and Outcomes_Q are related as they both represent different dimensions of measurable results, potentially distinguishing long-term and short-term impacts."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;FACTORS_HE&quot;" target="&quot;FACTORS_CL&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Factors_Cl and Factors_He are connected as they both influence health outcomes, with one leaning toward clinical and the other toward overall health factors."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V055_RAW_VA&quot;" target="&quot;V081_RAWVA&quot;">
+      <data key="d4">6.0</data>
+      <data key="d5">"v055_raw_va and v081_rawva are both geographic indicators and might be linked through comparable spatial or location-based correlations."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V081_RAWVA&quot;" target="&quot;V081_NUMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v081_rawva provides geographic or spatial values, whereas v081_numer quantifies occurrences or events linked to those values."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V080_RAWVA&quot;" target="&quot;V080_NUMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v080_rawva and v080_numer are related as geographic metrics and their corresponding count-based events, respectively."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V056_RAWVA&quot;" target="&quot;V056_NUMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v056_rawva involves geographic metrics, while v056_numer provides event counts tied to these metrics."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V126_RAWVA&quot;" target="&quot;V126_NUMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v126_rawva indicates geographic attributes, and v126_numer quantifies occurrence or impact linked to these data points."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V059_RAWVA&quot;" target="&quot;V059_NUMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v059_rawva provides geographic metrics, and v059_numer represents counts of associated events or occurrences."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V057_RAWVA&quot;" target="&quot;V057_NUMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v057_rawva describes geographic values, while v057_numer reflects event counts or occurrences tied to these geographic trends."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;V058_RAWVA&quot;" target="&quot;V058_NUMER&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"v058_rawva provides geographic data, and v058_numer quantifies events or counts linked to these geographic values."</data>
+      <data key="d6">chunk-e379b5e881dbab8dd48924d1fc56df2b</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;UNITED STATES&quot;" target="&quot;NATION.SHP&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The United States is the geographic region represented by the Nation.shp data file, which contains the relevant attributes and metrics."</data>
+      <data key="d6">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;UNITED STATES&quot;" target="&quot;COUNTY_HEALTH_RANKINGS_2021&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The United States is the geographic focus of the County_Health_Rankings_2021 dataset, reflecting national demographics and health outcomes."</data>
+      <data key="d6">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;NATION.SHP&quot;" target="&quot;COUNTY_HEALTH_RANKINGS_2021&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"The County_Health_Rankings_2021 data is represented within Nation.shp, linking county-level health information to national-level metrics."</data>
+      <data key="d6">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;NATION.SHP&quot;" target="&quot;PHD PROGRAM AT THE UNIVERSITY OF TEXAS AT AUSTIN&quot;">
+      <data key="d4">7.0</data>
+      <data key="d5">"The dataset Nation.shp is associated with a project under the PhD Program at The University of Texas at Austin, highlighting its academic and research application."</data>
+      <data key="d6">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;NATION.SHP&quot;" target="&quot;HEALTH METRICS&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"Health Metrics are detailed in the Nation.shp dataset, providing a structured representation of relevant health-related data."</data>
+      <data key="d6">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;NATION.SHP&quot;" target="&quot;DATA ATTRIBUTES&quot;">
+      <data key="d4">9.0</data>
+      <data key="d5">"Data Attributes form the core structure of the Nation.shp dataset, representing specific metrics tied to health and demographics."</data>
+      <data key="d6">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;HEALTH METRICS&quot;" target="&quot;RACE STATISTICS&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Race-specific data is a component of Health Metrics, reflecting diversity in health outcomes within the dataset."</data>
+      <data key="d6">chunk-eba65d28e2bf83c777edfa727c5bec84</data>
+      <data key="d7">1</data>
+    </edge>
+  </graph>
+</graphml>

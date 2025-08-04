@@ -1,0 +1,1850 @@
+Toolset: **Overlay Toolset**
+
+Tool: Count Overlapping Features
+
+Description: The Overlay toolset contains tools to overlay multiple feature classes to combine, erase, modify, or update spatial features. Overlay is more than just merging geometries; it carries all attributes of the features participating in the overlay to the result. The "Count Overlapping Features" tool generates planarized overlapping features from input features and writes the count of overlapping features to the output features. This tool is useful for understanding spatial boundaries and relationships, such as determining the number of features that overlap in a given spatial analysis.
+
+Parameters:
+- Input Features: Specifies the input features for which overlapping features will be counted. Type: Feature Layer.
+- Output Feature Class: Specifies the output feature class that will contain the planarized overlapping features with the count of overlaps. Type: Feature Class.
+
+Derived Output:
+- Output Feature Class: Contains planarized overlapping features with the count of overlapping features. Type: Feature Class.
+**Toolset:** Overlay Toolset
+
+**Tool:** Identity
+
+**Description:**
+The Identity tool is part of the Overlay Toolset in ArcGIS Pro. It overlays multiple feature classes to combine, erase, modify, or update spatial features, creating a new feature class. This tool helps answer spatial questions like "What's on top of what?" by identifying spatial relationships between features. Use cases include determining land use on specific soil types, identifying parcels within a floodplain, or locating roads within certain counties. The Identity tool is essential in spatial analysis workflows for understanding spatial boundaries and relationships between datasets.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+Toolset: Overlay Toolset
+
+Tool: Spatial Join
+
+Description:
+The Spatial Join tool in ArcGIS Pro is used to append attributes from one layer to another based on the spatial relationship between the features in the layers. This tool is particularly useful for spatial analysis tasks where you need to understand how different spatial features relate to each other. For example, you can use Spatial Join to find the nearest feature, determine what features are inside a polygon, or identify intersecting features. Typical use cases include:
+- **Proximity Analysis:** Identifying the closest rail station to tourist attractions.
+- **Containment Analysis:** Determining which homes are within a flood boundary.
+- **Intersection Analysis:** Finding which roads intersect with certain land parcels.
+
+Parameters:
+- **Target Features:** The layer to which you want to join data. Type: Feature Layer.
+- **Join Features:** The layer whose attributes will be appended to the target layer. Type: Feature Layer.
+- **Output Feature Class:** The name and location of the new feature class that will store the results. Type: String.
+- **Match Option:** Defines the spatial relationship used for the join, such as Intersect, Within, or Closest. Type: String.
+
+Derived Output:
+- **Output Feature Class:** A new feature class containing the joined attributes based on the specified spatial relationship. Type: Feature Class.
+**Toolset:** Overlay Toolset
+
+**Tool:** Intersect
+
+**Description:**
+The Intersect tool in ArcGIS Pro calculates the geometric intersection of multiple feature classes or layers. It identifies the features or portions of features that are common to all inputs, writing them to a new output feature class. This tool is essential for spatial analysis, allowing users to determine spatial relationships between different datasets. Typical use cases include:
+- Identifying land use types within specific soil types.
+- Determining parcels within floodplains.
+- Finding roads within county boundaries.
+- Locating wells within abandoned military bases.
+
+**Parameters:**
+- **Input Features:** The feature classes or layers to be intersected. Type: Value Table.
+- **Output Feature Class:** The feature class where the intersected features will be stored. Type: Feature Class.
+- **Join Attributes (Optional):** Specifies which attributes from the input features will be transferred to the output feature class. Options include all attributes, all except feature IDs, or only feature IDs. Type: String.
+- **XY Tolerance (Optional):** The minimum distance separating feature coordinates, affecting how features snap together. Type: Linear Unit.
+- **Output Type (Optional):** Specifies the type of intersections returned, such as same as input or lower dimension geometry. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the intersected features with specified attributes. Type: Feature Class.
+Toolset: Overlay Toolset
+
+Tool: Erase
+
+Description:
+The Erase tool in ArcGIS Pro creates a new feature class by removing areas of overlap between two feature classes. It subtracts the areas of the "Erase Features" from the "Input Features," resulting in an output that contains only those parts of the input features that do not overlap with the erase features. This tool is particularly useful in spatial analysis workflows where you need to exclude certain areas from a dataset, such as removing deforested areas from a planned development zone or excluding water bodies from a land use analysis.
+
+Parameters:
+- **Input Features:** The feature class or layer that you want to modify by removing overlapping areas. **Type:** Feature Layer.
+- **Erase Features:** The feature class or layer that defines the areas to be removed from the input features. **Type:** Feature Layer.
+- **Output Feature Class:** The resulting feature class that contains only the non-overlapping portions of the input features. **Type:** Feature Class.
+- **XY Tolerance (Optional):** The minimum distance separating all feature coordinates. Modifying this parameter can lead to unexpected results, so it is recommended to use the default value. **Type:** Linear Unit.
+
+Derived Output:
+- **Output Feature Class:** This is the feature class that results from the erase operation, containing only those input features that are not coincident with the erase features. **Type:** Feature Class.
+Toolset: Overlay Toolset
+
+Tool: Symmetrical Difference
+
+Description: The Symmetrical Difference tool is used to compute a geometric overlay of two input feature classes to identify the areas where the features do not overlap. It returns the input features and update features that do not overlap. Features or portions of features in the input and update features that do not overlap will be written to the output feature class. 
+
+Parameters:
+- Input Features: The first input feature class. Type: Feature Layer.
+- Update Features: The second input feature class. Type: Feature Layer.
+
+Derived Output:
+- Output Feature Class: The result of the symmetrical difference operation. Type: Feature Class.
+Toolset: Overlay Toolset
+
+Tool: Update
+
+Description: The Update tool computes the geometric intersection of the input features and update features. It updates the attributes and geometry of the input features with the update features in the output feature class. This tool requires that the input and update datasets have matching schemas, including fields, geometry type, m-values, and z-values. The tool modifies the input dataset directly, returning the updated features.
+
+Parameters:
+- Input Features: Specifies the features to be updated. Type: Feature Layer.
+- Update Features: Specifies the features used to update the input features. Type: Feature Layer.
+
+Derived Output:
+- Output Feature Class: The updated feature class resulting from the geometric intersection of input and update features. Type: Feature Class.
+Toolset: Overlay Toolset
+
+Tool: Remove Overlap
+
+Description: The Remove Overlap tool is used to create a trade area layer with clear delineation between overlapping areas based on the selected method. It resolves overlap between polygons, allowing for the creation of distinct boundaries. For example, you can generate trade area rings for each site with the Dissolve Option set to Overlap to enable the application of Remove Overlap across all trade areas.
+
+Parameters:
+- Input Features: Specifies the layer containing the polygons that overlap. Type: Feature Layer.
+- Output Feature Class: Sets the name and location of the created polygon layer. Type: Feature Class.
+- Method: Determines how overlapping areas are resolved, with options like Center Line, Thiessen, and Grid. Type: String.
+
+Derived Output:
+No derived outputs available.
+**Toolset:** Overlay Toolset
+
+**Tool:** Union
+
+**Description:**
+The Union tool in ArcGIS Pro computes the geometric union of multiple polygon feature classes or layers. It combines all input features into a single output feature class, preserving all attributes from the input datasets. This tool is essential for spatial analysis, enabling tasks such as determining land use overlaps, combining administrative boundaries, or integrating environmental data layers. For example, the Union tool can be used to overlay land use data with soil type data to analyze agricultural suitability or to merge multiple jurisdictional boundaries into a single dataset for regional planning.
+
+**Parameters:**
+- **Input Features**: The polygon feature classes or layers to be combined. Type: Feature Layer.
+- **Output Feature Class**: The name of the resulting feature class that will contain the union of the input features. Type: Feature Class.
+- **Gaps Allowed**: Specifies whether gaps are allowed in the output. Type: Boolean.
+
+**Derived Output:**
+- **Output Feature Class**: Contains polygons representing the geometric union of all input features, including all fields from the input feature classes. Type: Feature Class.
+
+The Union tool is a powerful component of the Overlay Toolset, facilitating comprehensive spatial analysis by integrating multiple datasets into a cohesive output. It is particularly useful for scenarios where understanding spatial relationships and overlaps between different datasets is crucial.
+**Toolset:** Overlay Toolset
+
+**Tool:** Apportion Polygon
+
+**Description:** The Apportion Polygon tool summarizes the attributes of an input polygon layer based on the spatial overlay of a target polygon layer. It assigns the summarized attributes to the target polygons. This tool is useful for apportioning or distributing attributes from one set of polygons to another based on their spatial overlap. For example, it can estimate the population within a specific area by overlaying population data polygons with custom geographic boundaries like service areas or trade zones. This process, known as apportioning, is commonly used in spatial analysis to gain new insights from existing data.
+
+**Parameters:**  
+- `No information available.`
+
+**Derived Output:**  
+- `No information available.`
+**Toolset:** Overlay
+
+**Tool:** Count Overlapping Features
+
+**Description:**
+The "Count Overlapping Features" tool generates planarized overlapping features from input features, calculating the count of overlapping features and writing this information to the output features. This tool is valuable in spatial analysis workflows to understand the density or frequency of overlapping features. For instance, it can be used to analyze urban areas with multiple zoning regulations overlapping or study ecological regions with intersecting habitat types.
+
+**Parameters:**
+- **Input Features:** The input feature classes or layers, which can be point, multipoint, line, or polygon features. Type: Feature Layer.
+- **Output Feature Class:** The output feature class containing the overlap count. Type: Feature Class.
+- **Minimum Overlap Count (Optional):** Limits the output to locations meeting or exceeding a specified number of overlaps, defaulting to 1. Type: Long.
+- **Output Overlap Table (Optional):** The output table containing records for each individual overlapping geometry. Type: Table.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the overlap count for the input features. Type: Feature Class.
+- **Output Overlap Table:** Provides detailed records of each overlapping geometry. Type: Table.
+**Toolset:** Overlay
+
+**Tool:** Identity
+
+**Description:**
+The Identity tool in ArcGIS Pro computes a geometric intersection between input features and identity features. It is used to determine which portions of input features overlap with identity features and assign the attributes of the identity features to those overlapping portions. Typical use cases include:
+- Identifying land use types within specific soil types.
+- Determining parcels within floodplains.
+- Finding roads within specific counties.
+- Locating wells within abandoned military bases.
+
+**Parameters:**
+- **Input Layer:** The point, line, or polygon features overlaid with the identity layer. Type: Feature Layer.
+- **Identity Layer:** The features overlaid with the input layer features. Type: Feature Layer.
+- **Output Feature Class:** A new feature class with overlaid features. Type: Feature Class.
+- **Overlay Type:** Specifies the type of overlay to be performed. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the input features or portions overlapping identity features, with attributes from the identity features. Type: Feature Class.
+**Toolset: Overlay**
+
+**Tool: Spatial Join**
+
+**Description:**
+The Spatial Join tool in ArcGIS Pro matches rows from the Join Features parameter value to the Target Features parameter value based on a spatial relationship. The output is written to a new output feature class. This tool is used to join attributes of two layers based on their spatial relationship. It is commonly used in GIS workflows to combine data from different layers. For example, it can be used to find the number of homes within a flood boundary by joining a homes layer to a flood boundary layer using the "Within" spatial relationship operator. Other use cases include finding the nearest feature or identifying features within a specific area.
+
+**Parameters:**
+- **Target Features**: The feature class to which the attributes from the join features will be appended. 
+  - **Type:** Feature Layer
+- **Join Features**: The feature class whose attributes will be joined to the target features. 
+  - **Type:** Feature Layer
+- **Join Operation**: Specifies how joins will be handled. Options include JOIN_ONE_TO_ONE or JOIN_ONE_TO_MANY. 
+  - **Type:** String
+- **Match Option**: Defines the spatial relationship to be evaluated. Options include INTERSECT, WITHIN, CONTAINS, CLOSEST, etc. 
+  - **Type:** String
+- **Search Radius**: The distance within which to search for the nearest feature. 
+  - **Type:** Linear Unit
+- **Field Map**: Specifies the fields from the join features to be appended to the target features. 
+  - **Type:** Field Map
+- **Join Type**: Determines whether all target features are maintained in the output feature class or only those that have a match. 
+  - **Type:** String
+
+**Derived Output:**
+- **Output Feature Class**: A new feature class containing the shape and attributes from the target layer and the matched attributes from the join layer. 
+  - **Type:** Feature Class
+**Toolset:** Overlay
+
+**Tool:** Intersect
+
+**Description:**
+The Intersect tool in ArcGIS Pro calculates the geometric intersection of multiple feature classes or feature layers. It identifies the features or portions of features that are common to all inputs and writes them to the output feature class. This tool is essential for spatial analysis as it helps in determining spatial relationships between different datasets. Typical use cases include analyzing land use on top of soil types, identifying parcels within floodplains, or finding roads within specific counties. The tool can handle inputs of various geometry types (point, line, polygon) and outputs features of the same or lower dimension geometry as the input with the lowest dimension. The tool is versatile and can be used with a single input to find intersections within the same dataset, which is useful for discovering polygon overlaps or line intersections.
+
+**Parameters:**
+- **Input Features:** The feature classes or layers to intersect. Type: Feature Set.
+- **Output Feature Class:** The name of the output feature class. Type: Feature Class.
+- **Join Attributes (Optional):** Specifies which attributes from the input features will be transferred to the output. Options include all attributes, all except feature IDs, or only feature IDs. Type: String.
+- **XY Tolerance (Optional):** The minimum distance separating all feature coordinates. Type: Linear Unit.
+- **Output Type (Optional):** Specifies the type of intersections to return. Options include same as input, line, or point. Type: String.
+- **Snap To Input (Optional):** Specifies if feature vertices in the input layer are allowed to move. Type: Boolean.
+
+**Derived Output:**
+- **Output Feature Class:** A new feature class containing the intersected features. Type: Feature Class.
+**Toolset:** Overlay
+
+**Tool:** Erase
+
+**Description:**
+The Erase tool in ArcGIS Pro is used to create a new feature class by overlaying input features with erase features. It effectively removes portions of the input features that overlap with the erase features, resulting in an output feature class that contains only those parts of the input features that do not coincide with the erase features. This tool is particularly useful in spatial analysis workflows where you need to exclude certain areas from a dataset, such as removing deforested areas from a planned road buffer or excluding floodplain areas from land use analysis.
+
+**Parameters:**
+- **Input Features:** The input feature class or layer that will be modified by the erase operation. Type: Feature Layer.
+- **Erase Features:** The feature class or layer that will be used to erase coincident features in the input. Type: Feature Layer.
+- **Output Feature Class:** The feature class that will contain only those input features that are not coincident with the erase features. Type: Feature Class.
+- **XY Tolerance (Optional):** The minimum distance separating all feature coordinates (nodes and vertices) as well as the distance a coordinate can move in x or y (or both). Type: Linear Unit.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the input features that are not coincident with the erase features. Type: Feature Class.
+Toolset: Overlay
+
+Tool: Symmetrical Difference
+
+Description: The Symmetrical Difference tool computes a geometric intersection of the input and update features, returning the input features and update features that do not overlap. It is used to identify spatial relationships between features. For example, it can be used to find areas where two different land cover types do not overlap or to determine the differences between two sets of boundaries.
+
+Parameters:
+- Input Features: Specifies the input features to be analyzed. Type: Feature Layer.
+- Update Features: Specifies the features to be compared with the input features. Type: Feature Layer.
+
+Derived Output:
+- Output Feature Class: Contains the features that do not overlap between the input and update features. Type: Feature Class.
+Toolset: Overlay
+
+Tool: Update
+
+Description: The Overlay toolset contains tools to overlay multiple feature classes to combine, erase, modify, or update spatial features, resulting in a new feature class. All of the overlay operations involve joining two sets of features into a single set of features to identify spatial relationships between the input features. The Update tool specifically computes the geometric intersection of the input features and update features. The attributes and geometry of the input features are updated by the update features in the output feature class.
+
+Parameters:
+- Input Features: Specifies the input features to be updated. Type: Feature Layer.
+- Update Features: Specifies the features used to update the input features. Type: Feature Layer.
+
+Derived Output:
+- Output Feature Class: The resulting feature class with updated attributes and geometry. Type: Feature Class.
+**Toolset:** Overlay
+
+**Tool:** Union
+
+**Description:**
+The Union tool in ArcGIS Pro computes a geometric union of multiple polygon feature classes or layers. It combines all input features into a single output feature class, preserving all attributes from the input datasets. This tool is essential for spatial analysis, particularly in scenarios where analyzing overlapping areas and retaining all attribute data is necessary. For example, it can be used to determine land use types within different soil types or identify parcels within a floodplain. The Union tool is versatile and handles complex spatial relationships by cracking and clustering features to ensure accurate geometric representation.
+
+**Parameters:**
+- **Input Features**: The polygon feature classes or layers to be combined. Type: Feature Layer.
+- **Output Feature Class**: The name of the new feature class that will store the results. Type: Feature Class.
+- **Gaps Allowed**: Specifies whether gaps are allowed in the output. Type: Boolean.
+
+**Derived Output:**
+- **Output Feature Class**: Contains polygons representing the geometric union of all input features, including all fields from the input feature classes. Type: Feature Class.
+**Toolset: Overlay**
+
+**Tool: Apportion Polygon**
+
+**Description:**
+The Apportion Polygon tool summarizes the attributes of an input polygon layer based on the spatial overlay of a target polygon layer. It assigns the summarized attributes to the target polygons, a process known as apportioning. This tool is valuable in spatial analysis and GIS workflows for allocating or distributing attributes from one set of polygons to another based on their spatial overlap. For instance, it can be used to determine the total population within a specific area affected by a natural disaster by apportioning population data from a larger area to the affected region. Another use case is allocating land use data from a larger geographic area to smaller administrative units for detailed analysis and planning.
+
+**Parameters:**
+- **Input Polygon Layer**: The polygon feature class or layer containing the attributes to be summarized. Type: *Feature Layer*.
+- **Target Polygons**: The polygon layer that will receive the summarized attributes from the input polygons. Type: *Polygon Layer*.
+
+**Derived Output:**
+- **Summarized Polygons**: A new polygon layer where each target polygon contains summed numeric attributes derived from the input polygons that overlap with each target polygon. Type: *Feature Class*.
+**Toolset:** Overlay
+
+**Tool:** Remove Overlap (multiple)
+
+**Description:**
+The "Remove Overlap (multiple)" tool eliminates overlaps between polygons in multiple input layers. It is useful in spatial analysis workflows requiring clear delineation between overlapping areas, such as in urban planning, environmental management, and market analysis. This tool offers methods like Center Line, Thiessen, and Grid to distribute overlapping areas between polygons. For example, it can be used to create trade area layers with precise boundary definitions.
+
+**Parameters:**
+- **Input Features:** Input feature classes or layers with overlapping polygons. Type: Feature Layer.
+- **Output Feature Class:** Name and location of the polygon layer created after removing overlaps. Type: Feature Class.
+- **Method:** Specifies how overlapping areas are resolved, with options like Center Line, Thiessen, and Grid. Type: String.
+
+**Derived Output:**
+- **Output Feature Class:** A new feature class with resolved overlaps between polygons. Type: Feature Class.
+**Toolset:** Spatial Analyst
+
+**Tool:** Extract Values to Points
+
+**Description:**
+The "Extract Values to Points" tool is part of the Spatial Analyst toolset in ArcGIS Pro. It is designed to extract cell values from a raster dataset based on a set of point features. These extracted values are recorded in the attribute table of an output feature class. This tool is typically used in spatial analysis workflows where you need to sample raster data at specific point locations, such as environmental monitoring stations or survey points. For example, you might use this tool to extract elevation values from a digital elevation model (DEM) at the locations of weather stations to analyze elevation's impact on weather patterns.
+
+**Parameters:**
+- **Input Point Features:** The point feature dataset that defines the locations for which you want to extract raster cell values. Type: Feature Layer.
+- **Input Raster:** The raster dataset from which cell values will be extracted. Type: Raster Layer.
+- **Output Feature Class:** The feature class that will store the extracted values in its attribute table. Type: Feature Class.
+
+**Derived Output:**
+- **Output Feature Class:** Contains the point features with the extracted raster values added to their attribute table. Type: Feature Class.
+**Toolset:** Spatial Analyst
+
+**Tool:** Darcy Flow
+
+**Description:**
+The Darcy Flow tool calculates the groundwater volume balance residual and other outputs for steady flow in an aquifer. It is primarily used to check the consistency of groundwater datasets and to generate rasters of groundwater flow vectors. The tool models two-dimensional, vertically mixed, horizontal, and steady state flow, where the head is independent of depth. A typical use case involves analyzing the flow of water into and out of each cell in a raster, which helps in identifying inconsistencies in the head raster with respect to transmissivity, porosity, and thickness rasters. For example, it can be used to ensure that the input rasters are smooth and consistent, with no sources or sinks, which should result in small residuals near zero. Large residual values indicate potential issues with the head raster.
+
+**Parameters:**
+- **Head Raster**: Represents the groundwater head elevation for each cell. Type: Raster.
+- **Transmissivity Raster**: Represents the transmissivity of the aquifer. Type: Raster.
+- **Porosity Raster**: Represents the porosity of the aquifer. Type: Raster.
+- **Thickness Raster**: Represents the thickness of the aquifer. Type: Raster.
+
+**Derived Output:**
+- **Volume Balance Residual Raster**: Measures the difference between the flow of water into and out of each cell. Type: Raster.
+**Toolset:** Spatial Analyst
+
+**Tool:** Kernel Density
+
+**Description:**
+The Kernel Density tool calculates the density of features in a neighborhood around those features. It can be applied to both point and line features. This tool is commonly used for analyzing the density of housing, occurrences of crime, or investigating the impact of roads or utility lines on wildlife habitats. By fitting a smoothly tapered surface to each point or polyline using a kernel function, the tool calculates density values that diminish with distance from the feature location. The density is determined by summing the values of all kernel surfaces overlaying each raster cell.
+
+**Parameters:**
+- **Input Point or Polyline Features:** The features for which density will be calculated. Type: Feature Layer.
+- **Population Field:** Specifies the population values for each feature, which can be integer or floating point. Type: Field.
+- **Search Radius:** Determines the distance to search for sample locations. Type: Double.
+- **Area Units:** Specifies the units for the area of the output raster. Type: String.
+- **Output Cell Size:** Specifies the size of each cell in the output raster. Type: Double.
+
+**Derived Output:**
+- **Output Raster:** The resulting kernel density raster, representing the density per unit area. Type: Raster.
+**Toolset:** Spatial Analyst
+
+**Tool:** Expand
+
+**Description:**
+The Expand tool is part of the Spatial Analyst toolbox in ArcGIS Pro, designed to increase the size of specified zones within a raster dataset. This tool is particularly useful for generalizing or simplifying raster data by expanding selected zones into adjacent zones. It operates by allowing certain zones to replace cells of other zones, effectively enlarging the selected zones. Typical use cases include:
+- **Land Cover Analysis:** Expanding urban areas in a land cover raster to simulate urban growth.
+- **Habitat Modeling:** Increasing the size of habitat zones to study potential expansion areas.
+- **Agricultural Planning:** Enlarging crop zones to assess potential expansion for farming.
+
+**Parameters:**
+- **Zone Values:** Specifies the zones to be expanded. Type: Integer.
+- **Number of Cells:** Determines how many cells the zones will expand into. Type: Integer.
+- **Zone Field:** The field that contains the zone values. Type: Field.
+
+**Derived Output:**
+- **Expanded Raster:** The output raster with expanded zones. Type: Raster.
+**Toolset:** Spatial Analyst
+
+**Tool:** Euclidean Direction
+
+**Description:**
+The Euclidean Direction tool calculates the direction from each cell in a raster to the closest source. It is used in spatial analysis to determine the direction of movement or flow from a given location to a source. For example, it can find the direction to the closest town from various locations in a study area. This tool is valuable in scenarios where understanding directional relationships between locations is crucial, such as in hydrology for determining flow direction or in urban planning for assessing accessibility.
+
+**Parameters:**
+- **Input raster or feature source data:** The input source locations, which can be a raster or feature layer identifying the cells or locations used to calculate the Euclidean direction for each output cell location. **Type:** Raster Layer; Feature Layer.
+- **Maximum distance (Optional):** The threshold that the accumulative distance values cannot exceed. If the value exceeds this threshold, the output for the cell location will be NoData. **Type:** Double.
+- **Output cell size (Optional):** The cell size of the output raster to be created, defined by a numeric value or obtained from an existing raster dataset. **Type:** Analysis Cell Size.
+- **Distance Method (Optional):** Specifies whether the distance will be calculated using a planar (flat earth) or a geodesic (ellipsoid) method. **Type:** String.
+- **Input raster or feature barrier data (Optional):** The dataset defining barriers, which can be a raster or feature layer. **Type:** Raster Layer; Feature Layer.
+
+**Derived Output:**
+- **Output direction raster:** Contains the calculated direction, in degrees, from each cell center to the closest source cell center. Values range from 0 to 360 degrees, with 0 reserved for source cells. **Type:** Raster Dataset.
+- **Out back direction raster (Optional):** Contains the calculated direction in degrees. **Type:** Raster Dataset.
+**Toolset:** Spatial Analyst
+
+**Tool:** Cost Distance
+
+**Description:**
+The Cost Distance tool in ArcGIS Pro calculates the least accumulative cost distance for each cell from or to the least-cost source over a cost surface. Unlike Euclidean distance, which measures straight-line distance, Cost Distance considers the movement of a traveler over a landscape, accounting for various factors such as surface characteristics and movement restrictions. This tool is typically used in scenarios where the cost of travel is not uniform across the landscape, such as constructing a new road, connecting wildlife habitats, or planning emergency response routes. For example, it can help identify the cheapest route for a new road to a proposed school, connect habitat patches for wildlife corridors, or determine the fastest way to reach an injured hiker in a remote area.
+
+**Parameters:**
+- **Input Source Raster or Features:** The input source locations, which can be a raster or feature (point, line, or polygon) identifying the cells or locations for calculating the least accumulated cost distance. Type: Raster Layer; Feature Layer.
+- **Input Cost Raster:** A raster defining the impedance or cost to move through each cell. The value at each cell location represents the cost-per-unit distance for moving through the cell. Type: Raster Layer.
+- **Maximum Distance (Optional):** The threshold that the accumulative cost values cannot exceed. If exceeded, the output value for the cell location will be NoData. Type: Double.
+
+**Derived Output:**
+- **Output Distance Raster:** The cost distance raster identifies, for each cell, the least accumulative cost distance over a cost surface to the identified source locations. Type: Raster Layer.
+- **Output Backlink Raster (Optional):** The backlink raster indicates the direction to the next cell on the least accumulative cost path to the nearest source. Type: Raster Layer.
+**Toolset:** Spatial Analyst
+
+**Tool:** Cost Connectivity
+
+**Description:**
+The Cost Connectivity tool focuses on defining the optimum network of least-cost paths between multiple input regions. It enables the creation of a network of paths that allows movement between regions, rather than individual paths connecting one region to another. This tool is valuable in scenarios such as wildlife conservation, military logistics, and timber harvesting. For instance, it can be used to establish wildlife corridors to maintain genetic diversity among bobcat populations, develop efficient supply routes between military bases, or create cost-effective logging roads.
+
+**Parameters:**
+- **source_direction**: Specifies the direction of movement from the source. Type: String.
+- **source_cost_multiplier**: Multiplies the cost of moving through each cell. Type: Double.
+- **source_start_cost**: Initial cost to begin movement from the source. Type: Double.
+- **source_resistance_rate**: Rate at which resistance increases as movement progresses. Type: Double.
+- **source_capacity**: Maximum capacity of the source. Type: Double.
+
+**Derived Output:**
+- **Connectivity Network**: The resulting network of least-cost paths connecting the input regions. Type: Raster.
+**Toolset:** Spatial Analyst
+
+**Tool:** Nibble
+
+**Description:**
+The Nibble tool allows selected areas of a raster to be assigned the value of their nearest neighbor. This tool is useful for editing areas of a raster where the data is known to be erroneous. The process involves identifying areas marked as NoData in a mask raster and then replacing the corresponding areas in the input raster with values from their nearest neighbors based on Euclidean distance. This tool is beneficial for scenarios where data integrity is compromised, such as when certain raster cells contain incorrect or missing values. For example, if a mask raster identifies areas with NoData, the Nibble tool can be used to fill these gaps with the nearest valid data from the input raster.
+
+**Parameters:**
+- **Input Raster:** The raster dataset to be nibbled. Type: Raster Layer.
+- **Mask Raster:** Defines the areas to be nibbled. Type: Raster Layer.
+- **Nibble Values:** Specifies whether NoData values can be nibbled into the mask area. Type: String.
+
+**Derived Output:**
+- **Output Raster:** The modified raster with nibbled values. Type: Raster Layer.
+Toolset: **Spatial Analyst**
+
+Tool: Boundary Clean
+
+Description: The Boundary Clean tool is part of the Spatial Analyst extension in ArcGIS Pro. It is used to smooth the boundary between features in raster data. This tool is particularly useful for cleaning up small erroneous data in the raster or generalizing the data to remove unnecessary detail for more generalized analysis. For example, it can be used to clean up misclassified cells in classified satellite imagery, remove unnecessary lines or text from scanned paper maps, or address conversion issues from rasters in different formats, resolutions, or projections. The tool helps automate the assignment of more reliable values to cells, improving the overall quality of the raster data.
+
+Parameters:
+- Input Raster: Specifies the input raster dataset to be processed. Type: Raster Dataset.
+- Output Raster: Specifies the output raster dataset that will contain the smoothed boundary features. Type: Raster Dataset.
+
+Derived Output:
+- None.
+**Toolset:** Spatial Analyst
+
+**Tool:** Calculate Kernel Density Ratio
+
+**Description:**
+The Calculate Kernel Density Ratio tool calculates a spatial relative risk surface using two input feature datasets. It is used to compare the density of occurrences (cases) against a control group, such as crimes versus total population in crime analysis or patients with a condition versus the general population in health studies. This tool helps identify areas of higher risk or concentration relative to the control group.
+
+**Parameters:**
+- Input Feature Dataset 1: Represents cases (e.g., crimes, patients). Type: Feature Layer.
+- Input Feature Dataset 2: Represents the control group (e.g., total population). Type: Feature Layer.
+
+**Derived Output:**
+- Spatial Relative Risk Surface: Represents the calculated density ratio. Type: Raster Dataset.
+**Toolset:** Spatial Analyst
+
+**Tool:** Point Density
+
+**Description:**
+The Point Density tool calculates the density of point features around each output raster cell. It defines a neighborhood around each raster cell center, totals the number of points within the neighborhood, and divides this by the area of the neighborhood. If a Population field is used, the value of the field determines how many times to count the point. For instance, a value of 3 would count the point as three points. This tool is useful for analyzing spatial properties and relationships, such as finding the density of houses, wildlife observations, or crime reports. The Population field can weight points differently, allowing one point to represent multiple observations, such as a condominium with multiple units or crimes weighted by severity.
+
+**Parameters:**
+- **Input Point Features:** The point features for which density will be calculated. Type: Feature Layer.
+- **Output Raster:** The raster dataset that will contain the density values. Type: Raster Dataset.
+- **Population Field:** A field used to weight the points. Type: Field.
+- **Cell Size:** The size of the output raster cells. Type: Double.
+- **Search Radius:** The radius of the neighborhood around each raster cell. Type: Double.
+
+**Derived Output:**
+- **Density Raster:** The raster dataset showing the calculated density values. Type: Raster Dataset.
+**Toolset:** Spatial Analyst
+
+**Tool:** Least Cost Corridor
+
+**Description:**
+The Least Cost Corridor tool calculates the sum of two accumulative cost distance rasters to identify a corridor where the total cost of travel between two locations is below a specified threshold. This tool is useful for creating wider, two-dimensional areas instead of narrow paths. For example, it can be applied in conservation planning to connect wildlife habitats by identifying corridors that avoid high-cost areas like industrial parks.
+
+**Parameters:**
+- **Source Raster**: The input source locations identifying cells or locations for calculating the least accumulated cost distance. Type: Raster.
+- **Raster Barriers**: Defines barriers where NoData represents no barriers. Type: Raster.
+- **Surface Raster**: Defines elevation values at each cell location. Type: Raster.
+- **Cost Raster**: Defines the cost or impedance to move through each cell. Type: Raster.
+- **Parallel processing factor**: Controls the number of cores the tool uses. Type: Integer.
+
+**Derived Output:**
+- **Output corridor raster**: Identifies the corridor where the total cost is below the specified threshold. Type: Raster.
+No information available.
+Toolset: **Spatial Analyst**
+
+Tool: Aggregate
+
+Description: Aggregates points into polygon features or bins. A polygon is returned with a count of points as well as optional statistics at all locations where points exist. Aggregating features is a way to summarize them into logical groups using statistical methods. ArcGIS Pro supports visualization of aggregated data for exploration and analysis purposes. Examples include symbolizing weather stations using total highest temperature recorded at each station, tracking disease outbreaks, or analyzing traffic volume along freeways during rush hour.
+
+Parameters:
+- **Input Point Features**: Specifies the point features to be aggregated. Type: Feature Layer.
+- **Output Polygon Features**: The polygon features resulting from the aggregation. Type: Feature Layer.
+- **Output Feature Class**: The feature class containing the aggregated polygons. Type: Feature Class.
+- **Output Table**: A table containing the count of points and optional statistics for each polygon. Type: Table.
+
+Derived Output:
+- **Aggregated Polygons**: The resulting polygons with aggregated points. Type: Feature Layer.
+**Toolset:** Spatial Analyst
+
+**Tool:** Distance Accumulation
+
+**Description:**
+The Distance Accumulation tool calculates the accumulated distance for each cell to sources, allowing for straight-line distance, cost distance, and true surface distance, as well as vertical and horizontal cost factors. This tool is essential in distance analyses, particularly for calculating straight-line or cost distance rasters. It can be used to connect regions over distance surfaces and is often employed in scenarios where understanding the rate at which distance is encountered is crucial, such as in cost distance analysis. Typical use cases include plotting least-cost paths, analyzing travel routes, and determining accessibility across landscapes.
+
+**Parameters:**
+- **Input raster or feature source data:** Specifies the source locations. Type: Raster or Feature.
+- **Input barrier raster or feature data:** Defines barriers that affect distance calculations. Type: Raster or Feature.
+- **Input cost raster:** Represents the cost of traversing each cell. Type: Raster.
+- **Input vertical factor:** Accounts for vertical movement costs. Type: Raster.
+- **Input horizontal factor:** Accounts for horizontal movement costs. Type: Raster.
+- **Distance method:** Specifies the method for distance calculation (Planar or Geodesic). Type: String.
+
+**Derived Output:**
+- **Distance accumulation raster:** Calculates the accumulative distance to the closest or least-cost source. Type: Raster.
+- **Back direction raster:** Indicates the direction to travel from each cell to return to the closest or least-cost source. Type: Raster.
+- **Source direction raster:** Determines the direction to the closest or least-cost source. Type: Raster.
+- **Source location raster:** Identifies the row and column of the closest or least-cost source. Type: Raster.
+Toolset: **Spatial Analyst**
+
+Tool: Extract by Points
+
+Description: The Extraction tools in the Spatial Analyst extension allow you to extract a subset of cells from a raster based on their attributes or spatial location. The **Extract by Points** tool specifically identifies cell values at specific x,y point locations. For example, this tool can be used to extract elevation values at specific coordinate points from a digital elevation model.
+
+Parameters:
+- Input File: The input file that will be scanned for locations (coordinates or custom locations), dates, and custom attributes. Data Type: File
+- Output Feature Class: The feature class containing point features representing the extracted cell values. Data Type: Feature Class
+- Input Template (Optional): The template file (*.lxttmpl) that determines the settings for each tool parameter. Data Type: Not specified
+
+Derived Output:
+- No derived outputs available.
+**Toolset:** Spatial Analyst
+
+**Tool:** Path Distance Back Link
+
+**Description:**
+The Path Distance Back Link tool is part of the Spatial Analyst toolset used for distance analysis. It defines the neighbor that is the next cell on the least accumulative cost path to the least-cost source, while accounting for surface distance along with horizontal and vertical cost factors. This tool is typically used in GIS workflows to model dispersion and movement processes, such as flow movement and least-cost path analysis. It is particularly useful in scenarios where the cost of travel is influenced by the terrain and other environmental factors.
+
+**Parameters:**
+- **Source Direction**: Specifies the direction of the source. Type: String.
+- **Source Cost Multiplier**: Multiplies the cost of traveling through each cell. Type: Double.
+- **Source Start Cost**: Specifies the starting cost from the source. Type: Double.
+- **Source Resistance Rate**: Specifies the rate at which resistance increases. Type: Double.
+- **Source Capacity**: Specifies the maximum capacity of the source. Type: Double.
+
+**Derived Output:**
+- **Distance Raster**: Represents the distance from each cell to the least-cost source. Type: Raster.
+**Toolset:** Spatial Analyst
+
+**Tool:** Euclidean Distance
+
+**Description:**
+The Euclidean Distance tool calculates the straight-line distance from each cell in a raster to the nearest source cell. This tool is commonly used in spatial analysis to determine proximity to features such as towns, wells, roads, or forest stands. For example, it can be used to find the distance to the nearest hospital for emergency planning or to create a suitability map where proximity to certain features is a factor.
+
+**Parameters:**
+- **Input raster or feature source data:** Identifies the cells or locations used to calculate the Euclidean distance for each output cell location. Type: Raster Layer; Feature Layer.
+- **Maximum distance (Optional):** Sets a threshold for accumulative distance values; if exceeded, the output value is NoData. Type: Double.
+- **Output cell size (Optional):** Defines the cell size of the output raster, either by a numeric value or from an existing raster dataset. Type: Analysis Cell Size.
+- **Distance Method (Optional):** Specifies the method for distance calculation, either planar or geodesic. Type: String.
+
+**Derived Output:**
+- **Output distance raster:** Contains the Euclidean distance to the closest source cell for each cell. Type: Raster Dataset.
+- **Output direction raster (Optional):** Contains the direction in degrees from each cell center to the closest source cell center. Type: Raster Dataset.
+Toolset: Spatial Analyst
+
+Tool: Region Group
+
+Description:
+The Region Group tool assigns a new value to each region in a raster dataset. A region is defined as a group of contiguous cells of the same zone type. The tool scans the raster from the upper-left corner to the lower-right, assigning a unique identifier to each region encountered. This tool is essential when individual regions within a zone need to be processed separately. For example, in land-use analysis, regions smaller than a specified threshold can be dissolved into surrounding groups to avoid aggregation bias.
+
+Parameters:
+- **Input Raster**: The raster dataset containing the zones to be grouped into regions. Type: Raster Layer.
+- **Output Raster**: The raster dataset storing the unique region identifiers. Type: Raster Layer.
+- **Number of Neighbors**: Specifies the number of neighboring cells to consider when grouping regions. Type: Integer.
+- **Zone Field**: The field in the input raster containing the zone values. Type: Field.
+
+Derived Output:
+- **Output Raster**: Contains the unique identifiers for each region. Type: Raster Layer.
+**Toolset:** Spatial Analyst
+
+**Tool:** Distance Allocation
+
+**Description:**
+The Distance Allocation tool is part of the Spatial Analyst toolset in ArcGIS Pro. It calculates the distance allocation for each cell to the provided sources based on straight-line distance, cost distance, and true surface distance, as well as vertical and horizontal cost factors. This tool is typically used in spatial analysis to determine the closest or least-cost source for each cell in a raster. It is particularly useful in scenarios where understanding the spatial relationship between different locations is crucial, such as in environmental modeling, urban planning, and resource management. For example, it can be used to allocate resources like emergency services to the nearest population centers or to determine the most efficient routes for transportation networks.
+
+**Parameters:**
+- **Input Raster or Feature Sources:** The input source locations. This can be an image service or feature service identifying the cells or locations from or to which the allocation for every output cell location is calculated. For an image service, the input type can be integer or floating point. For a feature service, the input type can be point, line, or polygon. **Type:** Raster Layer; Feature Layer.
+- **Output Distance Allocation Raster Name:** The name of the output distance allocation raster service. **Type:** String.
+- **Input Raster or Feature Barriers (Optional):** The dataset that defines the barriers. The barriers can be defined by an integer or a floating-point image service, or by a feature service. For a feature service, the input type can be point, line, or polygon. For an image service barrier, the barrier must have a valid value, including zero, and the areas that are not barriers must be NoData. **Type:** Raster Layer; Feature Layer.
+- **Input Surface Raster (Optional):** An image service defining the elevation values at each cell location. The values are used to calculate the actual surface distance covered when passing between cells. **Type:** Raster Layer.
+- **Input Cost Raster (Optional):** An image service defining the impedance or cost to move planimetrically through each cell. The value at each cell location represents the cost. **Type:** Raster Layer.
+
+**Derived Output:**
+- **Distance Allocation Raster:** For each cell, this raster indicates the closest or least-cost source to reach. **Type:** Raster Layer.
+Toolset: Spatial Analyst
+
+Tool: Cost Back Link
+
+Description:
+The **Cost Back Link** tool is part of the Spatial Analyst toolset in ArcGIS Pro, available with the Spatial Analyst license. It is used in distance analysis to determine the neighbor that is the next cell on the least-accumulative cost path to the nearest source. This tool is commonly used to find the least-cost path from a destination back to a source, based on a cost surface. It is often utilized in conjunction with other cost distance tools like Cost Distance and Cost Allocation to conduct comprehensive cost path analyses. For instance, it can be applied in environmental studies to identify the most cost-effective path for wildlife corridors or in urban planning to optimize the routing of utilities or transportation networks.
+
+Parameters:
+- **Input Cost Distance Raster**: The name of a cost distance image service used to determine the least-cost path from destination locations to a source. This raster stores the minimum accumulative cost distance over a cost surface from each cell to a source. **Type:** Raster Layer; Image Service; String.
+
+Derived Output:
+- **Cost Back Link Raster**: For each cell in the back link raster, a value identifies the neighbor that is the next cell on the least-accumulative cost path to the nearest source. **Type:** Raster Layer; Image Service; String.
+**Toolset:** Spatial Analyst
+
+**Tool:** Extract Multi Values to Points
+
+**Description:**
+The "Extract Multi Values to Points" tool appends cell values from one or more raster datasets to the attribute table of an existing point feature class. It enhances the existing dataset by adding values from multiple rasters, making it useful for scenarios requiring the integration of raster data with point features for spatial analysis. Typical use cases include environmental modeling, resource management, and spatial data analysis where multiple raster datasets need to be correlated with specific point locations.
+
+**Parameters:**
+- **Input Point Features:** The point feature class defining the locations for extracting raster values. Type: Feature Layer.
+- **Input Rasters:** One or more raster datasets to extract cell values from. Type: Raster Layer.
+
+**Derived Output:**
+- **Updated Point Feature Class:** The input point feature class with appended raster values in its attribute table. Type: Feature Layer.
+Toolset: Spatial Analyst
+
+Tool: Extract by Circle
+
+Description: Circular area extraction is performed using the Extract by Circle tool. This tool requires specifying the location of the circle's center and its radius. All cells falling within the circle are extracted. This tool is useful for extracting a subset of cells based on a circular area in spatial analysis workflows. For example, it can be used to extract cells within a specific radius around a point of interest for further analysis.
+
+Parameters:
+- Input Raster: The raster dataset from which cells will be extracted. Type: Raster Dataset.
+- Center Point: The coordinates of the center of the circle. Type: Point.
+- Radius: The radius of the circle. Type: Double.
+
+Derived Output:
+- Output Raster: The new raster containing cells extracted within the circular area. Type: Raster Dataset.
+Toolset: **Spatial Analyst**
+
+Tool: Euclidean Back Direction
+
+Description: The Euclidean Back Direction tool calculates the direction from each cell to the closest source in degrees. The tool is used to identify the next cell along the shortest path back to the closest source while avoiding barriers. For example, it can be used to determine the direction to the closest town from a specific location. The output raster contains values ranging from 0 to 360 degrees, with 0 reserved for the source cells. The tool is valuable for assigning space to objects and determining proximity in spatial analysis workflows.
+
+Parameters:
+- Input raster or feature barrier data (Optional): The dataset defining barriers, which can be a raster or a feature layer. (Data Type: Raster Layer; Feature Layer)
+- Output back direction raster (Optional): The output Euclidean back direction raster containing direction values in degrees. (Data Type: Raster)
+
+Derived Output:
+- Output back direction raster: The output Euclidean back direction raster containing the calculated direction in degrees. The range of values is from 0 to 360 degrees, with 0 reserved for the source cells. Due east is 90, and the values increase clockwise. (Data Type: Raster)
+**Toolset:** Spatial Analyst
+
+**Tool:** Extract by Attributes
+
+**Description:**
+The "Extract by Attributes" tool is part of the Spatial Analyst toolset in ArcGIS Pro. It is designed to extract cells from a raster based on their attribute values using a specified query or "where clause." This tool is particularly useful for isolating specific data points within a raster dataset that meet certain criteria. For example, it can be used to extract cells from an elevation raster that are higher than 100 meters, allowing for focused analysis on areas of higher elevation. Typical use cases include environmental modeling, resource management, and spatial data analysis where specific attribute-based filtering is required.
+
+**Parameters:**
+- **Input Raster:** The raster dataset from which cells will be extracted. Type: Raster Layer.
+- **Where Clause:** A SQL expression used to select cells based on their attribute values. Type: String.
+
+**Derived Output:**
+- **Output Raster:** The resulting raster containing only the cells that meet the specified attribute criteria. Type: Raster Layer.
+**Toolset:** Spatial Analyst
+
+**Tool:** Path Distance Allocation
+
+**Description:**
+The Path Distance Allocation tool is part of the Spatial Analyst extension in ArcGIS Pro, designed for distance analysis. It calculates the minimum accumulative travel cost from a source to each cell location on a raster, considering both horizontal and vertical factors that influence movement. This tool is useful for modeling dispersion and movement processes, such as flow movement and least-cost path analysis. It compensates for actual surface distance and factors like terrain slope and wind direction, making it ideal for scenarios where accurate modeling of travel cost over a surface is required.
+
+**Parameters:**
+- **Source Locations:** Identifies locations from which the least accumulative cost distance is calculated. Type: Feature or Raster Dataset.
+- **Cost Surface:** Represents the cost to travel through each cell. Type: Raster Dataset.
+- **Horizontal Factor:** Accounts for horizontal influences like wind or current. Type: Raster Dataset.
+- **Vertical Factor:** Accounts for vertical influences like slope. Type: Raster Dataset.
+- **Distance Method:** Specifies whether calculations are planar or geodesic. Type: String.
+
+**Derived Output:**
+- **Distance Allocation Raster:** Indicates the closest source for each cell. Type: Raster Dataset.
+- **Back Link Raster:** Shows the direction to the next cell on the least-cost path. Type: Raster Dataset.
+**Toolset:** Spatial Analyst
+
+**Tool:** Sample
+
+**Description:**
+The Sample tool in ArcGIS Pro creates a table or a point feature class that displays the values of cells from a raster or a set of rasters for defined locations. These locations can be specified by raster cells, points, polylines, or polygons. This tool is commonly used in spatial analysis workflows to extract and analyze raster data values at specific geographic locations. For instance, it can be utilized to sample elevation values at specific points across a landscape or to extract land cover data along a transect line.
+
+**Parameters:**
+- **Input Raster or Feature Locations:** Specifies the locations where the raster values will be sampled. Type: Raster Layer or Feature Layer.
+- **Input Raster:** Defines the raster dataset from which values will be sampled. Type: Raster Layer.
+- **Output Table:** Represents the table or feature class that will store the sampled values. Type: Table or Feature Class.
+
+**Derived Output:**
+- **Output Table:** Contains the sampled values from the input raster(s) at the specified locations. Type: Table or Feature Class.
+**Toolset:** Spatial Analyst
+
+**Tool:** Cost Path
+
+**Description:**
+The Cost Path tool determines the least-cost path from a destination point to a source. It uses two rasters derived from a cost distance tool: the least-cost distance raster and the back-link raster. These rasters are created from the Cost Distance or Path Distance tools. The least-cost path is one cell wide and travels from the destination to the source, ensuring the cheapest route relative to the cost units defined by the original cost raster. This tool is useful for finding optimal routes for road construction or determining paths from multiple locations to a common destination, like a shopping mall.
+
+**Parameters:**
+- **Input Destination Raster or Features:** Identifies cells from which the least-cost path is determined to the least costly source. Type: Raster Layer; Image Service; Feature Layer; String.
+- **Input Cost Distance Raster:** The cost distance image service used to determine the least-cost path from destination locations to a source. Type: Raster Layer; Image Service; String.
+- **Input Cost Backlink Raster:** The cost backlink raster used to determine the path back to a source via the least-cost path. Type: Raster Layer; Image Service; String.
+- **Output Name:** The name of the output travel cost paths raster service. Type: String.
+
+**Derived Output:**
+- **Output Travel Cost Paths Raster:** Represents the least-cost paths. Type: Raster Layer.
+**Toolset:** Spatial Analyst
+
+**Tool:** Shrink
+
+**Description:**
+The Shrink tool is used to reduce the size of selected zones within a raster by replacing them with the value of the cell that is most frequent in its neighborhood. This tool is particularly useful in spatial analysis for generalizing raster data by targeting specific zones for reduction. It can be applied in workflows where simplifying the representation of certain areas is necessary, such as cleaning up small erroneous data or reducing detail for broader analysis. For example, it can be used to shrink areas of misclassified cells in satellite imagery or to simplify scanned map data.
+
+**Parameters:**
+- **Zone Values**: Specifies the zones to be shrunk. Type: Integer.
+- **Number of Cells**: Determines the number of cells by which the zones will be shrunk. Type: Integer.
+- **Shrink Method**: Specifies the method of shrinking, either MORPHOLOGICAL or DISTANCE. Type: String.
+
+**Derived Output:**
+- **Output Raster**: The resulting raster after the zones have been shrunk. Type: Raster.
+**Toolset:** Spatial Analyst
+
+**Tool:** Optimal Path as Line
+
+**Description:**
+The Optimal Path as Line tool calculates the optimal path from a source to a destination as a line. It is commonly used in spatial analysis to find the least-cost path between two locations, considering factors like terrain, barriers, and cost surfaces. This tool is valuable in scenarios where travel direction matters, such as uphill or downhill movement, or when horizontal factors like wind direction are significant. For instance, it can be applied in urban planning for designing efficient transportation routes or in environmental studies to establish wildlife corridors that avoid high-cost areas.
+
+**Parameters:**
+- **Input Raster or Feature Destinations:** An integer raster or feature (point, line, or polygon) identifying locations from which the optimal path is determined to the least costly source. Type: Raster Layer; Feature Layer.
+- **Input Distance Accumulation Raster:** A raster used to determine the optimal path from sources to destinations, typically created with the Distance Accumulation or Distance Allocation tool. Type: Raster Layer.
+- **Input Back Direction or Flow Direction Raster:** Contains calculated directions in degrees, identifying the next cell along the optimal path back to the least accumulative cost source while avoiding barriers. Type: Raster Layer.
+
+**Derived Output:**
+- **Optimal Path as Line:** A feature class containing one polyline per destination, with attributes providing the total accumulation cost and the identity of the destination. Type: Feature Class.
+Toolset: **Spatial Analyst**
+
+Tool: Extract by Polygon
+
+Description: The Extraction toolset in the Spatial Analyst extension allows users to extract a subset of cells from a raster by either the cells' attributes or their spatial location. One specific tool within this toolset is Extract by Polygon, which extracts cells from a raster based on a specified polygon shape. This tool is commonly used to extract raster cells that fall within a defined polygon boundary, enabling users to focus their analysis on specific areas of interest.
+
+Parameters:
+- Input Raster: Specifies the raster from which cells will be extracted. Type: Raster Layer.
+- Input Polygon: Specifies the polygon shape that defines the area for extraction. Type: Feature Layer.
+
+Derived Output:
+- Output Raster: The extracted raster cells based on the input polygon. Type: Raster Dataset.
+**Toolset:** Spatial Analyst
+
+**Tool:** Particle Track
+
+**Description:**
+The Particle Track tool is designed to calculate the path of a particle through a velocity field. It is particularly useful in groundwater modeling to track the movement of particles, such as contaminants, through an aquifer. The tool employs a predictor-corrector scheme to predict the future location of a particle based on the local velocity field, which is interpolated from the nearest raster cell centers. This method allows particles to move freely through the velocity field, independent of the raster cell resolution. Typical use cases include tracking contaminants from a spill to a water supply source, analyzing the distribution of pollutants, and understanding groundwater flow dynamics.
+
+**Parameters:**
+- **Input particle track file:** The path to the input particle track file, which is an ASCII text file containing information about the position, local velocity vector, and cumulative length and time of travel along the path. **Type:** File.
+- **Input effective formation porosity raster:** A raster where each cell value represents the effective formation porosity at that location. **Type:** Raster Layer.
+- **Input saturated thickness raster:** A raster where each cell value represents the saturated thickness at that location, interpreted from geological properties of the aquifer. **Type:** Raster Layer.
+- **Mass:** The amount of mass released instantaneously at the source point, in units of mass. **Type:** Double.
+- **Dispersion time (Optional):** The time horizon for dispersion of the solute, in units of time. Must be less than or equal to the maximum time in the track file. **Type:** Double.
+- **Longitudinal dispersivity (Optional):** The dispersivity parallel to the flow direction. **Type:** Double.
+
+**Derived Output:**
+- **Particle tracking data:** An ASCII file of particle tracking data, which may include a feature class of track information. **Type:** File.
+Toolset: **Spatial Analyst**
+
+Tool: Derive Stream As Raster
+
+Description: The Derive Stream As Raster tool generates a stream raster from an input surface raster without the need for prior sink or depression filling. This tool is used to model the flow of water across a surface, allowing users to analyze stream networks efficiently. For example, it can be utilized in hydrological analysis to determine flow patterns and identify stream networks within a landscape.
+
+Parameters:
+- Input Surface: The surface raster from which the stream raster will be derived. Type: Raster.
+
+Derived Output:
+- Stream Raster: Represents the stream network derived from the input surface raster. Type: Raster.
+Toolset: **Spatial Analyst**
+
+Tool: **Derive Stream As Line**
+
+Description: The Derive Stream As Line tool generates stream line features from an input surface raster without the need for prior sink or depression filling. It is used to model stream networks and is particularly useful in hydrological analysis to understand the flow of water across a surface.
+
+Parameters:
+- Input Surface: The surface raster from which stream lines will be derived. Type: Raster Dataset.
+- Output Feature Class: The feature class containing the generated stream lines. Type: Feature Class.
+
+Derived Output:
+- Stream Lines: The line features representing the derived stream network. Type: Polyline Feature Class.
+Toolset: **Spatial Analyst**
+
+Tool: Thin
+
+Description: Thins rasterized linear features by reducing the number of cells representing the width of the features. The Thin tool does not run well once the maximum thickness exceeds 40 cells. To address this, consider using a smaller value for the maximum thickness or up-sampling the input raster to a coarser resolution with the Resample tool.
+
+Parameters:
+- Input Raster: The raster dataset to be thinned. Type: Raster Layer.
+- Output Raster: The thinned raster dataset. Type: Raster Dataset.
+- Maximum Thickness: The maximum thickness of the features to be thinned. Type: Long.
+
+Derived Output:
+- Thinned Raster: The output raster dataset representing the thinned features. Type: Raster Dataset.
+Toolset: Spatial Analyst
+
+Tool: Cost Allocation
+
+Description:
+The Cost Allocation tool is designed to determine the nearest source for each cell based on the least-accumulative cost over a cost surface. It is used in scenarios where efficient resource or service allocation across a geographic area is needed, considering factors like distance, terrain, or other impediments. Typical use cases include urban planning, environmental management, and logistics optimization.
+
+Parameters:
+- **in_cost_raster**: The input raster defining the cost to travel through each cell. Type: Raster Layer.
+- **in_source_data**: The input data defining the source locations. Type: Feature Layer or Raster Layer.
+- **source_cost_multiplier**: A multiplier applied to the cost of each source. Type: Double.
+- **source_start_cost**: The starting cost from each source. Type: Double.
+- **source_resistance_rate**: The rate at which the cost increases from each source. Type: Double.
+- **source_capacity**: The maximum cost that can be accumulated from each source. Type: Double.
+- **source_direction**: The direction of travel from each source. Type: Integer.
+
+Derived Output:
+- **out_allocation_raster**: The output raster identifying the nearest source each cell is allocated to, based on accumulated travel cost. Type: Raster Layer.
+- **out_distance_raster**: The output raster providing the distance to the nearest source for each cell. Type: Raster Layer.
+- **out_backlink_raster**: The output raster indicating the direction to the nearest source for each cell. Type: Raster Layer.
+**Toolset:** Spatial Analyst
+
+**Tool:** Optimal Region Connections
+
+**Description:**
+The Optimal Region Connections tool identifies the optimal network of least-cost paths to connect a series of input regions. It creates a network that shows the best way to travel between multiple regions, such as habitat patches, parks, or logging operations. Travelers can move between any regions using these paths, even passing through other regions to reach distant ones. The direction of travel does not impact the accumulative cost, ensuring the cost remains the same regardless of the direction.
+
+**Parameters:**
+- **Input Raster or Feature Regions:** Specifies the regions to connect. Type: Raster or Feature.
+- **Output Optimal Connection Lines:** Specifies the output layer containing the optimal network of paths. Type: Feature.
+- **Input Raster or Feature Barriers:** Specifies barriers to avoid. Type: Raster or Feature.
+- **Input Cost Raster:** Specifies the cost surface for calculating least-cost paths. Type: Raster.
+
+**Derived Output:**
+- **Optimal Output Connectivity Lines:** Contains the optimal network of paths for the specified regions. Type: Feature.
+- **Output Neighboring Connecting Lines:** Optionally identifies paths to each region's closest neighbors. Type: Feature.
+Toolset: **Spatial Analyst**
+
+Tool: **Path Distance**
+
+Description: The Path Distance tool is used for distance analysis, calculating the minimum accumulative travel cost from a source to each cell location on a raster. It compensates for the actual surface distance that must be traveled, as well as horizontal and vertical factors influencing the total cost of movement. This tool is beneficial for dispersion modeling, flow movement, and least-cost path analysis in various scenarios such as determining hiking trails, calculating road costs adjusting for terrain changes, or planning ship routes considering ocean currents and wind effects.
+
+Parameters:
+- **Input raster or feature source data**: Specifies the source to connect to. Type: Raster Layer or Feature Layer.
+- **Input raster or feature destination data**: Identifies the destination to connect from. Type: Raster Layer or Feature Layer.
+- **Input cost raster**: Provides the cost values for the least-cost path analysis. Type: Raster Layer.
+- **Input vertical raster**: Specifies the vertical factor influencing the cost of moving between locations. Type: Raster Layer.
+- **Input horizontal raster**: Specifies the horizontal factor influencing the cost of moving between locations. Type: Raster Layer.
+
+Derived Output:
+- **Output distance raster**: Represents the accumulated cost distance for each cell to sources. Type: Raster Layer.
+- **Output back direction raster**: Defines the neighbor that is the next cell on the least accumulative cost path to the least-cost source. Type: Raster Layer.
+**Toolset:** Spatial Analyst
+
+**Tool:** Space Time Kernel Density
+
+**Description:**
+The Space Time Kernel Density tool expands kernel density calculations from analyzing the relative position and magnitude of the input features to include other dimensions such as time and depth (elevation). This tool is particularly useful for analyzing the density of events or incidents that occur over both space and time, providing a more comprehensive understanding of spatial and temporal distributions, patterns, and trends. It is applicable in various fields, including crime analysis, disease mapping, transportation planning, environmental monitoring, oceanographic, and atmospheric sciences. By considering time and elevation, the tool allows for a nuanced understanding of event patterns, making it versatile for complex phenomena analysis. Typical use cases include demographic studies, concentration and exposure research, and policymaking for service needs like healthcare and emergency services.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- **Output Raster:** The tool generates a raster output that identifies the magnitude-per-unit area using multiple kernel functions to fit a smoothly tapered surface to each input point. This output is typically in the Esri Cloud Raster Format (CRF) for multidimensional data, which is beneficial for visualizing and identifying hotspots, trends, and patterns across space and time. Type: Raster.
+Toolset: **Spatial Analyst**
+
+Tool: **Extract by Rectangle**
+
+Description: The Extract by Rectangle tool allows you to extract a subset of cells from a raster based on a specified rectangular area. This tool is useful for selecting and extracting raster cells within a defined rectangular shape. For example, you can extract land cover information within a specific region for further analysis or extract elevation data for a particular area of interest.
+
+Parameters:
+- Input Raster: Specifies the raster from which cells will be extracted. Type: Raster Layer.
+- Rectangle Extent: Defines the rectangular area for extraction. Type: Extent.
+
+Derived Output:
+- Extracted Raster: The subset of cells extracted based on the specified rectangle. Type: Raster Dataset.
+**Toolset:** Spatial Analyst
+
+**Tool:** Majority Filter
+
+**Description:**
+The Majority Filter tool replaces cells in a raster based on the majority value of their contiguous neighboring cells. This tool is particularly useful for smoothing raster data by reducing noise and enhancing the representation of spatial patterns. It operates by evaluating the values of neighboring cells and replacing the central cell with the most frequent value found in its neighborhood. Typical use cases include cleaning up classified raster data, such as land cover maps, where small, isolated pixels may need to be adjusted to better reflect the surrounding area.
+
+**Parameters:**
+- **Input Raster:** The raster dataset to be processed. Type: Raster Layer.
+- **Majority Threshold:** Specifies the number of neighboring cells that must have the same value to be considered the majority. Type: Integer.
+- **Half Threshold:** Specifies the number of neighboring cells that must have the same value to be considered half. Type: Integer.
+
+**Derived Output:**
+- **Filtered Raster:** The output raster with cells replaced based on the majority value of their neighbors. Type: Raster Layer.
+### Toolset: Spatial Analyst
+
+### Tool: Basin
+
+**Description:**
+The Basin tool is designed to create a raster that delineates all drainage basins within a given area. This tool is particularly useful in hydrologic modeling and analysis, where understanding the flow of water across a surface is crucial. Typical use cases include regional planning, agriculture, and forestry, where it is important to know how water flows across an area and how changes in that area may affect that flow. For example, the Basin tool can be used to identify areas that contribute water to a common outlet, which is essential for watershed management and flood risk assessment.
+
+**Parameters:**
+- **Input Surface Raster**: The raster representing the surface over which the drainage basins will be delineated. Type: Raster Layer.
+
+**Derived Output:**
+- **Output Basin Raster**: A raster delineating all drainage basins. Type: Raster Layer.
+**Toolset:** Spatial Analyst
+
+**Tool:** Optimal Path as Raster
+
+**Description:**
+The "Optimal Path as Raster" tool calculates the optimal path from a source to a destination as a raster. This tool is particularly useful when the direction of travel matters, such as moving uphill or downhill, or when considering factors like wind direction. It determines the least-cost path between specified locations, considering various cost factors like vertical and horizontal influences. For example, it can be used in scenarios like planning wildlife corridors to avoid high-cost areas like industrial parks or determining optimal routes for infrastructure development while considering terrain and environmental constraints.
+
+**Parameters:**
+- No detailed information is provided about the specific input parameters for the "Optimal Path as Raster" tool.
+
+**Derived Output:**
+- **Output Raster:** This raster identifies the least-cost path (one cell wide) between the destination and the source. The cell values in the paths indicate the number of paths from the destinations that pass through that cell. Type: Raster Dataset.
+**Toolset:** Spatial Analyst
+
+**Tool:** Fill
+
+**Description:**
+The Fill tool is designed to remove small imperfections in a surface raster by filling sinks and peaks. Sinks are areas where the surrounding pixels are higher, creating undefined drainage directions, while peaks are spurious cells with higher elevations than expected. The tool iteratively fills these sinks to ensure proper delineation of basins and streams, which is crucial for hydrologic modeling. This process continues until all sinks within a specified Z Limit are filled. The tool is essential for creating a depressionless Digital Elevation Model (DEM), which is vital for accurate hydrologic analysis and modeling. For example, in a DEM, if sinks are not filled, the derived drainage network may be discontinuous, affecting the accuracy of hydrologic models.
+
+**Parameters:**
+- **Input Surface Raster:** The input raster representing a continuous surface. **Type:** Raster Layer; Image Service; String.
+- **Output Name:** The name of the output fill raster service. **Type:** String.
+- **Z Limit (Optional):** Maximum elevation difference between a sink and its pour point to be filled. **Type:** Double.
+
+**Derived Output:**
+- **Output Raster:** The output raster with filled sinks. **Type:** Raster Layer.
+Toolset: Spatial Analyst
+
+Tool: Cost Path as Polyline
+
+Description:
+The "Cost Path as Polyline" tool calculates the least-cost path from a source to a destination and represents this path as a line feature. It is part of the Distance toolset available with the Spatial Analyst license in ArcGIS Pro. This tool is useful for determining the most cost-effective route, such as planning optimal paths for new roads, pipelines, or utility lines to minimize construction costs or environmental impact. For example, it can be used to find the least-cost path for a hiking trail that avoids steep inclines or environmentally sensitive areas.
+
+Parameters:
+- **Input Source Raster or Features**: The input raster that identifies the cells or locations from which the least-cost path is determined. Type: *Raster Layer or Feature Layer*.
+- **Destination Data**: The input raster that identifies the destination cells for which the least-cost path is calculated. Type: *Raster Layer*.
+- **Cost Distance Raster**: A raster in which each cell contains the minimum accumulative cost from the cell to a source cell. Type: *Raster Layer*.
+- **Cost Back Link Raster**: A raster that contains values 0 through 8, each representing the direction to the next cell along the least accumulative cost path from a cell to a source. Type: *Raster Layer*.
+- **Path Type**: Specifies the manner in which the path is derived from the cost distance raster. Type: *String*.
+- **Destination Field**: The field used to obtain values for the destination locations. Type: *Field*.
+
+Derived Output:
+- **Output Polyline Features**: The least-cost path from a source to a destination as a line feature. Type: *Feature Class*.
+**Toolset:** Spatial Analyst
+
+**Tool:** Euclidean Allocation
+
+**Description:**
+The Euclidean Allocation tool is part of the Spatial Analyst extension in ArcGIS Pro. It identifies cells in a raster allocated to a source based on closest proximity. This tool is useful for determining the nearest source for each cell in a raster dataset. For example, it can find the closest town to each location in a study area, aiding in logistics or emergency response planning. The tool calculates the straight-line distance from each cell to the nearest source and allocates each cell to the closest source.
+
+**Parameters:**
+- **Source Data:** Specifies the location of objects of interest like wells, shopping malls, or roads. For a raster source, it should only contain source cell values, with other cells as NoData. For a feature source, it will be internally transformed into a raster. Type: Raster or Feature.
+- **Barrier Data:** Optional parameter to specify barriers affecting the allocation process. Type: Raster.
+- **Distance Method:** Specifies distance calculation method, planar or geodesic. Type: String.
+
+**Derived Output:**
+- **Allocation Raster:** Indicates the closest source for each cell. Type: Raster.
+- **Back Direction Raster:** Provides the direction to the closest source for each cell. Type: Raster.
+Toolset: **Spatial Analyst**
+
+Tool: Porous Puff
+
+Description: Porous Puff is a tool that calculates the time-dependent, two-dimensional concentration distribution in mass per volume of a solute introduced instantaneously and at a discrete point into a vertically mixed aquifer. It is used for modeling and analyzing groundwater flow scenarios. 
+
+Parameters:
+- **Input Point Features**: Represents the location where the solute is introduced. Type: Feature Layer.
+- **Input Surface Raster**: Represents the surface where the concentration distribution will be calculated. Type: Raster Dataset.
+
+Derived Output:
+- **Concentration Distribution**: Provides the concentration distribution of the solute in the aquifer over time. Type: Raster Dataset.
+**Toolset:** Spatial Analyst
+
+**Tool:** Darcy Velocity
+
+**Description:**
+The Darcy Velocity tool calculates the groundwater seepage velocity vector, which includes both the direction and magnitude, for steady flow in an aquifer. This tool is particularly useful in scenarios where the volume balance residual of Darcy Flow is not required. It is part of the groundwater modeling tools that can be used for rudimentary advection-dispersion modeling of constituents in groundwater flow. Typical use cases include environmental assessments, hydrological studies, and groundwater contamination analysis, where understanding the flow direction and speed of groundwater is crucial.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- **Seepage Velocity Vector:** This output consists of two rasters, one representing the magnitude and the other the direction of the groundwater seepage velocity. Type: Raster.
+Toolset: Spatial Analyst
+
+Tool: Optimal Corridor Connections
+
+Description: The Optimal Corridor Connections tool calculates the optimal corridor connections between two or more input regions. It helps in creating wider, two-dimensional areas where the total cost of travel between locations is less than a specified threshold. This tool is useful for planning wildlife corridors or any scenario where a broader corridor is needed to connect locations efficiently.
+
+Parameters:
+- Input Regions: Specifies the regions to connect. Type: Raster or Feature Layer.
+- Output Corridor: Defines the output corridor connections. Type: Raster.
+
+Derived Output:
+- Corridor Connections: Represents the optimal connectivity network between the input regions. Type: Raster.
+Toolset: **Spatial Analyst**
+
+Tool: Flow
+
+Description: The Flow tool models the flow of water across a surface. It calculates the direction of flow from each cell to its downslope neighbor using methods like D8, D-Infinity (DINF), or Multiple Flow Direction (MFD). It can be used to compute flow accumulation, flow distance, flow length, identify sinks, snap pour points, calculate storage capacity, assign stream links, stream order, convert raster linear networks to features, and determine watersheds.
+
+Parameters:
+- **Input Surface**: The surface raster for flow analysis. Type: Raster.
+- **Flow Direction Type**: Specifies the type of input flow direction raster (D8, MFD, or DINF). Type: String.
+
+Derived Output:
+- **Flow Accumulation**: A raster of accumulated flow into each cell. Type: Raster.
+- **Flow Distance**: Computes the horizontal or vertical component of downslope distance for each cell. Type: Raster.
+**Toolset:** Spatial Analyst
+
+**Tool:** Extract by Mask
+
+**Description:**
+The Extract by Mask tool is used to extract cells from a raster based on a mask, which can be either a raster or a feature dataset. This tool is particularly useful for isolating specific areas of interest within a larger dataset, allowing for focused analysis on those areas. Typical use cases include:
+- Extracting land cover data within a specific administrative boundary.
+- Isolating elevation data within a watershed for hydrological modeling.
+- Filtering out urban areas from a land use raster for environmental impact studies.
+
+**Parameters:**
+- **Input raster:** The raster dataset from which cells will be extracted. Type: Raster Dataset.
+- **Input raster or feature mask data:** The mask that defines the areas to be extracted. This can be a raster or feature dataset. Type: Raster Dataset or Feature Dataset.
+- **Output raster:** The name and location of the output raster dataset. Type: Raster Dataset.
+
+**Derived Output:**
+- **Output raster:** The raster dataset containing the extracted cells based on the mask. Type: Raster Dataset.
+**Toolset:** Spatial Analyst
+
+**Tool:** Line Density
+
+**Description:**
+The Line Density tool calculates the density of linear features within the neighborhood of each output raster cell. Density is measured in units of length per unit of area. A circle is drawn around each raster cell center using the search radius. The length of the portion of each line falling within the circle is multiplied by its Population field value. These values are summed and divided by the circle's area to compute density. An example of its use is determining the density of utility lines in urban areas.
+
+**Parameters:**
+- **Input Polyline Features:** The polyline features for which density will be calculated. Type: Feature Layer.
+- **Output Raster:** The raster dataset that will store the density results. Type: Raster Dataset.
+- **Population Field:** A field used to weight the length of the line features. Type: Field.
+- **Search Radius:** The radius of the circle used to calculate density. Type: Linear Unit.
+
+**Derived Output:**
+- **Density Raster:** The output raster showing the calculated density values. Type: Raster Dataset.
+Toolset: Proximity Toolset
+
+Tool: Create Buffers
+
+Description: The Create Buffers tool creates polygons that cover a specified distance from a point, line, or polygon feature. This tool is used to generate buffer zones around input features for spatial analysis. For example, it can be utilized to determine areas within a certain distance of specific features, such as creating a buffer zone around fire stations to identify areas within a certain response radius. 
+
+Parameters:
+- Input Features: Specifies the features for which buffers will be created. Type: Feature Layer
+- Output Feature Class: Specifies the name and location of the output feature class. Type: Feature Class
+- Distance: Specifies the buffer distance. Type: Linear Unit
+
+Derived Output:
+- Output Feature Class: The resulting buffer polygons. Type: Feature Class
+Toolset: Proximity Toolset
+
+Tool: Snap Tracks
+
+Description:
+The "Snap Tracks" tool aligns input track points to existing lines. This tool is useful for scenarios with time-enabled point data where each point represents a specific moment in time. It is primarily used in spatial analysis involving object movement along predefined paths like roads or pathways. For instance, it can analyze vehicle movement along a road network by snapping GPS track points to the nearest road lines. This tool is valuable in transportation studies, logistics, and GIS workflows requiring precise tracking of moving objects along a network.
+
+Parameters:
+- **Input Track Points**: The point data representing the tracks to be snapped to lines. Type: *Feature Layer*.
+- **Input Lines**: The line features to which the track points will be snapped. These lines must have fields indicating the "from" and "to" nodes for analysis. Type: *Feature Layer*.
+
+Derived Output:
+- **Snapped Tracks**: A feature class where the input track points are snapped to the nearest line. Type: Feature Layer.
+Toolset: Use Proximity
+
+Tool: Group By Proximity
+
+Description: The Use Proximity toolset contains tools for answering the spatial analysis question, "What is near what?" These tools help determine the proximity of features within one or more feature classes or between two feature classes. They can identify features that are closest to one another or calculate the distances between or around them. For example, you can use the Group By Proximity tool to group features that are within spatial or spatiotemporal proximity to each other, aiding in spatial analysis and GIS workflows.
+
+Parameters:
+- Input Features: The features to be analyzed for proximity. Type: Feature Layer.
+- Group Field: The field used to group features that are in proximity to each other. Type: Field.
+
+Derived Output:
+- Grouped Features: Features grouped based on proximity. Type: Feature Layer.
+**Toolset:** Proximity Toolset
+
+**Tool:** Trace Proximity Events
+
+**Description:**
+The "Trace Proximity Events" tool traces events near each other in space and time. It is designed for time-enabled point data representing an instant in time. This tool is useful for analyzing the proximity of events like tracking animal movements, monitoring vehicle locations, or studying the spread of phenomena over time. For instance, it can determine if wildlife sightings are occurring close to each other over a specific period or analyze delivery vehicle movement patterns within a city.
+
+**Parameters:**
+- **Input Points:** The time-enabled point feature class used for tracing proximity events. **Type:** Feature Layer.
+- **Entity ID Field:** The text field with unique IDs for each entity. **Type:** Field.
+- **Distance Method:** Specifies the distance type for the Spatial Search Distance parameter, with options like Planar and Geodesic. **Type:** String.
+- **Spatial Search Distance (Optional):** The maximum distance between two points considered in proximity. **Type:** Linear Unit.
+- **Temporal Search Distance (Optional):** The maximum duration between two points considered in proximity. **Type:** Time Unit.
+- **Define Entities of Interest Using (Optional):** Specifies entities of interest, with options like "Entities of Interest IDs" and "Selected features in a specified entity of interest layer." **Type:** String.
+
+**Derived Output:**
+- **Output Proximity Events:** The output feature class containing the trace proximity events. **Type:** Feature Class.
+**Toolset:** Manage Data Toolset
+
+**Tool:** Dissolve Boundaries
+
+**Description:**
+The Dissolve Boundaries tool finds polygons that overlap or share a common boundary and merges them into a single polygon. It simplifies data by removing unnecessary boundaries between adjacent polygons. This tool is commonly used to aggregate land parcels for zoning analysis or to combine overlapping habitat areas into a single conservation zone.
+
+**Parameters:**
+- **Input Features**: The polygon feature class to be processed. Type: Feature Layer.
+- **Output Feature Class**: The name for the feature class created with aggregated features. Type: Feature Class.
+- **Dissolve Field(s)**: The field(s) used to determine which boundaries to dissolve. Type: Field.
+- **Create multipart features**: Option to create multipart features. Type: Boolean.
+
+**Derived Output:**
+- **Output Feature Class**: The resulting feature class with dissolved boundaries. Type: Feature Class.
+**Toolset:** Manage Data Toolset
+
+**Tool:** Merge Layers
+
+**Description:**
+The "Merge Layers" tool combines features from two layers into a new layer. It is useful for consolidating data from multiple sources with the same feature type, like points, lines, or polygons. For instance, you can merge datasets from different administrative regions to create a comprehensive map of a larger area. An example is merging city parks and county parks datasets to analyze green space distribution in a metropolitan area. This tool offers control over how fields from input layers are joined and copied, providing flexibility in managing attribute data.
+
+**Parameters:**
+- **Input Datasets**: The datasets to be merged, all of the same feature type (e.g., points, lines, polygons). Type: Feature Layer.
+- **Field Map**: Defines how fields from input datasets are combined, allowing options to remove, rename, or match fields from the merge layer to the input layer. Type: Field Mapping.
+
+**Derived Output:**
+- **Output Layer**: Contains combined features and attributes from input datasets. Type: Feature Set.
+Toolset: Manage Data Toolset
+
+Tool: Overlay Layers
+
+Description: Overlays the geometries from multiple layers into a single layer. Overlay can be used to combine, erase, modify, or update spatial features. The overlay is more than just a merging of geometries; all the attributes of the features participating in the overlay are carried through to the result. For example, Overlay Layers can be used to combine land parcel boundaries with zoning information to create a comprehensive land use map. It can also be utilized to erase specific land cover types from a vegetation map to analyze deforestation patterns.
+
+Parameters:
+- Input Layer: The primary layer to overlay with other layers. Type: Feature Layer.
+- Overlay Layer: The layer whose geometries will be overlaid onto the input layer. Type: Feature Layer.
+- Overlay Type: Specifies the type of overlay operation to perform (e.g., Intersect, Erase). Type: String.
+
+Derived Output:
+- Result Layer: The output layer containing the overlaid geometries from the input and overlay layers. Type: Feature Layer.
+**Toolset:** Manage Data
+
+**Tool:** Clip Layer
+
+**Description:**
+The Clip Layer tool in ArcGIS Pro extracts input features that fall within specified polygon boundaries. It is commonly used in spatial analysis to focus on a specific area of interest by removing features outside the desired boundary. For instance, in a scenario where you have a dataset of land parcels and need to analyze only those within a city boundary, the Clip Layer tool can be used to extract those specific parcels. This tool is essential in workflows requiring spatial data refinement to a particular geographic area, such as environmental studies, urban planning, and resource management.
+
+**Parameters:**
+- **Input Layer**: The dataset containing the point, line, or polygon features to be clipped. **Type:** Feature Layer.
+- **Clip Layer**: The dataset containing the polygon features used to clip the input features. **Type:** Feature Layer.
+- **Output Name (Optional)**: The name of the output feature service. **Type:** String.
+- **Data Store (Optional)**: Specifies the ArcGIS Data Store where the output will be stored. Options include a spatiotemporal big data store or a relational data store. **Type:** String.
+
+**Derived Output:**
+- **Output Feature Class**: The clipped output features. **Type:** Feature Class.
+Toolset: Manage Data
+
+Tool: Dissolve Boundaries
+
+Description: Finds polygons that overlap or share a common boundary and merges them together to form a single polygon. This tool is useful for spatial analysis tasks where merging polygons is necessary, such as simplifying boundaries or aggregating data for reporting purposes.
+
+Parameters:
+- Input Features: Specifies the polygon features to dissolve. Type: Feature Layer.
+- Dissolve Fields: Specifies one or more fields whose values determine which polygons are dissolved together. Type: Field.
+- Unsplit Lines: Specifies whether to keep or remove the boundaries between dissolved polygons. Type: Boolean.
+
+Derived Output:
+- Output Feature Class: The resulting feature class containing the dissolved polygons. Type: Feature Class.
+**Toolset:** Manage Data
+
+**Tool:** Overlay Layers
+
+**Description:**
+The Overlay Layers tool in ArcGIS Pro overlays the geometries from multiple layers into a single layer. This tool is versatile and can be used to combine, erase, modify, or update spatial features. It ensures that all attributes of the features involved in the overlay are carried through to the result. Some typical use cases include:
+- **Combining multiple datasets**: For example, combining land use data with zoning data to create a comprehensive map that includes attributes from both datasets.
+- **Erasing features**: Removing specific features from a dataset, such as erasing water bodies from a land cover map.
+- **Updating spatial features**: Modifying existing features based on new data inputs, like updating a road network with new construction data.
+
+**Parameters:**
+No information available.
+
+**Derived Output:**
+No information available.
+**Toolset:** Manage Data
+
+**Tool:** Dissolve Boundaries
+
+**Description:**
+The "Dissolve Boundaries" tool finds polygons that overlap or share a common boundary and merges them into a single polygon. This tool simplifies data by removing unnecessary boundaries, aiding in creating cleaner maps and reducing data complexity. For instance, it can merge adjacent land parcels for zoning analysis or combine overlapping habitat areas for environmental studies.
+
+**Parameters:**
+- **Input Features**: The features to dissolve. Type: Feature Layer.
+- **Dissolve Fields**: The fields used to dissolve features. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class**: A new feature class containing the merged polygons. Type: Feature Class.
+**Toolset:** Manage Data
+
+**Tool:** Overlay Layers
+
+**Description:**
+The "Overlay Layers" tool in ArcGIS Pro overlays the geometries from multiple layers into a single layer. It goes beyond simple merging by ensuring that all attributes of the features involved are carried through to the result. This tool is versatile and can be used for various purposes such as combining, erasing, modifying, or updating spatial features. Some typical use cases include:
+- **Combining datasets**: For example, combining land use data with zoning data for compliance assessment.
+- **Updating features**: Like adding new road networks to an existing transportation map.
+- **Spatial analysis**: Performing complex spatial analyses that require integrating multiple data sources, such as environmental impact assessments.
+
+**Parameters:**
+No information available.
+
+**Derived Output:**
+No information available.
+**Toolset:** Manage Data
+
+**Tool:** Clip Layer
+
+**Description:**
+The Clip Layer tool is used to extract input features that fall within specified polygon boundaries. This tool is typically used in spatial analysis to focus on a specific area of interest by removing features outside the desired boundary. For example, if you have a dataset of city parks and you want to analyze only those within a particular neighborhood, you can use the Clip Layer tool to isolate the parks within that neighborhood. This tool is essential in GIS workflows for tasks such as data preparation, where only relevant data is needed for further analysis or visualization.
+
+**Parameters:**
+- **Input Layer:** The dataset containing the point, line, or polygon features to be clipped. **Type:** Feature Layer.
+- **Clip Layer:** The dataset containing the polygon features used to clip the input features. **Type:** Feature Layer.
+- **Output Name (Optional):** The name of the output feature service. **Type:** String.
+- **Data Store (Optional):** Specifies the ArcGIS Data Store where the output will be stored. Options include a spatiotemporal big data store or a relational data store. **Type:** String.
+
+**Derived Output:**
+- **Output Feature Class:** The clipped output features. **Type:** Feature Class.
+Toolset: **Manage Data**
+
+Tool: Calculate Field
+
+Description: The Calculate Field tool allows you to perform advanced calculations using Python code blocks or simple field calculator expressions on field values in a table. It can be used to add a new field or modify an existing field in a layer. This tool is useful for batch updating many records in a table at once. For example, you can calculate values based on conditions, perform mathematical calculations, or update field values based on specific criteria in a spatial analysis or GIS workflow.
+
+Parameters:
+- Input Table: The table containing the fields that will be updated with the new calculations. Type: Table View; Raster Layer; Mosaic Layer.
+- Field Name (Existing or New): The field that will be updated with the new calculation. If the specified field does not exist in the input table, it will be added. Type: Field.
+- Expression Type: Specifies the type of expression used for calculations. Options include Python, Arcade, SQL, and VBScript. Type: String.
+- Field Expression: The calculation expression used to create values that will populate the selected rows. Type: String.
+
+Derived Output:
+- Output Features: The resulting layer with calculated field values. Type: Feature Layer.
+**Toolset:** Manage Data
+
+**Tool:** Calculate Field
+
+**Description:**
+The Calculate Field tool in ArcGIS Pro is designed to perform calculations on field values within a table, feature class, or raster. This tool is commonly used to update or populate fields with calculated values based on expressions. It supports various expression types, including Python, Arcade, SQL, and VBScript, allowing for both simple and complex calculations. Typical use cases include:
+- Performing mathematical operations on numeric fields.
+- Updating string fields with concatenated values.
+- Calculating date fields using date arithmetic.
+- Applying conditional logic to populate fields based on criteria.
+
+**Parameters:**
+- **Input Table:** The table containing the fields to be updated. Type: Table View; Raster Layer; Mosaic Layer.
+- **Field Name (Existing or New):** The field to be updated or added. Type: Field.
+- **Expression:** The calculation expression used to populate the field. Type: String.
+- **Expression Type (Optional):** Specifies the type of expression (Python, Arcade, SQL, VBScript). Type: String.
+
+**Derived Output:**
+- **Output Features:** The updated feature layer with calculated field values. Type: GPFeatureLayer.
+**Toolset:** Topology
+
+**Tool:** Export Topology Errors
+
+**Description:**
+The "Export Topology Errors" tool allows users to export errors and exceptions from a geodatabase topology to a target geodatabase. This tool is essential for managing and sharing topology errors, enabling users to export all associated information, such as the features referenced by the error or exception. Once exported, these feature classes can be accessed using any ArcGIS license level, making it easier to share with users who do not have access to the topology. This tool is typically used in workflows where maintaining data integrity and sharing error information is crucial, such as in collaborative projects or when integrating data from multiple sources.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- **Exported Errors and Exceptions:** This output includes the errors and exceptions from the geodatabase topology, along with all associated information. Type: Feature Class.
+Toolset: Topology
+
+Tool: Create Topology
+
+Description: The Create Topology tool is used to create a geodatabase topology, which helps ensure data integrity by defining spatial relationships between features. Geodatabase topologies provide a mechanism to perform integrity checks on data, validate and maintain feature representations, and model spatial relationships. This tool is essential for tasks like finding adjacent features, working with coincident boundaries, and navigating along connected features in GIS workflows.
+
+Parameters:
+- Input Feature Dataset: Specifies the feature dataset where the topology will be created. Type: Feature Dataset.
+- Input Topology Definition File: Specifies the .xml file containing the topology definition. Type: File.
+
+Derived Output:
+- None available.
+**Toolset:** Topology
+
+**Tool:** Remove Rule From Topology
+
+**Description:**
+The "Remove Rule From Topology" tool in ArcGIS Pro is used to delete a specific rule from a geodatabase topology. This tool is essential for managing and maintaining the integrity of spatial data by allowing users to modify the set of rules that define spatial relationships and constraints within a topology. Typical use cases include updating topology rules to reflect changes in data requirements or correcting errors in rule definitions. For example, if a rule that enforces "Must Not Have Dangles" is no longer applicable due to changes in the dataset, this tool can be used to remove it, ensuring that the topology remains valid and relevant.
+
+**Parameters:**
+- **Topology**: The path to the topology from which the rule will be removed. Type: String.
+- **Rule**: The specific rule to be removed, identified by its name and ObjectClassID. Type: String.
+
+**Derived Output:**
+- No information available.
+**Toolset: Topology**
+
+**Tool: Add Rule To Topology**
+
+**Description:**
+The **Add Rule To Topology** tool is used to add a rule to an existing geodatabase topology. Geodatabase topologies are essential for ensuring data integrity by defining and maintaining spatial relationships and boundaries between features. This tool is typically used in GIS workflows to enforce spatial rules that help in maintaining the accuracy of feature data, such as ensuring that boundaries are covered by other boundaries or that polygons do not overlap. For example, in a city planning context, this tool can be used to ensure that property boundaries are correctly aligned with zoning boundaries, or that roads are properly connected without gaps or overlaps. This helps in maintaining the integrity of spatial data and supports various analytical operations like identifying adjacent features or managing connected features in a network. The tool is part of the Topology toolset in the Data Management toolbox in ArcGIS Pro and is used to add rules to an existing geodatabase topology. It is often used in conjunction with other topology tools to ensure data integrity and accuracy in GIS workflows. The tool can be run multiple times to add all desired rules to a topology, and it is typically used after creating a topology and adding feature classes to it. Once the rules are added, the topology can be validated using the Validate Topology geoprocessing tool to ensure that the spatial relationships and constraints are correctly enforced. This process helps in identifying and fixing errors, such as overlapping polygons or gaps between features, which is crucial for maintaining accurate and reliable geospatial data.
+
+**Parameters:**
+- **Input Topology**: The path to the location of the topology where you want to add the rule. Type: *String*. 
+- **Rule**: The rule you want to add.
+
+**Derived Output:**
+- No information available.
+**Toolset:** Topology
+
+**Tool:** Add Feature Class To Topology
+
+**Description:**
+The "Add Feature Class To Topology" tool is used to incorporate a feature class into an existing geodatabase topology. This tool is essential for managing spatial relationships and ensuring data integrity within a geodatabase. By adding feature classes to a topology, users can enforce spatial rules and validate the spatial relationships between features. Typical use cases include ensuring that adjacent features share boundaries correctly, maintaining connectivity in network datasets, and supporting spatial analysis operations that require topological consistency.
+
+**Parameters:**
+- **Input Topology:** The path to the topology where the feature class will be added. Type: *String*.
+- **Input Feature Class:** The location of the feature class to be added. Only feature classes within the feature dataset and not currently part of another topology or geometric network can be added. Type: *String*.
+- **XY Coordinate Rank:** The rank for the x,y-coordinates of the feature class, which determines its accuracy relative to other feature classes. Type: *Integer*.
+- **Z Coordinate Rank:** The rank for the z-coordinates of the feature class, which determines its accuracy relative to other feature classes. Type: *Integer*.
+
+**Derived Output:**
+- **Updated Topology:** The topology with the newly added feature class. Type: *Topology*.
+**Toolset:** Topology
+
+**Tool:** Remove Feature Class From Topology
+
+**Description:**
+The "Remove Feature Class From Topology" tool is used to remove a feature class from a geodatabase topology. This tool is essential for managing spatial data integrity and ensuring that only relevant feature classes are part of a topology. Typical use cases include updating a topology by removing outdated or incorrect feature classes or simplifying a topology by excluding certain features that no longer need validation against topological rules. For example, if a street network topology needs updating to exclude certain streets no longer in use, this tool can remove those streets from the topology.
+
+**Parameters:**
+- **Feature Class to Remove**: Specifies the location of the feature class to be removed from the topology. Type: Feature Class.
+
+**Derived Output:**
+No derived outputs are specified for this tool.
+**Toolset:** Topology
+
+**Tool:** Set Cluster Tolerance
+
+**Description:**
+The Set Cluster Tolerance tool in ArcGIS Pro is used to modify the cluster tolerance of a topology within a geodatabase. Cluster tolerance is a critical parameter that defines the minimum distance between vertices that are considered coincident during topology validation. This tool is essential for ensuring spatial data integrity by controlling how closely vertices must be to be considered the same location. Typical use cases include adjusting the precision of spatial data to prevent unintended movement of features during topology validation, which can be crucial in maintaining accurate spatial relationships and boundaries. For example, in urban planning, setting an appropriate cluster tolerance can help ensure that street networks are accurately represented without collapsing intersections or distorting road alignments.
+
+**Parameters:**
+- **Input Topology:** The topology for which you want to change the cluster tolerance. Type: Topology Layer.
+- **Cluster Tolerance:** The value to be set as the cluster tolerance property of the selected topology. If you enter a value of zero, the default or minimum cluster tolerance will be applied to the topology. Type: Double.
+
+**Derived Output:**
+- **Updated Input Topology:** The updated topology after the cluster tolerance has been set. Type: Topology Layer.
+**Toolset:** Topology
+
+**Tool:** Validate Topology
+
+**Description:**
+The Validate Topology tool in ArcGIS Pro ensures data integrity by validating the features in a topology against a predefined set of topology rules. It identifies errors in the data based on the rules set for the topology, such as adjacency, connectivity, and coincidence of features. This tool is essential for maintaining spatial relationships and boundaries within a geodatabase. Typical use cases include ensuring that polygons do not overlap, lines connect at endpoints, and points are properly contained within polygons. It is particularly useful in workflows that require high data accuracy, such as urban planning, utility management, and environmental monitoring.
+
+**Parameters:**
+- **Input Topology**: The topology to be validated. This can be a topology layer from a feature service or a local geodatabase. Type: Topology Layer.
+
+**Derived Output:**
+- **Validation Result**: Describes the result of the validation operation, including any errors or exceptions found. Type: ValidationResult.
+
+The tool can be used asynchronously when the input topology is from a topology layer feature service, which is beneficial for large datasets or when working with web services. It also supports validation through the Error Inspector in ArcGIS Pro, which provides a systematic approach to identifying and resolving errors.
+**Toolset:** Generalization Toolset
+
+**Tool:** Collapse Dual Lines To Centerline
+
+**Description:**
+The "Collapse Dual Lines To Centerline" tool derives centerlines from dual-line features, such as road casings, based on specified width tolerances. This simplifies the representation of roads or similar features by reducing them to a single line. It is beneficial for cartographic purposes or spatial analysis requiring a simplified network. For instance, in urban planning, this tool can create a simplified road network for traffic analysis or visualization at smaller scales.
+
+**Parameters:**
+- **in_line_decode_id_table**: Specifies the input table that contains the decode values for the input line features. Type: Table.
+- **in_poly_decode_id_table**: Specifies the input table that contains the decode values for the input polygon features. Type: Table.
+
+**Derived Output:**
+- **Centerline Features**: Represents the simplified version of the original dual-line features. Type: Feature Class.
+Toolset: Generalization Toolset
+
+Tool: Delineate Built-Up Areas
+
+Description: The Delineate Built-Up Areas tool creates polygons to represent built-up areas by delineating densely clustered arrangements of buildings on small-scale maps. This tool is useful for simplifying and refining features for display at smaller scales, enhancing the visualization of object boundaries and spatial properties. For example, it can be used in urban planning to identify densely populated areas or in environmental studies to analyze land use patterns.
+
+Parameters:
+- Input Features: Specifies the point features representing buildings or structures to be delineated. Type: Feature Layer.
+- Output Feature Class: Specifies the output polygon features representing the built-up areas. Type: Feature Class.
+
+Derived Output:
+- None available.
+**Toolset:** Generalization Toolset
+
+**Tool:** Merge Divided Roads
+
+**Description:**
+The Merge Divided Roads tool merges road segments that are parallel along a significant distance into one center line. Matched pairs of roads or lanes are merged if they are the same road class, trend generally parallel to one another, and are within the merge distance apart. This tool is useful for simplifying road networks at smaller scales, where depicting divided highways and boulevards as a single line is appropriate. Typical use cases include:
+- Simplifying large-scale road collections for smaller scale maps.
+- Depicting divided highways as single lines for clearer visualization.
+- Preparing road networks for display by removing extraneous minor road features.
+
+**Parameters:**
+- **Merge Field**: Specifies the road class for merging. Type: String.
+- **Merge Distance**: Defines the maximum distance between road lanes to be merged. Type: Double.
+
+**Derived Output:**
+- **Output Feature Class**: Contains the merged single-line road features. Type: Feature Class.
+### Toolset: Generalization Toolset
+
+### Tool: Thin Road Network
+
+#### Description:
+The **Thin Road Network** tool simplifies road networks by identifying and flagging road segments that can be removed from display without impacting the network's connectivity and character. It is beneficial for creating cleaner, less cluttered maps, especially at smaller scales. This tool helps maintain the essential morphology and character of road networks, making it ideal for urban planning, transportation analysis, and geographic data presentation.
+
+Typical use cases include:
+- Simplifying road networks for display at smaller scales.
+- Enhancing map readability by reducing road network density.
+- Preparing road network data for thematic mapping or spatial analysis.
+
+#### Parameters:
+- **Input Road Network**: The feature class containing the road network to be thinned. Type: Feature Layer.
+- **Minimum Length**: Specifies the minimum length of road segments to retain. Type: Double.
+- **Invisible Field**: The field used to flag road segments for removal. Type: String.
+- **Level**: Specifies the level of thinning to apply. Type: Integer.
+
+#### Derived Output:
+- **Thinned Road Network**: A feature class representing the simplified road network. Type: Feature Layer.
+**Toolset:** Generalization Toolset
+
+**Tool:** Simplify Building
+
+**Description:**
+The "Simplify Building" tool simplifies the boundary or footprint of building polygons while preserving their essential shape and size. This tool is beneficial in cartographic workflows, especially for creating maps at smaller scales where detailed building shapes can clutter the map. By reducing the complexity of building outlines, it enhances the aesthetic quality of maps while maintaining the crucial characteristics of buildings without unnecessary detail. For instance, in urban planning or GIS workflows, this tool is used to prepare building data for visualization in city maps or regional planning documents.
+
+**Parameters:**
+- No information available.
+
+**Derived Output:**
+- No information available.
+Toolset: Generalization Toolset
+
+Tool: Simplify Line
+
+Description: The Simplify Line tool simplifies lines by removing relatively extraneous vertices while preserving essential shape. It is used to reduce the number of vertices in a line feature, improving processing time and maintaining the overall geometry. For example, it can be used to smooth out jagged edges in road networks or simplify river outlines for cartographic purposes.
+
+Parameters:
+- Input Line Features: Specifies the line features to be simplified. Type: Feature Layer
+- Simplification Tolerance: Defines the maximum allowable offset that the simplified line can deviate from the original line. Type: Linear Unit
+
+Derived Output:
+- Simplified Line Features: The output feature class containing the simplified line features. Type: Feature Class
+**Toolset:** Generalization Toolset
+
+**Tool:** Collapse Road Detail
+
+**Description:**
+The Collapse Road Detail tool simplifies road networks by collapsing small, open configurations of road segments that disrupt the general trend of a road network. This simplification is particularly useful for features like traffic circles, replacing them with a more straightforward depiction. It is commonly used when visualizing road networks at smaller scales to represent details as simple intersections. For instance, in a large-scale road map, traffic circles might be collapsed to streamline the visual representation of the network. This tool is optimized for road networks and may not yield expected results if applied to other spatial data types.
+
+**Parameters:**
+- **Collapse Distance**: The maximum diameter across the open area that will be collapsed. Type: Double.
+
+**Derived Output:**
+- **Output Feature Class**: Contains the simplified road network. All roads not collapsed are copied to this output. Type: Feature Class.
+Toolset: Generalization Toolset
+
+Tool: Simplify Polygon
+
+Description: The Simplify Polygon tool simplifies polygons by removing relatively extraneous vertices while preserving essential shape. This tool is useful for refining polygon boundaries while maintaining spatial properties. For example, it can be used to simplify the boundary of building polygons or to smooth polygon outlines for improved cartographic quality.
+
+Parameters:
+- in_features: Specifies the input polygon features to be simplified. Type: Feature Layer
+- out_feature_class: Specifies the output feature class that will contain the simplified polygons. Type: Feature Class
+- algorithm: Specifies the simplification algorithm to be used. Type: String
+
+Derived Output:
+- out_point_feature_class: Contains point features representing endpoints of simplified lines or polygons. Type: Feature Class
+**Toolset:** Generalization Toolset
+
+**Tool:** Aggregate Points
+
+**Description:**
+The Aggregate Points tool creates polygon features around clusters of proximate point features. It is used to simplify and refine data for better visualization and understanding of spatial properties. This tool is commonly employed in scenarios where individual point data needs to be aggregated into larger, more meaningful spatial units. For example, it can aggregate census data into different levels of census boundaries or symbolize weather stations using the highest temperature recorded at each station. Another use case is tracking diseases like Ebola by aggregating reported incidences recorded as point features into polygonal containers.
+
+**Parameters:**
+- **Input Features**: The point features to be aggregated. Type: Feature Layer.
+- **Output Feature Class**: The name of the output polygon feature class. Type: String.
+- **Aggregation Distance**: The distance within which points will be aggregated into polygons. Type: Linear Unit.
+- **Statistics Fields**: Optional fields for which statistics will be calculated. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class**: Contains the aggregated polygon features with counts of points and optional statistics. Type: Feature Class.
+**Toolset:** Generalization Toolset
+
+**Tool:** Simplify Shared Edges
+
+**Description:**
+The "Simplify Shared Edges" tool simplifies the edges of input features while maintaining the topological relationship with edges shared with other features. This tool is valuable in spatial analysis and GIS workflows where preserving shared boundaries is essential, such as in urban planning or environmental mapping. For instance, it can be used to simplify the boundaries of adjacent land parcels or administrative regions without altering their shared borders, ensuring accurate representation of real-world spatial relationships.
+
+**Parameters:**
+- **Input Features**: The lines or polygons to be simplified. Type: Feature Layer.
+- **Simplification Algorithm**: The algorithm used for simplification. Type: String.
+- **Simplification Tolerance**: Specifies the input and unit of input for simplification. Type: Linear Unit.
+- **Shared Edge Features** (Optional): Line or polygon features that will be simplified along edges shared with input features. Type: Feature Layer.
+- **Input Barrier Layers** (Optional): Point, line, or polygon features that act as barriers for simplification. Type: Feature Layer.
+
+**Derived Output:**
+- **Simplified Features**: The output feature class containing simplified features. Type: Feature Layer.
+**Toolset:** Generalization Toolset
+
+**Tool:** Create Cartographic Partitions
+
+**Description:**
+The "Create Cartographic Partitions" tool generates a mesh of polygon features covering an input feature class. Each output polygon encloses a specified number of input features or vertices based on density and distribution. This tool subdivides large datasets into manageable sections, ensuring topologically correct partitions with no overlaps. It is valuable for generalizing or resolving conflicts in spatial datasets, such as creating administrative boundaries or map sheets.
+
+**Parameters:**
+- **Partition Features**: The polygon feature class used to subdivide large datasets for generalization or conflict resolution processing. Type: Feature Class.
+
+**Derived Output:**
+- **Partitioned Feature Class**: Output feature class containing the partitioned polygons. Type: Feature Class.
+
+The tool efficiently processes large datasets by dividing them into logical partitions, preventing memory limitations and maintaining seamless feature classes across boundaries.
+**Toolset:** Generalization Toolset
+
+**Tool:** Aggregate Polygons
+
+**Description:**
+The Aggregate Polygons tool combines polygons within a specified distance into new polygons. It simplifies complex datasets by merging adjacent polygons, aiding in visualizing spatial properties at smaller scales. For instance, in urban planning, it can aggregate small land parcels into larger zones for zoning analysis. In environmental studies, it helps combine fragmented habitats into larger conservation areas.
+
+**Parameters:**
+- **Input Features:** The polygon features to be aggregated. Type: Feature Layer.
+- **Distance:** The maximum distance between polygons to be aggregated. Type: Linear Unit.
+- **Aggregate Field:** A field used to determine which polygons to aggregate. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class:** The new aggregated polygon features. Type: Feature Class.
+Toolset: Generalization Toolset
+
+Tool: Collapse Hydro Polygon
+
+Description: Collapses or partially collapses hydro polygons to a centerline based on a collapse width. This tool is useful for creating centerlines from hydrographic polygons for use at smaller scales. It simplifies the hydrographic network while maintaining the main arteries and thinning less significant features based on hierarchy, length, and spacing between features. 
+
+Parameters:
+- in_line_decode_id_table: Specifies the input line decode ID table. Type: Table.
+- in_poly_decode_id_table: Specifies the input polygon decode ID table. Type: Table.
+
+Derived Output:
+No information available.
+Toolset: Conceptualization of Spatial Relationships
+
+Tool: Travel Time
+
+Description: The Travel Time tool is used for network analysis to calculate Service Areas based on travel time or distance limits from specified facilities. It allows users to define input facilities, output polygons, network dataset, travel mode, cutoffs, cutoff units, and time of day for the analysis. For example, it can help in determining optimal locations for facilities like community centers based on travel time thresholds.
+
+Parameters:
+- Input Facilities: Points around which Service Area polygons will be calculated. Type: Feature Set.
+- Output Polygons: The output feature class created by the tool. Type: Feature Class.
+- Network: The network dataset or network analysis service used for calculations. Type: Network Dataset.
+- Travel Mode: The travel mode used for analysis. Type: Network Travel Mode.
+- Cutoffs: The travel time or distance limit for Service Areas. Type: Double.
+- Cutoff Units: The units for interpreting the Cutoffs parameter value. Type: String.
+- Time Of Day: The date and time of day for the analysis. Type: Date.
+
+Derived Output:
+- Output Directions: Provides travel directions as a feature class in a memory-based workspace. Type: Feature Class.
+Toolset: Conceptualization of Spatial Relationships
+
+Tool: K Nearest Neighbors
+
+Description: A conceptualization of spatial relationships integrates space directly into mathematical calculations. The K Nearest Neighbors tool identifies a fixed number of features closest to a focal feature to be used as neighbors. This method ensures that each neighborhood contains the same number of neighbors for every feature. For example, in an analysis involving census tracts with uneven shapes and sizes, using the K Nearest Neighbors method ensures that each neighborhood contains a set number (k) of neighbors, such as the focal tract and its eight nearest tracts in space.
+
+Parameters:
+- Distance Band: Specifies the cutoff distance for defining neighbors. Type: Positive number.
+- Number of Neighbors: Represents the count of neighbors to include for each target feature. Type: Positive integer.
+
+Derived Output:
+- No derived outputs available.
+Toolset: Conceptualization of Spatial Relationships
+
+Tool: Conceptualization of Spatial Relationships: Inverse Distance
+
+Description: Spatial statistics integrate space and spatial relationships directly into their mathematics. Many tools in the Spatial Statistics toolbox require selecting a value for the Conceptualization of Spatial Relationships parameter before analysis. Common conceptualizations include inverse distance, travel time, fixed distance, K nearest neighbors, and contiguity. The choice of spatial relationship conceptualization depends on the analysis requirements.
+
+Parameters:
+- Conceptualization of Spatial Relationships: Specifies the type of spatial relationship to consider. Type: String.
+- Other parameters specific to the Conceptualization of Spatial Relationships: Refer to the tool documentation for detailed information.
+
+Derived Output:
+- No derived outputs specified for this tool.
+Toolset: Conceptualization of Spatial Relationships
+
+Tool: Fixed Distance
+
+Description: The Fixed Distance tool allows users to specify a fixed distance band for spatial analysis. This tool is commonly used in scenarios where understanding object properties and relations within a specific distance is crucial. For example, in analyzing childhood obesity, the tool can be used to define the scale of analysis based on distances between households or school zones. It is important to choose a distance that aligns with the scale of the question being addressed or the remediation scale under consideration.
+
+Parameters:
+- Conceptualization of Spatial Relationships: Specifies the type of spatial relationship to consider. Options include inverse distance, travel time, fixed distance, K nearest neighbors, and contiguity. Data Type: String.
+- Linear Unit: Allows the user to choose a unit for distance measurement. It is a string data type.
+- X Distance and Y Distance: Define the fixed distance band in both X and Y directions. Data Type: Double.
+- Output: Represents the derived output, which is a feature layer modified by the tool based on the input feature layer. Data Type: Feature Layer.
+
+Derived Output:
+- Output: The modified feature layer resulting from the Fixed Distance analysis. Type: Feature Layer.
+Toolset: Conceptualization of Spatial Relationships
+
+Tool: Contiguity
+
+Description: The polygon contiguity Conceptualization of Spatial Relationships parameter value defines feature neighbors as those polygons that share a boundary or corner. The input feature class does not contain polygon features, so this is not valid. To resolve this, specify a different Conceptualization of Spatial Relationships parameter value or provide a different polygon input feature class for analysis.
+
+Parameters:
+- Spatial Constraints: Specifies the spatial constraints to be imposed. Type: String.
+
+Derived Output:
+- No derived outputs available.
+Toolset: Space Time Cube Creation Toolset
+
+Tool: Create Space Time Cube By Aggregating Points
+
+Description:
+The "Create Space Time Cube By Aggregating Points" tool summarizes a set of point features into a netCDF data structure by aggregating them into space-time bins. Within each bin, the points are counted, and specified attributes are aggregated. This tool is commonly used in spatial analysis to evaluate trends in point data over time and space. For instance, it can be applied to analyze the distribution and trends of crime incidents in a city over time or study the spread of a disease by aggregating patient data into spatial and temporal bins.
+
+Parameters:
+- **Input Features**: The input point feature layer to be aggregated. Type: *Feature Layer*.
+- **Output Space Time Cube**: The output netCDF file that will be produced. Type: *File*.
+- **Time Field**: The field containing the date and time for each point. Type: *Date*.
+- **Time Step Interval**: The number of seconds, minutes, hours, days, weeks, or years that represent a single time step in the space-time cube. Type: *Time Interval*.
+- **Distance Interval**: The distance interval used to define the space-time bins. Type: *Linear Unit*.
+- **Summary Fields**: The fields to be aggregated within each space-time bin. Type: *Field*.
+
+Derived Output:
+- **Output Space Time Cube**: The output is a netCDF file that contains the aggregated space-time data. Type: *File*.
+**Toolset:** Space Time Cube Creation Toolset
+
+**Tool:** Create Space Time Cube From Defined Locations
+
+**Description:**
+The "Create Space Time Cube From Defined Locations" tool structures panel data or station data into a netCDF data format by creating space-time bins. This tool is particularly useful for datasets where the geographic location remains constant, but the attributes change over time. It is typically used in scenarios where you need to analyze temporal trends at fixed locations, such as monitoring environmental data at weather stations or tracking sales data at retail locations over time. The tool evaluates trends for variables or summary fields across all defined locations, providing insights into temporal patterns and changes.
+
+**Parameters:**
+- **Input Features**: The input dataset containing the defined locations. Type: Feature Layer.
+- **Output Space Time Cube**: The name and location for the output netCDF file. Type: File.
+- **Time Field**: The field containing the date and time information for each record. Type: Date.
+- **Time Step Interval**: The interval of time for each bin in the space-time cube (e.g., days, weeks, months). Type: Time Interval.
+- **Summary Fields**: Fields to be summarized within each bin. Type: Field.
+
+**Derived Output:**
+- **Output Space Time Cube**: A netCDF file that contains the structured space-time data. This file can be used for further analysis in ArcGIS Pro. Type: netCDF File.
+**Toolset: Space Time Cube Creation Toolset**
+
+**Tool: Create Space Time Cube From Multidimensional Raster Layer**
+
+**Description:**
+The "Create Space Time Cube From Multidimensional Raster Layer" tool converts a time-enabled multidimensional raster layer into a space-time cube in a netCDF data format. This tool is valuable for analyzing temporal properties of raster data, such as environmental data collected over time. For instance, it can be used to analyze air quality data like PM2.5 concentrations over time, enabling the identification of temporal trends and patterns in pollution levels. The resulting space-time cube serves as a foundational data structure for further analysis using tools in the Space Time Pattern Mining toolbox, such as Emerging Hot Spot Analysis or Time Series Clustering.
+
+**Parameters:**
+- **Input Multidimensional Raster Layer**: The multidimensional raster layer used to create the space-time cube. Type: *Multidimensional Raster Layer*.
+- **Output Space Time Cube**: The location and name for the output space-time cube file, saved in a NetCDF format with an `.nc` extension. Type: *File*.
+- **Fill Empty Bins Method**: The method for filling empty bins in the space-time cube. Default method: "Zeros". Type: *String*.
+
+**Derived Output:**
+- **Output Space Time Cube**: The resulting space-time cube, a NetCDF file containing summarized data from the input multidimensional raster layer. This file is not automatically added to the map but can be used as input for other tools in the Space Time Pattern Mining toolbox. Type: *NetCDF File*.
+Toolset: Space Time Cube Creation
+
+Tool: Create Space Time Cube By Aggregating Points
+
+Description:
+The "Create Space Time Cube By Aggregating Points" tool summarizes a set of point data into a netCDF data structure by aggregating these points into space-time bins. Within each bin, the tool counts the points and aggregates specified attributes. It evaluates the trend for counts and summary field values across all bin locations. This tool is particularly useful in spatial analysis and GIS workflows for analyzing temporal and spatial patterns, such as tracking changes in population density over time, monitoring environmental changes, or analyzing crime patterns in a city over different time periods.
+
+Parameters:
+- Input Features: The input point feature layer to be aggregated. Type: Feature Layer.
+- Output Space Time Cube: The output netCDF file that will be produced. Type: File.
+- Time Field: The field containing the date and time for each point. Type: Date.
+- Time Step Interval: The number of seconds, minutes, hours, days, weeks, or years that will represent a single time step in the space-time cube. Type: Time Interval.
+
+Derived Output:
+- Output Space Time Cube: The output is a netCDF file that contains the space-time cube data. Type: netCDF File.
+**Toolset:** Space Time Cube Creation
+
+**Tool:** Create Space Time Cube From Defined Locations
+
+**Description:**
+The "Create Space Time Cube From Defined Locations" tool structures panel data or station data into a netCDF data format by creating space-time bins. It is useful when dealing with feature locations that remain constant over time, but attributes change. This tool is commonly used for analyzing environmental monitoring stations, traffic data collection points, or any scenario where data is collected at fixed locations over time. It evaluates trends for variables or summary fields across all defined locations, making it a powerful tool for temporal analysis in GIS workflows.
+
+**Parameters:**
+- Input Features: Specifies the input point feature layer to be aggregated. Type: Feature Layer.
+- Output Space Time Cube: Specifies the output netCDF file that will be produced. Type: File.
+- Time Field: Specifies the field containing the date and time for each point. Type: Field.
+- Time Step Interval: Specifies the duration of time represented by each bin. Type: String.
+
+**Derived Output:**
+- No information available.
+**Toolset:** Space Time Cube Creation
+
+**Tool:** Create Space Time Cube From Multidimensional Raster Layer
+
+**Description:**
+The "Create Space Time Cube From Multidimensional Raster Layer" tool converts a time-enabled multidimensional raster layer into a space-time cube. This tool structures the data into a netCDF data format, essential for efficient space-time analysis and visualization. The space-time cube created does not perform spatial or temporal aggregation, making it suitable for datasets with predefined spatial and temporal resolution. Typical use cases include analyzing environmental data like air quality or temperature changes over time, where data is already organized in a multidimensional raster format. For example, it can be used to analyze PM2.5 concentration levels over a period to identify trends and patterns.
+
+**Parameters:**
+- **Input Multidimensional Raster Layer**: The raster layer containing the multidimensional data to convert into a space-time cube. **Type:** Multidimensional Raster Layer.
+- **Output Space Time Cube**: The file path to save the resulting space-time cube. **Type:** File Path.
+- **Fill Empty Bins Method**: Method to fill empty bins in the space-time cube. Default is "Zeros". **Type:** String.
+
+**Derived Output:**
+- **Space Time Cube**: The resulting netCDF file containing structured space-time data. This file is foundational for further analysis but is not automatically added to the map. **Type:** NetCDF File.
+**Toolset: Spatial Statistics**
+
+**Tool: Optimized Outlier Analysis**
+
+**Description:**
+The Optimized Outlier Analysis tool executes the Cluster and Outlier Analysis (Anselin Local Moran's I) tool by automatically determining the optimal settings for analysis based on the characteristics of the input data. It is particularly useful for identifying statistically significant hot spots, cold spots, and spatial outliers in datasets containing incident points or weighted features, which can be points or polygons. This tool is beneficial for large datasets where manual parameter tuning is impractical. It utilizes the False Discovery Rate (FDR) correction method to adjust the classification type reported in the output features for multiple testing and spatial dependence. An example of its use is in environmental studies like air quality monitoring to identify areas with significant deviations in data, such as pollution levels.
+
+**Parameters:**
+- **Input Features**: The dataset with features to be analyzed. Type: *Feature Layer*.
+- **Analysis Field**: Optional field for analysis. Type: *Field*.
+- **Bounding Polygons Defining Where Incidents Are Possible**: Optional parameter to define spatial extent. Type: *Feature Class*.
+- **Incident Data Aggregation Method**: Method to aggregate incident data into weighted features. Type: *String*.
+
+**Derived Output:**
+- **Output Features**: Map of statistically significant hot spots, cold spots, and spatial outliers. The classification type is adjusted for multiple testing and spatial dependence using the FDR correction method. Type: *Feature Class*.
+**Toolset:** Spatial Statistics
+
+**Tool:** Generalized Linear Regression
+
+**Description:**
+The Generalized Linear Regression tool in ArcGIS Pro creates models to understand or predict a variable by quantifying relationships among features. It is useful for spatial analysis to evaluate relationships between feature attributes. The tool supports various models like Ordinary Least Squares (OLS), Count (Poisson), and Binary (Logistic), enabling analysis of a wide range of problems. Examples of typical use cases include:
+- Analyzing demographic characteristics affecting public transportation usage.
+- Investigating relationships between vandalism and burglary.
+- Predicting 911 call volumes.
+- Estimating future demand for emergency response resources.
+- Understanding variables influencing low birth rates.
+
+**Parameters:**
+- **Input Features**: Feature class or layer with dependent and explanatory variables. Type: Feature Layer.
+- **Dependent Variable**: Field representing the variable to model or predict. Type: Field.
+- **Explanatory Variables**: One or more fields explaining or predicting the dependent variable. Type: Field(s).
+
+**Derived Output:**
+- **Output Feature Class**: Contains regression analysis results with predicted values and residuals. Type: Feature Class.
+- **Output Diagnostics Table**: Table with regression model diagnostics like coefficients and statistical significance. Type: Table.
+**Toolset:** Spatial Statistics
+
+**Tool:** Spatial Autocorrelation (Global Moran's I)
+
+**Description:**
+The Spatial Autocorrelation (Global Moran's I) tool measures spatial autocorrelation based on both feature locations and feature values simultaneously. It evaluates whether the pattern expressed is clustered, dispersed, or random. This tool calculates the Moran's I Index value along with a z-score and p-value to assess the significance of the index. Typical use cases include analyzing geographic data to determine if high or low values are spatially clustered, which can be crucial for urban planning, environmental studies, and resource management. For example, it can be used to identify clusters of high crime rates in a city or areas of high biodiversity in a conservation study.
+
+**Parameters:**
+- **Input Feature Class**: The feature class containing the features to be analyzed. Type: Feature Layer.
+- **Input Field**: The numeric field to be evaluated for spatial autocorrelation. Type: Field.
+- **Conceptualization of Spatial Relationships**: Defines how spatial relationships among features are conceptualized. Options include inverse distance, fixed distance, and contiguity. Type: String.
+- **Distance Band or Threshold Distance**: Specifies a distance threshold for spatial relationships. Type: Double.
+
+**Derived Output:**
+- **Moran's I Index**: A measure of spatial autocorrelation. Type: Double.
+- **Expected Index**: The expected value of Moran's I under the null hypothesis. Type: Double.
+- **Variance**: The variance of the Moran's I Index. Type: Double.
+- **z-score**: A measure of statistical significance. Type: Double.
+- **p-value**: The probability that the observed spatial pattern is due to random chance. Type: Double.
+**Toolset:** Spatial Statistics
+
+**Tool:** Cluster and Outlier Analysis (Anselin Local Moran's I)
+
+**Description:**
+The Cluster and Outlier Analysis tool, also known as Anselin Local Moran's I, is designed to identify spatial clusters of features with high or low values and to detect spatial outliers. This tool calculates a local Moran's I value, a z-score, a pseudo p-value, and a cluster type code for each statistically significant feature. A positive index value indicates a feature is part of a cluster with similar high or low values, while a negative value indicates a feature is an outlier with dissimilar neighboring values. The tool is particularly useful in fields such as economics, resource management, public health, and demographics, where it can help identify areas with anomalous patterns, such as unexpected spending or disease rates.
+
+**Parameters:**
+- **Input Feature Class**: The dataset containing the features to be analyzed. Type: Feature Class.
+- **Input Field**: The field containing the values to be analyzed. Type: Field.
+
+**Derived Output:**
+- **Output Feature Class**: Contains the results of the analysis, including the local Moran's I value, z-score, pseudo p-value, and cluster type code for each feature. Type: Feature Class.
+
+This tool is essential for understanding spatial relationships and boundaries, providing insights into the spatial distribution of data points. It requires a minimum of 30 features to ensure reliable results.
+Toolset: Spatial Statistics
+
+Tool: Optimized Hot Spot Analysis
+
+Description: The Optimized Hot Spot Analysis tool executes the Hot Spot Analysis (Getis-Ord Gi*) tool using parameters derived from characteristics of your input data. It automatically determines the best distance for performing the hot spot analysis based on the clustering among counts in neighboring hexbins. The tool then compares the count of high blood lead level patients in each neighborhood cluster of hexbins with the entire study area to determine a z-score, which is used to establish statistical significance. The tool provides messages during execution to explain the decisions made for optimal results. By aggregating incident point data into weighted features and identifying an appropriate scale of analysis, it offers insights into spatial patterns of high concentrations. The statistical significance reported in the output features is adjusted for multiple testing and spatial dependence using the False Discovery Rate (FDR) correction method.
+
+Parameters:
+- Input Features: Dataset containing incident point data aggregated into weighted features. Type: Feature Layer.
+- Output Features: Location to store the output feature class. Type: Feature Class.
+- Analysis Field: Optional parameter to consider numeric values associated with input features. Leave empty if not applicable. Type: Field.
+
+Derived Output:
+- High_Blood_Lead_Hot_Spots: Feature class containing statistically significant hot and cold spots based on the Getis-Ord Gi* statistic. Type: Feature Class.
+**Toolset:** Spatial Statistics
+
+**Tool:** Hot Spot Analysis (Getis-Ord Gi*)
+
+**Description:**
+The Hot Spot Analysis (Getis-Ord Gi*) tool is used to identify statistically significant spatial clusters of high values (hot spots) and low values (cold spots) in your data. This tool is particularly useful in spatial analysis workflows where understanding the spatial distribution of phenomena is crucial. For example, it can be used to identify areas with high crime rates, regions with a high incidence of disease, or locations with frequent traffic accidents. The tool integrates spatial relationships directly into its calculations, making it a powerful method for analyzing spatial patterns and processes.
+
+**Parameters:**
+- **Input Features**: The feature class or layer containing the data to be analyzed. Type: Feature Layer.
+- **Analysis Field**: The numeric field that will be used to measure the intensity of the phenomenon being analyzed. Type: Field.
+- **Conceptualization of Spatial Relationships**: Defines how spatial relationships among features are conceptualized. Options include inverse distance, fixed distance, and contiguity. Type: String.
+- **Distance Band or Threshold Distance**: Specifies the distance within which features are considered neighbors. Type: Double.
+
+**Derived Output:**
+- **Output Feature Class**: The feature class containing the results of the hot spot analysis, including z-scores and p-values for each feature. Type: Feature Class.
+**Toolset:** Proximity
+
+**Tool:** Create Buffers
+
+**Description:**
+The "Create Buffers" tool in ArcGIS Pro generates polygons that extend a specified distance from input features, which can be points, lines, or polygons. This tool is commonly used in spatial analysis to determine areas of influence or proximity around geographic features. For example, it can create a buffer zone around a river to analyze potential flood impact areas or establish a safety perimeter around hazardous sites. Buffers are essential in various GIS workflows, such as environmental impact assessments, urban planning, and resource management.
+
+**Parameters:**
+- **Input Features**: The features around which buffers will be created. Type: Feature Layer.
+- **Output Feature Class**: The name and location of the output buffer feature class. Type: Feature Class.
+- **Distance**: The distance to buffer the input features. Type: Linear Unit.
+- **Dissolve Type**: Specifies how output buffers are dissolved. Options include "None" or "All". Type: String.
+- **Method**: The method used to create buffers, such as "Planar" or "Geodesic". Type: String.
+
+**Derived Output:**
+- **Output Feature Class**: The resulting buffer polygons. Type: Feature Class.
+Toolset: Use Proximity
+
+Tool: Snap Tracks
+
+Description: Snap Tracks tool snaps input track points to lines. The time-enabled point data must include features that represent an instant in time. Traversable lines with fields indicating the from and to nodes are required for analysis. This tool is useful for automating the process of determining the closest rail station to each tourist attraction by gathering all the information into a single layer.
+
+Parameters:
+- Input Points: The time-enabled point feature class that will be used to trace proximity events. Data Type: Feature Layer
+- Entity ID Field: The text field representing unique IDs for each entity. Data Type: Field
+- Output Proximity Events: The output feature class containing the trace proximity events. Data Type: Feature Class
+- Distance Method: Specifies the distance type used with the Spatial Search Distance parameter. Data Type: String
+- Spatial Search Distance (Optional): The maximum distance between two points to be considered in proximity. Data Type: Linear Unit
+- Temporal Search Distance (Optional): The maximum duration between two points to be considered in proximity. Data Type: Time Unit
+- Define Entities of Interest Using (Optional): Specifies the entities of interest. Data Type: String
+
+Derived Output:
+- Output Proximity Events: Contains the trace proximity events. Data Type: Feature Class
+Toolset: Use Proximity
+
+Tool: Group By Proximity
+
+Description: The Group By Proximity tool is part of the Use Proximity toolset, designed to determine the proximity of features within spatial or spatiotemporal boundaries. This tool groups features that are within spatial or spatiotemporal proximity to each other. It helps answer the common spatial analysis question, "What is near what?" For example, it can be used to group locations based on their proximity to specific features, such as grouping customers based on their distance from store locations.
+
+Parameters:
+- Spatial Constraints: Specifies the spatial constraints for grouping features based on proximity. Type: Spatial Reference.
+- Time Constraints: Specifies the time constraints for grouping features based on spatiotemporal proximity. Type: Date/Time.
+
+Derived Output:
+- Grouped Features: Features grouped based on spatial or spatiotemporal proximity. Type: Feature Class.
+**Toolset:** Proximity
+
+**Tool:** Trace Proximity Events
+
+**Description:**
+The "Trace Proximity Events" tool traces events near each other in space and time. It is designed for time-enabled point data where each feature represents an instant in time. This tool is useful for scenarios like analyzing traffic incidents or wildlife sightings occurring at specific times and locations. For instance, it can identify clusters of traffic accidents within a defined distance and time frame, aiding in pattern recognition and enhancing road safety measures.
+
+**Parameters:**
+- **Input Points:** The time-enabled point feature class used for tracing proximity events. **Type:** Feature Layer.
+- **Entity ID Field:** The text field containing unique IDs for each entity. **Type:** Field.
+- **Distance Method:** Specifies the distance type for the Spatial Search Distance parameter, with options like Planar and Geodesic. **Type:** String.
+- **Spatial Search Distance (Optional):** The maximum distance between two points considered in proximity. **Type:** Linear Unit.
+- **Temporal Search Distance (Optional):** The maximum duration between two points considered in proximity. **Type:** Time Unit.
+- **Define Entities of Interest Using (Optional):** Specifies the entities of interest, with options like "Entities of Interest IDs" and "Selected features in a specified entity of interest layer." **Type:** String.
+
+**Derived Output:**
+- **Output Proximity Events:** The output feature class containing the traced proximity events. **Type:** Feature Class.

@@ -1,0 +1,56 @@
+name: generate_hypothesis_expert
+description: Generate a detailed and robust hypothesis for a scientific objective based on literature review and reasoning.
+template: |
+ # Role
+  You are an expert scientific assistant tasked with formulating a novel and robust hypothesis for the given objective. You must generate your reasoning and answer as if speaking to an audience of domain experts.
+
+  # Instructions
+  - You must work step by step. Explicitly state your reasoning at each stage before generating the hypothesis.
+  - Persistence: Do not terminate your output until the hypothesis is fully formulated and all parts of the analysis are complete. Only yield control when every requirement is satisfied.
+  - Planning: Before proposing a hypothesis, develop and write out a clear, multi-step reasoning plan. Reflect on key literature, connect findings, and outline the logical framework that leads to your proposal.
+  - Literature Integration: Critically synthesize information from the literature provided below. Clearly cite how each article contributes to your analysis.
+  - Expert Integration: Carefully review the expert interview provided below (retrieved via RAG). Integrate these expert perspectives into your reasoning, and explicitly note how they influence, support, or challenge your hypothesis. Where appropriate, compare or contrast the expert insights with the literature.
+  - Tool-calling (if applicable): If additional data, definitions, or document lookups are needed, explicitly indicate the information required and recommend an appropriate tool or query. Do NOT guess or make up citations.
+  - Hypothesis Criteria: Use the provided 'criteria for a strong hypothesis' as a checklist. Make sure your final hypothesis meets every listed criterion, and explain how.
+  - If prior hypotheses are provided, compare and contrast your proposal with them. Clearly indicate advancements or differences.
+  - Be concise but rigorous. Avoid vague statements and unsubstantiated claims.
+  - Output structure: 
+    1. (Optional) Restate or clarify the scientific objective if ambiguous.
+    2. Step-by-step reasoning plan.
+    3. Synthesis of literature (chronologically ordered, beginning with the most recent).
+    4. Integration of expert interviews and discussion of their influence.
+    5. Logical framework and rationale.
+    6. Final hypothesis statement (detailed and technical, for domain experts).
+    7. (Optional) Short table or bullet list mapping your hypothesis to each criterion.
+  - Think step by step. Do not skip any required element.
+
+  # Output Format
+  Your output should include each of the following, each is a section, for in order:
+    - Restatement of goal and problem if clarifying.
+    - Reasoning and analysis steps (step by step).
+    - Synthesis of literature (chronologically ordered, most recent first).
+    - Integration of expert interviews.
+    - Logical framework/rationale connecting literature and hypothesis.
+    - Detailed hypothesis statement.
+    - Brief mapping of how the hypothesis satisfies each criterion.
+  ......
+ 
+  # Context (auto-populated)
+  Goal: {{ goal }}
+
+  Criteria for a strong hypothesis: {{ preferences }}
+
+  Existing hypothesis (if applicable): {{ source_hypothesis }}
+
+  Literature review and analytical rationale (chronologically ordered, beginning with the most recent analysis):  
+
+  {{ articles_with_reasoning }}
+  
+  Expert interview excerpts (RAG-retrieved, if available):  
+  
+  {{ expert_contexts }}
+  
+  Proposed hypothesis (detailed description for domain experts):
+
+  # Final Instructions
+  Do not summarize or conclude until all requirements above have been satisfied. Only end when the hypothesis is clearly presented and fully justified for a domain expert audience. Please output every section and its content in the order specified and in a json format. Make sure only 7 sections and the output content can be interpreted by json.loads() .
